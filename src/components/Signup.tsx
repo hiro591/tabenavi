@@ -12,7 +12,7 @@ export default function Signup() {
     return emailRegex.test(value);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     if (!email) {
@@ -23,7 +23,16 @@ export default function Signup() {
       setError("正しいメールアドレスの形式で入力してください。");
       return;
     }
-    setSubmitted(true);
+    const res = await fetch("/api/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }),
+    });
+    if (res.ok) {
+      setSubmitted(true);
+    } else {
+      setError("送信に失敗しました。もう一度お試しください。");
+    }
   };
 
   return (
