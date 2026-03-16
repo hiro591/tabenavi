@@ -23,7 +23,7 @@ export default function Signup() {
       setError("正しいメールアドレスの形式で入力してください。");
       return;
     }
-    const res = await fetch("/api/signup", {
+    const res = await fetch("https://formspree.io/f/xkoqqzdy", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email }),
