@@ -341,6 +341,18 @@ function SearchResultsContent() {
                         {item.price != null && (
                           <span className="ml-auto text-gray-700 font-bold">¥{item.price}</span>
                         )}
+                        {item.chain_restaurants?.name && (
+                          <a
+                            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.chain_restaurants.name)}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            className="text-gray-400 active:text-orange-500 transition-colors ml-1"
+                            title="近くの店舗をGoogleマップで探す"
+                          >
+                            📍
+                          </a>
+                        )}
                         <button
                           onClick={(e) => toggleFavorite(e, item.id)}
                           className={`text-xl transition-colors ml-1 ${favoriteIds.has(item.id) ? "text-red-500" : "text-gray-300"}`}

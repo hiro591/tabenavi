@@ -109,7 +109,9 @@ export default async function ItemDetailPage({
   const badges = getSuitabilityBadges(item);
   const chainName = item.chain_restaurants?.name ?? "";
   const chainEmoji = item.chain_restaurants?.emoji ?? "🍽️";
-  const mapsUrl = `https://www.google.com/maps/search/${encodeURIComponent(chainName)}`;
+  const mapsUrl = chainName
+    ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(chainName)}`
+    : `https://www.google.com/maps`;
 
   return (
     <div className="min-h-screen bg-white pb-28">
@@ -345,27 +347,10 @@ export default async function ItemDetailPage({
             href={mapsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-orange-500 text-white rounded-xl font-medium hover:bg-orange-600 transition-colors"
+            className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-orange-500 text-white rounded-xl font-medium active:bg-orange-600 transition-colors"
           >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-              />
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-              />
-            </svg>
-            このお店を探す
+            <span className="text-lg">📍</span>
+            <span>近くの{chainName || "お店"}を探す</span>
           </a>
         </div>
       </div>
