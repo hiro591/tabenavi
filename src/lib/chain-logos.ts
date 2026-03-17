@@ -12,12 +12,12 @@ const CHAIN_LOGO_MAP: [string, ChainLogoInfo][] = [
   // ── コンビニ ──────────────────────────────────────────────────────────────
   ["セブンイレブン",    { url: "/chain-logos/seven-eleven.svg", bg: "#ffffff" }],
   ["セブン-イレブン",   { url: "/chain-logos/seven-eleven.svg", bg: "#ffffff" }],
-  ["ローソン",          { url: "/chain-logos/lawson.svg",        bg: "#0068b7" }],
+  ["ローソン",          { url: "/chain-logos/lawson.svg",        bg: "#ffffff" }],
   ["ファミリーマート",  { url: "/chain-logos/familymart.svg",    bg: "#ffffff" }],
   ["ファミマ",          { url: "/chain-logos/familymart.svg",    bg: "#ffffff" }],
 
   // ── ファストフード ────────────────────────────────────────────────────────
-  ["マクドナルド",      { url: "/chain-logos/mcdonalds.svg",     bg: "#FFC72C" }],
+  ["マクドナルド",      { url: "/chain-logos/mcdonalds.svg",     bg: "#DA291C" }],
   ["スターバックス",    { url: "/chain-logos/starbucks.svg",     bg: "#00704a" }],
   ["ケンタッキー",      { url: "/chain-logos/kfc.svg",           bg: "#ffffff" }],
   ["KFC",               { url: "/chain-logos/kfc.svg",           bg: "#ffffff" }],
