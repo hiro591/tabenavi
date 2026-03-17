@@ -31,11 +31,11 @@ export default function DashboardLayout({
             active={pathname.startsWith("/combo")}
           />
           <Link
-            href="/search"
+            href="/map"
             className="flex flex-col items-center -mt-6"
           >
             <div className="w-14 h-14 bg-orange-500 rounded-full shadow-lg flex items-center justify-center text-white text-2xl active:scale-95 transition-transform">
-              🔍
+              📍
             </div>
           </Link>
           <NavItem
