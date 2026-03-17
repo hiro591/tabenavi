@@ -58,18 +58,20 @@ export default function ReportButton({
     if (checkedFields.length === 0) return;
 
     setSubmitting(true);
-    try {
-      const supabase = createClient();
-      await supabase.from("data_reports").insert({
-        menu_item_id: itemId,
-        item_name: itemName,
-        chain_name: chainName,
-        fields: checkedFields.join(","),
-        correct_values: correctValues,
-        source: source,
-      });
-    } catch {
-      // silently fail if table doesn't exist
+    const supabase = createClient();
+    const { error } = await supabase.from("data_reports").insert({
+      menu_item_id: itemId,
+      item_name: itemName,
+      chain_name: chainName,
+      fields: checkedFields.join(","),
+      correct_values: correctValues,
+      source: source || null,
+    });
+    if (error) {
+      console.error("Report insert error:", error);
+      alert("送信に失敗しました。もう一度お試しください。");
+      setSubmitting(false);
+      return;
     }
 
     setSubmitting(false);

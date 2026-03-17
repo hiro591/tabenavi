@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { Search, Save, Plus, ExternalLink, Trash2, Lock } from "lucide-react";
+import { Search, Save, Plus, ExternalLink, Trash2, Lock, Flag, CheckCircle } from "lucide-react";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -146,6 +146,20 @@ export default function AdminPage() {
   const [items, setItems] = useState<MenuItem[]>([]);
   const [loading, setLoading] = useState(false);
 
+  // Reports
+  interface Report {
+    id: string;
+    item_name: string;
+    chain_name: string;
+    fields: string;
+    correct_values: string;
+    source: string | null;
+    created_at: string;
+    menu_item_id: string;
+  }
+  const [reports, setReports] = useState<Report[]>([]);
+  const [reportsLoading, setReportsLoading] = useState(true);
+
   // New item form
   const [newItem, setNewItem] = useState({
     name: "",
@@ -158,16 +172,23 @@ export default function AdminPage() {
   });
   const [adding, setAdding] = useState(false);
 
-  // Fetch chains
+  // Fetch chains and reports
   useEffect(() => {
     (async () => {
-      const { data } = await supabase
-        .from("chain_restaurants")
-        .select("id, name, emoji")
-        .order("name");
-      if (data) setChains(data);
+      const [chainsRes, reportsRes] = await Promise.all([
+        supabase.from("chain_restaurants").select("id, name, emoji").order("name"),
+        supabase.from("data_reports").select("*").order("created_at", { ascending: false }).limit(50),
+      ]);
+      if (chainsRes.data) setChains(chainsRes.data);
+      if (reportsRes.data) setReports(reportsRes.data as Report[]);
+      setReportsLoading(false);
     })();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const dismissReport = async (reportId: string) => {
+    await supabase.from("data_reports").delete().eq("id", reportId);
+    setReports((prev) => prev.filter((r) => r.id !== reportId));
+  };
 
   // Fetch items when chain selected
   const fetchItems = useCallback(
@@ -470,6 +491,59 @@ export default function AdminPage() {
             )}
           </div>
         )}
+
+        {/* User Reports */}
+        <div className="bg-white rounded-lg shadow-sm border p-4 mb-6">
+          <h2 className="text-sm font-medium text-gray-700 mb-3 flex items-center gap-2">
+            <Flag className="w-4 h-4 text-orange-500" />
+            ユーザーからの報告
+            {reports.length > 0 && (
+              <span className="bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                {reports.length}
+              </span>
+            )}
+          </h2>
+          {reportsLoading ? (
+            <p className="text-sm text-gray-400">読み込み中...</p>
+          ) : reports.length === 0 ? (
+            <p className="text-sm text-gray-400">報告はありません</p>
+          ) : (
+            <div className="space-y-3">
+              {reports.map((r) => (
+                <div key={r.id} className="border border-orange-200 bg-orange-50/50 rounded-xl p-4">
+                  <div className="flex items-start justify-between gap-2 mb-2">
+                    <div>
+                      <p className="text-sm font-bold text-gray-900">{r.chain_name} - {r.item_name}</p>
+                      <p className="text-xs text-gray-400">{new Date(r.created_at).toLocaleString("ja-JP")}</p>
+                    </div>
+                    <button
+                      onClick={() => dismissReport(r.id)}
+                      className="flex items-center gap-1 text-xs text-green-600 bg-green-50 border border-green-200 px-2 py-1 rounded-lg hover:bg-green-100 transition-colors shrink-0"
+                    >
+                      <CheckCircle className="w-3 h-3" />
+                      対応済み
+                    </button>
+                  </div>
+                  <div className="flex flex-wrap gap-1 mb-2">
+                    {r.fields.split(",").map((f) => (
+                      <span key={f} className="bg-orange-100 text-orange-700 text-xs px-2 py-0.5 rounded-full font-medium">
+                        {f}
+                      </span>
+                    ))}
+                  </div>
+                  {r.correct_values && (
+                    <p className="text-sm text-gray-700 bg-white rounded-lg p-2 border border-gray-100">
+                      {r.correct_values}
+                    </p>
+                  )}
+                  {r.source && (
+                    <p className="text-xs text-gray-400 mt-1">参照元: {r.source}</p>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
 
         {/* Official links */}
         <div className="bg-white rounded-lg shadow-sm border p-4">
