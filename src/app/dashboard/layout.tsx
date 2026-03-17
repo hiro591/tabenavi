@@ -25,10 +25,10 @@ export default function DashboardLayout({
             active={pathname.startsWith("/search")}
           />
           <NavItem
-            href="/recommend"
-            icon="📍"
-            label="マップ"
-            active={pathname.startsWith("/recommend")}
+            href="/combo"
+            icon="🧮"
+            label="コンボ"
+            active={pathname.startsWith("/combo")}
           />
           <Link
             href="/search"

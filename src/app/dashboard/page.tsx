@@ -217,6 +217,32 @@ export default function DashboardPage() {
       </div>
       <p className="text-sm text-gray-400 mb-5">{todayDate}</p>
 
+      {/* Discovery Banners */}
+      <div className="space-y-2 mb-4">
+        <Link href="/combo">
+          <div className="bg-gradient-to-r from-orange-500 to-amber-500 rounded-2xl p-4 shadow-md active:scale-[0.98] transition-transform">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-white font-bold">🧮 組み合わせ提案</p>
+                <p className="text-orange-100 text-xs mt-0.5">今日の残りカロリーに合うセットを見つける</p>
+              </div>
+              <span className="text-white text-xl">→</span>
+            </div>
+          </div>
+        </Link>
+        <Link href="/search">
+          <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100 active:scale-[0.98] transition-transform">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="text-xl">🔍</span>
+                <p className="text-sm font-semibold text-gray-700">メニューを探す</p>
+              </div>
+              <span className="text-gray-400">→</span>
+            </div>
+          </div>
+        </Link>
+      </div>
+
       {/* Calorie Ring */}
       <div className="bg-white rounded-2xl p-6 shadow-sm mb-4">
         <div className="flex justify-center">

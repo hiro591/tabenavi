@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import FavoriteButton from "./FavoriteButton";
+import ShareCard from "./ShareCard";
 
 interface MenuItem {
   id: string;
@@ -339,6 +340,7 @@ export default async function ItemDetailPage({
       <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-t border-gray-100 py-3 px-4">
         <div className="max-w-lg mx-auto flex gap-3">
           <FavoriteButton itemId={item.id} />
+          <ShareCard item={item} />
           <a
             href={mapsUrl}
             target="_blank"

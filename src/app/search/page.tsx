@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 
 // ─── Dual Range Slider ──────────────────────────────────────────────────────
@@ -191,6 +192,19 @@ export default function SearchPage() {
   return (
     <div className="min-h-screen bg-gray-50 pb-40">
       <div className="max-w-lg mx-auto">
+
+        {/* Combo Banner */}
+        <Link href="/combo">
+          <div className="mx-4 mt-4 bg-gradient-to-r from-orange-500 to-amber-500 rounded-2xl p-4 shadow-md active:scale-[0.98] transition-transform">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-white font-bold text-base">🧮 組み合わせ提案</p>
+                <p className="text-orange-100 text-xs mt-0.5">残りカロリーに合うセットを自動提案</p>
+              </div>
+              <span className="text-white text-xl">→</span>
+            </div>
+          </div>
+        </Link>
 
         {/* Header */}
         <div className="bg-white px-4 pt-6 pb-4 border-b border-gray-100">
