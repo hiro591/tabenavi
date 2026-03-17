@@ -23,10 +23,10 @@ export default function DashboardLayout({
             active={pathname === "/dashboard"}
           />
           <NavItem
-            href="/history"
-            icon="📅"
-            label="履歴"
-            active={pathname === "/history"}
+            href="/recommend"
+            icon="⭐"
+            label="おすすめ"
+            active={pathname === "/recommend"}
           />
           <Link
             href="/record"
@@ -40,12 +40,17 @@ export default function DashboardLayout({
             </span>
           </Link>
           <NavItem
-            href="/cheatday"
-            icon="🎉"
-            label="チートデイ"
-            active={pathname === "/cheatday"}
+            href="/history"
+            icon="📅"
+            label="履歴"
+            active={pathname === "/history"}
           />
-          <div className="w-12" />
+          <NavItem
+            href="/profile"
+            icon="👤"
+            label="マイページ"
+            active={pathname === "/profile"}
+          />
         </div>
       </nav>
     </div>
