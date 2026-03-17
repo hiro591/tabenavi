@@ -6,6 +6,7 @@ import { createClient } from "@/lib/supabase/client";
 import type { ChainRestaurant, MenuItem } from "@/types/database";
 import Link from "next/link";
 import { Suspense } from "react";
+import { Utensils } from "lucide-react";
 
 type MealType = "breakfast" | "lunch" | "dinner" | "snack";
 
@@ -274,7 +275,7 @@ function RecordPageContent() {
                 className="w-full mb-4 bg-gradient-to-r from-orange-50 to-amber-50 rounded-xl p-4 border-2 border-orange-200 hover:border-orange-400 hover:shadow-md transition-all text-left active:scale-[0.98]"
               >
                 <div className="flex items-center gap-3">
-                  <span className="text-2xl">✏️</span>
+                  <Utensils className="w-5 h-5 text-orange-400" />
                   <div>
                     <p className="font-bold text-gray-800">チェーン店以外を記録</p>
                     <p className="text-sm text-orange-500">カスタムで入力する →</p>
@@ -308,7 +309,7 @@ function RecordPageContent() {
                       className="bg-white rounded-xl p-4 border border-gray-100 hover:border-orange-300 hover:shadow-md transition-all text-center active:scale-95"
                     >
                       <span className="text-2xl block mb-1">
-                        {chain.emoji || "🍽️"}
+                        <Utensils className="w-5 h-5 text-orange-400" />
                       </span>
                       <span className="text-xs font-medium text-gray-700 line-clamp-2">
                         {chain.name}
@@ -333,7 +334,7 @@ function RecordPageContent() {
             <>
               <div className="flex items-center gap-2 mb-4 bg-orange-50 rounded-xl px-4 py-2">
                 <span className="text-xl">
-                  {selectedChain?.emoji || "🍽️"}
+                  <Utensils className="w-5 h-5 text-orange-400" />
                 </span>
                 <span className="font-medium text-gray-800">
                   {selectedChain?.name}
@@ -481,7 +482,7 @@ function RecordPageContent() {
                 <div className="bg-white rounded-xl p-5 border border-gray-100 mb-4">
                   <div className="flex items-center gap-2 mb-3">
                     <span className="text-lg">
-                      {selectedChain?.emoji || "🍽️"}
+                      <Utensils className="w-5 h-5 text-orange-400" />
                     </span>
                     <span className="text-sm text-gray-500">
                       {selectedChain?.name}

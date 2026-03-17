@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { Flame, Scale, Dumbbell, CheckCircle } from "lucide-react";
 
 type Goal = "diet" | "maintain" | "bulk" | null;
 
@@ -91,7 +92,9 @@ export default function OnboardingPage() {
         {/* Step 1: Welcome */}
         {step === 1 && (
           <div className="flex flex-col items-center justify-center min-h-[70vh] text-center">
-            <div className="text-6xl mb-6">🍜🍔🍣🥗</div>
+            <div className="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Flame className="w-10 h-10 text-orange-500" />
+            </div>
             <h1 className="text-3xl font-bold mb-4">たべなびへようこそ！</h1>
             <p className="text-gray-600 text-lg mb-12 leading-relaxed">
               外食専門の食事管理アプリです。
@@ -120,9 +123,9 @@ export default function OnboardingPage() {
 
             <div className="space-y-3 mb-8">
               {([
-                { key: "diet" as const, emoji: "🔥", title: "ダイエット", desc: "体重を減らしたい" },
-                { key: "maintain" as const, emoji: "⚖️", title: "現状維持", desc: "今の体型をキープしたい" },
-                { key: "bulk" as const, emoji: "💪", title: "筋肉増量", desc: "筋肉をつけたい" },
+                { key: "diet" as const, Icon: Flame, title: "ダイエット", desc: "体重を減らしたい" },
+                { key: "maintain" as const, Icon: Scale, title: "現状維持", desc: "今の体型をキープしたい" },
+                { key: "bulk" as const, Icon: Dumbbell, title: "筋肉増量", desc: "筋肉をつけたい" },
               ]).map((g) => (
                 <button
                   key={g.key}
@@ -134,7 +137,7 @@ export default function OnboardingPage() {
                   }`}
                 >
                   <div className="flex items-center gap-3">
-                    <span className="text-2xl">{g.emoji}</span>
+                    <g.Icon className={`w-6 h-6 ${goal === g.key ? "text-orange-500" : "text-gray-500"}`} />
                     <div>
                       <div className="font-bold text-lg">{g.title}</div>
                       <div className="text-gray-500 text-sm">{g.desc}</div>
@@ -212,7 +215,7 @@ export default function OnboardingPage() {
                   >
                     {selected && (
                       <div className="absolute top-1 right-1 w-5 h-5 bg-orange-500 rounded-full flex items-center justify-center">
-                        <span className="text-white text-xs">✓</span>
+                        <CheckCircle className="w-3 h-3 text-white" />
                       </div>
                     )}
                     <span className="text-2xl">{chain.emoji}</span>
@@ -242,7 +245,9 @@ export default function OnboardingPage() {
         {/* Step 4: Complete */}
         {step === 4 && (
           <div className="flex flex-col items-center justify-center min-h-[70vh] text-center">
-            <div className="text-6xl mb-6">🎉</div>
+            <div className="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mb-6">
+              <CheckCircle className="w-10 h-10 text-green-500" />
+            </div>
             <h1 className="text-3xl font-bold mb-6">設定完了！</h1>
 
             <div className="bg-gray-50 rounded-xl p-6 w-full mb-8 text-left space-y-3">

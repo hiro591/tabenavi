@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { PartyPopper } from "lucide-react";
 import type { CheatDay } from "@/types/database";
 
 const RESET_TEMPLATES = [
@@ -213,7 +214,7 @@ export default function CheatDayPage() {
         </div>
       ) : (
         <div className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl shadow-sm p-6 mb-4 text-white text-center">
-          <p className="text-3xl mb-2">🎉</p>
+          <PartyPopper className="w-8 h-8 text-white mx-auto mb-2" />
           <p className="text-lg font-bold">今日はチートデイ！</p>
           <p className="text-sm opacity-90 mt-1">
             楽しんでくださいね。明日からまた頑張りましょう！

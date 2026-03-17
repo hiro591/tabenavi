@@ -1,21 +1,24 @@
-const problems = [
+import { HelpCircle, ClipboardList, Frown, Smartphone } from "lucide-react";
+import type { ComponentType } from "react";
+
+const problems: { Icon: ComponentType<{ className?: string }>; title: string; description: string }[] = [
   {
-    emoji: "😰",
+    Icon: HelpCircle,
     title: "外食のカロリーが分からない",
     description: "定食屋やラーメン店のカロリーって？検索しても正確な情報が出てこない。結局「まあいいか」で終わる毎日。",
   },
   {
-    emoji: "📝",
+    Icon: ClipboardList,
     title: "記録が面倒で3日で挫折",
     description: "食材を一つずつ入力？グラム数を量る？外食派にとって既存アプリの記録方法はハードルが高すぎる。",
   },
   {
-    emoji: "😞",
+    Icon: Frown,
     title: "外食＝罪悪感でモヤモヤ",
     description: "「また外食しちゃった…」という罪悪感。健康管理アプリが外食を否定的に扱うから、使うたびにストレス。",
   },
   {
-    emoji: "📱",
+    Icon: Smartphone,
     title: "栄養管理アプリは自炊向けで使えない",
     description: "既存アプリは自炊・コンビニ食がメイン。外食チェーンのメニューデータが少なく、実用性に欠ける。",
   },
@@ -46,8 +49,8 @@ export default function ProblemSection() {
               key={problem.title}
               className="bg-white rounded-2xl p-6 border border-red-100 hover:shadow-md transition-shadow"
             >
-              <div className="w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center text-2xl mb-4">
-                {problem.emoji}
+              <div className="w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center mb-4">
+                <problem.Icon className="w-6 h-6 text-red-500" />
               </div>
               <h3 className="text-lg font-bold text-gray-900 mb-2">{problem.title}</h3>
               <p className="text-gray-600 text-sm leading-relaxed">{problem.description}</p>

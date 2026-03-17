@@ -2,11 +2,13 @@
 
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
+import { Store, Utensils, CheckCircle, MapPin } from "lucide-react";
+import type { ComponentType } from "react";
 
-const steps = [
+const steps: { number: string; Icon: ComponentType<{ className?: string }>; title: string; description: string; detail: string }[] = [
   {
     number: "01",
-    emoji: "🏪",
+    Icon: Store,
     title: "お店を選ぶ",
     description:
       "GPS位置情報から近くのチェーン店を自動提案。または店名を検索してすぐに見つけられます。",
@@ -14,7 +16,7 @@ const steps = [
   },
   {
     number: "02",
-    emoji: "🍽️",
+    Icon: Utensils,
     title: "メニューをタップ",
     description:
       "人気メニューと前回注文したメニューが最上部に表示。選ぶだけで栄養情報が自動入力されます。",
@@ -22,7 +24,7 @@ const steps = [
   },
   {
     number: "03",
-    emoji: "✅",
+    Icon: CheckCircle,
     title: "記録完了！",
     description:
       "わずか3タップ・10秒で記録完了。今日の合計カロリーとPFCバランスが即座に更新されます。",
@@ -76,7 +78,7 @@ function StepDemo() {
                 transition={{ delay: i * 0.15 }}
                 className="bg-white rounded-lg p-2.5 flex items-center gap-2 text-sm"
               >
-                <span className="text-orange-500">📍</span>
+                <MapPin className="w-4 h-4 text-orange-500 shrink-0" />
                 <span className="text-gray-700">{name}</span>
                 <span className="text-xs text-gray-400 ml-auto">
                   {(i + 1) * 50}m
@@ -103,7 +105,7 @@ function StepDemo() {
               transition={{ delay: i * 0.15 }}
               className={`bg-white rounded-lg p-2.5 flex items-center gap-2 text-sm ${i === 0 ? "ring-2 ring-orange-400" : ""}`}
             >
-              <span className="text-orange-500">🍚</span>
+              <Utensils className="w-4 h-4 text-orange-500 shrink-0" />
               <span className="text-gray-700 flex-1">{item.name}</span>
               <span className="text-xs font-semibold text-orange-500">
                 {item.cal}
@@ -121,9 +123,9 @@ function StepDemo() {
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ type: "spring", stiffness: 300, damping: 15 }}
-            className="text-4xl mb-2"
+            className="flex justify-center mb-2"
           >
-            ✅
+            <CheckCircle className="w-10 h-10 text-green-500" />
           </motion.div>
           <div className="text-sm font-semibold text-gray-800 mb-1">
             牛丼（並）を記録しました
@@ -275,8 +277,8 @@ export default function HowItWorks() {
                 >
                   {/* Step number */}
                   <div className="relative inline-block mb-6">
-                    <div className="w-16 h-16 bg-orange-500 rounded-2xl flex items-center justify-center text-3xl shadow-lg shadow-orange-200 mx-auto">
-                      {step.emoji}
+                    <div className="w-16 h-16 bg-orange-500 rounded-2xl flex items-center justify-center shadow-lg shadow-orange-200 mx-auto">
+                      <step.Icon className="w-8 h-8 text-white" />
                     </div>
                     <div className="absolute -top-2 -right-2 w-7 h-7 bg-white border-2 border-orange-500 rounded-full flex items-center justify-center text-xs font-bold text-orange-500">
                       {index + 1}
@@ -324,7 +326,7 @@ export default function HowItWorks() {
           <div className="grid sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
             <div className="bg-red-50 rounded-2xl p-4 border border-red-100">
               <div className="text-xs font-bold text-red-400 mb-2">
-                😟 従来のアプリ
+                従来のアプリ
               </div>
               <div className="text-sm text-red-700 font-medium">
                 「脂質が多すぎます」
@@ -335,7 +337,7 @@ export default function HowItWorks() {
             </div>
             <div className="bg-green-50 rounded-2xl p-4 border border-green-100">
               <div className="text-xs font-bold text-green-500 mb-2">
-                😊 たべなび
+                たべなび
               </div>
               <div className="text-sm text-green-700 font-medium">
                 「今日はタンパク質がしっかり摂れました！」

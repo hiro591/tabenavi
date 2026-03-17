@@ -5,6 +5,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { getChainLogo } from "@/lib/chain-logos";
+import { ChevronLeft, Heart, MapPin, Utensils } from "lucide-react";
 
 const SORT_OPTIONS = [
   { label: "おすすめ順",       value: "recommended" },
@@ -58,7 +59,7 @@ function ChainLogoPanel({
         />
       ) : (
         <div className={`w-full h-full flex items-center justify-center bg-gradient-to-br ${getCardGradient(item)}`}>
-          <span className="text-5xl">{item.chain_restaurants?.emoji || "🍽"}</span>
+          <Utensils className="w-10 h-10 text-gray-400" />
         </div>
       )}
       {fitnessBadge && (
@@ -107,9 +108,9 @@ function getStoreBadgeStyle(name: string | undefined, sourceType: string | null)
 // Fitness badge: shown when protein is notably high or calories notably low
 function getFitnessBadge(item: MenuItem): { label: string; style: string } | null {
   if (item.protein != null && item.protein >= 25)
-    return { label: "💪 高タンパク", style: "bg-blue-500 text-white" };
+    return { label: "高タンパク", style: "bg-blue-500 text-white" };
   if (item.calories != null && item.calories <= 300)
-    return { label: "🌿 低カロリー", style: "bg-green-500 text-white" };
+    return { label: "低カロリー", style: "bg-green-500 text-white" };
   return null;
 }
 
@@ -221,8 +222,8 @@ function SearchResultsContent() {
         <div className="max-w-lg mx-auto">
           <div className="flex items-center gap-3 px-4 py-3">
             <button onClick={() => router.back()}
-              className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 text-lg shrink-0">
-              ←
+              className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 shrink-0">
+              <ChevronLeft className="w-5 h-5" />
             </button>
             <h1 className="text-base font-bold text-gray-900 truncate flex-1">{pageTitle}</h1>
             <button
@@ -302,17 +303,17 @@ function SearchResultsContent() {
                       <div className="flex flex-wrap gap-1 mb-2">
                         {item.calories != null && (
                           <span className="text-[11px] bg-orange-50 text-orange-600 px-2 py-0.5 rounded-full font-semibold">
-                            🔥 {item.calories}
+                            {item.calories} kcal
                           </span>
                         )}
                         {item.protein != null && (
                           <span className="text-[11px] bg-blue-50 text-blue-600 px-2 py-0.5 rounded-full font-semibold">
-                            💪 {item.protein}g
+                            P {item.protein}g
                           </span>
                         )}
                         {item.fat != null && (
                           <span className="text-[11px] bg-yellow-50 text-yellow-700 px-2 py-0.5 rounded-full font-semibold">
-                            🧈 {item.fat}g
+                            F {item.fat}g
                           </span>
                         )}
                       </div>
@@ -329,16 +330,16 @@ function SearchResultsContent() {
                               target="_blank"
                               rel="noopener noreferrer"
                               onClick={(e) => e.stopPropagation()}
-                              className="text-gray-300 active:text-orange-400 transition-colors text-lg"
+                              className="text-gray-300 active:text-orange-400 transition-colors"
                             >
-                              📍
+                              <MapPin className="w-4 h-4" />
                             </a>
                           )}
                           <button
                             onClick={(e) => toggleFavorite(e, item.id)}
-                            className={`text-xl transition-colors ${favoriteIds.has(item.id) ? "text-red-500" : "text-gray-200"}`}
+                            className={`transition-colors ${favoriteIds.has(item.id) ? "text-red-500" : "text-gray-300"}`}
                           >
-                            {favoriteIds.has(item.id) ? "♥" : "♡"}
+                            <Heart className={`w-4 h-4 ${favoriteIds.has(item.id) ? "fill-current" : ""}`} />
                           </button>
                         </div>
                       </div>
@@ -352,7 +353,7 @@ function SearchResultsContent() {
         ) : (
           <div className="flex flex-col items-center justify-center py-20 text-center">
             <div className="w-20 h-20 bg-orange-50 rounded-full flex items-center justify-center mb-4">
-              <span className="text-4xl">🍽</span>
+              <Utensils className="w-9 h-9 text-orange-300" />
             </div>
             <p className="text-base font-bold text-gray-700 mb-1">見つかりませんでした</p>
             <p className="text-sm text-gray-400 mb-6">条件を変えて再検索してみてください</p>

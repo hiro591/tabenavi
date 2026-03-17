@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { ChevronLeft, MapPin, Utensils } from "lucide-react";
 import FavoriteButton from "./FavoriteButton";
 import ShareCard from "./ShareCard";
 import ItemHeroImage from "./ItemHeroImage";
@@ -109,7 +110,6 @@ export default async function ItemDetailPage({
       : null;
   const badges = getSuitabilityBadges(item);
   const chainName = item.chain_restaurants?.name ?? "";
-  const chainEmoji = item.chain_restaurants?.emoji ?? "🍽️";
   const mapsUrl = chainName
     ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(chainName)}`
     : `https://www.google.com/maps`;
@@ -123,7 +123,7 @@ export default async function ItemDetailPage({
             href="/search"
             className="flex items-center gap-1 text-gray-600 hover:text-gray-900 transition-colors"
           >
-            <span className="text-xl">&larr;</span>
+            <ChevronLeft className="w-5 h-5" />
             <span className="text-sm">検索に戻る</span>
           </Link>
           <button
@@ -152,7 +152,7 @@ export default async function ItemDetailPage({
         {/* Hero Section */}
         <div className="pt-8 pb-6 text-center">
           <div className="flex justify-center mb-4">
-            <ItemHeroImage chainName={chainName} emoji={chainEmoji} />
+            <ItemHeroImage chainName={chainName} />
           </div>
 
           <div className="flex justify-center mb-3">
@@ -316,10 +316,10 @@ export default async function ItemDetailPage({
                   href={`/items/${similar.id}`}
                   className="flex-shrink-0 w-36 bg-white rounded-xl border border-gray-100 shadow-sm p-3 hover:shadow-md transition-shadow"
                 >
-                  <div className="text-center mb-2">
-                    <span className="text-3xl">
-                      {similar.chain_restaurants?.emoji ?? "🍽️"}
-                    </span>
+                  <div className="flex justify-center mb-2">
+                    <div className="w-10 h-10 bg-orange-50 rounded-full flex items-center justify-center">
+                      <Utensils className="w-5 h-5 text-orange-400" />
+                    </div>
                   </div>
                   <p className="text-xs text-gray-400 truncate">
                     {similar.chain_restaurants?.name ?? ""}
@@ -350,7 +350,7 @@ export default async function ItemDetailPage({
             rel="noopener noreferrer"
             className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-orange-500 text-white rounded-xl font-medium active:bg-orange-600 transition-colors"
           >
-            <span className="text-lg">📍</span>
+            <MapPin className="w-4 h-4" />
             <span>近くの{chainName || "お店"}を探す</span>
           </a>
         </div>

@@ -1,41 +1,44 @@
-const features = [
+import { Store, Camera, Smile, Map, BarChart3, Link2 } from "lucide-react";
+import type { ComponentType } from "react";
+
+const features: { Icon: ComponentType<{ className?: string }>; title: string; description: string; color: string; comingSoon: boolean }[] = [
   {
-    icon: "🏪",
+    Icon: Store,
     title: "日本最大の外食チェーンDB",
     description: "マクドナルド・松屋・スシロー・大戸屋など主要20チェーンの公式栄養データを収録。メニュー名をタップするだけで正確な記録が完了。",
     color: "orange",
     comingSoon: false,
   },
   {
-    icon: "📸",
+    Icon: Camera,
     title: "ガイショクSnap",
     description: "メニュー表・料理写真・レシートを撮影するだけでAIが自動認識。注文前に栄養を確認することも可能。",
     color: "blue",
     comingSoon: true,
   },
   {
-    icon: "😊",
+    Icon: Smile,
     title: "まあいいかモード",
     description: "カロリーオーバーで叱責するのではなく、ポジティブなフレーミングで外食の楽しさを守りながら健康管理をサポート。",
     color: "green",
     comingSoon: false,
   },
   {
-    icon: "🗺️",
+    Icon: Map,
     title: "次どこ行く？レコメンド",
     description: "今週の栄養バランスから「不足している栄養を補える近くの外食先」をAIがレコメンド。もう迷わない。",
     color: "purple",
     comingSoon: true,
   },
   {
-    icon: "📊",
+    Icon: BarChart3,
     title: "週次レポート",
     description: "毎週月曜日に先週の食事サマリーをお届け。ベストチョイスをハイライトし、今週のちょっとしたチャレンジを提案。",
     color: "amber",
     comingSoon: false,
   },
   {
-    icon: "🔗",
+    Icon: Link2,
     title: "みんなの外食マップ",
     description: "ユーザーが投稿した個人店の栄養情報が蓄積。みんなで作る、外食×栄養の地図。記録するほど情報が充実。",
     color: "rose",
@@ -93,8 +96,8 @@ export default function Features() {
                       {index + 1}
                     </div>
                   </div>
-                  <div className={`w-12 h-12 ${colors.icon} rounded-xl flex items-center justify-center text-2xl transition-transform duration-300 group-hover:scale-110`}>
-                    {feature.icon}
+                  <div className={`w-12 h-12 ${colors.icon} rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110`}>
+                    <feature.Icon className="w-6 h-6" />
                   </div>
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-2">{feature.title}</h3>

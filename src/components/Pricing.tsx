@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Check } from "lucide-react";
 
 const freeFeatures = [
   "1日3食までの食事記録",
@@ -95,7 +96,7 @@ export default function Pricing() {
             <ul className="space-y-3">
               {freeFeatures.map((feature) => (
                 <li key={feature} className="flex items-start gap-3 text-sm text-gray-600">
-                  <span className="text-green-500 font-bold mt-0.5 flex-shrink-0">✓</span>
+                  <Check className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
                   {feature}
                 </li>
               ))}
@@ -126,10 +127,10 @@ export default function Pricing() {
 
               <div className="flex flex-wrap gap-2 mb-4">
                 <div className="inline-block bg-amber-400 text-amber-900 text-xs font-bold px-3 py-1 rounded-full">
-                  ✨ 一番人気
+                  一番人気
                 </div>
                 <div className="inline-block bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full">
-                  💳 クレカ不要 · 14日間無料
+                  クレカ不要 · 14日間無料
                 </div>
               </div>
 
@@ -143,7 +144,7 @@ export default function Pricing() {
               <ul className="space-y-3">
                 {premiumFeatures.map((feature) => (
                   <li key={feature} className="flex items-start gap-3 text-sm text-white">
-                    <span className="text-orange-200 font-bold mt-0.5 flex-shrink-0">✓</span>
+                    <Check className="w-4 h-4 text-orange-200 mt-0.5 flex-shrink-0" />
                     {feature}
                   </li>
                 ))}

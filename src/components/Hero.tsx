@@ -1,16 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Utensils } from "lucide-react";
 
-const floatingEmojis = [
-  { emoji: "🍜", top: "10%", left: "5%", delay: 0, size: "text-3xl" },
-  { emoji: "🍣", top: "20%", right: "8%", delay: 0.5, size: "text-4xl" },
-  { emoji: "🍔", bottom: "30%", left: "8%", delay: 1, size: "text-2xl" },
-  { emoji: "🥗", bottom: "15%", right: "12%", delay: 1.5, size: "text-3xl" },
-  { emoji: "🍱", top: "50%", left: "2%", delay: 0.8, size: "text-2xl" },
-  { emoji: "🍕", top: "35%", right: "3%", delay: 1.2, size: "text-3xl" },
-  { emoji: "🥤", bottom: "40%", right: "5%", delay: 0.3, size: "text-2xl" },
-  { emoji: "🍙", top: "70%", left: "12%", delay: 1.8, size: "text-2xl" },
+const floatingDots = [
+  { top: "10%", left: "5%", delay: 0, size: 12, color: "bg-orange-300" },
+  { top: "20%", right: "8%", delay: 0.5, size: 16, color: "bg-amber-300" },
+  { bottom: "30%", left: "8%", delay: 1, size: 10, color: "bg-orange-200" },
+  { bottom: "15%", right: "12%", delay: 1.5, size: 14, color: "bg-amber-200" },
+  { top: "50%", left: "2%", delay: 0.8, size: 10, color: "bg-orange-300" },
+  { top: "35%", right: "3%", delay: 1.2, size: 12, color: "bg-amber-300" },
+  { bottom: "40%", right: "5%", delay: 0.3, size: 8, color: "bg-orange-200" },
+  { top: "70%", left: "12%", delay: 1.8, size: 10, color: "bg-amber-200" },
 ];
 
 const containerVariants = {
@@ -53,21 +54,23 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-tr from-orange-100/30 via-transparent to-amber-100/20"></div>
       </div>
 
-      {/* Floating food emojis */}
+      {/* Floating decorative dots */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {floatingEmojis.map((item, i) => (
+        {floatingDots.map((item, i) => (
           <motion.div
             key={i}
-            className={`absolute ${item.size} select-none`}
+            className={`absolute ${item.color} rounded-full`}
             style={{
               top: item.top,
               bottom: item.bottom,
               left: item.left,
               right: item.right,
+              width: item.size,
+              height: item.size,
               opacity: 0,
             }}
             animate={{
-              opacity: [0, 0.12, 0.12, 0],
+              opacity: [0, 0.2, 0.2, 0],
               y: [0, -20, -40, -60],
             }}
             transition={{
@@ -76,9 +79,7 @@ export default function Hero() {
               delay: item.delay,
               ease: "easeInOut",
             }}
-          >
-            {item.emoji}
-          </motion.div>
+          />
         ))}
       </div>
 
@@ -190,8 +191,8 @@ export default function Hero() {
                         </span>
                       </div>
                     </div>
-                    <div className="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center text-white text-lg">
-                      🍽️
+                    <div className="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center text-white">
+                      <Utensils className="w-5 h-5" />
                     </div>
                   </div>
 
@@ -231,7 +232,9 @@ export default function Hero() {
                       今日の記録
                     </div>
                     <div className="bg-white rounded-xl p-3 flex items-center gap-3">
-                      <span className="text-xl">🍚</span>
+                      <div className="w-8 h-8 bg-orange-50 rounded-lg flex items-center justify-center shrink-0">
+                        <Utensils className="w-4 h-4 text-orange-400" />
+                      </div>
                       <div className="flex-1">
                         <div className="text-sm font-medium text-gray-800">
                           牛丼（並）
@@ -245,7 +248,9 @@ export default function Hero() {
                       </div>
                     </div>
                     <div className="bg-white rounded-xl p-3 flex items-center gap-3">
-                      <span className="text-xl">☕</span>
+                      <div className="w-8 h-8 bg-green-50 rounded-lg flex items-center justify-center shrink-0">
+                        <Utensils className="w-4 h-4 text-green-400" />
+                      </div>
                       <div className="flex-1">
                         <div className="text-sm font-medium text-gray-800">
                           ラテ（S）
@@ -275,7 +280,7 @@ export default function Hero() {
                 animate="visible"
                 transition={{ delay: 1.2 }}
               >
-                ✓ 3タップで完了！
+                3タップで完了
               </motion.div>
               <motion.div
                 className="absolute -bottom-4 -left-4 bg-white rounded-2xl px-3 py-2 shadow-lg border border-orange-100"
@@ -286,7 +291,7 @@ export default function Hero() {
               >
                 <div className="text-xs text-gray-500">今週のバランス</div>
                 <div className="text-sm font-bold text-green-600">
-                  ★ 良好です！
+                  良好です
                 </div>
               </motion.div>
             </div>

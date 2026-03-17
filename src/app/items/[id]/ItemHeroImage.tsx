@@ -1,14 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { Utensils } from "lucide-react";
 import { getChainLogo } from "@/lib/chain-logos";
 
 export default function ItemHeroImage({
   chainName,
-  emoji,
 }: {
   chainName: string;
-  emoji: string;
+  emoji?: string;
 }) {
   const [failed, setFailed] = useState(false);
   const logoInfo = getChainLogo(chainName);
@@ -33,7 +33,7 @@ export default function ItemHeroImage({
 
   return (
     <div className="inline-flex items-center justify-center w-32 h-32 bg-orange-50 rounded-3xl shadow-sm">
-      <span className="text-7xl leading-none">{emoji}</span>
+      <Utensils className="w-14 h-14 text-orange-300" />
     </div>
   );
 }

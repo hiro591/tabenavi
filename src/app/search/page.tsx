@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
+import { Search, SlidersHorizontal, Store, Utensils, ShoppingCart, Dumbbell, Flame, Leaf, Zap, Tag } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 
 // ─── DualRangeSlider ─────────────────────────────────────────────────────────
@@ -70,14 +71,14 @@ function DualRangeSlider({
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
-const QUICK_FILTERS: { label: string; params: Record<string, string> }[] = [
-  { label: "💪 高タンパク", params: { protein_min: "20" } },
-  { label: "🔥 低カロリー", params: { calorie_max: "400" } },
-  { label: "🥗 ダイエット", params: { calorie_max: "500", fat_max: "15" } },
-  { label: "🏋 筋トレ飯",  params: { protein_min: "30" } },
-  { label: "💰 〜500円",   params: { price_max: "500" } },
-  { label: "🏪 コンビニ",  params: { source_type: "convenience_store" } },
-  { label: "🍽 外食",      params: { source_type: "chain_restaurant" } },
+const QUICK_FILTERS: { label: string; icon: React.ComponentType<{ className?: string }>; params: Record<string, string> }[] = [
+  { label: "高タンパク", icon: Dumbbell, params: { protein_min: "20" } },
+  { label: "低カロリー", icon: Flame,    params: { calorie_max: "400" } },
+  { label: "ダイエット", icon: Leaf,     params: { calorie_max: "500", fat_max: "15" } },
+  { label: "筋トレ飯",  icon: Zap,      params: { protein_min: "30" } },
+  { label: "〜500円",   icon: Tag,      params: { price_max: "500" } },
+  { label: "コンビニ",  icon: Store,    params: { source_type: "convenience_store" } },
+  { label: "外食",      icon: Utensils, params: { source_type: "chain_restaurant" } },
 ];
 
 const CATEGORIES = [
@@ -95,11 +96,11 @@ const CATEGORIES = [
   { label: "定食",       value: "定食・セット",   hint: "セットメニュー",     photo: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=400&h=300&fit=crop&q=80", fallback: "from-teal-400 to-cyan-600" },
 ];
 
-const STORE_TYPES = [
+const STORE_TYPES: { label: string; value: string; Icon?: React.ComponentType<{ className?: string }> }[] = [
   { label: "すべて",    value: "" },
-  { label: "🏪 コンビニ", value: "convenience_store" },
-  { label: "🍽 外食",   value: "chain_restaurant" },
-  { label: "🛒 スーパー", value: "supermarket" },
+  { label: "コンビニ", value: "convenience_store", Icon: Store },
+  { label: "外食",     value: "chain_restaurant",  Icon: Utensils },
+  { label: "スーパー", value: "supermarket",        Icon: ShoppingCart },
 ];
 
 const SORT_OPTIONS = [
@@ -193,7 +194,7 @@ export default function SearchPage() {
           <p className="text-white/80 text-sm font-medium mb-1">たべなび</p>
           <h1 className="text-white text-2xl font-bold mb-4">今日、何食べる？</h1>
           <div className="relative">
-            <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-lg">🔍</span>
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
             <input
               type="text"
               value={keyword}
@@ -224,8 +225,9 @@ export default function SearchPage() {
               <button
                 key={f.label}
                 onClick={() => handleQuickFilter(f.params)}
-                className="shrink-0 px-3.5 py-2 bg-white border border-gray-200 rounded-full text-sm font-medium text-gray-700 active:bg-orange-50 active:border-orange-300 active:text-orange-600 transition-colors shadow-sm"
+                className="shrink-0 flex items-center gap-1.5 px-3.5 py-2 bg-white border border-gray-200 rounded-full text-sm font-medium text-gray-700 active:bg-orange-50 active:border-orange-300 active:text-orange-600 transition-colors shadow-sm"
               >
+                <f.icon className="w-3.5 h-3.5" />
                 {f.label}
               </button>
             ))}
@@ -239,12 +241,13 @@ export default function SearchPage() {
               <button
                 key={s.value}
                 onClick={() => setStoreType(s.value)}
-                className={`flex-1 py-2 rounded-xl text-xs font-bold transition-all ${
+                className={`flex-1 flex items-center justify-center gap-1 py-2 rounded-xl text-xs font-bold transition-all ${
                   storeType === s.value
                     ? "bg-white text-gray-900 shadow-sm"
                     : "text-gray-500"
                 }`}
               >
+                {s.Icon && <s.Icon className="w-3 h-3" />}
                 {s.label}
               </button>
             ))}
@@ -258,7 +261,7 @@ export default function SearchPage() {
             className="w-full flex items-center justify-between px-5 py-4 bg-white border border-gray-200 rounded-2xl shadow-sm active:bg-gray-50 transition-colors"
           >
             <div className="flex items-center gap-3">
-              <span className="text-xl">⚙️</span>
+              <SlidersHorizontal className="w-5 h-5 text-gray-500 shrink-0" />
               <div className="text-left">
                 <p className="text-sm font-bold text-gray-800">詳細フィルター</p>
                 <p className="text-xs text-gray-400">カロリー・タンパク質・価格で絞り込む</p>
@@ -333,25 +336,31 @@ export default function SearchPage() {
 
             <div className="divide-y divide-gray-100 space-y-0">
               <div className="py-5">
-                <p className="text-sm font-bold text-gray-700 mb-4">🔥 カロリー</p>
+                <div className="flex items-center gap-1.5 mb-4">
+                  <Flame className="w-4 h-4 text-orange-500" />
+                  <p className="text-sm font-bold text-gray-700">カロリー</p>
+                </div>
                 <DualRangeSlider min={CAL_MIN} max={CAL_MAX} step={CAL_STEP}
                   valueMin={calorieRange[0]} valueMax={calorieRange[1]}
                   onChange={(a, b) => setCalorieRange([a, b])} unit="kcal" />
               </div>
               <div className="py-5">
-                <p className="text-sm font-bold text-gray-700 mb-4">💪 タンパク質</p>
+                <div className="flex items-center gap-1.5 mb-4">
+                  <Dumbbell className="w-4 h-4 text-blue-500" />
+                  <p className="text-sm font-bold text-gray-700">タンパク質</p>
+                </div>
                 <DualRangeSlider min={PRO_MIN} max={PRO_MAX} step={PRO_STEP}
                   valueMin={proteinRange[0]} valueMax={proteinRange[1]}
                   onChange={(a, b) => setProteinRange([a, b])} unit="g" />
               </div>
               <div className="py-5">
-                <p className="text-sm font-bold text-gray-700 mb-4">🧈 脂質</p>
+                <p className="text-sm font-bold text-gray-700 mb-4">脂質</p>
                 <DualRangeSlider min={FAT_MIN} max={FAT_MAX} step={FAT_STEP}
                   valueMin={fatRange[0]} valueMax={fatRange[1]}
                   onChange={(a, b) => setFatRange([a, b])} unit="g" />
               </div>
               <div className="py-5">
-                <p className="text-sm font-bold text-gray-700 mb-4">💰 価格</p>
+                <p className="text-sm font-bold text-gray-700 mb-4">価格</p>
                 <DualRangeSlider min={PRC_MIN} max={PRC_MAX} step={PRC_STEP}
                   valueMin={priceRange[0]} valueMax={priceRange[1]}
                   onChange={(a, b) => setPriceRange([a, b])} unit="円" />
@@ -375,7 +384,7 @@ export default function SearchPage() {
               onClick={handleSearch}
               className="w-full bg-orange-500 active:bg-orange-600 text-white font-bold py-4 rounded-2xl shadow-lg shadow-orange-200 mt-2 text-base"
             >
-              🔍 この条件で検索する
+              この条件で検索する
             </button>
           </div>
         </div>

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { ChevronLeft, MapPin, Utensils } from "lucide-react";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -31,45 +32,45 @@ interface NearbyStore {
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
 const CHAIN_MAP: Record<string, { key: string; type: NearbyStore["type"]; color: string; emoji: string }> = {
-  "セブンイレブン":     { key: "セブンイレブン",   type: "convenience_store",  color: "#007B40", emoji: "🏪" },
-  "セブン-イレブン":    { key: "セブンイレブン",   type: "convenience_store",  color: "#007B40", emoji: "🏪" },
-  "7-Eleven":           { key: "セブンイレブン",   type: "convenience_store",  color: "#007B40", emoji: "🏪" },
-  "ローソン":           { key: "ローソン",          type: "convenience_store",  color: "#0068b7", emoji: "🏪" },
-  "Lawson":             { key: "ローソン",          type: "convenience_store",  color: "#0068b7", emoji: "🏪" },
-  "ファミリーマート":   { key: "ファミリーマート",  type: "convenience_store",  color: "#007bff", emoji: "🏪" },
-  "FamilyMart":         { key: "ファミリーマート",  type: "convenience_store",  color: "#007bff", emoji: "🏪" },
-  "マクドナルド":       { key: "マクドナルド",      type: "chain_restaurant",   color: "#ffc300", emoji: "🍔" },
-  "McDonald's":         { key: "マクドナルド",      type: "chain_restaurant",   color: "#ffc300", emoji: "🍔" },
-  "すき家":             { key: "すき家",            type: "chain_restaurant",   color: "#f97316", emoji: "🍚" },
-  "吉野家":             { key: "吉野家",            type: "chain_restaurant",   color: "#ef4444", emoji: "🍚" },
-  "松屋":               { key: "松屋",              type: "chain_restaurant",   color: "#d97706", emoji: "🍚" },
-  "スターバックス":     { key: "スターバックス",    type: "chain_restaurant",   color: "#00704a", emoji: "☕" },
-  "Starbucks":          { key: "スターバックス",    type: "chain_restaurant",   color: "#00704a", emoji: "☕" },
-  "モスバーガー":       { key: "モスバーガー",      type: "chain_restaurant",   color: "#e63e3e", emoji: "🍔" },
-  "ケンタッキー":       { key: "ケンタッキー",      type: "chain_restaurant",   color: "#c8102e", emoji: "🍗" },
-  "KFC":                { key: "ケンタッキー",      type: "chain_restaurant",   color: "#c8102e", emoji: "🍗" },
-  "サイゼリヤ":         { key: "サイゼリヤ",        type: "chain_restaurant",   color: "#16a34a", emoji: "🍝" },
-  "ガスト":             { key: "ガスト",            type: "chain_restaurant",   color: "#f59e0b", emoji: "🍽" },
-  "バーミヤン":         { key: "バーミヤン",        type: "chain_restaurant",   color: "#0ea5e9", emoji: "🥢" },
-  "餃子の王将":         { key: "餃子の王将",        type: "chain_restaurant",   color: "#dc2626", emoji: "🥟" },
-  "日高屋":             { key: "日高屋",            type: "chain_restaurant",   color: "#f97316", emoji: "🍜" },
-  "イオン":             { key: "イオン",            type: "supermarket",        color: "#0ea5e9", emoji: "🛒" },
-  "西友":               { key: "西友",              type: "supermarket",        color: "#e11d48", emoji: "🛒" },
+  "セブンイレブン":     { key: "セブンイレブン",   type: "convenience_store",  color: "#007B40", emoji: "C" },
+  "セブン-イレブン":    { key: "セブンイレブン",   type: "convenience_store",  color: "#007B40", emoji: "C" },
+  "7-Eleven":           { key: "セブンイレブン",   type: "convenience_store",  color: "#007B40", emoji: "C" },
+  "ローソン":           { key: "ローソン",          type: "convenience_store",  color: "#0068b7", emoji: "C" },
+  "Lawson":             { key: "ローソン",          type: "convenience_store",  color: "#0068b7", emoji: "C" },
+  "ファミリーマート":   { key: "ファミリーマート",  type: "convenience_store",  color: "#007bff", emoji: "C" },
+  "FamilyMart":         { key: "ファミリーマート",  type: "convenience_store",  color: "#007bff", emoji: "C" },
+  "マクドナルド":       { key: "マクドナルド",      type: "chain_restaurant",   color: "#ffc300", emoji: "R" },
+  "McDonald's":         { key: "マクドナルド",      type: "chain_restaurant",   color: "#ffc300", emoji: "R" },
+  "すき家":             { key: "すき家",            type: "chain_restaurant",   color: "#f97316", emoji: "R" },
+  "吉野家":             { key: "吉野家",            type: "chain_restaurant",   color: "#ef4444", emoji: "R" },
+  "松屋":               { key: "松屋",              type: "chain_restaurant",   color: "#d97706", emoji: "R" },
+  "スターバックス":     { key: "スターバックス",    type: "chain_restaurant",   color: "#00704a", emoji: "R" },
+  "Starbucks":          { key: "スターバックス",    type: "chain_restaurant",   color: "#00704a", emoji: "R" },
+  "モスバーガー":       { key: "モスバーガー",      type: "chain_restaurant",   color: "#e63e3e", emoji: "R" },
+  "ケンタッキー":       { key: "ケンタッキー",      type: "chain_restaurant",   color: "#c8102e", emoji: "R" },
+  "KFC":                { key: "ケンタッキー",      type: "chain_restaurant",   color: "#c8102e", emoji: "R" },
+  "サイゼリヤ":         { key: "サイゼリヤ",        type: "chain_restaurant",   color: "#16a34a", emoji: "R" },
+  "ガスト":             { key: "ガスト",            type: "chain_restaurant",   color: "#f59e0b", emoji: "R" },
+  "バーミヤン":         { key: "バーミヤン",        type: "chain_restaurant",   color: "#0ea5e9", emoji: "R" },
+  "餃子の王将":         { key: "餃子の王将",        type: "chain_restaurant",   color: "#dc2626", emoji: "R" },
+  "日高屋":             { key: "日高屋",            type: "chain_restaurant",   color: "#f97316", emoji: "R" },
+  "イオン":             { key: "イオン",            type: "supermarket",        color: "#0ea5e9", emoji: "S" },
+  "西友":               { key: "西友",              type: "supermarket",        color: "#e11d48", emoji: "S" },
 };
 
 function classifyStore(name: string): { key: string | null; type: NearbyStore["type"]; color: string; emoji: string } {
   for (const [k, v] of Object.entries(CHAIN_MAP)) {
     if (name.includes(k)) return { key: v.key, type: v.type, color: v.color, emoji: v.emoji };
   }
-  return { key: null, type: "other", color: "#9ca3af", emoji: "🏬" };
+  return { key: null, type: "other", color: "#9ca3af", emoji: "?" };
 }
 
-function makeCircleIcon(color: string, emoji: string): string {
+function makeCircleIcon(color: string, label: string): string {
   const svg = `
     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="48" viewBox="0 0 40 48">
       <circle cx="20" cy="20" r="18" fill="${color}" opacity="0.9"/>
-      <circle cx="20" cy="20" r="14" fill="white" opacity="0.15"/>
-      <text x="20" y="26" text-anchor="middle" font-size="16">${emoji}</text>
+      <circle cx="20" cy="20" r="14" fill="white" opacity="0.2"/>
+      <text x="20" y="26" text-anchor="middle" font-size="16" font-weight="bold" fill="white" font-family="sans-serif">${label}</text>
       <polygon points="20,42 13,32 27,32" fill="${color}" opacity="0.9"/>
     </svg>
   `.trim();
@@ -77,10 +78,10 @@ function makeCircleIcon(color: string, emoji: string): string {
 }
 
 const STORE_FILTERS = [
-  { label: "すべて",        value: "all" },
-  { label: "🏪 コンビニ",   value: "convenience_store" },
-  { label: "🍽 外食",       value: "chain_restaurant" },
-  { label: "🛒 スーパー",   value: "supermarket" },
+  { label: "すべて",      value: "all" },
+  { label: "コンビニ",   value: "convenience_store" },
+  { label: "外食",       value: "chain_restaurant" },
+  { label: "スーパー",   value: "supermarket" },
 ];
 
 // ─── Component ───────────────────────────────────────────────────────────────
@@ -283,10 +284,10 @@ export default function MapPage() {
             onClick={() => router.back()}
             className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-600"
           >
-            ←
+            <ChevronLeft className="w-5 h-5" />
           </button>
-          <h1 className="text-lg font-bold text-gray-900 flex-1">
-            📍 近くのお店
+          <h1 className="text-lg font-bold text-gray-900 flex-1 flex items-center gap-1.5">
+            <MapPin className="w-4 h-4 text-orange-500" /> 近くのお店
           </h1>
           {loadingStores && (
             <div className="w-4 h-4 border-2 border-orange-500 border-t-transparent rounded-full animate-spin" />
@@ -320,14 +321,16 @@ export default function MapPage() {
       {/* Location error */}
       {locationError && (
         <div className="absolute top-24 left-4 right-4 z-[1000] bg-yellow-50 border border-yellow-200 rounded-xl px-4 py-2">
-          <p className="text-xs text-yellow-700">📍 現在地を取得できませんでした。東京駅周辺を表示しています。</p>
+          <p className="text-xs text-yellow-700">現在地を取得できませんでした。東京駅周辺を表示しています。</p>
         </div>
       )}
 
       {/* No stores */}
       {!loadingStores && mapReady && stores.length === 0 && (
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[1000] bg-white rounded-2xl shadow-lg px-6 py-5 text-center max-w-xs">
-          <p className="text-2xl mb-2">🏙</p>
+          <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-2">
+            <MapPin className="w-6 h-6 text-gray-400" />
+          </div>
           <p className="text-sm font-medium text-gray-700">近くのお店が見つかりませんでした</p>
           <p className="text-xs text-gray-400 mt-1">OpenStreetMapにデータがない地域かもしれません</p>
         </div>
@@ -344,7 +347,7 @@ export default function MapPage() {
               <div className="flex items-start justify-between mb-3">
                 <div>
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="text-xl">{classifyStore(selected.name).emoji}</span>
+                    <MapPin className="w-5 h-5 text-orange-500" />
                     <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${
                       selected.type === "convenience_store"
                         ? "bg-blue-100 text-blue-700"
@@ -372,7 +375,7 @@ export default function MapPage() {
                   onClick={() => handleViewMenu(selected)}
                   className="flex-1 py-3 bg-orange-500 text-white rounded-xl font-medium text-sm active:bg-orange-600 transition-colors"
                 >
-                  🍽 このお店のメニューを見る
+                  このお店のメニューを見る
                 </button>
                 <a
                   href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(selected.name)}&near=${selected.lat},${selected.lon}`}

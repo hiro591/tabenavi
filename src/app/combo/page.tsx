@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
+import { Calculator, Flame, Dumbbell, Store, Package, ChevronLeft } from "lucide-react";
 import type { ChainRestaurant } from "@/types/database";
 
 // ─── Types ──────────────────────────────────────────────────────────────────
@@ -257,9 +258,9 @@ export default function ComboPage() {
 
   // Rank badge
   const getRankBadge = (index: number) => {
-    if (index === 0) return { emoji: "🏆", bg: "bg-yellow-50 border-yellow-300" };
-    if (index === 1) return { emoji: "🥈", bg: "bg-gray-50 border-gray-300" };
-    if (index === 2) return { emoji: "🥉", bg: "bg-orange-50 border-orange-300" };
+    if (index === 0) return { rank: "1st", bg: "bg-yellow-50 border-yellow-300" };
+    if (index === 1) return { rank: "2nd", bg: "bg-gray-50 border-gray-300" };
+    if (index === 2) return { rank: "3rd", bg: "bg-orange-50 border-orange-300" };
     return null;
   };
 
@@ -288,11 +289,12 @@ export default function ComboPage() {
               href="/search"
               className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-500 hover:text-gray-700 transition-colors"
             >
-              ←
+              <ChevronLeft className="w-5 h-5" />
             </Link>
-            <div>
+            <div className="flex items-center gap-2">
+              <Calculator className="w-5 h-5 text-orange-500" />
               <h1 className="text-xl font-bold text-gray-900">
-                🧮 組み合わせ提案
+                組み合わせ提案
               </h1>
               <p className="text-xs text-gray-400">
                 目標に合うセットを自動で提案
@@ -305,9 +307,10 @@ export default function ComboPage() {
         <div className="bg-white mt-2 divide-y divide-gray-100">
           {/* Calorie Target */}
           <div className="px-4 py-4">
-            <p className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-3">
-              🔥 残りカロリー
-            </p>
+            <div className="flex items-center gap-1.5 mb-3">
+              <Flame className="w-3.5 h-3.5 text-orange-500" />
+              <p className="text-xs font-bold text-gray-500 uppercase tracking-wide">残りカロリー</p>
+            </div>
             <div className="flex items-center justify-center gap-3 mb-3">
               <button
                 onClick={() => setCalorieTarget(Math.max(100, calorieTarget - 50))}
@@ -351,9 +354,10 @@ export default function ComboPage() {
 
           {/* Protein Target */}
           <div className="px-4 py-4">
-            <p className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-3">
-              💪 タンパク質 最低
-            </p>
+            <div className="flex items-center gap-1.5 mb-3">
+              <Dumbbell className="w-3.5 h-3.5 text-blue-500" />
+              <p className="text-xs font-bold text-gray-500 uppercase tracking-wide">タンパク質 最低</p>
+            </div>
             <div className="flex items-center justify-center gap-3 mb-3">
               <button
                 onClick={() => setProteinTarget(Math.max(0, proteinTarget - 5))}
@@ -397,9 +401,10 @@ export default function ComboPage() {
 
           {/* Store Selection */}
           <div className="px-4 py-4">
-            <p className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-3">
-              🏪 お店を選ぶ
-            </p>
+            <div className="flex items-center gap-1.5 mb-3">
+              <Store className="w-3.5 h-3.5 text-gray-500" />
+              <p className="text-xs font-bold text-gray-500 uppercase tracking-wide">お店を選ぶ</p>
+            </div>
             {storeGroups.map((group) => (
               <div key={group.label} className="mb-3">
                 <p className="text-[10px] font-semibold text-gray-400 mb-2">
@@ -433,7 +438,7 @@ export default function ComboPage() {
             disabled={!selectedStoreId || loading}
             className="w-full bg-orange-500 active:bg-orange-600 disabled:bg-gray-300 text-white font-bold py-4 rounded-2xl shadow-lg shadow-orange-200 transition-colors text-base"
           >
-            {loading ? "🧮 計算中..." : "この条件で提案する"}
+            {loading ? "計算中..." : "この条件で提案する"}
           </button>
         </div>
 
@@ -442,7 +447,7 @@ export default function ComboPage() {
           <div className="px-4 mt-6 text-center">
             <div className="w-10 h-10 border-3 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
             <p className="text-sm text-gray-500">
-              🧮 最適な組み合わせを計算中...
+              最適な組み合わせを計算中...
             </p>
           </div>
         )}
@@ -459,7 +464,7 @@ export default function ComboPage() {
                   </p>
                   {selectedStore && (
                     <span className="text-xs text-gray-400">
-                      {selectedStore.emoji} {selectedStore.name}
+                      {selectedStore.name}
                     </span>
                   )}
                 </div>
@@ -507,7 +512,7 @@ export default function ComboPage() {
                         {/* Card Header */}
                         <div className="px-4 pt-3 pb-2 flex items-center justify-between">
                           <span className="text-sm font-bold text-gray-700">
-                            {badge ? `${badge.emoji} ` : ""}組み合わせ #{index + 1}
+                            {badge ? `${badge.rank} ` : ""}組み合わせ #{index + 1}
                           </span>
                           <span className="text-xs text-gray-400">
                             {combo.items.length}品
@@ -523,7 +528,7 @@ export default function ComboPage() {
                               className="flex items-center justify-between py-2.5 hover:bg-gray-50 -mx-4 px-4 transition-colors"
                             >
                               <div className="flex items-center gap-2 min-w-0">
-                                <span className="text-sm">📦</span>
+                                <Package className="w-4 h-4 text-gray-400 shrink-0" />
                                 <p className="text-sm font-medium text-gray-800 truncate">
                                   {item.name}
                                 </p>
@@ -553,7 +558,7 @@ export default function ComboPage() {
                             </span>
                             <div className="flex items-center gap-3">
                               <span className="text-sm font-bold text-blue-600">
-                                💪P{combo.totalProtein}g
+                                P{combo.totalProtein}g
                               </span>
                               {combo.totalPrice > 0 && (
                                 <span className="text-sm font-medium text-gray-500">

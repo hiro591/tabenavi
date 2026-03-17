@@ -113,7 +113,6 @@ export default function ShareCard({ item }: ShareCardProps) {
                 <span
                   className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium ${cardStyle.badgeBg}`}
                 >
-                  {storeEmoji && <span>{storeEmoji}</span>}
                   {storeName || cardStyle.label}
                 </span>
               </div>
@@ -129,7 +128,7 @@ export default function ShareCard({ item }: ShareCardProps) {
               <div className="px-5 pb-4">
                 <div className="grid grid-cols-4 gap-2">
                   <div className="bg-white/80 rounded-xl p-3 text-center">
-                    <p className="text-lg mb-0.5">🔥</p>
+                    <p className="text-xs font-bold text-orange-500 mb-0.5">CAL</p>
                     <p className="text-2xl font-bold text-gray-900 leading-none">
                       {item.calories ?? "-"}
                     </p>
@@ -137,7 +136,7 @@ export default function ShareCard({ item }: ShareCardProps) {
                     <p className="text-[10px] text-gray-400">カロリー</p>
                   </div>
                   <div className="bg-white/80 rounded-xl p-3 text-center">
-                    <p className="text-lg mb-0.5">💪</p>
+                    <p className="text-xs font-bold text-blue-500 mb-0.5">P</p>
                     <p className="text-2xl font-bold text-blue-600 leading-none">
                       {item.protein != null
                         ? Number.isInteger(item.protein)
@@ -149,7 +148,7 @@ export default function ShareCard({ item }: ShareCardProps) {
                     <p className="text-[10px] text-gray-400">タンパク質</p>
                   </div>
                   <div className="bg-white/80 rounded-xl p-3 text-center">
-                    <p className="text-lg mb-0.5">🧈</p>
+                    <p className="text-xs font-bold text-yellow-600 mb-0.5">F</p>
                     <p className="text-2xl font-bold text-yellow-600 leading-none">
                       {item.fat != null
                         ? Number.isInteger(item.fat)
@@ -161,7 +160,7 @@ export default function ShareCard({ item }: ShareCardProps) {
                     <p className="text-[10px] text-gray-400">脂質</p>
                   </div>
                   <div className="bg-white/80 rounded-xl p-3 text-center">
-                    <p className="text-lg mb-0.5">🌾</p>
+                    <p className="text-xs font-bold text-green-600 mb-0.5">C</p>
                     <p className="text-2xl font-bold text-green-600 leading-none">
                       {item.carbs != null
                         ? Number.isInteger(item.carbs)

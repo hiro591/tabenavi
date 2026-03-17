@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Star } from "lucide-react";
 
 export default function Signup() {
   const [email, setEmail] = useState("");
@@ -82,7 +83,7 @@ export default function Signup() {
         {/* Social proof */}
         <div className="mt-12 flex flex-wrap items-center justify-center gap-6 text-sm text-gray-500">
           <div className="flex items-center gap-2">
-            <span className="text-yellow-400">★★★★★</span>
+            <span className="flex gap-0.5">{[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 text-yellow-400 fill-current" />)}</span>
             <span>β版ユーザー満足度</span>
           </div>
           <div className="w-px h-4 bg-gray-700"></div>

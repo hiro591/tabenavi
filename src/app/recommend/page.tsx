@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { createClient } from "@/lib/supabase/client";
+import { Utensils, MapPin, Star, CheckCircle } from "lucide-react";
 import type { MenuItem, ChainRestaurant } from "@/types/database";
 import type { NearbyPlace } from "./MapComponent";
 
@@ -351,7 +352,7 @@ out center 50;
                 : "bg-white text-gray-500 shadow-sm"
             }`}
           >
-            📍 周辺マップ
+            周辺マップ
           </button>
           <button
             onClick={() => setActiveTab("calorie")}
@@ -361,7 +362,7 @@ out center 50;
                 : "bg-white text-gray-500 shadow-sm"
             }`}
           >
-            ⭐ カロリー別
+            カロリー別
           </button>
         </div>
 
@@ -392,7 +393,9 @@ out center 50;
 
             {locationError && (
               <div className="bg-white rounded-2xl p-6 shadow-sm text-center mb-4">
-                <p className="text-3xl mb-3">📍</p>
+                <div className="w-14 h-14 bg-orange-50 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <MapPin className="w-7 h-7 text-orange-300" />
+                </div>
                 <p className="text-sm font-bold text-gray-700 mb-1">
                   {locationError}
                 </p>
@@ -460,7 +463,7 @@ out center 50;
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
                               <span className="text-lg">
-                                {place.chainRestaurant?.emoji ?? "🍽️"}
+                                <Utensils className="w-5 h-5 text-orange-400" />
                               </span>
                               <div>
                                 <p className="text-sm font-bold text-gray-800">
@@ -588,7 +591,7 @@ out center 50;
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-2">
                             <span className="text-lg">
-                              {chain.emoji ?? "🍽️"}
+                              <Utensils className="w-5 h-5 text-orange-400" />
                             </span>
                             <p className="text-sm font-bold text-gray-800">
                               {chain.name}
@@ -623,7 +626,9 @@ out center 50;
 
             {remainingCalories <= 0 ? (
               <div className="bg-white rounded-2xl p-8 shadow-sm text-center">
-                <p className="text-4xl mb-4">🎉</p>
+                <div className="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <CheckCircle className="w-8 h-8 text-green-500" />
+                </div>
                 <p className="text-lg font-bold text-gray-800 mb-2">
                   今日のカロリーは達成済みです！
                 </p>

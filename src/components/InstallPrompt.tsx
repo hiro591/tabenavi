@@ -54,7 +54,7 @@ export default function InstallPrompt() {
     <div className="bg-orange-50 border-b border-orange-200 px-4 py-3">
       <div className="max-w-lg mx-auto flex items-center justify-between gap-3">
         <p className="text-sm text-orange-800 flex-1">
-          📱 ホーム画面に追加してアプリのように使えます
+          ホーム画面に追加してアプリのように使えます
         </p>
         <button
           onClick={handleInstall}

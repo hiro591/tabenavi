@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
+import { Settings, Calculator, Search, Flame, ClipboardList, Trash2, Utensils, ChevronRight, PartyPopper } from "lucide-react";
 import type { FoodLog, Profile } from "@/types/database";
 
 const MEAL_TYPE_LABELS: Record<string, string> = {
@@ -212,7 +213,7 @@ export default function DashboardPage() {
           href="/profile"
           className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200 transition-colors"
         >
-          <span className="text-lg">⚙</span>
+          <Settings className="w-4 h-4" />
         </Link>
       </div>
       <p className="text-sm text-gray-400 mb-5">{todayDate}</p>
@@ -223,10 +224,13 @@ export default function DashboardPage() {
           <div className="bg-gradient-to-r from-orange-500 to-amber-500 rounded-2xl p-4 shadow-md active:scale-[0.98] transition-transform">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-white font-bold">🧮 組み合わせ提案</p>
+                <div className="flex items-center gap-2 mb-0.5">
+                    <Calculator className="w-4 h-4 text-white" />
+                    <p className="text-white font-bold">組み合わせ提案</p>
+                  </div>
                 <p className="text-orange-100 text-xs mt-0.5">今日の残りカロリーに合うセットを見つける</p>
               </div>
-              <span className="text-white text-xl">→</span>
+              <ChevronRight className="w-5 h-5 text-white" />
             </div>
           </div>
         </Link>
@@ -234,10 +238,10 @@ export default function DashboardPage() {
           <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100 active:scale-[0.98] transition-transform">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <span className="text-xl">🔍</span>
+                <Search className="w-4 h-4 text-gray-500" />
                 <p className="text-sm font-semibold text-gray-700">メニューを探す</p>
               </div>
-              <span className="text-gray-400">→</span>
+              <ChevronRight className="w-4 h-4 text-gray-400" />
             </div>
           </div>
         </Link>
@@ -296,7 +300,9 @@ export default function DashboardPage() {
       <div className="bg-white rounded-2xl p-4 shadow-sm mb-4">
         {streak > 0 ? (
           <div className="flex items-center gap-3">
-            <span className="text-3xl">🔥</span>
+            <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center shrink-0">
+              <Flame className="w-6 h-6 text-orange-500" />
+            </div>
             <div>
               <p className="text-base font-bold text-gray-800">
                 {streak}日連続記録中
@@ -312,7 +318,9 @@ export default function DashboardPage() {
           </div>
         ) : (
           <div className="flex items-center gap-3">
-            <span className="text-3xl">📝</span>
+            <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center shrink-0">
+              <ClipboardList className="w-6 h-6 text-gray-400" />
+            </div>
             <div>
               <p className="text-sm text-gray-500">
                 今日はまだ記録がありません
@@ -405,7 +413,7 @@ export default function DashboardPage() {
                 : "明日の食事に気をつけましょう"}
             </p>
           </div>
-          <span className="text-lg">→</span>
+          <ChevronRight className="w-5 h-5 text-current opacity-60" />
         </div>
       </Link>
 
@@ -416,7 +424,9 @@ export default function DashboardPage() {
         </h2>
         {logs.length === 0 ? (
           <div className="text-center py-8">
-            <p className="text-4xl mb-3">🍽️</p>
+            <div className="w-14 h-14 bg-orange-50 rounded-full flex items-center justify-center mx-auto mb-3">
+                <Utensils className="w-7 h-7 text-orange-300" />
+              </div>
             <p className="text-sm text-gray-500">
               まだ記録がありません。
             </p>
@@ -440,7 +450,6 @@ export default function DashboardPage() {
                   <div className="min-w-0">
                     {log.menu_items?.chain_restaurants && (
                       <p className="text-[10px] text-gray-400 truncate">
-                        {log.menu_items.chain_restaurants.emoji}{" "}
                         {log.menu_items.chain_restaurants.name}
                       </p>
                     )}
@@ -459,7 +468,7 @@ export default function DashboardPage() {
                     className="text-gray-300 hover:text-red-400 transition-colors text-base leading-none p-1"
                     aria-label="削除"
                   >
-                    🗑
+                    <Trash2 className="w-4 h-4" />
                   </button>
                 </div>
               </div>
@@ -478,7 +487,9 @@ export default function DashboardPage() {
       <Link href="/cheatday">
         <div className="bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-100 rounded-2xl p-4 shadow-sm mb-6 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <span className="text-2xl">🎉</span>
+            <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center shrink-0">
+                <PartyPopper className="w-5 h-5 text-purple-500" />
+              </div>
             <div>
               <p className="text-sm font-semibold text-gray-700">
                 チートデイを記録
@@ -488,7 +499,7 @@ export default function DashboardPage() {
               </p>
             </div>
           </div>
-          <span className="text-gray-400">→</span>
+          <ChevronRight className="w-4 h-4 text-gray-400" />
         </div>
       </Link>
     </div>

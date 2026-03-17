@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { ChevronLeft, Heart, Utensils } from "lucide-react";
 
 interface FavoriteItem {
   id: string;
@@ -82,9 +83,9 @@ export default function FavoritesPage() {
           <div className="flex items-center gap-3 px-4 py-3">
             <button
               onClick={() => router.back()}
-              className="text-gray-600 text-xl shrink-0"
+              className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 shrink-0"
             >
-              &larr;
+              <ChevronLeft className="w-5 h-5" />
             </button>
             <h1 className="text-lg font-bold text-gray-900 flex-1">
               お気に入り
@@ -128,9 +129,7 @@ export default function FavoritesPage() {
                             className="w-full h-full object-cover"
                           />
                         ) : (
-                          <span className="text-4xl">
-                            {item.chain_restaurants?.emoji || "🍽"}
-                          </span>
+                          <Utensils className="w-9 h-9 text-orange-300" />
                         )}
                       </div>
 
@@ -143,12 +142,6 @@ export default function FavoritesPage() {
                           >
                             {item.chain_restaurants?.name || "その他"}
                           </span>
-                          {item.source_type === "convenience_store" && (
-                            <span className="text-xs text-gray-400">🏪</span>
-                          )}
-                          {item.source_type === "chain_restaurant" && (
-                            <span className="text-xs text-gray-400">🍽</span>
-                          )}
                         </div>
 
                         {/* Item name */}
@@ -178,9 +171,9 @@ export default function FavoritesPage() {
                               e.stopPropagation();
                               removeFavorite(fav.id);
                             }}
-                            className="text-xl text-red-500 transition-colors ml-1"
+                            className="text-red-500 transition-colors ml-1"
                           >
-                            ♥
+                            <Heart className="w-4 h-4 fill-current" />
                           </button>
                         </div>
                       </div>
@@ -192,12 +185,14 @@ export default function FavoritesPage() {
           ) : (
             /* Empty state */
             <div className="text-center py-20">
-              <p className="text-5xl mb-4">♡</p>
+              <div className="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center mb-4 mx-auto">
+                <Heart className="w-9 h-9 text-red-300" />
+              </div>
               <p className="text-base font-medium text-gray-700 mb-2">
                 お気に入りがまだありません
               </p>
               <p className="text-sm text-gray-400 mb-6">
-                検索結果の ♡ をタップして保存しましょう
+                検索結果のハートをタップして保存しましょう
               </p>
               <button
                 onClick={() => router.push("/search")}

@@ -1,3 +1,5 @@
+import { Star } from "lucide-react";
+
 const testimonials = [
   {
     name: "田中 翔太",
@@ -77,8 +79,10 @@ export default function Testimonials() {
               <div className="absolute -top-3 left-8 w-6 h-6 bg-white rotate-45 border-l border-t border-gray-100"></div>
 
               {/* Stars */}
-              <div className="text-amber-400 text-lg mb-3 tracking-wider">
-                {"★★★★★"}
+              <div className="flex gap-0.5 mb-3">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-4 h-4 text-amber-400 fill-current" />
+                ))}
               </div>
 
               {/* Review text */}

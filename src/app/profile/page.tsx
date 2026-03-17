@@ -4,34 +4,35 @@ import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
+import { Flame, Scale, Dumbbell } from "lucide-react";
 import type { Profile } from "@/types/database";
 
 type GoalType = "diet" | "maintain" | "bulk";
 
 const GOAL_OPTIONS: {
   type: GoalType;
-  icon: string;
+  Icon: React.ComponentType<{ className?: string }>;
   label: string;
   description: string;
   suggestedCalories: number;
 }[] = [
   {
     type: "diet",
-    icon: "🔥",
+    Icon: Flame,
     label: "ダイエット",
     description: "目標: -500kcal 不足",
     suggestedCalories: 1500,
   },
   {
     type: "maintain",
-    icon: "⚖️",
+    Icon: Scale,
     label: "現状維持",
     description: "カロリー維持",
     suggestedCalories: 2000,
   },
   {
     type: "bulk",
-    icon: "💪",
+    Icon: Dumbbell,
     label: "筋肉増量",
     description: "目標: +300kcal 余剰",
     suggestedCalories: 2500,
@@ -202,7 +203,7 @@ export default function ProfilePage() {
                     : "border-gray-100 bg-gray-50 hover:border-gray-200"
                 }`}
               >
-                <span className="text-2xl">{goal.icon}</span>
+                <goal.Icon className={`w-6 h-6 ${selectedGoal === goal.type ? "text-orange-500" : "text-gray-500"}`} />
                 <span
                   className={`text-xs font-semibold ${
                     selectedGoal === goal.type
@@ -268,7 +269,7 @@ export default function ProfilePage() {
           className="block bg-white rounded-2xl p-6 shadow-sm mb-4 hover:shadow-md transition-all active:scale-[0.98]"
         >
           <div className="flex items-center gap-4">
-            <span className="text-2xl">⚖️</span>
+            <Scale className="w-6 h-6 text-gray-500" />
             <div className="flex-1">
               <p className="font-bold text-gray-800">体重記録</p>
               <p className="text-sm text-gray-400">体重の推移を確認する →</p>
@@ -287,7 +288,7 @@ export default function ProfilePage() {
 
         {saved && (
           <p className="text-center text-sm text-green-600 font-medium mb-4">
-            保存しました ✓
+            保存しました
           </p>
         )}
 
