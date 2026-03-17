@@ -81,18 +81,18 @@ const QUICK_FILTERS: { label: string; params: Record<string, string> }[] = [
 ];
 
 const CATEGORIES = [
-  { emoji: "🍱", label: "和食",     value: "和食",         gradient: "from-amber-400 to-orange-500",   hint: "定食・お弁当" },
-  { emoji: "🍝", label: "洋食",     value: "洋食",         gradient: "from-violet-400 to-purple-500",  hint: "パスタ・ハンバーグ" },
-  { emoji: "🥢", label: "中華",     value: "中華・アジア", gradient: "from-red-400 to-rose-500",       hint: "炒め物・点心" },
-  { emoji: "🍜", label: "麺類",     value: "麺類",         gradient: "from-yellow-400 to-amber-500",   hint: "ラーメン・うどん" },
-  { emoji: "🍚", label: "丼もの",   value: "丼もの",       gradient: "from-orange-400 to-red-400",     hint: "牛丼・親子丼" },
-  { emoji: "🥪", label: "パン・サンド", value: "パン・サンドイッチ", gradient: "from-yellow-300 to-amber-400", hint: "サンドイッチ" },
-  { emoji: "🥗", label: "サラダ",   value: "サラダ・ヘルシー", gradient: "from-green-400 to-emerald-500", hint: "低カロリー・ヘルシー" },
-  { emoji: "🍗", label: "揚げ物",   value: "揚げ物",       gradient: "from-yellow-500 to-orange-600",  hint: "から揚げ・フライ" },
-  { emoji: "🍙", label: "おにぎり", value: "おにぎり・軽食", gradient: "from-slate-400 to-gray-600",   hint: "軽食・スナック" },
-  { emoji: "🍰", label: "スイーツ", value: "スイーツ",     gradient: "from-pink-400 to-rose-500",      hint: "デザート・お菓子" },
-  { emoji: "☕", label: "ドリンク", value: "ドリンク",     gradient: "from-amber-600 to-stone-600",    hint: "コーヒー・ジュース" },
-  { emoji: "🍱", label: "定食",     value: "定食・セット", gradient: "from-teal-400 to-cyan-600",      hint: "セットメニュー" },
+  { label: "和食",       value: "和食",           hint: "定食・お弁当",       photo: "https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=400&h=300&fit=crop&q=80", fallback: "from-amber-400 to-orange-500" },
+  { label: "洋食",       value: "洋食",           hint: "パスタ・ハンバーグ", photo: "https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?w=400&h=300&fit=crop&q=80", fallback: "from-violet-400 to-purple-500" },
+  { label: "中華",       value: "中華・アジア",   hint: "餃子・炒め物",       photo: "https://images.unsplash.com/photo-1563245372-f21724e3856d?w=400&h=300&fit=crop&q=80", fallback: "from-red-400 to-rose-500" },
+  { label: "麺類",       value: "麺類",           hint: "ラーメン・うどん",   photo: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400&h=300&fit=crop&q=80", fallback: "from-yellow-400 to-amber-500" },
+  { label: "丼もの",     value: "丼もの",         hint: "牛丼・親子丼",       photo: "https://images.unsplash.com/photo-1611143669185-af224c5e3252?w=400&h=300&fit=crop&q=80", fallback: "from-orange-400 to-red-400" },
+  { label: "パン・サンド", value: "パン・サンドイッチ", hint: "サンドイッチ・パン", photo: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400&h=300&fit=crop&q=80", fallback: "from-yellow-300 to-amber-400" },
+  { label: "サラダ",     value: "サラダ・ヘルシー", hint: "低カロリー・ヘルシー", photo: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop&q=80", fallback: "from-green-400 to-emerald-500" },
+  { label: "揚げ物",     value: "揚げ物",         hint: "から揚げ・フライ",   photo: "https://images.unsplash.com/photo-1562967914-608f82629710?w=400&h=300&fit=crop&q=80", fallback: "from-yellow-500 to-orange-600" },
+  { label: "おにぎり",   value: "おにぎり・軽食", hint: "軽食・スナック",     photo: "https://images.unsplash.com/photo-1617196034183-421b4040ed20?w=400&h=300&fit=crop&q=80", fallback: "from-slate-400 to-gray-600" },
+  { label: "スイーツ",   value: "スイーツ",       hint: "デザート・お菓子",   photo: "https://images.unsplash.com/photo-1551024601-bec78aea704b?w=400&h=300&fit=crop&q=80", fallback: "from-pink-400 to-rose-500" },
+  { label: "ドリンク",   value: "ドリンク",       hint: "コーヒー・ジュース", photo: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=300&fit=crop&q=80", fallback: "from-amber-600 to-stone-600" },
+  { label: "定食",       value: "定食・セット",   hint: "セットメニュー",     photo: "https://images.unsplash.com/photo-1547592180-85f173990554?w=400&h=300&fit=crop&q=80", fallback: "from-teal-400 to-cyan-600" },
 ];
 
 const STORE_TYPES = [
@@ -251,32 +251,8 @@ export default function SearchPage() {
           </div>
         </div>
 
-        {/* ── Category Grid ───────────────────────────────────────────────── */}
-        <div className="px-4 pt-5">
-          <p className="text-xs font-bold text-gray-400 uppercase tracking-wide mb-3">カテゴリーから探す</p>
-          <div className="grid grid-cols-2 gap-3">
-            {CATEGORIES.map((cat) => (
-              <button
-                key={cat.value}
-                onClick={() => handleCategoryTap(cat.value)}
-                className={`relative bg-gradient-to-br ${cat.gradient} rounded-2xl p-4 h-28 flex flex-col justify-between text-left overflow-hidden active:scale-95 transition-transform shadow-md`}
-              >
-                {/* Background glow */}
-                <div className="absolute -right-3 -bottom-3 text-7xl opacity-20 select-none pointer-events-none">
-                  {cat.emoji}
-                </div>
-                <span className="text-3xl">{cat.emoji}</span>
-                <div>
-                  <p className="text-white font-bold text-base leading-tight">{cat.label}</p>
-                  <p className="text-white/70 text-xs mt-0.5">{cat.hint}</p>
-                </div>
-              </button>
-            ))}
-          </div>
-        </div>
-
         {/* ── Advanced Filter Button ──────────────────────────────────────── */}
-        <div className="px-4 pt-5 pb-2">
+        <div className="px-4 pt-4 pb-2">
           <button
             onClick={() => setShowSheet(true)}
             className="w-full flex items-center justify-between px-5 py-4 bg-white border border-gray-200 rounded-2xl shadow-sm active:bg-gray-50 transition-colors"
@@ -295,6 +271,38 @@ export default function SearchPage() {
               <span className="text-gray-400 text-lg">›</span>
             </div>
           </button>
+        </div>
+
+        {/* ── Category Grid ───────────────────────────────────────────────── */}
+        <div className="px-4 pt-4 pb-2">
+          <p className="text-xs font-bold text-gray-400 uppercase tracking-wide mb-3">カテゴリーから探す</p>
+          <div className="grid grid-cols-2 gap-3">
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat.value}
+                onClick={() => handleCategoryTap(cat.value)}
+                className="relative rounded-2xl h-28 overflow-hidden active:scale-95 transition-transform shadow-md text-left"
+              >
+                {/* Photo background */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={cat.photo}
+                  alt={cat.label}
+                  className="absolute inset-0 w-full h-full object-cover"
+                  onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+                />
+                {/* Fallback gradient (shown if image fails) */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${cat.fallback}`} style={{ zIndex: -1 }} />
+                {/* Dark overlay for text readability */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
+                {/* Text */}
+                <div className="absolute bottom-0 left-0 p-3">
+                  <p className="text-white font-bold text-base leading-tight drop-shadow">{cat.label}</p>
+                  <p className="text-white/75 text-xs mt-0.5 drop-shadow">{cat.hint}</p>
+                </div>
+              </button>
+            ))}
+          </div>
         </div>
 
       </div>

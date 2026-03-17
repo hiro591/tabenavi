@@ -142,7 +142,20 @@ function SearchResultsContent() {
     const supabase = createClient();
     let query = supabase.from("menu_items").select("*, chain_restaurants(name, emoji)");
 
-    if (searchQ)    query = query.ilike("name", `%${searchQ}%`);
+    if (searchQ) {
+      // Also search by chain restaurant name (e.g. typing "マクドナルド" shows all McDonald's items)
+      const { data: chains } = await supabase
+        .from("chain_restaurants")
+        .select("id")
+        .ilike("name", `%${searchQ}%`);
+      const chainIds = (chains ?? []).map((c: { id: string }) => c.id);
+
+      if (chainIds.length > 0) {
+        query = query.or(`name.ilike.%${searchQ}%,chain_restaurant_id.in.(${chainIds.join(",")})`);
+      } else {
+        query = query.or(`name.ilike.%${searchQ}%,description.ilike.%${searchQ}%`);
+      }
+    }
     if (category)   query = query.eq("category", category);
     if (sourceType) query = query.eq("source_type", sourceType);
     if (calorieMin > 0) query = query.gte("calories", calorieMin);
