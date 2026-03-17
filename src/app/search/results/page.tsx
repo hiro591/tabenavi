@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import { useState, useEffect, useCallback } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { getChainLogoUrl } from "@/lib/chain-logos";
 
 const SORT_OPTIONS = [
   { label: "おすすめ順",       value: "recommended" },
@@ -24,6 +25,46 @@ interface MenuItem {
   source_type: string | null;
   image_url: string | null;
   chain_restaurants: { name: string; emoji: string } | null;
+}
+
+// ─── Chain logo panel (handles image error fallback) ─────────────────────────
+
+function ChainLogoPanel({
+  item,
+  fitnessBadge,
+}: {
+  item: MenuItem;
+  fitnessBadge: { label: string; style: string } | null;
+}) {
+  const [logoFailed, setLogoFailed] = useState(false);
+  const logoUrl = getChainLogoUrl(item.chain_restaurants?.name || "");
+  const showLogo = logoUrl && !logoFailed;
+
+  return (
+    <div className={`w-28 shrink-0 flex items-center justify-center relative bg-gradient-to-br ${getCardGradient(item)}`}>
+      {item.image_url ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={item.image_url} alt={item.name} className="w-full h-full object-cover" />
+      ) : showLogo ? (
+        <div className="w-14 h-14 bg-white rounded-2xl shadow-sm flex items-center justify-center overflow-hidden p-1.5">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={logoUrl}
+            alt={item.chain_restaurants?.name || ""}
+            className="w-full h-full object-contain"
+            onError={() => setLogoFailed(true)}
+          />
+        </div>
+      ) : (
+        <span className="text-5xl">{item.chain_restaurants?.emoji || "🍽"}</span>
+      )}
+      {fitnessBadge && (
+        <span className={`absolute bottom-1.5 left-1.5 right-1.5 text-center text-[9px] font-bold px-1.5 py-0.5 rounded-lg ${fitnessBadge.style}`}>
+          {fitnessBadge.label}
+        </span>
+      )}
+    </div>
+  );
 }
 
 // ─── Store gradient per brand ────────────────────────────────────────────────
@@ -224,21 +265,8 @@ function SearchResultsContent() {
                   className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 active:scale-[0.985] active:shadow-none transition-all cursor-pointer"
                 >
                   <div className="flex">
-                    {/* Left gradient panel */}
-                    <div className={`w-28 shrink-0 bg-gradient-to-br ${getCardGradient(item)} flex items-center justify-center relative`}>
-                      {item.image_url ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img src={item.image_url} alt={item.name} className="w-full h-full object-cover" />
-                      ) : (
-                        <span className="text-5xl">{item.chain_restaurants?.emoji || "🍽"}</span>
-                      )}
-                      {/* Fitness badge overlay */}
-                      {fitnessBadge && (
-                        <span className={`absolute bottom-1.5 left-1.5 right-1.5 text-center text-[9px] font-bold px-1.5 py-0.5 rounded-lg ${fitnessBadge.style}`}>
-                          {fitnessBadge.label}
-                        </span>
-                      )}
-                    </div>
+                    {/* Left panel: logo or gradient+emoji */}
+                    <ChainLogoPanel item={item} fitnessBadge={fitnessBadge} />
 
                     {/* Right content */}
                     <div className="flex-1 min-w-0 p-3 flex flex-col justify-between">

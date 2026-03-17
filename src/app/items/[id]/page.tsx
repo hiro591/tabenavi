@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import FavoriteButton from "./FavoriteButton";
 import ShareCard from "./ShareCard";
+import ItemHeroImage from "./ItemHeroImage";
+import { getChainLogoUrl } from "@/lib/chain-logos";
 
 interface MenuItem {
   id: string;
@@ -109,6 +111,7 @@ export default async function ItemDetailPage({
   const badges = getSuitabilityBadges(item);
   const chainName = item.chain_restaurants?.name ?? "";
   const chainEmoji = item.chain_restaurants?.emoji ?? "🍽️";
+  const chainLogoUrl = getChainLogoUrl(chainName);
   const mapsUrl = chainName
     ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(chainName)}`
     : `https://www.google.com/maps`;
@@ -150,8 +153,8 @@ export default async function ItemDetailPage({
       <div className="max-w-lg mx-auto px-4">
         {/* Hero Section */}
         <div className="pt-8 pb-6 text-center">
-          <div className="inline-flex items-center justify-center w-32 h-32 bg-orange-50 rounded-3xl mb-4">
-            <span className="text-8xl leading-none">{chainEmoji}</span>
+          <div className="flex justify-center mb-4">
+            <ItemHeroImage logoUrl={chainLogoUrl} emoji={chainEmoji} chainName={chainName} />
           </div>
 
           <div className="flex justify-center mb-3">
