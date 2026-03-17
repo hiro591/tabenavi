@@ -72,7 +72,7 @@ export default function Features() {
             たべなびは外食「だけ」を深く最適化しています。
           </p>
           <p className="text-sm text-orange-500 font-medium">
-            あすけん・MyFitnessPalにはできない、外食に特化した体験
+            外食に特化した、これまでにない体験
           </p>
         </div>
 

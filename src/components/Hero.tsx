@@ -65,11 +65,10 @@ export default function Hero() {
                 variants={fadeUpVariants}
                 className="mt-6 text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-[1.1] tracking-tight"
               >
-                外食を、
+                外食しながら、
                 <br />
-                もっと
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500">
-                  賢く
+                  カラダづくり
                 </span>
                 。
               </motion.h1>
