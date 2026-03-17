@@ -85,14 +85,14 @@ const CATEGORIES = [
   { label: "洋食",       value: "洋食",           hint: "パスタ・ハンバーグ", photo: "https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?w=400&h=300&fit=crop&q=80", fallback: "from-violet-400 to-purple-500" },
   { label: "中華",       value: "中華・アジア",   hint: "餃子・炒め物",       photo: "https://images.unsplash.com/photo-1563245372-f21724e3856d?w=400&h=300&fit=crop&q=80", fallback: "from-red-400 to-rose-500" },
   { label: "麺類",       value: "麺類",           hint: "ラーメン・うどん",   photo: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400&h=300&fit=crop&q=80", fallback: "from-yellow-400 to-amber-500" },
-  { label: "丼もの",     value: "丼もの",         hint: "牛丼・親子丼",       photo: "https://images.unsplash.com/photo-1611143669185-af224c5e3252?w=400&h=300&fit=crop&q=80", fallback: "from-orange-400 to-red-400" },
+  { label: "丼もの",     value: "丼もの",         hint: "牛丼・親子丼",       photo: "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400&h=300&fit=crop&q=80", fallback: "from-orange-400 to-red-400" },
   { label: "パン・サンド", value: "パン・サンドイッチ", hint: "サンドイッチ・パン", photo: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400&h=300&fit=crop&q=80", fallback: "from-yellow-300 to-amber-400" },
   { label: "サラダ",     value: "サラダ・ヘルシー", hint: "低カロリー・ヘルシー", photo: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop&q=80", fallback: "from-green-400 to-emerald-500" },
   { label: "揚げ物",     value: "揚げ物",         hint: "から揚げ・フライ",   photo: "https://images.unsplash.com/photo-1562967914-608f82629710?w=400&h=300&fit=crop&q=80", fallback: "from-yellow-500 to-orange-600" },
-  { label: "おにぎり",   value: "おにぎり・軽食", hint: "軽食・スナック",     photo: "https://images.unsplash.com/photo-1617196034183-421b4040ed20?w=400&h=300&fit=crop&q=80", fallback: "from-slate-400 to-gray-600" },
+  { label: "おにぎり",   value: "おにぎり・軽食", hint: "軽食・スナック",     photo: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop&q=80", fallback: "from-slate-400 to-gray-600" },
   { label: "スイーツ",   value: "スイーツ",       hint: "デザート・お菓子",   photo: "https://images.unsplash.com/photo-1551024601-bec78aea704b?w=400&h=300&fit=crop&q=80", fallback: "from-pink-400 to-rose-500" },
   { label: "ドリンク",   value: "ドリンク",       hint: "コーヒー・ジュース", photo: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=300&fit=crop&q=80", fallback: "from-amber-600 to-stone-600" },
-  { label: "定食",       value: "定食・セット",   hint: "セットメニュー",     photo: "https://images.unsplash.com/photo-1547592180-85f173990554?w=400&h=300&fit=crop&q=80", fallback: "from-teal-400 to-cyan-600" },
+  { label: "定食",       value: "定食・セット",   hint: "セットメニュー",     photo: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=400&h=300&fit=crop&q=80", fallback: "from-teal-400 to-cyan-600" },
 ];
 
 const STORE_TYPES = [
