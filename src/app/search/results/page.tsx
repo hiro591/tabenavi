@@ -59,7 +59,7 @@ function ChainLogoPanel({
         />
       ) : (
         <div className={`w-full h-full flex items-center justify-center bg-gradient-to-br ${getCardGradient(item)}`}>
-          <Utensils className="w-10 h-10 text-gray-400" />
+          <Utensils className="w-10 h-10 text-orange-300" />
         </div>
       )}
       {fitnessBadge && (

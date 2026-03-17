@@ -238,7 +238,7 @@ export default function DashboardPage() {
           <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100 active:scale-[0.98] transition-transform">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <Search className="w-4 h-4 text-gray-500" />
+                <Search className="w-4 h-4 text-orange-500" />
                 <p className="text-sm font-semibold text-gray-700">メニューを探す</p>
               </div>
               <ChevronRight className="w-4 h-4 text-gray-400" />

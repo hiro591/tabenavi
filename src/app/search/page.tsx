@@ -71,14 +71,14 @@ function DualRangeSlider({
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
-const QUICK_FILTERS: { label: string; icon: React.ComponentType<{ className?: string }>; params: Record<string, string> }[] = [
-  { label: "高タンパク", icon: Dumbbell, params: { protein_min: "20" } },
-  { label: "低カロリー", icon: Flame,    params: { calorie_max: "400" } },
-  { label: "ダイエット", icon: Leaf,     params: { calorie_max: "500", fat_max: "15" } },
-  { label: "筋トレ飯",  icon: Zap,      params: { protein_min: "30" } },
-  { label: "〜500円",   icon: Tag,      params: { price_max: "500" } },
-  { label: "コンビニ",  icon: Store,    params: { source_type: "convenience_store" } },
-  { label: "外食",      icon: Utensils, params: { source_type: "chain_restaurant" } },
+const QUICK_FILTERS: { label: string; icon: React.ComponentType<{ className?: string }>; color: string; params: Record<string, string> }[] = [
+  { label: "高タンパク", icon: Dumbbell, color: "text-blue-500",   params: { protein_min: "20" } },
+  { label: "低カロリー", icon: Flame,    color: "text-orange-500", params: { calorie_max: "400" } },
+  { label: "ダイエット", icon: Leaf,     color: "text-green-500",  params: { calorie_max: "500", fat_max: "15" } },
+  { label: "筋トレ飯",  icon: Zap,      color: "text-amber-500",  params: { protein_min: "30" } },
+  { label: "〜500円",   icon: Tag,      color: "text-purple-500", params: { price_max: "500" } },
+  { label: "コンビニ",  icon: Store,    color: "text-sky-500",    params: { source_type: "convenience_store" } },
+  { label: "外食",      icon: Utensils, color: "text-rose-500",   params: { source_type: "chain_restaurant" } },
 ];
 
 const CATEGORIES = [
@@ -96,11 +96,11 @@ const CATEGORIES = [
   { label: "定食",       value: "定食・セット",   hint: "セットメニュー",     photo: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=400&h=300&fit=crop&q=80", fallback: "from-teal-400 to-cyan-600" },
 ];
 
-const STORE_TYPES: { label: string; value: string; Icon?: React.ComponentType<{ className?: string }> }[] = [
+const STORE_TYPES: { label: string; value: string; Icon?: React.ComponentType<{ className?: string }>; iconColor?: string }[] = [
   { label: "すべて",    value: "" },
-  { label: "コンビニ", value: "convenience_store", Icon: Store },
-  { label: "外食",     value: "chain_restaurant",  Icon: Utensils },
-  { label: "スーパー", value: "supermarket",        Icon: ShoppingCart },
+  { label: "コンビニ", value: "convenience_store", Icon: Store,        iconColor: "text-sky-500" },
+  { label: "外食",     value: "chain_restaurant",  Icon: Utensils,     iconColor: "text-orange-500" },
+  { label: "スーパー", value: "supermarket",        Icon: ShoppingCart, iconColor: "text-green-500" },
 ];
 
 const SORT_OPTIONS = [
@@ -189,10 +189,19 @@ export default function SearchPage() {
     <div className="min-h-screen bg-gray-50 pb-28">
 
       {/* ── Hero Header ─────────────────────────────────────────────────── */}
-      <div className="bg-gradient-to-br from-orange-500 to-amber-400 px-4 pt-10 pb-6 shadow-lg">
-        <div className="max-w-lg mx-auto">
-          <p className="text-white/80 text-sm font-medium mb-1">たべなび</p>
-          <h1 className="text-white text-2xl font-bold mb-4">今日、何食べる？</h1>
+      <div className="relative bg-white px-4 pt-12 pb-6 overflow-hidden">
+        {/* Subtle background decoration */}
+        <div className="absolute top-0 right-0 w-48 h-48 bg-orange-100 rounded-full -translate-y-1/2 translate-x-1/4 opacity-60" />
+        <div className="absolute bottom-0 left-0 w-32 h-32 bg-amber-50 rounded-full translate-y-1/2 -translate-x-1/4 opacity-80" />
+
+        <div className="max-w-lg mx-auto relative">
+          <div className="flex items-center gap-2 mb-1">
+            <div className="w-7 h-7 bg-gradient-to-br from-orange-500 to-amber-400 rounded-lg flex items-center justify-center">
+              <Utensils className="w-3.5 h-3.5 text-white" />
+            </div>
+            <p className="text-orange-500 text-sm font-bold tracking-wide">たべなび</p>
+          </div>
+          <h1 className="text-gray-900 text-2xl font-bold mb-4">今日、何食べる？</h1>
           <div className="relative">
             <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
             <input
@@ -201,7 +210,7 @@ export default function SearchPage() {
               onChange={(e) => setKeyword(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleSearch()}
               placeholder="メニュー名・商品名で検索"
-              className="w-full pl-11 pr-4 py-3.5 bg-white rounded-2xl text-sm font-medium text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white/50 shadow-md"
+              className="w-full pl-11 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-2xl text-sm font-medium text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-300 focus:border-orange-300 focus:bg-white transition-colors"
             />
             {keyword && (
               <button
@@ -227,7 +236,7 @@ export default function SearchPage() {
                 onClick={() => handleQuickFilter(f.params)}
                 className="shrink-0 flex items-center gap-1.5 px-3.5 py-2 bg-white border border-gray-200 rounded-full text-sm font-medium text-gray-700 active:bg-orange-50 active:border-orange-300 active:text-orange-600 transition-colors shadow-sm"
               >
-                <f.icon className="w-3.5 h-3.5" />
+                <f.icon className={`w-3.5 h-3.5 ${f.color}`} />
                 {f.label}
               </button>
             ))}
@@ -247,7 +256,7 @@ export default function SearchPage() {
                     : "text-gray-500"
                 }`}
               >
-                {s.Icon && <s.Icon className="w-3 h-3" />}
+                {s.Icon && <s.Icon className={`w-3 h-3 ${storeType === s.value ? "" : s.iconColor}`} />}
                 {s.label}
               </button>
             ))}
@@ -261,7 +270,7 @@ export default function SearchPage() {
             className="w-full flex items-center justify-between px-5 py-4 bg-white border border-gray-200 rounded-2xl shadow-sm active:bg-gray-50 transition-colors"
           >
             <div className="flex items-center gap-3">
-              <SlidersHorizontal className="w-5 h-5 text-gray-500 shrink-0" />
+              <SlidersHorizontal className="w-5 h-5 text-orange-500 shrink-0" />
               <div className="text-left">
                 <p className="text-sm font-bold text-gray-800">詳細フィルター</p>
                 <p className="text-xs text-gray-400">カロリー・タンパク質・価格で絞り込む</p>
