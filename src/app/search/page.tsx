@@ -71,14 +71,14 @@ function DualRangeSlider({
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
-const QUICK_FILTERS: { label: string; icon: React.ComponentType<{ className?: string }>; color: string; params: Record<string, string> }[] = [
-  { label: "高タンパク", icon: Dumbbell, color: "text-blue-500",   params: { protein_min: "20" } },
-  { label: "低カロリー", icon: Flame,    color: "text-orange-500", params: { calorie_max: "400" } },
-  { label: "ダイエット", icon: Leaf,     color: "text-green-500",  params: { calorie_max: "500", fat_max: "15" } },
-  { label: "筋トレ飯",  icon: Zap,      color: "text-amber-500",  params: { protein_min: "30" } },
-  { label: "〜500円",   icon: Tag,      color: "text-purple-500", params: { price_max: "500" } },
-  { label: "コンビニ",  icon: Store,    color: "text-sky-500",    params: { source_type: "convenience_store" } },
-  { label: "外食",      icon: Utensils, color: "text-rose-500",   params: { source_type: "chain_restaurant" } },
+const QUICK_FILTERS: { label: string; icon: React.ComponentType<{ className?: string }>; color: string; bg: string; params: Record<string, string> }[] = [
+  { label: "高タンパク", icon: Dumbbell, color: "text-blue-600",   bg: "bg-blue-50 border-blue-200",   params: { protein_min: "20" } },
+  { label: "低カロリー", icon: Flame,    color: "text-orange-600", bg: "bg-orange-50 border-orange-200", params: { calorie_max: "400" } },
+  { label: "ダイエット", icon: Leaf,     color: "text-green-600",  bg: "bg-green-50 border-green-200",  params: { calorie_max: "500", fat_max: "15" } },
+  { label: "筋トレ飯",  icon: Zap,      color: "text-amber-600",  bg: "bg-amber-50 border-amber-200",  params: { protein_min: "30" } },
+  { label: "〜500円",   icon: Tag,      color: "text-purple-600", bg: "bg-purple-50 border-purple-200", params: { price_max: "500" } },
+  { label: "コンビニ",  icon: Store,    color: "text-sky-600",    bg: "bg-sky-50 border-sky-200",    params: { source_type: "convenience_store" } },
+  { label: "外食",      icon: Utensils, color: "text-rose-600",   bg: "bg-rose-50 border-rose-200",   params: { source_type: "chain_restaurant" } },
 ];
 
 const CATEGORIES = [
@@ -189,19 +189,20 @@ export default function SearchPage() {
     <div className="min-h-screen bg-gray-50 pb-28">
 
       {/* ── Hero Header ─────────────────────────────────────────────────── */}
-      <div className="relative bg-white px-4 pt-12 pb-6 overflow-hidden">
-        {/* Subtle background decoration */}
-        <div className="absolute top-0 right-0 w-48 h-48 bg-orange-100 rounded-full -translate-y-1/2 translate-x-1/4 opacity-60" />
-        <div className="absolute bottom-0 left-0 w-32 h-32 bg-amber-50 rounded-full translate-y-1/2 -translate-x-1/4 opacity-80" />
+      <div className="relative bg-gradient-to-br from-orange-500 via-orange-400 to-amber-400 px-4 pt-10 pb-8 overflow-hidden">
+        {/* Decorative shapes */}
+        <div className="absolute top-0 right-0 w-56 h-56 bg-white/10 rounded-full -translate-y-1/3 translate-x-1/4" />
+        <div className="absolute bottom-0 left-0 w-40 h-40 bg-white/10 rounded-full translate-y-1/3 -translate-x-1/4" />
+        <div className="absolute top-1/2 right-8 w-20 h-20 bg-white/5 rounded-full" />
 
         <div className="max-w-lg mx-auto relative">
-          <div className="flex items-center gap-2 mb-1">
-            <div className="w-7 h-7 bg-gradient-to-br from-orange-500 to-amber-400 rounded-lg flex items-center justify-center">
-              <Utensils className="w-3.5 h-3.5 text-white" />
+          <div className="flex items-center gap-2.5 mb-2">
+            <div className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center border border-white/30">
+              <Utensils className="w-4 h-4 text-white" />
             </div>
-            <p className="text-orange-500 text-sm font-bold tracking-wide">たべなび</p>
+            <p className="text-white/90 text-sm font-bold tracking-wider">たべなび</p>
           </div>
-          <h1 className="text-gray-900 text-2xl font-bold mb-4">今日、何食べる？</h1>
+          <h1 className="text-white text-2xl font-bold mb-5 drop-shadow-sm">今日、何食べる？</h1>
           <div className="relative">
             <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
             <input
@@ -210,12 +211,12 @@ export default function SearchPage() {
               onChange={(e) => setKeyword(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleSearch()}
               placeholder="メニュー名・商品名で検索"
-              className="w-full pl-11 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-2xl text-sm font-medium text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-300 focus:border-orange-300 focus:bg-white transition-colors"
+              className="w-full pl-11 pr-4 py-3.5 bg-white/95 backdrop-blur-sm rounded-2xl text-sm font-medium text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white/60 shadow-lg shadow-orange-600/20"
             />
             {keyword && (
               <button
                 onClick={handleSearch}
-                className="absolute right-3 top-1/2 -translate-y-1/2 bg-orange-500 text-white text-xs font-bold px-3 py-1.5 rounded-xl"
+                className="absolute right-3 top-1/2 -translate-y-1/2 bg-orange-500 text-white text-xs font-bold px-3 py-1.5 rounded-xl shadow-md"
               >
                 検索
               </button>
@@ -234,7 +235,7 @@ export default function SearchPage() {
               <button
                 key={f.label}
                 onClick={() => handleQuickFilter(f.params)}
-                className="shrink-0 flex items-center gap-1.5 px-3.5 py-2 bg-white border border-gray-200 rounded-full text-sm font-medium text-gray-700 active:bg-orange-50 active:border-orange-300 active:text-orange-600 transition-colors shadow-sm"
+                className={`shrink-0 flex items-center gap-1.5 px-3.5 py-2 ${f.bg} border rounded-full text-sm font-medium text-gray-700 active:scale-95 transition-all shadow-sm`}
               >
                 <f.icon className={`w-3.5 h-3.5 ${f.color}`} />
                 {f.label}

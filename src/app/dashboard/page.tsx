@@ -297,11 +297,11 @@ export default function DashboardPage() {
       </div>
 
       {/* Streak & Motivation */}
-      <div className="bg-white rounded-2xl p-4 shadow-sm mb-4">
+      <div className={`rounded-2xl p-4 shadow-sm mb-4 ${streak > 0 ? "bg-gradient-to-r from-orange-50 to-amber-50 border border-orange-100" : "bg-white"}`}>
         {streak > 0 ? (
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center shrink-0">
-              <Flame className="w-6 h-6 text-orange-500" />
+            <div className="w-12 h-12 bg-gradient-to-br from-orange-400 to-amber-400 rounded-full flex items-center justify-center shrink-0 shadow-md shadow-orange-200">
+              <Flame className="w-6 h-6 text-white" />
             </div>
             <div>
               <p className="text-base font-bold text-gray-800">
