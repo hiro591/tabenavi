@@ -1,41 +1,8 @@
 "use client";
 
-import { useState } from "react";
-import { Star } from "lucide-react";
+import { Star, Users, Shield, ArrowRight } from "lucide-react";
 
 export default function Signup() {
-  const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState("");
-
-  const validateEmail = (value: string): boolean => {
-    const emailRegex = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
-    return emailRegex.test(value);
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
-    if (!email) {
-      setError("メールアドレスを入力してください。");
-      return;
-    }
-    if (!validateEmail(email)) {
-      setError("正しいメールアドレスの形式で入力してください。");
-      return;
-    }
-    const res = await fetch("https://formspree.io/f/xkoqqzdy", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email }),
-    });
-    if (res.ok) {
-      setSubmitted(true);
-    } else {
-      setError("送信に失敗しました。もう一度お試しください。");
-    }
-  };
-
   return (
     <section id="signup" className="py-24 bg-gray-900 relative overflow-hidden">
       {/* Background decoration */}
@@ -45,32 +12,36 @@ export default function Signup() {
       </div>
 
       <div className="relative max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div className="inline-flex items-center gap-2 bg-orange-500/20 text-orange-400 px-4 py-1.5 rounded-full text-sm font-medium mb-6">
+        <div className="inline-flex items-center gap-2 bg-orange-500/20 text-orange-400 px-4 py-1.5 rounded-full text-sm font-medium mb-8 border border-orange-500/20">
           <span className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></span>
-          β版先行登録受付中
+          ベータ版先行登録受付中
         </div>
 
         <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
           外食をもっと楽しもう
         </h2>
-        <p className="text-lg text-gray-400 mb-3">
+        <p className="text-lg text-gray-400 mb-4 leading-relaxed">
           今すぐ登録して、外食専門の食事管理を体験してください。
-          β版ユーザーは<span className="text-orange-400 font-semibold">プレミアム機能を3ヶ月無料</span>でご利用いただけます。
+          ベータ版ユーザーは<span className="text-orange-400 font-semibold">プレミアム機能を3ヶ月無料</span>でご利用いただけます。
         </p>
-        <p className="text-sm text-amber-400 font-semibold mb-10">
-          先着500名限定 · 残り247名
-        </p>
+
+        {/* Urgency element */}
+        <div className="inline-flex items-center gap-3 bg-amber-500/10 border border-amber-500/20 text-amber-400 px-5 py-2 rounded-full text-sm font-semibold mb-10">
+          <Users className="w-4 h-4" />
+          先着500名限定 -- 残り247名
+        </div>
 
         <div className="max-w-md mx-auto flex flex-col sm:flex-row gap-3">
           <a
             href="/signup"
-            className="flex-1 bg-orange-500 hover:bg-orange-400 text-white px-8 py-4 rounded-2xl font-semibold transition-all hover:shadow-lg hover:shadow-orange-500/25 text-center"
+            className="flex-1 inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-400 text-white px-8 py-4 rounded-2xl font-semibold transition-all hover:shadow-lg hover:shadow-orange-500/25 text-center"
           >
-            無料で始める →
+            無料で始める
+            <ArrowRight className="w-4 h-4" />
           </a>
           <a
             href="/login"
-            className="flex-1 bg-white/10 hover:bg-white/20 border border-white/20 text-white px-8 py-4 rounded-2xl font-semibold transition-all text-center"
+            className="flex-1 bg-white/10 hover:bg-white/15 border border-white/20 text-white px-8 py-4 rounded-2xl font-semibold transition-all text-center"
           >
             ログイン
           </a>
@@ -83,11 +54,14 @@ export default function Signup() {
         {/* Social proof */}
         <div className="mt-12 flex flex-wrap items-center justify-center gap-6 text-sm text-gray-500">
           <div className="flex items-center gap-2">
-            <span className="flex gap-0.5">{[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 text-yellow-400 fill-current" />)}</span>
-            <span>β版ユーザー満足度</span>
+            <span className="flex gap-0.5">{[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 text-amber-400 fill-current" />)}</span>
+            <span>ベータ版ユーザー満足度 4.8</span>
           </div>
           <div className="w-px h-4 bg-gray-700"></div>
-          <div>クレジットカード不要</div>
+          <div className="flex items-center gap-1.5">
+            <Shield className="w-3.5 h-3.5" />
+            クレジットカード不要
+          </div>
           <div className="w-px h-4 bg-gray-700"></div>
           <div>いつでも解約可能</div>
         </div>

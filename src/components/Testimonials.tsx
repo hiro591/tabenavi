@@ -1,4 +1,4 @@
-import { Star } from "lucide-react";
+import { Star, Quote } from "lucide-react";
 
 const testimonials = [
   {
@@ -57,13 +57,13 @@ export default function Testimonials() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 bg-orange-100 text-orange-600 px-4 py-1.5 rounded-full text-sm font-medium mb-4">
+          <div className="inline-flex items-center gap-2 bg-orange-100 text-orange-600 px-4 py-1.5 rounded-full text-sm font-medium mb-6">
             ユーザーの声
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
             ベータ版ユーザーから届いた声
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-500 max-w-2xl mx-auto">
             先行リリースで利用いただいたユーザーの皆さまから、嬉しいフィードバックをいただいています。
           </p>
         </div>
@@ -73,31 +73,31 @@ export default function Testimonials() {
           {testimonials.map((t) => (
             <div
               key={t.name}
-              className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow relative"
+              className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100 relative group"
             >
-              {/* Speech bubble tail */}
-              <div className="absolute -top-3 left-8 w-6 h-6 bg-white rotate-45 border-l border-t border-gray-100"></div>
+              {/* Quote icon */}
+              <Quote className="w-8 h-8 text-orange-100 mb-3 fill-current" />
 
               {/* Stars */}
-              <div className="flex gap-0.5 mb-3">
+              <div className="flex gap-0.5 mb-4">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="w-4 h-4 text-amber-400 fill-current" />
                 ))}
               </div>
 
               {/* Review text */}
-              <p className="text-gray-700 text-sm leading-relaxed mb-5">
+              <p className="text-gray-600 text-sm leading-relaxed mb-6">
                 {t.review}
               </p>
 
               {/* User info */}
               <div className="flex items-center gap-3 pt-4 border-t border-gray-100">
-                <div className={`w-10 h-10 ${t.color} rounded-full flex items-center justify-center text-white font-bold text-sm`}>
+                <div className={`w-10 h-10 ${t.color} rounded-full flex items-center justify-center text-white font-bold text-sm shadow-sm`}>
                   {t.initial}
                 </div>
                 <div>
                   <div className="font-bold text-gray-900 text-sm">{t.name}</div>
-                  <div className="text-gray-500 text-xs">{t.age} / {t.role}</div>
+                  <div className="text-gray-400 text-xs">{t.age} / {t.role}</div>
                 </div>
               </div>
             </div>

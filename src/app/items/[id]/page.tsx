@@ -1,7 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ChevronLeft, MapPin, Share2, Utensils } from "lucide-react";
+import { ChevronLeft, MapPin, Utensils } from "lucide-react";
 import { getChainLogo } from "@/lib/chain-logos";
 import FavoriteButton from "./FavoriteButton";
 import ShareCard from "./ShareCard";
@@ -136,12 +136,7 @@ export default async function ItemDetailPage({
             <ChevronLeft className="w-5 h-5" />
             <span className="text-sm">検索に戻る</span>
           </Link>
-          <button
-            className="p-2 text-gray-400 hover:text-gray-600 transition-colors"
-            aria-label="共有"
-          >
-            <Share2 className="w-5 h-5" />
-          </button>
+          <ShareCard item={item} variant="header" />
         </div>
       </div>
 

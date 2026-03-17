@@ -46,13 +46,13 @@ const features: { Icon: ComponentType<{ className?: string }>; title: string; de
   },
 ];
 
-const colorMap: Record<string, { bg: string; icon: string; badge: string }> = {
-  orange: { bg: "bg-orange-50", icon: "bg-orange-100 text-orange-600", badge: "text-orange-600" },
-  blue: { bg: "bg-blue-50", icon: "bg-blue-100 text-blue-600", badge: "text-blue-600" },
-  green: { bg: "bg-green-50", icon: "bg-green-100 text-green-600", badge: "text-green-600" },
-  purple: { bg: "bg-purple-50", icon: "bg-purple-100 text-purple-600", badge: "text-purple-600" },
-  amber: { bg: "bg-amber-50", icon: "bg-amber-100 text-amber-600", badge: "text-amber-600" },
-  rose: { bg: "bg-rose-50", icon: "bg-rose-100 text-rose-600", badge: "text-rose-600" },
+const colorMap: Record<string, { iconBg: string; iconText: string }> = {
+  orange: { iconBg: "bg-orange-100", iconText: "text-orange-600" },
+  blue: { iconBg: "bg-blue-100", iconText: "text-blue-600" },
+  green: { iconBg: "bg-green-100", iconText: "text-green-600" },
+  purple: { iconBg: "bg-purple-100", iconText: "text-purple-600" },
+  amber: { iconBg: "bg-amber-100", iconText: "text-amber-600" },
+  rose: { iconBg: "bg-rose-100", iconText: "text-rose-600" },
 };
 
 export default function Features() {
@@ -61,13 +61,13 @@ export default function Features() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 bg-orange-100 text-orange-600 px-4 py-1.5 rounded-full text-sm font-medium mb-4">
+          <div className="inline-flex items-center gap-2 bg-orange-100 text-orange-600 px-4 py-1.5 rounded-full text-sm font-medium mb-6">
             機能
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
             外食専門だからできること
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-3">
+          <p className="text-lg text-gray-500 max-w-2xl mx-auto mb-3 leading-relaxed">
             汎用アプリが自炊・コンビニ・外食を広く浅くカバーするのに対し、
             たべなびは外食「だけ」を深く最適化しています。
           </p>
@@ -78,30 +78,23 @@ export default function Features() {
 
         {/* Features grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {features.map((feature, index) => {
+          {features.map((feature) => {
             const colors = colorMap[feature.color];
             return (
               <div
                 key={feature.title}
-                className={`${colors.bg} rounded-2xl p-6 hover:shadow-lg transition-all hover:-translate-y-1 cursor-default relative group`}
+                className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 cursor-default relative group"
               >
                 {feature.comingSoon && (
-                  <span className="absolute top-4 right-4 bg-orange-500 text-white text-xs font-bold px-2.5 py-1 rounded-full">
-                    近日公開
+                  <span className="absolute top-4 right-4 bg-gray-900 text-white text-[10px] font-semibold px-2.5 py-1 rounded-full uppercase tracking-wider">
+                    Coming Soon
                   </span>
                 )}
-                <div className="flex items-start gap-4 mb-4">
-                  <div className="flex-shrink-0">
-                    <div className="w-7 h-7 bg-orange-500 text-white rounded-full flex items-center justify-center text-xs font-bold">
-                      {index + 1}
-                    </div>
-                  </div>
-                  <div className={`w-12 h-12 ${colors.icon} rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110`}>
-                    <feature.Icon className="w-6 h-6" />
-                  </div>
+                <div className={`w-12 h-12 ${colors.iconBg} rounded-full flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-110`}>
+                  <feature.Icon className={`w-6 h-6 ${colors.iconText}`} />
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-2">{feature.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{feature.description}</p>
+                <p className="text-gray-500 text-sm leading-relaxed">{feature.description}</p>
               </div>
             );
           })}

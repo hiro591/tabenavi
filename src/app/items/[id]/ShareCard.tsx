@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Share2, Copy, Check, X } from "lucide-react";
 
 interface ShareCardProps {
   item: {
@@ -14,6 +15,7 @@ interface ShareCardProps {
     source_type: string | null;
     chain_restaurants: { name: string; emoji: string } | null;
   };
+  variant?: "default" | "header";
 }
 
 function getCardStyle(sourceType: string | null) {
@@ -42,59 +44,86 @@ function getCardStyle(sourceType: string | null) {
   }
 }
 
-export default function ShareCard({ item }: ShareCardProps) {
+export default function ShareCard({ item, variant = "default" }: ShareCardProps) {
   const [showCard, setShowCard] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [canWebShare, setCanWebShare] = useState(false);
+
+  useEffect(() => {
+    setCanWebShare(!!navigator.share);
+  }, []);
 
   const storeName = item.chain_restaurants?.name ?? "";
-  const storeEmoji = item.chain_restaurants?.emoji ?? "";
   const cardStyle = getCardStyle(item.source_type);
 
-  const shareText = `【${storeName}】${item.name}\n🔥${item.calories ?? "-"}kcal 💪${item.protein ?? "-"}g\n\n#筋トレ飯 #マクロ管理 #たべなび\nhttps://tabenavi.jp/items/${item.id}`;
+  const shareUrl = `https://tabenavi.jp/items/${item.id}`;
+  const shareText = `【${storeName}】${item.name}\n${item.calories ?? "-"}kcal / タンパク質${item.protein ?? "-"}g\n\n#筋トレ飯 #マクロ管理 #たべなび`;
 
-  async function handleShare() {
+  async function handleWebShare() {
     if (navigator.share) {
       try {
         await navigator.share({
+          title: `${storeName} ${item.name} - たべなび`,
           text: shareText,
+          url: shareUrl,
         });
       } catch {
         // User cancelled share
       }
-    } else {
-      await navigator.clipboard.writeText(shareText);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
     }
+  }
+
+  function handleLineShare() {
+    const url = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(shareUrl)}`;
+    window.open(url, "_blank", "noopener,noreferrer");
+  }
+
+  function handleTwitterShare() {
+    const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
+    window.open(url, "_blank", "noopener,noreferrer");
+  }
+
+  async function handleCopyLink() {
+    await navigator.clipboard.writeText(shareUrl);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   }
 
   return (
     <>
-      {/* Share button in sticky bar */}
+      {/* Share trigger button */}
       <button
         onClick={() => setShowCard(true)}
-        className="flex items-center justify-center w-12 h-12 rounded-xl border border-gray-200 bg-white text-gray-600 hover:bg-gray-50 transition-colors"
+        className={
+          variant === "header"
+            ? "p-2 text-gray-400 hover:text-gray-600 transition-colors"
+            : "flex items-center justify-center w-12 h-12 rounded-xl border border-gray-200 bg-white text-gray-600 hover:bg-gray-50 transition-colors"
+        }
         aria-label="シェアする"
       >
-        <svg
-          className="w-5 h-5"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={2}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
-          />
-        </svg>
+        <Share2 className="w-5 h-5" />
       </button>
 
       {/* Modal overlay */}
       {showCard && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setShowCard(false);
+          }}
+        >
           <div className="w-full max-w-sm">
+            {/* Close button */}
+            <div className="flex justify-end mb-2">
+              <button
+                onClick={() => setShowCard(false)}
+                className="p-1.5 rounded-full bg-white/90 text-gray-500 hover:text-gray-700 transition-colors"
+                aria-label="閉じる"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
             {/* Share Card */}
             <div
               id="share-card"
@@ -191,14 +220,57 @@ export default function ShareCard({ item }: ShareCardProps) {
               </div>
             </div>
 
-            {/* Action buttons */}
+            {/* Share buttons */}
             <div className="mt-4 space-y-2">
-              <button
-                onClick={handleShare}
-                className="w-full py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-medium rounded-xl hover:from-orange-600 hover:to-orange-700 transition-all shadow-lg"
-              >
-                {copied ? "コピーしました！" : "シェアする"}
-              </button>
+              {/* Web Share API button (mobile) */}
+              {canWebShare && (
+                <button
+                  onClick={handleWebShare}
+                  className="w-full py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-medium rounded-xl hover:from-orange-600 hover:to-orange-700 transition-all shadow-lg flex items-center justify-center gap-2"
+                >
+                  <Share2 className="w-4 h-4" />
+                  シェアする
+                </button>
+              )}
+
+              {/* Platform share buttons */}
+              <div className="flex gap-2">
+                {/* LINE */}
+                <button
+                  onClick={handleLineShare}
+                  className="flex-1 py-3 bg-[#06C755] text-white font-medium rounded-xl hover:bg-[#05b34c] transition-colors flex items-center justify-center gap-2"
+                >
+                  <span className="text-xs font-bold">LINE</span>
+                </button>
+
+                {/* X (Twitter) */}
+                <button
+                  onClick={handleTwitterShare}
+                  className="flex-1 py-3 bg-black text-white font-medium rounded-xl hover:bg-gray-800 transition-colors flex items-center justify-center gap-2"
+                >
+                  <span className="text-xs font-bold">X</span>
+                </button>
+
+                {/* Copy link */}
+                <button
+                  onClick={handleCopyLink}
+                  className="flex-1 py-3 bg-gray-100 text-gray-700 font-medium rounded-xl hover:bg-gray-200 transition-colors flex items-center justify-center gap-2"
+                >
+                  {copied ? (
+                    <>
+                      <Check className="w-4 h-4 text-green-600" />
+                      <span className="text-xs text-green-600">コピー済</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-4 h-4" />
+                      <span className="text-xs">コピー</span>
+                    </>
+                  )}
+                </button>
+              </div>
+
+              {/* Close button */}
               <button
                 onClick={() => setShowCard(false)}
                 className="w-full py-3 bg-white/90 text-gray-600 font-medium rounded-xl hover:bg-white transition-colors"
