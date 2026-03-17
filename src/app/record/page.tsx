@@ -1,9 +1,11 @@
 "use client";
 
 import { useEffect, useState, useMemo } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import type { ChainRestaurant, MenuItem } from "@/types/database";
+import Link from "next/link";
+import { Suspense } from "react";
 
 type MealType = "breakfast" | "lunch" | "dinner" | "snack";
 
@@ -14,8 +16,9 @@ const MEAL_TYPES: { value: MealType; label: string }[] = [
   { value: "snack", label: "間食" },
 ];
 
-export default function RecordPage() {
+function RecordPageContent() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const supabase = createClient();
 
   // Step management
@@ -46,8 +49,32 @@ export default function RecordPage() {
 
   // UI state
   const [saving, setSaving] = useState(false);
-  const [toast, setToast] = useState(false);
+  const [saved, setSaved] = useState(false);
   const [chainsLoading, setChainsLoading] = useState(true);
+
+  // Handle ?menu_id=xxx param - pre-select menu item and skip to Step 3
+  useEffect(() => {
+    const menuId = searchParams.get("menu_id");
+    if (!menuId) return;
+
+    async function fetchMenuById() {
+      const { data } = await supabase
+        .from("menu_items")
+        .select("*, chain_restaurants(*)")
+        .eq("id", menuId!)
+        .single();
+
+      if (data) {
+        const menu = data as MenuItem & { chain_restaurants: ChainRestaurant };
+        setSelectedMenu(menu);
+        if (menu.chain_restaurants) {
+          setSelectedChain(menu.chain_restaurants);
+        }
+        setStep(3);
+      }
+    }
+    fetchMenuById();
+  }, [searchParams]);
 
   // Fetch chains on mount
   useEffect(() => {
@@ -112,7 +139,7 @@ export default function RecordPage() {
 
     await supabase.from("food_logs").insert({
       user_id: user.id,
-      menu_item_id: selectedMenu?.id ?? null,
+      menu_item_id: isManualMode ? null : (selectedMenu?.id ?? null),
       custom_name: isManualMode ? customName : null,
       calories: finalCalories,
       protein: isManualMode ? customProtein : (selectedMenu?.protein ?? 0),
@@ -123,14 +150,11 @@ export default function RecordPage() {
     });
 
     setSaving(false);
-    setToast(true);
-    setTimeout(() => {
-      router.push("/dashboard");
-    }, 1500);
+    setSaved(true);
   }
 
-  // Go to manual mode
-  function goManual() {
+  // Go to custom mode
+  function goCustom() {
     setIsManualMode(true);
     setSelectedChain(null);
     setSelectedMenu(null);
@@ -139,6 +163,7 @@ export default function RecordPage() {
 
   // Step indicator
   function StepIndicator() {
+    if (saved) return null;
     return (
       <div className="flex items-center justify-center gap-2 mb-6">
         {[1, 2, 3].map((s) => (
@@ -161,6 +186,31 @@ export default function RecordPage() {
             )}
           </div>
         ))}
+      </div>
+    );
+  }
+
+  // Success screen
+  if (saved) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center px-4">
+          <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg className="w-10 h-10 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <h2 className="text-xl font-bold text-gray-800 mb-2">記録しました!</h2>
+          <p className="text-gray-500 mb-6">
+            {isManualMode ? customName : selectedMenu?.name} - {finalCalories} kcal
+          </p>
+          <Link
+            href="/dashboard"
+            className="inline-block bg-orange-500 text-white font-semibold px-8 py-3 rounded-xl hover:bg-orange-600 transition-colors"
+          >
+            ダッシュボードへ
+          </Link>
+        </div>
       </div>
     );
   }
@@ -218,6 +268,20 @@ export default function RecordPage() {
         >
           {step === 1 && (
             <>
+              {/* Custom entry card - at the top */}
+              <button
+                onClick={goCustom}
+                className="w-full mb-4 bg-gradient-to-r from-orange-50 to-amber-50 rounded-xl p-4 border-2 border-orange-200 hover:border-orange-400 hover:shadow-md transition-all text-left active:scale-[0.98]"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl">✏️</span>
+                  <div>
+                    <p className="font-bold text-gray-800">チェーン店以外を記録</p>
+                    <p className="text-sm text-orange-500">カスタムで入力する →</p>
+                  </div>
+                </div>
+              </button>
+
               <div className="mb-4">
                 <input
                   type="text"
@@ -253,13 +317,6 @@ export default function RecordPage() {
                   ))}
                 </div>
               )}
-
-              <button
-                onClick={goManual}
-                className="w-full py-3 rounded-xl border-2 border-dashed border-orange-300 text-orange-500 font-medium hover:bg-orange-50 transition-colors"
-              >
-                手動入力
-              </button>
             </>
           )}
         </div>
@@ -345,24 +402,24 @@ export default function RecordPage() {
           {step === 3 && (
             <>
               {isManualMode ? (
-                /* Manual Input Form */
+                /* Custom Input Form */
                 <div className="bg-white rounded-xl p-5 border border-gray-100 mb-4 space-y-4">
-                  <h2 className="font-bold text-gray-800">手動入力</h2>
+                  <h2 className="font-bold text-gray-800">カスタム記録</h2>
                   <div>
                     <label className="text-sm text-gray-500 block mb-1">
-                      メニュー名
+                      食事名
                     </label>
                     <input
                       type="text"
                       value={customName}
                       onChange={(e) => setCustomName(e.target.value)}
-                      placeholder="例: チキンカレー"
+                      placeholder="例: 自炊のサラダ、コンビニのおにぎり"
                       className="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-500 text-gray-800"
                     />
                   </div>
                   <div>
                     <label className="text-sm text-gray-500 block mb-1">
-                      カロリー (kcal)
+                      カロリー (kcal) <span className="text-red-400">*</span>
                     </label>
                     <input
                       type="number"
@@ -377,7 +434,7 @@ export default function RecordPage() {
                   <div className="grid grid-cols-3 gap-3">
                     <div>
                       <label className="text-sm text-gray-500 block mb-1">
-                        P (g)
+                        タンパク質 (g)
                       </label>
                       <input
                         type="number"
@@ -391,7 +448,7 @@ export default function RecordPage() {
                     </div>
                     <div>
                       <label className="text-sm text-gray-500 block mb-1">
-                        F (g)
+                        脂質 (g)
                       </label>
                       <input
                         type="number"
@@ -405,7 +462,7 @@ export default function RecordPage() {
                     </div>
                     <div>
                       <label className="text-sm text-gray-500 block mb-1">
-                        C (g)
+                        炭水化物 (g)
                       </label>
                       <input
                         type="number"
@@ -544,15 +601,20 @@ export default function RecordPage() {
           )}
         </div>
       </div>
-
-      {/* Toast notification */}
-      {toast && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 pointer-events-none">
-          <div className="bg-gray-800 text-white px-6 py-3 rounded-xl shadow-lg animate-fade-in-up">
-            記録しました!
-          </div>
-        </div>
-      )}
     </div>
+  );
+}
+
+export default function RecordPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="w-8 h-8 border-4 border-orange-500 border-t-transparent rounded-full animate-spin" />
+        </div>
+      }
+    >
+      <RecordPageContent />
+    </Suspense>
   );
 }

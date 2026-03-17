@@ -262,6 +262,20 @@ export default function ProfilePage() {
           </p>
         </div>
 
+        {/* Weight Tracking Link */}
+        <Link
+          href="/weight"
+          className="block bg-white rounded-2xl p-6 shadow-sm mb-4 hover:shadow-md transition-all active:scale-[0.98]"
+        >
+          <div className="flex items-center gap-4">
+            <span className="text-2xl">⚖️</span>
+            <div className="flex-1">
+              <p className="font-bold text-gray-800">体重記録</p>
+              <p className="text-sm text-gray-400">体重の推移を確認する →</p>
+            </div>
+          </div>
+        </Link>
+
         {/* Save Button */}
         <button
           onClick={handleSave}

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import InstallPrompt from "@/components/InstallPrompt";
 
 export default function DashboardLayout({
   children,
@@ -12,6 +13,7 @@ export default function DashboardLayout({
 
   return (
     <div className="min-h-screen bg-gray-50 pb-24">
+      <InstallPrompt />
       <div className="max-w-lg mx-auto">{children}</div>
 
       <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 px-4 pb-[env(safe-area-inset-bottom)]">
