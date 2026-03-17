@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
-import { ChevronLeft, Heart, Utensils } from "lucide-react";
+import { ChevronLeft, Heart, Trash2, Utensils } from "lucide-react";
+import { getChainLogo } from "@/lib/chain-logos";
 
 interface FavoriteItem {
   id: string;
@@ -45,6 +46,7 @@ export default function FavoritesPage() {
   const router = useRouter();
   const [favorites, setFavorites] = useState<FavoriteItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [logoErrors, setLogoErrors] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     const supabase = createClient();
@@ -77,6 +79,7 @@ export default function FavoritesPage() {
 
   return (
     <div className="min-h-screen bg-white">
+      <div className="h-1 bg-gradient-to-r from-orange-500 to-amber-400" />
       <div className="max-w-lg mx-auto">
         {/* Header */}
         <div className="sticky top-0 z-20 bg-white border-b border-gray-100">
@@ -112,11 +115,18 @@ export default function FavoritesPage() {
             <div className="space-y-3 pt-4">
               {favorites.map((fav) => {
                 const item = fav.menu_items;
+                const borderClass =
+                  item.source_type === "convenience_store"
+                    ? "border-l-4 border-l-sky-400"
+                    : item.source_type === "chain_restaurant"
+                    ? "border-l-4 border-l-orange-400"
+                    : "border-l-4 border-l-gray-200";
+                const logoInfo = getChainLogo(item.chain_restaurants?.name || "");
                 return (
                   <div
                     key={fav.id}
                     onClick={() => router.push(`/items/${fav.menu_item_id}`)}
-                    className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm active:shadow-none active:scale-[0.99] transition-all cursor-pointer"
+                    className={`bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm active:shadow-none active:scale-[0.99] transition-all cursor-pointer ${borderClass}`}
                   >
                     <div className="flex">
                       {/* Photo placeholder */}
@@ -127,6 +137,15 @@ export default function FavoritesPage() {
                             src={item.image_url}
                             alt={item.name}
                             className="w-full h-full object-cover"
+                          />
+                        ) : logoInfo && !logoErrors.has(fav.id) ? (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img
+                            src={logoInfo.url}
+                            alt={item.chain_restaurants?.name || ""}
+                            className="w-14 h-14 object-contain rounded-lg p-1"
+                            style={{ backgroundColor: logoInfo.bg }}
+                            onError={() => setLogoErrors((prev) => new Set(prev).add(fav.id))}
                           />
                         ) : (
                           <Utensils className="w-9 h-9 text-orange-300" />
@@ -171,9 +190,9 @@ export default function FavoritesPage() {
                               e.stopPropagation();
                               removeFavorite(fav.id);
                             }}
-                            className="text-red-500 transition-colors ml-1"
+                            className="text-gray-400 hover:text-red-500 transition-colors ml-1"
                           >
-                            <Heart className="w-4 h-4 fill-current" />
+                            <Trash2 className="w-3.5 h-3.5" />
                           </button>
                         </div>
                       </div>

@@ -1,7 +1,8 @@
 import { createClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ChevronLeft, MapPin, Utensils } from "lucide-react";
+import { ChevronLeft, MapPin, Share2, Utensils } from "lucide-react";
+import { getChainLogo } from "@/lib/chain-logos";
 import FavoriteButton from "./FavoriteButton";
 import ShareCard from "./ShareCard";
 import ItemHeroImage from "./ItemHeroImage";
@@ -49,24 +50,32 @@ function calcPfcRatio(protein: number, fat: number, carbs: number) {
   };
 }
 
+const BADGE_COLORS: Record<string, string> = {
+  "高タンパク": "bg-blue-50 text-blue-700 border border-blue-200",
+  "低カロリー": "bg-green-50 text-green-700 border border-green-200",
+  "低脂質": "bg-amber-50 text-amber-700 border border-amber-200",
+  "ダイエット向き": "bg-emerald-50 text-emerald-700 border border-emerald-200",
+  "筋トレ向き": "bg-indigo-50 text-indigo-700 border border-indigo-200",
+};
+
 function getSuitabilityBadges(item: MenuItem) {
-  const badges: { label: string; icon: string }[] = [];
+  const badges: { label: string; icon: string; color: string }[] = [];
   const { calories, protein, fat } = item;
 
   if (protein != null && protein > 20) {
-    badges.push({ label: "高タンパク", icon: "check" });
+    badges.push({ label: "高タンパク", icon: "check", color: BADGE_COLORS["高タンパク"] });
   }
   if (calories != null && calories < 400) {
-    badges.push({ label: "低カロリー", icon: "check" });
+    badges.push({ label: "低カロリー", icon: "check", color: BADGE_COLORS["低カロリー"] });
   }
   if (fat != null && fat < 15) {
-    badges.push({ label: "低脂質", icon: "check" });
+    badges.push({ label: "低脂質", icon: "check", color: BADGE_COLORS["低脂質"] });
   }
   if (calories != null && calories < 500 && protein != null && protein > 15) {
-    badges.push({ label: "ダイエット向き", icon: "check" });
+    badges.push({ label: "ダイエット向き", icon: "check", color: BADGE_COLORS["ダイエット向き"] });
   }
   if (protein != null && protein > 25) {
-    badges.push({ label: "筋トレ向き", icon: "check" });
+    badges.push({ label: "筋トレ向き", icon: "check", color: BADGE_COLORS["筋トレ向き"] });
   }
 
   return badges;
@@ -130,20 +139,7 @@ export default async function ItemDetailPage({
             className="p-2 text-gray-400 hover:text-gray-600 transition-colors"
             aria-label="共有"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
-              />
-            </svg>
+            <Share2 className="w-5 h-5" />
           </button>
         </div>
       </div>
@@ -271,7 +267,7 @@ export default async function ItemDetailPage({
               {badges.map((badge) => (
                 <span
                   key={badge.label}
-                  className="inline-flex items-center gap-1 px-3 py-1.5 bg-green-50 text-green-700 rounded-full text-sm font-medium"
+                  className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-sm font-medium ${badge.color}`}
                 >
                   <svg
                     className="w-4 h-4"
@@ -317,9 +313,21 @@ export default async function ItemDetailPage({
                   className="flex-shrink-0 w-36 bg-white rounded-xl border border-gray-100 shadow-sm p-3 hover:shadow-md transition-shadow"
                 >
                   <div className="flex justify-center mb-2">
-                    <div className="w-10 h-10 bg-orange-50 rounded-full flex items-center justify-center">
-                      <Utensils className="w-5 h-5 text-orange-400" />
-                    </div>
+                    {(() => {
+                      const logo = getChainLogo(similar.chain_restaurants?.name ?? "");
+                      return logo ? (
+                        <div
+                          className="w-10 h-10 rounded-full flex items-center justify-center"
+                          style={{ backgroundColor: logo.bg }}
+                        >
+                          <img src={logo.url} alt="" className="w-6 h-6" />
+                        </div>
+                      ) : (
+                        <div className="w-10 h-10 bg-orange-50 rounded-full flex items-center justify-center">
+                          <Utensils className="w-5 h-5 text-orange-400" />
+                        </div>
+                      );
+                    })()}
                   </div>
                   <p className="text-xs text-gray-400 truncate">
                     {similar.chain_restaurants?.name ?? ""}

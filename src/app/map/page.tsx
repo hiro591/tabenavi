@@ -299,19 +299,25 @@ export default function MapPage() {
 
         {/* Filter tabs */}
         <div className="flex gap-2 px-4 pb-2 overflow-x-auto scrollbar-hide">
-          {STORE_FILTERS.map((f) => (
-            <button
-              key={f.value}
-              onClick={() => setFilter(f.value)}
-              className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
-                filter === f.value
-                  ? "bg-orange-500 text-white"
-                  : "bg-gray-100 text-gray-600"
-              }`}
-            >
-              {f.label}
-            </button>
-          ))}
+          {STORE_FILTERS.map((f) => {
+            const count =
+              f.value === "all"
+                ? stores.length
+                : stores.filter((s) => s.type === f.value).length;
+            return (
+              <button
+                key={f.value}
+                onClick={() => setFilter(f.value)}
+                className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
+                  filter === f.value
+                    ? "bg-orange-500 text-white"
+                    : "bg-gray-100 text-gray-600"
+                }`}
+              >
+                {f.label}{stores.length > 0 ? ` (${count})` : ""}
+              </button>
+            );
+          })}
         </div>
       </div>
 
@@ -322,6 +328,37 @@ export default function MapPage() {
       {locationError && (
         <div className="absolute top-24 left-4 right-4 z-[1000] bg-yellow-50 border border-yellow-200 rounded-xl px-4 py-2">
           <p className="text-xs text-yellow-700">現在地を取得できませんでした。東京駅周辺を表示しています。</p>
+        </div>
+      )}
+
+      {/* Manual location search fallback */}
+      {locationError && (
+        <div className="absolute top-32 left-4 right-4 z-[1000]">
+          <div className="bg-white rounded-xl shadow-lg px-4 py-3 flex gap-2">
+            <input
+              type="text"
+              placeholder="場所を入力（例：渋谷駅）"
+              className="flex-1 text-sm border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-300"
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  const query = (e.target as HTMLInputElement).value;
+                  if (query) {
+                    fetch(
+                      `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&countrycodes=jp&limit=1`
+                    )
+                      .then((r) => r.json())
+                      .then((results) => {
+                        if (results[0]) {
+                          const lat = parseFloat(results[0].lat);
+                          const lng = parseFloat(results[0].lon);
+                          setLocation({ lat, lng });
+                        }
+                      });
+                  }
+                }
+              }}
+            />
+          </div>
         </div>
       )}
 

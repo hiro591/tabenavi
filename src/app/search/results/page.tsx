@@ -5,7 +5,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { getChainLogo } from "@/lib/chain-logos";
-import { ChevronLeft, Heart, MapPin, Utensils } from "lucide-react";
+import { ChevronLeft, Heart, MapPin, Plus, Utensils } from "lucide-react";
 
 const SORT_OPTIONS = [
   { label: "おすすめ順",       value: "recommended" },
@@ -122,6 +122,9 @@ function SearchResultsContent() {
 
   const [items, setItems] = useState<MenuItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+  const [page, setPage] = useState(1);
   const [userId, setUserId] = useState<string>("");
   const [favoriteIds, setFavoriteIds] = useState<Set<string>>(new Set());
 
@@ -139,7 +142,7 @@ function SearchResultsContent() {
   const sort       = searchParams.get("sort") || "recommended";
 
   const fetchItems = useCallback(async () => {
-    setLoading(true);
+    if (page === 1) setLoading(true);
     const supabase = createClient();
     let query = supabase.from("menu_items").select("*, chain_restaurants(name, emoji)");
 
@@ -173,10 +176,13 @@ function SearchResultsContent() {
     else if (sort === "price_asc")    query = query.order("price", { ascending: true });
     else query = query.order("protein", { ascending: false });
 
-    const { data } = await query.limit(60);
-    setItems((data as MenuItem[]) || []);
+    const { data } = await query.range(0, page * 20 - 1);
+    const fetched = (data as MenuItem[]) || [];
+    setItems(fetched);
+    setHasMore(fetched.length === page * 20);
     setLoading(false);
-  }, [searchQ, category, sourceType, calorieMin, calorieMax, proteinMin, proteinMax, fatMin, fatMax, priceMin, priceMax, sort]);
+    setLoadingMore(false);
+  }, [searchQ, category, sourceType, calorieMin, calorieMax, proteinMin, proteinMax, fatMin, fatMax, priceMin, priceMax, sort, page]);
 
   useEffect(() => {
     const supabase = createClient();
@@ -209,6 +215,25 @@ function SearchResultsContent() {
     } else {
       setFavoriteIds((prev) => new Set([...prev, itemId]));
       await supabase.from("favorites").insert({ user_id: userId, menu_item_id: itemId });
+    }
+  };
+
+  const loadMore = () => {
+    setLoadingMore(true);
+    setPage((p) => p + 1);
+  };
+
+  const handleRecord = (e: React.MouseEvent, item: MenuItem) => {
+    e.stopPropagation();
+    router.push(`/record?chain=${encodeURIComponent(item.chain_restaurants?.name || "")}&menu=${encodeURIComponent(item.name)}`);
+  };
+
+  const getLeftBorderClass = (sourceType: string | null) => {
+    switch (sourceType) {
+      case "convenience_store": return "border-l-4 border-l-sky-400";
+      case "chain_restaurant":  return "border-l-4 border-l-orange-400";
+      case "supermarket":       return "border-l-4 border-l-green-400";
+      default:                  return "border-l-4 border-l-gray-200";
     }
   };
 
@@ -279,7 +304,7 @@ function SearchResultsContent() {
                 <div
                   key={item.id}
                   onClick={() => router.push(`/items/${item.id}`)}
-                  className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 active:scale-[0.985] active:shadow-none transition-all cursor-pointer"
+                  className={`bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 active:scale-[0.985] active:shadow-none transition-all cursor-pointer ${getLeftBorderClass(item.source_type)}`}
                 >
                   <div className="flex">
                     {/* Left panel: logo or gradient+emoji */}
@@ -307,12 +332,12 @@ function SearchResultsContent() {
                           </span>
                         )}
                         {item.protein != null && (
-                          <span className="text-[11px] bg-blue-50 text-blue-600 px-2 py-0.5 rounded-full font-semibold">
+                          <span className="text-[11px] bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full font-semibold">
                             P {item.protein}g
                           </span>
                         )}
                         {item.fat != null && (
-                          <span className="text-[11px] bg-yellow-50 text-yellow-700 px-2 py-0.5 rounded-full font-semibold">
+                          <span className="text-[11px] bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full font-semibold">
                             F {item.fat}g
                           </span>
                         )}
@@ -341,6 +366,12 @@ function SearchResultsContent() {
                           >
                             <Heart className={`w-4 h-4 ${favoriteIds.has(item.id) ? "fill-current" : ""}`} />
                           </button>
+                          <button
+                            onClick={(e) => handleRecord(e, item)}
+                            className="w-7 h-7 flex items-center justify-center rounded-full bg-orange-500 text-white active:bg-orange-600 transition-colors"
+                          >
+                            <Plus className="w-3.5 h-3.5" />
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -348,6 +379,15 @@ function SearchResultsContent() {
                 </div>
               );
             })}
+            {hasMore && (
+              <button
+                onClick={loadMore}
+                disabled={loadingMore}
+                className="w-full py-3 mt-2 bg-white border border-gray-200 rounded-2xl text-sm font-bold text-gray-600 active:bg-gray-50 transition-colors disabled:opacity-50"
+              >
+                {loadingMore ? "読み込み中..." : "もっと見る"}
+              </button>
+            )}
           </div>
 
         ) : (

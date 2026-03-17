@@ -21,6 +21,13 @@ const MEAL_TYPE_COLORS: Record<string, string> = {
   snack: "bg-pink-100 text-pink-700",
 };
 
+const MEAL_TYPE_BORDER_COLORS: Record<string, string> = {
+  breakfast: "border-l-2 border-l-yellow-400",
+  lunch: "border-l-2 border-l-orange-400",
+  dinner: "border-l-2 border-l-indigo-400",
+  snack: "border-l-2 border-l-pink-400",
+};
+
 type WeeklySummary = {
   date: string;
   label: string;
@@ -101,22 +108,29 @@ export default function DashboardPage() {
   }, [supabase, router]);
 
   const calculateStreak = async (userId: string) => {
-    let currentStreak = 0;
     const today = new Date();
+    const yearAgo = new Date();
+    yearAgo.setDate(today.getDate() - 364);
+    const yearAgoStr = yearAgo.toISOString().split("T")[0];
+    const todayStr = today.toISOString().split("T")[0];
 
+    const { data } = await supabase
+      .from("food_logs")
+      .select("logged_at")
+      .eq("user_id", userId)
+      .gte("logged_at", `${yearAgoStr}T00:00:00`)
+      .lte("logged_at", `${todayStr}T23:59:59`);
+
+    const loggedDates = new Set(
+      data?.map((log) => log.logged_at.split("T")[0]) ?? []
+    );
+
+    let currentStreak = 0;
     for (let i = 0; i < 365; i++) {
       const d = new Date();
       d.setDate(today.getDate() - i);
       const dateStr = d.toISOString().split("T")[0];
-
-      const { count } = await supabase
-        .from("food_logs")
-        .select("id", { count: "exact", head: true })
-        .eq("user_id", userId)
-        .gte("logged_at", `${dateStr}T00:00:00`)
-        .lte("logged_at", `${dateStr}T23:59:59`);
-
-      if (count && count > 0) {
+      if (loggedDates.has(dateStr)) {
         currentStreak++;
       } else {
         break;
@@ -207,11 +221,11 @@ export default function DashboardPage() {
       {/* Header */}
       <div className="flex items-center justify-between mb-1">
         <h1 className="text-xl font-bold text-gray-800">
-          {greeting}、{displayName}さん！
+          {greeting}、<span className="text-orange-500">{displayName}</span>さん！
         </h1>
         <Link
           href="/profile"
-          className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200 transition-colors"
+          className="w-9 h-9 flex items-center justify-center rounded-full bg-orange-50 text-orange-500 hover:bg-orange-100 transition-colors"
         >
           <Settings className="w-4 h-4" />
         </Link>
@@ -280,18 +294,21 @@ export default function DashboardPage() {
             value={totalProtein}
             target={proteinTarget}
             color="bg-blue-400"
+            dotColor="bg-blue-400"
           />
           <PFCBar
             label="脂質"
             value={totalFat}
             target={fatTarget}
             color="bg-yellow-400"
+            dotColor="bg-yellow-400"
           />
           <PFCBar
             label="炭水化物"
             value={totalCarbs}
             target={carbsTarget}
             color="bg-green-400"
+            dotColor="bg-green-400"
           />
         </div>
       </div>
@@ -351,7 +368,9 @@ export default function DashboardPage() {
                 ? "bg-gray-200"
                 : day.calories > targetCalories
                   ? "bg-red-400"
-                  : "bg-orange-400";
+                  : isToday
+                    ? "bg-gradient-to-t from-orange-500 to-amber-400"
+                    : "bg-orange-400";
 
             return (
               <div
@@ -439,7 +458,7 @@ export default function DashboardPage() {
             {logs.map((log) => (
               <div
                 key={log.id}
-                className={`flex items-center justify-between bg-gray-50 rounded-xl px-3 py-2.5 transition-opacity ${deletingId === log.id ? "opacity-50" : ""}`}
+                className={`flex items-center justify-between bg-gray-50 rounded-xl px-3 py-2.5 transition-opacity ${MEAL_TYPE_BORDER_COLORS[log.meal_type] || MEAL_TYPE_BORDER_COLORS.snack} ${deletingId === log.id ? "opacity-50" : ""}`}
               >
                 <div className="flex items-center gap-2 flex-1 min-w-0">
                   <span
@@ -578,18 +597,20 @@ function PFCBar({
   value,
   target,
   color,
+  dotColor,
 }: {
   label: string;
   value: number;
   target: number;
   color: string;
+  dotColor?: string;
 }) {
   const percentage = target > 0 ? Math.min((value / target) * 100, 100) : 0;
 
   return (
     <div>
       <div className="flex items-center justify-between mb-1">
-        <span className="text-xs text-gray-500">{label}</span>
+        <span className="text-xs text-gray-500 flex items-center">{dotColor && <span className={`w-2 h-2 rounded-full ${dotColor} inline-block mr-1.5`} />}{label}</span>
         <span className="text-xs text-gray-500">
           <span className="font-semibold text-gray-700">
             {value.toFixed(1)}

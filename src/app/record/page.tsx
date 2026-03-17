@@ -52,6 +52,7 @@ function RecordPageContent() {
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [chainsLoading, setChainsLoading] = useState(true);
+  const [remainingCalories, setRemainingCalories] = useState<number | null>(null);
 
   // Handle ?menu_id=xxx param - pre-select menu item and skip to Step 3
   useEffect(() => {
@@ -105,6 +106,25 @@ function RecordPageContent() {
     }
     fetchMenus();
   }, [selectedChain]);
+
+  // Fetch remaining calories when entering step 3
+  useEffect(() => {
+    if (step !== 3) return;
+    async function fetchRemaining() {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+      const today = new Date().toISOString().split("T")[0];
+      const [profileRes, logsRes] = await Promise.all([
+        supabase.from("profiles").select("target_calories").eq("id", user.id).single(),
+        supabase.from("food_logs").select("calories").eq("user_id", user.id)
+          .gte("logged_at", `${today}T00:00:00`).lte("logged_at", `${today}T23:59:59`),
+      ]);
+      const target = profileRes.data?.target_calories ?? 2000;
+      const consumed = logsRes.data?.reduce((sum, l) => sum + (l.calories || 0), 0) ?? 0;
+      setRemainingCalories(target - consumed);
+    }
+    fetchRemaining();
+  }, [step]);
 
   // Filtered chains
   const filteredChains = useMemo(() => {
@@ -579,6 +599,14 @@ function RecordPageContent() {
                   ))}
                 </div>
               </div>
+
+              {/* Remaining calories banner */}
+              {remainingCalories !== null && (
+                <div className="bg-orange-50 border border-orange-200 rounded-xl px-4 py-2 mb-3 text-sm">
+                  <span className="text-gray-600">今日の残り: </span>
+                  <span className="font-bold text-orange-600">{remainingCalories} kcal</span>
+                </div>
+              )}
 
               {/* Save button */}
               <button
