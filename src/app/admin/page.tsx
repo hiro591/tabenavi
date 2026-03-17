@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { Search, Save, Plus, ExternalLink, Trash2 } from "lucide-react";
+import { Search, Save, Plus, ExternalLink, Trash2, Lock } from "lucide-react";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -118,6 +118,26 @@ function EditableCell({
 // ─── Main page ───────────────────────────────────────────────────────────────
 
 export default function AdminPage() {
+  const [authenticated, setAuthenticated] = useState(false);
+  const [password, setPassword] = useState("");
+  const [authError, setAuthError] = useState(false);
+
+  useEffect(() => {
+    if (sessionStorage.getItem("admin_auth") === "true") {
+      setAuthenticated(true);
+    }
+  }, []);
+
+  const handleAuth = () => {
+    if (password === "tabenavi2025") {
+      setAuthenticated(true);
+      setAuthError(false);
+      sessionStorage.setItem("admin_auth", "true");
+    } else {
+      setAuthError(true);
+    }
+  };
+
   const supabase = createClient();
 
   const [chains, setChains] = useState<Chain[]>([]);
@@ -219,6 +239,39 @@ export default function AdminPage() {
   const filteredChains = chainSearch
     ? chains.filter((c) => c.name.includes(chainSearch))
     : chains;
+
+  if (!authenticated) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-sm">
+          <div className="text-center mb-6">
+            <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mx-auto mb-3">
+              <Lock className="w-6 h-6 text-orange-500" />
+            </div>
+            <h1 className="text-lg font-bold text-gray-900">管理者ログイン</h1>
+            <p className="text-sm text-gray-500 mt-1">メニューデータ管理ページ</p>
+          </div>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            onKeyDown={(e) => { if (e.key === "Enter") handleAuth(); }}
+            placeholder="パスワードを入力"
+            className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-orange-300 mb-3"
+          />
+          {authError && (
+            <p className="text-red-500 text-xs mb-3">パスワードが正しくありません</p>
+          )}
+          <button
+            onClick={handleAuth}
+            className="w-full py-3 bg-orange-500 text-white rounded-xl font-bold hover:bg-orange-600 transition-colors"
+          >
+            ログイン
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
