@@ -127,7 +127,7 @@ export default function Hero() {
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-10"
             >
               <a
-                href="#signup"
+                href="/signup"
                 className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all hover:shadow-xl hover:shadow-orange-200 hover:-translate-y-0.5"
               >
                 無料で始める →

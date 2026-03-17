@@ -60,50 +60,20 @@ export default function Signup() {
           先着500名限定 · 残り247名
         </p>
 
-        {!submitted ? (
-          <div className="max-w-md mx-auto">
-            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                  if (error) setError("");
-                }}
-                placeholder="メールアドレスを入力"
-                required
-                className={`flex-1 bg-white/10 border text-white placeholder-gray-500 rounded-2xl px-5 py-4 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors ${
-                  error ? "border-red-500" : "border-white/20"
-                }`}
-              />
-              <button
-                type="submit"
-                className="bg-orange-500 hover:bg-orange-400 text-white px-8 py-4 rounded-2xl font-semibold transition-all hover:shadow-lg hover:shadow-orange-500/25 whitespace-nowrap"
-              >
-                無料で始める →
-              </button>
-            </form>
-            {error && (
-              <p className="text-red-400 text-sm mt-2 text-left">{error}</p>
-            )}
-          </div>
-        ) : (
-          <div className="bg-green-500/20 border border-green-500/30 rounded-2xl p-6 max-w-md mx-auto">
-            <div className="text-4xl mb-3">🎉</div>
-            <div className="text-white font-bold text-lg mb-2">登録ありがとうございます！</div>
-            <div className="text-gray-400 text-sm mb-4">
-              <span className="text-green-400">{email}</span> に確認メールをお送りしました。
-            </div>
-            <div className="bg-white/10 rounded-xl p-4 text-left">
-              <div className="text-white text-sm font-semibold mb-2">次のステップ</div>
-              <ol className="text-gray-400 text-sm space-y-1.5 list-decimal list-inside">
-                <li>メール内の確認リンクをクリック</li>
-                <li>プロフィール（目標・よく行くチェーン）を設定</li>
-                <li>最初の食事を記録してみましょう！</li>
-              </ol>
-            </div>
-          </div>
-        )}
+        <div className="max-w-md mx-auto flex flex-col sm:flex-row gap-3">
+          <a
+            href="/signup"
+            className="flex-1 bg-orange-500 hover:bg-orange-400 text-white px-8 py-4 rounded-2xl font-semibold transition-all hover:shadow-lg hover:shadow-orange-500/25 text-center"
+          >
+            無料で始める →
+          </a>
+          <a
+            href="/login"
+            className="flex-1 bg-white/10 hover:bg-white/20 border border-white/20 text-white px-8 py-4 rounded-2xl font-semibold transition-all text-center"
+          >
+            ログイン
+          </a>
+        </div>
 
         <p className="text-gray-600 text-xs mt-4">
           スパムメールは送りません。いつでも登録解除できます。

@@ -52,11 +52,11 @@ export default function Header() {
 
           {/* CTA */}
           <div className="hidden md:flex items-center gap-3">
-            <a href="#" className="text-gray-600 hover:text-orange-500 transition-colors text-sm font-medium">
+            <a href="/login" className="text-gray-600 hover:text-orange-500 transition-colors text-sm font-medium">
               ログイン
             </a>
             <a
-              href="#signup"
+              href="/signup"
               className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white px-5 py-2 rounded-full text-sm font-semibold transition-all hover:shadow-lg hover:shadow-orange-200"
             >
               無料で始める
@@ -82,7 +82,7 @@ export default function Header() {
               <a href="#how-it-works" className="text-gray-600 hover:text-orange-500 transition-colors text-sm font-medium" onClick={() => setMenuOpen(false)}>使い方</a>
               <a href="#pricing" className="text-gray-600 hover:text-orange-500 transition-colors text-sm font-medium" onClick={() => setMenuOpen(false)}>料金</a>
               <a href="#chains" className="text-gray-600 hover:text-orange-500 transition-colors text-sm font-medium" onClick={() => setMenuOpen(false)}>対応チェーン</a>
-              <a href="#signup" className="bg-gradient-to-r from-orange-500 to-amber-500 text-white px-5 py-2 rounded-full text-sm font-semibold text-center">無料で始める</a>
+              <a href="/signup" className="bg-gradient-to-r from-orange-500 to-amber-500 text-white px-5 py-2 rounded-full text-sm font-semibold text-center">無料で始める</a>
             </nav>
           </div>
         )}
