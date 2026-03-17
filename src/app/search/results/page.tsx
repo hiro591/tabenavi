@@ -93,6 +93,8 @@ function SearchResultsContent() {
   const [items, setItems] = useState<MenuItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [showFilter, setShowFilter] = useState(false);
+  const [userId, setUserId] = useState<string>("");
+  const [favoriteIds, setFavoriteIds] = useState<Set<string>>(new Set());
 
   // Current filters from URL
   const searchQ = searchParams.get("q") || "";
@@ -153,10 +155,20 @@ function SearchResultsContent() {
 
   useEffect(() => {
     const supabase = createClient();
-    supabase.auth.getUser().then(({ data }) => {
+    supabase.auth.getUser().then(async ({ data }) => {
       if (!data.user) {
         router.replace("/login");
         return;
+      }
+      setUserId(data.user.id);
+      try {
+        const { data: favs } = await supabase
+          .from("favorites")
+          .select("menu_item_id")
+          .eq("user_id", data.user.id);
+        setFavoriteIds(new Set(favs?.map((f) => f.menu_item_id) || []));
+      } catch {
+        // favorites table may not exist yet
       }
       fetchItems();
     });
@@ -187,6 +199,30 @@ function SearchResultsContent() {
   const resetFilters = () => {
     setFilterCategory("");
     setFilterSourceType("");
+  };
+
+  const toggleFavorite = async (e: React.MouseEvent, itemId: string) => {
+    e.stopPropagation();
+    if (!userId) return;
+    const supabase = createClient();
+    const isFav = favoriteIds.has(itemId);
+    if (isFav) {
+      setFavoriteIds((prev) => {
+        const s = new Set(prev);
+        s.delete(itemId);
+        return s;
+      });
+      await supabase
+        .from("favorites")
+        .delete()
+        .eq("menu_item_id", itemId)
+        .eq("user_id", userId);
+    } else {
+      setFavoriteIds((prev) => new Set([...prev, itemId]));
+      await supabase
+        .from("favorites")
+        .insert({ user_id: userId, menu_item_id: itemId });
+    }
   };
 
   const pageTitle = searchQ || category || "検索結果";
@@ -305,6 +341,12 @@ function SearchResultsContent() {
                         {item.price != null && (
                           <span className="ml-auto text-gray-700 font-bold">¥{item.price}</span>
                         )}
+                        <button
+                          onClick={(e) => toggleFavorite(e, item.id)}
+                          className={`text-xl transition-colors ml-1 ${favoriteIds.has(item.id) ? "text-red-500" : "text-gray-300"}`}
+                        >
+                          {favoriteIds.has(item.id) ? "♥" : "♡"}
+                        </button>
                       </div>
                     </div>
                   </div>
