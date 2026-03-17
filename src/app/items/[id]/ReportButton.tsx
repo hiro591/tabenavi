@@ -68,7 +68,6 @@ export default function ReportButton({
       source: source || null,
     });
     if (error) {
-      console.error("Report insert error:", error);
       alert("送信に失敗しました。もう一度お試しください。");
       setSubmitting(false);
       return;

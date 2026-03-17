@@ -30,9 +30,7 @@ export async function POST(request: Request) {
         </div>
       `,
     });
-    if (notifyError) {
-      console.error("通知メールエラー:", notifyError);
-    }
+    // Notification email error is non-critical, continue silently
   }
 
   return NextResponse.json({ success: true });

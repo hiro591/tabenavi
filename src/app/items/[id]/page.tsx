@@ -321,7 +321,7 @@ export default async function ItemDetailPage({
                           className="w-10 h-10 rounded-full flex items-center justify-center"
                           style={{ backgroundColor: logo.bg }}
                         >
-                          <img src={logo.url} alt="" className="w-6 h-6" />
+                          <img src={logo.url} alt={similar.chain_restaurants?.name ?? ""} className="w-6 h-6" />
                         </div>
                       ) : (
                         <div className="w-10 h-10 bg-orange-50 rounded-full flex items-center justify-center">
