@@ -167,6 +167,7 @@ export default async function ItemDetailPage({
               &yen;{item.price.toLocaleString()}
             </p>
           )}
+          <p className="text-[10px] text-gray-400 mt-1">※価格は店舗により異なる場合があります</p>
         </div>
 
         {/* Nutrition Info Card */}
@@ -211,6 +212,7 @@ export default async function ItemDetailPage({
                 </p>
               </div>
             </div>
+            <p className="text-[10px] text-gray-400 mt-2 text-center">※栄養成分値は目安です。実際の値と異なる場合があります</p>
           </div>
         )}
 

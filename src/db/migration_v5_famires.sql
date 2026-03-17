@@ -9,7 +9,7 @@
 -- ============================================================
 
 INSERT INTO chain_restaurants (name, emoji)
-VALUES
+SELECT v.name, v.emoji FROM (VALUES
   ('サイゼリヤ',    '🍝'),
   ('ガスト',        '🍽️'),
   ('バーミヤン',    '🥟'),
@@ -21,7 +21,8 @@ VALUES
   ('丸亀製麺',      '🍜'),
   ('くら寿司',      '🍣'),
   ('スシロー',      '🍣')
-ON CONFLICT (name) DO NOTHING;
+) AS v(name, emoji)
+WHERE NOT EXISTS (SELECT 1 FROM chain_restaurants WHERE chain_restaurants.name = v.name);
 
 -- ============================================================
 -- PART 2: サイゼリヤ (Saizeriya)
@@ -73,8 +74,8 @@ VALUES
     'デザート2種の盛り合わせ'),
   ('コーンクリームスープ', 118, 2.5, 5.5, 15.0, 150, '洋食', 'chain_restaurant',
     (SELECT id FROM chain_restaurants WHERE name = 'サイゼリヤ'),
-    'クリーミーなコーンスープ')
-ON CONFLICT DO NOTHING;
+    'クリーミーなコーンスープ');
+
 
 -- ============================================================
 -- PART 3: ガスト (Gusto)
@@ -123,8 +124,8 @@ VALUES
     'ねばねば食材のヘルシーサラダ'),
   ('ガストバーガー', 548, 22.0, 28.0, 48.0, 549, 'パン・サンドイッチ', 'chain_restaurant',
     (SELECT id FROM chain_restaurants WHERE name = 'ガスト'),
-    'ビーフパティのガストオリジナルバーガー')
-ON CONFLICT DO NOTHING;
+    'ビーフパティのガストオリジナルバーガー');
+
 
 -- ============================================================
 -- PART 4: バーミヤン (Bamiyan)
@@ -170,8 +171,8 @@ VALUES
     'パリパリの揚げ春巻き'),
   ('杏仁豆腐', 148, 3.5, 6.0, 20.0, 219, 'スイーツ', 'chain_restaurant',
     (SELECT id FROM chain_restaurants WHERE name = 'バーミヤン'),
-    'なめらかな杏仁豆腐')
-ON CONFLICT DO NOTHING;
+    'なめらかな杏仁豆腐');
+
 
 -- ============================================================
 -- PART 5: デニーズ (Denny's Japan)
@@ -214,8 +215,8 @@ VALUES
     'ふんわり焼き上げたフレンチトースト'),
   ('デニーズハンバーガー', 598, 25.0, 30.0, 50.0, 769, 'パン・サンドイッチ', 'chain_restaurant',
     (SELECT id FROM chain_restaurants WHERE name = 'デニーズ'),
-    'ジューシーなビーフパティのバーガー')
-ON CONFLICT DO NOTHING;
+    'ジューシーなビーフパティのバーガー');
+
 
 -- ============================================================
 -- PART 6: 餃子の王将 (Gyoza no Ohsho)
@@ -258,8 +259,8 @@ VALUES
     'レバニラ炒めにライス・スープ付き'),
   ('春巻 (3本)', 265, 8.0, 15.0, 24.0, 297, '中華・アジア', 'chain_restaurant',
     (SELECT id FROM chain_restaurants WHERE name = '餃子の王将'),
-    'パリッと揚げた春巻き3本')
-ON CONFLICT DO NOTHING;
+    'パリッと揚げた春巻き3本');
+
 
 -- ============================================================
 -- PART 7: 日高屋 (Hidakaya)
@@ -302,8 +303,8 @@ VALUES
     '中華そばとチャーハンのセット'),
   ('唐揚げ (5個)', 380, 22.0, 22.0, 18.0, 350, '揚げ物', 'chain_restaurant',
     (SELECT id FROM chain_restaurants WHERE name = '日高屋'),
-    'ジューシーな鶏の唐揚げ5個')
-ON CONFLICT DO NOTHING;
+    'ジューシーな鶏の唐揚げ5個');
+
 
 -- ============================================================
 -- PART 8: スターバックス (Starbucks Japan)
@@ -352,8 +353,8 @@ VALUES
     '香ばしいほうじ茶のティーラテ'),
   ('チャイティーラテ Tall', 207, 6.5, 4.5, 34.0, 490, 'ドリンク', 'chain_restaurant',
     (SELECT id FROM chain_restaurants WHERE name = 'スターバックス'),
-    'スパイス香るチャイティーラテ')
-ON CONFLICT DO NOTHING;
+    'スパイス香るチャイティーラテ');
+
 
 -- ============================================================
 -- PART 9: ドトール (Doutor)
@@ -396,8 +397,8 @@ VALUES
     'すっきりアイスコーヒー'),
   ('豆乳ラテ M', 118, 6.0, 4.5, 14.0, 390, 'ドリンク', 'chain_restaurant',
     (SELECT id FROM chain_restaurants WHERE name = 'ドトール'),
-    '豆乳を使ったヘルシーラテ')
-ON CONFLICT DO NOTHING;
+    '豆乳を使ったヘルシーラテ');
+
 
 -- ============================================================
 -- PART 10: 丸亀製麺 (Marugame Seimen)
@@ -443,8 +444,8 @@ VALUES
     '甘く煮た油揚げをのせたうどん'),
   ('釜玉うどん (並)', 365, 12.0, 5.0, 63.0, 390, '麺類', 'chain_restaurant',
     (SELECT id FROM chain_restaurants WHERE name = '丸亀製麺'),
-    '卵とだし醤油で食べる釜玉うどん')
-ON CONFLICT DO NOTHING;
+    '卵とだし醤油で食べる釜玉うどん');
+
 
 -- ============================================================
 -- PART 11: くら寿司 (Kura Sushi)
@@ -487,8 +488,8 @@ VALUES
     '天ぷら入りの温かいうどん'),
   ('シャリカレー', 525, 12.0, 15.0, 82.0, 390, '和食', 'chain_restaurant',
     (SELECT id FROM chain_restaurants WHERE name = 'くら寿司'),
-    '酢飯にカレーをかけたくら寿司名物')
-ON CONFLICT DO NOTHING;
+    '酢飯にカレーをかけたくら寿司名物');
+
 
 -- ============================================================
 -- PART 12: スシロー (Sushiro)
@@ -537,8 +538,8 @@ VALUES
     '歯ごたえの良いたこ握り2貫'),
   ('かっぱ巻き (3貫)', 85, 2.5, 0.5, 18.0, 120, '和食', 'chain_restaurant',
     (SELECT id FROM chain_restaurants WHERE name = 'スシロー'),
-    'さっぱりきゅうりの細巻き')
-ON CONFLICT DO NOTHING;
+    'さっぱりきゅうりの細巻き');
+
 
 -- ============================================================
 -- Done! Migration V5 complete.

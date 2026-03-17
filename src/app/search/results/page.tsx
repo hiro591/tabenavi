@@ -279,9 +279,12 @@ function SearchResultsContent() {
 
         {/* Results count */}
         {!loading && (
-          <p className="text-xs text-gray-400 mb-3 font-medium">
-            {items.length}件見つかりました
-          </p>
+          <>
+            <p className="text-xs text-gray-400 mb-1 font-medium">
+              {items.length}件見つかりました
+            </p>
+            <p className="text-[10px] text-gray-400 mb-3">※価格・栄養成分は目安です。店舗により異なる場合があります</p>
+          </>
         )}
 
         {/* Loading skeleton */}
