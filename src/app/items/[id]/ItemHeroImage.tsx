@@ -1,26 +1,30 @@
 "use client";
 
 import { useState } from "react";
+import { getChainLogo } from "@/lib/chain-logos";
 
 export default function ItemHeroImage({
-  logoUrl,
-  emoji,
   chainName,
+  emoji,
 }: {
-  logoUrl: string | null;
-  emoji: string;
   chainName: string;
+  emoji: string;
 }) {
   const [failed, setFailed] = useState(false);
+  const logoInfo = getChainLogo(chainName);
+  const showLogo = logoInfo && !failed;
 
-  if (logoUrl && !failed) {
+  if (showLogo) {
     return (
-      <div className="w-28 h-28 bg-white rounded-3xl shadow-md flex items-center justify-center overflow-hidden p-3 border border-gray-100">
+      <div
+        className="w-32 h-32 rounded-3xl shadow-md flex items-center justify-center overflow-hidden"
+        style={{ backgroundColor: logoInfo.bg }}
+      >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={logoUrl}
+          src={logoInfo.url}
           alt={chainName}
-          className="w-full h-full object-contain"
+          className="w-full h-full object-contain p-4"
           onError={() => setFailed(true)}
         />
       </div>
@@ -28,8 +32,8 @@ export default function ItemHeroImage({
   }
 
   return (
-    <div className="inline-flex items-center justify-center w-32 h-32 bg-orange-50 rounded-3xl">
-      <span className="text-8xl leading-none">{emoji}</span>
+    <div className="inline-flex items-center justify-center w-32 h-32 bg-orange-50 rounded-3xl shadow-sm">
+      <span className="text-7xl leading-none">{emoji}</span>
     </div>
   );
 }

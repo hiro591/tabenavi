@@ -4,7 +4,7 @@ import { Suspense } from "react";
 import { useState, useEffect, useCallback } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
-import { getChainLogoUrl } from "@/lib/chain-logos";
+import { getChainLogo } from "@/lib/chain-logos";
 
 const SORT_OPTIONS = [
   { label: "おすすめ順",       value: "recommended" },
@@ -37,26 +37,29 @@ function ChainLogoPanel({
   fitnessBadge: { label: string; style: string } | null;
 }) {
   const [logoFailed, setLogoFailed] = useState(false);
-  const logoUrl = getChainLogoUrl(item.chain_restaurants?.name || "");
-  const showLogo = logoUrl && !logoFailed;
+  const logoInfo = getChainLogo(item.chain_restaurants?.name || "");
+  const showLogo = logoInfo && !logoFailed;
 
   return (
-    <div className={`w-28 shrink-0 flex items-center justify-center relative bg-gradient-to-br ${getCardGradient(item)}`}>
+    <div
+      className="w-28 shrink-0 flex items-center justify-center relative overflow-hidden"
+      style={{ backgroundColor: showLogo ? logoInfo.bg : undefined }}
+    >
       {item.image_url ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img src={item.image_url} alt={item.name} className="w-full h-full object-cover" />
       ) : showLogo ? (
-        <div className="w-14 h-14 bg-white rounded-2xl shadow-sm flex items-center justify-center overflow-hidden p-1.5">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={logoUrl}
-            alt={item.chain_restaurants?.name || ""}
-            className="w-full h-full object-contain"
-            onError={() => setLogoFailed(true)}
-          />
-        </div>
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={logoInfo.url}
+          alt={item.chain_restaurants?.name || ""}
+          className="w-full h-full object-contain p-4"
+          onError={() => setLogoFailed(true)}
+        />
       ) : (
-        <span className="text-5xl">{item.chain_restaurants?.emoji || "🍽"}</span>
+        <div className={`w-full h-full flex items-center justify-center bg-gradient-to-br ${getCardGradient(item)}`}>
+          <span className="text-5xl">{item.chain_restaurants?.emoji || "🍽"}</span>
+        </div>
       )}
       {fitnessBadge && (
         <span className={`absolute bottom-1.5 left-1.5 right-1.5 text-center text-[9px] font-bold px-1.5 py-0.5 rounded-lg ${fitnessBadge.style}`}>
