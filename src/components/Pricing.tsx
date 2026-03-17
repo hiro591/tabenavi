@@ -102,7 +102,7 @@ export default function Pricing() {
             </div>
 
             <a
-              href="#signup"
+              href="/signup"
               className="block w-full text-center bg-gray-100 hover:bg-gray-200 text-gray-700 py-3.5 rounded-2xl font-semibold transition-colors mb-8"
             >
               無料で始める
@@ -149,15 +149,15 @@ export default function Pricing() {
                     一番人気
                   </div>
                   <div className="inline-block bg-white/15 backdrop-blur-sm text-white text-xs font-medium px-3 py-1.5 rounded-full border border-white/20">
-                    14日間無料トライアル
+                    1ヶ月無料トライアル
                   </div>
                 </div>
 
                 <a
-                  href="#signup"
+                  href="/signup"
                   className="block w-full text-center bg-white hover:bg-orange-50 text-orange-600 py-3.5 rounded-2xl font-bold transition-colors mb-8 shadow-lg"
                 >
-                  14日間無料で試す
+                  1ヶ月無料で試す
                 </a>
 
                 <ul className="space-y-3.5">
@@ -174,7 +174,7 @@ export default function Pricing() {
         </div>
 
         <p className="text-center text-gray-400 text-sm mt-8">
-          クレジットカード不要 / いつでも解約可能 / 14日間の返金保証
+          クレジットカード不要 / いつでも解約可能 / 1ヶ月間の返金保証
         </p>
 
         {/* Comparison table */}
@@ -208,7 +208,7 @@ export default function Pricing() {
 
         {/* Enterprise link */}
         <p className="text-center text-sm mt-8">
-          <a href="#" className="text-orange-500 hover:text-orange-600 font-medium transition-colors">
+          <a href="mailto:tabenavi.app@gmail.com?subject=法人プランについて" className="text-orange-500 hover:text-orange-600 font-medium transition-colors">
             法人・チームプランはこちら →
           </a>
         </p>

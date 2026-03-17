@@ -22,13 +22,13 @@ export default function Signup() {
         </h2>
         <p className="text-lg text-gray-400 mb-4 leading-relaxed">
           今すぐ登録して、外食専門の食事管理を体験してください。
-          ベータ版ユーザーは<span className="text-orange-400 font-semibold">プレミアム機能を3ヶ月無料</span>でご利用いただけます。
+          ベータ版ユーザーは<span className="text-orange-400 font-semibold">プレミアム機能を1ヶ月無料</span>でご利用いただけます。
         </p>
 
         {/* Urgency element */}
         <div className="inline-flex items-center gap-3 bg-amber-500/10 border border-amber-500/20 text-amber-400 px-5 py-2 rounded-full text-sm font-semibold mb-10">
           <Users className="w-4 h-4" />
-          先着500名限定 -- 残り247名
+          ベータ版ユーザー限定特典
         </div>
 
         <div className="max-w-md mx-auto flex flex-col sm:flex-row gap-3">
