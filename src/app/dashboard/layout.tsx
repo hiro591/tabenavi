@@ -19,39 +19,36 @@ export default function DashboardLayout({
       <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 px-4 pb-[env(safe-area-inset-bottom)]">
         <div className="max-w-lg mx-auto flex items-center justify-around h-16">
           <NavItem
-            href="/dashboard"
-            icon="🏠"
-            label="ホーム"
-            active={pathname === "/dashboard"}
+            href="/search"
+            icon="🔍"
+            label="さがす"
+            active={pathname.startsWith("/search")}
           />
           <NavItem
             href="/recommend"
-            icon="⭐"
-            label="おすすめ"
-            active={pathname === "/recommend"}
+            icon="📍"
+            label="マップ"
+            active={pathname.startsWith("/recommend")}
           />
           <Link
-            href="/record"
+            href="/search"
             className="flex flex-col items-center -mt-6"
           >
             <div className="w-14 h-14 bg-orange-500 rounded-full shadow-lg flex items-center justify-center text-white text-2xl active:scale-95 transition-transform">
-              ＋
+              🔍
             </div>
-            <span className="text-[10px] text-orange-500 font-medium mt-0.5">
-              記録
-            </span>
           </Link>
           <NavItem
-            href="/history"
-            icon="📅"
-            label="履歴"
-            active={pathname === "/history"}
+            href="/favorites"
+            icon="⭐"
+            label="お気に入り"
+            active={pathname.startsWith("/favorites")}
           />
           <NavItem
             href="/profile"
             icon="👤"
             label="マイページ"
-            active={pathname === "/profile"}
+            active={pathname.startsWith("/profile")}
           />
         </div>
       </nav>
