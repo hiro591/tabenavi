@@ -1,7 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ChevronLeft, MapPin, Share2, Utensils } from "lucide-react";
+import { ChevronLeft, Flag, MapPin, Share2, Utensils } from "lucide-react";
 import { getChainLogo } from "@/lib/chain-logos";
 import FavoriteButton from "./FavoriteButton";
 import ShareCard from "./ShareCard";
@@ -122,6 +122,9 @@ export default async function ItemDetailPage({
   const mapsUrl = chainName
     ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(chainName)}`
     : `https://www.google.com/maps`;
+  const reportSubject = encodeURIComponent(`[たべなび] データ修正: ${item.name}`);
+  const reportBody = encodeURIComponent(`商品名: ${item.name}\nチェーン: ${chainName}\n\n修正内容:\n（正しい値を記入してください）\n\n価格: \nカロリー: \nタンパク質: \n脂質: \n炭水化物: \n\n参照元: `);
+  const reportMailto = `mailto:tabenavi.app@gmail.com?subject=${reportSubject}&body=${reportBody}`;
 
   return (
     <div className="min-h-screen bg-white pb-28">
@@ -213,6 +216,13 @@ export default async function ItemDetailPage({
               </div>
             </div>
             <p className="text-[10px] text-gray-400 mt-2 text-center">※栄養成分値は目安です。実際の値と異なる場合があります</p>
+            <a
+              href={reportMailto}
+              className="flex items-center gap-1 text-[10px] text-gray-400 hover:text-orange-500 transition-colors mt-1 mx-auto w-fit"
+            >
+              <Flag className="w-3 h-3" />
+              情報の誤りを報告
+            </a>
           </div>
         )}
 
@@ -362,6 +372,15 @@ export default async function ItemDetailPage({
           >
             <MapPin className="w-4 h-4" />
             <span>近くの{chainName || "お店"}を探す</span>
+          </a>
+        </div>
+        <div className="text-center mt-1">
+          <a
+            href={reportMailto}
+            className="text-[10px] text-gray-400 hover:text-orange-500 flex items-center gap-1 mx-auto w-fit"
+          >
+            <Flag className="w-3 h-3" />
+            情報の誤りを報告
           </a>
         </div>
       </div>
