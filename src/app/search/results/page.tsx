@@ -66,7 +66,24 @@ interface MenuItem {
   price: number | null;
   category: string | null;
   source_type: string | null;
+  image_url: string | null;
   chain_restaurants: { name: string; emoji: string } | null;
+}
+
+// ブランドカラーバッジ
+function getStoreBadgeStyle(name: string | undefined, sourceType: string | null): string {
+  const n = name ?? "";
+  if (n.includes("セブン")) return "bg-green-100 text-green-700";
+  if (n.includes("ローソン")) return "bg-blue-100 text-blue-700";
+  if (n.includes("ファミリー") || n.includes("ファミマ")) return "bg-sky-100 text-sky-700";
+  if (n.includes("マクドナルド")) return "bg-yellow-100 text-yellow-700";
+  if (n.includes("すき家")) return "bg-orange-100 text-orange-700";
+  if (n.includes("吉野家")) return "bg-red-100 text-red-700";
+  if (n.includes("松屋")) return "bg-amber-100 text-amber-700";
+  if (n.includes("スターバックス")) return "bg-green-100 text-green-800";
+  if (sourceType === "convenience_store") return "bg-blue-50 text-blue-600";
+  if (sourceType === "supermarket") return "bg-emerald-50 text-emerald-600";
+  return "bg-orange-50 text-orange-600";
 }
 
 function SearchResultsContent() {
@@ -240,51 +257,55 @@ function SearchResultsContent() {
               {items.map((item) => (
                 <div
                   key={item.id}
-                  className="bg-gray-50 rounded-xl p-4"
+                  onClick={() => router.push(`/items/${item.id}`)}
+                  className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm active:shadow-none active:scale-[0.99] transition-all cursor-pointer"
                 >
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1 min-w-0">
-                      <p className="text-xs text-gray-400 flex items-center gap-1">
-                        <span>{item.chain_restaurants?.emoji || "🍽"}</span>
-                        <span className="truncate">
-                          {item.chain_restaurants?.name || ""}
+                  <div className="flex">
+                    {/* Photo placeholder */}
+                    <div className="w-24 h-24 shrink-0 bg-gradient-to-br from-orange-50 to-amber-100 flex items-center justify-center">
+                      {item.image_url ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={item.image_url} alt={item.name} className="w-full h-full object-cover" />
+                      ) : (
+                        <span className="text-4xl">{item.chain_restaurants?.emoji || "🍽"}</span>
+                      )}
+                    </div>
+
+                    {/* Content */}
+                    <div className="flex-1 min-w-0 p-3">
+                      {/* Store badge */}
+                      <div className="flex items-center gap-1.5 mb-1">
+                        <span className={`inline-block text-xs font-bold px-2 py-0.5 rounded-full ${getStoreBadgeStyle(item.chain_restaurants?.name, item.source_type)}`}>
+                          {item.chain_restaurants?.name || "その他"}
                         </span>
-                      </p>
-                      <p className="text-base font-bold text-gray-900 mt-1 line-clamp-2">
-                        {item.name}
-                      </p>
-                      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-2 text-xs">
-                        {item.calories != null && (
-                          <span className="text-orange-500 font-medium">
-                            🔥 {item.calories}kcal
-                          </span>
+                        {item.source_type === "convenience_store" && (
+                          <span className="text-xs text-gray-400">🏪</span>
                         )}
-                        {item.protein != null && (
-                          <span className="text-blue-500 font-medium">
-                            💪 {item.protein}g
-                          </span>
-                        )}
-                        {item.fat != null && (
-                          <span className="text-yellow-500 font-medium">
-                            💧 {item.fat}g
-                          </span>
-                        )}
-                        {item.carbs != null && (
-                          <span className="text-green-500 font-medium">
-                            🌾 {item.carbs}g
-                          </span>
+                        {item.source_type === "chain_restaurant" && (
+                          <span className="text-xs text-gray-400">🍽</span>
                         )}
                       </div>
-                    </div>
-                    <div className="flex flex-col items-end gap-2 ml-3">
-                      {item.price != null && (
-                        <span className="text-sm font-bold text-gray-700">
-                          ¥{item.price}
-                        </span>
-                      )}
-                      <button className="text-gray-300 text-xl active:text-red-400 transition-colors">
-                        ♡
-                      </button>
+
+                      {/* Item name */}
+                      <p className="text-sm font-bold text-gray-900 line-clamp-2 leading-snug">
+                        {item.name}
+                      </p>
+
+                      {/* Nutrition row */}
+                      <div className="flex items-center gap-2 mt-1.5 text-xs">
+                        {item.calories != null && (
+                          <span className="text-orange-500 font-semibold">{item.calories}kcal</span>
+                        )}
+                        {item.protein != null && (
+                          <span className="text-blue-500">P {item.protein}g</span>
+                        )}
+                        {item.fat != null && (
+                          <span className="text-yellow-600">F {item.fat}g</span>
+                        )}
+                        {item.price != null && (
+                          <span className="ml-auto text-gray-700 font-bold">¥{item.price}</span>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
