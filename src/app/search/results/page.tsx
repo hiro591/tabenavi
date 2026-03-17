@@ -81,29 +81,23 @@ function SearchResultsContent() {
   const searchQ = searchParams.get("q") || "";
   const category = searchParams.get("category") || "";
   const sourceType = searchParams.get("source_type") || "";
+  const calorieMin = Number(searchParams.get("calorie_min")) || 0;
   const calorieMax = Number(searchParams.get("calorie_max")) || 0;
   const proteinMin = Number(searchParams.get("protein_min")) || 0;
+  const proteinMax = Number(searchParams.get("protein_max")) || 0;
+  const fatMin = Number(searchParams.get("fat_min")) || 0;
   const fatMax = Number(searchParams.get("fat_max")) || 0;
+  const priceMin = Number(searchParams.get("price_min")) || 0;
   const priceMax = Number(searchParams.get("price_max")) || 0;
   const sort = searchParams.get("sort") || "recommended";
 
-  // Local filter state (for filter panel before applying)
   const [filterCategory, setFilterCategory] = useState(category);
   const [filterSourceType, setFilterSourceType] = useState(sourceType);
-  const [filterCalorieMax, setFilterCalorieMax] = useState(calorieMax);
-  const [filterProteinMin, setFilterProteinMin] = useState(proteinMin);
-  const [filterFatMax, setFilterFatMax] = useState(fatMax);
-  const [filterPriceMax, setFilterPriceMax] = useState(priceMax);
 
-  // Sync local filter state when URL params change
   useEffect(() => {
     setFilterCategory(category);
     setFilterSourceType(sourceType);
-    setFilterCalorieMax(calorieMax);
-    setFilterProteinMin(proteinMin);
-    setFilterFatMax(fatMax);
-    setFilterPriceMax(priceMax);
-  }, [category, sourceType, calorieMax, proteinMin, fatMax, priceMax]);
+  }, [category, sourceType]);
 
   const fetchItems = useCallback(async () => {
     setLoading(true);
@@ -116,9 +110,13 @@ function SearchResultsContent() {
     if (searchQ) query = query.ilike("name", `%${searchQ}%`);
     if (category) query = query.eq("category", category);
     if (sourceType) query = query.eq("source_type", sourceType);
+    if (calorieMin > 0) query = query.gte("calories", calorieMin);
     if (calorieMax > 0) query = query.lte("calories", calorieMax);
     if (proteinMin > 0) query = query.gte("protein", proteinMin);
+    if (proteinMax > 0) query = query.lte("protein", proteinMax);
+    if (fatMin > 0) query = query.gte("fat", fatMin);
     if (fatMax > 0) query = query.lte("fat", fatMax);
+    if (priceMin > 0) query = query.gte("price", priceMin);
     if (priceMax > 0) query = query.lte("price", priceMax);
 
     if (sort === "calorie_asc") {
@@ -134,7 +132,7 @@ function SearchResultsContent() {
     const { data } = await query.limit(50);
     setItems((data as MenuItem[]) || []);
     setLoading(false);
-  }, [searchQ, category, sourceType, calorieMax, proteinMin, fatMax, priceMax, sort]);
+  }, [searchQ, category, sourceType, calorieMin, calorieMax, proteinMin, proteinMax, fatMin, fatMax, priceMin, priceMax, sort]);
 
   useEffect(() => {
     const supabase = createClient();
@@ -164,10 +162,6 @@ function SearchResultsContent() {
     if (searchQ) params.set("q", searchQ);
     if (filterCategory) params.set("category", filterCategory);
     if (filterSourceType) params.set("source_type", filterSourceType);
-    if (filterCalorieMax > 0) params.set("calorie_max", String(filterCalorieMax));
-    if (filterProteinMin > 0) params.set("protein_min", String(filterProteinMin));
-    if (filterFatMax > 0) params.set("fat_max", String(filterFatMax));
-    if (filterPriceMax > 0) params.set("price_max", String(filterPriceMax));
     if (sort !== "recommended") params.set("sort", sort);
     router.push(`/search/results?${params.toString()}`);
     setShowFilter(false);
@@ -176,10 +170,6 @@ function SearchResultsContent() {
   const resetFilters = () => {
     setFilterCategory("");
     setFilterSourceType("");
-    setFilterCalorieMax(0);
-    setFilterProteinMin(0);
-    setFilterFatMax(0);
-    setFilterPriceMax(0);
   };
 
   const pageTitle = searchQ || category || "検索結果";
@@ -200,10 +190,10 @@ function SearchResultsContent() {
               {pageTitle}
             </h1>
             <button
-              onClick={() => setShowFilter(true)}
-              className="shrink-0 px-3 py-1.5 bg-gray-100 rounded-lg text-sm text-gray-600 active:bg-gray-200 transition-colors"
+              onClick={() => router.push("/search")}
+              className="shrink-0 px-3 py-1.5 bg-orange-50 text-orange-500 rounded-lg text-sm font-medium active:bg-orange-100 transition-colors"
             >
-              絞り込み
+              条件変更
             </button>
           </div>
 
@@ -313,160 +303,6 @@ function SearchResultsContent() {
           )}
         </div>
 
-        {/* Filter Panel (slide up) */}
-        {showFilter && (
-          <div className="fixed inset-0 z-50">
-            <div
-              className="absolute inset-0 bg-black/40"
-              onClick={() => setShowFilter(false)}
-            />
-            <div className="absolute bottom-0 left-0 right-0 bg-white rounded-t-2xl max-h-[80vh] overflow-y-auto animate-slide-up">
-              <div className="max-w-lg mx-auto p-5">
-                <div className="flex items-center justify-between mb-5">
-                  <h2 className="text-lg font-bold text-gray-900">
-                    絞り込み
-                  </h2>
-                  <button
-                    onClick={() => setShowFilter(false)}
-                    className="text-gray-400 text-2xl"
-                  >
-                    ×
-                  </button>
-                </div>
-
-                {/* Category */}
-                <div className="mb-5">
-                  <h3 className="text-sm font-bold text-gray-700 mb-2">
-                    カテゴリー
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {CATEGORIES.map((cat) => (
-                      <button
-                        key={cat.value}
-                        onClick={() =>
-                          setFilterCategory(
-                            filterCategory === cat.value ? "" : cat.value
-                          )
-                        }
-                        className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
-                          filterCategory === cat.value
-                            ? "bg-orange-500 text-white"
-                            : "bg-gray-100 text-gray-600"
-                        }`}
-                      >
-                        {cat.label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Store Type */}
-                <div className="mb-5">
-                  <h3 className="text-sm font-bold text-gray-700 mb-2">
-                    お店のタイプ
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {STORE_TYPES.map((st) => (
-                      <button
-                        key={st.value}
-                        onClick={() => setFilterSourceType(st.value)}
-                        className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
-                          filterSourceType === st.value
-                            ? "bg-orange-500 text-white"
-                            : "bg-gray-100 text-gray-600"
-                        }`}
-                      >
-                        {st.label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Calories */}
-                <div className="mb-5">
-                  <h3 className="text-sm font-bold text-gray-700 mb-2">
-                    カロリー
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {CALORIE_PRESETS.map((p) => (
-                      <button
-                        key={p.value}
-                        onClick={() => setFilterCalorieMax(p.value)}
-                        className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
-                          filterCalorieMax === p.value
-                            ? "bg-orange-500 text-white"
-                            : "bg-gray-100 text-gray-600"
-                        }`}
-                      >
-                        {p.label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Protein */}
-                <div className="mb-5">
-                  <h3 className="text-sm font-bold text-gray-700 mb-2">
-                    タンパク質
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {PROTEIN_PRESETS.map((p) => (
-                      <button
-                        key={p.value}
-                        onClick={() => setFilterProteinMin(p.value)}
-                        className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
-                          filterProteinMin === p.value
-                            ? "bg-orange-500 text-white"
-                            : "bg-gray-100 text-gray-600"
-                        }`}
-                      >
-                        {p.label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Price */}
-                <div className="mb-6">
-                  <h3 className="text-sm font-bold text-gray-700 mb-2">
-                    価格
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {PRICE_PRESETS.map((p) => (
-                      <button
-                        key={p.value}
-                        onClick={() => setFilterPriceMax(p.value)}
-                        className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
-                          filterPriceMax === p.value
-                            ? "bg-orange-500 text-white"
-                            : "bg-gray-100 text-gray-600"
-                        }`}
-                      >
-                        {p.label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Actions */}
-                <div className="flex items-center gap-3">
-                  <button
-                    onClick={resetFilters}
-                    className="text-sm text-gray-500 underline"
-                  >
-                    リセット
-                  </button>
-                  <button
-                    onClick={applyFilters}
-                    className="flex-1 bg-orange-500 text-white font-bold py-3 rounded-xl active:bg-orange-600 transition-colors"
-                  >
-                    絞り込む
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

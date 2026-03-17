@@ -1,8 +1,105 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+
+// ─── Dual Range Slider ──────────────────────────────────────────────────────
+
+function DualRangeSlider({
+  min, max, step,
+  valueMin, valueMax,
+  onChange,
+  unit,
+  formatValue,
+}: {
+  min: number; max: number; step: number;
+  valueMin: number; valueMax: number;
+  onChange: (min: number, max: number) => void;
+  unit: string;
+  formatValue?: (v: number) => string;
+}) {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const dragging = useRef<"min" | "max" | null>(null);
+  const fmt = formatValue ?? ((v: number) => `${v}`);
+
+  const clamp = (v: number) => Math.round(Math.max(min, Math.min(max, v)) / step) * step;
+
+  const getValueFromX = useCallback((clientX: number) => {
+    if (!trackRef.current) return 0;
+    const { left, width } = trackRef.current.getBoundingClientRect();
+    const pct = Math.max(0, Math.min(1, (clientX - left) / width));
+    return clamp(min + pct * (max - min));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [min, max, step]);
+
+  const onPointerDown = (handle: "min" | "max") => (e: React.PointerEvent) => {
+    e.currentTarget.setPointerCapture(e.pointerId);
+    dragging.current = handle;
+  };
+
+  const onPointerMove = (e: React.PointerEvent) => {
+    if (!dragging.current) return;
+    const val = getValueFromX(e.clientX);
+    if (dragging.current === "min") {
+      onChange(Math.min(val, valueMax - step), valueMax);
+    } else {
+      onChange(valueMin, Math.max(val, valueMin + step));
+    }
+  };
+
+  const onPointerUp = () => { dragging.current = null; };
+
+  const minPct = ((valueMin - min) / (max - min)) * 100;
+  const maxPct = ((valueMax - min) / (max - min)) * 100;
+  const isDefault = valueMin === min && valueMax === max;
+
+  return (
+    <div>
+      {/* Value label */}
+      <div className="flex justify-end mb-3">
+        <span className={`text-sm font-bold px-3 py-1 rounded-full ${isDefault ? "bg-gray-100 text-gray-400" : "bg-orange-100 text-orange-600"}`}>
+          {isDefault ? `指定なし` : `${fmt(valueMin)}${unit} 〜 ${fmt(valueMax)}${unit}`}
+        </span>
+      </div>
+
+      {/* Track */}
+      <div
+        ref={trackRef}
+        className="relative h-10 flex items-center cursor-pointer select-none"
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        onPointerLeave={onPointerUp}
+      >
+        {/* Background track */}
+        <div className="absolute left-0 right-0 h-1.5 bg-gray-200 rounded-full" />
+        {/* Active fill */}
+        <div
+          className="absolute h-1.5 bg-orange-400 rounded-full"
+          style={{ left: `${minPct}%`, width: `${maxPct - minPct}%` }}
+        />
+        {/* Min thumb */}
+        <div
+          className="absolute w-6 h-6 bg-white border-2 border-orange-500 rounded-full shadow-md cursor-grab active:cursor-grabbing active:scale-110 transition-transform z-10"
+          style={{ left: `calc(${minPct}% - 12px)` }}
+          onPointerDown={onPointerDown("min")}
+        />
+        {/* Max thumb */}
+        <div
+          className="absolute w-6 h-6 bg-orange-500 rounded-full shadow-md cursor-grab active:cursor-grabbing active:scale-110 transition-transform z-10"
+          style={{ left: `calc(${maxPct}% - 12px)` }}
+          onPointerDown={onPointerDown("max")}
+        />
+        {/* Min tick labels */}
+        <div className="absolute left-0 top-8 text-xs text-gray-400">{fmt(min)}{unit}</div>
+        <div className="absolute right-0 top-8 text-xs text-gray-400">{fmt(max)}{unit}</div>
+      </div>
+      <div className="h-5" />
+    </div>
+  );
+}
+
+// ─── Constants ──────────────────────────────────────────────────────────────
 
 const CATEGORIES = [
   { emoji: "🍱", label: "和食", value: "和食" },
@@ -26,29 +123,6 @@ const STORE_TYPES = [
   { label: "🛒 スーパー", value: "supermarket" },
 ];
 
-const CALORIE_OPTIONS = [
-  { label: "〜300kcal", value: "300" },
-  { label: "〜500kcal", value: "500" },
-  { label: "〜700kcal", value: "700" },
-  { label: "〜1000kcal", value: "1000" },
-  { label: "上限なし", value: "" },
-];
-
-const PROTEIN_OPTIONS = [
-  { label: "10g以上", value: "10" },
-  { label: "20g以上", value: "20" },
-  { label: "30g以上", value: "30" },
-  { label: "指定なし", value: "" },
-];
-
-const PRICE_OPTIONS = [
-  { label: "〜300円", value: "300" },
-  { label: "〜500円", value: "500" },
-  { label: "〜800円", value: "800" },
-  { label: "〜1000円", value: "1000" },
-  { label: "上限なし", value: "" },
-];
-
 const SORT_OPTIONS = [
   { label: "おすすめ順", value: "" },
   { label: "カロリー低い順", value: "calorie_asc" },
@@ -56,63 +130,78 @@ const SORT_OPTIONS = [
   { label: "価格安い順", value: "price_asc" },
 ];
 
+const CAL_MIN = 0; const CAL_MAX = 1500; const CAL_STEP = 50;
+const PRO_MIN = 0; const PRO_MAX = 60;  const PRO_STEP = 1;
+const FAT_MIN = 0; const FAT_MAX = 80;  const FAT_STEP = 1;
+const PRC_MIN = 0; const PRC_MAX = 2000; const PRC_STEP = 50;
+
+// ─── Page ────────────────────────────────────────────────────────────────────
+
 export default function SearchPage() {
   const router = useRouter();
   const [keyword, setKeyword] = useState("");
   const [category, setCategory] = useState("");
   const [storeType, setStoreType] = useState("");
-  const [calorieMax, setCalorieMax] = useState("");
-  const [proteinMin, setProteinMin] = useState("");
-  const [priceMax, setPriceMax] = useState("");
   const [sort, setSort] = useState("");
 
+  // Range states [min, max]
+  const [calorieRange, setCalorieRange] = useState([CAL_MIN, CAL_MAX]);
+  const [proteinRange, setProteinRange] = useState([PRO_MIN, PRO_MAX]);
+  const [fatRange, setFatRange] = useState([FAT_MIN, FAT_MAX]);
+  const [priceRange, setPriceRange] = useState([PRC_MIN, PRC_MAX]);
+
   useEffect(() => {
-    const supabase = createClient();
-    supabase.auth.getUser().then(({ data }) => {
+    createClient().auth.getUser().then(({ data }) => {
       if (!data.user) router.replace("/login");
     });
   }, [router]);
 
-  const handleSearch = () => {
-    const params = new URLSearchParams();
-    if (keyword.trim()) params.set("q", keyword.trim());
-    if (category) params.set("category", category);
-    if (storeType) params.set("source_type", storeType);
-    if (calorieMax) params.set("calorie_max", calorieMax);
-    if (proteinMin) params.set("protein_min", proteinMin);
-    if (priceMax) params.set("price_max", priceMax);
-    if (sort) params.set("sort", sort);
-    router.push(`/search/results?${params.toString()}`);
-  };
-
-  const hasFilters = category || storeType || calorieMax || proteinMin || priceMax;
+  const isDefault =
+    calorieRange[0] === CAL_MIN && calorieRange[1] === CAL_MAX &&
+    proteinRange[0] === PRO_MIN && proteinRange[1] === PRO_MAX &&
+    fatRange[0] === FAT_MIN && fatRange[1] === FAT_MAX &&
+    priceRange[0] === PRC_MIN && priceRange[1] === PRC_MAX &&
+    !category && !storeType;
 
   const resetAll = () => {
-    setKeyword("");
-    setCategory("");
-    setStoreType("");
-    setCalorieMax("");
-    setProteinMin("");
-    setPriceMax("");
-    setSort("");
+    setKeyword(""); setCategory(""); setStoreType(""); setSort("");
+    setCalorieRange([CAL_MIN, CAL_MAX]);
+    setProteinRange([PRO_MIN, PRO_MAX]);
+    setFatRange([FAT_MIN, FAT_MAX]);
+    setPriceRange([PRC_MIN, PRC_MAX]);
+  };
+
+  const handleSearch = () => {
+    const p = new URLSearchParams();
+    if (keyword.trim()) p.set("q", keyword.trim());
+    if (category) p.set("category", category);
+    if (storeType) p.set("source_type", storeType);
+    if (calorieRange[0] > CAL_MIN) p.set("calorie_min", String(calorieRange[0]));
+    if (calorieRange[1] < CAL_MAX) p.set("calorie_max", String(calorieRange[1]));
+    if (proteinRange[0] > PRO_MIN) p.set("protein_min", String(proteinRange[0]));
+    if (proteinRange[1] < PRO_MAX) p.set("protein_max", String(proteinRange[1]));
+    if (fatRange[0] > FAT_MIN) p.set("fat_min", String(fatRange[0]));
+    if (fatRange[1] < FAT_MAX) p.set("fat_max", String(fatRange[1]));
+    if (priceRange[0] > PRC_MIN) p.set("price_min", String(priceRange[0]));
+    if (priceRange[1] < PRC_MAX) p.set("price_max", String(priceRange[1]));
+    if (sort) p.set("sort", sort);
+    router.push(`/search/results?${p.toString()}`);
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 pb-40">
       <div className="max-w-lg mx-auto">
 
         {/* Header */}
         <div className="bg-white px-4 pt-6 pb-4 border-b border-gray-100">
           <div className="flex items-center justify-between mb-4">
             <h1 className="text-xl font-bold text-gray-900">🧭 たべなび</h1>
-            {hasFilters && (
+            {!isDefault && (
               <button onClick={resetAll} className="text-sm text-orange-500 font-medium">
                 リセット
               </button>
             )}
           </div>
-
-          {/* Search bar */}
           <div className="relative">
             <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">🔍</span>
             <input
@@ -126,7 +215,6 @@ export default function SearchPage() {
           </div>
         </div>
 
-        {/* Filters */}
         <div className="bg-white mt-2 divide-y divide-gray-100">
 
           {/* カテゴリー */}
@@ -140,7 +228,7 @@ export default function SearchPage() {
                   className={`flex items-center gap-1.5 px-3 py-2 rounded-full text-sm font-medium transition-colors ${
                     category === c.value
                       ? "bg-orange-500 text-white"
-                      : "bg-gray-100 text-gray-700 active:bg-gray-200"
+                      : "bg-gray-100 text-gray-700"
                   }`}
                 >
                   <span>{c.emoji}</span>
@@ -161,7 +249,7 @@ export default function SearchPage() {
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                     storeType === s.value
                       ? "bg-orange-500 text-white"
-                      : "bg-gray-100 text-gray-700 active:bg-gray-200"
+                      : "bg-gray-100 text-gray-700"
                   }`}
                 >
                   {s.label}
@@ -171,63 +259,47 @@ export default function SearchPage() {
           </div>
 
           {/* カロリー */}
-          <div className="px-4 py-4">
-            <p className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-3">🔥 カロリー上限</p>
-            <div className="flex flex-wrap gap-2">
-              {CALORIE_OPTIONS.map((o) => (
-                <button
-                  key={o.value}
-                  onClick={() => setCalorieMax(calorieMax === o.value ? "" : o.value)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                    calorieMax === o.value
-                      ? "bg-orange-500 text-white"
-                      : "bg-gray-100 text-gray-700 active:bg-gray-200"
-                  }`}
-                >
-                  {o.label}
-                </button>
-              ))}
-            </div>
+          <div className="px-4 py-5">
+            <p className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-1">🔥 カロリー</p>
+            <DualRangeSlider
+              min={CAL_MIN} max={CAL_MAX} step={CAL_STEP}
+              valueMin={calorieRange[0]} valueMax={calorieRange[1]}
+              onChange={(a, b) => setCalorieRange([a, b])}
+              unit="kcal"
+            />
           </div>
 
           {/* タンパク質 */}
-          <div className="px-4 py-4">
-            <p className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-3">💪 タンパク質（最低量）</p>
-            <div className="flex flex-wrap gap-2">
-              {PROTEIN_OPTIONS.map((o) => (
-                <button
-                  key={o.value}
-                  onClick={() => setProteinMin(proteinMin === o.value ? "" : o.value)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                    proteinMin === o.value
-                      ? "bg-orange-500 text-white"
-                      : "bg-gray-100 text-gray-700 active:bg-gray-200"
-                  }`}
-                >
-                  {o.label}
-                </button>
-              ))}
-            </div>
+          <div className="px-4 py-5">
+            <p className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-1">💪 タンパク質</p>
+            <DualRangeSlider
+              min={PRO_MIN} max={PRO_MAX} step={PRO_STEP}
+              valueMin={proteinRange[0]} valueMax={proteinRange[1]}
+              onChange={(a, b) => setProteinRange([a, b])}
+              unit="g"
+            />
+          </div>
+
+          {/* 脂質 */}
+          <div className="px-4 py-5">
+            <p className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-1">🧈 脂質</p>
+            <DualRangeSlider
+              min={FAT_MIN} max={FAT_MAX} step={FAT_STEP}
+              valueMin={fatRange[0]} valueMax={fatRange[1]}
+              onChange={(a, b) => setFatRange([a, b])}
+              unit="g"
+            />
           </div>
 
           {/* 価格 */}
-          <div className="px-4 py-4">
-            <p className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-3">💰 価格上限</p>
-            <div className="flex flex-wrap gap-2">
-              {PRICE_OPTIONS.map((o) => (
-                <button
-                  key={o.value}
-                  onClick={() => setPriceMax(priceMax === o.value ? "" : o.value)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                    priceMax === o.value
-                      ? "bg-orange-500 text-white"
-                      : "bg-gray-100 text-gray-700 active:bg-gray-200"
-                  }`}
-                >
-                  {o.label}
-                </button>
-              ))}
-            </div>
+          <div className="px-4 py-5">
+            <p className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-1">💰 価格</p>
+            <DualRangeSlider
+              min={PRC_MIN} max={PRC_MAX} step={PRC_STEP}
+              valueMin={priceRange[0]} valueMax={priceRange[1]}
+              onChange={(a, b) => setPriceRange([a, b])}
+              unit="円"
+            />
           </div>
 
           {/* 並び順 */}
@@ -241,7 +313,7 @@ export default function SearchPage() {
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                     sort === o.value
                       ? "bg-gray-800 text-white"
-                      : "bg-gray-100 text-gray-700 active:bg-gray-200"
+                      : "bg-gray-100 text-gray-700"
                   }`}
                 >
                   {o.label}
@@ -250,18 +322,18 @@ export default function SearchPage() {
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Search button - sticky bottom */}
-        <div className="fixed bottom-20 left-0 right-0 px-4 z-10 max-w-lg mx-auto">
+      {/* Sticky search button */}
+      <div className="fixed bottom-20 left-0 right-0 z-10 px-4">
+        <div className="max-w-lg mx-auto">
           <button
             onClick={handleSearch}
-            className="w-full bg-orange-500 hover:bg-orange-600 active:bg-orange-700 text-white font-bold py-4 rounded-2xl shadow-lg shadow-orange-200 transition-colors text-base"
+            className="w-full bg-orange-500 active:bg-orange-600 text-white font-bold py-4 rounded-2xl shadow-lg shadow-orange-200 transition-colors text-base"
           >
             🔍 この条件で検索する
           </button>
         </div>
-
-        <div className="h-36" />
       </div>
     </div>
   );
