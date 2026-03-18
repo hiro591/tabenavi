@@ -7,6 +7,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "kfc", "mos", "gusto", "bamiyan", "ohsho", "hidakaya",
     "marugame", "kurasushi", "sushiro", "dennys", "doutor",
     "subway", "nakau", "ootoya", "yayoiken",
+    "gyudon-comparison", "low-fat-eating-out", "calorie-database",
   ];
 
   const guidePages = chains.map((slug) => ({

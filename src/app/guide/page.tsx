@@ -169,6 +169,55 @@ const articles = [
     description:
       "外食しながら痩せるための完全ガイド。チェーン店別のおすすめメニューを紹介。",
   },
+  {
+    slug: "muscle-eating-out",
+    chain: "",
+    title: "筋トレ中の外食完全ガイド｜高タンパクチェーン店メニュー",
+    description:
+      "筋トレ中の外食で迷わない。高タンパクメニューをPFCデータ付きで紹介。",
+  },
+  {
+    slug: "gyudon-comparison",
+    chain: "",
+    title: "牛丼チェーン3社カロリー・栄養比較｜吉野家・松屋・すき家",
+    description:
+      "吉野家・松屋・すき家の牛丼を徹底比較。ダイエットに最適なチェーンはどこ？",
+  },
+  {
+    slug: "low-fat-eating-out",
+    chain: "",
+    title: "外食で低脂質メニューを選ぶ完全ガイド",
+    description:
+      "脂質制限中でも安心の外食メニューをチェーン店別に紹介。選び方のコツも解説。",
+  },
+  {
+    slug: "calorie-database",
+    chain: "",
+    title: "外食チェーン店カロリー一覧【全20社・完全版】",
+    description:
+      "主要チェーン店のカロリー・PFCを完全網羅。ダイエット中の外食選びに。",
+  },
+  {
+    slug: "mcdonalds-diet",
+    chain: "マクドナルド",
+    title: "マクドナルドでダイエット｜低カロリーメニューランキングと太らない食べ方",
+    description:
+      "カロリー低い順ランキング、おすすめメニュー5選、PFCバランスで選ぶ食べ方を徹底解説。",
+  },
+  {
+    slug: "conveni-protein",
+    chain: "セブンイレブン",
+    title: "コンビニ高タンパク商品ランキング【セブン・ローソン・ファミマ比較】",
+    description:
+      "3大コンビニの高タンパク商品を徹底比較。筋トレ・ダイエット中のタンパク質補給に。",
+  },
+  {
+    slug: "saizeriya-diet",
+    chain: "サイゼリヤ",
+    title: "サイゼリヤでダイエット｜低カロリー＆高タンパクメニュー完全ガイド",
+    description:
+      "カロリーランキング、500円以下の神注文法、筋トレ民おすすめメニューを徹底解説。",
+  },
 ];
 
 export default function GuidePage() {
