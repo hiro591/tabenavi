@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "たべなび | 外食をもっと賢く、楽しく。",
   description: "外食専門の食事管理サービス。チェーン店のメニューを3タップで記録。カロリー・栄養バランスを確認しながら、外食をもっと賢く楽しもう。",
   keywords: "外食,カロリー,栄養管理,食事記録,ダイエット,健康,チェーン店",
+  verification: {
+    google: "AAhuVl9MdVUxjq_AP5PTmUKwAqVDiIsYilfWD8tEfmA",
+  },
   openGraph: {
     title: "たべなび | 外食をもっと賢く、楽しく。",
     description: "外食専門の食事管理サービス。3タップで記録完了。",
