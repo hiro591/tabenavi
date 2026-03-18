@@ -34,6 +34,111 @@ const CHAIN_MAP: Record<string, { name: string; description: string }> = {
     name: "セブンイレブン",
     description: "コンビニ3社の高タンパク商品ランキングです。",
   },
+  kfc: {
+    name: "ケンタッキー",
+    description: "ケンタッキーフライドチキンの全メニューのカロリー・栄養成分一覧です。",
+  },
+  mos: {
+    name: "モスバーガー",
+    description: "モスバーガーの全メニューのカロリー・栄養成分一覧です。",
+  },
+  gusto: {
+    name: "ガスト",
+    description: "ガストの全メニューのカロリー・栄養成分一覧です。",
+  },
+  bamiyan: {
+    name: "バーミヤン",
+    description: "バーミヤンの全メニューのカロリー・栄養成分一覧です。",
+  },
+  ohsho: {
+    name: "餃子の王将",
+    description: "餃子の王将の全メニューのカロリー・栄養成分一覧です。",
+  },
+  hidakaya: {
+    name: "日高屋",
+    description: "日高屋の全メニューのカロリー・栄養成分一覧です。",
+  },
+  marugame: {
+    name: "丸亀製麺",
+    description: "丸亀製麺の全メニューのカロリー・栄養成分一覧です。",
+  },
+  kurasushi: {
+    name: "くら寿司",
+    description: "くら寿司の全メニューのカロリー・栄養成分一覧です。",
+  },
+  sushiro: {
+    name: "スシロー",
+    description: "スシローの全メニューのカロリー・栄養成分一覧です。",
+  },
+  dennys: {
+    name: "デニーズ",
+    description: "デニーズの全メニューのカロリー・栄養成分一覧です。",
+  },
+  doutor: {
+    name: "ドトール",
+    description: "ドトールの全ドリンク・フードのカロリー・栄養成分一覧です。",
+  },
+  subway: {
+    name: "サブウェイ",
+    description: "サブウェイの全メニューのカロリー・栄養成分一覧です。",
+  },
+  nakau: {
+    name: "なか卯",
+    description: "なか卯の全メニューのカロリー・栄養成分一覧です。",
+  },
+  ootoya: {
+    name: "大戸屋",
+    description: "大戸屋の全メニューのカロリー・栄養成分一覧です。",
+  },
+  yayoiken: {
+    name: "やよい軒",
+    description: "やよい軒の全メニューのカロリー・栄養成分一覧です。",
+  },
+};
+
+const TIPS_MAP: Record<string, string> = {
+  mcdonalds:
+    "マクドナルドでダイエット中に外食する場合、バーガー単品で注文し、セットのポテトをサイドサラダに変更するのが基本です。チキン系メニューはビーフ系より脂質が低い傾向があります。ドリンクはブラックコーヒーやお茶を選ぶと余計なカロリーを抑えられます。",
+  yoshinoya:
+    "吉野家でカロリーを抑えるなら、サイズ選びが最も重要です。並盛と大盛で約230kcalの差があります。サラシア牛丼やライザップ牛サラダなど、健康志向メニューも充実しています。",
+  matsuya:
+    "松屋ではライスの量を調整するのが効果的です。ミニ盛にするだけで100kcal以上の削減になります。定食メニューは味噌汁・サラダ付きで栄養バランスが取りやすいのでおすすめです。",
+  sukiya:
+    "すき家ではミニサイズを選ぶことでカロリーを大幅にカットできます。牛丼ライトはご飯の代わりに豆腐を使用しており、糖質制限中の方におすすめです。",
+  saizeriya:
+    "サイゼリヤはコスパ最強の外食チェーンです。グリルチキンやサラダなど、低カロリー・高タンパクメニューが充実しています。パスタはオリーブオイル系を選ぶと脂質を抑えやすくなります。",
+  starbucks:
+    "スターバックスでカロリーを抑えるなら、ミルクをアーモンドミルクや無脂肪乳に変更するのが効果的です。シロップの量を減らすカスタマイズも有効です。ブラックコーヒーやティーはほぼゼロカロリーです。",
+  kfc:
+    "ケンタッキーではオリジナルチキンよりも骨なしケンタッキーの方がカロリーが低めです。サイドメニューのコールスローは比較的低カロリーなので、ポテトの代わりに選ぶのがおすすめです。",
+  mos:
+    "モスバーガーではモスの菜摘（なつみ）シリーズがダイエット向きです。バンズの代わりにレタスで包んでおり、糖質を大幅にカットできます。ソイパティを選ぶと脂質も抑えられます。",
+  gusto:
+    "ガストでは日替わりランチが栄養バランスに優れています。ハンバーグ系よりもチキン系・魚系メニューを選ぶと脂質を抑えやすくなります。セットのスープバーは低カロリーで満腹感が得られます。",
+  bamiyan:
+    "バーミヤンでは蒸し鶏や野菜メニューが低カロリーでおすすめです。炒め物は油を多く使うため、蒸し料理やスープ系を選ぶとカロリーを抑えられます。ご飯の量は少なめに調整しましょう。",
+  ohsho:
+    "餃子の王将では餃子は意外とタンパク質が摂れるメニューです。チャーハンや天津飯よりも、レバニラ炒めや鶏の唐揚げなどタンパク質メインのメニューを選ぶのがポイントです。",
+  hidakaya:
+    "日高屋では野菜たっぷりタンメンやバクダン炒め定食が栄養バランスに優れています。ラーメンのスープを飲み干さないだけでも、塩分・カロリーを大幅にカットできます。",
+  marugame:
+    "丸亀製麺ではうどん自体は低脂質で消化が良い食事です。トッピングの天ぷらを控えめにし、ネギやおろし生姜など薬味で味わうのがヘルシーに食べるコツです。",
+  kurasushi:
+    "くら寿司ではお寿司1貫あたりのカロリーは比較的低めです。サイドメニューの揚げ物を避け、赤身魚やイカ・タコなど低脂質なネタを選ぶのがダイエットのポイントです。",
+  sushiro:
+    "スシローではまぐろやサーモンなど定番ネタが高タンパク・低カロリーです。シャリハーフを選べる店舗では糖質をカットできます。味噌汁やあおさ汁はカロリー控えめで満足感を得られます。",
+  dennys:
+    "デニーズではバランスランチや和食メニューが栄養バランスに優れています。ハンバーグやステーキ系よりも、魚定食やサラダ系メニューを選ぶとカロリーを抑えやすくなります。",
+  doutor:
+    "ドトールではブレンドコーヒーやティーがほぼゼロカロリーです。フードメニューを選ぶ場合、全粒粉サンドやトーストなど軽食系がカロリー控えめです。ミラノサンドは具材によってカロリーが大きく変わるので確認しましょう。",
+  subway:
+    "サブウェイでは野菜を多めにカスタマイズできるのが最大の強みです。パンを全粒粉に変更し、ソースはオイル＆ビネガーやマスタードを選ぶと脂質を抑えられます。ローストチキンやターキーが高タンパクでおすすめです。",
+  nakau:
+    "なか卯では親子丼が比較的バランスの良いメニューです。うどんセットよりも単品で注文し、サイドに温泉たまごを追加するとタンパク質を補えます。",
+  ootoya:
+    "大戸屋では手作り定食が栄養バランスに優れています。五穀米に変更できるメニューを選ぶと食物繊維を増やせます。チキンかあさん煮やしまほっけ定食など、高タンパクメニューがおすすめです。",
+  yayoiken:
+    "やよい軒ではご飯おかわり無料ですが、食べすぎに注意が必要です。最初から少なめを注文するのがポイント。しょうが焼き定食や焼魚定食は高タンパクで栄養バランスに優れています。",
 };
 
 interface MenuItem {
@@ -43,6 +148,7 @@ interface MenuItem {
   protein: number | null;
   fat: number | null;
   carbs: number | null;
+  price: number | null;
   category: string | null;
   chain_restaurants: { name: string } | null;
 }
@@ -55,7 +161,9 @@ export async function generateMetadata({
   const { slug } = await params;
   const chain = CHAIN_MAP[slug];
   return {
-    title: `${chain?.name ?? "外食"} カロリー・栄養成分一覧 | たべなび`,
+    title: slug === "eating-out-diet"
+      ? "【2026年最新】外食ダイエット完全ガイド｜チェーン店別おすすめメニュー | たべなび"
+      : `【2026年最新】${chain?.name ?? "外食"} カロリー・栄養成分一覧｜全メニューPFC表 | たべなび`,
     description:
       chain?.description ?? "外食チェーンの栄養成分一覧",
   };
@@ -67,7 +175,7 @@ async function fetchItems(slug: string) {
   if (slug === "conveni") {
     const { data } = await supabase
       .from("menu_items")
-      .select("id, name, calories, protein, fat, carbs, category, chain_restaurants(name)")
+      .select("id, name, calories, protein, fat, carbs, price, category, chain_restaurants(name)")
       .eq("source_type", "convenience_store")
       .order("calories", { ascending: true })
       .returns<MenuItem[]>();
@@ -77,7 +185,7 @@ async function fetchItems(slug: string) {
   if (slug === "eating-out-diet") {
     const { data } = await supabase
       .from("menu_items")
-      .select("id, name, calories, protein, fat, carbs, category, chain_restaurants(name)")
+      .select("id, name, calories, protein, fat, carbs, price, category, chain_restaurants(name)")
       .not("calories", "is", null)
       .order("calories", { ascending: true })
       .limit(200)
@@ -90,7 +198,7 @@ async function fetchItems(slug: string) {
 
   const { data } = await supabase
     .from("menu_items")
-    .select("id, name, calories, protein, fat, carbs, category, chain_restaurants!inner(name)")
+    .select("id, name, calories, protein, fat, carbs, price, category, chain_restaurants!inner(name)")
     .eq("chain_restaurants.name", chain.name)
     .order("calories", { ascending: true })
     .returns<MenuItem[]>();
@@ -132,12 +240,22 @@ export default async function GuideArticlePage({
     "@type": "Article",
     headline: title,
     description: chain?.description ?? "外食チェーンの栄養成分一覧",
-    dateModified: "2026-03-01",
+    dateModified: new Date().toISOString().split("T")[0],
     author: {
       "@type": "Organization",
       name: "たべなび",
+      url: "https://tabenavi.jp",
     },
+    publisher: {
+      "@type": "Organization",
+      name: "たべなび",
+    },
+    mainEntityOfPage: `https://tabenavi.jp/guide/${slug}`,
   };
+
+  const otherChains = Object.entries(CHAIN_MAP).filter(
+    ([key]) => key !== slug && key !== "conveni"
+  );
 
   return (
     <div className="min-h-screen bg-white">
@@ -166,6 +284,15 @@ export default async function GuideArticlePage({
         </h1>
         <p className="text-sm text-gray-400 mb-8">最終更新: 2026年3月</p>
 
+        {/* Introduction text */}
+        {chain && (
+          <p className="text-gray-600 leading-relaxed mb-8">
+            {chain.name}の全メニューのカロリー、タンパク質（P）、脂質（F）、炭水化物（C）の栄養成分を一覧でまとめています。
+            ダイエットや筋トレ中の食事選びにお役立てください。
+            ※価格・栄養成分は店舗により異なる場合があります。
+          </p>
+        )}
+
         {/* Full Nutrition Table */}
         {items.length > 0 && (
           <section className="mb-12">
@@ -180,6 +307,7 @@ export default async function GuideArticlePage({
                     {isGeneralGuide && (
                       <th className="text-left px-4 py-3 font-medium">チェーン</th>
                     )}
+                    <th className="text-right px-4 py-3 font-medium">価格</th>
                     <th className="text-right px-4 py-3 font-medium">カロリー</th>
                     <th className="text-right px-4 py-3 font-medium">タンパク質</th>
                     <th className="text-right px-4 py-3 font-medium">脂質</th>
@@ -205,6 +333,9 @@ export default async function GuideArticlePage({
                           {item.chain_restaurants?.name ?? "-"}
                         </td>
                       )}
+                      <td className="text-right px-4 py-2.5 text-gray-700">
+                        {item.price != null ? `¥${item.price}` : "-"}
+                      </td>
                       <td className="text-right px-4 py-2.5 text-gray-700">
                         {item.calories != null ? `${item.calories} kcal` : "-"}
                       </td>
@@ -299,6 +430,40 @@ export default async function GuideArticlePage({
                       {item.calories ?? "-"} kcal
                     </p>
                   </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Tips section */}
+        {chain && TIPS_MAP[slug] && (
+          <section className="mb-12">
+            <h2 className="text-lg font-bold text-gray-900 mb-4">
+              {chain.name}で上手に栄養管理するコツ
+            </h2>
+            <div className="prose prose-gray">
+              <p className="text-gray-600 leading-relaxed">
+                {TIPS_MAP[slug]}
+              </p>
+            </div>
+          </section>
+        )}
+
+        {/* Internal links to other guides */}
+        {otherChains.length > 0 && (
+          <section className="mb-12">
+            <h2 className="text-lg font-bold text-gray-900 mb-4">
+              他のチェーン店のガイド
+            </h2>
+            <div className="flex flex-wrap gap-2">
+              {otherChains.map(([key, value]) => (
+                <Link
+                  key={key}
+                  href={`/guide/${key}`}
+                  className="text-sm px-3 py-1.5 rounded-full border border-gray-200 text-gray-600 hover:border-orange-300 hover:text-orange-500 transition-colors"
+                >
+                  {value.name}
                 </Link>
               ))}
             </div>
