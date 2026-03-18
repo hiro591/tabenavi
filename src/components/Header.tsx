@@ -48,6 +48,9 @@ export default function Header() {
             <a href="#chains" className="relative text-gray-600 hover:text-orange-500 transition-colors text-sm font-medium after:absolute after:left-0 after:bottom-[-4px] after:h-0.5 after:w-0 after:bg-orange-500 after:transition-all after:duration-300 hover:after:w-full">
               対応チェーン
             </a>
+            <a href="/guide" className="relative text-gray-600 hover:text-orange-500 transition-colors text-sm font-medium after:absolute after:left-0 after:bottom-[-4px] after:h-0.5 after:w-0 after:bg-orange-500 after:transition-all after:duration-300 hover:after:w-full">
+              ガイド
+            </a>
           </nav>
 
           {/* CTA */}
@@ -82,6 +85,7 @@ export default function Header() {
               <a href="#how-it-works" className="text-gray-600 hover:text-orange-500 transition-colors text-sm font-medium" onClick={() => setMenuOpen(false)}>使い方</a>
               <a href="#pricing" className="text-gray-600 hover:text-orange-500 transition-colors text-sm font-medium" onClick={() => setMenuOpen(false)}>料金</a>
               <a href="#chains" className="text-gray-600 hover:text-orange-500 transition-colors text-sm font-medium" onClick={() => setMenuOpen(false)}>対応チェーン</a>
+              <a href="/guide" className="text-gray-600 hover:text-orange-500 transition-colors text-sm font-medium" onClick={() => setMenuOpen(false)}>ガイド</a>
               <a href="/signup" className="bg-gradient-to-r from-orange-500 to-amber-500 text-white px-5 py-2 rounded-full text-sm font-semibold text-center">無料で始める</a>
             </nav>
           </div>
