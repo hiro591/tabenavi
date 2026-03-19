@@ -16,6 +16,7 @@ import {
   NumberedList,
   ComparisonTable,
   ArticleFooter,
+  ArticleImage,
 } from "@/components/guide/ArticleComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -195,6 +196,11 @@ export default function DailyMealPlanPage() {
         <p className="mb-8">
           特に重要なのは<Marker>タンパク質を最低100g以上</Marker>確保すること。ダイエット中は筋肉の分解を防ぐため、体重1kgあたり1.5〜2gのタンパク質が必要です。以下のプランではすべてP100g以上を確保しています。
         </p>
+
+        <ArticleImage
+          src="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=800&h=400&fit=crop"
+          alt="サラダチキンやゆで卵など栄養バランスの良い朝食メニュー"
+        />
 
         {/* ─── Section 3: パターンA ─── */}
         <SectionHeading id="plan-a">パターンA：コンビニ朝 + 吉野家昼 + サイゼリヤ夜</SectionHeading>
@@ -381,6 +387,11 @@ export default function DailyMealPlanPage() {
         <TipBox title="パターンBのポイント">
           <p><Marker>脂質わずか34.3gという超低脂質プラン</Marker>。1,265kcalと余裕があるので、間食にプロテインシェイク（約120kcal・P24g）を追加するのがおすすめ。タンパク質を100g以上に引き上げられます。大戸屋のチキン南蛮定食（892kcal）は揚げ物なので避けましょう。</p>
         </TipBox>
+
+        <ArticleImage
+          src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800&h=400&fit=crop"
+          alt="外食チェーンのヘルシーなランチプレート"
+        />
 
         {/* Mid-article CTA */}
         <CTABanner
@@ -696,6 +707,11 @@ export default function DailyMealPlanPage() {
         <TipBox title="成功のカギは「計画」">
           <p>1500kcalダイエットの成功率を最も高めるのは、<Marker>前日の夜に翌日の3食を決めておくこと</Marker>。「明日の朝はコンビニでサラダチキン、昼は吉野家の牛皿、夜はサイゼのディアボラ」とメモしておくだけで、衝動的な高カロリー食の誘惑に負けにくくなります。</p>
         </TipBox>
+
+        <ArticleImage
+          src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&h=400&fit=crop"
+          alt="栄養バランスの取れた彩り豊かなディナープレート"
+        />
 
         {/* ─── Section 9: まとめ ─── */}
         <SectionHeading id="summary">まとめ</SectionHeading>

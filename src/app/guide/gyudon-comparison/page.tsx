@@ -15,6 +15,7 @@ import {
   CheckList,
   NumberedList,
   ArticleFooter,
+  ArticleImage,
 } from "@/components/guide/ArticleComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -108,6 +109,8 @@ export default function GyudonComparisonPage() {
           <TableOfContents items={tocItems} />
         </div>
 
+        <ArticleImage src="https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?w=800&h=400&fit=crop" alt="美味しそうな牛丼の盛り付け" />
+
         {/* Section 1: 基本データ比較表 */}
         <section className="mb-12">
           <SectionHeading id="basic-comparison">
@@ -200,6 +203,8 @@ export default function GyudonComparisonPage() {
           title="牛丼チェーンの栄養をサクッと検索"
           subtitle="たべなびなら主要チェーンの栄養成分をすぐに確認できます"
         />
+
+        <ArticleImage src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&h=400&fit=crop" alt="バランスの良い和定食セット" />
 
         {/* Section 4: 各チェーンのダイエット向けメニュー */}
         <section className="mb-12">
@@ -323,6 +328,8 @@ export default function GyudonComparisonPage() {
             </p>
           </WarningBox>
         </section>
+
+        <ArticleImage src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&h=400&fit=crop" alt="新鮮な野菜を使ったヘルシーな食事" />
 
         {/* Section 6: まとめ */}
         <section className="mb-12">

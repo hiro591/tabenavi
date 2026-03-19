@@ -12,6 +12,7 @@ import {
   CTABanner,
   CheckList,
   ArticleFooter,
+  ArticleImage,
 } from "@/components/guide/ArticleComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -259,6 +260,11 @@ export default async function CalorieDatabasePage() {
           </ul>
         </TipBox>
 
+        <ArticleImage
+          src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800&h=400&fit=crop"
+          alt="ハンバーガーや定食など様々な外食チェーンの料理が並ぶ様子"
+        />
+
         {/* Chain Categories */}
         {CHAIN_CATEGORIES.map((cat) => (
           <div key={cat.slug}>
@@ -312,6 +318,11 @@ export default async function CalorieDatabasePage() {
           </div>
         ))}
 
+        <ArticleImage
+          src="https://images.unsplash.com/photo-1580822184713-fc5400e7fe10?w=800&h=400&fit=crop"
+          alt="寿司や天ぷらなどバラエティ豊かな和食メニュー"
+        />
+
         {/* Mid-article CTA */}
         <CTABanner
           title="全メニューの栄養データを検索"
@@ -362,6 +373,11 @@ export default async function CalorieDatabasePage() {
             );
           });
         })()}
+
+        <ArticleImage
+          src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=800&h=400&fit=crop"
+          alt="コンビニの棚に並ぶサラダチキンやおにぎりなどの食品"
+        />
 
         {/* まとめ */}
         <SectionHeading id="summary">まとめ</SectionHeading>

@@ -15,6 +15,7 @@ import {
   NumberedList,
   ComparisonTable,
   ArticleFooter,
+  ArticleImage,
 } from "@/components/guide/ArticleComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -174,6 +175,8 @@ export default async function LowFatEatingOutPage() {
           </ul>
         </TipBox>
 
+        <ArticleImage src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=800&h=400&fit=crop" alt="香ばしく焼き上げた魚のグリル料理" />
+
         {/* Section 2: 1日の脂質の目安 */}
         <SectionHeading id="daily-fat-target">
           1日の脂質の目安と外食での管理法
@@ -266,6 +269,8 @@ export default async function LowFatEatingOutPage() {
           <p className="text-gray-500 text-sm">データを読み込み中です。</p>
         )}
 
+        <ArticleImage src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=800&h=400&fit=crop" alt="色鮮やかな新鮮野菜のサラダボウル" />
+
         {/* Mid-article CTA */}
         <CTABanner
           title="低脂質メニューをもっと探す"
@@ -307,6 +312,8 @@ export default async function LowFatEatingOutPage() {
             <li>・ <strong>クリーム系パスタ：</strong>1皿で脂質30g超えも。トマト系を選ぼう</li>
           </ul>
         </TipBox>
+
+        <ArticleImage src="https://images.unsplash.com/photo-1532550907401-a500c9a57435?w=800&h=400&fit=crop" alt="高タンパクな鶏むね肉のグリル料理" />
 
         {/* Section 5: まとめ */}
         <SectionHeading id="summary">まとめ</SectionHeading>

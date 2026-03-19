@@ -17,6 +17,7 @@ import {
   NumberedList,
   ComparisonTable,
   ArticleFooter,
+  ArticleImage,
 } from "@/components/guide/ArticleComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -136,6 +137,8 @@ export default function SaizeriyaDietPage() {
           <p><Marker>サイゼリヤの若鶏のグリル（P35.2g/¥500）</Marker>は、マクドナルドのダブルチーズバーガー（P26.4g/¥400）やすき家の牛丼並（P22g/¥430）と比較しても、タンパク質あたりのコスパが圧倒的に優れています。</p>
         </TipBox>
 
+        <ArticleImage src="https://images.unsplash.com/photo-1532550907401-a500c9a57435?w=800&h=400&fit=crop" alt="香ばしく焼かれたイタリアン風グリルチキンのプレート" />
+
         {/* Section 2: カロリーランキング */}
         <SectionHeading id="calorie-ranking">サイゼリヤ カロリーランキング（低い順）</SectionHeading>
 
@@ -228,6 +231,8 @@ export default function SaizeriyaDietPage() {
             </p>
           </div>
         </div>
+
+        <ArticleImage src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&h=400&fit=crop" alt="彩り豊かなヘルシーフードプレート" />
 
         {/* Mid-article CTA */}
         <CTABanner
@@ -358,6 +363,8 @@ export default function SaizeriyaDietPage() {
         <p className="mb-8 mt-4">
           タンパク質・炭水化物・野菜をバランスよく摂れるセット。通常の食事として<Marker color="green">満足感のある組み合わせ</Marker>です。ダイエットの維持期や、軽い運動をした日の食事におすすめ。
         </p>
+
+        <ArticleImage src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=400&fit=crop" alt="レストランで楽しく食事をする人々の様子" />
 
         {/* まとめ */}
         <SectionHeading id="summary">まとめ</SectionHeading>

@@ -17,6 +17,7 @@ import {
   NumberedList,
   ComparisonTable,
   ArticleFooter,
+  ArticleImage,
 } from "@/components/guide/ArticleComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -112,6 +113,8 @@ export default function FamilyRestaurantDietPage() {
           <TableOfContents items={tocItems} />
         </div>
 
+        <ArticleImage src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=400&fit=crop" alt="明るく清潔感のあるファミリーレストランの店内" />
+
         {/* Section 1: ファミレスがダイエットに向いている理由 */}
         <SectionHeading id="why-family-restaurant">ファミレスがダイエットに向いている理由</SectionHeading>
 
@@ -198,6 +201,8 @@ export default function FamilyRestaurantDietPage() {
         <WarningBox title="パスタはダイエット中は要注意">
           <p>パスタ系は全チェーンで500kcal以上。<Marker>炭水化物が80g前後</Marker>と非常に多いため、糖質制限中は避けた方が無難です。どうしてもパスタが食べたい場合は、サイゼリヤのペペロンチーノ（510kcal）が最も低カロリーです。</p>
         </WarningBox>
+
+        <ArticleImage src="https://images.unsplash.com/photo-1544025162-d76694265947?w=800&h=400&fit=crop" alt="ジューシーに焼き上げたグリルステーキ" />
 
         {/* Section 3: サイゼリヤBEST5 */}
         <SectionHeading id="saizeriya-best">サイゼリヤおすすめダイエットメニューBEST5</SectionHeading>
@@ -379,6 +384,8 @@ export default function FamilyRestaurantDietPage() {
         <TipBox title="「サイドメニュー」だけで1食にする裏ワザ">
           <p>サイゼリヤなら、サラダ+スープ+おつまみで<Marker>合計400kcal以下の「サイドメニュー定食」</Marker>が作れます。例：わかめサラダ（92kcal）+コーンクリームスープ（126kcal）+辛味チキン（175kcal）= 合計393kcal。満足感もありながら大幅なカロリーカットが可能です。</p>
         </TipBox>
+
+        <ArticleImage src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=800&h=400&fit=crop" alt="栄養バランスの取れたヘルシーな食事プレート" />
 
         {/* Section 8: まとめ */}
         <SectionHeading id="summary">まとめ</SectionHeading>

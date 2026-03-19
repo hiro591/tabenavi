@@ -17,6 +17,7 @@ import {
   NumberedList,
   ComparisonTable,
   ArticleFooter,
+  ArticleImage,
 } from "@/components/guide/ArticleComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -107,6 +108,8 @@ export default function McDonaldsDietPage() {
         <div className="lg:hidden">
           <TableOfContents items={tocItems} />
         </div>
+
+        <ArticleImage src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800&h=400&fit=crop" alt="ジューシーなハンバーガーのクローズアップ写真" />
 
         {/* Section 1: カロリーランキング */}
         <SectionHeading id="calorie-ranking">マクドナルドのカロリー低い順ランキング</SectionHeading>
@@ -200,6 +203,8 @@ export default function McDonaldsDietPage() {
             </p>
           </div>
         </div>
+
+        <ArticleImage src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&h=400&fit=crop" alt="新鮮な野菜たっぷりのヘルシーなサラダプレート" />
 
         {/* Section 3: 避けるべきメニュー */}
         <SectionHeading id="avoid">避けるべき高カロリーメニュー</SectionHeading>
@@ -332,6 +337,8 @@ export default function McDonaldsDietPage() {
         <p className="mb-8">
           エッグマックマフィン + ブラックコーヒーのシンプルな組み合わせ。朝マックで最も栄養バランスが良く、<Marker color="green">315kcalで高タンパク18.9g</Marker>。忙しい朝でも手軽に栄養を摂れるのが嬉しいポイントです。
         </p>
+
+        <ArticleImage src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&h=400&fit=crop" alt="スマートフォンで食事の栄養情報を確認している様子" />
 
         {/* まとめ */}
         <SectionHeading id="summary">まとめ</SectionHeading>

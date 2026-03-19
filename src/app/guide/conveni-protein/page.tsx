@@ -15,6 +15,7 @@ import {
   CheckList,
   NumberedList,
   ArticleFooter,
+  ArticleImage,
 } from "@/components/guide/ArticleComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -109,6 +110,8 @@ export default function ConveniProteinPage() {
         <div className="lg:hidden">
           <TableOfContents items={tocItems} />
         </div>
+
+        <ArticleImage src="https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=800&h=400&fit=crop" alt="コンビニの商品棚に並ぶ食品ディスプレイ" />
 
         {/* Section 1: 総合ランキングTOP3 */}
         <section className="mb-12">
@@ -296,6 +299,8 @@ export default function ConveniProteinPage() {
           </TipBox>
         </section>
 
+        <ArticleImage src="https://images.unsplash.com/photo-1606168094336-48f205276929?w=800&h=400&fit=crop" alt="高タンパクな鶏むね肉のグリル料理" />
+
         {/* Mid-article CTA */}
         <CTABanner
           title="コンビニ商品の栄養をサクッと検索"
@@ -412,6 +417,8 @@ export default function ConveniProteinPage() {
             </p>
           </WarningBox>
         </section>
+
+        <ArticleImage src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&h=400&fit=crop" alt="ジムでトレーニングをしているフィットネスの様子" />
 
         {/* Section 7: まとめ */}
         <section className="mb-12">

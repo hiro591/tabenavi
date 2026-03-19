@@ -17,6 +17,7 @@ import {
   NumberedList,
   ComparisonTable,
   ArticleFooter,
+  ArticleImage,
 } from "@/components/guide/ArticleComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -110,6 +111,11 @@ export default function DrinkingPartyDietPage() {
         <div className="lg:hidden">
           <TableOfContents items={tocItems} />
         </div>
+
+        <ArticleImage
+          src="https://images.unsplash.com/photo-1575037614876-c38a4c44f5b8?w=800&h=400&fit=crop"
+          alt="居酒屋のカウンターに並ぶビールやカクテルのグラス"
+        />
 
         {/* Section 1: 飲み会はダイエットの大敵？ */}
         <SectionHeading id="alcohol-enemy">飲み会はダイエットの大敵？アルコールと体脂肪の関係</SectionHeading>
@@ -228,6 +234,11 @@ export default function DrinkingPartyDietPage() {
         <TipBox title="「最初の注文」がカロリーを左右する">
           <p>飲み会の最初に「とりあえず唐揚げ！」ではなく、<Marker>「とりあえず枝豆・冷奴・海藻サラダ！」</Marker>と注文しましょう。最初に低カロリーなおつまみで空腹感を和らげておくと、その後の食べ過ぎを防げます。さらに食物繊維を先に摂ることで血糖値の急上昇も抑えられます。</p>
         </TipBox>
+
+        <ArticleImage
+          src="https://images.unsplash.com/photo-1534256958597-7fe685cbd745?w=800&h=400&fit=crop"
+          alt="枝豆や刺身などヘルシーな居酒屋おつまみが並ぶテーブル"
+        />
 
         {/* Mid-article CTA */}
         <CTABanner
@@ -411,6 +422,11 @@ export default function DrinkingPartyDietPage() {
         <p className="mb-8">
           なんと<Marker>差は2,065kcal</Marker>。ダイエットプランなら飲み会1回のカロリーを1,000kcal以下に抑えられます。これは「飲み会で何も食べない」のではなく、<Marker color="blue">「選び方を変える」だけで達成できる数字</Marker>です。
         </p>
+
+        <ArticleImage
+          src="https://images.unsplash.com/photo-1529268209110-62be1d87fe75?w=800&h=400&fit=crop"
+          alt="友人同士で乾杯しながら楽しく飲み会を過ごす様子"
+        />
 
         {/* Section 7: まとめ */}
         <SectionHeading id="summary">まとめ</SectionHeading>
