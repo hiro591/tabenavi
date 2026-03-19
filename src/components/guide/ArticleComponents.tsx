@@ -347,7 +347,7 @@ export function CTABanner({
       <h3 className="text-xl font-bold text-white mb-2">{title}</h3>
       <p className="text-sky-100 text-sm sm:text-base mb-6">{subtitle}</p>
       <Link
-        href="/items"
+        href="/signup"
         className="inline-flex items-center gap-2 bg-white text-sky-600 font-bold px-8 py-3 rounded-full text-base shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-200"
       >
         無料で始める

@@ -100,7 +100,7 @@ function SidebarCTA() {
         外食の栄養管理を、もっとラクに。
       </p>
       <Link
-        href="/items"
+        href="/signup"
         className="inline-flex items-center gap-1 bg-sky-400 hover:bg-sky-500 text-white text-xs font-bold px-4 py-2 rounded-full transition-colors"
       >
         無料で始める
