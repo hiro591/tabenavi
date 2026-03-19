@@ -52,6 +52,12 @@ const GUIDE_ARTICLES = [
   { slug: "saizeriya-diet", title: "サイゼリヤでダイエット" },
   { slug: "low-fat-eating-out", title: "低脂質な外食メニュー" },
   { slug: "calorie-database", title: "外食カロリーDB" },
+  { slug: "low-carb-eating-out", title: "糖質制限×外食ガイド" },
+  { slug: "diet-lunch", title: "ダイエット中のランチガイド" },
+  { slug: "family-restaurant-diet", title: "ファミレスダイエット比較" },
+  { slug: "drinking-party-diet", title: "飲み会で太らないガイド" },
+  { slug: "daily-meal-plan", title: "1日1500kcalプラン" },
+  { slug: "protein-cost-ranking", title: "タンパク質コスパランキング" },
 ];
 
 function SidebarRelated({ currentSlug }: { currentSlug: string }) {

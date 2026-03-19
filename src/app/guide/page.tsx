@@ -218,6 +218,48 @@ const articles = [
     description:
       "カロリーランキング、500円以下の神注文法、筋トレ民おすすめメニューを徹底解説。",
   },
+  {
+    slug: "low-carb-eating-out",
+    chain: "",
+    title: "糖質制限中でも外食OK！低糖質メニュー完全ガイド",
+    description:
+      "チェーン店別の低糖質メニューを徹底解説。1食の糖質20〜40gに抑える食べ方を紹介。",
+  },
+  {
+    slug: "diet-lunch",
+    chain: "",
+    title: "ダイエット中のランチ完全ガイド｜500kcal以下のおすすめメニュー",
+    description:
+      "外食チェーン店で500kcal以下のランチメニューを厳選。目的別おすすめも紹介。",
+  },
+  {
+    slug: "family-restaurant-diet",
+    chain: "",
+    title: "ファミレスダイエット完全ガイド｜サイゼリヤ・ガスト・デニーズ比較",
+    description:
+      "3大ファミレスのカロリーを徹底比較。ダイエット中のおすすめメニューを紹介。",
+  },
+  {
+    slug: "drinking-party-diet",
+    chain: "",
+    title: "飲み会で太らない完全ガイド｜居酒屋メニューの選び方",
+    description:
+      "お酒のカロリー比較、太らないおつまみBEST10、飲み会前後のテクニックを解説。",
+  },
+  {
+    slug: "daily-meal-plan",
+    chain: "",
+    title: "外食だけで1日1500kcal！ダイエット食事プラン完全ガイド",
+    description:
+      "チェーン店だけで達成する1日1500kcalの食事プランを5パターン紹介。",
+  },
+  {
+    slug: "protein-cost-ranking",
+    chain: "",
+    title: "外食タンパク質コスパ最強ランキング｜1gあたりの価格で比較",
+    description:
+      "タンパク質1gあたりの価格で外食メニューを徹底比較。コスパ最強はどれ？",
+  },
 ];
 
 export default function GuidePage() {
@@ -263,20 +305,20 @@ export default function GuidePage() {
                       />
                     </div>
                   ) : (
-                    <div className="w-14 h-14 bg-orange-50 rounded-full flex items-center justify-center">
-                      <Utensils className="w-7 h-7 text-orange-400" />
+                    <div className="w-14 h-14 bg-sky-50 rounded-full flex items-center justify-center">
+                      <Utensils className="w-7 h-7 text-sky-400" />
                     </div>
                   )}
                 </div>
 
                 {/* Content */}
-                <h2 className="text-sm sm:text-base font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-orange-600 transition-colors">
+                <h2 className="text-sm sm:text-base font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-sky-600 transition-colors">
                   {article.title}
                 </h2>
                 <p className="text-xs sm:text-sm text-gray-500 line-clamp-2 mb-4 flex-1">
                   {article.description}
                 </p>
-                <span className="text-xs font-medium text-orange-500 group-hover:text-orange-600 transition-colors">
+                <span className="text-xs font-medium text-sky-500 group-hover:text-sky-600 transition-colors">
                   読む &rarr;
                 </span>
               </Link>
@@ -289,7 +331,7 @@ export default function GuidePage() {
       <div className="text-center pb-12">
         <Link
           href="/"
-          className="text-sm text-gray-400 hover:text-orange-500 transition-colors"
+          className="text-sm text-gray-400 hover:text-sky-500 transition-colors"
         >
           &larr; トップに戻る
         </Link>

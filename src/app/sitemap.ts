@@ -8,6 +8,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "marugame", "kurasushi", "sushiro", "dennys", "doutor",
     "subway", "nakau", "ootoya", "yayoiken",
     "gyudon-comparison", "low-fat-eating-out", "calorie-database",
+    "muscle-eating-out", "mcdonalds-diet", "conveni-protein", "saizeriya-diet",
+    "low-carb-eating-out", "diet-lunch", "family-restaurant-diet",
+    "drinking-party-diet", "daily-meal-plan", "protein-cost-ranking",
   ];
 
   const guidePages = chains.map((slug) => ({

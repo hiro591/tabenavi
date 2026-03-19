@@ -596,6 +596,36 @@ const RELATED_ARTICLES = [
     title: "外食カロリーデータベース",
     description: "主要チェーンのカロリー情報まとめ。",
   },
+  {
+    slug: "low-carb-eating-out",
+    title: "糖質制限×外食ガイド",
+    description: "チェーン店の低糖質メニューを徹底解説。",
+  },
+  {
+    slug: "diet-lunch",
+    title: "ダイエット中のランチガイド",
+    description: "500kcal以下のランチメニューを厳選。",
+  },
+  {
+    slug: "family-restaurant-diet",
+    title: "ファミレスダイエット比較",
+    description: "サイゼリヤ・ガスト・デニーズを徹底比較。",
+  },
+  {
+    slug: "drinking-party-diet",
+    title: "飲み会で太らないガイド",
+    description: "お酒のカロリーとおつまみの選び方。",
+  },
+  {
+    slug: "daily-meal-plan",
+    title: "1日1500kcalプラン",
+    description: "外食だけで達成する食事プラン。",
+  },
+  {
+    slug: "protein-cost-ranking",
+    title: "タンパク質コスパランキング",
+    description: "1gあたりの価格で外食メニューを比較。",
+  },
 ];
 
 export function ArticleFooter({ currentSlug }: { currentSlug: string }) {
