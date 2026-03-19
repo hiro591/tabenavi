@@ -15,6 +15,7 @@ import {
   NumberedList,
   ArticleFooter,
 } from "@/components/guide/ArticleComponents";
+import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
   title:
@@ -77,13 +78,18 @@ export default function EatingOutDietPage() {
         breadcrumb="外食ダイエット"
       />
 
-      <article className="max-w-[780px] mx-auto px-4 sm:px-6 py-10 text-base text-gray-800 leading-[1.8]">
+      <ArticleLayout tocItems={tocItems} currentSlug="eating-out-diet">
         {/* Authority Badge */}
         <div className="mb-8">
           <AuthorityBadge />
           <p className="text-sm text-gray-400 mt-2">
             最終更新: 2026年3月 | 読了目安: 10分
           </p>
+        </div>
+
+        {/* Mobile TOC */}
+        <div className="lg:hidden">
+          <TableOfContents items={tocItems} />
         </div>
 
         {/* Introduction */}
@@ -102,8 +108,7 @@ export default function EatingOutDietPage() {
           とともに紹介し、外食でも確実に痩せるための実践的なルールを解説します。
         </p>
 
-        {/* Table of Contents */}
-        <TableOfContents items={tocItems} />
+        {/* Table of Contents — desktop uses sidebar */}
 
         {/* ─── Section 1: 外食でダイエットは可能？ ─── */}
         <section className="mb-12">
@@ -478,7 +483,7 @@ export default function EatingOutDietPage() {
             &larr; ガイド一覧に戻る
           </Link>
         </div>
-      </article>
+      </ArticleLayout>
     </div>
   );
 }

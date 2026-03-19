@@ -1,6 +1,22 @@
 import Link from "next/link";
-import { ChevronLeft } from "lucide-react";
 import type { Metadata } from "next";
+import {
+  AuthorityBadge,
+  ArticleHero,
+  TableOfContents,
+  SectionHeading,
+  SubSectionHeading,
+  NutritionTable,
+  TipBox,
+  WarningBox,
+  Marker,
+  CTABanner,
+  RankingCard,
+  CheckList,
+  NumberedList,
+  ArticleFooter,
+} from "@/components/guide/ArticleComponents";
+import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
   title:
@@ -33,7 +49,7 @@ const jsonLd = {
   description:
     "セブンイレブン・ローソン・ファミリーマートの高タンパク商品をランキング形式で紹介。",
   datePublished: "2026-03-18",
-  dateModified: "2026-03-18",
+  dateModified: "2026-03-19",
   author: {
     "@type": "Organization",
     name: "たべなび",
@@ -46,423 +62,392 @@ const jsonLd = {
   mainEntityOfPage: "https://tabenavi.jp/guide/conveni-protein",
 };
 
-const top10 = [
-  { rank: 1, name: "筋肉食堂DELI 鶏の照り焼き", store: "ローソン", p: 32.5, cal: 285, price: 598 },
-  { rank: 2, name: "プロテインボックス", store: "ファミリーマート", p: 28.5, cal: 320, price: 550 },
-  { rank: 3, name: "サラダチキン（プレーン）", store: "セブンイレブン", p: 24.3, cal: 113, price: 238 },
-  { rank: 4, name: "直火焼きサラダチキン", store: "ファミリーマート", p: 24.2, cal: 118, price: 258 },
-  { rank: 5, name: "サラダチキン スパイシー", store: "ローソン", p: 21.8, cal: 125, price: 238 },
-  { rank: 6, name: "7プレミアム サラダチキンバー", store: "セブンイレブン", p: 21.6, cal: 108, price: 198 },
-  { rank: 7, name: "グリルチキン（黒胡椒）", store: "ローソン", p: 20.4, cal: 130, price: 248 },
-  { rank: 8, name: "たんぱく質が摂れるチキン&スパイシーチリ", store: "セブンイレブン", p: 20.2, cal: 242, price: 430 },
-  { rank: 9, name: "砂肝の黒胡椒焼き", store: "ファミリーマート", p: 18.6, cal: 98, price: 298 },
-  { rank: 10, name: "味付き半熟ゆでたまご 2個", store: "セブンイレブン", p: 12.8, cal: 130, price: 162 },
+const tocItems = [
+  { id: "ranking", label: "高タンパク商品 総合ランキングTOP3" },
+  { id: "seven", label: "セブンイレブンの高タンパク商品" },
+  { id: "lawson", label: "ローソンの高タンパク商品" },
+  { id: "familymart", label: "ファミリーマートの高タンパク商品" },
+  { id: "combos", label: "目的別おすすめ組み合わせ" },
+  { id: "tips", label: "高タンパク食品を選ぶ5つのコツ" },
+  { id: "summary", label: "まとめ" },
 ];
-
-const sevenItems = [
-  { name: "サラダチキン（プレーン）", p: 24.3, cal: 113, f: 1.2, c: 0.5, price: 238 },
-  { name: "7プレミアム サラダチキンバー", p: 21.6, cal: 108, f: 1.5, c: 1.8, price: 198 },
-  { name: "たんぱく質が摂れるチキン&スパイシーチリ", p: 20.2, cal: 242, f: 8.5, c: 22.1, price: 430 },
-  { name: "味付き半熟ゆでたまご 2個", p: 12.8, cal: 130, f: 8.8, c: 0.8, price: 162 },
-  { name: "たんぱく質が摂れる鶏むね肉サラダ", p: 19.8, cal: 152, f: 5.2, c: 8.4, price: 430 },
-  { name: "プロテインバー チョコレート", p: 15.2, cal: 183, f: 8.5, c: 12.8, price: 162 },
-];
-
-const lawsonItems = [
-  { name: "筋肉食堂DELI 鶏の照り焼き", p: 32.5, cal: 285, f: 8.2, c: 15.3, price: 598 },
-  { name: "サラダチキン スパイシー", p: 21.8, cal: 125, f: 2.1, c: 1.5, price: 238 },
-  { name: "グリルチキン（黒胡椒）", p: 20.4, cal: 130, f: 3.5, c: 1.2, price: 248 },
-  { name: "ブランパン 2個入", p: 10.6, cal: 130, f: 4.4, c: 12.2, price: 150 },
-  { name: "たまごサラダ（タンパク質10g）", p: 10.2, cal: 148, f: 11.5, c: 2.8, price: 230 },
-];
-
-const familyMartItems = [
-  { name: "直火焼きサラダチキン", p: 24.2, cal: 118, f: 1.8, c: 1.2, price: 258 },
-  { name: "プロテインボックス", p: 28.5, cal: 320, f: 12.4, c: 18.5, price: 550 },
-  { name: "砂肝の黒胡椒焼き", p: 18.6, cal: 98, f: 2.8, c: 0.5, price: 298 },
-  { name: "グリルチキン（プレーン）", p: 19.5, cal: 112, f: 2.2, c: 0.8, price: 248 },
-  { name: "RIZAP サラダチキンバー", p: 16.8, cal: 95, f: 1.5, c: 1.8, price: 178 },
-];
-
-const combos = [
-  {
-    title: "筋トレ後（タンパク質30g以上）",
-    items: "サラダチキン + ゆでたまご2個 + おにぎり1個",
-    totalP: 42.1,
-    totalCal: 443,
-    price: 600,
-    description:
-      "トレーニング後に必要なタンパク質30g以上を確保。おにぎりで炭水化物も補給し、筋合成に必要な栄養素をカバー。",
-  },
-  {
-    title: "ダイエット中（500kcal以下で高タンパク）",
-    items: "サラダチキンバー + ブランパン + サラダ",
-    totalP: 34.2,
-    totalCal: 298,
-    price: 550,
-    description:
-      "300kcal以下でタンパク質34g以上。低糖質ブランパンで満腹感も得られ、ダイエット中のランチに最適。",
-  },
-  {
-    title: "朝食（手軽に栄養バランス）",
-    items: "ゆでたまご2個 + バナナ + プロテインバー",
-    totalP: 30.0,
-    totalCal: 399,
-    price: 440,
-    description:
-      "忙しい朝でもサッと食べられる組み合わせ。バナナの炭水化物でエネルギー補給しつつ、タンパク質もしっかり摂取。",
-  },
-];
-
-function StoreSection({
-  storeName,
-  storeColor,
-  items,
-}: {
-  storeName: string;
-  storeColor: string;
-  items: typeof sevenItems;
-}) {
-  const colorClasses: Record<string, { bg: string; border: string; text: string; badge: string }> = {
-    green: { bg: "bg-green-50/50", border: "border-green-100", text: "text-green-800", badge: "bg-green-100 text-green-700" },
-    blue: { bg: "bg-blue-50/50", border: "border-blue-100", text: "text-blue-800", badge: "bg-blue-100 text-blue-700" },
-    cyan: { bg: "bg-cyan-50/50", border: "border-cyan-100", text: "text-cyan-800", badge: "bg-cyan-100 text-cyan-700" },
-  };
-  const c = colorClasses[storeColor] ?? colorClasses.green;
-
-  return (
-    <div className="space-y-3">
-      {items.map((item) => (
-        <div
-          key={item.name}
-          className={`${c.bg} rounded-xl ${c.border} border p-4`}
-        >
-          <div className="flex items-center justify-between mb-2">
-            <h3 className="font-bold text-gray-900 text-sm">{item.name}</h3>
-            <span className="text-xs text-gray-500">¥{item.price}</span>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            <span className={`text-xs px-2 py-1 rounded-full font-medium ${c.badge}`}>
-              P {item.p}g
-            </span>
-            <span className="text-xs bg-white px-2 py-1 rounded-full text-orange-600 font-medium border border-orange-100">
-              {item.cal} kcal
-            </span>
-            <span className="text-xs bg-white px-2 py-1 rounded-full text-gray-600 border border-gray-200">
-              F {item.f}g
-            </span>
-            <span className="text-xs bg-white px-2 py-1 rounded-full text-gray-600 border border-gray-200">
-              C {item.c}g
-            </span>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
 
 export default function ConveniProteinPage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#fdfdfd]">
+      {/* JSON-LD structured data (static trusted content) */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* Sticky Header */}
-      <div className="sticky top-0 z-10 bg-white/90 backdrop-blur-sm border-b border-gray-100">
-        <div className="max-w-3xl mx-auto px-4 h-14 flex items-center">
-          <Link
-            href="/guide"
-            className="flex items-center gap-1 text-gray-600 hover:text-gray-900 transition-colors"
-          >
-            <ChevronLeft className="w-5 h-5" />
-            <span className="text-sm">ガイド一覧</span>
-          </Link>
+      <ArticleHero
+        title="コンビニで買える高タンパク商品ランキング"
+        subtitle="セブン・ローソン・ファミマ3大コンビニを徹底比較"
+        imageUrl="https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=800&h=400&fit=crop"
+        breadcrumb="コンビニ高タンパク商品"
+      />
+
+      <ArticleLayout tocItems={tocItems} currentSlug="conveni-protein">
+        {/* Authority Badge & Date */}
+        <div className="mb-8">
+          <AuthorityBadge />
+          <p className="text-sm text-gray-400 mt-2">
+            最終更新: 2026年3月19日 | 読了目安: 8分
+          </p>
         </div>
-      </div>
 
-      <article className="max-w-3xl mx-auto px-4 py-10">
-        {/* Title */}
-        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2 leading-tight">
-          コンビニで買える高タンパク商品ランキング【セブン・ローソン・ファミマ徹底比較】
-        </h1>
-        <p className="text-sm text-gray-400 mb-6">最終更新: 2026年3月</p>
-
-        <p className="text-gray-600 leading-relaxed mb-10">
-          筋トレやダイエット中のタンパク質補給に欠かせないコンビニ。
-          セブンイレブン、ローソン、ファミリーマートの3大コンビニで買える高タンパク商品を徹底比較し、ランキング形式で紹介します。
-          目的別のおすすめ組み合わせも解説するので、コンビニでの食事選びの参考にしてください。
+        {/* Introduction */}
+        <p className="mb-4">
+          筋トレやダイエット中のタンパク質補給に欠かせないコンビニ。セブンイレブン、ローソン、ファミリーマートの3大コンビニで買える高タンパク商品を徹底比較し、ランキング形式で紹介します。
+        </p>
+        <p className="mb-10">
+          <Marker>目的別のおすすめ組み合わせ</Marker>も解説するので、コンビニでの食事選びの参考にしてください。1食あたり<Marker color="blue">タンパク質30g以上</Marker>の摂取も、コンビニなら手軽に実現できます。
         </p>
 
-        {/* Section 1: 総合ランキング */}
+        {/* Mobile TOC */}
+        <div className="lg:hidden">
+          <TableOfContents items={tocItems} />
+        </div>
+
+        {/* Section 1: 総合ランキングTOP3 */}
         <section className="mb-12">
-          <h2 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-100">
-            コンビニ高タンパク商品 総合ランキングTOP10
-          </h2>
-          <p className="text-gray-600 text-sm mb-4">
+          <SectionHeading id="ranking">
+            コンビニ高タンパク商品 総合ランキングTOP3
+          </SectionHeading>
+          <p className="mb-6">
             3大コンビニの商品をタンパク質含有量順にランキング。手軽に買えてタンパク質がしっかり摂れる商品を厳選しました。
           </p>
-          <div className="overflow-x-auto rounded-xl border border-gray-200">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="bg-gray-50 text-gray-600">
-                  <th className="text-center px-3 py-3 font-medium w-10">順位</th>
-                  <th className="text-left px-3 py-3 font-medium">商品名</th>
-                  <th className="text-left px-3 py-3 font-medium hidden sm:table-cell">コンビニ</th>
-                  <th className="text-right px-3 py-3 font-medium">タンパク質</th>
-                  <th className="text-right px-3 py-3 font-medium">カロリー</th>
-                  <th className="text-right px-3 py-3 font-medium hidden sm:table-cell">価格</th>
-                </tr>
-              </thead>
-              <tbody>
-                {top10.map((item, i) => (
-                  <tr
-                    key={item.name}
-                    className={i % 2 === 0 ? "bg-white" : "bg-gray-50/50"}
-                  >
-                    <td className="text-center px-3 py-2.5">
-                      <span
-                        className={`inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold ${
-                          i < 3
-                            ? "bg-blue-100 text-blue-700"
-                            : "text-gray-500"
-                        }`}
-                      >
-                        {item.rank}
-                      </span>
-                    </td>
-                    <td className="px-3 py-2.5 text-gray-900 font-medium">
-                      {item.name}
-                      <span className="block sm:hidden text-xs text-gray-400">
-                        {item.store}
-                      </span>
-                    </td>
-                    <td className="px-3 py-2.5 text-gray-500 text-xs hidden sm:table-cell">
-                      {item.store}
-                    </td>
-                    <td className="text-right px-3 py-2.5 text-blue-600 font-bold">
-                      {item.p}g
-                    </td>
-                    <td className="text-right px-3 py-2.5 text-gray-600">
-                      {item.cal} kcal
-                    </td>
-                    <td className="text-right px-3 py-2.5 text-gray-600 hidden sm:table-cell">
-                      ¥{item.price}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <p className="text-xs text-gray-400 mt-2">
-            ※価格・栄養成分は店舗により異なる場合があります。
-          </p>
+
+          <RankingCard
+            rank={1}
+            title="筋肉食堂DELI 鶏の照り焼き"
+            subtitle="ローソン ・ ¥598"
+          >
+            <div className="grid grid-cols-4 gap-2 mb-3">
+              <div className="bg-sky-50 rounded-lg py-2 px-3 text-center">
+                <p className="text-sky-600 font-bold text-sm">285</p>
+                <p className="text-sky-600 text-[10px]">kcal</p>
+              </div>
+              <div className="bg-blue-50 rounded-lg py-2 px-3 text-center">
+                <p className="text-blue-600 font-bold text-sm">32.5g</p>
+                <p className="text-blue-600 text-[10px]">タンパク</p>
+              </div>
+              <div className="bg-amber-50 rounded-lg py-2 px-3 text-center">
+                <p className="text-amber-600 font-bold text-sm">8.2g</p>
+                <p className="text-amber-600 text-[10px]">脂質</p>
+              </div>
+              <div className="bg-green-50 rounded-lg py-2 px-3 text-center">
+                <p className="text-green-600 font-bold text-sm">15.3g</p>
+                <p className="text-green-600 text-[10px]">炭水化物</p>
+              </div>
+            </div>
+            <p className="text-sm text-gray-600">
+              コンビニ高タンパク商品の中でも<Marker>タンパク質32.5gはトップクラス</Marker>。筋肉食堂とのコラボならではの栄養設計で、筋トレ後のリカバリーに最適です。
+            </p>
+          </RankingCard>
+
+          <RankingCard
+            rank={2}
+            title="プロテインボックス"
+            subtitle="ファミリーマート ・ ¥550"
+          >
+            <div className="grid grid-cols-4 gap-2 mb-3">
+              <div className="bg-sky-50 rounded-lg py-2 px-3 text-center">
+                <p className="text-sky-600 font-bold text-sm">320</p>
+                <p className="text-sky-600 text-[10px]">kcal</p>
+              </div>
+              <div className="bg-blue-50 rounded-lg py-2 px-3 text-center">
+                <p className="text-blue-600 font-bold text-sm">28.5g</p>
+                <p className="text-blue-600 text-[10px]">タンパク</p>
+              </div>
+              <div className="bg-amber-50 rounded-lg py-2 px-3 text-center">
+                <p className="text-amber-600 font-bold text-sm">12.4g</p>
+                <p className="text-amber-600 text-[10px]">脂質</p>
+              </div>
+              <div className="bg-green-50 rounded-lg py-2 px-3 text-center">
+                <p className="text-green-600 font-bold text-sm">18.5g</p>
+                <p className="text-green-600 text-[10px]">炭水化物</p>
+              </div>
+            </div>
+            <p className="text-sm text-gray-600">
+              1パックで<Marker>タンパク質28.5g</Marker>と驚異的な含有量。鶏むね肉、ゆでたまご、枝豆などがバランスよく入り、そのまま食べられる手軽さも魅力。
+            </p>
+          </RankingCard>
+
+          <RankingCard
+            rank={3}
+            title="サラダチキン（プレーン）"
+            subtitle="セブンイレブン ・ ¥238"
+          >
+            <div className="grid grid-cols-4 gap-2 mb-3">
+              <div className="bg-sky-50 rounded-lg py-2 px-3 text-center">
+                <p className="text-sky-600 font-bold text-sm">113</p>
+                <p className="text-sky-600 text-[10px]">kcal</p>
+              </div>
+              <div className="bg-blue-50 rounded-lg py-2 px-3 text-center">
+                <p className="text-blue-600 font-bold text-sm">24.3g</p>
+                <p className="text-blue-600 text-[10px]">タンパク</p>
+              </div>
+              <div className="bg-amber-50 rounded-lg py-2 px-3 text-center">
+                <p className="text-amber-600 font-bold text-sm">1.2g</p>
+                <p className="text-amber-600 text-[10px]">脂質</p>
+              </div>
+              <div className="bg-green-50 rounded-lg py-2 px-3 text-center">
+                <p className="text-green-600 font-bold text-sm">0.5g</p>
+                <p className="text-green-600 text-[10px]">炭水化物</p>
+              </div>
+            </div>
+            <p className="text-sm text-gray-600">
+              全コンビニで買える定番中の定番。<Marker color="green">カロリーわずか113kcalでタンパク質24.3g</Marker>という圧倒的なカロリー効率が最大の強み。¥238と価格も手頃。
+            </p>
+          </RankingCard>
+
+          <TipBox title="4位以下のランキング">
+            <p className="mb-1">4位: 直火焼きサラダチキン（ファミマ） P24.2g / 118kcal / ¥258</p>
+            <p className="mb-1">5位: サラダチキン スパイシー（ローソン） P21.8g / 125kcal / ¥238</p>
+            <p className="mb-1">6位: 7プレミアム サラダチキンバー（セブン） P21.6g / 108kcal / ¥198</p>
+            <p className="mb-1">7位: グリルチキン 黒胡椒（ローソン） P20.4g / 130kcal / ¥248</p>
+            <p className="mb-1">8位: たんぱく質が摂れるチキン&スパイシーチリ（セブン） P20.2g / 242kcal / ¥430</p>
+            <p className="mb-1">9位: 砂肝の黒胡椒焼き（ファミマ） P18.6g / 98kcal / ¥298</p>
+            <p>10位: 味付き半熟ゆでたまご 2個（セブン） P12.8g / 130kcal / ¥162</p>
+          </TipBox>
         </section>
 
         {/* Section 2: セブンイレブン */}
         <section className="mb-12">
-          <h2 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-100">
+          <SectionHeading id="seven">
             セブンイレブンの高タンパク商品
-          </h2>
-          <p className="text-gray-600 text-sm mb-4">
-            セブンイレブンは「たんぱく質が摂れる」シリーズが充実。サラダチキンのバリエーションも豊富で、飽きずに高タンパク生活を続けられます。
+          </SectionHeading>
+          <p className="mb-4">
+            セブンイレブンは<Marker>「たんぱく質が摂れる」シリーズが充実</Marker>。サラダチキンのバリエーションも豊富で、飽きずに高タンパク生活を続けられます。
           </p>
-          <StoreSection storeName="セブンイレブン" storeColor="green" items={sevenItems} />
+
+          <NutritionTable
+            highlightProtein
+            items={[
+              { name: "サラダチキン（プレーン）", calories: 113, protein: 24.3, fat: 1.2, carbs: 0.5, highlight: true },
+              { name: "7プレミアム サラダチキンバー", calories: 108, protein: 21.6, fat: 1.5, carbs: 1.8 },
+              { name: "たんぱく質が摂れるチキン&スパイシーチリ", calories: 242, protein: 20.2, fat: 8.5, carbs: 22.1 },
+              { name: "たんぱく質が摂れる鶏むね肉サラダ", calories: 152, protein: 19.8, fat: 5.2, carbs: 8.4 },
+              { name: "プロテインバー チョコレート", calories: 183, protein: 15.2, fat: 8.5, carbs: 12.8 },
+              { name: "味付き半熟ゆでたまご 2個", calories: 130, protein: 12.8, fat: 8.8, carbs: 0.8 },
+            ]}
+          />
+
+          <TipBox title="セブンイレブンの攻略ポイント">
+            <p>
+              サラダチキン（P24.3g）とゆでたまご2個（P12.8g）の組み合わせで、<Marker color="blue">合計タンパク質37.1g / 243kcal / ¥400</Marker>。コスパ・カロリー効率ともに最強の組み合わせです。
+            </p>
+          </TipBox>
         </section>
 
         {/* Section 3: ローソン */}
         <section className="mb-12">
-          <h2 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-100">
+          <SectionHeading id="lawson">
             ローソンの高タンパク商品
-          </h2>
-          <p className="text-gray-600 text-sm mb-4">
-            ローソンは筋肉食堂DELIとのコラボ商品が目玉。タンパク質32.5gの鶏の照り焼きは、コンビニ高タンパク商品の中でもトップクラスです。低糖質ブランパンシリーズもダイエッターに人気。
+          </SectionHeading>
+          <p className="mb-4">
+            ローソンは<Marker>筋肉食堂DELIとのコラボ商品が目玉</Marker>。タンパク質32.5gの鶏の照り焼きは、コンビニ高タンパク商品の中でもトップクラスです。低糖質ブランパンシリーズもダイエッターに人気。
           </p>
-          <StoreSection storeName="ローソン" storeColor="blue" items={lawsonItems} />
+
+          <NutritionTable
+            highlightProtein
+            items={[
+              { name: "筋肉食堂DELI 鶏の照り焼き", calories: 285, protein: 32.5, fat: 8.2, carbs: 15.3, highlight: true },
+              { name: "サラダチキン スパイシー", calories: 125, protein: 21.8, fat: 2.1, carbs: 1.5 },
+              { name: "グリルチキン（黒胡椒）", calories: 130, protein: 20.4, fat: 3.5, carbs: 1.2 },
+              { name: "ブランパン 2個入", calories: 130, protein: 10.6, fat: 4.4, carbs: 12.2 },
+              { name: "たまごサラダ（タンパク質10g）", calories: 148, protein: 10.2, fat: 11.5, carbs: 2.8 },
+            ]}
+          />
+
+          <TipBox title="ローソンの攻略ポイント">
+            <p>
+              ローソンの強みは<Marker color="green">低糖質ブランパン</Marker>。ブランパン2個（P10.6g）＋グリルチキン（P20.4g）で、糖質を抑えつつタンパク質31gを確保できます。ダイエット中のランチに最適。
+            </p>
+          </TipBox>
         </section>
 
         {/* Section 4: ファミリーマート */}
         <section className="mb-12">
-          <h2 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-100">
+          <SectionHeading id="familymart">
             ファミリーマートの高タンパク商品
-          </h2>
-          <p className="text-gray-600 text-sm mb-4">
-            ファミリーマートのプロテインボックスは、1パックでタンパク質28.5gと驚異的。RIZAPコラボ商品も豊富で、手軽にボディメイクをサポートしてくれます。
+          </SectionHeading>
+          <p className="mb-4">
+            ファミリーマートの<Marker>プロテインボックスは1パックでタンパク質28.5g</Marker>と驚異的。RIZAPコラボ商品も豊富で、手軽にボディメイクをサポートしてくれます。
           </p>
-          <StoreSection storeName="ファミリーマート" storeColor="cyan" items={familyMartItems} />
+
+          <NutritionTable
+            highlightProtein
+            items={[
+              { name: "プロテインボックス", calories: 320, protein: 28.5, fat: 12.4, carbs: 18.5, highlight: true },
+              { name: "直火焼きサラダチキン", calories: 118, protein: 24.2, fat: 1.8, carbs: 1.2 },
+              { name: "グリルチキン（プレーン）", calories: 112, protein: 19.5, fat: 2.2, carbs: 0.8 },
+              { name: "砂肝の黒胡椒焼き", calories: 98, protein: 18.6, fat: 2.8, carbs: 0.5 },
+              { name: "RIZAP サラダチキンバー", calories: 95, protein: 16.8, fat: 1.5, carbs: 1.8 },
+            ]}
+          />
+
+          <TipBox title="ファミマの攻略ポイント">
+            <p>
+              砂肝の黒胡椒焼き（P18.6g / <Marker color="green">わずか98kcal</Marker>）は隠れた名品。おつまみコーナーにあるので見落としがちですが、カロリー効率はサラダチキン以上です。
+            </p>
+          </TipBox>
         </section>
+
+        {/* Mid-article CTA */}
+        <CTABanner
+          title="コンビニ商品の栄養をサクッと検索"
+          subtitle="たべなびならコンビニ商品の栄養成分をすぐに確認できます"
+        />
 
         {/* Section 5: 目的別おすすめ組み合わせ */}
         <section className="mb-12">
-          <h2 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-100">
+          <SectionHeading id="combos">
             目的別おすすめ組み合わせ
-          </h2>
+          </SectionHeading>
+          <p className="mb-6">
+            単品だけでなく、<Marker>目的に合わせた組み合わせ</Marker>で効率よくタンパク質を摂取しましょう。
+          </p>
 
-          <div className="space-y-6">
-            {combos.map((combo) => (
-              <div key={combo.title}>
-                <h3 className="font-bold text-gray-900 mb-3">{combo.title}</h3>
-                <div className="bg-gray-50 rounded-xl border border-gray-200 p-5">
-                  <p className="text-sm text-gray-800 mb-2 font-medium">
-                    {combo.items}
-                  </p>
-                  <div className="flex flex-wrap gap-2 mb-3">
-                    <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full font-bold">
-                      P {combo.totalP}g
-                    </span>
-                    <span className="text-xs bg-white px-2 py-1 rounded-full text-orange-600 font-bold border border-orange-100">
-                      {combo.totalCal} kcal
-                    </span>
-                    <span className="text-xs bg-white px-2 py-1 rounded-full text-gray-600 border border-gray-200">
-                      約¥{combo.price}
-                    </span>
-                  </div>
-                  <p className="text-sm text-gray-600 leading-relaxed">
-                    {combo.description}
-                  </p>
-                </div>
-              </div>
-            ))}
+          <SubSectionHeading>筋トレ後（タンパク質30g以上）</SubSectionHeading>
+          <div className="bg-white rounded-lg border border-gray-200 p-5 mb-6 shadow-sm">
+            <p className="font-bold text-gray-900 mb-2">
+              サラダチキン + ゆでたまご2個 + おにぎり1個
+            </p>
+            <div className="flex flex-wrap gap-2 mb-3">
+              <span className="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full font-bold">
+                P 42.1g
+              </span>
+              <span className="text-xs bg-sky-50 text-sky-700 px-2.5 py-1 rounded-full font-bold">
+                443 kcal
+              </span>
+              <span className="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full">
+                約¥600
+              </span>
+            </div>
+            <p className="text-sm text-gray-600 leading-relaxed">
+              トレーニング後に必要なタンパク質30g以上を確保。おにぎりで炭水化物も補給し、筋合成に必要な栄養素をカバー。
+            </p>
+          </div>
+
+          <SubSectionHeading>ダイエット中（500kcal以下で高タンパク）</SubSectionHeading>
+          <div className="bg-white rounded-lg border border-gray-200 p-5 mb-6 shadow-sm">
+            <p className="font-bold text-gray-900 mb-2">
+              サラダチキンバー + ブランパン + サラダ
+            </p>
+            <div className="flex flex-wrap gap-2 mb-3">
+              <span className="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full font-bold">
+                P 34.2g
+              </span>
+              <span className="text-xs bg-sky-50 text-sky-700 px-2.5 py-1 rounded-full font-bold">
+                298 kcal
+              </span>
+              <span className="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full">
+                約¥550
+              </span>
+            </div>
+            <p className="text-sm text-gray-600 leading-relaxed">
+              <Marker color="green">300kcal以下でタンパク質34g以上</Marker>。低糖質ブランパンで満腹感も得られ、ダイエット中のランチに最適。
+            </p>
+          </div>
+
+          <SubSectionHeading>朝食（手軽に栄養バランス）</SubSectionHeading>
+          <div className="bg-white rounded-lg border border-gray-200 p-5 mb-6 shadow-sm">
+            <p className="font-bold text-gray-900 mb-2">
+              ゆでたまご2個 + バナナ + プロテインバー
+            </p>
+            <div className="flex flex-wrap gap-2 mb-3">
+              <span className="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full font-bold">
+                P 30.0g
+              </span>
+              <span className="text-xs bg-sky-50 text-sky-700 px-2.5 py-1 rounded-full font-bold">
+                399 kcal
+              </span>
+              <span className="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full">
+                約¥440
+              </span>
+            </div>
+            <p className="text-sm text-gray-600 leading-relaxed">
+              忙しい朝でもサッと食べられる組み合わせ。バナナの炭水化物でエネルギー補給しつつ、タンパク質もしっかり摂取。
+            </p>
           </div>
         </section>
 
         {/* Section 6: 選ぶコツ */}
         <section className="mb-12">
-          <h2 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-100">
-            コンビニで高タンパク食品を選ぶコツ
-          </h2>
-          <div className="space-y-4">
-            {[
+          <SectionHeading id="tips">
+            コンビニで高タンパク食品を選ぶ5つのコツ
+          </SectionHeading>
+
+          <NumberedList
+            items={[
               {
-                num: 1,
                 title: "栄養成分表示を必ずチェック",
                 body: "パッケージ裏の栄養成分表示でタンパク質量を確認。「高タンパク」と書いてあっても、実際には10g以下の商品もあるので注意が必要です。",
               },
               {
-                num: 2,
                 title: "タンパク質あたりのカロリーで比較",
                 body: "同じタンパク質量でもカロリーが大きく異なる場合があります。サラダチキン（P24.3g/113kcal）はカロリー効率が非常に良い食品です。",
               },
               {
-                num: 3,
                 title: "「たんぱく質が摂れる」シリーズを活用",
                 body: "セブンイレブンの「たんぱく質が摂れる」シリーズやローソンの筋肉食堂DELIなど、高タンパクを謳った商品は探しやすく、栄養設計もされています。",
               },
               {
-                num: 4,
                 title: "組み合わせでタンパク質30gを目指す",
                 body: "1食あたり20〜30gのタンパク質摂取が理想。単品で足りない場合は、ゆでたまごやプロテインバーを追加してタンパク質を補いましょう。",
               },
               {
-                num: 5,
                 title: "定番商品をローテーションする",
                 body: "サラダチキン、ゆでたまご、プロテインバーを軸に、週替わりで別の商品を組み合わせると飽きずに続けられます。",
               },
-            ].map((tip) => (
-              <div key={tip.num} className="flex gap-4">
-                <span className="flex-shrink-0 w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 font-bold text-sm">
-                  {tip.num}
-                </span>
-                <div>
-                  <h3 className="font-bold text-gray-900 mb-1">{tip.title}</h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">
-                    {tip.body}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
+            ]}
+          />
 
-        {/* まとめ */}
-        <section className="mb-12">
-          <h2 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b border-gray-100">
-            まとめ
-          </h2>
-          <div className="bg-blue-50/50 rounded-xl border border-blue-100 p-6">
-            <p className="text-gray-700 leading-relaxed mb-4">
-              コンビニは高タンパク商品の宝庫です。押さえるべきポイントは以下の通り。
+          <WarningBox title="よくある落とし穴">
+            <p>
+              「高タンパク」と表記されたスムージーやドリンク系は、糖質も多い場合があります。必ず栄養成分表示を確認し、<Marker>タンパク質あたりのカロリー</Marker>で判断しましょう。
             </p>
-            <ul className="space-y-2 text-sm text-gray-700 mb-4">
-              <li className="flex items-start gap-2">
-                <span className="text-blue-600 font-bold mt-0.5">1.</span>
-                <span>サラダチキンは全コンビニで高タンパク・低カロリーの王道商品</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-blue-600 font-bold mt-0.5">2.</span>
-                <span>ローソン筋肉食堂DELI（P32.5g）やファミマプロテインボックス（P28.5g）が総合トップ</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-blue-600 font-bold mt-0.5">3.</span>
-                <span>目的に合わせて組み合わせることで、1食30g以上のタンパク質摂取が可能</span>
-              </li>
-            </ul>
-            <p className="text-sm text-gray-500">
-              ※価格・栄養成分は店舗により異なる場合があります。商品は予告なく変更・終了する場合があります。
-            </p>
-          </div>
+          </WarningBox>
         </section>
 
-        {/* Related articles */}
+        {/* Section 7: まとめ */}
         <section className="mb-12">
-          <h2 className="text-lg font-bold text-gray-900 mb-4">
-            関連する記事
-          </h2>
-          <div className="flex flex-wrap gap-2">
-            <Link
-              href="/guide/conveni"
-              className="text-sm px-3 py-1.5 rounded-full border border-gray-200 text-gray-600 hover:border-orange-300 hover:text-orange-500 transition-colors"
-            >
-              コンビニ全商品栄養一覧
-            </Link>
-            <Link
-              href="/guide/mcdonalds-diet"
-              className="text-sm px-3 py-1.5 rounded-full border border-gray-200 text-gray-600 hover:border-orange-300 hover:text-orange-500 transition-colors"
-            >
-              マクドナルドダイエット
-            </Link>
-            <Link
-              href="/guide/saizeriya-diet"
-              className="text-sm px-3 py-1.5 rounded-full border border-gray-200 text-gray-600 hover:border-orange-300 hover:text-orange-500 transition-colors"
-            >
-              サイゼリヤダイエット
-            </Link>
-            <Link
-              href="/guide/eating-out-diet"
-              className="text-sm px-3 py-1.5 rounded-full border border-gray-200 text-gray-600 hover:border-orange-300 hover:text-orange-500 transition-colors"
-            >
-              外食ダイエット完全ガイド
-            </Link>
-          </div>
+          <SectionHeading id="summary">まとめ</SectionHeading>
+          <p className="mb-6">
+            コンビニは高タンパク商品の宝庫です。押さえるべきポイントは以下の通り。
+          </p>
+
+          <CheckList
+            items={[
+              "サラダチキンは全コンビニで高タンパク・低カロリーの王道商品",
+              "ローソン筋肉食堂DELI（P32.5g）やファミマプロテインボックス（P28.5g）が総合トップ",
+              "目的に合わせて組み合わせることで、1食30g以上のタンパク質摂取が可能",
+              "栄養成分表示のチェックとカロリー効率の比較が賢い選び方のカギ",
+              "定番商品のローテーションで飽きずに高タンパク生活を継続",
+            ]}
+          />
+
+          <p className="text-xs text-gray-400 mt-4">
+            ※価格・栄養成分は店舗により異なる場合があります。商品は予告なく変更・終了する場合があります。
+          </p>
         </section>
 
-        {/* CTA */}
-        <section className="text-center py-10 border-t border-gray-100">
-          <p className="text-gray-600 mb-2 text-sm">
-            コンビニ商品の栄養成分をサクッと検索
-          </p>
-          <p className="text-gray-500 mb-4 text-xs">
-            たべなびならコンビニ商品の栄養成分をすぐに確認できます
-          </p>
-          <Link
-            href="/signup"
-            className="inline-block bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white px-8 py-3 rounded-full font-semibold transition-all hover:shadow-lg hover:shadow-orange-200"
-          >
-            たべなびで栄養管理を始める（無料）
-          </Link>
-        </section>
+        {/* Article Footer */}
+        <ArticleFooter currentSlug="conveni-protein" />
 
         {/* Back link */}
-        <div className="text-center pb-8">
+        <div className="text-center py-8">
           <Link
             href="/guide"
-            className="text-sm text-gray-400 hover:text-orange-500 transition-colors"
+            className="text-sm text-gray-400 hover:text-sky-500 transition-colors"
           >
             &larr; ガイド一覧に戻る
           </Link>
         </div>
-      </article>
+      </ArticleLayout>
     </div>
   );
 }

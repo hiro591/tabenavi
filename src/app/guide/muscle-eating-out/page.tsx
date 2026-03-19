@@ -16,6 +16,7 @@ import {
   CheckList,
   ArticleFooter,
 } from "@/components/guide/ArticleComponents";
+import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
   title:
@@ -80,7 +81,7 @@ export default function MuscleEatingOutPage() {
         breadcrumb="筋トレ×外食"
       />
 
-      <article className="max-w-[780px] mx-auto px-4 sm:px-6 py-10 text-base text-gray-800 leading-[1.8]">
+      <ArticleLayout tocItems={tocItems} currentSlug="muscle-eating-out">
         {/* Authority Badge */}
         <div className="mb-8">
           <AuthorityBadge />
@@ -100,8 +101,10 @@ export default function MuscleEatingOutPage() {
           トレーニング後の外食で迷ったら、このガイドを見れば即決できます。
         </p>
 
-        {/* Table of Contents */}
-        <TableOfContents items={tocItems} />
+        {/* Mobile TOC */}
+        <div className="lg:hidden">
+          <TableOfContents items={tocItems} />
+        </div>
 
         {/* ─── Section 1: 筋トレ中に外食しても大丈夫？ ─── */}
         <section className="mb-14">
@@ -461,7 +464,7 @@ export default function MuscleEatingOutPage() {
             &larr; ガイド一覧に戻る
           </Link>
         </div>
-      </article>
+      </ArticleLayout>
     </div>
   );
 }
