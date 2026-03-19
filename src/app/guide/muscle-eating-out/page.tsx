@@ -157,7 +157,7 @@ export default function MuscleEatingOutPage() {
               ]}
             />
             <p className="text-sm text-gray-500">
-              <Link href="/guide/ootoya" className="text-orange-500 hover:text-orange-600 underline">大戸屋の全メニュー栄養成分一覧はこちら</Link>
+              <Link href="/guide/ootoya" className="text-sky-500 hover:text-sky-600 underline">大戸屋の全メニュー栄養成分一覧はこちら</Link>
             </p>
           </RankingCard>
 
@@ -175,7 +175,7 @@ export default function MuscleEatingOutPage() {
               ]}
             />
             <p className="text-sm text-gray-500">
-              <Link href="/guide/yayoiken" className="text-orange-500 hover:text-orange-600 underline">やよい軒の全メニュー栄養成分一覧はこちら</Link>
+              <Link href="/guide/yayoiken" className="text-sky-500 hover:text-sky-600 underline">やよい軒の全メニュー栄養成分一覧はこちら</Link>
             </p>
           </RankingCard>
 
@@ -193,7 +193,7 @@ export default function MuscleEatingOutPage() {
               ]}
             />
             <p className="text-sm text-gray-500">
-              <Link href="/guide/saizeriya" className="text-orange-500 hover:text-orange-600 underline">サイゼリヤの全メニュー栄養成分一覧はこちら</Link>
+              <Link href="/guide/saizeriya" className="text-sky-500 hover:text-sky-600 underline">サイゼリヤの全メニュー栄養成分一覧はこちら</Link>
             </p>
           </RankingCard>
 
@@ -211,7 +211,7 @@ export default function MuscleEatingOutPage() {
               ]}
             />
             <p className="text-sm text-gray-500">
-              <Link href="/guide/subway" className="text-orange-500 hover:text-orange-600 underline">サブウェイの全メニュー栄養成分一覧はこちら</Link>
+              <Link href="/guide/subway" className="text-sky-500 hover:text-sky-600 underline">サブウェイの全メニュー栄養成分一覧はこちら</Link>
             </p>
           </RankingCard>
 
@@ -229,7 +229,7 @@ export default function MuscleEatingOutPage() {
               ]}
             />
             <p className="text-sm text-gray-500">
-              <Link href="/guide/mcdonalds" className="text-orange-500 hover:text-orange-600 underline">マクドナルドの全メニュー栄養成分一覧はこちら</Link>
+              <Link href="/guide/mcdonalds" className="text-sky-500 hover:text-sky-600 underline">マクドナルドの全メニュー栄養成分一覧はこちら</Link>
             </p>
           </RankingCard>
         </section>
@@ -264,9 +264,9 @@ export default function MuscleEatingOutPage() {
               ]}
             />
             <div className="flex gap-2 text-sm mt-2">
-              <Link href="/guide/yoshinoya" className="text-orange-500 hover:text-orange-600 underline">吉野家</Link>
-              <Link href="/guide/matsuya" className="text-orange-500 hover:text-orange-600 underline">松屋</Link>
-              <Link href="/guide/sukiya" className="text-orange-500 hover:text-orange-600 underline">すき家</Link>
+              <Link href="/guide/yoshinoya" className="text-sky-500 hover:text-sky-600 underline">吉野家</Link>
+              <Link href="/guide/matsuya" className="text-sky-500 hover:text-sky-600 underline">松屋</Link>
+              <Link href="/guide/sukiya" className="text-sky-500 hover:text-sky-600 underline">すき家</Link>
             </div>
           </div>
 
@@ -285,9 +285,9 @@ export default function MuscleEatingOutPage() {
               ]}
             />
             <div className="flex gap-2 text-sm mt-2">
-              <Link href="/guide/saizeriya" className="text-orange-500 hover:text-orange-600 underline">サイゼリヤ</Link>
-              <Link href="/guide/gusto" className="text-orange-500 hover:text-orange-600 underline">ガスト</Link>
-              <Link href="/guide/dennys" className="text-orange-500 hover:text-orange-600 underline">デニーズ</Link>
+              <Link href="/guide/saizeriya" className="text-sky-500 hover:text-sky-600 underline">サイゼリヤ</Link>
+              <Link href="/guide/gusto" className="text-sky-500 hover:text-sky-600 underline">ガスト</Link>
+              <Link href="/guide/dennys" className="text-sky-500 hover:text-sky-600 underline">デニーズ</Link>
             </div>
           </div>
 
@@ -312,9 +312,9 @@ export default function MuscleEatingOutPage() {
               ]}
             />
             <div className="flex gap-2 text-sm mt-2">
-              <Link href="/guide/mcdonalds" className="text-orange-500 hover:text-orange-600 underline">マクドナルド</Link>
-              <Link href="/guide/mos" className="text-orange-500 hover:text-orange-600 underline">モスバーガー</Link>
-              <Link href="/guide/kfc" className="text-orange-500 hover:text-orange-600 underline">KFC</Link>
+              <Link href="/guide/mcdonalds" className="text-sky-500 hover:text-sky-600 underline">マクドナルド</Link>
+              <Link href="/guide/mos" className="text-sky-500 hover:text-sky-600 underline">モスバーガー</Link>
+              <Link href="/guide/kfc" className="text-sky-500 hover:text-sky-600 underline">KFC</Link>
             </div>
           </div>
 
@@ -333,7 +333,7 @@ export default function MuscleEatingOutPage() {
               ]}
             />
             <p className="text-sm text-gray-500 mt-2">
-              <Link href="/guide/conveni-protein" className="text-orange-500 hover:text-orange-600 underline">コンビニの高タンパク商品ランキングはこちら</Link>
+              <Link href="/guide/conveni-protein" className="text-sky-500 hover:text-sky-600 underline">コンビニの高タンパク商品ランキングはこちら</Link>
             </p>
           </div>
         </section>
@@ -441,7 +441,7 @@ export default function MuscleEatingOutPage() {
               <Link
                 key={link.slug}
                 href={`/guide/${link.slug}`}
-                className="text-sm px-3 py-1.5 border border-gray-200 text-gray-600 hover:border-orange-300 hover:text-orange-500 transition-colors"
+                className="text-sm px-3 py-1.5 border border-gray-200 text-gray-600 hover:border-sky-300 hover:text-sky-500 transition-colors"
               >
                 {link.name}
               </Link>
@@ -456,7 +456,7 @@ export default function MuscleEatingOutPage() {
         <div className="text-center pt-8 pb-4">
           <Link
             href="/guide"
-            className="text-sm text-gray-400 hover:text-orange-500 transition-colors"
+            className="text-sm text-gray-400 hover:text-sky-500 transition-colors"
           >
             &larr; ガイド一覧に戻る
           </Link>

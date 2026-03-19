@@ -450,7 +450,7 @@ export default function EatingOutDietPage() {
                 "PFCバランスはP30:F25:C45を目安に",
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
-                  <span className="flex-shrink-0 w-5 h-5 rounded-full bg-orange-500 text-white text-xs font-bold flex items-center justify-center mt-0.5">
+                  <span className="flex-shrink-0 w-5 h-5 rounded-full bg-sky-400 text-white text-xs font-bold flex items-center justify-center mt-0.5">
                     ✓
                   </span>
                   <span className="text-gray-700">{item}</span>
@@ -473,7 +473,7 @@ export default function EatingOutDietPage() {
         <div className="text-center pt-8 pb-4">
           <Link
             href="/guide"
-            className="text-sm text-gray-400 hover:text-orange-500 transition-colors"
+            className="text-sm text-gray-400 hover:text-sky-500 transition-colors"
           >
             &larr; ガイド一覧に戻る
           </Link>
