@@ -143,7 +143,7 @@ export function SectionHeading({
   return (
     <h2
       id={id}
-      className="bg-sky-400 text-white font-bold text-lg sm:text-xl px-5 py-3.5 scroll-mt-24 mb-6 border-t-[3px] border-b-[3px] border-sky-600"
+      className="bg-sky-400 text-white font-bold text-lg sm:text-xl px-5 py-3.5 scroll-mt-24 mt-2 mb-8 border-t-[3px] border-b-[3px] border-sky-600"
     >
       {children}
     </h2>
@@ -158,7 +158,7 @@ export function SubSectionHeading({
   children: React.ReactNode;
 }) {
   return (
-    <h3 className="text-lg font-bold text-gray-900 mb-4 pb-2 relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[3px] after:bg-[repeating-linear-gradient(90deg,_var(--color-sky-300)_0px,_var(--color-sky-300)_6px,_transparent_6px,_transparent_12px)]">
+    <h3 className="text-lg font-bold text-gray-900 mt-1 mb-5 pb-2 relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[3px] after:bg-[repeating-linear-gradient(90deg,_var(--color-sky-300)_0px,_var(--color-sky-300)_6px,_transparent_6px,_transparent_12px)]">
       {children}
     </h3>
   );
@@ -240,7 +240,7 @@ export function TipBox({
   children: React.ReactNode;
 }) {
   return (
-    <div className="my-6 rounded-lg overflow-hidden border border-sky-200 bg-white">
+    <div className="my-8 rounded-lg overflow-hidden border border-sky-200 bg-white">
       <div className="bg-sky-400 px-5 py-2.5 flex items-center gap-2">
         <Lightbulb className="w-4 h-4 text-white" />
         <h4 className="font-bold text-white text-sm">{title}</h4>
@@ -262,7 +262,7 @@ export function WarningBox({
   children: React.ReactNode;
 }) {
   return (
-    <div className="my-6 rounded-lg overflow-hidden border border-red-200 bg-white">
+    <div className="my-8 rounded-lg overflow-hidden border border-red-200 bg-white">
       <div className="bg-red-500 px-5 py-2.5 flex items-center gap-2">
         <AlertTriangle className="w-4 h-4 text-white" />
         <h4 className="font-bold text-white text-sm">{title}</h4>
@@ -510,7 +510,7 @@ export function NutritionTable({
   highlightProtein?: boolean;
 }) {
   return (
-    <div className="overflow-x-auto border border-gray-200 my-4">
+    <div className="overflow-x-auto border border-gray-200 my-6">
       <table className="w-full text-sm">
         <thead>
           <tr className="bg-sky-400 text-white">
@@ -625,6 +625,56 @@ const RELATED_ARTICLES = [
     slug: "protein-cost-ranking",
     title: "タンパク質コスパランキング",
     description: "1gあたりの価格で外食メニューを比較。",
+  },
+  {
+    slug: "yoshinoya-diet",
+    title: "吉野家ダイエットガイド",
+    description: "低カロリーランキングとおすすめの食べ方。",
+  },
+  {
+    slug: "matsuya-diet",
+    title: "松屋ダイエットガイド",
+    description: "定食vs丼の比較と低カロリーメニュー。",
+  },
+  {
+    slug: "sukiya-diet",
+    title: "すき家ダイエットガイド",
+    description: "牛丼ライトで糖質オフ。",
+  },
+  {
+    slug: "kfc-diet",
+    title: "ケンタッキーダイエットガイド",
+    description: "高タンパクメニューの選び方。",
+  },
+  {
+    slug: "gusto-diet",
+    title: "ガストダイエットガイド",
+    description: "低カロリーランキングと注文テクニック。",
+  },
+  {
+    slug: "subway-diet",
+    title: "サブウェイダイエットガイド",
+    description: "低カロリーサンドの選び方。",
+  },
+  {
+    slug: "ootoya-diet",
+    title: "大戸屋ダイエットガイド",
+    description: "定食の選び方とおすすめメニュー。",
+  },
+  {
+    slug: "dennys-diet",
+    title: "デニーズダイエットガイド",
+    description: "低カロリーメニューとソース別比較。",
+  },
+  {
+    slug: "starbucks-diet",
+    title: "スタバダイエットガイド",
+    description: "低カロリードリンクとカスタマイズ術。",
+  },
+  {
+    slug: "marugame-diet",
+    title: "丸亀製麺ダイエットガイド",
+    description: "うどんは太る？低カロリーの選び方。",
   },
 ];
 

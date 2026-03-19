@@ -117,6 +117,66 @@ const guideArticles = [
     description: "脂質を抑えたい人向けの外食選び",
     tag: "低脂質",
   },
+  {
+    slug: "yoshinoya-diet",
+    title: "吉野家ダイエットガイド",
+    description: "低カロリーランキングとおすすめの食べ方",
+    tag: "吉野家",
+  },
+  {
+    slug: "matsuya-diet",
+    title: "松屋ダイエットガイド",
+    description: "定食vs丼の比較と低カロリーメニュー",
+    tag: "松屋",
+  },
+  {
+    slug: "sukiya-diet",
+    title: "すき家ダイエットガイド",
+    description: "牛丼ライト352kcalで糖質オフ",
+    tag: "すき家",
+  },
+  {
+    slug: "kfc-diet",
+    title: "ケンタッキーダイエットガイド",
+    description: "意外と高タンパクなメニューの選び方",
+    tag: "KFC",
+  },
+  {
+    slug: "gusto-diet",
+    title: "ガストダイエットガイド",
+    description: "低カロリーランキングと注文テクニック",
+    tag: "ガスト",
+  },
+  {
+    slug: "subway-diet",
+    title: "サブウェイダイエットガイド",
+    description: "低カロリー＆高タンパクサンドの選び方",
+    tag: "サブウェイ",
+  },
+  {
+    slug: "ootoya-diet",
+    title: "大戸屋ダイエットガイド",
+    description: "定食の選び方とおすすめ低カロリーメニュー",
+    tag: "大戸屋",
+  },
+  {
+    slug: "dennys-diet",
+    title: "デニーズダイエットガイド",
+    description: "低カロリーメニューとソース別比較",
+    tag: "デニーズ",
+  },
+  {
+    slug: "starbucks-diet",
+    title: "スタバダイエットガイド",
+    description: "低カロリードリンクと太らないカスタマイズ術",
+    tag: "スタバ",
+  },
+  {
+    slug: "marugame-diet",
+    title: "丸亀製麺ダイエットガイド",
+    description: "うどんは太る？低カロリーメニューの選び方",
+    tag: "丸亀製麺",
+  },
 ];
 
 // ─── チェーン店記事 ──────────────────────────────────────────────────────────

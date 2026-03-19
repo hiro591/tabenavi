@@ -58,6 +58,16 @@ const GUIDE_ARTICLES = [
   { slug: "drinking-party-diet", title: "飲み会で太らないガイド" },
   { slug: "daily-meal-plan", title: "1日1500kcalプラン" },
   { slug: "protein-cost-ranking", title: "タンパク質コスパランキング" },
+  { slug: "yoshinoya-diet", title: "吉野家ダイエット" },
+  { slug: "matsuya-diet", title: "松屋ダイエット" },
+  { slug: "sukiya-diet", title: "すき家ダイエット" },
+  { slug: "kfc-diet", title: "ケンタッキーダイエット" },
+  { slug: "gusto-diet", title: "ガストダイエット" },
+  { slug: "subway-diet", title: "サブウェイダイエット" },
+  { slug: "ootoya-diet", title: "大戸屋ダイエット" },
+  { slug: "dennys-diet", title: "デニーズダイエット" },
+  { slug: "starbucks-diet", title: "スタバダイエット" },
+  { slug: "marugame-diet", title: "丸亀製麺ダイエット" },
 ];
 
 function SidebarRelated({ currentSlug }: { currentSlug: string }) {

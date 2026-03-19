@@ -11,6 +11,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "muscle-eating-out", "mcdonalds-diet", "conveni-protein", "saizeriya-diet",
     "low-carb-eating-out", "diet-lunch", "family-restaurant-diet",
     "drinking-party-diet", "daily-meal-plan", "protein-cost-ranking",
+    "yoshinoya-diet", "matsuya-diet", "sukiya-diet", "kfc-diet",
+    "gusto-diet", "subway-diet", "ootoya-diet", "dennys-diet",
+    "starbucks-diet", "marugame-diet",
   ];
 
   const guidePages = chains.map((slug) => ({
