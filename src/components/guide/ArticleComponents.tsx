@@ -82,44 +82,58 @@ export function ArticleHero({
 }
 
 // ─── 3. TableOfContents ──────────────────────────────────────────────────────
+// Inspired by kinnikushokudo.jp — double border + subtle pattern
 
 export function TableOfContents({
   items,
 }: {
   items: { id: string; label: string }[];
 }) {
+  const [isOpen, setIsOpen] = useState(true);
+
   return (
-    <nav className="bg-gray-50 border border-gray-200 rounded-xl p-6 mb-10">
-      <h2 className="text-base font-bold text-gray-800 mb-4 flex items-center gap-2">
-        <BookOpen className="w-5 h-5 text-orange-500" />
-        この記事の内容
-      </h2>
-      <ol className="space-y-3">
-        {items.map((item, i) => (
-          <li key={item.id}>
-            <a
-              href={`#${item.id}`}
-              className="flex items-start gap-3 text-sm text-gray-600 hover:text-orange-600 transition-colors group"
-              onClick={(e) => {
-                e.preventDefault();
-                document
-                  .getElementById(item.id)
-                  ?.scrollIntoView({ behavior: "smooth" });
-              }}
-            >
-              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-orange-100 text-orange-600 text-xs font-bold flex items-center justify-center mt-0.5 group-hover:bg-orange-500 group-hover:text-white transition-colors">
-                {i + 1}
-              </span>
-              <span className="leading-snug">{item.label}</span>
-            </a>
-          </li>
-        ))}
-      </ol>
+    <nav className="relative max-w-[780px] mx-auto my-10 border-[3px] border-double border-orange-400 rounded-lg overflow-hidden bg-[repeating-linear-gradient(45deg,transparent,transparent_8px,rgba(251,146,60,0.03)_8px,rgba(251,146,60,0.03)_16px)]">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full flex items-center justify-between px-6 py-4 bg-orange-50/60 hover:bg-orange-50 transition-colors"
+      >
+        <span className="flex items-center gap-2 text-base font-bold text-gray-800">
+          <BookOpen className="w-5 h-5 text-orange-500" />
+          この記事の内容
+        </span>
+        <span className="text-sm text-orange-500 font-medium">
+          {isOpen ? "閉じる" : "開く"}
+        </span>
+      </button>
+      {isOpen && (
+        <ol className="px-6 pb-5 pt-2 space-y-3">
+          {items.map((item, i) => (
+            <li key={item.id}>
+              <a
+                href={`#${item.id}`}
+                className="flex items-start gap-3 text-sm text-gray-600 hover:text-orange-600 transition-colors group"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document
+                    .getElementById(item.id)
+                    ?.scrollIntoView({ behavior: "smooth" });
+                }}
+              >
+                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-orange-100 text-orange-600 text-xs font-bold flex items-center justify-center mt-0.5 group-hover:bg-orange-500 group-hover:text-white transition-colors">
+                  {i + 1}
+                </span>
+                <span className="leading-snug">{item.label}</span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      )}
     </nav>
   );
 }
 
 // ─── 4. SectionHeading (H2) ──────────────────────────────────────────────────
+// kinnikushokudo style: solid background + top/bottom border lines
 
 export function SectionHeading({
   children,
@@ -131,7 +145,7 @@ export function SectionHeading({
   return (
     <h2
       id={id}
-      className="bg-orange-500 text-white font-bold text-lg sm:text-xl px-5 py-3 rounded-lg scroll-mt-24 mb-6"
+      className="bg-orange-500 text-white font-bold text-lg sm:text-xl px-5 py-3.5 scroll-mt-24 mb-6 border-t-[3px] border-b-[3px] border-orange-700"
     >
       {children}
     </h2>
@@ -139,6 +153,7 @@ export function SectionHeading({
 }
 
 // ─── 5. SubSectionHeading (H3) ───────────────────────────────────────────────
+// kinnikushokudo style: dotted gradient underline
 
 export function SubSectionHeading({
   children,
@@ -146,9 +161,24 @@ export function SubSectionHeading({
   children: React.ReactNode;
 }) {
   return (
-    <h3 className="border-l-[3px] border-orange-400 pl-4 text-lg font-bold text-gray-900 mb-4">
+    <h3 className="text-lg font-bold text-gray-900 mb-4 pb-2 relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[3px] after:bg-[repeating-linear-gradient(90deg,_var(--color-orange-400)_0px,_var(--color-orange-400)_6px,_transparent_6px,_transparent_12px)]">
       {children}
     </h3>
+  );
+}
+
+// ─── 5b. SubSubSectionHeading (H4) ──────────────────────────────────────────
+// kinnikushokudo style: left border
+
+export function SubSubSectionHeading({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <h4 className="border-l-[3px] border-orange-400 pl-4 text-base font-bold text-gray-900 mb-3">
+      {children}
+    </h4>
   );
 }
 
@@ -175,7 +205,7 @@ export function NutritionCard({
         </div>
         {recommended && (
           <span className="bg-orange-500 text-white text-xs px-2 py-0.5 rounded-full font-semibold flex-shrink-0">
-            おすすめ ★
+            おすすめ
           </span>
         )}
       </div>
@@ -205,6 +235,7 @@ export function NutritionCard({
 }
 
 // ─── 7. TipBox ───────────────────────────────────────────────────────────────
+// kinnikushokudo style: cap_box with header bar
 
 export function TipBox({
   title,
@@ -214,12 +245,14 @@ export function TipBox({
   children: React.ReactNode;
 }) {
   return (
-    <div className="border-2 border-orange-400 bg-orange-50 rounded-xl p-5 my-6">
-      <div className="flex items-center gap-2 mb-2">
-        <Lightbulb className="w-5 h-5 text-orange-500" />
-        <h4 className="font-bold text-gray-900">{title}</h4>
+    <div className="my-6 rounded-lg overflow-hidden border border-orange-200 bg-white">
+      <div className="bg-orange-500 px-5 py-2.5 flex items-center gap-2">
+        <Lightbulb className="w-4 h-4 text-white" />
+        <h4 className="font-bold text-white text-sm">{title}</h4>
       </div>
-      <div className="text-sm text-gray-700 leading-relaxed">{children}</div>
+      <div className="px-5 py-4 text-sm text-gray-700 leading-relaxed bg-orange-50/40">
+        {children}
+      </div>
     </div>
   );
 }
@@ -234,13 +267,42 @@ export function WarningBox({
   children: React.ReactNode;
 }) {
   return (
-    <div className="border-2 border-red-300 bg-red-50 rounded-xl p-5 my-6">
-      <div className="flex items-center gap-2 mb-2">
-        <AlertTriangle className="w-5 h-5 text-red-500" />
-        <h4 className="font-bold text-red-700">{title}</h4>
+    <div className="my-6 rounded-lg overflow-hidden border border-red-200 bg-white">
+      <div className="bg-red-500 px-5 py-2.5 flex items-center gap-2">
+        <AlertTriangle className="w-4 h-4 text-white" />
+        <h4 className="font-bold text-white text-sm">{title}</h4>
       </div>
-      <div className="text-sm text-gray-700 leading-relaxed">{children}</div>
+      <div className="px-5 py-4 text-sm text-gray-700 leading-relaxed bg-red-50/40">
+        {children}
+      </div>
     </div>
+  );
+}
+
+// ─── 8b. Marker (蛍光ペン風ハイライト) ───────────────────────────────────────
+// kinnikushokudo style: gradient transparent 64% then color
+
+export function Marker({
+  children,
+  color = "orange",
+}: {
+  children: React.ReactNode;
+  color?: "orange" | "blue" | "green";
+}) {
+  const colorMap = {
+    orange: "rgba(251,146,60,0.35)",
+    blue: "rgba(96,165,250,0.35)",
+    green: "rgba(74,222,128,0.35)",
+  };
+  return (
+    <span
+      className="font-bold"
+      style={{
+        background: `linear-gradient(transparent 64%, ${colorMap[color]} 64%)`,
+      }}
+    >
+      {children}
+    </span>
   );
 }
 
@@ -257,14 +319,14 @@ export function ArticleImage({
 
   if (hasError) {
     return (
-      <div className="w-full h-48 sm:h-64 rounded-xl bg-gradient-to-br from-orange-100 to-amber-50 flex items-center justify-center my-8">
+      <div className="w-full h-48 sm:h-64 rounded bg-gradient-to-br from-orange-100 to-amber-50 flex items-center justify-center my-8">
         <span className="text-gray-400 text-sm">{alt}</span>
       </div>
     );
   }
 
   return (
-    <div className="w-full rounded-xl overflow-hidden my-8 shadow-md">
+    <div className="w-full rounded overflow-hidden my-8 shadow-sm border border-gray-100">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={src}
@@ -287,7 +349,7 @@ export function CTABanner({
   subtitle?: string;
 }) {
   return (
-    <section className="my-12 rounded-2xl bg-gradient-to-r from-orange-500 to-amber-500 p-8 text-center shadow-lg shadow-orange-200/50">
+    <section className="my-12 bg-gradient-to-r from-orange-500 to-amber-500 p-8 text-center shadow-lg shadow-orange-200/50 border-t-[3px] border-b-[3px] border-orange-700">
       <h3 className="text-xl font-bold text-white mb-2">{title}</h3>
       <p className="text-orange-100 text-sm sm:text-base mb-6">{subtitle}</p>
       <Link
@@ -313,7 +375,7 @@ export function ComparisonTable({
   bestRowIndex?: number;
 }) {
   return (
-    <div className="overflow-x-auto rounded-xl border border-gray-200 my-6 shadow-sm">
+    <div className="overflow-x-auto border border-gray-200 my-6 shadow-sm">
       <table className="w-full text-sm">
         <thead>
           <tr className="bg-orange-500 text-white">
@@ -380,7 +442,126 @@ export function NumberedList({
   );
 }
 
-// ─── 13. ArticleFooter ───────────────────────────────────────────────────────
+// ─── 12b. CheckList ──────────────────────────────────────────────────────────
+
+export function CheckList({
+  items,
+}: {
+  items: string[];
+}) {
+  return (
+    <div className="bg-gray-50 rounded-lg border border-gray-200 p-6">
+      <ul className="space-y-3">
+        {items.map((item, i) => (
+          <li key={i} className="flex items-start gap-3">
+            <CheckCircle className="w-5 h-5 text-orange-500 flex-shrink-0 mt-0.5" />
+            <span className="text-gray-700 text-sm leading-relaxed">{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+// ─── 13. RankingCard ─────────────────────────────────────────────────────────
+// kinnikushokudo-inspired ranking display
+
+export function RankingCard({
+  rank,
+  title,
+  subtitle,
+  children,
+}: {
+  rank: number;
+  title: string;
+  subtitle: string;
+  children: React.ReactNode;
+}) {
+  const rankColors: Record<number, { bg: string; circle: string }> = {
+    1: { bg: "from-yellow-50 to-amber-50", circle: "bg-yellow-400" },
+    2: { bg: "from-gray-50 to-slate-50", circle: "bg-gray-400" },
+    3: { bg: "from-orange-50 to-amber-50", circle: "bg-orange-400" },
+  };
+  const colors = rankColors[rank] || { bg: "from-gray-50 to-gray-50", circle: "bg-gray-300" };
+
+  return (
+    <div className="mb-8 border border-gray-200 overflow-hidden">
+      <div className={`bg-gradient-to-r ${colors.bg} px-5 py-4 flex items-center gap-3 border-b border-gray-100`}>
+        <span className={`w-10 h-10 rounded-full ${colors.circle} flex items-center justify-center text-white font-bold text-lg shadow-sm`}>
+          {rank}
+        </span>
+        <div>
+          <h3 className="text-lg font-bold text-gray-900">{title}</h3>
+          <p className="text-xs text-gray-500">{subtitle}</p>
+        </div>
+      </div>
+      <div className="p-5">{children}</div>
+    </div>
+  );
+}
+
+// ─── 14. NutritionTable ──────────────────────────────────────────────────────
+// Table format for nutrition data (alternative to NutritionCard grid)
+
+export function NutritionTable({
+  items,
+  highlightProtein,
+}: {
+  items: {
+    name: string;
+    calories: number;
+    protein: number;
+    fat: number;
+    carbs: number;
+    highlight?: boolean;
+  }[];
+  highlightProtein?: boolean;
+}) {
+  return (
+    <div className="overflow-x-auto border border-gray-200 my-4">
+      <table className="w-full text-sm">
+        <thead>
+          <tr className="bg-orange-500 text-white">
+            <th className="text-left px-4 py-2.5 font-bold">メニュー</th>
+            <th className="text-right px-4 py-2.5 font-bold">カロリー</th>
+            <th className="text-right px-4 py-2.5 font-bold">P</th>
+            <th className="text-right px-4 py-2.5 font-bold">F</th>
+            <th className="text-right px-4 py-2.5 font-bold">C</th>
+          </tr>
+        </thead>
+        <tbody>
+          {items.map((item, i) => (
+            <tr
+              key={item.name}
+              className={
+                item.highlight
+                  ? "bg-orange-50/50"
+                  : i % 2 === 0
+                    ? "bg-white"
+                    : "bg-gray-50/50"
+              }
+            >
+              <td className="px-4 py-2.5 text-gray-900 font-medium">
+                {item.name}
+                {item.highlight && (
+                  <span className="ml-2 text-xs text-orange-600 font-bold">おすすめ</span>
+                )}
+              </td>
+              <td className="text-right px-4 py-2.5 text-gray-700">{item.calories} kcal</td>
+              <td className={`text-right px-4 py-2.5 font-bold ${highlightProtein ? "text-orange-600" : "text-blue-600"}`}>
+                {item.protein.toFixed(1)}g
+              </td>
+              <td className="text-right px-4 py-2.5 text-gray-700">{item.fat.toFixed(1)}g</td>
+              <td className="text-right px-4 py-2.5 text-gray-700">{item.carbs.toFixed(1)}g</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+// ─── 15. ArticleFooter ───────────────────────────────────────────────────────
 
 const RELATED_ARTICLES = [
   {
@@ -431,14 +612,14 @@ export function ArticleFooter({ currentSlug }: { currentSlug: string }) {
   ).slice(0, 3);
 
   return (
-    <section className="mt-12 pt-10 border-t border-gray-200">
+    <section className="mt-12 pt-10 border-t-[3px] border-double border-gray-300">
       <h3 className="text-xl font-bold text-gray-900 mb-6">関連記事</h3>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {related.map((article) => (
           <Link
             key={article.slug}
             href={`/guide/${article.slug}`}
-            className="block bg-white rounded-xl border border-gray-200 p-5 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 group"
+            className="block bg-white border border-gray-200 p-5 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 group"
           >
             <h4 className="font-bold text-gray-900 mb-1 group-hover:text-orange-600 transition-colors">
               {article.title}
