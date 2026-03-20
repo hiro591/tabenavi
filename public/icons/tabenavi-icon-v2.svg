@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#0ea5e9"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Rounded square background -->
+  <rect width="512" height="512" rx="112" fill="url(#bg2)"/>
+
+  <!-- Bowl shape -->
+  <path d="M128 240 Q128 340 256 370 Q384 340 384 240 Z" fill="white" opacity="0.95"/>
+
+  <!-- Bowl rim -->
+  <ellipse cx="256" cy="240" rx="136" ry="20" fill="white"/>
+
+  <!-- Steam lines (3 wavy lines) -->
+  <path d="M200 190 Q208 170 200 150 Q192 130 200 110" stroke="white" stroke-width="10" stroke-linecap="round" fill="none" opacity="0.7"/>
+  <path d="M256 180 Q264 160 256 140 Q248 120 256 100" stroke="white" stroke-width="10" stroke-linecap="round" fill="none" opacity="0.8"/>
+  <path d="M312 190 Q320 170 312 150 Q304 130 312 110" stroke="white" stroke-width="10" stroke-linecap="round" fill="none" opacity="0.7"/>
+
+  <!-- Chopsticks -->
+  <line x1="176" y1="260" x2="296" y2="400" stroke="white" stroke-width="10" stroke-linecap="round" opacity="0.9"/>
+  <line x1="216" y1="260" x2="336" y2="400" stroke="white" stroke-width="10" stroke-linecap="round" opacity="0.9"/>
+
+  <!-- Small location dot (navi element) -->
+  <circle cx="400" cy="112" r="28" fill="white" opacity="0.9"/>
+  <circle cx="400" cy="112" r="12" fill="#38bdf8"/>
+</svg>

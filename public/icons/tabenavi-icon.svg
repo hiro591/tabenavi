@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <!-- Background circle -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+    <linearGradient id="pin" x1="180" y1="80" x2="332" y2="380" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f0f9ff"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Rounded square background -->
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+
+  <!-- Map pin shape (eating + navigation) -->
+  <path d="M256 420 C256 420 152 298 152 216 C152 158.6 198.6 112 256 112 C313.4 112 360 158.6 360 216 C360 298 256 420 256 420Z" fill="url(#pin)" opacity="0.95"/>
+
+  <!-- Fork icon inside pin -->
+  <g transform="translate(256, 210)" stroke="#38bdf8" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <!-- Left tine -->
+    <line x1="-24" y1="-52" x2="-24" y2="-16"/>
+    <!-- Middle tine -->
+    <line x1="-4" y1="-52" x2="-4" y2="-16"/>
+    <!-- Right tine -->
+    <line x1="16" y1="-52" x2="16" y2="-16"/>
+    <!-- Handle connector -->
+    <path d="M-32,-16 Q-32,4 -4,4 Q24,4 24,-16"/>
+    <!-- Handle -->
+    <line x1="-4" y1="4" x2="-4" y2="56"/>
+  </g>
+
+  <!-- Small circle at pin point for emphasis -->
+  <circle cx="256" cy="200" r="68" fill="none" stroke="#38bdf8" stroke-width="3" opacity="0.2"/>
+</svg>
