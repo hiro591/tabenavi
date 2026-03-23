@@ -1,14 +1,22 @@
 import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const chains = [
+  const baseUrl = "https://tabenavi.jp";
+  const now = "2026-03-23T00:00:00.000Z";
+
+  // ─── チェーン店の栄養データページ（/guide/[slug]） ───
+  const chainSlugs = [
     "mcdonalds", "yoshinoya", "matsuya", "sukiya", "saizeriya",
-    "starbucks", "conveni", "eating-out-diet",
-    "kfc", "mos", "gusto", "bamiyan", "ohsho", "hidakaya",
-    "marugame", "kurasushi", "sushiro", "dennys", "doutor",
-    "subway", "nakau", "ootoya", "yayoiken",
-    "gyudon-comparison", "low-fat-eating-out", "calorie-database",
-    "muscle-eating-out", "mcdonalds-diet", "conveni-protein", "saizeriya-diet",
+    "starbucks", "conveni", "kfc", "mos", "gusto", "bamiyan",
+    "ohsho", "hidakaya", "marugame", "kurasushi", "sushiro",
+    "dennys", "doutor", "subway", "nakau", "ootoya", "yayoiken",
+  ];
+
+  // ─── SEOガイド記事 ───
+  const guideSlugs = [
+    "eating-out-diet", "muscle-eating-out", "mcdonalds-diet",
+    "conveni-protein", "saizeriya-diet", "gyudon-comparison",
+    "low-fat-eating-out", "calorie-database",
     "low-carb-eating-out", "diet-lunch", "family-restaurant-diet",
     "drinking-party-diet", "daily-meal-plan", "protein-cost-ranking",
     "yoshinoya-diet", "matsuya-diet", "sukiya-diet", "kfc-diet",
@@ -16,20 +24,39 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "starbucks-diet", "marugame-diet",
   ];
 
-  const guidePages = chains.map((slug) => ({
-    url: `https://tabenavi.jp/guide/${slug}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly" as const,
+  const chainPages: MetadataRoute.Sitemap = chainSlugs.map((slug) => ({
+    url: `${baseUrl}/guide/${slug}`,
+    lastModified: now,
+    changeFrequency: "weekly",
+    priority: 0.7,
+  }));
+
+  const guidePages: MetadataRoute.Sitemap = guideSlugs.map((slug) => ({
+    url: `${baseUrl}/guide/${slug}`,
+    lastModified: now,
+    changeFrequency: "weekly",
     priority: 0.8,
   }));
 
   return [
-    { url: "https://tabenavi.jp", lastModified: new Date(), changeFrequency: "daily" as const, priority: 1 },
-    { url: "https://tabenavi.jp/guide", lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.9 },
+    // トップ
+    { url: baseUrl, lastModified: now, changeFrequency: "daily", priority: 1.0 },
+
+    // ガイド一覧
+    { url: `${baseUrl}/guide`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
+
+    // SEOガイド記事（高優先度）
     ...guidePages,
-    { url: "https://tabenavi.jp/signup", lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.7 },
-    { url: "https://tabenavi.jp/login", lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.5 },
-    { url: "https://tabenavi.jp/privacy", lastModified: new Date(), changeFrequency: "yearly" as const, priority: 0.3 },
-    { url: "https://tabenavi.jp/terms", lastModified: new Date(), changeFrequency: "yearly" as const, priority: 0.3 },
+
+    // チェーン店データページ
+    ...chainPages,
+
+    // 主要ページ
+    { url: `${baseUrl}/search`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${baseUrl}/signup`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${baseUrl}/login`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },
+    { url: `${baseUrl}/contact`, lastModified: now, changeFrequency: "yearly", priority: 0.4 },
+    { url: `${baseUrl}/privacy`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
+    { url: `${baseUrl}/terms`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
   ];
 }
