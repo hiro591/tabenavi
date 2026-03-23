@@ -68,6 +68,16 @@ const GUIDE_ARTICLES = [
   { slug: "dennys-diet", title: "デニーズダイエット" },
   { slug: "starbucks-diet", title: "スタバダイエット" },
   { slug: "marugame-diet", title: "丸亀製麺ダイエット" },
+  { slug: "morning-diet", title: "朝食ダイエットガイド" },
+  { slug: "ramen-diet", title: "ラーメンとダイエット" },
+  { slug: "curry-diet", title: "カレーとダイエット" },
+  { slug: "sushi-diet", title: "回転寿司ダイエット" },
+  { slug: "pfc-guide", title: "PFCバランス入門" },
+  { slug: "recording-diet", title: "レコーディングダイエット" },
+  { slug: "late-night-eating", title: "夜食で太らない方法" },
+  { slug: "eating-order", title: "太らない食べ順ガイド" },
+  { slug: "seven-eleven-diet", title: "セブンイレブンダイエット" },
+  { slug: "bulkup-eating-out", title: "増量期の外食ガイド" },
 ];
 
 function SidebarRelated({ currentSlug }: { currentSlug: string }) {

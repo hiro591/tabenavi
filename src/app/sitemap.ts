@@ -22,6 +22,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "yoshinoya-diet", "matsuya-diet", "sukiya-diet", "kfc-diet",
     "gusto-diet", "subway-diet", "ootoya-diet", "dennys-diet",
     "starbucks-diet", "marugame-diet",
+    "morning-diet", "ramen-diet", "curry-diet", "sushi-diet",
+    "pfc-guide", "recording-diet", "late-night-eating",
+    "eating-order", "seven-eleven-diet", "bulkup-eating-out",
   ];
 
   const chainPages: MetadataRoute.Sitemap = chainSlugs.map((slug) => ({

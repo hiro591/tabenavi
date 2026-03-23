@@ -676,6 +676,56 @@ const RELATED_ARTICLES = [
     title: "丸亀製麺ダイエットガイド",
     description: "うどんは太る？低カロリーの選び方。",
   },
+  {
+    slug: "morning-diet",
+    title: "朝食ダイエットガイド",
+    description: "朝マック・コンビニの朝食メニュー。",
+  },
+  {
+    slug: "ramen-diet",
+    title: "ラーメンとダイエット",
+    description: "カロリー比較と太らない食べ方。",
+  },
+  {
+    slug: "curry-diet",
+    title: "カレーとダイエット",
+    description: "チェーン店別カロリー比較。",
+  },
+  {
+    slug: "sushi-diet",
+    title: "回転寿司ダイエットガイド",
+    description: "ネタ別カロリーと太らない食べ方。",
+  },
+  {
+    slug: "pfc-guide",
+    title: "PFCバランス入門",
+    description: "計算方法と外食での実践ガイド。",
+  },
+  {
+    slug: "recording-diet",
+    title: "レコーディングダイエット",
+    description: "記録するだけで痩せる科学的根拠。",
+  },
+  {
+    slug: "late-night-eating",
+    title: "夜食で太らない方法",
+    description: "深夜の外食・コンビニメニュー。",
+  },
+  {
+    slug: "eating-order",
+    title: "太らない食べ順ガイド",
+    description: "食べ順ダイエットの実践方法。",
+  },
+  {
+    slug: "seven-eleven-diet",
+    title: "セブンイレブンダイエット",
+    description: "低カロリー＆高タンパク商品。",
+  },
+  {
+    slug: "bulkup-eating-out",
+    title: "増量期の外食ガイド",
+    description: "バルクアップ向きチェーン店メニュー。",
+  },
 ];
 
 export function ArticleFooter({ currentSlug }: { currentSlug: string }) {
