@@ -53,6 +53,7 @@ export default function DashboardPage() {
   const [streak, setStreak] = useState(0);
   const [loading, setLoading] = useState(true);
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [toast, setToast] = useState("");
 
   const fetchData = useCallback(async () => {
     const {
@@ -150,9 +151,18 @@ export default function DashboardPage() {
   const handleDelete = async (logId: string) => {
     if (!confirm("この記録を削除しますか？")) return;
     setDeletingId(logId);
-    await supabase.from("food_logs").delete().eq("id", logId);
-    setLogs((prev) => prev.filter((l) => l.id !== logId));
-    setDeletingId(null);
+    try {
+      const { error } = await supabase.from("food_logs").delete().eq("id", logId);
+      if (error) throw error;
+      setLogs((prev) => prev.filter((l) => l.id !== logId));
+      setToast("削除しました");
+      setTimeout(() => setToast(""), 2000);
+    } catch {
+      setToast("削除に失敗しました");
+      setTimeout(() => setToast(""), 2000);
+    } finally {
+      setDeletingId(null);
+    }
   };
 
   // ─── Loading skeleton ───
@@ -207,6 +217,11 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-[#1A2235] px-4 pt-6 pb-24">
+      {toast && (
+        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-[#243044] text-slate-100 text-sm font-medium px-5 py-2.5 rounded-xl border border-[#334155]/30 shadow-lg">
+          {toast}
+        </div>
+      )}
       <div className="max-w-lg mx-auto">
         {/* ─── Header ─── */}
         <div className="flex items-center justify-between mb-1">

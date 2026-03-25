@@ -72,9 +72,14 @@ export default function FavoritesPage() {
   }, [router]);
 
   const removeFavorite = async (favoriteId: string) => {
-    setFavorites((prev) => prev.filter((f) => f.id !== favoriteId));
     const supabase = createClient();
-    await supabase.from("favorites").delete().eq("id", favoriteId);
+    try {
+      const { error } = await supabase.from("favorites").delete().eq("id", favoriteId);
+      if (error) throw error;
+      setFavorites((prev) => prev.filter((f) => f.id !== favoriteId));
+    } catch {
+      alert("削除に失敗しました");
+    }
   };
 
   return (
@@ -85,7 +90,7 @@ export default function FavoritesPage() {
         <div className="sticky top-0 z-20 bg-white border-b border-gray-100">
           <div className="flex items-center gap-3 px-4 py-3">
             <button
-              onClick={() => router.back()}
+              onClick={() => router.push("/dashboard")}
               className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 shrink-0"
             >
               <ChevronLeft className="w-5 h-5" />

@@ -53,6 +53,8 @@ function RecordPageContent() {
   const [saved, setSaved] = useState(false);
   const [chainsLoading, setChainsLoading] = useState(true);
   const [remainingCalories, setRemainingCalories] = useState<number | null>(null);
+  const [error, setError] = useState("");
+  const [menusFetchError, setMenusFetchError] = useState("");
 
   // Handle ?menu_id=xxx param - pre-select menu item and skip to Step 3
   useEffect(() => {
@@ -73,6 +75,10 @@ function RecordPageContent() {
           setSelectedChain(menu.chain_restaurants);
         }
         setStep(3);
+      } else {
+        // Menu not found - stay on step 1
+        setStep(1);
+        setError("指定されたメニューが見つかりませんでした");
       }
     }
     fetchMenuById();
@@ -96,13 +102,20 @@ function RecordPageContent() {
     if (!selectedChain) return;
     async function fetchMenus() {
       setMenusLoading(true);
-      const { data } = await supabase
-        .from("menu_items")
-        .select("*")
-        .eq("chain_restaurant_id", selectedChain!.id)
-        .order("name");
-      if (data) setMenus(data);
-      setMenusLoading(false);
+      setMenusFetchError("");
+      try {
+        const { data, error: fetchError } = await supabase
+          .from("menu_items")
+          .select("*")
+          .eq("chain_restaurant_id", selectedChain!.id)
+          .order("name");
+        if (fetchError) throw fetchError;
+        if (data) setMenus(data);
+      } catch {
+        setMenusFetchError("メニューの読み込みに失敗しました");
+      } finally {
+        setMenusLoading(false);
+      }
     }
     fetchMenus();
   }, [selectedChain]);
@@ -150,28 +163,36 @@ function RecordPageContent() {
   // Handle save
   async function handleSave() {
     setSaving(true);
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    if (!user) {
-      router.push("/login");
-      return;
+    setError("");
+    try {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (!user) {
+        router.push("/login");
+        return;
+      }
+
+      const { error: insertError } = await supabase.from("food_logs").insert({
+        user_id: user.id,
+        menu_item_id: isManualMode ? null : (selectedMenu?.id ?? null),
+        custom_name: isManualMode ? customName : null,
+        calories: finalCalories,
+        protein: isManualMode ? customProtein : (selectedMenu?.protein ?? 0),
+        fat: isManualMode ? customFat : (selectedMenu?.fat ?? 0),
+        carbs: isManualMode ? customCarbs : (selectedMenu?.carbs ?? 0),
+        meal_type: mealType,
+        logged_at: new Date().toISOString(),
+      });
+
+      if (insertError) throw insertError;
+
+      setSaved(true);
+    } catch {
+      setError("保存に失敗しました。もう一度お試しください。");
+    } finally {
+      setSaving(false);
     }
-
-    await supabase.from("food_logs").insert({
-      user_id: user.id,
-      menu_item_id: isManualMode ? null : (selectedMenu?.id ?? null),
-      custom_name: isManualMode ? customName : null,
-      calories: finalCalories,
-      protein: isManualMode ? customProtein : (selectedMenu?.protein ?? 0),
-      fat: isManualMode ? customFat : (selectedMenu?.fat ?? 0),
-      carbs: isManualMode ? customCarbs : (selectedMenu?.carbs ?? 0),
-      meal_type: mealType,
-      logged_at: new Date().toISOString(),
-    });
-
-    setSaving(false);
-    setSaved(true);
   }
 
   // Go to custom mode
@@ -227,9 +248,15 @@ function RecordPageContent() {
           </p>
           <Link
             href="/dashboard"
-            className="inline-block bg-orange-500 text-white font-semibold px-8 py-3 rounded-xl hover:bg-orange-600 transition-colors"
+            className="inline-block bg-orange-500 text-white font-semibold px-8 py-3 rounded-xl hover:bg-orange-600 transition-colors mb-3"
           >
-            ダッシュボードへ
+            ダッシュボードに戻る
+          </Link>
+          <Link
+            href="/record"
+            className="inline-block text-orange-500 font-semibold px-8 py-3 rounded-xl border border-orange-300 hover:bg-orange-50 transition-colors"
+          >
+            続けて記録する
           </Link>
         </div>
       </div>
@@ -237,14 +264,14 @@ function RecordPageContent() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-20">
+    <div className="min-h-screen bg-gray-50 pb-24">
       {/* Header */}
       <header className="bg-white border-b border-gray-200 sticky top-0 z-10">
         <div className="max-w-lg mx-auto px-4 py-3 flex items-center gap-3">
           <button
             onClick={() => {
               if (step === 1 || (step === 3 && isManualMode)) {
-                router.back();
+                router.push("/dashboard");
               } else if (step === 2) {
                 setStep(1);
                 setSelectedChain(null);
@@ -289,6 +316,13 @@ function RecordPageContent() {
         >
           {step === 1 && (
             <>
+              {/* Error message */}
+              {error && (
+                <div className="bg-red-50 border border-red-200 rounded-xl px-4 py-3 mb-3 text-sm text-red-600">
+                  {error}
+                </div>
+              )}
+
               {/* Custom entry card - at the top */}
               <button
                 onClick={goCustom}
@@ -370,6 +404,12 @@ function RecordPageContent() {
                   className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white text-gray-800"
                 />
               </div>
+
+              {menusFetchError && (
+                <div className="bg-red-50 border border-red-200 rounded-xl px-4 py-3 mb-3 text-sm text-red-600">
+                  {menusFetchError}
+                </div>
+              )}
 
               {menusLoading ? (
                 <div className="flex justify-center py-12">
@@ -608,6 +648,13 @@ function RecordPageContent() {
                 </div>
               )}
 
+              {/* Error message */}
+              {error && (
+                <div className="bg-red-50 border border-red-200 rounded-xl px-4 py-3 mb-3 text-sm text-red-600">
+                  {error}
+                </div>
+              )}
+
               {/* Save button */}
               <button
                 onClick={handleSave}
@@ -615,7 +662,11 @@ function RecordPageContent() {
                   saving ||
                   (isManualMode && (!customName || customCalories <= 0))
                 }
-                className="w-full py-3.5 rounded-xl bg-orange-500 text-white font-bold text-lg hover:bg-orange-600 active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className={`w-full py-3.5 rounded-xl font-bold text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed ${
+                  saving
+                    ? "bg-gray-400 text-white cursor-not-allowed"
+                    : "bg-orange-500 text-white hover:bg-orange-600 active:scale-[0.98]"
+                }`}
               >
                 {saving ? (
                   <span className="flex items-center justify-center gap-2">

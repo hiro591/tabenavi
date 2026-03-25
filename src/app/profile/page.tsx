@@ -48,6 +48,7 @@ export default function ProfilePage() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [saveError, setSaveError] = useState("");
   const [email, setEmail] = useState("");
   const [displayName, setDisplayName] = useState("");
   const [targetCalories, setTargetCalories] = useState(2000);
@@ -109,26 +110,35 @@ export default function ProfilePage() {
   const handleSave = async () => {
     setSaving(true);
     setSaved(false);
+    setSaveError("");
 
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    if (!user) {
-      router.push("/login");
-      return;
+    try {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (!user) {
+        router.push("/login");
+        return;
+      }
+
+      const { error } = await supabase
+        .from("profiles")
+        .update({
+          display_name: displayName || null,
+          target_calories: targetCalories,
+        })
+        .eq("id", user.id);
+
+      if (error) throw error;
+
+      setSaved(true);
+      setTimeout(() => setSaved(false), 3000);
+    } catch {
+      setSaveError("保存に失敗しました。もう一度お試しください。");
+      setTimeout(() => setSaveError(""), 4000);
+    } finally {
+      setSaving(false);
     }
-
-    await supabase
-      .from("profiles")
-      .update({
-        display_name: displayName || null,
-        target_calories: targetCalories,
-      })
-      .eq("id", user.id);
-
-    setSaving(false);
-    setSaved(true);
-    setTimeout(() => setSaved(false), 3000);
   };
 
   const handleLogout = async () => {
@@ -258,6 +268,11 @@ export default function ProfilePage() {
               max={10000}
             />
           </div>
+          {targetCalories > 5000 && (
+            <p className="text-[11px] text-red-500 font-medium mt-2">
+              目標カロリーが5000kcalを超えています。入力値をご確認ください。
+            </p>
+          )}
           <p className="text-[11px] text-gray-400 mt-3 leading-relaxed">
             一般的な成人男性: 2000-2500kcal / 女性: 1600-2000kcal
           </p>
@@ -287,9 +302,15 @@ export default function ProfilePage() {
         </button>
 
         {saved && (
-          <p className="text-center text-sm text-green-600 font-medium mb-4">
+          <div className="text-center text-sm text-green-600 font-bold mb-4 bg-green-50 py-2.5 rounded-xl border border-green-200">
             保存しました
-          </p>
+          </div>
+        )}
+
+        {saveError && (
+          <div className="text-center text-sm text-red-600 font-bold mb-4 bg-red-50 py-2.5 rounded-xl border border-red-200">
+            {saveError}
+          </div>
         )}
 
         {/* Account Section */}

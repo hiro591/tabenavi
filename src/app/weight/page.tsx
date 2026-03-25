@@ -35,6 +35,7 @@ export default function WeightPage() {
   const [recentLogs, setRecentLogs] = useState<WeightLog[]>([]);
   const [last30Logs, setLast30Logs] = useState<WeightLog[]>([]);
   const [deleting, setDeleting] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const today = new Date().toISOString().split("T")[0];
 
@@ -96,40 +97,58 @@ export default function WeightPage() {
   }, [fetchData]);
 
   const handleSave = async () => {
+    setError(null);
     const weightNum = parseFloat(weight);
-    if (isNaN(weightNum) || weightNum <= 0 || weightNum > 500) return;
-
-    setSaving(true);
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    if (!user) {
-      router.push("/login");
+    if (isNaN(weightNum) || weightNum < 30 || weightNum > 300) {
+      setError("30〜300kgの範囲で入力してください");
       return;
     }
 
-    if (todayEntry) {
-      await supabase
-        .from("weight_logs")
-        .update({ weight: weightNum })
-        .eq("id", todayEntry.id);
-    } else {
-      await supabase.from("weight_logs").insert({
-        user_id: user.id,
-        weight: weightNum,
-        logged_at: today,
-      });
-    }
+    setSaving(true);
+    try {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (!user) {
+        router.push("/login");
+        return;
+      }
 
-    setSaving(false);
-    await fetchData();
+      if (todayEntry) {
+        const { error: updateError } = await supabase
+          .from("weight_logs")
+          .update({ weight: weightNum })
+          .eq("id", todayEntry.id);
+        if (updateError) throw updateError;
+      } else {
+        const { error: insertError } = await supabase.from("weight_logs").insert({
+          user_id: user.id,
+          weight: weightNum,
+          logged_at: today,
+        });
+        if (insertError) throw insertError;
+      }
+
+      await fetchData();
+    } catch {
+      setError("保存に失敗しました。もう一度お試しください。");
+    } finally {
+      setSaving(false);
+    }
   };
 
   const handleDelete = async (id: string) => {
+    setError(null);
     setDeleting(id);
-    await supabase.from("weight_logs").delete().eq("id", id);
-    setDeleting(null);
-    await fetchData();
+    try {
+      const { error: deleteError } = await supabase.from("weight_logs").delete().eq("id", id);
+      if (deleteError) throw deleteError;
+      await fetchData();
+    } catch {
+      setError("削除に失敗しました。もう一度お試しください。");
+    } finally {
+      setDeleting(null);
+    }
   };
 
   // Chart data: last 14 entries from last30Logs
@@ -158,7 +177,7 @@ export default function WeightPage() {
         {/* Header */}
         <div className="flex items-center gap-3 mb-6">
           <Link
-            href="/profile"
+            href="/dashboard"
             className="w-10 h-10 flex items-center justify-center rounded-full bg-white shadow-sm text-gray-600 hover:bg-gray-100 transition-colors"
           >
             ←
@@ -176,8 +195,8 @@ export default function WeightPage() {
             <input
               type="number"
               step="0.1"
-              min="20"
-              max="500"
+              min="30"
+              max="300"
               value={weight}
               onChange={(e) => setWeight(e.target.value)}
               placeholder="0.0"
@@ -185,6 +204,9 @@ export default function WeightPage() {
             />
             <span className="text-xl text-gray-400 pb-1 shrink-0">kg</span>
           </div>
+          {error && (
+            <p className="text-sm text-red-500 mb-3">{error}</p>
+          )}
           <button
             onClick={handleSave}
             disabled={saving || !weight}

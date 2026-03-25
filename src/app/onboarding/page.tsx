@@ -29,6 +29,7 @@ export default function OnboardingPage() {
   const [chains, setChains] = useState<Chain[]>([]);
   const [selectedChains, setSelectedChains] = useState<string[]>([]);
   const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState(false);
 
   useEffect(() => {
     const supabase = createClient();
@@ -54,16 +55,18 @@ export default function OnboardingPage() {
 
   const handleComplete = async () => {
     setSaving(true);
+    setSaveError(false);
     try {
       const supabase = createClient();
       const {
         data: { user },
       } = await supabase.auth.getUser();
       if (user) {
-        await supabase
+        const { error } = await supabase
           .from("profiles")
           .update({ target_calories: calories })
           .eq("id", user.id);
+        if (error) throw error;
       }
       if (selectedChains.length > 0) {
         localStorage.setItem("favoriteChains", JSON.stringify(selectedChains));
@@ -71,6 +74,7 @@ export default function OnboardingPage() {
       router.push("/dashboard");
     } catch {
       setSaving(false);
+      setSaveError(true);
     }
   };
 
@@ -264,6 +268,19 @@ export default function OnboardingPage() {
                 </span>
               </div>
             </div>
+
+            {saveError && (
+              <div className="w-full bg-red-50 border border-red-200 rounded-xl p-4 mb-4 text-center">
+                <p className="text-sm text-red-700 mb-3">保存に失敗しました。もう一度お試しください。</p>
+                <button
+                  onClick={handleComplete}
+                  disabled={saving}
+                  className="px-6 py-2 bg-red-500 text-white text-sm font-medium rounded-xl active:scale-[0.98] transition-transform disabled:opacity-50"
+                >
+                  {saving ? "保存中..." : "再試行"}
+                </button>
+              </div>
+            )}
 
             <button
               onClick={handleComplete}

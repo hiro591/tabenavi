@@ -99,6 +99,7 @@ export default function MapPage() {
   const [filter, setFilter] = useState<string>("all");
   const [selected, setSelected] = useState<NearbyStore | null>(null);
   const [mapReady, setMapReady] = useState(false);
+  const [storeError, setStoreError] = useState(false);
 
   // Auth
   useEffect(() => {
@@ -121,6 +122,7 @@ export default function MapPage() {
         setLocationError(true);
         // Default to Tokyo Station
         setLocation({ lat: 35.6812, lng: 139.7671 });
+        alert("位置情報を取得できませんでした。東京駅周辺を表示しています。");
       },
       { timeout: 8000, enableHighAccuracy: true }
     );
@@ -223,7 +225,7 @@ export default function MapPage() {
 
         setStores(nearby);
       } catch {
-        // Overpass might fail on slow connections — silent fail
+        setStoreError(true);
       }
       setLoadingStores(false);
     };
@@ -281,7 +283,7 @@ export default function MapPage() {
       <div className="absolute top-0 left-0 right-0 z-[1000] bg-white/95 backdrop-blur-sm border-b border-gray-100">
         <div className="max-w-lg mx-auto px-4 h-14 flex items-center gap-3">
           <button
-            onClick={() => router.back()}
+            onClick={() => router.push("/dashboard")}
             className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-600"
           >
             <ChevronLeft className="w-5 h-5" />
@@ -362,8 +364,15 @@ export default function MapPage() {
         </div>
       )}
 
+      {/* Store fetch error */}
+      {storeError && (
+        <div className="absolute top-24 left-4 right-4 z-[1000] bg-red-50 border border-red-200 rounded-xl px-4 py-2">
+          <p className="text-xs text-red-700">店舗情報の取得に失敗しました</p>
+        </div>
+      )}
+
       {/* No stores */}
-      {!loadingStores && mapReady && stores.length === 0 && (
+      {!loadingStores && mapReady && stores.length === 0 && !storeError && (
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[1000] bg-white rounded-2xl shadow-lg px-6 py-5 text-center max-w-xs">
           <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-2">
             <MapPin className="w-6 h-6 text-gray-400" />

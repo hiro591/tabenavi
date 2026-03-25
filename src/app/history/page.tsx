@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState, useMemo } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import type { FoodLog } from "@/types/database";
 
@@ -10,6 +12,7 @@ type DayData = {
 };
 
 export default function HistoryPage() {
+  const router = useRouter();
   const [logs, setLogs] = useState<FoodLog[]>([]);
   const [targetCalories, setTargetCalories] = useState(2000);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
@@ -124,15 +127,43 @@ export default function HistoryPage() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="text-gray-400">読み込み中...</div>
+      <div className="px-4 pt-6 pb-20">
+        <div className="h-7 w-32 bg-gray-200 rounded animate-pulse mb-4" />
+        <div className="bg-white rounded-2xl shadow-sm p-4 mb-4">
+          <div className="h-6 w-40 bg-gray-200 rounded animate-pulse mb-4 mx-auto" />
+          <div className="grid grid-cols-7 gap-1">
+            {Array.from({ length: 35 }).map((_, i) => (
+              <div key={i} className="h-12 bg-gray-100 rounded-lg animate-pulse" />
+            ))}
+          </div>
+        </div>
       </div>
     );
   }
 
   return (
     <div className="px-4 pt-6 pb-20">
-      <h1 className="text-xl font-bold text-gray-800 mb-4">食事履歴</h1>
+      <div className="flex items-center gap-3 mb-4">
+        <button
+          onClick={() => router.push("/dashboard")}
+          className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-600"
+        >
+          ←
+        </button>
+        <h1 className="text-xl font-bold text-gray-800">食事履歴</h1>
+      </div>
+
+      {logs.length === 0 && (
+        <div className="bg-white rounded-2xl shadow-sm p-8 text-center mb-4">
+          <p className="text-gray-500 mb-3">まだ記録がありません</p>
+          <Link
+            href="/record"
+            className="inline-block px-6 py-2 bg-orange-500 text-white text-sm font-medium rounded-xl"
+          >
+            食事を記録する
+          </Link>
+        </div>
+      )}
 
       {/* カレンダーヘッダー */}
       <div className="bg-white rounded-2xl shadow-sm p-4 mb-4">
