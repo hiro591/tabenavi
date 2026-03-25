@@ -1,11 +1,11 @@
 {
   "name": "たべなび",
   "short_name": "たべなび",
-  "description": "外食専門の食事管理サービス",
+  "description": "外食専門の栄養管理アプリ",
   "start_url": "/dashboard",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#0ea5e9",
+  "background_color": "#141B2D",
+  "theme_color": "#141B2D",
   "orientation": "portrait",
   "icons": [
     { "src": "/icon-192x192.png", "sizes": "192x192", "type": "image/png" },

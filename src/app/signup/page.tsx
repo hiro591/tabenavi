@@ -57,20 +57,20 @@ export default function SignupPage() {
 
   if (success) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-sky-50 to-cyan-50 flex items-center justify-center p-4">
-        <div className="bg-white rounded-3xl shadow-xl p-8 w-full max-w-md text-center">
-          <div className="w-14 h-14 bg-gradient-to-br from-sky-400 to-cyan-400 rounded-2xl flex items-center justify-center mx-auto mb-4">
+      <div className="min-h-screen bg-[#141B2D] flex items-center justify-center p-4">
+        <div className="bg-[#1E2A3F] rounded-2xl border border-[#334155]/50 p-8 w-full max-w-md text-center animate-fade-in">
+          <div className="w-14 h-14 bg-gradient-to-br from-sky-400 to-cyan-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-cyan-500/20">
             <span className="text-white font-bold text-2xl">た</span>
           </div>
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">たべなび</h1>
-          <div className="mt-6 p-5 bg-green-50 rounded-2xl">
-            <p className="text-green-700 font-bold">確認メールを送信しました</p>
-            <p className="text-green-600 text-sm mt-2 leading-relaxed">
+          <h1 className="text-2xl font-bold text-slate-100 mb-2">たべなび</h1>
+          <div className="mt-6 p-5 bg-emerald-400/10 rounded-xl border border-emerald-400/20">
+            <p className="text-emerald-400 font-bold">確認メールを送信しました</p>
+            <p className="text-emerald-400/80 text-sm mt-2 leading-relaxed">
               メール内のリンクをクリックして、登録を完了してください。
             </p>
           </div>
-          <p className="text-sm text-gray-500 mt-6">
-            <Link href="/login" className="text-sky-500 hover:text-sky-600 font-medium">
+          <p className="text-sm text-slate-500 mt-6">
+            <Link href="/login" className="text-cyan-400 hover:text-cyan-300 font-medium transition-colors">
               ログインページへ戻る
             </Link>
           </p>
@@ -80,85 +80,86 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-sky-50 to-cyan-50 flex items-center justify-center p-4">
-      <div className="w-full max-w-4xl flex flex-col lg:flex-row gap-6 lg:gap-10 items-center">
+    <div className="min-h-screen bg-[#141B2D] flex items-center justify-center p-4">
+      <div className="w-full max-w-4xl flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
 
-        {/* 左カラム: 価値訴求 */}
-        <div className="flex-1 max-w-md lg:max-w-none">
-          <div className="flex items-center gap-2 mb-5">
-            <div className="w-10 h-10 bg-gradient-to-br from-sky-400 to-cyan-400 rounded-xl flex items-center justify-center">
+        {/* Left: Value proposition */}
+        <div className="flex-1 max-w-md lg:max-w-none animate-fade-in-up">
+          <div className="flex items-center gap-2.5 mb-6">
+            <div className="w-10 h-10 bg-gradient-to-br from-sky-400 to-cyan-500 rounded-xl flex items-center justify-center shadow-lg shadow-cyan-500/20">
               <span className="text-white font-bold text-lg">た</span>
             </div>
-            <span className="text-xl font-bold text-gray-900">たべなび</span>
+            <span className="text-xl font-bold text-slate-100">たべなび</span>
           </div>
 
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 leading-tight mb-4">
-            外食しながら、<br />
-            カラダづくり。
+          <h1 className="text-[28px] sm:text-[34px] font-bold text-slate-100 leading-tight mb-4">
+            外食しながら、
+            <br />
+            <span className="text-gradient">カラダづくり。</span>
           </h1>
-          <p className="text-gray-500 text-sm sm:text-base leading-relaxed mb-8">
-            チェーン店・コンビニのメニューを選ぶだけ。<br />
+          <p className="text-slate-400 text-sm sm:text-base leading-relaxed mb-8">
+            チェーン店・コンビニのメニューを選ぶだけ。
+            <br />
             カロリー・PFCを自動で記録・管理できます。
           </p>
 
           <div className="space-y-4">
             <div className="flex items-start gap-3">
-              <div className="w-9 h-9 rounded-lg bg-sky-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                <Utensils className="w-4.5 h-4.5 text-sky-600" />
+              <div className="w-9 h-9 rounded-lg bg-cyan-400/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <Utensils className="w-[18px] h-[18px] text-cyan-400" />
               </div>
               <div>
-                <p className="font-bold text-gray-900 text-sm">20チェーン・500メニュー対応</p>
-                <p className="text-xs text-gray-500 mt-0.5">マクドナルド・吉野家・サイゼリヤなど主要チェーンを網羅</p>
+                <p className="font-semibold text-slate-200 text-sm">20チェーン・500メニュー対応</p>
+                <p className="text-xs text-slate-500 mt-0.5">マクドナルド・吉野家・サイゼリヤなど主要チェーンを網羅</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
-              <div className="w-9 h-9 rounded-lg bg-sky-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                <BarChart3 className="w-4.5 h-4.5 text-sky-600" />
+              <div className="w-9 h-9 rounded-lg bg-blue-400/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <BarChart3 className="w-[18px] h-[18px] text-blue-400" />
               </div>
               <div>
-                <p className="font-bold text-gray-900 text-sm">PFCで外食先を絞り込み</p>
-                <p className="text-xs text-gray-500 mt-0.5">カロリー・タンパク質・脂質で最適なメニューを検索</p>
+                <p className="font-semibold text-slate-200 text-sm">PFCで外食先を絞り込み</p>
+                <p className="text-xs text-slate-500 mt-0.5">カロリー・タンパク質・脂質で最適なメニューを検索</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
-              <div className="w-9 h-9 rounded-lg bg-sky-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                <MapPin className="w-4.5 h-4.5 text-sky-600" />
+              <div className="w-9 h-9 rounded-lg bg-emerald-400/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <MapPin className="w-[18px] h-[18px] text-emerald-400" />
               </div>
               <div>
-                <p className="font-bold text-gray-900 text-sm">マップで近くのメニューを発見</p>
-                <p className="text-xs text-gray-500 mt-0.5">今いる場所の近くで体づくり向きのメニューが見つかる</p>
+                <p className="font-semibold text-slate-200 text-sm">マップで近くのメニューを発見</p>
+                <p className="text-xs text-slate-500 mt-0.5">今いる場所の近くで体づくり向きのメニューが見つかる</p>
               </div>
             </div>
           </div>
 
-          {/* Social proof */}
-          <div className="flex items-center gap-4 mt-8 text-xs text-gray-400">
-            <span className="flex items-center gap-1">
-              <CheckCircle className="w-3.5 h-3.5 text-sky-400" />
+          <div className="flex items-center gap-4 mt-8 text-xs text-slate-500">
+            <span className="flex items-center gap-1.5">
+              <CheckCircle className="w-3.5 h-3.5 text-cyan-400" />
               無料で利用可能
             </span>
-            <span className="flex items-center gap-1">
-              <CheckCircle className="w-3.5 h-3.5 text-sky-400" />
+            <span className="flex items-center gap-1.5">
+              <CheckCircle className="w-3.5 h-3.5 text-cyan-400" />
               3タップで記録
             </span>
-            <span className="flex items-center gap-1">
-              <CheckCircle className="w-3.5 h-3.5 text-sky-400" />
+            <span className="flex items-center gap-1.5">
+              <CheckCircle className="w-3.5 h-3.5 text-cyan-400" />
               登録30秒
             </span>
           </div>
         </div>
 
-        {/* 右カラム: 登録フォーム */}
-        <div className="bg-white rounded-3xl shadow-xl p-7 sm:p-8 w-full max-w-md">
+        {/* Right: Form */}
+        <div className="bg-[#1E2A3F] rounded-2xl border border-[#334155]/50 p-7 sm:p-8 w-full max-w-md animate-fade-in-up delay-200" style={{ animationFillMode: 'both' }}>
           <div className="text-center mb-6">
-            <h2 className="text-xl font-bold text-gray-900">無料アカウント作成</h2>
-            <p className="text-gray-400 text-sm mt-1">30秒で登録完了</p>
+            <h2 className="text-xl font-bold text-slate-100">無料アカウント作成</h2>
+            <p className="text-slate-500 text-sm mt-1">30秒で登録完了</p>
           </div>
 
-          {/* Googleログイン（最優先CTA） */}
+          {/* Google Login */}
           <button
             onClick={handleGoogleSignup}
-            className="w-full py-3.5 border border-gray-200 rounded-2xl text-gray-700 font-medium hover:bg-gray-50 transition flex items-center justify-center gap-2.5 mb-4"
+            className="w-full py-3.5 bg-[#253245] border border-[#334155] rounded-xl text-slate-200 font-medium hover:bg-[#2D3B50] transition-colors flex items-center justify-center gap-2.5 mb-5"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24">
               <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4" />
@@ -169,15 +170,15 @@ export default function SignupPage() {
             Googleで始める
           </button>
 
-          <div className="flex items-center gap-3 mb-4">
-            <div className="flex-1 h-px bg-gray-100" />
-            <span className="text-xs text-gray-400">または</span>
-            <div className="flex-1 h-px bg-gray-100" />
+          <div className="flex items-center gap-3 mb-5">
+            <div className="flex-1 h-px bg-[#334155]/50" />
+            <span className="text-xs text-slate-600">または</span>
+            <div className="flex-1 h-px bg-[#334155]/50" />
           </div>
 
-          <form onSubmit={handleSignup} className="space-y-3.5">
+          <form onSubmit={handleSignup} className="space-y-4">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="name" className="block text-sm font-medium text-slate-300 mb-1.5">
                 お名前
               </label>
               <input
@@ -186,13 +187,13 @@ export default function SignupPage() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
-                className="w-full px-4 py-3 border border-gray-200 rounded-2xl focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400 transition text-sm"
+                className="w-full px-4 py-3 bg-[#253245] border border-[#334155] rounded-xl text-slate-100 placeholder:text-slate-500 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/30 transition-colors text-sm"
                 placeholder="ニックネームでOK"
               />
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-1.5">
                 メールアドレス
               </label>
               <input
@@ -201,13 +202,13 @@ export default function SignupPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full px-4 py-3 border border-gray-200 rounded-2xl focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400 transition text-sm"
+                className="w-full px-4 py-3 bg-[#253245] border border-[#334155] rounded-xl text-slate-100 placeholder:text-slate-500 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/30 transition-colors text-sm"
                 placeholder="mail@example.com"
               />
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="password" className="block text-sm font-medium text-slate-300 mb-1.5">
                 パスワード
               </label>
               <input
@@ -217,19 +218,19 @@ export default function SignupPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 minLength={8}
-                className="w-full px-4 py-3 border border-gray-200 rounded-2xl focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400 transition text-sm"
+                className="w-full px-4 py-3 bg-[#253245] border border-[#334155] rounded-xl text-slate-100 placeholder:text-slate-500 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/30 transition-colors text-sm"
                 placeholder="8文字以上"
               />
             </div>
 
             {error && (
-              <p className="text-red-500 text-sm">{error}</p>
+              <p className="text-red-400 text-sm bg-red-400/10 rounded-lg px-3 py-2">{error}</p>
             )}
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3.5 bg-gradient-to-r from-sky-400 to-cyan-400 hover:from-sky-500 hover:to-cyan-500 text-white font-bold rounded-2xl transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-1.5"
+              className="w-full py-3.5 bg-gradient-to-r from-sky-400 to-cyan-500 hover:from-sky-500 hover:to-cyan-600 text-white font-bold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-1.5 shadow-lg shadow-cyan-500/20 active:scale-[0.98]"
             >
               {loading ? '登録中...' : (
                 <>
@@ -240,15 +241,15 @@ export default function SignupPage() {
             </button>
           </form>
 
-          <p className="text-center text-xs text-gray-400 mt-5">
+          <p className="text-center text-xs text-slate-500 mt-5">
             すでにアカウントをお持ちの方は
-            <Link href="/login" className="text-sky-500 hover:text-sky-600 font-medium ml-1">
+            <Link href="/login" className="text-cyan-400 hover:text-cyan-300 font-medium ml-1 transition-colors">
               ログイン
             </Link>
           </p>
 
-          <p className="text-center text-[10px] text-gray-300 mt-3 leading-relaxed">
-            登録により<Link href="/terms" className="underline">利用規約</Link>と<Link href="/privacy" className="underline">プライバシーポリシー</Link>に同意したものとみなされます
+          <p className="text-center text-[10px] text-slate-600 mt-3 leading-relaxed">
+            登録により<Link href="/terms" className="underline hover:text-slate-400 transition-colors">利用規約</Link>と<Link href="/privacy" className="underline hover:text-slate-400 transition-colors">プライバシーポリシー</Link>に同意したものとみなされます
           </p>
         </div>
       </div>
