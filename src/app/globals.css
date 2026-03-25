@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 :root {
-  --bg-base: #141B2D;
-  --bg-card: #1E2A3F;
-  --bg-surface: #253245;
+  --bg-base: #1A2235;
+  --bg-card: #243044;
+  --bg-surface: #2D3B50;
   --bg-elevated: #2D3B50;
   --border: #334155;
   --border-subtle: #1E293B;

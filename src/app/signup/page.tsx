@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
 import { CheckCircle, ChevronRight, Utensils, BarChart3, MapPin } from 'lucide-react'
+import { Logo } from '@/components/Logo'
 
 export default function SignupPage() {
   const [name, setName] = useState('')
@@ -57,12 +58,11 @@ export default function SignupPage() {
 
   if (success) {
     return (
-      <div className="min-h-screen bg-[#141B2D] flex items-center justify-center p-4">
-        <div className="bg-[#1E2A3F] rounded-2xl border border-[#334155]/50 p-8 w-full max-w-md text-center animate-fade-in">
-          <div className="w-14 h-14 bg-gradient-to-br from-sky-400 to-cyan-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-cyan-500/20">
-            <span className="text-white font-bold text-2xl">た</span>
+      <div className="min-h-screen bg-[#1A2235] flex items-center justify-center p-4">
+        <div className="bg-[#243044] rounded-2xl border border-[#334155]/50 p-8 w-full max-w-md text-center animate-fade-in">
+          <div className="flex justify-center mb-4">
+            <Logo size={40} textSize="text-2xl" />
           </div>
-          <h1 className="text-2xl font-bold text-slate-100 mb-2">たべなび</h1>
           <div className="mt-6 p-5 bg-emerald-400/10 rounded-xl border border-emerald-400/20">
             <p className="text-emerald-400 font-bold">確認メールを送信しました</p>
             <p className="text-emerald-400/80 text-sm mt-2 leading-relaxed">
@@ -80,16 +80,13 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#141B2D] flex items-center justify-center p-4">
+    <div className="min-h-screen bg-[#1A2235] flex items-center justify-center p-4">
       <div className="w-full max-w-4xl flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
 
         {/* Left: Value proposition */}
         <div className="flex-1 max-w-md lg:max-w-none animate-fade-in-up">
-          <div className="flex items-center gap-2.5 mb-6">
-            <div className="w-10 h-10 bg-gradient-to-br from-sky-400 to-cyan-500 rounded-xl flex items-center justify-center shadow-lg shadow-cyan-500/20">
-              <span className="text-white font-bold text-lg">た</span>
-            </div>
-            <span className="text-xl font-bold text-slate-100">たべなび</span>
+          <div className="mb-6">
+            <Logo size={36} textSize="text-xl" />
           </div>
 
           <h1 className="text-[28px] sm:text-[34px] font-bold text-slate-100 leading-tight mb-4">
@@ -150,7 +147,7 @@ export default function SignupPage() {
         </div>
 
         {/* Right: Form */}
-        <div className="bg-[#1E2A3F] rounded-2xl border border-[#334155]/50 p-7 sm:p-8 w-full max-w-md animate-fade-in-up delay-200" style={{ animationFillMode: 'both' }}>
+        <div className="bg-[#243044] rounded-2xl border border-[#334155]/50 p-7 sm:p-8 w-full max-w-md animate-fade-in-up delay-200" style={{ animationFillMode: 'both' }}>
           <div className="text-center mb-6">
             <h2 className="text-xl font-bold text-slate-100">無料アカウント作成</h2>
             <p className="text-slate-500 text-sm mt-1">30秒で登録完了</p>
@@ -159,7 +156,7 @@ export default function SignupPage() {
           {/* Google Login */}
           <button
             onClick={handleGoogleSignup}
-            className="w-full py-3.5 bg-[#253245] border border-[#334155] rounded-xl text-slate-200 font-medium hover:bg-[#2D3B50] transition-colors flex items-center justify-center gap-2.5 mb-5"
+            className="w-full py-3.5 bg-[#2D3B50] border border-[#334155] rounded-xl text-slate-200 font-medium hover:bg-[#2D3B50] transition-colors flex items-center justify-center gap-2.5 mb-5"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24">
               <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4" />
@@ -187,7 +184,7 @@ export default function SignupPage() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
-                className="w-full px-4 py-3 bg-[#253245] border border-[#334155] rounded-xl text-slate-100 placeholder:text-slate-500 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/30 transition-colors text-sm"
+                className="w-full px-4 py-3 bg-[#2D3B50] border border-[#334155] rounded-xl text-slate-100 placeholder:text-slate-500 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/30 transition-colors text-sm"
                 placeholder="ニックネームでOK"
               />
             </div>
@@ -202,7 +199,7 @@ export default function SignupPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full px-4 py-3 bg-[#253245] border border-[#334155] rounded-xl text-slate-100 placeholder:text-slate-500 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/30 transition-colors text-sm"
+                className="w-full px-4 py-3 bg-[#2D3B50] border border-[#334155] rounded-xl text-slate-100 placeholder:text-slate-500 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/30 transition-colors text-sm"
                 placeholder="mail@example.com"
               />
             </div>
@@ -218,7 +215,7 @@ export default function SignupPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 minLength={8}
-                className="w-full px-4 py-3 bg-[#253245] border border-[#334155] rounded-xl text-slate-100 placeholder:text-slate-500 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/30 transition-colors text-sm"
+                className="w-full px-4 py-3 bg-[#2D3B50] border border-[#334155] rounded-xl text-slate-100 placeholder:text-slate-500 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/30 transition-colors text-sm"
                 placeholder="8文字以上"
               />
             </div>

@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
+import { Logo } from '@/components/Logo'
 
 export default function LoginPage() {
   const router = useRouter()
@@ -40,20 +41,19 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#141B2D] flex items-center justify-center p-4">
-      <div className="bg-[#1E2A3F] rounded-2xl border border-[#334155]/50 p-8 w-full max-w-md animate-fade-in">
+    <div className="min-h-screen bg-[#1A2235] flex items-center justify-center p-4">
+      <div className="bg-[#243044] rounded-2xl border border-[#334155]/50 p-8 w-full max-w-md animate-fade-in">
         <div className="text-center mb-8">
-          <div className="w-14 h-14 bg-gradient-to-br from-sky-400 to-cyan-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-cyan-500/20">
-            <span className="text-white font-bold text-2xl">た</span>
+          <div className="flex justify-center mb-2">
+            <Logo size={40} textSize="text-2xl" />
           </div>
-          <h1 className="text-2xl font-bold text-slate-100">たべなび</h1>
           <p className="text-slate-500 text-sm mt-1">外食しながら、カラダづくり。</p>
         </div>
 
         {/* Google Login */}
         <button
           onClick={handleGoogleLogin}
-          className="w-full py-3.5 bg-[#253245] border border-[#334155] rounded-xl text-slate-200 font-medium hover:bg-[#2D3B50] transition-colors flex items-center justify-center gap-2.5 mb-5"
+          className="w-full py-3.5 bg-[#2D3B50] border border-[#334155] rounded-xl text-slate-200 font-medium hover:bg-[#2D3B50] transition-colors flex items-center justify-center gap-2.5 mb-5"
         >
           <svg className="w-5 h-5" viewBox="0 0 24 24">
             <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4" />
@@ -81,7 +81,7 @@ export default function LoginPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full px-4 py-3 bg-[#253245] border border-[#334155] rounded-xl text-slate-100 placeholder:text-slate-500 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/30 transition-colors text-sm"
+              className="w-full px-4 py-3 bg-[#2D3B50] border border-[#334155] rounded-xl text-slate-100 placeholder:text-slate-500 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/30 transition-colors text-sm"
               placeholder="mail@example.com"
             />
           </div>
@@ -96,7 +96,7 @@ export default function LoginPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full px-4 py-3 bg-[#253245] border border-[#334155] rounded-xl text-slate-100 placeholder:text-slate-500 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/30 transition-colors text-sm"
+              className="w-full px-4 py-3 bg-[#2D3B50] border border-[#334155] rounded-xl text-slate-100 placeholder:text-slate-500 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/30 transition-colors text-sm"
               placeholder="パスワードを入力"
             />
           </div>

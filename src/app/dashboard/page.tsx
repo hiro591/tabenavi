@@ -158,21 +158,21 @@ export default function DashboardPage() {
   // ─── Loading skeleton ───
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#141B2D] px-4 pt-6 pb-24">
+      <div className="min-h-screen bg-[#1A2235] px-4 pt-6 pb-24">
         <div className="max-w-lg mx-auto space-y-4">
           <div className="flex items-center justify-between mb-2">
-            <div className="h-6 w-48 bg-[#1E2A3F] rounded-lg animate-shimmer" />
-            <div className="h-8 w-8 bg-[#1E2A3F] rounded-full animate-shimmer" />
+            <div className="h-6 w-48 bg-[#243044] rounded-lg animate-shimmer" />
+            <div className="h-8 w-8 bg-[#243044] rounded-full animate-shimmer" />
           </div>
-          <div className="h-4 w-32 bg-[#1E2A3F] rounded animate-shimmer" />
-          <div className="bg-[#1E2A3F] rounded-2xl p-6 flex justify-center">
-            <div className="w-48 h-48 rounded-full bg-[#253245] animate-shimmer" />
+          <div className="h-4 w-32 bg-[#243044] rounded animate-shimmer" />
+          <div className="bg-[#243044] rounded-2xl p-6 flex justify-center">
+            <div className="w-48 h-48 rounded-full bg-[#2D3B50] animate-shimmer" />
           </div>
-          <div className="bg-[#1E2A3F] rounded-2xl p-6 space-y-3">
-            <div className="h-4 w-24 bg-[#253245] rounded animate-shimmer" />
-            <div className="h-2.5 w-full bg-[#253245] rounded-full animate-shimmer" />
-            <div className="h-2.5 w-full bg-[#253245] rounded-full animate-shimmer" />
-            <div className="h-2.5 w-full bg-[#253245] rounded-full animate-shimmer" />
+          <div className="bg-[#243044] rounded-2xl p-6 space-y-3">
+            <div className="h-4 w-24 bg-[#2D3B50] rounded animate-shimmer" />
+            <div className="h-2.5 w-full bg-[#2D3B50] rounded-full animate-shimmer" />
+            <div className="h-2.5 w-full bg-[#2D3B50] rounded-full animate-shimmer" />
+            <div className="h-2.5 w-full bg-[#2D3B50] rounded-full animate-shimmer" />
           </div>
         </div>
       </div>
@@ -206,7 +206,7 @@ export default function DashboardPage() {
   const carbsTarget = Math.round((targetCalories * 0.6) / 4);
 
   return (
-    <div className="min-h-screen bg-[#141B2D] px-4 pt-6 pb-24">
+    <div className="min-h-screen bg-[#1A2235] px-4 pt-6 pb-24">
       <div className="max-w-lg mx-auto">
         {/* ─── Header ─── */}
         <div className="flex items-center justify-between mb-1">
@@ -215,7 +215,7 @@ export default function DashboardPage() {
           </h1>
           <Link
             href="/profile"
-            className="w-9 h-9 flex items-center justify-center rounded-full bg-[#1E2A3F] text-slate-400 hover:text-slate-200 hover:bg-[#253245] transition-colors"
+            className="w-9 h-9 flex items-center justify-center rounded-full bg-[#243044] text-slate-400 hover:text-slate-200 hover:bg-[#2D3B50] transition-colors"
           >
             <Settings className="w-4 h-4" />
           </Link>
@@ -223,7 +223,7 @@ export default function DashboardPage() {
         <p className="text-xs text-slate-500 mb-5">{todayDate}</p>
 
         {/* ─── Calorie Ring ─── */}
-        <div className="bg-[#1E2A3F] rounded-2xl border border-[#334155]/30 p-6 mb-4">
+        <div className="bg-[#243044] rounded-2xl border border-[#334155]/30 p-6 mb-4">
           <div className="flex justify-center">
             <CalorieRing total={totalCalories} target={targetCalories} />
           </div>
@@ -245,7 +245,7 @@ export default function DashboardPage() {
         </div>
 
         {/* ─── PFC Balance ─── */}
-        <div className="bg-[#1E2A3F] rounded-2xl border border-[#334155]/30 p-5 mb-4">
+        <div className="bg-[#243044] rounded-2xl border border-[#334155]/30 p-5 mb-4">
           <h2 className="text-xs font-semibold text-slate-500 mb-4 uppercase tracking-wider">
             PFCバランス
           </h2>
@@ -278,7 +278,7 @@ export default function DashboardPage() {
         <div className="grid grid-cols-2 gap-3 mb-4">
           <Link
             href="/search"
-            className="bg-[#1E2A3F] rounded-2xl border border-[#334155]/30 p-4 flex items-center gap-3 hover:bg-[#253245] transition-colors active:scale-[0.98]"
+            className="bg-[#243044] rounded-2xl border border-[#334155]/30 p-4 flex items-center gap-3 hover:bg-[#2D3B50] transition-colors active:scale-[0.98]"
           >
             <div className="w-10 h-10 rounded-xl bg-cyan-400/10 flex items-center justify-center">
               <Search className="w-5 h-5 text-cyan-400" />
@@ -290,7 +290,7 @@ export default function DashboardPage() {
           </Link>
           <Link
             href="/combo"
-            className="bg-[#1E2A3F] rounded-2xl border border-[#334155]/30 p-4 flex items-center gap-3 hover:bg-[#253245] transition-colors active:scale-[0.98]"
+            className="bg-[#243044] rounded-2xl border border-[#334155]/30 p-4 flex items-center gap-3 hover:bg-[#2D3B50] transition-colors active:scale-[0.98]"
           >
             <div className="w-10 h-10 rounded-xl bg-violet-400/10 flex items-center justify-center">
               <TrendingUp className="w-5 h-5 text-violet-400" />
@@ -324,7 +324,7 @@ export default function DashboardPage() {
         )}
 
         {/* ─── Weekly Trend ─── */}
-        <div className="bg-[#1E2A3F] rounded-2xl border border-[#334155]/30 p-5 mb-4">
+        <div className="bg-[#243044] rounded-2xl border border-[#334155]/30 p-5 mb-4">
           <h2 className="text-xs font-semibold text-slate-500 mb-4 uppercase tracking-wider">
             週間カロリー
           </h2>
@@ -352,7 +352,7 @@ export default function DashboardPage() {
                     <div
                       className={`w-7 rounded-t-md transition-all duration-500 ${
                         day.calories === 0
-                          ? "bg-[#253245]"
+                          ? "bg-[#2D3B50]"
                           : isOver
                             ? "bg-red-400"
                             : isToday
@@ -381,7 +381,7 @@ export default function DashboardPage() {
         </div>
 
         {/* ─── Today's Logs ─── */}
-        <div className="bg-[#1E2A3F] rounded-2xl border border-[#334155]/30 p-5 mb-4">
+        <div className="bg-[#243044] rounded-2xl border border-[#334155]/30 p-5 mb-4">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
               今日の記録
@@ -390,7 +390,7 @@ export default function DashboardPage() {
           </div>
           {logs.length === 0 ? (
             <div className="text-center py-8">
-              <div className="w-14 h-14 bg-[#253245] rounded-full flex items-center justify-center mx-auto mb-3">
+              <div className="w-14 h-14 bg-[#2D3B50] rounded-full flex items-center justify-center mx-auto mb-3">
                 <Utensils className="w-6 h-6 text-slate-500" />
               </div>
               <p className="text-sm text-slate-400">まだ記録がありません</p>
@@ -403,7 +403,7 @@ export default function DashboardPage() {
               {logs.map((log) => (
                 <div
                   key={log.id}
-                  className={`flex items-center justify-between bg-[#253245]/50 rounded-xl px-3 py-2.5 transition-all ${
+                  className={`flex items-center justify-between bg-[#2D3B50]/50 rounded-xl px-3 py-2.5 transition-all ${
                     MEAL_TYPE_BORDER[log.meal_type] || MEAL_TYPE_BORDER.snack
                   } ${deletingId === log.id ? "opacity-40 scale-95" : ""}`}
                 >
@@ -569,7 +569,7 @@ function PFCBar({
           / {target}g
         </span>
       </div>
-      <div className="w-full bg-[#253245] rounded-full h-2 overflow-hidden">
+      <div className="w-full bg-[#2D3B50] rounded-full h-2 overflow-hidden">
         <div
           className={`h-full rounded-full ${color} transition-all duration-500`}
           style={{ width: `${percentage}%` }}

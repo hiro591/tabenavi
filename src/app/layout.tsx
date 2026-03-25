@@ -39,7 +39,7 @@ export default function RootLayout({
           sizes="180x180"
           href="/apple-touch-icon.png"
         />
-        <meta name="theme-color" content="#141B2D" />
+        <meta name="theme-color" content="#1A2235" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta
           name="apple-mobile-web-app-status-bar-style"
@@ -64,7 +64,7 @@ export default function RootLayout({
           `}
         </Script>
       </head>
-      <body className="antialiased bg-[#141B2D] text-slate-100">
+      <body className="antialiased bg-[#1A2235] text-slate-100">
         {children}
       </body>
     </html>
