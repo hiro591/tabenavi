@@ -78,6 +78,16 @@ const GUIDE_ARTICLES = [
   { slug: "eating-order", title: "太らない食べ順ガイド" },
   { slug: "seven-eleven-diet", title: "セブンイレブンダイエット" },
   { slug: "bulkup-eating-out", title: "増量期の外食ガイド" },
+  { slug: "cheat-day", title: "チートデイ完全ガイド" },
+  { slug: "no-exercise-diet", title: "運動なしダイエット" },
+  { slug: "diet-plateau", title: "停滞期の乗り越え方" },
+  { slug: "rebound-prevention", title: "リバウンド防止" },
+  { slug: "bmr-calculator", title: "基礎代謝の計算" },
+  { slug: "lawson-diet", title: "ローソンダイエット" },
+  { slug: "familymart-diet", title: "ファミマダイエット" },
+  { slug: "eat-and-lose", title: "食べて痩せる方法" },
+  { slug: "metabolism-boost-foods", title: "代謝を上げる食べ物" },
+  { slug: "diet-mistakes", title: "ダイエットNG集" },
 ];
 
 function SidebarRelated({ currentSlug }: { currentSlug: string }) {

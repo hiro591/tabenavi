@@ -726,6 +726,56 @@ const RELATED_ARTICLES = [
     title: "増量期の外食ガイド",
     description: "バルクアップ向きチェーン店メニュー。",
   },
+  {
+    slug: "cheat-day",
+    title: "チートデイ完全ガイド",
+    description: "正しいやり方・頻度・メニュー。",
+  },
+  {
+    slug: "no-exercise-diet",
+    title: "運動なしダイエット",
+    description: "食事だけで痩せる方法。",
+  },
+  {
+    slug: "diet-plateau",
+    title: "停滞期の乗り越え方",
+    description: "体重が減らない時の対策。",
+  },
+  {
+    slug: "rebound-prevention",
+    title: "リバウンド防止ガイド",
+    description: "ダイエット後の体重維持。",
+  },
+  {
+    slug: "bmr-calculator",
+    title: "基礎代謝の計算と上げ方",
+    description: "痩せやすい体を作る方法。",
+  },
+  {
+    slug: "lawson-diet",
+    title: "ローソンダイエット",
+    description: "低カロリー＆高タンパク商品。",
+  },
+  {
+    slug: "familymart-diet",
+    title: "ファミマダイエット",
+    description: "RIZAP商品＆低カロリー。",
+  },
+  {
+    slug: "eat-and-lose",
+    title: "食べて痩せる方法",
+    description: "我慢しないダイエット。",
+  },
+  {
+    slug: "metabolism-boost-foods",
+    title: "代謝を上げる食べ物",
+    description: "痩せやすい体を食事で作る。",
+  },
+  {
+    slug: "diet-mistakes",
+    title: "ダイエットNG集",
+    description: "やってはいけないこと10選。",
+  },
 ];
 
 export function ArticleFooter({ currentSlug }: { currentSlug: string }) {

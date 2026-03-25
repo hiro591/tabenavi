@@ -25,6 +25,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "morning-diet", "ramen-diet", "curry-diet", "sushi-diet",
     "pfc-guide", "recording-diet", "late-night-eating",
     "eating-order", "seven-eleven-diet", "bulkup-eating-out",
+    "cheat-day", "no-exercise-diet", "diet-plateau",
+    "rebound-prevention", "bmr-calculator", "lawson-diet",
+    "familymart-diet", "eat-and-lose", "metabolism-boost-foods",
+    "diet-mistakes",
   ];
 
   const chainPages: MetadataRoute.Sitemap = chainSlugs.map((slug) => ({
