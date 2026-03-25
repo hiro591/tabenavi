@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://tabenavi.jp";
-  const now = "2026-03-23T00:00:00.000Z";
+  const now = "2026-03-25T00:00:00.000Z";
 
   // ─── チェーン店の栄養データページ（/guide/[slug]） ───
   const chainSlugs = [
