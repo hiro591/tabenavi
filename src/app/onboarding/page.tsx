@@ -120,7 +120,7 @@ export default function OnboardingPage() {
   };
 
   // Picker data
-  const years = Array.from({ length: 60 }, (_, i) => 2010 - i);
+  const years = Array.from({ length: 77 }, (_, i) => 2026 - i);
   const heights = Array.from({ length: 61 }, (_, i) => 140 + i);
   const weights = Array.from({ length: 101 }, (_, i) => 30 + i);
 
