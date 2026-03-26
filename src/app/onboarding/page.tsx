@@ -3,74 +3,65 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
-import { Flame, Scale, Dumbbell, CheckCircle } from "lucide-react";
+import { Target, Utensils, User, Ruler, Weight, ChevronRight, ChevronLeft, SkipForward } from "lucide-react";
+import { LogoIcon } from "@/components/Logo";
 
-type Goal = "diet" | "maintain" | "bulk" | null;
-
-interface Chain {
-  id: string;
-  name: string;
-  emoji: string;
-}
-
-const GOAL_CALORIES: Record<Exclude<Goal, null>, number> = {
-  diet: 1500,
-  maintain: 2000,
-  bulk: 2500,
-};
-
-const PRESET_CALORIES = [1500, 1800, 2000, 2200, 2500];
+const TOTAL_STEPS = 7;
 
 export default function OnboardingPage() {
   const router = useRouter();
   const [step, setStep] = useState(1);
-  const [goal, setGoal] = useState<Goal>(null);
-  const [calories, setCalories] = useState(2000);
-  const [chains, setChains] = useState<Chain[]>([]);
-  const [selectedChains, setSelectedChains] = useState<string[]>([]);
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState(false);
 
-  useEffect(() => {
-    const supabase = createClient();
-    supabase
-      .from("chain_restaurants")
-      .select("id, name, emoji")
-      .order("name")
-      .then(({ data }) => {
-        if (data) setChains(data);
-      });
-  }, []);
+  // Answers (all optional)
+  const [goal, setGoal] = useState<string | null>(null);
+  const [eatingOutFreq, setEatingOutFreq] = useState<string | null>(null);
+  const [gender, setGender] = useState<string | null>(null);
+  const [birthYear, setBirthYear] = useState("");
+  const [height, setHeight] = useState("");
+  const [currentWeight, setCurrentWeight] = useState("");
+  const [targetWeight, setTargetWeight] = useState("");
 
-  const selectGoal = (g: Exclude<Goal, null>) => {
-    setGoal(g);
-    setCalories(GOAL_CALORIES[g]);
+  const GOAL_CALORIES: Record<string, number> = {
+    lose: 1500,
+    maintain: 2000,
+    gain: 2500,
   };
 
-  const toggleChain = (id: string) => {
-    setSelectedChains((prev) =>
-      prev.includes(id) ? prev.filter((c) => c !== id) : [...prev, id]
-    );
-  };
+  const next = () => setStep((s) => Math.min(s + 1, TOTAL_STEPS));
+  const prev = () => setStep((s) => Math.max(s - 1, 1));
+  const skip = () => next();
 
   const handleComplete = async () => {
     setSaving(true);
     setSaveError(false);
     try {
       const supabase = createClient();
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
+      const { data: { user } } = await supabase.auth.getUser();
+
       if (user) {
+        const calories = goal ? GOAL_CALORIES[goal] ?? 2000 : 2000;
         const { error } = await supabase
           .from("profiles")
           .update({ target_calories: calories })
           .eq("id", user.id);
         if (error) throw error;
       }
-      if (selectedChains.length > 0) {
-        localStorage.setItem("favoriteChains", JSON.stringify(selectedChains));
-      }
+
+      // Save additional data to localStorage (DB migration later)
+      const onboardingData = {
+        goal,
+        eatingOutFreq,
+        gender,
+        birthYear: birthYear || null,
+        height: height || null,
+        currentWeight: currentWeight || null,
+        targetWeight: targetWeight || null,
+        completedAt: new Date().toISOString(),
+      };
+      localStorage.setItem("onboarding", JSON.stringify(onboardingData));
+
       router.push("/dashboard");
     } catch {
       setSaving(false);
@@ -80,204 +71,223 @@ export default function OnboardingPage() {
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
-      {/* Progress indicator */}
-      <div className="flex justify-center gap-2 pt-8 pb-4">
-        {[1, 2, 3, 4].map((s) => (
-          <div
-            key={s}
-            className={`h-2 rounded-full transition-all duration-300 ${
-              s === step ? "w-8 bg-orange-500" : s < step ? "w-8 bg-orange-300" : "w-8 bg-gray-200"
-            }`}
-          />
-        ))}
+      {/* Progress bar */}
+      <div className="px-6 pt-6 pb-2">
+        <div className="flex gap-1.5">
+          {Array.from({ length: TOTAL_STEPS }).map((_, i) => (
+            <div
+              key={i}
+              className={`h-1 rounded-full flex-1 transition-all duration-300 ${
+                i < step ? "bg-sky-400" : "bg-gray-100"
+              }`}
+            />
+          ))}
+        </div>
+        <p className="text-[11px] text-gray-400 mt-2">{step} / {TOTAL_STEPS}</p>
       </div>
 
-      <div className="flex-1 max-w-lg mx-auto w-full px-6 pb-8">
-        {/* Step 1: Welcome */}
+      <div className="flex-1 max-w-lg mx-auto w-full px-6 pb-8 flex flex-col">
+
+        {/* ─── Step 1: Welcome ─── */}
         {step === 1 && (
-          <div className="flex flex-col items-center justify-center min-h-[70vh] text-center">
-            <div className="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Flame className="w-10 h-10 text-orange-500" />
+          <div className="flex-1 flex flex-col items-center justify-center text-center">
+            <div className="mb-6">
+              <LogoIcon size={56} />
             </div>
-            <h1 className="text-3xl font-bold mb-4">たべなびへようこそ！</h1>
-            <p className="text-gray-600 text-lg mb-12 leading-relaxed">
-              外食専門の食事管理アプリです。
+            <h1 className="text-[26px] font-bold text-gray-900 mb-3">たべなびへようこそ</h1>
+            <p className="text-gray-500 text-[15px] leading-relaxed mb-10">
+              いくつかの質問に答えるだけで、
               <br />
-              まず簡単な設定をしましょう。
+              あなたに最適な設定ができます。
             </p>
             <button
-              onClick={() => setStep(2)}
-              className="w-full bg-orange-500 text-white font-bold py-4 rounded-xl text-lg active:scale-[0.98] transition-transform"
+              onClick={next}
+              className="w-full bg-gradient-to-r from-sky-400 to-cyan-500 text-white font-bold py-3.5 rounded-xl active:scale-[0.98] transition-transform shadow-md shadow-sky-200 flex items-center justify-center gap-2"
             >
-              はじめる →
+              はじめる
+              <ChevronRight className="w-4 h-4" />
             </button>
+            <p className="text-[12px] text-gray-400 mt-4">すべての質問はスキップ可能です</p>
           </div>
         )}
 
-        {/* Step 2: Goal Setting */}
+        {/* ─── Step 2: Goal ─── */}
         {step === 2 && (
-          <div className="pt-4">
-            <button
-              onClick={() => setStep(1)}
-              className="text-gray-400 text-sm mb-4"
-            >
-              ← 戻る
-            </button>
-            <h1 className="text-2xl font-bold mb-6">目標を教えてください</h1>
-
-            <div className="space-y-3 mb-8">
-              {([
-                { key: "diet" as const, Icon: Flame, title: "ダイエット", desc: "体重を減らしたい" },
-                { key: "maintain" as const, Icon: Scale, title: "現状維持", desc: "今の体型をキープしたい" },
-                { key: "bulk" as const, Icon: Dumbbell, title: "筋肉増量", desc: "筋肉をつけたい" },
-              ]).map((g) => (
+          <StepLayout title="あなたの目標は？" onBack={prev} onSkip={skip}>
+            <div className="space-y-3">
+              {[
+                { key: "lose", emoji: "🔥", title: "減量", desc: "体重を落としたい" },
+                { key: "maintain", emoji: "⚖️", title: "維持", desc: "今の体型をキープしたい" },
+                { key: "gain", emoji: "💪", title: "増量", desc: "筋肉をつけたい" },
+              ].map((g) => (
                 <button
                   key={g.key}
-                  onClick={() => selectGoal(g.key)}
-                  className={`w-full p-4 rounded-xl border-2 text-left transition-all ${
-                    goal === g.key
-                      ? "border-orange-500 bg-orange-50"
-                      : "border-gray-200 bg-white"
+                  onClick={() => { setGoal(g.key); next(); }}
+                  className={`w-full p-4 rounded-xl border-2 text-left transition-all active:scale-[0.98] ${
+                    goal === g.key ? "border-sky-400 bg-sky-50" : "border-gray-100 bg-white hover:bg-gray-50"
                   }`}
                 >
                   <div className="flex items-center gap-3">
-                    <g.Icon className={`w-6 h-6 ${goal === g.key ? "text-orange-500" : "text-gray-500"}`} />
+                    <span className="text-2xl">{g.emoji}</span>
                     <div>
-                      <div className="font-bold text-lg">{g.title}</div>
-                      <div className="text-gray-500 text-sm">{g.desc}</div>
+                      <p className="font-bold text-gray-900">{g.title}</p>
+                      <p className="text-sm text-gray-400">{g.desc}</p>
                     </div>
                   </div>
                 </button>
               ))}
             </div>
+          </StepLayout>
+        )}
 
-            <div className="mb-8">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                1日の目標カロリー
-              </label>
-              <div className="flex items-center justify-center gap-2 mb-4">
+        {/* ─── Step 3: Eating out frequency ─── */}
+        {step === 3 && (
+          <StepLayout title="外食は週に何日しますか？" onBack={prev} onSkip={skip}>
+            <div className="space-y-3">
+              {[
+                { key: "1-2", label: "1〜2日", desc: "たまに外食する" },
+                { key: "3-4", label: "3〜4日", desc: "半分くらい外食" },
+                { key: "5+", label: "5日以上", desc: "ほぼ毎日外食" },
+              ].map((f) => (
+                <button
+                  key={f.key}
+                  onClick={() => { setEatingOutFreq(f.key); next(); }}
+                  className={`w-full p-4 rounded-xl border-2 text-left transition-all active:scale-[0.98] ${
+                    eatingOutFreq === f.key ? "border-sky-400 bg-sky-50" : "border-gray-100 bg-white hover:bg-gray-50"
+                  }`}
+                >
+                  <p className="font-bold text-gray-900">{f.label}</p>
+                  <p className="text-sm text-gray-400">{f.desc}</p>
+                </button>
+              ))}
+            </div>
+          </StepLayout>
+        )}
+
+        {/* ─── Step 4: Gender ─── */}
+        {step === 4 && (
+          <StepLayout title="性別を教えてください" onBack={prev} onSkip={skip}>
+            <div className="space-y-3">
+              {[
+                { key: "male", label: "男性" },
+                { key: "female", label: "女性" },
+                { key: "other", label: "その他 / 回答しない" },
+              ].map((g) => (
+                <button
+                  key={g.key}
+                  onClick={() => { setGender(g.key); next(); }}
+                  className={`w-full p-4 rounded-xl border-2 text-left transition-all active:scale-[0.98] ${
+                    gender === g.key ? "border-sky-400 bg-sky-50" : "border-gray-100 bg-white hover:bg-gray-50"
+                  }`}
+                >
+                  <p className="font-bold text-gray-900">{g.label}</p>
+                </button>
+              ))}
+            </div>
+          </StepLayout>
+        )}
+
+        {/* ─── Step 5: Birth year + Height ─── */}
+        {step === 5 && (
+          <StepLayout title="生まれ年と身長" onBack={prev} onSkip={skip}>
+            <div className="space-y-5">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">生まれ年</label>
                 <input
                   type="number"
-                  value={calories}
-                  onChange={(e) => setCalories(Number(e.target.value))}
-                  className="text-center text-3xl font-bold w-40 border-b-2 border-orange-500 outline-none py-2"
+                  value={birthYear}
+                  onChange={(e) => setBirthYear(e.target.value)}
+                  placeholder="例: 1998"
+                  className="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder:text-gray-300 focus:border-sky-400 focus:ring-1 focus:ring-sky-400/30 transition-colors text-lg tabular-nums"
                 />
-                <span className="text-xl text-gray-500">kcal</span>
               </div>
-              <div className="flex flex-wrap justify-center gap-2">
-                {PRESET_CALORIES.map((c) => (
-                  <button
-                    key={c}
-                    onClick={() => setCalories(c)}
-                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                      calories === c
-                        ? "bg-orange-500 text-white"
-                        : "bg-gray-100 text-gray-600"
-                    }`}
-                  >
-                    {c}
-                  </button>
-                ))}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">身長 (cm)</label>
+                <input
+                  type="number"
+                  value={height}
+                  onChange={(e) => setHeight(e.target.value)}
+                  placeholder="例: 172"
+                  className="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder:text-gray-300 focus:border-sky-400 focus:ring-1 focus:ring-sky-400/30 transition-colors text-lg tabular-nums"
+                />
               </div>
             </div>
-
             <button
-              onClick={() => setStep(3)}
-              className="w-full bg-orange-500 text-white font-bold py-4 rounded-xl text-lg active:scale-[0.98] transition-transform"
+              onClick={next}
+              className="w-full mt-8 bg-gradient-to-r from-sky-400 to-cyan-500 text-white font-bold py-3.5 rounded-xl active:scale-[0.98] transition-transform shadow-md shadow-sky-200 flex items-center justify-center gap-2"
             >
-              次へ →
+              次へ
+              <ChevronRight className="w-4 h-4" />
             </button>
-          </div>
+          </StepLayout>
         )}
 
-        {/* Step 3: Favorite Chains */}
-        {step === 3 && (
-          <div className="pt-4">
-            <button
-              onClick={() => setStep(2)}
-              className="text-gray-400 text-sm mb-4"
-            >
-              ← 戻る
-            </button>
-            <h1 className="text-2xl font-bold mb-2">よく行くお店を選んでください</h1>
-            <p className="text-gray-500 text-sm mb-6">
-              おすすめに優先表示されます（複数選択可）
-            </p>
-
-            <div className="grid grid-cols-3 gap-3 mb-8">
-              {chains.map((chain) => {
-                const selected = selectedChains.includes(chain.id);
-                return (
-                  <button
-                    key={chain.id}
-                    onClick={() => toggleChain(chain.id)}
-                    className={`relative p-4 rounded-xl border-2 flex flex-col items-center gap-2 transition-all ${
-                      selected
-                        ? "border-orange-500 bg-orange-50"
-                        : "border-gray-200 bg-white"
-                    }`}
-                  >
-                    {selected && (
-                      <div className="absolute top-1 right-1 w-5 h-5 bg-orange-500 rounded-full flex items-center justify-center">
-                        <CheckCircle className="w-3 h-3 text-white" />
-                      </div>
-                    )}
-                    <span className="text-2xl">{chain.emoji}</span>
-                    <span className="text-xs font-medium text-gray-700 text-center leading-tight">
-                      {chain.name}
-                    </span>
-                  </button>
-                );
-              })}
+        {/* ─── Step 6: Weight ─── */}
+        {step === 6 && (
+          <StepLayout title="体重を教えてください" onBack={prev} onSkip={skip}>
+            <div className="space-y-5">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">現在の体重 (kg)</label>
+                <input
+                  type="number"
+                  value={currentWeight}
+                  onChange={(e) => setCurrentWeight(e.target.value)}
+                  placeholder="例: 72"
+                  step="0.1"
+                  className="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder:text-gray-300 focus:border-sky-400 focus:ring-1 focus:ring-sky-400/30 transition-colors text-lg tabular-nums"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">目標体重 (kg)</label>
+                <input
+                  type="number"
+                  value={targetWeight}
+                  onChange={(e) => setTargetWeight(e.target.value)}
+                  placeholder="例: 65"
+                  step="0.1"
+                  className="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder:text-gray-300 focus:border-sky-400 focus:ring-1 focus:ring-sky-400/30 transition-colors text-lg tabular-nums"
+                />
+              </div>
             </div>
-
             <button
-              onClick={() => setStep(4)}
-              className="w-full bg-orange-500 text-white font-bold py-4 rounded-xl text-lg mb-3 active:scale-[0.98] transition-transform"
+              onClick={next}
+              className="w-full mt-8 bg-gradient-to-r from-sky-400 to-cyan-500 text-white font-bold py-3.5 rounded-xl active:scale-[0.98] transition-transform shadow-md shadow-sky-200 flex items-center justify-center gap-2"
             >
-              次へ →
+              次へ
+              <ChevronRight className="w-4 h-4" />
             </button>
-            <button
-              onClick={() => setStep(4)}
-              className="w-full text-gray-400 text-sm py-2"
-            >
-              スキップ
-            </button>
-          </div>
+          </StepLayout>
         )}
 
-        {/* Step 4: Complete */}
-        {step === 4 && (
-          <div className="flex flex-col items-center justify-center min-h-[70vh] text-center">
-            <div className="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mb-6">
-              <CheckCircle className="w-10 h-10 text-green-500" />
+        {/* ─── Step 7: Complete ─── */}
+        {step === 7 && (
+          <div className="flex-1 flex flex-col items-center justify-center text-center">
+            <div className="w-16 h-16 bg-gradient-to-br from-emerald-400 to-green-500 rounded-full flex items-center justify-center mb-5 shadow-lg shadow-emerald-100">
+              <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
             </div>
-            <h1 className="text-3xl font-bold mb-6">設定完了！</h1>
+            <h1 className="text-[24px] font-bold text-gray-900 mb-2">準備完了！</h1>
+            <p className="text-gray-500 text-sm mb-8">いつでもプロフィールから変更できます</p>
 
-            <div className="bg-gray-50 rounded-xl p-6 w-full mb-8 text-left space-y-3">
-              <div className="flex justify-between">
-                <span className="text-gray-500">目標カロリー</span>
-                <span className="font-bold">{calories} kcal</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-500">お気に入りのお店</span>
-                <span className="font-bold">
-                  {selectedChains.length > 0
-                    ? `${selectedChains.length}件`
-                    : "未選択"}
-                </span>
-              </div>
+            <div className="bg-gray-50 rounded-xl p-5 w-full mb-8 text-left space-y-3 text-sm">
+              <SummaryRow label="目標" value={goal === "lose" ? "減量" : goal === "gain" ? "増量" : goal === "maintain" ? "維持" : "未設定"} />
+              <SummaryRow label="外食頻度" value={eatingOutFreq === "1-2" ? "週1〜2日" : eatingOutFreq === "3-4" ? "週3〜4日" : eatingOutFreq === "5+" ? "週5日以上" : "未設定"} />
+              <SummaryRow label="性別" value={gender === "male" ? "男性" : gender === "female" ? "女性" : gender === "other" ? "その他" : "未設定"} />
+              {height && <SummaryRow label="身長" value={`${height} cm`} />}
+              {currentWeight && <SummaryRow label="体重" value={`${currentWeight} kg`} />}
+              {targetWeight && <SummaryRow label="目標体重" value={`${targetWeight} kg`} />}
             </div>
 
             {saveError && (
-              <div className="w-full bg-red-50 border border-red-200 rounded-xl p-4 mb-4 text-center">
-                <p className="text-sm text-red-700 mb-3">保存に失敗しました。もう一度お試しください。</p>
+              <div className="w-full bg-red-50 border border-red-200 rounded-xl p-4 mb-4">
+                <p className="text-sm text-red-600 mb-2">保存に失敗しました。</p>
                 <button
                   onClick={handleComplete}
                   disabled={saving}
-                  className="px-6 py-2 bg-red-500 text-white text-sm font-medium rounded-xl active:scale-[0.98] transition-transform disabled:opacity-50"
+                  className="text-sm text-red-600 font-bold underline"
                 >
-                  {saving ? "保存中..." : "再試行"}
+                  再試行
                 </button>
               </div>
             )}
@@ -285,13 +295,55 @@ export default function OnboardingPage() {
             <button
               onClick={handleComplete}
               disabled={saving}
-              className="w-full bg-orange-500 text-white font-bold py-4 rounded-xl text-lg active:scale-[0.98] transition-transform disabled:opacity-50"
+              className="w-full bg-gradient-to-r from-sky-400 to-cyan-500 text-white font-bold py-3.5 rounded-xl active:scale-[0.98] transition-transform shadow-md shadow-sky-200 disabled:opacity-50 flex items-center justify-center gap-2"
             >
-              {saving ? "保存中..." : "たべなびをはじめる →"}
+              {saving ? "保存中..." : "たべなびをはじめる"}
+              {!saving && <ChevronRight className="w-4 h-4" />}
             </button>
           </div>
         )}
       </div>
+    </div>
+  );
+}
+
+// ─── Step Layout ─────────────────────────────────────────────────────────────
+
+function StepLayout({
+  title,
+  onBack,
+  onSkip,
+  children,
+}: {
+  title: string;
+  onBack: () => void;
+  onSkip: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="flex-1 flex flex-col pt-4">
+      <div className="flex items-center justify-between mb-6">
+        <button onClick={onBack} className="text-gray-400 hover:text-gray-600 transition-colors p-1">
+          <ChevronLeft className="w-5 h-5" />
+        </button>
+        <button onClick={onSkip} className="text-sm text-gray-400 hover:text-gray-600 transition-colors flex items-center gap-1">
+          スキップ
+          <SkipForward className="w-3.5 h-3.5" />
+        </button>
+      </div>
+      <h1 className="text-[22px] font-bold text-gray-900 mb-6">{title}</h1>
+      <div className="flex-1">{children}</div>
+    </div>
+  );
+}
+
+// ─── Summary Row ─────────────────────────────────────────────────────────────
+
+function SummaryRow({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="flex justify-between">
+      <span className="text-gray-400">{label}</span>
+      <span className="font-semibold text-gray-700">{value}</span>
     </div>
   );
 }
