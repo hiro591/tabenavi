@@ -18,7 +18,7 @@ const CHAIN_LOGO_MAP: [string, ChainLogoInfo][] = [
   ["ファミマ",          { url: "/chain-logos/familymart.svg",    bg: "#ffffff" }],
 
   // ── ファストフード ────────────────────────────────────────────────────────
-  ["マクドナルド",      { url: "/chain-logos/mcdonalds.svg",     bg: "#FFC72C" }],
+  ["マクドナルド",      { url: "/chain-logos/mcdonalds.svg",     bg: "#ffffff" }],
   ["スターバックス",    { url: "/chain-logos/starbucks.svg",     bg: "#ffffff" }],
   ["ケンタッキー",      { url: "/chain-logos/kfc.svg",           bg: "#ffffff" }],
   ["KFC",               { url: "/chain-logos/kfc.svg",           bg: "#ffffff" }],
