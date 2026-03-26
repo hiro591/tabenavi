@@ -66,9 +66,9 @@ export default function ScrollPicker({
 
   return (
     <div className="relative" style={{ height: containerHeight }}>
-      {/* Selection highlight */}
+      {/* Selection indicator lines */}
       <div
-        className="absolute left-0 right-0 bg-sky-50 border-y border-sky-200 rounded-lg pointer-events-none z-10"
+        className="absolute left-0 right-0 border-y border-gray-200 pointer-events-none z-10"
         style={{
           top: itemHeight * 2,
           height: itemHeight,
