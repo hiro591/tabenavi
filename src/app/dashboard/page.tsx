@@ -257,25 +257,37 @@ export default function DashboardPage() {
         })}
       </div>
 
-      {/* ─── Main Card: Calorie Ring + PFC ─── */}
-      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 mb-4">
-        <p className="text-xs text-gray-400 mb-4">
-          目標: <span className="font-semibold text-gray-600 tabular-nums">{targetCalories}</span> kcal
-        </p>
-
+      {/* ─── Calorie ─── */}
+      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 mb-3">
         <div className="flex items-center gap-5">
-          {/* Ring */}
           <div className="flex-shrink-0">
-            <CalorieRing total={totalCalories} target={targetCalories} remaining={remainingCalories} />
+            <CalorieRing consumed={totalCalories} target={targetCalories} />
           </div>
-
-          {/* PFC */}
-          <div className="flex-1 space-y-3">
-            <MiniPFC label="タンパク質" value={totalProtein} target={proteinTarget} color="bg-blue-400" textColor="text-blue-500" />
-            <MiniPFC label="炭水化物" value={totalCarbs} target={carbsTarget} color="bg-emerald-400" textColor="text-emerald-500" />
-            <MiniPFC label="脂質" value={totalFat} target={fatTarget} color="bg-amber-400" textColor="text-amber-500" />
+          <div className="flex-1">
+            <p className="text-[26px] font-bold text-gray-900 tabular-nums leading-none">
+              {totalCalories} <span className="text-[14px] font-medium text-gray-400">/ {targetCalories}</span>
+            </p>
+            <p className="text-[11px] text-gray-400 mt-1">kcal 摂取 / 目標</p>
+            <div className="mt-3 px-3 py-1.5 rounded-lg bg-sky-50 inline-block">
+              {remainingCalories > 0 ? (
+                <p className="text-[12px] font-bold text-sky-600 tabular-nums">
+                  あと {remainingCalories} kcal
+                </p>
+              ) : (
+                <p className="text-[12px] font-bold text-red-500 tabular-nums">
+                  {Math.abs(remainingCalories)} kcal 超過
+                </p>
+              )}
+            </div>
           </div>
         </div>
+      </div>
+
+      {/* ─── PFC ─── */}
+      <div className="grid grid-cols-3 gap-2.5 mb-4">
+        <PFCCard label="タンパク質" short="P" value={totalProtein} target={proteinTarget} color="bg-blue-400" bgColor="bg-blue-50" textColor="text-blue-600" />
+        <PFCCard label="脂質" short="F" value={totalFat} target={fatTarget} color="bg-amber-400" bgColor="bg-amber-50" textColor="text-amber-600" />
+        <PFCCard label="炭水化物" short="C" value={totalCarbs} target={carbsTarget} color="bg-emerald-400" bgColor="bg-emerald-50" textColor="text-emerald-600" />
       </div>
 
       {/* ─── Quick Actions ─── */}
@@ -378,97 +390,81 @@ export default function DashboardPage() {
   );
 }
 
-// ─── Calorie Ring (compact, shows remaining) ────────────────────────────────
+// ─── Calorie Ring ────────────────────────────────────────────────────────────
 
 function CalorieRing({
-  total,
+  consumed,
   target,
-  remaining,
 }: {
-  total: number;
+  consumed: number;
   target: number;
-  remaining: number;
 }) {
-  const radius = 58;
+  const radius = 46;
   const circumference = 2 * Math.PI * radius;
-  const ratio = total / target;
+  const ratio = consumed / target;
   const progress = Math.min(ratio, 1);
-  const strokeDashoffset = circumference * (1 - progress);
+  const offset = circumference * (1 - progress);
 
   return (
-    <svg width="140" height="140" viewBox="0 0 140 140">
+    <svg width="110" height="110" viewBox="0 0 110 110">
       <defs>
         <linearGradient id="ring-grad" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0%" stopColor="#38BDF8" />
           <stop offset="100%" stopColor="#06B6D4" />
         </linearGradient>
       </defs>
-      <circle cx="70" cy="70" r={radius} fill="none" stroke="#F3F4F6" strokeWidth="10" />
+      <circle cx="55" cy="55" r={radius} fill="none" stroke="#F3F4F6" strokeWidth="9" />
       <circle
-        cx="70" cy="70" r={radius} fill="none"
+        cx="55" cy="55" r={radius} fill="none"
         stroke={ratio > 1 ? "#F87171" : "url(#ring-grad)"}
-        strokeWidth="10"
+        strokeWidth="9"
         strokeDasharray={circumference}
-        strokeDashoffset={strokeDashoffset}
+        strokeDashoffset={offset}
         strokeLinecap="round"
-        transform="rotate(-90 70 70)"
+        transform="rotate(-90 55 55)"
         style={{ transition: "stroke-dashoffset 0.8s ease" }}
       />
-      {remaining > 0 ? (
-        <>
-          <text x="70" y="62" textAnchor="middle" fill="#111827" fontSize="26" fontWeight="bold" style={{ fontVariantNumeric: "tabular-nums" }}>
-            {remaining}
-          </text>
-          <text x="70" y="80" textAnchor="middle" fill="#9CA3AF" fontSize="10">
-            kcal 残り
-          </text>
-        </>
-      ) : (
-        <>
-          <text x="70" y="62" textAnchor="middle" fill="#EF4444" fontSize="22" fontWeight="bold" style={{ fontVariantNumeric: "tabular-nums" }}>
-            +{Math.abs(remaining)}
-          </text>
-          <text x="70" y="80" textAnchor="middle" fill="#EF4444" fontSize="10">
-            kcal 超過
-          </text>
-        </>
-      )}
+      <text x="55" y="52" textAnchor="middle" fill="#111827" fontSize="13" fontWeight="bold">
+        {Math.round((progress) * 100)}%
+      </text>
+      <text x="55" y="66" textAnchor="middle" fill="#9CA3AF" fontSize="9">
+        達成
+      </text>
     </svg>
   );
 }
 
-// ─── Mini PFC Bar (compact for side layout) ─────────────────────────────────
+// ─── PFC Card ────────────────────────────────────────────────────────────────
 
-function MiniPFC({
+function PFCCard({
   label,
+  short,
   value,
   target,
   color,
+  bgColor,
   textColor,
 }: {
   label: string;
+  short: string;
   value: number;
   target: number;
   color: string;
+  bgColor: string;
   textColor: string;
 }) {
   const pct = target > 0 ? Math.min((value / target) * 100, 100) : 0;
 
   return (
-    <div>
-      <div className="flex items-baseline justify-between mb-1">
-        <span className={`text-[13px] font-bold tabular-nums ${textColor}`}>
-          {Math.round(value)}
-        </span>
-        <span className="text-[10px] text-gray-400">/ {target}g</span>
+    <div className={`${bgColor} rounded-xl p-3`}>
+      <p className={`text-[10px] font-semibold ${textColor} mb-1.5`}>{label}</p>
+      <p className="text-[18px] font-bold text-gray-900 tabular-nums leading-none">
+        {Math.round(value)}<span className="text-[11px] font-medium text-gray-400">g</span>
+      </p>
+      <div className="w-full bg-white/60 rounded-full h-1.5 mt-2 overflow-hidden">
+        <div className={`h-full rounded-full ${color} transition-all duration-500`} style={{ width: `${pct}%` }} />
       </div>
-      <div className="w-full bg-gray-100 rounded-full h-[6px] overflow-hidden">
-        <div
-          className={`h-full rounded-full ${color} transition-all duration-500`}
-          style={{ width: `${pct}%` }}
-        />
-      </div>
-      <p className="text-[10px] text-gray-400 mt-0.5">{label}</p>
+      <p className="text-[9px] text-gray-400 mt-1 tabular-nums">/ {target}g</p>
     </div>
   );
 }
