@@ -258,20 +258,18 @@ export default function DashboardPage() {
       </div>
 
       {/* ─── Calorie ─── */}
-      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 mb-3">
-        <div className="flex flex-col items-center">
+      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm px-4 pt-3 pb-3 mb-3">
+        <div className="flex flex-col items-center -mb-1">
           <CalorieRing consumed={totalCalories} target={targetCalories} />
-          <div className="mt-2">
-            {remainingCalories > 0 ? (
-              <p className="text-[13px] font-bold text-sky-600 tabular-nums text-center">
-                あと {remainingCalories} kcal
-              </p>
-            ) : (
-              <p className="text-[13px] font-bold text-red-500 tabular-nums text-center">
-                {Math.abs(remainingCalories)} kcal 超過
-              </p>
-            )}
-          </div>
+          {remainingCalories > 0 ? (
+            <p className="text-[13px] font-bold text-sky-600 tabular-nums">
+              あと {remainingCalories} kcal
+            </p>
+          ) : (
+            <p className="text-[13px] font-bold text-red-500 tabular-nums">
+              {Math.abs(remainingCalories)} kcal 超過
+            </p>
+          )}
         </div>
       </div>
 
@@ -398,7 +396,7 @@ function CalorieRing({
   const offset = halfCircumference * (1 - progress);
 
   return (
-    <svg width="240" height="140" viewBox="0 0 240 140">
+    <svg width="240" height="120" viewBox="0 0 240 125" className="-mt-1">
       <defs>
         <linearGradient id="ring-grad" x1="0" y1="0" x2="1" y2="0">
           <stop offset="0%" stopColor="#38BDF8" />
