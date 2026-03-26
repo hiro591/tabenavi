@@ -405,11 +405,11 @@ export default function Home() {
                 >
                   {logo ? (
                     <div
-                      className="w-10 h-10 rounded-lg flex items-center justify-center"
+                      className="w-10 h-10 rounded-lg flex items-center justify-center p-1.5"
                       style={{ backgroundColor: logo.bg }}
                     >
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={logo.url} alt={chain} className="w-6 h-6" />
+                      <img src={logo.url} alt={chain} className="w-full h-full object-contain" />
                     </div>
                   ) : (
                     <div className="w-10 h-10 rounded-lg bg-gray-50 flex items-center justify-center">
