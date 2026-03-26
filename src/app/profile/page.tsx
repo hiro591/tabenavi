@@ -158,7 +158,7 @@ export default function ProfilePage() {
     (displayName || email || "?").charAt(0).toUpperCase();
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 pb-20">
       <div className="max-w-lg mx-auto px-4 pt-6 pb-12">
         {/* Header */}
         <div className="flex items-center gap-3 mb-6">

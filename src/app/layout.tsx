@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
+import AppBottomNav from "@/components/AppBottomNav";
 
 export const metadata: Metadata = {
   title: "たべなび | 外食しながら、カラダづくり。",
@@ -66,6 +67,7 @@ export default function RootLayout({
       </head>
       <body className="antialiased bg-[#1A2235] text-slate-100">
         {children}
+        <AppBottomNav />
       </body>
     </html>
   );

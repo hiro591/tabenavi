@@ -287,7 +287,7 @@ out center 50;
   // Loading skeleton
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 pb-20">
         <div className="max-w-lg mx-auto px-4 pt-6">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-8 h-8 bg-gray-200 rounded-full animate-pulse" />
@@ -320,7 +320,7 @@ out center 50;
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 pb-20">
       <div className="max-w-lg mx-auto px-4 pt-6 pb-8">
         {/* Header */}
         <div className="flex items-center justify-between mb-4">

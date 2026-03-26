@@ -173,7 +173,7 @@ export default function WeightPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="max-w-lg mx-auto px-4 pt-6 pb-12">
+      <div className="max-w-lg mx-auto px-4 pt-6 pb-20">
         {/* Header */}
         <div className="flex items-center gap-3 mb-6">
           <Link
