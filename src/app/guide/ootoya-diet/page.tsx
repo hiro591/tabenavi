@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     title: "【2026年最新】大戸屋ダイエットガイド｜定食の選び方とおすすめ低カロリーメニュー",
     description:
       "大戸屋の低カロリー定食ランキング、五穀米変更のコツ、ダイエット中におすすめの定食メニューを徹底解説。",
-    url: "https://tabenavi.jp/guide/ootoya-diet",
+    url: "https://www.tabenavi.jp/guide/ootoya-diet",
     type: "article",
   },
 };
@@ -54,13 +54,13 @@ const jsonLd = {
   author: {
     "@type": "Organization",
     name: "たべなび",
-    url: "https://tabenavi.jp",
+    url: "https://www.tabenavi.jp",
   },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
   },
-  mainEntityOfPage: "https://tabenavi.jp/guide/ootoya-diet",
+  mainEntityOfPage: "https://www.tabenavi.jp/guide/ootoya-diet",
 };
 
 const tocItems = [

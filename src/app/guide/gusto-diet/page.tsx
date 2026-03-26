@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     title: "【2026年最新】ガストダイエットガイド｜低カロリーメニューランキングとおすすめの食べ方",
     description:
       "ガストのカロリーランキング、ダイエット中におすすめの低カロリーメニュー、注文テクニックを徹底解説。",
-    url: "https://tabenavi.jp/guide/gusto-diet",
+    url: "https://www.tabenavi.jp/guide/gusto-diet",
     type: "article",
   },
 };
@@ -54,13 +54,13 @@ const jsonLd = {
   author: {
     "@type": "Organization",
     name: "たべなび",
-    url: "https://tabenavi.jp",
+    url: "https://www.tabenavi.jp",
   },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
   },
-  mainEntityOfPage: "https://tabenavi.jp/guide/gusto-diet",
+  mainEntityOfPage: "https://www.tabenavi.jp/guide/gusto-diet",
 };
 
 const tocItems = [

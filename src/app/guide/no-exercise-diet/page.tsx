@@ -37,7 +37,7 @@ export const metadata: Metadata = {
       "【2026年最新】運動なしで痩せる！食事だけで確実に体重を落とす方法",
     description:
       "運動なしでも食事管理だけで痩せられる科学的根拠を解説。外食中心でも実践できる具体的な食事プランを紹介。",
-    url: "https://tabenavi.jp/guide/no-exercise-diet",
+    url: "https://www.tabenavi.jp/guide/no-exercise-diet",
     type: "article",
   },
 };
@@ -54,13 +54,13 @@ const jsonLd = {
   author: {
     "@type": "Organization",
     name: "たべなび",
-    url: "https://tabenavi.jp",
+    url: "https://www.tabenavi.jp",
   },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
   },
-  mainEntityOfPage: "https://tabenavi.jp/guide/no-exercise-diet",
+  mainEntityOfPage: "https://www.tabenavi.jp/guide/no-exercise-diet",
 };
 
 const tocItems = [

@@ -50,10 +50,10 @@ const jsonLd = {
   author: {
     "@type": "Organization",
     name: "たべなび",
-    url: "https://tabenavi.jp",
+    url: "https://www.tabenavi.jp",
   },
   publisher: { "@type": "Organization", name: "たべなび" },
-  mainEntityOfPage: "https://tabenavi.jp/guide/low-fat-eating-out",
+  mainEntityOfPage: "https://www.tabenavi.jp/guide/low-fat-eating-out",
 };
 
 const tocItems = [

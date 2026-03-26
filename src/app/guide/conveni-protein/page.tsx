@@ -37,7 +37,7 @@ export const metadata: Metadata = {
       "コンビニで買える高タンパク商品ランキング【セブン・ローソン・ファミマ徹底比較】",
     description:
       "3大コンビニの高タンパク商品を徹底比較。筋トレ・ダイエット中のタンパク質補給に。",
-    url: "https://tabenavi.jp/guide/conveni-protein",
+    url: "https://www.tabenavi.jp/guide/conveni-protein",
     type: "article",
   },
 };
@@ -54,13 +54,13 @@ const jsonLd = {
   author: {
     "@type": "Organization",
     name: "たべなび",
-    url: "https://tabenavi.jp",
+    url: "https://www.tabenavi.jp",
   },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
   },
-  mainEntityOfPage: "https://tabenavi.jp/guide/conveni-protein",
+  mainEntityOfPage: "https://www.tabenavi.jp/guide/conveni-protein",
 };
 
 const tocItems = [

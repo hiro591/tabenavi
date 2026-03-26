@@ -37,7 +37,7 @@ export const metadata: Metadata = {
       "【2026年最新】代謝を上げる食べ物ランキングTOP15｜痩せやすい体を食事で作る",
     description:
       "代謝を上げる食べ物TOP15を徹底解説。外食チェーン店での代謝アップメニュー選びも紹介。",
-    url: "https://tabenavi.jp/guide/metabolism-boost-foods",
+    url: "https://www.tabenavi.jp/guide/metabolism-boost-foods",
     type: "article",
   },
 };
@@ -54,13 +54,13 @@ const jsonLd = {
   author: {
     "@type": "Organization",
     name: "たべなび",
-    url: "https://tabenavi.jp",
+    url: "https://www.tabenavi.jp",
   },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
   },
-  mainEntityOfPage: "https://tabenavi.jp/guide/metabolism-boost-foods",
+  mainEntityOfPage: "https://www.tabenavi.jp/guide/metabolism-boost-foods",
 };
 
 const tocItems = [

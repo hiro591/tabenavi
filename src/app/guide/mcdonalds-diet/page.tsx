@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     title: "マクドナルドでダイエット｜低カロリーメニューランキングと太らない食べ方",
     description:
       "マクドナルドのカロリー低い順ランキング、ダイエット中のおすすめメニュー5選、PFCバランスで選ぶ食べ方を徹底解説。",
-    url: "https://tabenavi.jp/guide/mcdonalds-diet",
+    url: "https://www.tabenavi.jp/guide/mcdonalds-diet",
     type: "article",
   },
 };
@@ -54,13 +54,13 @@ const jsonLd = {
   author: {
     "@type": "Organization",
     name: "たべなび",
-    url: "https://tabenavi.jp",
+    url: "https://www.tabenavi.jp",
   },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
   },
-  mainEntityOfPage: "https://tabenavi.jp/guide/mcdonalds-diet",
+  mainEntityOfPage: "https://www.tabenavi.jp/guide/mcdonalds-diet",
 };
 
 const tocItems = [

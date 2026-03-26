@@ -35,7 +35,7 @@ export const metadata: Metadata = {
       "【2026年最新】レコーディングダイエットとは？記録するだけで痩せる科学的な理由と実践方法",
     description:
       "食事を記録するだけで痩せるレコーディングダイエット。科学的根拠と外食中心でも続けるコツを解説。",
-    url: "https://tabenavi.jp/guide/recording-diet",
+    url: "https://www.tabenavi.jp/guide/recording-diet",
     type: "article",
   },
 };
@@ -52,13 +52,13 @@ const jsonLd = {
   author: {
     "@type": "Organization",
     name: "たべなび",
-    url: "https://tabenavi.jp",
+    url: "https://www.tabenavi.jp",
   },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
   },
-  mainEntityOfPage: "https://tabenavi.jp/guide/recording-diet",
+  mainEntityOfPage: "https://www.tabenavi.jp/guide/recording-diet",
 };
 
 const tocItems = [

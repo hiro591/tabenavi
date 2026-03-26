@@ -244,7 +244,7 @@ export default async function GuideArticlePage({
     author: {
       "@type": "Organization",
       name: "たべなび",
-      url: "https://tabenavi.jp",
+      url: "https://www.tabenavi.jp",
     },
     publisher: {
       "@type": "Organization",

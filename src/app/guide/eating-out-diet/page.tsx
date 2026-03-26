@@ -45,13 +45,13 @@ const jsonLd = {
   author: {
     "@type": "Organization",
     name: "たべなび",
-    url: "https://tabenavi.jp",
+    url: "https://www.tabenavi.jp",
   },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
   },
-  mainEntityOfPage: "https://tabenavi.jp/guide/eating-out-diet",
+  mainEntityOfPage: "https://www.tabenavi.jp/guide/eating-out-diet",
 };
 
 const tocItems = [

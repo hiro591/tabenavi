@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     title: "【2026年最新】ケンタッキーダイエットガイド｜意外と高タンパクなメニューの選び方",
     description:
       "ケンタッキーのカロリーランキング、高タンパクおすすめメニュー、ダイエット中の食べ方を徹底解説。",
-    url: "https://tabenavi.jp/guide/kfc-diet",
+    url: "https://www.tabenavi.jp/guide/kfc-diet",
     type: "article",
   },
 };
@@ -54,13 +54,13 @@ const jsonLd = {
   author: {
     "@type": "Organization",
     name: "たべなび",
-    url: "https://tabenavi.jp",
+    url: "https://www.tabenavi.jp",
   },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
   },
-  mainEntityOfPage: "https://tabenavi.jp/guide/kfc-diet",
+  mainEntityOfPage: "https://www.tabenavi.jp/guide/kfc-diet",
 };
 
 const tocItems = [

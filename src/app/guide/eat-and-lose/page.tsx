@@ -37,7 +37,7 @@ export const metadata: Metadata = {
       "【2026年最新】食べて痩せるダイエット完全ガイド｜我慢しないで確実に体重を落とす方法",
     description:
       "食べて痩せるダイエットの科学的根拠と実践メニューを完全解説。チェーン店活用法も紹介。",
-    url: "https://tabenavi.jp/guide/eat-and-lose",
+    url: "https://www.tabenavi.jp/guide/eat-and-lose",
     type: "article",
   },
 };
@@ -54,13 +54,13 @@ const jsonLd = {
   author: {
     "@type": "Organization",
     name: "たべなび",
-    url: "https://tabenavi.jp",
+    url: "https://www.tabenavi.jp",
   },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
   },
-  mainEntityOfPage: "https://tabenavi.jp/guide/eat-and-lose",
+  mainEntityOfPage: "https://www.tabenavi.jp/guide/eat-and-lose",
 };
 
 const tocItems = [

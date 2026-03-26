@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     title: "サイゼリヤでダイエット｜低カロリー＆高タンパクメニュー完全ガイド",
     description:
       "サイゼリヤのカロリーランキング、筋トレ民におすすめの高タンパクメニュー、500円以下の神注文法を徹底解説。",
-    url: "https://tabenavi.jp/guide/saizeriya-diet",
+    url: "https://www.tabenavi.jp/guide/saizeriya-diet",
     type: "article",
   },
 };
@@ -54,13 +54,13 @@ const jsonLd = {
   author: {
     "@type": "Organization",
     name: "たべなび",
-    url: "https://tabenavi.jp",
+    url: "https://www.tabenavi.jp",
   },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
   },
-  mainEntityOfPage: "https://tabenavi.jp/guide/saizeriya-diet",
+  mainEntityOfPage: "https://www.tabenavi.jp/guide/saizeriya-diet",
 };
 
 const tocItems = [

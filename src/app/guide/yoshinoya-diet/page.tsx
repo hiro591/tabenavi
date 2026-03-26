@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     title: "【2026年最新】吉野家ダイエットガイド｜低カロリーメニューランキングとおすすめの食べ方",
     description:
       "吉野家のカロリー低い順ランキング、ライザップ牛サラダなどダイエット向けメニュー、PFCバランスで選ぶ食べ方を徹底解説。",
-    url: "https://tabenavi.jp/guide/yoshinoya-diet",
+    url: "https://www.tabenavi.jp/guide/yoshinoya-diet",
     type: "article",
   },
 };
@@ -54,13 +54,13 @@ const jsonLd = {
   author: {
     "@type": "Organization",
     name: "たべなび",
-    url: "https://tabenavi.jp",
+    url: "https://www.tabenavi.jp",
   },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
   },
-  mainEntityOfPage: "https://tabenavi.jp/guide/yoshinoya-diet",
+  mainEntityOfPage: "https://www.tabenavi.jp/guide/yoshinoya-diet",
 };
 
 const tocItems = [

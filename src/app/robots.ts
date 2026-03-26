@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/api/", "/admin", "/auth/"],
       },
     ],
-    sitemap: "https://tabenavi.jp/sitemap.xml",
+    sitemap: "https://www.tabenavi.jp/sitemap.xml",
   };
 }

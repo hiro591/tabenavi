@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     title: "【2026年最新】カレーのカロリーは？ダイエット中の食べ方とチェーン店別比較",
     description:
       "カレーのカロリーをチェーン店別に徹底比較。CoCo壱のカリフラワーライスや太らない食べ方を解説します。",
-    url: "https://tabenavi.jp/guide/curry-diet",
+    url: "https://www.tabenavi.jp/guide/curry-diet",
     type: "article",
   },
 };
@@ -53,13 +53,13 @@ const jsonLd = {
   author: {
     "@type": "Organization",
     name: "たべなび",
-    url: "https://tabenavi.jp",
+    url: "https://www.tabenavi.jp",
   },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
   },
-  mainEntityOfPage: "https://tabenavi.jp/guide/curry-diet",
+  mainEntityOfPage: "https://www.tabenavi.jp/guide/curry-diet",
 };
 
 const tocItems = [

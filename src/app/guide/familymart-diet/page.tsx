@@ -37,7 +37,7 @@ export const metadata: Metadata = {
       "【2026年最新】ファミマダイエット完全ガイド｜低カロリー＆高タンパク商品ランキング",
     description:
       "ファミリーマートの低カロリー・高タンパク商品を徹底解説。RIZAPコラボ＆お母さん食堂シリーズの活用法も紹介。",
-    url: "https://tabenavi.jp/guide/familymart-diet",
+    url: "https://www.tabenavi.jp/guide/familymart-diet",
     type: "article",
   },
 };
@@ -54,13 +54,13 @@ const jsonLd = {
   author: {
     "@type": "Organization",
     name: "たべなび",
-    url: "https://tabenavi.jp",
+    url: "https://www.tabenavi.jp",
   },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
   },
-  mainEntityOfPage: "https://tabenavi.jp/guide/familymart-diet",
+  mainEntityOfPage: "https://www.tabenavi.jp/guide/familymart-diet",
 };
 
 const tocItems = [

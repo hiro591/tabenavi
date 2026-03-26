@@ -39,7 +39,7 @@ export const metadata: Metadata = {
       "【2026年最新】外食タンパク質コスパ最強ランキング｜1gあたりの価格で徹底比較",
     description:
       "外食チェーンのタンパク質コスパを1gあたりの価格で徹底比較。20メニューをランキング形式で紹介。",
-    url: "https://tabenavi.jp/guide/protein-cost-ranking",
+    url: "https://www.tabenavi.jp/guide/protein-cost-ranking",
     type: "article",
   },
 };
@@ -56,13 +56,13 @@ const jsonLd = {
   author: {
     "@type": "Organization",
     name: "たべなび",
-    url: "https://tabenavi.jp",
+    url: "https://www.tabenavi.jp",
   },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
   },
-  mainEntityOfPage: "https://tabenavi.jp/guide/protein-cost-ranking",
+  mainEntityOfPage: "https://www.tabenavi.jp/guide/protein-cost-ranking",
 };
 
 const tocItems = [

@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     title: "【2026年最新】松屋ダイエットガイド｜低カロリーメニューランキングとおすすめの食べ方",
     description:
       "松屋のカロリー低い順ランキング、ダイエット向けおすすめメニュー、定食と丼の比較を徹底解説。",
-    url: "https://tabenavi.jp/guide/matsuya-diet",
+    url: "https://www.tabenavi.jp/guide/matsuya-diet",
     type: "article",
   },
 };
@@ -54,13 +54,13 @@ const jsonLd = {
   author: {
     "@type": "Organization",
     name: "たべなび",
-    url: "https://tabenavi.jp",
+    url: "https://www.tabenavi.jp",
   },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
   },
-  mainEntityOfPage: "https://tabenavi.jp/guide/matsuya-diet",
+  mainEntityOfPage: "https://www.tabenavi.jp/guide/matsuya-diet",
 };
 
 const tocItems = [

@@ -40,7 +40,7 @@ export const metadata: Metadata = {
       "【2026年最新】ファミレスダイエット完全ガイド｜サイゼリヤ・ガスト・デニーズのカロリー比較",
     description:
       "サイゼリヤ・ガスト・デニーズの3大ファミレスをカロリー・PFC別に徹底比較。ダイエット中のおすすめメニューと注文テクニックを解説。",
-    url: "https://tabenavi.jp/guide/family-restaurant-diet",
+    url: "https://www.tabenavi.jp/guide/family-restaurant-diet",
     type: "article",
   },
 };
@@ -57,13 +57,13 @@ const jsonLd = {
   author: {
     "@type": "Organization",
     name: "たべなび",
-    url: "https://tabenavi.jp",
+    url: "https://www.tabenavi.jp",
   },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
   },
-  mainEntityOfPage: "https://tabenavi.jp/guide/family-restaurant-diet",
+  mainEntityOfPage: "https://www.tabenavi.jp/guide/family-restaurant-diet",
 };
 
 const tocItems = [

@@ -37,7 +37,7 @@ export const metadata: Metadata = {
       "【2026年最新】夜食で太らない方法｜深夜の外食・コンビニメニューおすすめガイド",
     description:
       "深夜に食べても太りにくいメニューを科学的根拠とともに紹介。コンビニ・外食チェーンの夜食おすすめを徹底解説。",
-    url: "https://tabenavi.jp/guide/late-night-eating",
+    url: "https://www.tabenavi.jp/guide/late-night-eating",
     type: "article",
   },
 };
@@ -54,13 +54,13 @@ const jsonLd = {
   author: {
     "@type": "Organization",
     name: "たべなび",
-    url: "https://tabenavi.jp",
+    url: "https://www.tabenavi.jp",
   },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
   },
-  mainEntityOfPage: "https://tabenavi.jp/guide/late-night-eating",
+  mainEntityOfPage: "https://www.tabenavi.jp/guide/late-night-eating",
 };
 
 const tocItems = [

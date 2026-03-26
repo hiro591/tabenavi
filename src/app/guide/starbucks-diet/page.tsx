@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     title: "【2026年最新】スタバダイエットガイド｜低カロリードリンクランキングと太らない注文術",
     description:
       "スタバの低カロリードリンクランキング、無脂肪ミルク変更やシロップ減量などのカスタマイズ術を徹底解説。",
-    url: "https://tabenavi.jp/guide/starbucks-diet",
+    url: "https://www.tabenavi.jp/guide/starbucks-diet",
     type: "article",
   },
 };
@@ -54,13 +54,13 @@ const jsonLd = {
   author: {
     "@type": "Organization",
     name: "たべなび",
-    url: "https://tabenavi.jp",
+    url: "https://www.tabenavi.jp",
   },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
   },
-  mainEntityOfPage: "https://tabenavi.jp/guide/starbucks-diet",
+  mainEntityOfPage: "https://www.tabenavi.jp/guide/starbucks-diet",
 };
 
 const tocItems = [

@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     title: "【初心者向け】PFCバランスとは？計算方法と外食での実践ガイド",
     description:
       "PFCバランスの基本から計算方法、外食での実践テクニックまで初心者向けに徹底解説。",
-    url: "https://tabenavi.jp/guide/pfc-guide",
+    url: "https://www.tabenavi.jp/guide/pfc-guide",
     type: "article",
   },
 };
@@ -51,13 +51,13 @@ const jsonLd = {
   author: {
     "@type": "Organization",
     name: "たべなび",
-    url: "https://tabenavi.jp",
+    url: "https://www.tabenavi.jp",
   },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
   },
-  mainEntityOfPage: "https://tabenavi.jp/guide/pfc-guide",
+  mainEntityOfPage: "https://www.tabenavi.jp/guide/pfc-guide",
 };
 
 const tocItems = [

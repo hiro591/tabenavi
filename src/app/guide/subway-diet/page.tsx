@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     title: "【2026年最新】サブウェイダイエットガイド｜低カロリー＆高タンパクサンドの選び方",
     description:
       "サブウェイのカロリーランキング、ダイエット中におすすめの低カロリーサンド、カスタマイズ術を徹底解説。",
-    url: "https://tabenavi.jp/guide/subway-diet",
+    url: "https://www.tabenavi.jp/guide/subway-diet",
     type: "article",
   },
 };
@@ -55,13 +55,13 @@ const jsonLd = {
   author: {
     "@type": "Organization",
     name: "たべなび",
-    url: "https://tabenavi.jp",
+    url: "https://www.tabenavi.jp",
   },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
   },
-  mainEntityOfPage: "https://tabenavi.jp/guide/subway-diet",
+  mainEntityOfPage: "https://www.tabenavi.jp/guide/subway-diet",
 };
 
 const tocItems = [

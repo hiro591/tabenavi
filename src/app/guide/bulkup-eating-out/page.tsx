@@ -37,7 +37,7 @@ export const metadata: Metadata = {
       "【2026年最新】増量期の外食完全ガイド｜バルクアップに最適なチェーン店メニュー",
     description:
       "増量期に使えるチェーン店メニューを徹底解説。1日3000kcalの外食プランも紹介。",
-    url: "https://tabenavi.jp/guide/bulkup-eating-out",
+    url: "https://www.tabenavi.jp/guide/bulkup-eating-out",
     type: "article",
   },
 };
@@ -54,13 +54,13 @@ const jsonLd = {
   author: {
     "@type": "Organization",
     name: "たべなび",
-    url: "https://tabenavi.jp",
+    url: "https://www.tabenavi.jp",
   },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
   },
-  mainEntityOfPage: "https://tabenavi.jp/guide/bulkup-eating-out",
+  mainEntityOfPage: "https://www.tabenavi.jp/guide/bulkup-eating-out",
 };
 
 const tocItems = [

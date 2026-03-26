@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     title: "【2026年最新】すき家ダイエットガイド｜低カロリーメニューランキングとおすすめの食べ方",
     description:
       "すき家のカロリー低い順ランキング、牛丼ライトなどダイエット向けメニュー、PFCバランスで選ぶ食べ方を徹底解説。",
-    url: "https://tabenavi.jp/guide/sukiya-diet",
+    url: "https://www.tabenavi.jp/guide/sukiya-diet",
     type: "article",
   },
 };
@@ -54,13 +54,13 @@ const jsonLd = {
   author: {
     "@type": "Organization",
     name: "たべなび",
-    url: "https://tabenavi.jp",
+    url: "https://www.tabenavi.jp",
   },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
   },
-  mainEntityOfPage: "https://tabenavi.jp/guide/sukiya-diet",
+  mainEntityOfPage: "https://www.tabenavi.jp/guide/sukiya-diet",
 };
 
 const tocItems = [

@@ -37,7 +37,7 @@ export const metadata: Metadata = {
       "【2026年最新】チートデイ完全ガイド｜正しいやり方・頻度・おすすめメニューを徹底解説",
     description:
       "チートデイの正しいやり方を科学的に解説。停滞期を突破する頻度・メニュー・翌日のリカバリーまで完全網羅。",
-    url: "https://tabenavi.jp/guide/cheat-day",
+    url: "https://www.tabenavi.jp/guide/cheat-day",
     type: "article",
   },
 };
@@ -54,13 +54,13 @@ const jsonLd = {
   author: {
     "@type": "Organization",
     name: "たべなび",
-    url: "https://tabenavi.jp",
+    url: "https://www.tabenavi.jp",
   },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
   },
-  mainEntityOfPage: "https://tabenavi.jp/guide/cheat-day",
+  mainEntityOfPage: "https://www.tabenavi.jp/guide/cheat-day",
 };
 
 const tocItems = [

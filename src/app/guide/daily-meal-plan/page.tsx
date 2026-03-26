@@ -38,7 +38,7 @@ export const metadata: Metadata = {
       "【2026年最新】外食だけで1日1500kcal！ダイエット食事プラン完全ガイド",
     description:
       "外食だけで1日1500kcalに収める具体的な食事プランを5パターン紹介。実際のメニュー名とPFC付きで完全解説。",
-    url: "https://tabenavi.jp/guide/daily-meal-plan",
+    url: "https://www.tabenavi.jp/guide/daily-meal-plan",
     type: "article",
   },
 };
@@ -55,13 +55,13 @@ const jsonLd = {
   author: {
     "@type": "Organization",
     name: "たべなび",
-    url: "https://tabenavi.jp",
+    url: "https://www.tabenavi.jp",
   },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
   },
-  mainEntityOfPage: "https://tabenavi.jp/guide/daily-meal-plan",
+  mainEntityOfPage: "https://www.tabenavi.jp/guide/daily-meal-plan",
 };
 
 const tocItems = [

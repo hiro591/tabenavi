@@ -53,7 +53,7 @@ const jsonLd = {
   name: "たべなび",
   applicationCategory: "HealthApplication",
   operatingSystem: "Web",
-  url: "https://tabenavi.jp",
+  url: "https://www.tabenavi.jp",
   description: "外食専門の栄養管理アプリ。カロリー・PFCで外食先を絞り込み、マップで近くの高タンパクメニューを発見。20チェーン・500メニュー対応。",
   offers: {
     "@type": "Offer",
@@ -69,7 +69,7 @@ const jsonLd = {
   author: {
     "@type": "Organization",
     name: "たべなび",
-    url: "https://tabenavi.jp",
+    url: "https://www.tabenavi.jp",
   },
 };
 

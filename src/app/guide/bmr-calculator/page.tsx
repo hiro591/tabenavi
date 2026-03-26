@@ -39,7 +39,7 @@ export const metadata: Metadata = {
       "【2026年最新】基礎代謝の計算方法と上げ方｜痩せやすい体を作る完全ガイド",
     description:
       "基礎代謝の計算方法（ハリス-ベネディクト式）、年齢・性別の平均値、代謝を上げる7つの方法を徹底解説。",
-    url: "https://tabenavi.jp/guide/bmr-calculator",
+    url: "https://www.tabenavi.jp/guide/bmr-calculator",
     type: "article",
   },
 };
@@ -61,13 +61,13 @@ const jsonLd = {
   author: {
     "@type": "Organization",
     name: "たべなび",
-    url: "https://tabenavi.jp",
+    url: "https://www.tabenavi.jp",
   },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
   },
-  mainEntityOfPage: "https://tabenavi.jp/guide/bmr-calculator",
+  mainEntityOfPage: "https://www.tabenavi.jp/guide/bmr-calculator",
 };
 
 const tocItems = [

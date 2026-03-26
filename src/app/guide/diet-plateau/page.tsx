@@ -37,7 +37,7 @@ export const metadata: Metadata = {
       "【2026年最新】ダイエット停滞期の原因と乗り越え方｜体重が減らない時の5つの対策",
     description:
       "ダイエット停滞期の科学的メカニズムと5つの突破法を解説。体重が減らない時に今すぐ実践できる対策を紹介。",
-    url: "https://tabenavi.jp/guide/diet-plateau",
+    url: "https://www.tabenavi.jp/guide/diet-plateau",
     type: "article",
   },
 };
@@ -54,13 +54,13 @@ const jsonLd = {
   author: {
     "@type": "Organization",
     name: "たべなび",
-    url: "https://tabenavi.jp",
+    url: "https://www.tabenavi.jp",
   },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
   },
-  mainEntityOfPage: "https://tabenavi.jp/guide/diet-plateau",
+  mainEntityOfPage: "https://www.tabenavi.jp/guide/diet-plateau",
 };
 
 const tocItems = [

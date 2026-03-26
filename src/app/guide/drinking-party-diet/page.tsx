@@ -40,7 +40,7 @@ export const metadata: Metadata = {
       "【2026年最新】飲み会で太らない完全ガイド｜居酒屋メニューのカロリー・おつまみの選び方",
     description:
       "飲み会でも太らないためのお酒・おつまみの選び方を徹底解説。カロリー比較と3段階テクニックで飲み会を乗り越えよう。",
-    url: "https://tabenavi.jp/guide/drinking-party-diet",
+    url: "https://www.tabenavi.jp/guide/drinking-party-diet",
     type: "article",
   },
 };
@@ -57,13 +57,13 @@ const jsonLd = {
   author: {
     "@type": "Organization",
     name: "たべなび",
-    url: "https://tabenavi.jp",
+    url: "https://www.tabenavi.jp",
   },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
   },
-  mainEntityOfPage: "https://tabenavi.jp/guide/drinking-party-diet",
+  mainEntityOfPage: "https://www.tabenavi.jp/guide/drinking-party-diet",
 };
 
 const tocItems = [

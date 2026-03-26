@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     title: "【2026年最新】ラーメンはダイエット中に食べていい？カロリー比較と太らない食べ方",
     description:
       "ラーメンのカロリーを味別・チェーン店別に徹底比較。太らない食べ方5つのコツを紹介します。",
-    url: "https://tabenavi.jp/guide/ramen-diet",
+    url: "https://www.tabenavi.jp/guide/ramen-diet",
     type: "article",
   },
 };
@@ -53,13 +53,13 @@ const jsonLd = {
   author: {
     "@type": "Organization",
     name: "たべなび",
-    url: "https://tabenavi.jp",
+    url: "https://www.tabenavi.jp",
   },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
   },
-  mainEntityOfPage: "https://tabenavi.jp/guide/ramen-diet",
+  mainEntityOfPage: "https://www.tabenavi.jp/guide/ramen-diet",
 };
 
 const tocItems = [

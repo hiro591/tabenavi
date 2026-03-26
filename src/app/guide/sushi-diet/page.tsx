@@ -37,7 +37,7 @@ export const metadata: Metadata = {
       "【2026年最新】回転寿司ダイエットガイド｜スシロー・くら寿司のカロリーと太らない食べ方",
     description:
       "回転寿司のカロリーをネタ別に徹底比較。スシローとくら寿司の栄養成分ランキング、太らない食べ方を解説。",
-    url: "https://tabenavi.jp/guide/sushi-diet",
+    url: "https://www.tabenavi.jp/guide/sushi-diet",
     type: "article",
   },
 };
@@ -54,13 +54,13 @@ const jsonLd = {
   author: {
     "@type": "Organization",
     name: "たべなび",
-    url: "https://tabenavi.jp",
+    url: "https://www.tabenavi.jp",
   },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
   },
-  mainEntityOfPage: "https://tabenavi.jp/guide/sushi-diet",
+  mainEntityOfPage: "https://www.tabenavi.jp/guide/sushi-diet",
 };
 
 const tocItems = [

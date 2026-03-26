@@ -36,7 +36,7 @@ export const metadata: Metadata = {
       "【2026年最新】太らない食べ方・食べ順ガイド｜外食で実践できる5つのテクニック",
     description:
       "食べ順ダイエットの科学的根拠と外食での実践法を徹底解説。血糖値コントロールで太りにくい体に。",
-    url: "https://tabenavi.jp/guide/eating-order",
+    url: "https://www.tabenavi.jp/guide/eating-order",
     type: "article",
   },
 };
@@ -53,13 +53,13 @@ const jsonLd = {
   author: {
     "@type": "Organization",
     name: "たべなび",
-    url: "https://tabenavi.jp",
+    url: "https://www.tabenavi.jp",
   },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
   },
-  mainEntityOfPage: "https://tabenavi.jp/guide/eating-order",
+  mainEntityOfPage: "https://www.tabenavi.jp/guide/eating-order",
 };
 
 const tocItems = [

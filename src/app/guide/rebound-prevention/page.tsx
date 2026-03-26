@@ -38,7 +38,7 @@ export const metadata: Metadata = {
       "【2026年最新】リバウンドしない方法｜ダイエット後に体重を維持する科学的アプローチ",
     description:
       "ダイエッターの80%がリバウンドする現実。科学的根拠に基づくリバウンド防止の5つの方法と外食での実践法を解説。",
-    url: "https://tabenavi.jp/guide/rebound-prevention",
+    url: "https://www.tabenavi.jp/guide/rebound-prevention",
     type: "article",
   },
 };
@@ -56,13 +56,13 @@ const jsonLd = {
   author: {
     "@type": "Organization",
     name: "たべなび",
-    url: "https://tabenavi.jp",
+    url: "https://www.tabenavi.jp",
   },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
   },
-  mainEntityOfPage: "https://tabenavi.jp/guide/rebound-prevention",
+  mainEntityOfPage: "https://www.tabenavi.jp/guide/rebound-prevention",
 };
 
 const tocItems = [

@@ -36,7 +36,7 @@ export const metadata: Metadata = {
       "【2026年最新】丸亀製麺ダイエットガイド｜うどんは太る？低カロリーメニューの選び方",
     description:
       "丸亀製麺のカロリー・PFC一覧、ダイエット中のおすすめメニュー、天ぷらの落とし穴を徹底解説。",
-    url: "https://tabenavi.jp/guide/marugame-diet",
+    url: "https://www.tabenavi.jp/guide/marugame-diet",
     type: "article",
   },
 };
@@ -53,13 +53,13 @@ const jsonLd = {
   author: {
     "@type": "Organization",
     name: "たべなび",
-    url: "https://tabenavi.jp",
+    url: "https://www.tabenavi.jp",
   },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
   },
-  mainEntityOfPage: "https://tabenavi.jp/guide/marugame-diet",
+  mainEntityOfPage: "https://www.tabenavi.jp/guide/marugame-diet",
 };
 
 const tocItems = [

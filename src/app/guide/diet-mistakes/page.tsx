@@ -37,7 +37,7 @@ export const metadata: Metadata = {
       "【2026年最新】ダイエットで絶対やってはいけないこと10選｜失敗する人の共通点",
     description:
       "ダイエット失敗者に共通するNG行動10選。科学的根拠とともに正しい対策を完全解説。",
-    url: "https://tabenavi.jp/guide/diet-mistakes",
+    url: "https://www.tabenavi.jp/guide/diet-mistakes",
     type: "article",
   },
 };
@@ -54,13 +54,13 @@ const jsonLd = {
   author: {
     "@type": "Organization",
     name: "たべなび",
-    url: "https://tabenavi.jp",
+    url: "https://www.tabenavi.jp",
   },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
   },
-  mainEntityOfPage: "https://tabenavi.jp/guide/diet-mistakes",
+  mainEntityOfPage: "https://www.tabenavi.jp/guide/diet-mistakes",
 };
 
 const tocItems = [

@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     title: "【2026年最新】ダイエット中の朝食完全ガイド｜朝マック・コンビニ・チェーン店のおすすめメニュー",
     description:
       "朝マック・コンビニ・チェーン店のダイエット向け朝食メニューを徹底比較。PFCバランスで選ぶ朝食の正解がわかります。",
-    url: "https://tabenavi.jp/guide/morning-diet",
+    url: "https://www.tabenavi.jp/guide/morning-diet",
     type: "article",
   },
 };
@@ -53,13 +53,13 @@ const jsonLd = {
   author: {
     "@type": "Organization",
     name: "たべなび",
-    url: "https://tabenavi.jp",
+    url: "https://www.tabenavi.jp",
   },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
   },
-  mainEntityOfPage: "https://tabenavi.jp/guide/morning-diet",
+  mainEntityOfPage: "https://www.tabenavi.jp/guide/morning-diet",
 };
 
 const tocItems = [

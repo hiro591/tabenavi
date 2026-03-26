@@ -36,7 +36,7 @@ export const metadata: Metadata = {
       "牛丼チェーン3社カロリー・栄養比較｜吉野家・松屋・すき家、ダイエットに最適なのは？",
     description:
       "吉野家・松屋・すき家の牛丼カロリー・タンパク質・脂質・炭水化物を徹底比較。ダイエット中に選ぶべき牛丼チェーンとおすすめメニューを紹介。",
-    url: "https://tabenavi.jp/guide/gyudon-comparison",
+    url: "https://www.tabenavi.jp/guide/gyudon-comparison",
     type: "article",
   },
 };
@@ -53,13 +53,13 @@ const jsonLd = {
   author: {
     "@type": "Organization",
     name: "たべなび",
-    url: "https://tabenavi.jp",
+    url: "https://www.tabenavi.jp",
   },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
   },
-  mainEntityOfPage: "https://tabenavi.jp/guide/gyudon-comparison",
+  mainEntityOfPage: "https://www.tabenavi.jp/guide/gyudon-comparison",
 };
 
 const tocItems = [
