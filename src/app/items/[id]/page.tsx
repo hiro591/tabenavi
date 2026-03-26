@@ -349,22 +349,16 @@ export default async function ItemDetailPage({
       </div>
 
       {/* Sticky Bottom Action Bar */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-t border-gray-100 py-3 px-4">
-        <div className="max-w-lg mx-auto flex gap-3">
+      <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-t border-gray-100 py-3 px-4 z-50">
+        <div className="max-w-lg mx-auto flex gap-2">
           <FavoriteButton itemId={item.id} />
           <ShareCard item={item} />
-          <a
-            href={mapsUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-orange-500 text-white rounded-xl font-medium active:bg-orange-600 transition-colors"
+          <Link
+            href={`/record?menu_id=${item.id}`}
+            className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-sky-400 to-cyan-500 text-white rounded-xl font-bold active:scale-[0.98] transition-all shadow-md shadow-sky-200"
           >
-            <MapPin className="w-4 h-4" />
-            <span>近くの{chainName || "お店"}を探す</span>
-          </a>
-        </div>
-        <div className="text-center mt-1">
-          <ReportButton itemId={item.id} itemName={item.name} chainName={chainName} />
+            <span>この食事を記録する</span>
+          </Link>
         </div>
       </div>
     </div>
