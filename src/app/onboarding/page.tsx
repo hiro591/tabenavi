@@ -3,10 +3,16 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
-import { Target, Utensils, User, Ruler, Weight, ChevronRight, ChevronLeft, SkipForward } from "lucide-react";
+import { ChevronRight, ChevronLeft, SkipForward, CheckCircle } from "lucide-react";
 import { LogoIcon } from "@/components/Logo";
 
-const TOTAL_STEPS = 7;
+const TOTAL_STEPS = 12;
+
+interface Chain {
+  id: string;
+  name: string;
+  emoji: string;
+}
 
 export default function OnboardingPage() {
   const router = useRouter();
@@ -14,24 +20,40 @@ export default function OnboardingPage() {
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState(false);
 
-  // Answers (all optional)
   const [goal, setGoal] = useState<string | null>(null);
+  const [timeline, setTimeline] = useState<string | null>(null);
   const [eatingOutFreq, setEatingOutFreq] = useState<string | null>(null);
   const [gender, setGender] = useState<string | null>(null);
-  const [birthYear, setBirthYear] = useState("");
-  const [height, setHeight] = useState("");
-  const [currentWeight, setCurrentWeight] = useState("");
-  const [targetWeight, setTargetWeight] = useState("");
+  const [birthYear, setBirthYear] = useState<string | null>(null);
+  const [heightRange, setHeightRange] = useState<string | null>(null);
+  const [weightRange, setWeightRange] = useState<string | null>(null);
+  const [targetWeightRange, setTargetWeightRange] = useState<string | null>(null);
+  const [hardGainer, setHardGainer] = useState<string | null>(null);
+  const [activityLevel, setActivityLevel] = useState<string | null>(null);
+  const [favoriteChains, setFavoriteChains] = useState<string[]>([]);
+  const [favoriteFoods, setFavoriteFoods] = useState<string[]>([]);
 
-  const GOAL_CALORIES: Record<string, number> = {
-    lose: 1500,
-    maintain: 2000,
-    gain: 2500,
-  };
+  const [chains, setChains] = useState<Chain[]>([]);
+
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.from("chain_restaurants").select("id, name, emoji").order("name").then(({ data }) => {
+      if (data) setChains(data);
+    });
+  }, []);
+
+  const GOAL_CALORIES: Record<string, number> = { lose: 1500, maintain: 2000, gain: 2500 };
 
   const next = () => setStep((s) => Math.min(s + 1, TOTAL_STEPS));
   const prev = () => setStep((s) => Math.max(s - 1, 1));
-  const skip = () => next();
+
+  const toggleFavoriteChain = (id: string) => {
+    setFavoriteChains((prev) => prev.includes(id) ? prev.filter((c) => c !== id) : [...prev, id]);
+  };
+
+  const toggleFavoriteFood = (food: string) => {
+    setFavoriteFoods((prev) => prev.includes(food) ? prev.filter((f) => f !== food) : [...prev, food]);
+  };
 
   const handleComplete = async () => {
     setSaving(true);
@@ -39,29 +61,16 @@ export default function OnboardingPage() {
     try {
       const supabase = createClient();
       const { data: { user } } = await supabase.auth.getUser();
-
       if (user) {
         const calories = goal ? GOAL_CALORIES[goal] ?? 2000 : 2000;
-        const { error } = await supabase
-          .from("profiles")
-          .update({ target_calories: calories })
-          .eq("id", user.id);
+        const { error } = await supabase.from("profiles").update({ target_calories: calories }).eq("id", user.id);
         if (error) throw error;
       }
-
-      // Save additional data to localStorage (DB migration later)
-      const onboardingData = {
-        goal,
-        eatingOutFreq,
-        gender,
-        birthYear: birthYear || null,
-        height: height || null,
-        currentWeight: currentWeight || null,
-        targetWeight: targetWeight || null,
-        completedAt: new Date().toISOString(),
-      };
-      localStorage.setItem("onboarding", JSON.stringify(onboardingData));
-
+      localStorage.setItem("onboarding", JSON.stringify({
+        goal, timeline, eatingOutFreq, gender, birthYear, heightRange,
+        weightRange, targetWeightRange, hardGainer, activityLevel,
+        favoriteChains, favoriteFoods, completedAt: new Date().toISOString(),
+      }));
       router.push("/dashboard");
     } catch {
       setSaving(false);
@@ -71,16 +80,11 @@ export default function OnboardingPage() {
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
-      {/* Progress bar */}
+      {/* Progress */}
       <div className="px-6 pt-6 pb-2">
-        <div className="flex gap-1.5">
+        <div className="flex gap-1">
           {Array.from({ length: TOTAL_STEPS }).map((_, i) => (
-            <div
-              key={i}
-              className={`h-1 rounded-full flex-1 transition-all duration-300 ${
-                i < step ? "bg-sky-400" : "bg-gray-100"
-              }`}
-            />
+            <div key={i} className={`h-1 rounded-full flex-1 transition-all duration-300 ${i < step ? "bg-sky-400" : "bg-gray-100"}`} />
           ))}
         </div>
         <p className="text-[11px] text-gray-400 mt-2">{step} / {TOTAL_STEPS}</p>
@@ -88,207 +92,221 @@ export default function OnboardingPage() {
 
       <div className="flex-1 max-w-lg mx-auto w-full px-6 pb-8 flex flex-col">
 
-        {/* ─── Step 1: Welcome ─── */}
+        {/* 1: Welcome */}
         {step === 1 && (
-          <div className="flex-1 flex flex-col items-center justify-center text-center">
-            <div className="mb-6">
-              <LogoIcon size={56} />
-            </div>
-            <h1 className="text-[26px] font-bold text-gray-900 mb-3">たべなびへようこそ</h1>
-            <p className="text-gray-500 text-[15px] leading-relaxed mb-10">
-              いくつかの質問に答えるだけで、
-              <br />
-              あなたに最適な設定ができます。
-            </p>
-            <button
-              onClick={next}
-              className="w-full bg-gradient-to-r from-sky-400 to-cyan-500 text-white font-bold py-3.5 rounded-xl active:scale-[0.98] transition-transform shadow-md shadow-sky-200 flex items-center justify-center gap-2"
-            >
-              はじめる
-              <ChevronRight className="w-4 h-4" />
-            </button>
-            <p className="text-[12px] text-gray-400 mt-4">すべての質問はスキップ可能です</p>
-          </div>
+          <Center>
+            <LogoIcon size={56} />
+            <h1 className="text-[24px] font-bold text-gray-900 mt-6 mb-3">たべなびへようこそ</h1>
+            <p className="text-gray-500 text-[15px] leading-relaxed mb-10">いくつかの質問に答えるだけで、<br />あなたに最適な設定ができます。</p>
+            <PrimaryButton onClick={next}>はじめる</PrimaryButton>
+            <p className="text-[12px] text-gray-400 mt-4">すべてスキップ可能です</p>
+          </Center>
         )}
 
-        {/* ─── Step 2: Goal ─── */}
+        {/* 2: Goal */}
         {step === 2 && (
-          <StepLayout title="あなたの目標は？" onBack={prev} onSkip={skip}>
-            <div className="space-y-3">
-              {[
-                { key: "lose", emoji: "🔥", title: "減量", desc: "体重を落としたい" },
-                { key: "maintain", emoji: "⚖️", title: "維持", desc: "今の体型をキープしたい" },
-                { key: "gain", emoji: "💪", title: "増量", desc: "筋肉をつけたい" },
-              ].map((g) => (
-                <button
-                  key={g.key}
-                  onClick={() => { setGoal(g.key); next(); }}
-                  className={`w-full p-4 rounded-xl border-2 text-left transition-all active:scale-[0.98] ${
-                    goal === g.key ? "border-sky-400 bg-sky-50" : "border-gray-100 bg-white hover:bg-gray-50"
-                  }`}
-                >
-                  <div className="flex items-center gap-3">
-                    <span className="text-2xl">{g.emoji}</span>
-                    <div>
-                      <p className="font-bold text-gray-900">{g.title}</p>
-                      <p className="text-sm text-gray-400">{g.desc}</p>
-                    </div>
-                  </div>
-                </button>
-              ))}
-            </div>
-          </StepLayout>
+          <Q title="あなたの目標は？" onBack={prev} onSkip={next}>
+            <Choices
+              options={[
+                { key: "lose", emoji: "🔥", label: "減量", desc: "体重を落としたい" },
+                { key: "maintain", emoji: "⚖️", label: "維持", desc: "今の体型をキープ" },
+                { key: "gain", emoji: "💪", label: "増量", desc: "筋肉をつけたい" },
+              ]}
+              selected={goal}
+              onSelect={(k) => { setGoal(k); next(); }}
+            />
+          </Q>
         )}
 
-        {/* ─── Step 3: Eating out frequency ─── */}
+        {/* 3: Timeline */}
         {step === 3 && (
-          <StepLayout title="外食は週に何日しますか？" onBack={prev} onSkip={skip}>
-            <div className="space-y-3">
-              {[
-                { key: "1-2", label: "1〜2日", desc: "たまに外食する" },
+          <Q title="どのくらいの期間で達成したい？" onBack={prev} onSkip={next}>
+            <Choices
+              options={[
+                { key: "1m", label: "1ヶ月以内" },
+                { key: "3m", label: "3ヶ月くらい" },
+                { key: "6m", label: "半年くらい" },
+                { key: "1y", label: "1年かけてゆっくり" },
+                { key: "none", label: "特に期限はない" },
+              ]}
+              selected={timeline}
+              onSelect={(k) => { setTimeline(k); next(); }}
+            />
+          </Q>
+        )}
+
+        {/* 4: Eating out freq */}
+        {step === 4 && (
+          <Q title="外食は週に何日しますか？" onBack={prev} onSkip={next}>
+            <Choices
+              options={[
+                { key: "1-2", label: "1〜2日", desc: "たまに外食" },
                 { key: "3-4", label: "3〜4日", desc: "半分くらい外食" },
                 { key: "5+", label: "5日以上", desc: "ほぼ毎日外食" },
-              ].map((f) => (
-                <button
-                  key={f.key}
-                  onClick={() => { setEatingOutFreq(f.key); next(); }}
-                  className={`w-full p-4 rounded-xl border-2 text-left transition-all active:scale-[0.98] ${
-                    eatingOutFreq === f.key ? "border-sky-400 bg-sky-50" : "border-gray-100 bg-white hover:bg-gray-50"
-                  }`}
-                >
-                  <p className="font-bold text-gray-900">{f.label}</p>
-                  <p className="text-sm text-gray-400">{f.desc}</p>
-                </button>
-              ))}
-            </div>
-          </StepLayout>
+              ]}
+              selected={eatingOutFreq}
+              onSelect={(k) => { setEatingOutFreq(k); next(); }}
+            />
+          </Q>
         )}
 
-        {/* ─── Step 4: Gender ─── */}
-        {step === 4 && (
-          <StepLayout title="性別を教えてください" onBack={prev} onSkip={skip}>
-            <div className="space-y-3">
-              {[
+        {/* 5: Gender */}
+        {step === 5 && (
+          <Q title="性別は？" onBack={prev} onSkip={next}>
+            <Choices
+              options={[
                 { key: "male", label: "男性" },
                 { key: "female", label: "女性" },
                 { key: "other", label: "その他 / 回答しない" },
-              ].map((g) => (
-                <button
-                  key={g.key}
-                  onClick={() => { setGender(g.key); next(); }}
-                  className={`w-full p-4 rounded-xl border-2 text-left transition-all active:scale-[0.98] ${
-                    gender === g.key ? "border-sky-400 bg-sky-50" : "border-gray-100 bg-white hover:bg-gray-50"
-                  }`}
-                >
-                  <p className="font-bold text-gray-900">{g.label}</p>
-                </button>
-              ))}
-            </div>
-          </StepLayout>
+              ]}
+              selected={gender}
+              onSelect={(k) => { setGender(k); next(); }}
+            />
+          </Q>
         )}
 
-        {/* ─── Step 5: Birth year + Height ─── */}
-        {step === 5 && (
-          <StepLayout title="生まれ年と身長" onBack={prev} onSkip={skip}>
-            <div className="space-y-5">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">生まれ年</label>
-                <input
-                  type="number"
-                  value={birthYear}
-                  onChange={(e) => setBirthYear(e.target.value)}
-                  placeholder="例: 1998"
-                  className="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder:text-gray-300 focus:border-sky-400 focus:ring-1 focus:ring-sky-400/30 transition-colors text-lg tabular-nums"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">身長 (cm)</label>
-                <input
-                  type="number"
-                  value={height}
-                  onChange={(e) => setHeight(e.target.value)}
-                  placeholder="例: 172"
-                  className="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder:text-gray-300 focus:border-sky-400 focus:ring-1 focus:ring-sky-400/30 transition-colors text-lg tabular-nums"
-                />
-              </div>
-            </div>
-            <button
-              onClick={next}
-              className="w-full mt-8 bg-gradient-to-r from-sky-400 to-cyan-500 text-white font-bold py-3.5 rounded-xl active:scale-[0.98] transition-transform shadow-md shadow-sky-200 flex items-center justify-center gap-2"
-            >
-              次へ
-              <ChevronRight className="w-4 h-4" />
-            </button>
-          </StepLayout>
-        )}
-
-        {/* ─── Step 6: Weight ─── */}
+        {/* 6: Birth year */}
         {step === 6 && (
-          <StepLayout title="体重を教えてください" onBack={prev} onSkip={skip}>
-            <div className="space-y-5">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">現在の体重 (kg)</label>
-                <input
-                  type="number"
-                  value={currentWeight}
-                  onChange={(e) => setCurrentWeight(e.target.value)}
-                  placeholder="例: 72"
-                  step="0.1"
-                  className="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder:text-gray-300 focus:border-sky-400 focus:ring-1 focus:ring-sky-400/30 transition-colors text-lg tabular-nums"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">目標体重 (kg)</label>
-                <input
-                  type="number"
-                  value={targetWeight}
-                  onChange={(e) => setTargetWeight(e.target.value)}
-                  placeholder="例: 65"
-                  step="0.1"
-                  className="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder:text-gray-300 focus:border-sky-400 focus:ring-1 focus:ring-sky-400/30 transition-colors text-lg tabular-nums"
-                />
-              </div>
-            </div>
-            <button
-              onClick={next}
-              className="w-full mt-8 bg-gradient-to-r from-sky-400 to-cyan-500 text-white font-bold py-3.5 rounded-xl active:scale-[0.98] transition-transform shadow-md shadow-sky-200 flex items-center justify-center gap-2"
-            >
-              次へ
-              <ChevronRight className="w-4 h-4" />
-            </button>
-          </StepLayout>
+          <Q title="生まれ年は？" onBack={prev} onSkip={next}>
+            <Choices
+              options={[
+                { key: "~1979", label: "1979年以前" },
+                { key: "1980s", label: "1980〜1989年" },
+                { key: "1990s", label: "1990〜1999年" },
+                { key: "2000s", label: "2000〜2009年" },
+                { key: "2010s~", label: "2010年以降" },
+              ]}
+              selected={birthYear}
+              onSelect={(k) => { setBirthYear(k); next(); }}
+            />
+          </Q>
         )}
 
-        {/* ─── Step 7: Complete ─── */}
+        {/* 7: Height */}
         {step === 7 && (
-          <div className="flex-1 flex flex-col items-center justify-center text-center">
-            <div className="w-16 h-16 bg-gradient-to-br from-emerald-400 to-green-500 rounded-full flex items-center justify-center mb-5 shadow-lg shadow-emerald-100">
-              <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-              </svg>
-            </div>
-            <h1 className="text-[24px] font-bold text-gray-900 mb-2">準備完了！</h1>
-            <p className="text-gray-500 text-sm mb-8">いつでもプロフィールから変更できます</p>
+          <Q title="身長は？" onBack={prev} onSkip={next}>
+            <Choices
+              options={[
+                { key: "~159", label: "159cm以下" },
+                { key: "160-169", label: "160〜169cm" },
+                { key: "170-179", label: "170〜179cm" },
+                { key: "180+", label: "180cm以上" },
+              ]}
+              selected={heightRange}
+              onSelect={(k) => { setHeightRange(k); next(); }}
+            />
+          </Q>
+        )}
 
-            <div className="bg-gray-50 rounded-xl p-5 w-full mb-8 text-left space-y-3 text-sm">
-              <SummaryRow label="目標" value={goal === "lose" ? "減量" : goal === "gain" ? "増量" : goal === "maintain" ? "維持" : "未設定"} />
-              <SummaryRow label="外食頻度" value={eatingOutFreq === "1-2" ? "週1〜2日" : eatingOutFreq === "3-4" ? "週3〜4日" : eatingOutFreq === "5+" ? "週5日以上" : "未設定"} />
-              <SummaryRow label="性別" value={gender === "male" ? "男性" : gender === "female" ? "女性" : gender === "other" ? "その他" : "未設定"} />
-              {height && <SummaryRow label="身長" value={`${height} cm`} />}
-              {currentWeight && <SummaryRow label="体重" value={`${currentWeight} kg`} />}
-              {targetWeight && <SummaryRow label="目標体重" value={`${targetWeight} kg`} />}
+        {/* 8: Weight */}
+        {step === 8 && (
+          <Q title="現在の体重は？" onBack={prev} onSkip={next}>
+            <Choices
+              options={[
+                { key: "~49", label: "49kg以下" },
+                { key: "50-59", label: "50〜59kg" },
+                { key: "60-69", label: "60〜69kg" },
+                { key: "70-79", label: "70〜79kg" },
+                { key: "80-89", label: "80〜89kg" },
+                { key: "90+", label: "90kg以上" },
+              ]}
+              selected={weightRange}
+              onSelect={(k) => { setWeightRange(k); next(); }}
+            />
+          </Q>
+        )}
+
+        {/* 9: Target weight */}
+        {step === 9 && (
+          <Q title="目標体重は？" onBack={prev} onSkip={next}>
+            <Choices
+              options={[
+                { key: "~49", label: "49kg以下" },
+                { key: "50-59", label: "50〜59kg" },
+                { key: "60-69", label: "60〜69kg" },
+                { key: "70-79", label: "70〜79kg" },
+                { key: "80+", label: "80kg以上" },
+                { key: "same", label: "今のままでいい" },
+              ]}
+              selected={targetWeightRange}
+              onSelect={(k) => { setTargetWeightRange(k); next(); }}
+            />
+          </Q>
+        )}
+
+        {/* 10: Hard gainer + Activity */}
+        {step === 10 && (
+          <Q title="普段の活動量は？" onBack={prev} onSkip={next}>
+            <Choices
+              options={[
+                { key: "sedentary", label: "ほぼ座りっぱなし", desc: "デスクワーク中心" },
+                { key: "light", label: "軽い運動あり", desc: "週1〜2回の軽い運動" },
+                { key: "moderate", label: "適度に運動", desc: "週3〜4回の運動" },
+                { key: "active", label: "かなり活動的", desc: "週5回以上の運動やジム" },
+              ]}
+              selected={activityLevel}
+              onSelect={(k) => { setActivityLevel(k); next(); }}
+            />
+          </Q>
+        )}
+
+        {/* 11: Favorite chains */}
+        {step === 11 && (
+          <Q title="よく行くチェーン店は？" subtitle="複数選択OK" onBack={prev} onSkip={next}>
+            <div className="grid grid-cols-3 gap-2.5 mb-6">
+              {chains.map((chain) => {
+                const selected = favoriteChains.includes(chain.id);
+                return (
+                  <button
+                    key={chain.id}
+                    onClick={() => toggleFavoriteChain(chain.id)}
+                    className={`relative p-3 rounded-xl border-2 flex flex-col items-center gap-1.5 transition-all active:scale-[0.97] ${
+                      selected ? "border-sky-400 bg-sky-50" : "border-gray-100 bg-white"
+                    }`}
+                  >
+                    {selected && (
+                      <div className="absolute top-1 right-1 w-4 h-4 bg-sky-400 rounded-full flex items-center justify-center">
+                        <CheckCircle className="w-2.5 h-2.5 text-white" />
+                      </div>
+                    )}
+                    <span className="text-xl">{chain.emoji}</span>
+                    <span className="text-[10px] font-medium text-gray-600 text-center leading-tight">{chain.name}</span>
+                  </button>
+                );
+              })}
+            </div>
+            <PrimaryButton onClick={next}>次へ</PrimaryButton>
+          </Q>
+        )}
+
+        {/* 12: Favorite foods */}
+        {step === 12 && (
+          <Q title="好きな食べ物は？" subtitle="複数選択OK" onBack={prev} onSkip={handleComplete}>
+            <div className="flex flex-wrap gap-2 mb-8">
+              {[
+                "🍔 ハンバーガー", "🍜 ラーメン", "🍛 カレー", "🍣 寿司",
+                "🥩 ステーキ", "🍗 チキン", "🥗 サラダ", "🍝 パスタ",
+                "🍱 定食", "🍚 丼もの", "🥪 サンドイッチ", "🌮 中華",
+                "🍕 ピザ", "🍰 スイーツ", "☕ コーヒー", "🥤 ドリンク",
+              ].map((food) => {
+                const selected = favoriteFoods.includes(food);
+                return (
+                  <button
+                    key={food}
+                    onClick={() => toggleFavoriteFood(food)}
+                    className={`px-3.5 py-2 rounded-xl text-sm font-medium transition-all active:scale-[0.97] ${
+                      selected ? "bg-sky-400 text-white" : "bg-gray-50 text-gray-600 border border-gray-100"
+                    }`}
+                  >
+                    {food}
+                  </button>
+                );
+              })}
             </div>
 
             {saveError && (
-              <div className="w-full bg-red-50 border border-red-200 rounded-xl p-4 mb-4">
-                <p className="text-sm text-red-600 mb-2">保存に失敗しました。</p>
-                <button
-                  onClick={handleComplete}
-                  disabled={saving}
-                  className="text-sm text-red-600 font-bold underline"
-                >
-                  再試行
-                </button>
+              <div className="w-full bg-red-50 border border-red-200 rounded-xl p-3 mb-4">
+                <p className="text-sm text-red-600">保存に失敗しました。もう一度お試しください。</p>
               </div>
             )}
 
@@ -300,50 +318,90 @@ export default function OnboardingPage() {
               {saving ? "保存中..." : "たべなびをはじめる"}
               {!saving && <ChevronRight className="w-4 h-4" />}
             </button>
-          </div>
+          </Q>
         )}
       </div>
     </div>
   );
 }
 
-// ─── Step Layout ─────────────────────────────────────────────────────────────
+// ─── Components ──────────────────────────────────────────────────────────────
 
-function StepLayout({
+function Center({ children }: { children: React.ReactNode }) {
+  return <div className="flex-1 flex flex-col items-center justify-center text-center">{children}</div>;
+}
+
+function PrimaryButton({ onClick, children }: { onClick: () => void; children: React.ReactNode }) {
+  return (
+    <button
+      onClick={onClick}
+      className="w-full bg-gradient-to-r from-sky-400 to-cyan-500 text-white font-bold py-3.5 rounded-xl active:scale-[0.98] transition-transform shadow-md shadow-sky-200 flex items-center justify-center gap-2"
+    >
+      {children}
+      <ChevronRight className="w-4 h-4" />
+    </button>
+  );
+}
+
+function Q({
   title,
+  subtitle,
   onBack,
   onSkip,
   children,
 }: {
   title: string;
+  subtitle?: string;
   onBack: () => void;
   onSkip: () => void;
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex-1 flex flex-col pt-4">
-      <div className="flex items-center justify-between mb-6">
+    <div className="flex-1 flex flex-col pt-2">
+      <div className="flex items-center justify-between mb-5">
         <button onClick={onBack} className="text-gray-400 hover:text-gray-600 transition-colors p-1">
           <ChevronLeft className="w-5 h-5" />
         </button>
         <button onClick={onSkip} className="text-sm text-gray-400 hover:text-gray-600 transition-colors flex items-center gap-1">
-          スキップ
-          <SkipForward className="w-3.5 h-3.5" />
+          スキップ <SkipForward className="w-3.5 h-3.5" />
         </button>
       </div>
-      <h1 className="text-[22px] font-bold text-gray-900 mb-6">{title}</h1>
+      <h1 className="text-[22px] font-bold text-gray-900 mb-1">{title}</h1>
+      {subtitle && <p className="text-sm text-gray-400 mb-5">{subtitle}</p>}
+      {!subtitle && <div className="mb-5" />}
       <div className="flex-1">{children}</div>
     </div>
   );
 }
 
-// ─── Summary Row ─────────────────────────────────────────────────────────────
-
-function SummaryRow({ label, value }: { label: string; value: string }) {
+function Choices({
+  options,
+  selected,
+  onSelect,
+}: {
+  options: { key: string; emoji?: string; label: string; desc?: string }[];
+  selected: string | null;
+  onSelect: (key: string) => void;
+}) {
   return (
-    <div className="flex justify-between">
-      <span className="text-gray-400">{label}</span>
-      <span className="font-semibold text-gray-700">{value}</span>
+    <div className="space-y-2.5">
+      {options.map((o) => (
+        <button
+          key={o.key}
+          onClick={() => onSelect(o.key)}
+          className={`w-full p-4 rounded-xl border-2 text-left transition-all active:scale-[0.98] ${
+            selected === o.key ? "border-sky-400 bg-sky-50" : "border-gray-100 bg-white hover:bg-gray-50"
+          }`}
+        >
+          <div className="flex items-center gap-3">
+            {o.emoji && <span className="text-xl">{o.emoji}</span>}
+            <div>
+              <p className="font-bold text-gray-900">{o.label}</p>
+              {o.desc && <p className="text-sm text-gray-400">{o.desc}</p>}
+            </div>
+          </div>
+        </button>
+      ))}
     </div>
   );
 }
