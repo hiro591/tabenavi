@@ -46,9 +46,40 @@ function PhoneMockup({ children }: { children: React.ReactNode }) {
   );
 }
 
+// Static trusted JSON-LD data for SEO structured data
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "たべなび",
+  applicationCategory: "HealthApplication",
+  operatingSystem: "Web",
+  url: "https://tabenavi.jp",
+  description: "外食専門の栄養管理アプリ。カロリー・PFCで外食先を絞り込み、マップで近くの高タンパクメニューを発見。20チェーン・500メニュー対応。",
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "JPY",
+  },
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "4.8",
+    ratingCount: "32",
+    bestRating: "5",
+  },
+  author: {
+    "@type": "Organization",
+    name: "たべなび",
+    url: "https://tabenavi.jp",
+  },
+};
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-white text-gray-900">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
 
       {/* ─── Header ─── */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-xl border-b border-gray-100">
