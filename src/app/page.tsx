@@ -111,53 +111,77 @@ export default function Home() {
           {/* Phone Mockup */}
           <div className="flex-shrink-0 w-[260px] sm:w-[280px]">
             <PhoneMockup>
-              <div className="p-4 pt-8 space-y-3 bg-white" style={{ minHeight: 420 }}>
-                <div className="flex items-center justify-between mb-2">
-                  <div>
-                    <p className="text-[11px] text-gray-400">こんにちは</p>
-                    <p className="text-sm font-bold text-gray-800">ヒロさん</p>
+              <div className="p-5 pt-9 space-y-4 bg-white" style={{ minHeight: 440 }}>
+                {/* Header bar */}
+                <div className="flex items-center justify-between">
+                  <p className="text-[13px] font-bold text-gray-800">今日のサマリー</p>
+                  <div className="flex items-center gap-1.5">
+                    <div className="w-2 h-2 rounded-full bg-emerald-400" />
+                    <span className="text-[9px] text-emerald-500 font-medium">記録中</span>
                   </div>
-                  <div className="w-8 h-8 rounded-full bg-sky-100" />
                 </div>
-                <div className="bg-sky-50 rounded-2xl p-4 flex flex-col items-center">
-                  <svg width="110" height="110" viewBox="0 0 110 110">
-                    <circle cx="55" cy="55" r="42" fill="none" stroke="#E0F2FE" strokeWidth="8" />
-                    <circle cx="55" cy="55" r="42" fill="none" stroke="url(#hero-ring)" strokeWidth="8"
-                      strokeDasharray={2 * Math.PI * 42} strokeDashoffset={2 * Math.PI * 42 * 0.35}
-                      strokeLinecap="round" transform="rotate(-90 55 55)" />
+
+                {/* Calorie ring */}
+                <div className="bg-gradient-to-br from-sky-50 to-cyan-50 rounded-2xl p-5 flex flex-col items-center">
+                  <svg width="120" height="120" viewBox="0 0 120 120">
+                    <circle cx="60" cy="60" r="46" fill="none" stroke="#E0F2FE" strokeWidth="10" />
+                    <circle cx="60" cy="60" r="46" fill="none" stroke="url(#hero-ring)" strokeWidth="10"
+                      strokeDasharray={2 * Math.PI * 46} strokeDashoffset={2 * Math.PI * 46 * 0.35}
+                      strokeLinecap="round" transform="rotate(-90 60 60)" />
                     <defs><linearGradient id="hero-ring" x1="0" y1="0" x2="1" y2="1"><stop stopColor="#38BDF8" /><stop offset="1" stopColor="#06B6D4" /></linearGradient></defs>
-                    <text x="55" y="50" textAnchor="middle" fill="#1E293B" fontSize="20" fontWeight="bold">1,170</text>
-                    <text x="55" y="65" textAnchor="middle" fill="#94A3B8" fontSize="9">/ 1,800 kcal</text>
+                    <text x="60" y="54" textAnchor="middle" fill="#0F172A" fontSize="22" fontWeight="bold">1,170</text>
+                    <text x="60" y="70" textAnchor="middle" fill="#94A3B8" fontSize="10">/ 1,800 kcal</text>
                   </svg>
-                  <p className="text-[11px] text-gray-500 mt-1">残り <span className="text-gray-800 font-semibold">630</span> kcal</p>
                 </div>
-                <div className="bg-gray-50 rounded-xl p-3 space-y-2">
-                  <div className="flex items-center justify-between text-[10px]">
-                    <span className="text-blue-500 font-medium">P 42.5g</span>
-                    <span className="text-amber-500 font-medium">F 28.0g</span>
-                    <span className="text-emerald-500 font-medium">C 95.2g</span>
+
+                {/* PFC bars */}
+                <div className="space-y-2.5">
+                  <div>
+                    <div className="flex justify-between text-[10px] mb-1">
+                      <span className="text-gray-500">タンパク質</span>
+                      <span className="font-semibold text-gray-700">42.5 / 68g</span>
+                    </div>
+                    <div className="h-2 bg-gray-100 rounded-full overflow-hidden"><div className="h-full bg-blue-400 rounded-full" style={{ width: "62%" }} /></div>
                   </div>
-                  <div className="flex gap-1 h-1.5 rounded-full overflow-hidden bg-gray-100">
-                    <div className="bg-blue-400 rounded-full" style={{ width: "35%" }} />
-                    <div className="bg-amber-400 rounded-full" style={{ width: "25%" }} />
-                    <div className="bg-emerald-400 rounded-full" style={{ width: "40%" }} />
+                  <div>
+                    <div className="flex justify-between text-[10px] mb-1">
+                      <span className="text-gray-500">脂質</span>
+                      <span className="font-semibold text-gray-700">28.0 / 50g</span>
+                    </div>
+                    <div className="h-2 bg-gray-100 rounded-full overflow-hidden"><div className="h-full bg-amber-400 rounded-full" style={{ width: "56%" }} /></div>
+                  </div>
+                  <div>
+                    <div className="flex justify-between text-[10px] mb-1">
+                      <span className="text-gray-500">炭水化物</span>
+                      <span className="font-semibold text-gray-700">95.2 / 248g</span>
+                    </div>
+                    <div className="h-2 bg-gray-100 rounded-full overflow-hidden"><div className="h-full bg-emerald-400 rounded-full" style={{ width: "38%" }} /></div>
                   </div>
                 </div>
-                <div className="bg-gray-50 rounded-xl p-3 space-y-2">
-                  <p className="text-[10px] text-gray-400 font-semibold">今日の記録</p>
-                  <div className="flex items-center justify-between bg-white rounded-lg px-2.5 py-2 border border-gray-100">
-                    <div>
-                      <p className="text-[9px] text-gray-400">吉野家</p>
-                      <p className="text-[11px] font-medium text-gray-700">ライザップ牛サラダ</p>
+
+                {/* Food log */}
+                <div className="space-y-1.5">
+                  <div className="flex items-center gap-2.5 bg-gray-50 rounded-xl px-3 py-2.5 border border-gray-100/80">
+                    <div className="w-1 h-8 rounded-full bg-sky-400" />
+                    <div className="flex-1 min-w-0">
+                      <p className="text-[9px] text-gray-400">昼食 · サイゼリヤ</p>
+                      <p className="text-[11px] font-semibold text-gray-700 truncate">若鶏のグリル</p>
                     </div>
-                    <span className="text-[11px] font-bold text-sky-500">398 kcal</span>
+                    <div className="text-right">
+                      <p className="text-[11px] font-bold text-sky-500">514</p>
+                      <p className="text-[8px] text-gray-400">kcal</p>
+                    </div>
                   </div>
-                  <div className="flex items-center justify-between bg-white rounded-lg px-2.5 py-2 border border-gray-100">
-                    <div>
-                      <p className="text-[9px] text-gray-400">サイゼリヤ</p>
-                      <p className="text-[11px] font-medium text-gray-700">若鶏のグリル</p>
+                  <div className="flex items-center gap-2.5 bg-gray-50 rounded-xl px-3 py-2.5 border border-gray-100/80">
+                    <div className="w-1 h-8 rounded-full bg-amber-400" />
+                    <div className="flex-1 min-w-0">
+                      <p className="text-[9px] text-gray-400">朝食 · セブンイレブン</p>
+                      <p className="text-[11px] font-semibold text-gray-700 truncate">サラダチキン + おにぎり</p>
                     </div>
-                    <span className="text-[11px] font-bold text-sky-500">514 kcal</span>
+                    <div className="text-right">
+                      <p className="text-[11px] font-bold text-sky-500">350</p>
+                      <p className="text-[8px] text-gray-400">kcal</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -231,27 +255,34 @@ export default function Home() {
               </div>
               <div className="w-[220px] flex-shrink-0">
                 <PhoneMockup>
-                  <div className="p-4 pt-8 bg-white" style={{ minHeight: 300 }}>
-                    <p className="text-xs font-bold text-gray-700 mb-3">絞り込み条件</p>
-                    <div className="space-y-3">
+                  <div className="p-5 pt-9 bg-white" style={{ minHeight: 310 }}>
+                    <p className="text-[11px] font-bold text-gray-700 mb-4">絞り込み条件</p>
+                    <div className="space-y-4">
                       <div>
-                        <p className="text-[10px] text-sky-500 font-medium mb-1">カロリー</p>
-                        <div className="h-1.5 bg-gray-100 rounded-full"><div className="h-full w-3/5 bg-gradient-to-r from-sky-400 to-cyan-500 rounded-full" /></div>
-                        <div className="flex justify-between text-[9px] text-gray-400 mt-0.5"><span>200</span><span>600 kcal</span></div>
+                        <div className="flex justify-between text-[10px] mb-1.5">
+                          <span className="text-sky-500 font-medium">カロリー</span>
+                          <span className="text-gray-500">200 – 600 kcal</span>
+                        </div>
+                        <div className="h-2 bg-gray-100 rounded-full"><div className="h-full w-3/5 bg-gradient-to-r from-sky-400 to-cyan-400 rounded-full" /></div>
                       </div>
                       <div>
-                        <p className="text-[10px] text-blue-500 font-medium mb-1">タンパク質</p>
-                        <div className="h-1.5 bg-gray-100 rounded-full"><div className="h-full w-2/5 bg-blue-400 rounded-full" /></div>
-                        <div className="flex justify-between text-[9px] text-gray-400 mt-0.5"><span>20g</span><span>以上</span></div>
+                        <div className="flex justify-between text-[10px] mb-1.5">
+                          <span className="text-blue-500 font-medium">タンパク質</span>
+                          <span className="text-gray-500">20g 以上</span>
+                        </div>
+                        <div className="h-2 bg-gray-100 rounded-full"><div className="h-full w-2/5 bg-blue-400 rounded-full" /></div>
                       </div>
-                      <div className="flex flex-wrap gap-1.5 mt-2">
-                        <span className="text-[9px] bg-sky-50 text-sky-600 px-2 py-0.5 rounded-full border border-sky-200">牛丼</span>
-                        <span className="text-[9px] bg-gray-50 text-gray-400 px-2 py-0.5 rounded-full border border-gray-200">ファミレス</span>
-                        <span className="text-[9px] bg-sky-50 text-sky-600 px-2 py-0.5 rounded-full border border-sky-200">定食</span>
-                        <span className="text-[9px] bg-gray-50 text-gray-400 px-2 py-0.5 rounded-full border border-gray-200">ファスト</span>
+                      <div>
+                        <p className="text-[10px] text-gray-500 mb-2">ジャンル</p>
+                        <div className="flex flex-wrap gap-1.5">
+                          <span className="text-[9px] bg-sky-50 text-sky-600 px-2.5 py-1 rounded-lg border border-sky-200 font-medium">牛丼</span>
+                          <span className="text-[9px] bg-gray-50 text-gray-400 px-2.5 py-1 rounded-lg border border-gray-100">ファミレス</span>
+                          <span className="text-[9px] bg-sky-50 text-sky-600 px-2.5 py-1 rounded-lg border border-sky-200 font-medium">定食</span>
+                          <span className="text-[9px] bg-gray-50 text-gray-400 px-2.5 py-1 rounded-lg border border-gray-100">カフェ</span>
+                        </div>
                       </div>
                     </div>
-                    <div className="mt-4 bg-gradient-to-r from-sky-400 to-cyan-500 text-white text-[10px] font-bold py-2 rounded-lg text-center">
+                    <div className="mt-5 bg-gradient-to-r from-sky-400 to-cyan-500 text-white text-[10px] font-bold py-2.5 rounded-xl text-center shadow-sm shadow-sky-200">
                       この条件で検索
                     </div>
                   </div>
@@ -273,23 +304,29 @@ export default function Home() {
               </div>
               <div className="w-[220px] flex-shrink-0">
                 <PhoneMockup>
-                  <div className="p-4 pt-8 bg-white" style={{ minHeight: 300 }}>
-                    <p className="text-xs font-bold text-gray-700 mb-3">検索結果</p>
-                    <div className="space-y-2">
+                  <div className="p-5 pt-9 bg-white" style={{ minHeight: 310 }}>
+                    <div className="flex items-center justify-between mb-4">
+                      <p className="text-[11px] font-bold text-gray-700">検索結果</p>
+                      <span className="text-[9px] text-gray-400">3件</span>
+                    </div>
+                    <div className="space-y-2.5">
                       {[
-                        { store: "サイゼリヤ", name: "若鶏のグリル", cal: 514, p: "35.3g" },
-                        { store: "吉野家", name: "ライザップ牛サラダ", cal: 398, p: "28.0g" },
-                        { store: "すき家", name: "牛丼ライト", cal: 352, p: "20.0g" },
+                        { store: "サイゼリヤ", name: "若鶏のグリル", cal: 514, p: 35.3, f: 28.7, color: "bg-emerald-400" },
+                        { store: "吉野家", name: "ライザップ牛サラダ", cal: 398, p: 28.0, f: 25.2, color: "bg-sky-400" },
+                        { store: "すき家", name: "牛丼ライト", cal: 352, p: 20.0, f: 12.5, color: "bg-violet-400" },
                       ].map((item) => (
-                        <div key={item.name} className="bg-gray-50 rounded-lg px-3 py-2.5 border border-gray-100">
-                          <p className="text-[9px] text-gray-400">{item.store}</p>
-                          <div className="flex items-center justify-between">
-                            <p className="text-[11px] font-medium text-gray-700">{item.name}</p>
-                            <span className="text-[11px] font-bold text-sky-500">{item.cal}</span>
-                          </div>
-                          <div className="flex gap-2 mt-1">
-                            <span className="text-[8px] text-blue-500">P {item.p}</span>
-                            <span className="text-[8px] text-gray-400">{item.cal}kcal</span>
+                        <div key={item.name} className="bg-gray-50 rounded-xl px-3.5 py-3 border border-gray-100/80">
+                          <div className="flex items-start gap-2.5">
+                            <div className={`w-1 h-10 rounded-full ${item.color} mt-0.5`} />
+                            <div className="flex-1 min-w-0">
+                              <p className="text-[9px] text-gray-400">{item.store}</p>
+                              <p className="text-[11px] font-semibold text-gray-700 truncate">{item.name}</p>
+                              <div className="flex items-center gap-3 mt-1">
+                                <span className="text-[9px] text-sky-500 font-bold">{item.cal} kcal</span>
+                                <span className="text-[8px] text-blue-400">P{item.p}g</span>
+                                <span className="text-[8px] text-amber-400">F{item.f}g</span>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       ))}
@@ -313,18 +350,30 @@ export default function Home() {
               </div>
               <div className="w-[220px] flex-shrink-0">
                 <PhoneMockup>
-                  <div className="p-4 pt-8 flex flex-col items-center justify-center bg-white" style={{ minHeight: 300 }}>
-                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-emerald-400 to-green-500 flex items-center justify-center mb-3 shadow-lg shadow-emerald-200">
-                      <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                  <div className="p-5 pt-9 flex flex-col items-center justify-center bg-white" style={{ minHeight: 310 }}>
+                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-emerald-400 to-green-500 flex items-center justify-center mb-4 shadow-lg shadow-emerald-100">
+                      <svg className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
                     </div>
-                    <p className="text-sm font-bold text-gray-800 mb-1">記録完了！</p>
-                    <p className="text-[10px] text-gray-400 mb-4 text-center">若鶏のグリルを昼食に記録しました</p>
-                    <div className="bg-gray-50 rounded-xl p-3 w-full border border-gray-100">
-                      <div className="grid grid-cols-4 gap-1 text-center">
-                        <div><p className="text-[10px] font-bold text-sky-500">514</p><p className="text-[8px] text-gray-400">kcal</p></div>
-                        <div><p className="text-[10px] font-bold text-blue-500">35.3g</p><p className="text-[8px] text-gray-400">P</p></div>
-                        <div><p className="text-[10px] font-bold text-amber-500">28.7g</p><p className="text-[8px] text-gray-400">F</p></div>
-                        <div><p className="text-[10px] font-bold text-emerald-500">26.6g</p><p className="text-[8px] text-gray-400">C</p></div>
+                    <p className="text-[13px] font-bold text-gray-800 mb-1">記録完了！</p>
+                    <p className="text-[10px] text-gray-400 mb-5">若鶏のグリルを昼食に記録しました</p>
+                    <div className="bg-gradient-to-br from-sky-50 to-cyan-50 rounded-xl p-4 w-full">
+                      <div className="grid grid-cols-4 gap-2 text-center">
+                        <div>
+                          <p className="text-[13px] font-bold text-sky-500">514</p>
+                          <p className="text-[8px] text-gray-400 mt-0.5">kcal</p>
+                        </div>
+                        <div>
+                          <p className="text-[13px] font-bold text-blue-500">35.3</p>
+                          <p className="text-[8px] text-gray-400 mt-0.5">P (g)</p>
+                        </div>
+                        <div>
+                          <p className="text-[13px] font-bold text-amber-500">28.7</p>
+                          <p className="text-[8px] text-gray-400 mt-0.5">F (g)</p>
+                        </div>
+                        <div>
+                          <p className="text-[13px] font-bold text-emerald-500">26.6</p>
+                          <p className="text-[8px] text-gray-400 mt-0.5">C (g)</p>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -371,6 +420,54 @@ export default function Home() {
                 </div>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── User Voices ─── */}
+      <section className="py-16 px-4 bg-gray-50">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-center text-xs text-sky-500 uppercase tracking-widest mb-3 font-semibold">User voices</p>
+          <h2 className="text-center text-2xl sm:text-3xl font-bold mb-10 text-gray-900">
+            ユーザーの声
+          </h2>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+            <div className="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm">
+              <div className="flex items-center gap-0.5 mb-3">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} className="w-3.5 h-3.5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                ))}
+              </div>
+              <p className="text-sm text-gray-600 leading-relaxed mb-3">
+                「PFCで検索できるのが神。筋トレ後にタンパク質30g以上で近くの店を探せるのは、たべなびだけ。」
+              </p>
+              <p className="text-xs text-gray-400">20代男性 · 筋トレ歴2年</p>
+            </div>
+
+            <div className="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm">
+              <div className="flex items-center gap-0.5 mb-3">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} className="w-3.5 h-3.5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                ))}
+              </div>
+              <p className="text-sm text-gray-600 leading-relaxed mb-3">
+                「週5で外食の生活でも、カロリー管理が続けられた。チェーン店のデータが正確なのが信頼できる。」
+              </p>
+              <p className="text-xs text-gray-400">30代男性 · 会社員</p>
+            </div>
+
+            <div className="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm">
+              <div className="flex items-center gap-0.5 mb-3">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} className="w-3.5 h-3.5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                ))}
+              </div>
+              <p className="text-sm text-gray-600 leading-relaxed mb-3">
+                「マップで近くのヘルシーメニューを探せるのが便利。ランチ選びが毎日楽しくなった。」
+              </p>
+              <p className="text-xs text-gray-400">20代女性 · ダイエット中</p>
+            </div>
           </div>
         </div>
       </section>
