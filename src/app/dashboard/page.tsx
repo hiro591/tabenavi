@@ -259,26 +259,18 @@ export default function DashboardPage() {
 
       {/* ─── Calorie ─── */}
       <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 mb-3">
-        <div className="flex items-center gap-5">
-          <div className="flex-shrink-0">
-            <CalorieRing consumed={totalCalories} target={targetCalories} />
-          </div>
-          <div className="flex-1">
-            <p className="text-[26px] font-bold text-gray-900 tabular-nums leading-none">
-              {totalCalories} <span className="text-[14px] font-medium text-gray-400">/ {targetCalories}</span>
-            </p>
-            <p className="text-[11px] text-gray-400 mt-1">kcal 摂取 / 目標</p>
-            <div className="mt-3 px-3 py-1.5 rounded-lg bg-sky-50 inline-block">
-              {remainingCalories > 0 ? (
-                <p className="text-[12px] font-bold text-sky-600 tabular-nums">
-                  あと {remainingCalories} kcal
-                </p>
-              ) : (
-                <p className="text-[12px] font-bold text-red-500 tabular-nums">
-                  {Math.abs(remainingCalories)} kcal 超過
-                </p>
-              )}
-            </div>
+        <div className="flex flex-col items-center">
+          <CalorieRing consumed={totalCalories} target={targetCalories} />
+          <div className="mt-2">
+            {remainingCalories > 0 ? (
+              <p className="text-[13px] font-bold text-sky-600 tabular-nums text-center">
+                あと {remainingCalories} kcal
+              </p>
+            ) : (
+              <p className="text-[13px] font-bold text-red-500 tabular-nums text-center">
+                {Math.abs(remainingCalories)} kcal 超過
+              </p>
+            )}
           </div>
         </div>
       </div>
@@ -390,7 +382,7 @@ export default function DashboardPage() {
   );
 }
 
-// ─── Calorie Ring ────────────────────────────────────────────────────────────
+// ─── Calorie Semi-Circle ─────────────────────────────────────────────────────
 
 function CalorieRing({
   consumed,
@@ -399,36 +391,48 @@ function CalorieRing({
   consumed: number;
   target: number;
 }) {
-  const radius = 46;
-  const circumference = 2 * Math.PI * radius;
+  const radius = 90;
+  const halfCircumference = Math.PI * radius;
   const ratio = consumed / target;
   const progress = Math.min(ratio, 1);
-  const offset = circumference * (1 - progress);
+  const offset = halfCircumference * (1 - progress);
 
   return (
-    <svg width="110" height="110" viewBox="0 0 110 110">
+    <svg width="240" height="140" viewBox="0 0 240 140">
       <defs>
-        <linearGradient id="ring-grad" x1="0" y1="0" x2="1" y2="1">
+        <linearGradient id="ring-grad" x1="0" y1="0" x2="1" y2="0">
           <stop offset="0%" stopColor="#38BDF8" />
           <stop offset="100%" stopColor="#06B6D4" />
         </linearGradient>
       </defs>
-      <circle cx="55" cy="55" r={radius} fill="none" stroke="#F3F4F6" strokeWidth="9" />
-      <circle
-        cx="55" cy="55" r={radius} fill="none"
-        stroke={ratio > 1 ? "#F87171" : "url(#ring-grad)"}
-        strokeWidth="9"
-        strokeDasharray={circumference}
-        strokeDashoffset={offset}
+      {/* Background half circle */}
+      <path
+        d={`M ${120 - radius} 125 A ${radius} ${radius} 0 0 1 ${120 + radius} 125`}
+        fill="none"
+        stroke="#F3F4F6"
+        strokeWidth="12"
         strokeLinecap="round"
-        transform="rotate(-90 55 55)"
+      />
+      {/* Progress half circle */}
+      <path
+        d={`M ${120 - radius} 125 A ${radius} ${radius} 0 0 1 ${120 + radius} 125`}
+        fill="none"
+        stroke={ratio > 1 ? "#F87171" : "url(#ring-grad)"}
+        strokeWidth="12"
+        strokeLinecap="round"
+        strokeDasharray={halfCircumference}
+        strokeDashoffset={offset}
         style={{ transition: "stroke-dashoffset 0.8s ease" }}
       />
-      <text x="55" y="52" textAnchor="middle" fill="#111827" fontSize="13" fontWeight="bold">
-        {Math.round((progress) * 100)}%
+      {/* Consumed / Target */}
+      <text x="120" y="85" textAnchor="middle" fill="#111827" fontSize="30" fontWeight="bold" style={{ fontVariantNumeric: "tabular-nums" }}>
+        {consumed}
       </text>
-      <text x="55" y="66" textAnchor="middle" fill="#9CA3AF" fontSize="9">
-        達成
+      <text x="120" y="108" textAnchor="middle" fill="#9CA3AF" fontSize="12" style={{ fontVariantNumeric: "tabular-nums" }}>
+        / {target} kcal
+      </text>
+      <text x="120" y="125" textAnchor="middle" fill="#D1D5DB" fontSize="10">
+        摂取 / 目標
       </text>
     </svg>
   );
