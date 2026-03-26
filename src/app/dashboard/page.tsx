@@ -24,10 +24,10 @@ const MEAL_TYPE_LABELS: Record<string, string> = {
 };
 
 const MEAL_TYPE_COLORS: Record<string, string> = {
-  breakfast: "bg-amber-400/15 text-amber-400",
-  lunch: "bg-cyan-400/15 text-cyan-400",
-  dinner: "bg-violet-400/15 text-violet-400",
-  snack: "bg-pink-400/15 text-pink-400",
+  breakfast: "bg-amber-400/15 text-amber-600",
+  lunch: "bg-cyan-400/15 text-cyan-600",
+  dinner: "bg-violet-400/15 text-violet-600",
+  snack: "bg-pink-400/15 text-pink-600",
 };
 
 const MEAL_TYPE_BORDER: Record<string, string> = {
@@ -168,21 +168,21 @@ export default function DashboardPage() {
   // ─── Loading skeleton ───
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#1A2235] px-4 pt-6 pb-24">
+      <div className="min-h-screen bg-gray-50 px-4 pt-6 pb-24">
         <div className="max-w-lg mx-auto space-y-4">
           <div className="flex items-center justify-between mb-2">
-            <div className="h-6 w-48 bg-[#243044] rounded-lg animate-shimmer" />
-            <div className="h-8 w-8 bg-[#243044] rounded-full animate-shimmer" />
+            <div className="h-6 w-48 bg-gray-200 rounded-lg animate-shimmer" />
+            <div className="h-8 w-8 bg-gray-200 rounded-full animate-shimmer" />
           </div>
-          <div className="h-4 w-32 bg-[#243044] rounded animate-shimmer" />
-          <div className="bg-[#243044] rounded-2xl p-6 flex justify-center">
-            <div className="w-48 h-48 rounded-full bg-[#2D3B50] animate-shimmer" />
+          <div className="h-4 w-32 bg-gray-200 rounded animate-shimmer" />
+          <div className="bg-white border border-gray-100 shadow-sm rounded-2xl p-6 flex justify-center">
+            <div className="w-48 h-48 rounded-full bg-gray-100 animate-shimmer" />
           </div>
-          <div className="bg-[#243044] rounded-2xl p-6 space-y-3">
-            <div className="h-4 w-24 bg-[#2D3B50] rounded animate-shimmer" />
-            <div className="h-2.5 w-full bg-[#2D3B50] rounded-full animate-shimmer" />
-            <div className="h-2.5 w-full bg-[#2D3B50] rounded-full animate-shimmer" />
-            <div className="h-2.5 w-full bg-[#2D3B50] rounded-full animate-shimmer" />
+          <div className="bg-white border border-gray-100 shadow-sm rounded-2xl p-6 space-y-3">
+            <div className="h-4 w-24 bg-gray-100 rounded animate-shimmer" />
+            <div className="h-2.5 w-full bg-gray-100 rounded-full animate-shimmer" />
+            <div className="h-2.5 w-full bg-gray-100 rounded-full animate-shimmer" />
+            <div className="h-2.5 w-full bg-gray-100 rounded-full animate-shimmer" />
           </div>
         </div>
       </div>
@@ -216,43 +216,43 @@ export default function DashboardPage() {
   const carbsTarget = Math.round((targetCalories * 0.6) / 4);
 
   return (
-    <div className="min-h-screen bg-[#1A2235] px-4 pt-6 pb-24">
+    <div className="min-h-screen bg-gray-50 px-4 pt-6 pb-24">
       {toast && (
-        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-[#243044] text-slate-100 text-sm font-medium px-5 py-2.5 rounded-xl border border-[#334155]/30 shadow-lg">
+        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-white text-gray-900 text-sm font-medium px-5 py-2.5 rounded-xl border border-gray-200 shadow-lg">
           {toast}
         </div>
       )}
       <div className="max-w-lg mx-auto">
         {/* ─── Header ─── */}
         <div className="flex items-center justify-between mb-1">
-          <h1 className="text-lg font-bold text-slate-100">
-            {greeting}、<span className="text-cyan-400">{displayName}</span>さん
+          <h1 className="text-lg font-bold text-gray-900">
+            {greeting}、<span className="text-sky-500">{displayName}</span>さん
           </h1>
           <Link
             href="/profile"
-            className="w-9 h-9 flex items-center justify-center rounded-full bg-[#243044] text-slate-400 hover:text-slate-200 hover:bg-[#2D3B50] transition-colors"
+            className="w-9 h-9 flex items-center justify-center rounded-full bg-white border border-gray-100 text-gray-400 hover:text-gray-700 hover:bg-gray-50 transition-colors shadow-sm"
           >
             <Settings className="w-4 h-4" />
           </Link>
         </div>
-        <p className="text-xs text-slate-500 mb-5">{todayDate}</p>
+        <p className="text-xs text-gray-400 mb-5">{todayDate}</p>
 
         {/* ─── Calorie Ring ─── */}
-        <div className="bg-[#243044] rounded-2xl border border-[#334155]/30 p-6 mb-4">
+        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mb-4">
           <div className="flex justify-center">
             <CalorieRing total={totalCalories} target={targetCalories} />
           </div>
-          <p className="text-center text-sm text-slate-400 mt-3">
+          <p className="text-center text-sm text-gray-500 mt-3">
             {remainingCalories > 0 ? (
               <>
                 残り{" "}
-                <span className="font-bold text-slate-100 tabular-nums">
+                <span className="font-bold text-gray-900 tabular-nums">
                   {remainingCalories}
                 </span>{" "}
                 kcal
               </>
             ) : (
-              <span className="text-red-400 font-bold">
+              <span className="text-red-500 font-bold">
                 {Math.abs(remainingCalories)} kcal オーバー
               </span>
             )}
@@ -260,8 +260,8 @@ export default function DashboardPage() {
         </div>
 
         {/* ─── PFC Balance ─── */}
-        <div className="bg-[#243044] rounded-2xl border border-[#334155]/30 p-5 mb-4">
-          <h2 className="text-xs font-semibold text-slate-500 mb-4 uppercase tracking-wider">
+        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 mb-4">
+          <h2 className="text-xs font-semibold text-gray-400 mb-4 uppercase tracking-wider">
             PFCバランス
           </h2>
           <div className="space-y-3.5">
@@ -293,41 +293,41 @@ export default function DashboardPage() {
         <div className="grid grid-cols-2 gap-3 mb-4">
           <Link
             href="/search"
-            className="bg-[#243044] rounded-2xl border border-[#334155]/30 p-4 flex items-center gap-3 hover:bg-[#2D3B50] transition-colors active:scale-[0.98]"
+            className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 flex items-center gap-3 hover:bg-gray-50 transition-colors active:scale-[0.98]"
           >
-            <div className="w-10 h-10 rounded-xl bg-cyan-400/10 flex items-center justify-center">
-              <Search className="w-5 h-5 text-cyan-400" />
+            <div className="w-10 h-10 rounded-xl bg-sky-500/10 flex items-center justify-center">
+              <Search className="w-5 h-5 text-sky-500" />
             </div>
             <div>
-              <p className="text-sm font-semibold text-slate-200">メニュー検索</p>
-              <p className="text-[11px] text-slate-500">PFCで絞り込み</p>
+              <p className="text-sm font-semibold text-gray-700">メニュー検索</p>
+              <p className="text-[11px] text-gray-400">PFCで絞り込み</p>
             </div>
           </Link>
           <Link
             href="/combo"
-            className="bg-[#243044] rounded-2xl border border-[#334155]/30 p-4 flex items-center gap-3 hover:bg-[#2D3B50] transition-colors active:scale-[0.98]"
+            className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 flex items-center gap-3 hover:bg-gray-50 transition-colors active:scale-[0.98]"
           >
             <div className="w-10 h-10 rounded-xl bg-violet-400/10 flex items-center justify-center">
               <TrendingUp className="w-5 h-5 text-violet-400" />
             </div>
             <div>
-              <p className="text-sm font-semibold text-slate-200">組み合わせ</p>
-              <p className="text-[11px] text-slate-500">最適な食事を提案</p>
+              <p className="text-sm font-semibold text-gray-700">組み合わせ</p>
+              <p className="text-[11px] text-gray-400">最適な食事を提案</p>
             </div>
           </Link>
         </div>
 
         {/* ─── Streak ─── */}
         {streak > 0 && (
-          <div className="bg-gradient-to-r from-cyan-400/10 to-sky-400/5 rounded-2xl border border-cyan-400/20 p-4 mb-4 flex items-center gap-3">
-            <div className="w-11 h-11 bg-gradient-to-br from-sky-400 to-cyan-500 rounded-full flex items-center justify-center shrink-0 shadow-lg shadow-cyan-500/20">
+          <div className="bg-gradient-to-r from-sky-50 to-cyan-50 rounded-2xl border border-sky-200/50 p-4 mb-4 flex items-center gap-3">
+            <div className="w-11 h-11 bg-gradient-to-br from-sky-400 to-cyan-500 rounded-full flex items-center justify-center shrink-0 shadow-lg shadow-sky-200">
               <Flame className="w-5 h-5 text-white" />
             </div>
             <div>
-              <p className="text-sm font-bold text-slate-100">
-                <span className="text-cyan-400 tabular-nums">{streak}</span>日連続記録中
+              <p className="text-sm font-bold text-gray-900">
+                <span className="text-sky-500 tabular-nums">{streak}</span>日連続記録中
               </p>
-              <p className="text-[11px] text-slate-500">
+              <p className="text-[11px] text-gray-400">
                 {streak >= 7
                   ? "素晴らしい！この調子で続けましょう"
                   : streak >= 3
@@ -339,8 +339,8 @@ export default function DashboardPage() {
         )}
 
         {/* ─── Weekly Trend ─── */}
-        <div className="bg-[#243044] rounded-2xl border border-[#334155]/30 p-5 mb-4">
-          <h2 className="text-xs font-semibold text-slate-500 mb-4 uppercase tracking-wider">
+        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 mb-4">
+          <h2 className="text-xs font-semibold text-gray-400 mb-4 uppercase tracking-wider">
             週間カロリー
           </h2>
           <div className="flex items-end justify-between gap-1.5 h-28">
@@ -359,7 +359,7 @@ export default function DashboardPage() {
                   className="flex flex-col items-center flex-1"
                 >
                   {isToday && day.calories > 0 && (
-                    <span className="text-[10px] text-slate-400 font-semibold mb-1 tabular-nums">
+                    <span className="text-[10px] text-gray-500 font-semibold mb-1 tabular-nums">
                       {day.calories}
                     </span>
                   )}
@@ -367,13 +367,13 @@ export default function DashboardPage() {
                     <div
                       className={`w-7 rounded-t-md transition-all duration-500 ${
                         day.calories === 0
-                          ? "bg-[#2D3B50]"
+                          ? "bg-gray-100"
                           : isOver
                             ? "bg-red-400"
                             : isToday
                               ? "bg-gradient-to-t from-sky-400 to-cyan-400"
-                              : "bg-sky-400/60"
-                      } ${isToday ? "ring-1 ring-cyan-400/30 ring-offset-1 ring-offset-[#1E2A3F]" : ""}`}
+                              : "bg-sky-300/60"
+                      } ${isToday ? "ring-1 ring-sky-400/30 ring-offset-1 ring-offset-white" : ""}`}
                       style={{
                         height: `${Math.min(barHeight, 120)}%`,
                         minHeight: "3px",
@@ -383,8 +383,8 @@ export default function DashboardPage() {
                   <span
                     className={`text-[11px] mt-1.5 ${
                       isToday
-                        ? "text-cyan-400 font-bold"
-                        : "text-slate-500"
+                        ? "text-sky-500 font-bold"
+                        : "text-gray-400"
                     }`}
                   >
                     {day.label}
@@ -396,20 +396,20 @@ export default function DashboardPage() {
         </div>
 
         {/* ─── Today's Logs ─── */}
-        <div className="bg-[#243044] rounded-2xl border border-[#334155]/30 p-5 mb-4">
+        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 mb-4">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+            <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
               今日の記録
             </h2>
-            <span className="text-xs text-slate-600 tabular-nums">{logs.length}件</span>
+            <span className="text-xs text-gray-300 tabular-nums">{logs.length}件</span>
           </div>
           {logs.length === 0 ? (
             <div className="text-center py-8">
-              <div className="w-14 h-14 bg-[#2D3B50] rounded-full flex items-center justify-center mx-auto mb-3">
-                <Utensils className="w-6 h-6 text-slate-500" />
+              <div className="w-14 h-14 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                <Utensils className="w-6 h-6 text-gray-400" />
               </div>
-              <p className="text-sm text-slate-400">まだ記録がありません</p>
-              <p className="text-xs text-slate-600 mt-1">
+              <p className="text-sm text-gray-500">まだ記録がありません</p>
+              <p className="text-xs text-gray-300 mt-1">
                 外食を記録してみましょう
               </p>
             </div>
@@ -418,7 +418,7 @@ export default function DashboardPage() {
               {logs.map((log) => (
                 <div
                   key={log.id}
-                  className={`flex items-center justify-between bg-[#2D3B50]/50 rounded-xl px-3 py-2.5 transition-all ${
+                  className={`flex items-center justify-between bg-gray-50 rounded-xl px-3 py-2.5 transition-all ${
                     MEAL_TYPE_BORDER[log.meal_type] || MEAL_TYPE_BORDER.snack
                   } ${deletingId === log.id ? "opacity-40 scale-95" : ""}`}
                 >
@@ -432,24 +432,24 @@ export default function DashboardPage() {
                     </span>
                     <div className="min-w-0">
                       {log.menu_items?.chain_restaurants && (
-                        <p className="text-[10px] text-slate-500 truncate">
+                        <p className="text-[10px] text-gray-400 truncate">
                           {log.menu_items.chain_restaurants.name}
                         </p>
                       )}
-                      <p className="text-sm font-medium text-slate-200 truncate">
+                      <p className="text-sm font-medium text-gray-700 truncate">
                         {log.menu_items?.name ?? log.custom_name ?? "不明"}
                       </p>
                     </div>
                   </div>
                   <div className="flex items-center gap-2 ml-2 shrink-0">
-                    <span className="text-sm font-bold text-cyan-400 tabular-nums">
+                    <span className="text-sm font-bold text-sky-500 tabular-nums">
                       {log.calories}
                     </span>
-                    <span className="text-[10px] text-slate-500">kcal</span>
+                    <span className="text-[10px] text-gray-400">kcal</span>
                     <button
                       onClick={() => handleDelete(log.id)}
                       disabled={deletingId === log.id}
-                      className="text-slate-600 hover:text-red-400 transition-colors p-1 ml-1"
+                      className="text-gray-300 hover:text-red-400 transition-colors p-1 ml-1"
                       aria-label="削除"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
@@ -463,7 +463,7 @@ export default function DashboardPage() {
           {/* Record button */}
           <Link
             href="/record"
-            className="mt-4 flex items-center justify-center gap-2 w-full bg-gradient-to-r from-sky-400 to-cyan-500 hover:from-sky-500 hover:to-cyan-600 text-white text-sm font-bold py-3 rounded-xl transition-all active:scale-[0.98] shadow-lg shadow-cyan-500/20"
+            className="mt-4 flex items-center justify-center gap-2 w-full bg-gradient-to-r from-sky-400 to-cyan-500 hover:from-sky-500 hover:to-cyan-600 text-white text-sm font-bold py-3 rounded-xl transition-all active:scale-[0.98] shadow-lg shadow-sky-200"
           >
             <Plus className="w-4 h-4" />
             記録する
@@ -503,7 +503,7 @@ function CalorieRing({
         cy="100"
         r={radius}
         fill="none"
-        stroke="#253245"
+        stroke="#E5E7EB"
         strokeWidth="12"
       />
       {/* Progress circle */}
@@ -527,21 +527,21 @@ function CalorieRing({
         x="100"
         y="88"
         textAnchor="middle"
-        fill="#F1F5F9"
+        fill="#111827"
         fontSize="34"
         fontWeight="bold"
         style={{ fontVariantNumeric: "tabular-nums" }}
       >
         {total}
       </text>
-      <text x="100" y="108" textAnchor="middle" fill="#64748B" fontSize="12">
+      <text x="100" y="108" textAnchor="middle" fill="#9CA3AF" fontSize="12">
         kcal
       </text>
       <text
         x="100"
         y="128"
         textAnchor="middle"
-        fill="#475569"
+        fill="#9CA3AF"
         fontSize="11"
         style={{ fontVariantNumeric: "tabular-nums" }}
       >
@@ -571,20 +571,20 @@ function PFCBar({
   return (
     <div>
       <div className="flex items-center justify-between mb-1.5">
-        <span className="text-xs text-slate-400 flex items-center gap-1.5">
+        <span className="text-xs text-gray-500 flex items-center gap-1.5">
           {dotColor && (
             <span className={`w-2 h-2 rounded-full ${dotColor}`} />
           )}
           {label}
         </span>
-        <span className="text-xs text-slate-500 tabular-nums">
-          <span className="font-semibold text-slate-200">
+        <span className="text-xs text-gray-400 tabular-nums">
+          <span className="font-semibold text-gray-700">
             {value.toFixed(1)}
           </span>{" "}
           / {target}g
         </span>
       </div>
-      <div className="w-full bg-[#2D3B50] rounded-full h-2 overflow-hidden">
+      <div className="w-full bg-gray-100 rounded-full h-2 overflow-hidden">
         <div
           className={`h-full rounded-full ${color} transition-all duration-500`}
           style={{ width: `${percentage}%` }}

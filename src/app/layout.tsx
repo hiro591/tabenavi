@@ -40,7 +40,7 @@ export default function RootLayout({
           sizes="180x180"
           href="/apple-touch-icon.png"
         />
-        <meta name="theme-color" content="#1A2235" />
+        <meta name="theme-color" content="#F9FAFB" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta
           name="apple-mobile-web-app-status-bar-style"
@@ -65,7 +65,7 @@ export default function RootLayout({
           `}
         </Script>
       </head>
-      <body className="antialiased bg-[#1A2235] text-slate-100">
+      <body className="antialiased bg-gray-50 text-gray-900">
         {children}
         <AppBottomNav />
       </body>

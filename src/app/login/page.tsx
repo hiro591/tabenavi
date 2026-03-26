@@ -41,19 +41,19 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#1A2235] flex items-center justify-center p-4">
-      <div className="bg-[#243044] rounded-2xl border border-[#334155]/50 p-8 w-full max-w-md animate-fade-in">
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 w-full max-w-md animate-fade-in">
         <div className="text-center mb-8">
           <div className="flex justify-center mb-2">
             <Logo size={40} textSize="text-2xl" />
           </div>
-          <p className="text-slate-500 text-sm mt-1">外食しながら、カラダづくり。</p>
+          <p className="text-gray-400 text-sm mt-1">外食しながら、カラダづくり。</p>
         </div>
 
         {/* Google Login */}
         <button
           onClick={handleGoogleLogin}
-          className="w-full py-3.5 bg-[#2D3B50] border border-[#334155] rounded-xl text-slate-200 font-medium hover:bg-[#2D3B50] transition-colors flex items-center justify-center gap-2.5 mb-5"
+          className="w-full py-3.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-700 font-medium hover:bg-gray-100 transition-colors flex items-center justify-center gap-2.5 mb-5"
         >
           <svg className="w-5 h-5" viewBox="0 0 24 24">
             <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4" />
@@ -65,14 +65,14 @@ export default function LoginPage() {
         </button>
 
         <div className="flex items-center gap-3 mb-5">
-          <div className="flex-1 h-px bg-[#334155]/50" />
-          <span className="text-xs text-slate-600">または</span>
-          <div className="flex-1 h-px bg-[#334155]/50" />
+          <div className="flex-1 h-px bg-gray-200" />
+          <span className="text-xs text-gray-300">または</span>
+          <div className="flex-1 h-px bg-gray-200" />
         </div>
 
         <form onSubmit={handleLogin} className="space-y-4">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-1.5">
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1.5">
               メールアドレス
             </label>
             <input
@@ -81,13 +81,13 @@ export default function LoginPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full px-4 py-3 bg-[#2D3B50] border border-[#334155] rounded-xl text-slate-100 placeholder:text-slate-500 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/30 transition-colors text-sm"
+              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl text-gray-900 placeholder:text-gray-400 focus:border-sky-400 focus:ring-1 focus:ring-sky-400/30 transition-colors text-sm"
               placeholder="mail@example.com"
             />
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-slate-300 mb-1.5">
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1.5">
               パスワード
             </label>
             <input
@@ -96,27 +96,27 @@ export default function LoginPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full px-4 py-3 bg-[#2D3B50] border border-[#334155] rounded-xl text-slate-100 placeholder:text-slate-500 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/30 transition-colors text-sm"
+              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl text-gray-900 placeholder:text-gray-400 focus:border-sky-400 focus:ring-1 focus:ring-sky-400/30 transition-colors text-sm"
               placeholder="パスワードを入力"
             />
           </div>
 
           {error && (
-            <p className="text-red-400 text-sm bg-red-400/10 rounded-lg px-3 py-2">{error}</p>
+            <p className="text-red-500 text-sm bg-red-50 rounded-lg px-3 py-2">{error}</p>
           )}
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3.5 bg-gradient-to-r from-sky-400 to-cyan-500 hover:from-sky-500 hover:to-cyan-600 text-white font-bold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-cyan-500/20 active:scale-[0.98]"
+            className="w-full py-3.5 bg-gradient-to-r from-sky-400 to-cyan-500 hover:from-sky-500 hover:to-cyan-600 text-white font-bold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-sky-200 active:scale-[0.98]"
           >
             {loading ? 'ログイン中...' : 'ログイン'}
           </button>
         </form>
 
-        <p className="text-center text-sm text-slate-500 mt-6">
+        <p className="text-center text-sm text-gray-400 mt-6">
           アカウントをお持ちでない方は
-          <Link href="/signup" className="text-cyan-400 hover:text-cyan-300 font-medium ml-1 transition-colors">
+          <Link href="/signup" className="text-sky-500 hover:text-sky-600 font-medium ml-1 transition-colors">
             無料登録
           </Link>
         </p>

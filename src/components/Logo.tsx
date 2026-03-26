@@ -47,7 +47,7 @@ export function Logo({
   return (
     <div className="flex items-center gap-2">
       <LogoIcon size={size} />
-      <span className={`${textSize} font-bold text-slate-100`}>たべなび</span>
+      <span className={`${textSize} font-bold text-gray-900`}>たべなび</span>
     </div>
   );
 }
