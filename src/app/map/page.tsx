@@ -108,23 +108,46 @@ export default function MapPage() {
     });
   }, [router]);
 
-  // Geolocation
+  // Geolocation — try high accuracy first, fallback to low accuracy, then default
   useEffect(() => {
     if (!navigator.geolocation) {
       setLocationError(true);
+      setLocation({ lat: 35.6812, lng: 139.7671 });
       return;
     }
+
+    let resolved = false;
+
+    // Try low accuracy first (faster, works on most devices)
     navigator.geolocation.getCurrentPosition(
       (pos) => {
-        setLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+        if (!resolved) {
+          resolved = true;
+          setLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+        }
       },
       () => {
-        setLocationError(true);
-        // Default to Tokyo Station
-        setLocation({ lat: 35.6812, lng: 139.7671 });
-        alert("位置情報を取得できませんでした。東京駅周辺を表示しています。");
+        // Low accuracy failed — fallback to Tokyo Station
+        if (!resolved) {
+          resolved = true;
+          setLocationError(true);
+          setLocation({ lat: 35.6812, lng: 139.7671 });
+        }
       },
-      { timeout: 8000, enableHighAccuracy: true }
+      { timeout: 15000, enableHighAccuracy: false, maximumAge: 300000 }
+    );
+
+    // Also try high accuracy in parallel (may take longer but more precise)
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        // Update if we get a better result
+        setLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+        setLocationError(false);
+      },
+      () => {
+        // High accuracy failed — ignore, we already have low accuracy or fallback
+      },
+      { timeout: 20000, enableHighAccuracy: true }
     );
   }, []);
 
