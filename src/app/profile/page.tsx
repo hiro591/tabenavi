@@ -278,6 +278,9 @@ export default function ProfilePage() {
           </p>
         </div>
 
+        {/* Body Info (from onboarding) */}
+        <OnboardingInfo />
+
         {/* Weight Tracking Link */}
         <Link
           href="/weight"
@@ -325,6 +328,89 @@ export default function ProfilePage() {
             ログアウト
           </button>
         </div>
+
+        {/* Re-do onboarding */}
+        <Link
+          href="/onboarding"
+          className="block text-center text-sm text-gray-400 hover:text-sky-500 transition-colors mt-4 mb-2"
+        >
+          初期設定をやり直す
+        </Link>
+      </div>
+    </div>
+  );
+}
+
+// ─── Onboarding Info Display ─────────────────────────────────────────────────
+
+function OnboardingInfo() {
+  const [data, setData] = useState<Record<string, string | number | string[] | null> | null>(null);
+
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem("onboarding");
+      if (raw) setData(JSON.parse(raw));
+    } catch {}
+  }, []);
+
+  if (!data) return null;
+
+  const goalLabel: Record<string, string> = { lose: "減量", maintain: "維持", gain: "増量" };
+  const activityLabel: Record<string, string> = { sedentary: "低い", light: "やや低い", moderate: "中程度", active: "高い" };
+  const genderLabel: Record<string, string> = { male: "男性", female: "女性", other: "その他" };
+
+  return (
+    <div className="bg-white rounded-2xl p-6 shadow-sm mb-4">
+      <h2 className="text-sm font-semibold text-gray-500 mb-4">身体情報</h2>
+      <div className="space-y-3 text-sm">
+        {data.gender && (
+          <div className="flex justify-between">
+            <span className="text-gray-400">性別</span>
+            <span className="font-medium text-gray-700">{genderLabel[data.gender as string] ?? "-"}</span>
+          </div>
+        )}
+        {data.birthYear && (
+          <div className="flex justify-between">
+            <span className="text-gray-400">生まれ年</span>
+            <span className="font-medium text-gray-700">{String(data.birthYear)}年</span>
+          </div>
+        )}
+        {data.height && (
+          <div className="flex justify-between">
+            <span className="text-gray-400">身長</span>
+            <span className="font-medium text-gray-700">{String(data.height)} cm</span>
+          </div>
+        )}
+        {data.weight && (
+          <div className="flex justify-between">
+            <span className="text-gray-400">体重</span>
+            <span className="font-medium text-gray-700">{String(data.weight)} kg</span>
+          </div>
+        )}
+        {data.targetWeight && (
+          <div className="flex justify-between">
+            <span className="text-gray-400">目標体重</span>
+            <span className="font-medium text-gray-700">{String(data.targetWeight)} kg</span>
+          </div>
+        )}
+        {data.goal && (
+          <div className="flex justify-between">
+            <span className="text-gray-400">目標</span>
+            <span className="font-medium text-gray-700">{goalLabel[data.goal as string] ?? "-"}</span>
+          </div>
+        )}
+        {data.activityLevel && (
+          <div className="flex justify-between">
+            <span className="text-gray-400">活動量</span>
+            <span className="font-medium text-gray-700">{activityLabel[data.activityLevel as string] ?? "-"}</span>
+          </div>
+        )}
+        {data.targetCalories && (
+          <div className="flex justify-between pt-2 border-t border-gray-100">
+            <span className="text-gray-400">自動計算カロリー</span>
+            <span className="font-bold text-sky-500">{String(data.targetCalories)} kcal</span>
+          </div>
+        )}
       </div>
     </div>
   );
