@@ -4,7 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
-import { Heart, MessageCircle, Utensils, Clock, Search } from "lucide-react";
+import { Heart, MessageCircle, Utensils, Clock, Search, PenSquare } from "lucide-react";
 import { getChainLogo } from "@/lib/chain-logos";
 
 interface TimelinePost {
@@ -280,6 +280,14 @@ export default function TimelinePage() {
           </div>
         )}
       </div>
+
+      {/* FAB - 投稿ボタン */}
+      <Link
+        href="/timeline/post"
+        className="fixed bottom-20 right-4 z-40 w-14 h-14 bg-gradient-to-br from-sky-400 to-cyan-500 rounded-full shadow-lg shadow-sky-200 flex items-center justify-center text-white active:scale-95 transition-transform"
+      >
+        <PenSquare className="w-5 h-5" />
+      </Link>
     </div>
   );
 }

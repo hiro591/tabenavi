@@ -12,6 +12,7 @@ import {
   Utensils,
   Plus,
   TrendingUp,
+  Bell,
 } from "lucide-react";
 import type { FoodLog, Profile } from "@/types/database";
 
@@ -223,12 +224,21 @@ export default function DashboardPage() {
             </p>
           )}
         </div>
-        <Link
-          href="/profile"
-          className="w-9 h-9 flex items-center justify-center rounded-full bg-white border border-gray-100 text-gray-400 hover:text-gray-700 hover:bg-gray-50 transition-colors shadow-sm"
-        >
-          <Settings className="w-4 h-4" />
-        </Link>
+        <div className="flex items-center gap-2">
+          <Link
+            href="/notifications"
+            className="relative w-9 h-9 flex items-center justify-center rounded-full bg-white border border-gray-100 text-gray-400 hover:text-gray-700 hover:bg-gray-50 transition-colors shadow-sm"
+          >
+            <Bell className="w-4 h-4" />
+            <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white" />
+          </Link>
+          <Link
+            href="/profile"
+            className="w-9 h-9 flex items-center justify-center rounded-full bg-white border border-gray-100 text-gray-400 hover:text-gray-700 hover:bg-gray-50 transition-colors shadow-sm"
+          >
+            <Settings className="w-4 h-4" />
+          </Link>
+        </div>
       </div>
 
       {/* ─── Week Calendar ─── */}
