@@ -234,30 +234,47 @@ function RecordPageContent() {
 
   // Success screen
   if (saved) {
+    const menuName = isManualMode ? customName : selectedMenu?.name;
+    const chainName = selectedChain?.name ?? "";
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center px-4">
-          <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg className="w-10 h-10 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+        <div className="text-center px-4 max-w-sm w-full">
+          <div className="w-16 h-16 bg-gradient-to-br from-emerald-400 to-green-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg shadow-emerald-100">
+            <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={3}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          <h2 className="text-xl font-bold text-gray-800 mb-2">記録しました!</h2>
-          <p className="text-gray-500 mb-6">
-            {isManualMode ? customName : selectedMenu?.name} - {finalCalories} kcal
+          <h2 className="text-xl font-bold text-gray-800 mb-1">記録しました!</h2>
+          <p className="text-gray-400 text-sm mb-6">
+            {menuName} — {finalCalories} kcal
           </p>
-          <Link
-            href="/dashboard"
-            className="inline-block bg-orange-500 text-white font-semibold px-8 py-3 rounded-xl hover:bg-orange-600 transition-colors mb-3"
-          >
-            ダッシュボードに戻る
-          </Link>
-          <Link
-            href="/record"
-            className="inline-block text-orange-500 font-semibold px-8 py-3 rounded-xl border border-orange-300 hover:bg-orange-50 transition-colors"
-          >
-            続けて記録する
-          </Link>
+
+          {/* みんなの外食に投稿 */}
+          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 mb-5">
+            <p className="text-sm font-bold text-gray-800 mb-1">みんなの外食に投稿しませんか？</p>
+            <p className="text-xs text-gray-400 mb-4">あなたの食事をシェアして、他のユーザーの参考に。</p>
+            <Link
+              href={`/timeline/post?menu=${encodeURIComponent(menuName ?? "")}&chain=${encodeURIComponent(chainName)}&cal=${finalCalories}`}
+              className="block w-full bg-gradient-to-r from-sky-400 to-cyan-500 text-white font-bold py-3 rounded-xl text-sm active:scale-[0.98] transition-all shadow-md shadow-sky-200"
+            >
+              みんなの外食に投稿する
+            </Link>
+          </div>
+
+          <div className="flex gap-3">
+            <Link
+              href="/dashboard"
+              className="flex-1 bg-gray-100 text-gray-700 font-semibold py-3 rounded-xl text-sm hover:bg-gray-200 transition-colors text-center"
+            >
+              ホームに戻る
+            </Link>
+            <Link
+              href="/record"
+              className="flex-1 bg-white border border-gray-200 text-gray-600 font-semibold py-3 rounded-xl text-sm hover:bg-gray-50 transition-colors text-center"
+            >
+              続けて記録
+            </Link>
+          </div>
         </div>
       </div>
     );
