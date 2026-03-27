@@ -108,47 +108,48 @@ export default function MapPage() {
     });
   }, [router]);
 
-  // Geolocation — try high accuracy first, fallback to low accuracy, then default
+  // Geolocation — show default immediately, then update when location is available
   useEffect(() => {
+    // Show Tokyo Station immediately so the map loads right away
+    setLocation({ lat: 35.6812, lng: 139.7671 });
+
     if (!navigator.geolocation) {
       setLocationError(true);
-      setLocation({ lat: 35.6812, lng: 139.7671 });
       return;
     }
 
-    let resolved = false;
-
-    // Try low accuracy first (faster, works on most devices)
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        if (!resolved) {
-          resolved = true;
-          setLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude });
-        }
-      },
-      () => {
-        // Low accuracy failed — fallback to Tokyo Station
-        if (!resolved) {
-          resolved = true;
+    // Check permission first
+    if (navigator.permissions) {
+      navigator.permissions.query({ name: "geolocation" }).then((result) => {
+        if (result.state === "denied") {
           setLocationError(true);
-          setLocation({ lat: 35.6812, lng: 139.7671 });
+          return;
         }
-      },
-      { timeout: 15000, enableHighAccuracy: false, maximumAge: 300000 }
-    );
+        requestLocation();
+      }).catch(() => {
+        // permissions API not supported, try anyway
+        requestLocation();
+      });
+    } else {
+      requestLocation();
+    }
 
-    // Also try high accuracy in parallel (may take longer but more precise)
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        // Update if we get a better result
-        setLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude });
-        setLocationError(false);
-      },
-      () => {
-        // High accuracy failed — ignore, we already have low accuracy or fallback
-      },
-      { timeout: 20000, enableHighAccuracy: true }
-    );
+    function requestLocation() {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          setLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+          setLocationError(false);
+          // Move existing map to new location
+          if (leafletMap.current) {
+            leafletMap.current.setView([pos.coords.latitude, pos.coords.longitude], 16);
+          }
+        },
+        () => {
+          setLocationError(true);
+        },
+        { timeout: 10000, enableHighAccuracy: false, maximumAge: 600000 }
+      );
+    }
   }, []);
 
   // Init map

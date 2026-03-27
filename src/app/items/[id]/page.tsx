@@ -353,11 +353,20 @@ export default async function ItemDetailPage({
         <div className="max-w-lg mx-auto flex gap-2">
           <FavoriteButton itemId={item.id} />
           <ShareCard item={item} />
+          <a
+            href={mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-1.5 px-3 py-3 bg-gray-100 text-gray-700 rounded-xl font-medium active:bg-gray-200 transition-colors"
+          >
+            <MapPin className="w-4 h-4" />
+            <span className="text-sm">地図</span>
+          </a>
           <Link
             href={`/record?menu_id=${item.id}`}
             className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-sky-400 to-cyan-500 text-white rounded-xl font-bold active:scale-[0.98] transition-all shadow-md shadow-sky-200"
           >
-            <span>この食事を記録する</span>
+            <span>記録する</span>
           </Link>
         </div>
       </div>
