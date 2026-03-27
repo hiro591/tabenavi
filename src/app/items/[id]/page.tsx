@@ -350,24 +350,28 @@ export default async function ItemDetailPage({
 
       {/* Sticky Bottom Action Bar */}
       <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-t border-gray-100 py-3 px-4 z-50">
-        <div className="max-w-lg mx-auto flex gap-2">
-          <FavoriteButton itemId={item.id} />
-          <ShareCard item={item} />
-          <a
-            href={mapsUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center gap-1.5 px-3 py-3 bg-gray-100 text-gray-700 rounded-xl font-medium active:bg-gray-200 transition-colors"
-          >
-            <MapPin className="w-4 h-4" />
-            <span className="text-sm">地図</span>
-          </a>
-          <Link
-            href={`/record?menu_id=${item.id}`}
-            className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-sky-400 to-cyan-500 text-white rounded-xl font-bold active:scale-[0.98] transition-all shadow-md shadow-sky-200"
-          >
-            <span>記録する</span>
-          </Link>
+        <div className="max-w-lg mx-auto space-y-2">
+          <div className="flex gap-2">
+            <a
+              href={mapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 flex items-center justify-center gap-1.5 px-4 py-3 bg-emerald-500 text-white rounded-xl font-semibold text-sm active:bg-emerald-600 transition-colors"
+            >
+              <MapPin className="w-4 h-4" />
+              近くの店舗を探す
+            </a>
+            <Link
+              href={`/record?menu_id=${item.id}`}
+              className="flex-1 flex items-center justify-center gap-1.5 px-4 py-3 bg-gradient-to-r from-sky-400 to-cyan-500 text-white rounded-xl font-semibold text-sm active:scale-[0.98] transition-all"
+            >
+              この食事を記録する
+            </Link>
+          </div>
+          <div className="flex gap-2 justify-center">
+            <FavoriteButton itemId={item.id} />
+            <ShareCard item={item} />
+          </div>
         </div>
       </div>
     </div>
