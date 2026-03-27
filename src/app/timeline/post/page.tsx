@@ -56,15 +56,20 @@ function PostPageContent() {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) { router.push("/login"); return; }
 
-      const { error: insertError } = await supabase.from("public_posts").insert({
+      const insertData: Record<string, unknown> = {
         user_id: user.id,
         text: text || null,
         menu_name: menuName || null,
         chain_name: chainName || null,
         calories: calories ? parseInt(calories, 10) : null,
-        menu_item_id: menuItemId || null,
         photo_url: photos[0] || null,
-      });
+      };
+      // Only include menu_item_id if it's a valid UUID
+      if (menuItemId && menuItemId.length > 10) {
+        insertData.menu_item_id = menuItemId;
+      }
+
+      const { error: insertError } = await supabase.from("public_posts").insert(insertData);
 
       if (insertError) throw insertError;
       setPosted(true);

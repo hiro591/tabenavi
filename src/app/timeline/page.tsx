@@ -66,7 +66,7 @@ export default function TimelinePage() {
 
     let query = supabase
       .from("public_posts")
-      .select("*, profiles(display_name)")
+      .select("*")
       .order("created_at", { ascending: false })
       .limit(50);
 
@@ -74,8 +74,29 @@ export default function TimelinePage() {
       query = query.eq("user_id", user.id);
     }
 
-    const { data } = await query;
-    if (data) setPosts(data as PublicPost[]);
+    const { data, error } = await query;
+    if (error) {
+      console.error("Timeline fetch error:", error);
+    }
+    if (data) {
+      // Fetch display names separately
+      const userIds = [...new Set(data.map((p: { user_id: string }) => p.user_id))];
+      const { data: profilesData } = await supabase
+        .from("profiles")
+        .select("id, display_name")
+        .in("id", userIds);
+
+      const profileMap = new Map(
+        (profilesData ?? []).map((p: { id: string; display_name: string | null }) => [p.id, p.display_name])
+      );
+
+      const postsWithNames = data.map((p: Record<string, unknown>) => ({
+        ...p,
+        profiles: { display_name: profileMap.get(p.user_id as string) ?? null },
+      }));
+
+      setPosts(postsWithNames as PublicPost[]);
+    }
     setLoading(false);
   }, [supabase, router, tab]);
 
