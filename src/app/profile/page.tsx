@@ -1,144 +1,91 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
-import { Flame, Scale, Dumbbell } from "lucide-react";
+import { ChevronLeft, ChevronRight, Scale, History, Heart, Camera, MapPin } from "lucide-react";
 import type { Profile } from "@/types/database";
-
-type GoalType = "diet" | "maintain" | "bulk";
-
-const GOAL_OPTIONS: {
-  type: GoalType;
-  Icon: React.ComponentType<{ className?: string }>;
-  label: string;
-  description: string;
-  suggestedCalories: number;
-}[] = [
-  {
-    type: "diet",
-    Icon: Flame,
-    label: "ダイエット",
-    description: "目標: -500kcal 不足",
-    suggestedCalories: 1500,
-  },
-  {
-    type: "maintain",
-    Icon: Scale,
-    label: "現状維持",
-    description: "カロリー維持",
-    suggestedCalories: 2000,
-  },
-  {
-    type: "bulk",
-    Icon: Dumbbell,
-    label: "筋肉増量",
-    description: "目標: +300kcal 余剰",
-    suggestedCalories: 2500,
-  },
-];
-
-const PRESET_CALORIES = [1500, 1800, 2000, 2200, 2500];
 
 export default function ProfilePage() {
   const supabase = createClient();
   const router = useRouter();
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [saved, setSaved] = useState(false);
-  const [saveError, setSaveError] = useState("");
+  const [toast, setToast] = useState("");
   const [email, setEmail] = useState("");
   const [displayName, setDisplayName] = useState("");
+  const [bio, setBio] = useState("");
+  const [avatarUrl, setAvatarUrl] = useState("");
   const [targetCalories, setTargetCalories] = useState(2000);
-  const [customCalories, setCustomCalories] = useState("");
-  const [selectedGoal, setSelectedGoal] = useState<GoalType | null>(null);
+  const [onboardingData, setOnboardingData] = useState<Record<string, string | number | string[] | null> | null>(null);
 
   const fetchProfile = useCallback(async () => {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    if (!user) {
-      router.push("/login");
-      return;
-    }
-
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) { router.push("/login"); return; }
     setEmail(user.email ?? "");
 
-    const { data: profile } = await supabase
-      .from("profiles")
-      .select("*")
-      .eq("id", user.id)
-      .single();
-
+    const { data: profile } = await supabase.from("profiles").select("*").eq("id", user.id).single();
     if (profile) {
       const p = profile as Profile;
       setDisplayName(p.display_name ?? "");
       setTargetCalories(p.target_calories);
     }
 
+    // Load local data
+    try {
+      const raw = localStorage.getItem("onboarding");
+      if (raw) setOnboardingData(JSON.parse(raw));
+      const saved = localStorage.getItem("profile_extra");
+      if (saved) {
+        const extra = JSON.parse(saved);
+        setBio(extra.bio ?? "");
+        setAvatarUrl(extra.avatarUrl ?? "");
+      }
+    } catch {}
+
     setLoading(false);
   }, [supabase, router]);
 
-  useEffect(() => {
-    fetchProfile();
-  }, [fetchProfile]);
+  useEffect(() => { fetchProfile(); }, [fetchProfile]);
 
-  const handleGoalSelect = (goal: GoalType) => {
-    setSelectedGoal(goal);
-    const option = GOAL_OPTIONS.find((g) => g.type === goal);
-    if (option) {
-      setTargetCalories(option.suggestedCalories);
-      setCustomCalories("");
-    }
-  };
-
-  const handlePresetSelect = (value: number) => {
-    setTargetCalories(value);
-    setCustomCalories("");
-  };
-
-  const handleCustomCaloriesChange = (value: string) => {
-    setCustomCalories(value);
-    const num = parseInt(value, 10);
-    if (!isNaN(num) && num > 0 && num <= 10000) {
-      setTargetCalories(num);
-    }
+  const showToast = (msg: string) => {
+    setToast(msg);
+    setTimeout(() => setToast(""), 2500);
   };
 
   const handleSave = async () => {
     setSaving(true);
-    setSaved(false);
-    setSaveError("");
-
     try {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      if (!user) {
-        router.push("/login");
-        return;
-      }
-
-      const { error } = await supabase
-        .from("profiles")
-        .update({
-          display_name: displayName || null,
-          target_calories: targetCalories,
-        })
-        .eq("id", user.id);
-
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) { router.push("/login"); return; }
+      const { error } = await supabase.from("profiles").update({
+        display_name: displayName || null,
+        target_calories: targetCalories,
+      }).eq("id", user.id);
       if (error) throw error;
 
-      setSaved(true);
-      setTimeout(() => setSaved(false), 3000);
+      localStorage.setItem("profile_extra", JSON.stringify({ bio, avatarUrl }));
+      showToast("保存しました");
     } catch {
-      setSaveError("保存に失敗しました。もう一度お試しください。");
-      setTimeout(() => setSaveError(""), 4000);
+      showToast("保存に失敗しました");
     } finally {
       setSaving(false);
     }
+  };
+
+  const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      if (ev.target?.result) {
+        setAvatarUrl(ev.target.result as string);
+      }
+    };
+    reader.readAsDataURL(file);
   };
 
   const handleLogout = async () => {
@@ -148,191 +95,174 @@ export default function ProfilePage() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="w-8 h-8 border-4 border-orange-500 border-t-transparent rounded-full animate-spin" />
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="w-6 h-6 border-2 border-sky-400 border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
 
-  const avatarChar =
-    (displayName || email || "?").charAt(0).toUpperCase();
+  const avatarChar = (displayName || email || "?").charAt(0).toUpperCase();
+
+  const goalLabel: Record<string, string> = { lose: "減量", maintain: "維持", gain: "増量" };
+  const activityLabel: Record<string, string> = { sedentary: "低い", light: "やや低い", moderate: "中程度", active: "高い" };
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-20">
-      <div className="max-w-lg mx-auto px-4 pt-6 pb-12">
-        {/* Header */}
-        <div className="flex items-center gap-3 mb-6">
-          <Link
-            href="/dashboard"
-            className="w-10 h-10 flex items-center justify-center rounded-full bg-white shadow-sm text-gray-600 hover:bg-gray-100 transition-colors"
+    <div className="min-h-screen bg-gray-50 pb-24">
+      {toast && (
+        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-white text-gray-900 text-sm font-medium px-5 py-2.5 rounded-xl border border-gray-200 shadow-lg animate-fade-in">
+          {toast}
+        </div>
+      )}
+
+      {/* Header */}
+      <div className="sticky top-0 z-30 bg-white/95 backdrop-blur-lg border-b border-gray-100">
+        <div className="max-w-lg mx-auto px-4 h-14 flex items-center gap-3">
+          <button onClick={() => router.push("/dashboard")} className="text-gray-400 hover:text-gray-600 transition-colors">
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <h1 className="text-base font-bold text-gray-900 flex-1">マイページ</h1>
+          <button
+            onClick={handleSave}
+            disabled={saving}
+            className="text-sm font-bold text-sky-500 disabled:text-gray-300 transition-colors"
           >
-            ←
-          </Link>
-          <h1 className="text-xl font-bold text-gray-800">
-            プロフィール設定
-          </h1>
+            {saving ? "保存中..." : "保存"}
+          </button>
         </div>
+      </div>
 
-        {/* User Info */}
-        <div className="bg-white rounded-2xl p-6 shadow-sm mb-4">
-          <div className="flex items-center gap-4 mb-5">
-            <div className="w-14 h-14 rounded-full bg-orange-500 flex items-center justify-center text-white text-xl font-bold shrink-0">
-              {avatarChar}
-            </div>
-            <div className="min-w-0">
-              <p className="text-sm text-gray-400 truncate">{email}</p>
-            </div>
-          </div>
-          <div>
-            <label className="block text-sm font-semibold text-gray-600 mb-1.5">
-              表示名
-            </label>
-            <input
-              type="text"
-              value={displayName}
-              onChange={(e) => setDisplayName(e.target.value)}
-              placeholder="表示名を入力"
-              className="w-full px-4 py-3 bg-gray-50 rounded-xl border-none outline-none text-gray-800 placeholder-gray-300 focus:ring-2 focus:ring-orange-300 transition-all"
-            />
-          </div>
-        </div>
+      <div className="max-w-lg mx-auto px-4 pt-6">
 
-        {/* Goal Type */}
-        <div className="bg-white rounded-2xl p-6 shadow-sm mb-4">
-          <h2 className="text-sm font-semibold text-gray-500 mb-4">
-            目標タイプ
-          </h2>
-          <div className="grid grid-cols-3 gap-2">
-            {GOAL_OPTIONS.map((goal) => (
-              <button
-                key={goal.type}
-                onClick={() => handleGoalSelect(goal.type)}
-                className={`flex flex-col items-center gap-1 p-3 rounded-xl border-2 transition-all ${
-                  selectedGoal === goal.type
-                    ? "border-orange-500 bg-orange-50"
-                    : "border-gray-100 bg-gray-50 hover:border-gray-200"
-                }`}
-              >
-                <goal.Icon className={`w-6 h-6 ${selectedGoal === goal.type ? "text-orange-500" : "text-gray-500"}`} />
-                <span
-                  className={`text-xs font-semibold ${
-                    selectedGoal === goal.type
-                      ? "text-orange-600"
-                      : "text-gray-600"
-                  }`}
-                >
-                  {goal.label}
-                </span>
-                <span className="text-[10px] text-gray-400">
-                  {goal.description}
-                </span>
+        {/* ─── Avatar + Name + Bio ─── */}
+        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 mb-4">
+          <div className="flex items-start gap-4">
+            {/* Avatar */}
+            <div className="relative shrink-0">
+              <button onClick={() => fileInputRef.current?.click()} className="group">
+                {avatarUrl ? (
+                  <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-gray-100">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={avatarUrl} alt="" className="w-full h-full object-cover" />
+                  </div>
+                ) : (
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-sky-400 to-cyan-500 flex items-center justify-center text-white text-xl font-bold">
+                    {avatarChar}
+                  </div>
+                )}
+                <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-white border border-gray-200 rounded-full flex items-center justify-center shadow-sm group-hover:bg-gray-50">
+                  <Camera className="w-3 h-3 text-gray-500" />
+                </div>
               </button>
-            ))}
+              <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleAvatarChange} />
+            </div>
+
+            <div className="flex-1 min-w-0">
+              <input
+                type="text"
+                value={displayName}
+                onChange={(e) => setDisplayName(e.target.value)}
+                placeholder="表示名"
+                className="w-full text-lg font-bold text-gray-900 placeholder:text-gray-300 outline-none bg-transparent"
+              />
+              <p className="text-xs text-gray-400 mt-0.5 truncate">{email}</p>
+            </div>
           </div>
+
+          {/* Bio */}
+          <textarea
+            value={bio}
+            onChange={(e) => setBio(e.target.value)}
+            placeholder="自己紹介を書いてみよう（例: 週5外食のサラリーマン。サイゼリヤが大好き。）"
+            className="w-full mt-4 text-sm text-gray-700 placeholder:text-gray-300 outline-none bg-gray-50 rounded-xl p-3 resize-none border border-gray-100 focus:border-sky-300 focus:ring-1 focus:ring-sky-300/30 transition-colors"
+            rows={2}
+          />
         </div>
 
-        {/* Target Calories */}
-        <div className="bg-white rounded-2xl p-6 shadow-sm mb-4">
-          <h2 className="text-sm font-semibold text-gray-500 mb-4">
-            1日の目標カロリー
-          </h2>
-          <div className="text-center mb-5">
-            <span className="text-4xl font-bold text-orange-500">
-              {targetCalories}
-            </span>
-            <span className="text-lg text-gray-400 ml-1">kcal</span>
+        {/* ─── 目標カロリー ─── */}
+        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 mb-4">
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="text-sm font-bold text-gray-800">目標カロリー</h2>
+            {onboardingData?.goal && (
+              <span className="text-[11px] text-sky-500 font-medium bg-sky-50 px-2 py-0.5 rounded-full">
+                {goalLabel[onboardingData.goal as string] ?? ""}モード
+              </span>
+            )}
           </div>
-          <div className="flex flex-wrap gap-2 mb-4">
-            {PRESET_CALORIES.map((cal) => (
+          <div className="flex items-baseline gap-1 mb-3">
+            <input
+              type="number"
+              value={targetCalories}
+              onChange={(e) => {
+                const v = parseInt(e.target.value, 10);
+                if (!isNaN(v) && v > 0 && v <= 10000) setTargetCalories(v);
+              }}
+              className="text-[28px] font-bold text-gray-900 w-24 outline-none bg-transparent tabular-nums"
+            />
+            <span className="text-sm text-gray-400">kcal / 日</span>
+          </div>
+          <div className="flex gap-2">
+            {[1500, 1800, 2000, 2200, 2500].map((cal) => (
               <button
                 key={cal}
-                onClick={() => handlePresetSelect(cal)}
-                className={`flex-1 min-w-[60px] py-2 rounded-xl text-sm font-semibold transition-all ${
-                  targetCalories === cal && customCalories === ""
-                    ? "bg-orange-500 text-white"
-                    : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                onClick={() => setTargetCalories(cal)}
+                className={`flex-1 py-2 rounded-lg text-xs font-semibold transition-all ${
+                  targetCalories === cal
+                    ? "bg-sky-500 text-white"
+                    : "bg-gray-50 text-gray-500 hover:bg-gray-100"
                 }`}
               >
                 {cal}
               </button>
             ))}
           </div>
-          <div>
-            <input
-              type="number"
-              value={customCalories}
-              onChange={(e) => handleCustomCaloriesChange(e.target.value)}
-              placeholder="カスタム値を入力 (kcal)"
-              className="w-full px-4 py-3 bg-gray-50 rounded-xl border-none outline-none text-gray-800 placeholder-gray-300 focus:ring-2 focus:ring-orange-300 transition-all"
-              min={500}
-              max={10000}
-            />
-          </div>
-          {targetCalories > 5000 && (
-            <p className="text-[11px] text-red-500 font-medium mt-2">
-              目標カロリーが5000kcalを超えています。入力値をご確認ください。
-            </p>
-          )}
-          <p className="text-[11px] text-gray-400 mt-3 leading-relaxed">
-            一般的な成人男性: 2000-2500kcal / 女性: 1600-2000kcal
-          </p>
         </div>
 
-        {/* Body Info (from onboarding) */}
-        <OnboardingInfo />
-
-        {/* Weight Tracking Link */}
-        <Link
-          href="/weight"
-          className="block bg-white rounded-2xl p-6 shadow-sm mb-4 hover:shadow-md transition-all active:scale-[0.98]"
-        >
-          <div className="flex items-center gap-4">
-            <Scale className="w-6 h-6 text-gray-500" />
-            <div className="flex-1">
-              <p className="font-bold text-gray-800">体重記録</p>
-              <p className="text-sm text-gray-400">体重の推移を確認する →</p>
+        {/* ─── 身体情報 ─── */}
+        {onboardingData && (
+          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 mb-4">
+            <div className="flex items-center justify-between mb-3">
+              <h2 className="text-sm font-bold text-gray-800">身体情報</h2>
+              <Link href="/onboarding" className="text-xs text-sky-500 font-medium">編集</Link>
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              {onboardingData.height && (
+                <InfoCell label="身長" value={`${onboardingData.height} cm`} />
+              )}
+              {onboardingData.weight && (
+                <InfoCell label="体重" value={`${onboardingData.weight} kg`} />
+              )}
+              {onboardingData.targetWeight && (
+                <InfoCell label="目標体重" value={`${onboardingData.targetWeight} kg`} />
+              )}
+              {onboardingData.activityLevel && (
+                <InfoCell label="活動量" value={activityLabel[onboardingData.activityLevel as string] ?? "-"} />
+              )}
             </div>
           </div>
-        </Link>
-
-        {/* Save Button */}
-        <button
-          onClick={handleSave}
-          disabled={saving}
-          className="w-full bg-orange-500 text-white font-semibold py-3.5 rounded-xl hover:bg-orange-600 active:scale-[0.98] transition-all disabled:opacity-50 mb-3"
-        >
-          {saving ? "保存中..." : "保存する"}
-        </button>
-
-        {saved && (
-          <div className="text-center text-sm text-green-600 font-bold mb-4 bg-green-50 py-2.5 rounded-xl border border-green-200">
-            保存しました
-          </div>
         )}
 
-        {saveError && (
-          <div className="text-center text-sm text-red-600 font-bold mb-4 bg-red-50 py-2.5 rounded-xl border border-red-200">
-            {saveError}
-          </div>
-        )}
+        {/* ─── メニュー ─── */}
+        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden mb-4">
+          <MenuItem href="/weight" icon={Scale} label="体重記録" desc="体重の推移を確認" />
+          <MenuItem href="/history" icon={History} label="食事履歴" desc="過去の記録を見る" />
+          <MenuItem href="/favorites" icon={Heart} label="お気に入り" desc="保存したメニュー" />
+          <MenuItem href="/map" icon={MapPin} label="近くのお店" desc="マップで探す" />
+        </div>
 
-        {/* Account Section */}
-        <div className="bg-white rounded-2xl p-6 shadow-sm mt-4">
-          <h2 className="text-sm font-semibold text-gray-500 mb-4">
-            アカウント
-          </h2>
+        {/* ─── アカウント ─── */}
+        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 mb-4">
+          <h2 className="text-sm font-bold text-gray-800 mb-3">アカウント</h2>
           <button
             onClick={handleLogout}
-            className="w-full py-3 rounded-xl bg-gray-100 text-gray-600 font-semibold hover:bg-gray-200 active:scale-[0.98] transition-all"
+            className="w-full py-3 rounded-xl bg-gray-50 text-gray-500 text-sm font-semibold hover:bg-gray-100 active:scale-[0.98] transition-all"
           >
             ログアウト
           </button>
         </div>
 
-        {/* Re-do onboarding */}
         <Link
           href="/onboarding"
-          className="block text-center text-sm text-gray-400 hover:text-sky-500 transition-colors mt-4 mb-2"
+          className="block text-center text-xs text-gray-400 hover:text-sky-500 transition-colors mb-4"
         >
           初期設定をやり直す
         </Link>
@@ -341,77 +271,39 @@ export default function ProfilePage() {
   );
 }
 
-// ─── Onboarding Info Display ─────────────────────────────────────────────────
+// ─── Sub Components ──────────────────────────────────────────────────────────
 
-function OnboardingInfo() {
-  const [data, setData] = useState<Record<string, string | number | string[] | null> | null>(null);
-
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem("onboarding");
-      if (raw) setData(JSON.parse(raw));
-    } catch {}
-  }, []);
-
-  if (!data) return null;
-
-  const goalLabel: Record<string, string> = { lose: "減量", maintain: "維持", gain: "増量" };
-  const activityLabel: Record<string, string> = { sedentary: "低い", light: "やや低い", moderate: "中程度", active: "高い" };
-  const genderLabel: Record<string, string> = { male: "男性", female: "女性", other: "その他" };
-
+function InfoCell({ label, value }: { label: string; value: string }) {
   return (
-    <div className="bg-white rounded-2xl p-6 shadow-sm mb-4">
-      <h2 className="text-sm font-semibold text-gray-500 mb-4">身体情報</h2>
-      <div className="space-y-3 text-sm">
-        {data.gender && (
-          <div className="flex justify-between">
-            <span className="text-gray-400">性別</span>
-            <span className="font-medium text-gray-700">{genderLabel[data.gender as string] ?? "-"}</span>
-          </div>
-        )}
-        {data.birthYear && (
-          <div className="flex justify-between">
-            <span className="text-gray-400">生まれ年</span>
-            <span className="font-medium text-gray-700">{String(data.birthYear)}年</span>
-          </div>
-        )}
-        {data.height && (
-          <div className="flex justify-between">
-            <span className="text-gray-400">身長</span>
-            <span className="font-medium text-gray-700">{String(data.height)} cm</span>
-          </div>
-        )}
-        {data.weight && (
-          <div className="flex justify-between">
-            <span className="text-gray-400">体重</span>
-            <span className="font-medium text-gray-700">{String(data.weight)} kg</span>
-          </div>
-        )}
-        {data.targetWeight && (
-          <div className="flex justify-between">
-            <span className="text-gray-400">目標体重</span>
-            <span className="font-medium text-gray-700">{String(data.targetWeight)} kg</span>
-          </div>
-        )}
-        {data.goal && (
-          <div className="flex justify-between">
-            <span className="text-gray-400">目標</span>
-            <span className="font-medium text-gray-700">{goalLabel[data.goal as string] ?? "-"}</span>
-          </div>
-        )}
-        {data.activityLevel && (
-          <div className="flex justify-between">
-            <span className="text-gray-400">活動量</span>
-            <span className="font-medium text-gray-700">{activityLabel[data.activityLevel as string] ?? "-"}</span>
-          </div>
-        )}
-        {data.targetCalories && (
-          <div className="flex justify-between pt-2 border-t border-gray-100">
-            <span className="text-gray-400">自動計算カロリー</span>
-            <span className="font-bold text-sky-500">{String(data.targetCalories)} kcal</span>
-          </div>
-        )}
-      </div>
+    <div className="bg-gray-50 rounded-xl p-3">
+      <p className="text-[11px] text-gray-400 mb-0.5">{label}</p>
+      <p className="text-sm font-bold text-gray-800">{value}</p>
     </div>
+  );
+}
+
+function MenuItem({
+  href,
+  icon: Icon,
+  label,
+  desc,
+}: {
+  href: string;
+  icon: React.ComponentType<{ className?: string }>;
+  label: string;
+  desc: string;
+}) {
+  return (
+    <Link
+      href={href}
+      className="flex items-center gap-3.5 px-5 py-4 hover:bg-gray-50 transition-colors border-b border-gray-50 last:border-b-0"
+    >
+      <Icon className="w-5 h-5 text-gray-400" />
+      <div className="flex-1">
+        <p className="text-sm font-semibold text-gray-800">{label}</p>
+        <p className="text-[11px] text-gray-400">{desc}</p>
+      </div>
+      <ChevronRight className="w-4 h-4 text-gray-300" />
+    </Link>
   );
 }
