@@ -2,31 +2,41 @@
 
 import { useState, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
 import { ChevronLeft, Camera, Image, X } from "lucide-react";
 import { Suspense } from "react";
 
 function PostPageContent() {
   const router = useRouter();
   const params = useSearchParams();
+  const supabase = createClient();
 
   const menuName = params.get("menu") ?? "";
   const chainName = params.get("chain") ?? "";
   const calories = params.get("cal") ?? "";
+  const menuItemId = params.get("menu_item_id") ?? "";
 
   const [text, setText] = useState("");
   const [photos, setPhotos] = useState<string[]>([]);
   const [posting, setPosting] = useState(false);
   const [posted, setPosted] = useState(false);
+  const [error, setError] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handlePhotoSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files) return;
     Array.from(files).forEach((file) => {
+      // Limit to 500KB per image for DB storage
+      if (file.size > 500000) {
+        setError("画像は500KB以下にしてください");
+        setTimeout(() => setError(""), 3000);
+        return;
+      }
       const reader = new FileReader();
       reader.onload = (ev) => {
         if (ev.target?.result) {
-          setPhotos((prev) => [...prev, ev.target!.result as string]);
+          setPhotos((prev) => [...prev.slice(0, 2), ev.target!.result as string]);
         }
       };
       reader.readAsDataURL(file);
@@ -38,12 +48,31 @@ function PostPageContent() {
   };
 
   const handlePost = async () => {
+    if (!text && photos.length === 0 && !menuName) return;
     setPosting(true);
-    // TODO: Save to Supabase public_posts table
-    // For now, simulate posting
-    await new Promise((r) => setTimeout(r, 800));
-    setPosted(true);
-    setPosting(false);
+    setError("");
+
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) { router.push("/login"); return; }
+
+      const { error: insertError } = await supabase.from("public_posts").insert({
+        user_id: user.id,
+        text: text || null,
+        menu_name: menuName || null,
+        chain_name: chainName || null,
+        calories: calories ? parseInt(calories, 10) : null,
+        menu_item_id: menuItemId || null,
+        photo_url: photos[0] || null,
+      });
+
+      if (insertError) throw insertError;
+      setPosted(true);
+    } catch {
+      setError("投稿に失敗しました。もう一度お試しください。");
+    } finally {
+      setPosting(false);
+    }
   };
 
   if (posted) {
@@ -87,7 +116,7 @@ function PostPageContent() {
           <h1 className="text-sm font-bold text-gray-800">みんなの外食に投稿</h1>
           <button
             onClick={handlePost}
-            disabled={posting || (!text && photos.length === 0)}
+            disabled={posting || (!text && photos.length === 0 && !menuName)}
             className="text-sm font-bold text-sky-500 disabled:text-gray-300 transition-colors"
           >
             {posting ? "投稿中..." : "投稿"}
@@ -96,7 +125,13 @@ function PostPageContent() {
       </div>
 
       <div className="max-w-lg mx-auto px-4 pt-4">
-        {/* Pre-filled menu info (if coming from record) */}
+        {error && (
+          <div className="bg-red-50 border border-red-200 rounded-xl px-4 py-2.5 mb-4">
+            <p className="text-xs text-red-600">{error}</p>
+          </div>
+        )}
+
+        {/* Pre-filled menu info */}
         {menuName && (
           <div className="bg-sky-50 rounded-xl p-3.5 mb-4 border border-sky-100">
             <p className="text-[11px] text-sky-500 font-medium mb-0.5">記録したメニュー</p>
@@ -116,7 +151,7 @@ function PostPageContent() {
         <textarea
           value={text}
           onChange={(e) => setText(e.target.value)}
-          placeholder="今日の外食はどうでしたか？&#10;感想やおすすめポイントを書いてみよう"
+          placeholder={"今日の外食はどうでしたか？\n感想やおすすめポイントを書いてみよう"}
           className="w-full bg-white border border-gray-100 rounded-2xl p-4 text-sm text-gray-800 placeholder:text-gray-300 outline-none focus:border-sky-300 focus:ring-1 focus:ring-sky-300/30 transition-colors resize-none shadow-sm"
           rows={5}
         />
@@ -168,20 +203,11 @@ function PostPageContent() {
           ref={fileInputRef}
           type="file"
           accept="image/*"
-          multiple
           className="hidden"
           onChange={handlePhotoSelect}
         />
 
-        {/* Tips */}
-        <div className="mt-6 bg-gray-50 rounded-xl p-4 border border-gray-100">
-          <p className="text-xs font-semibold text-gray-500 mb-2">投稿のコツ</p>
-          <ul className="text-xs text-gray-400 space-y-1">
-            <li>📸 食事の写真を追加すると反応がもらいやすい</li>
-            <li>💬 味の感想やおすすめポイントを書くと参考になる</li>
-            <li>🏷 チェーン店名やメニュー名を含めると見つかりやすい</li>
-          </ul>
-        </div>
+        <p className="text-[11px] text-gray-300 mt-4">写真は500KB以下・最大1枚</p>
       </div>
     </div>
   );
