@@ -17,7 +17,7 @@ export default function ContactPage() {
         <div className="max-w-3xl mx-auto px-4 py-4">
           <Link
             href="/"
-            className="text-sm text-gray-500 hover:text-orange-500 transition-colors"
+            className="text-sm text-gray-500 hover:text-sky-500 transition-colors"
           >
             &larr; トップページに戻る
           </Link>
@@ -32,11 +32,11 @@ export default function ContactPage() {
           ご質問・ご要望がございましたら、お気軽にご連絡ください。
         </p>
 
-        <div className="bg-orange-50 border border-orange-200 rounded-xl p-6 mb-10">
+        <div className="bg-sky-50 border border-sky-200 rounded-xl p-6 mb-10">
           <p className="text-sm text-gray-700 mb-1">メールでのお問い合わせ</p>
           <a
             href="mailto:tabenavi.app@gmail.com"
-            className="text-lg font-semibold text-orange-600 hover:text-orange-700 transition-colors"
+            className="text-lg font-semibold text-sky-600 hover:text-sky-700 transition-colors"
           >
             tabenavi.app@gmail.com
           </a>
@@ -53,7 +53,7 @@ export default function ContactPage() {
             </p>
             <button
               onClick={() => setSubmitted(false)}
-              className="mt-4 text-sm text-orange-500 hover:text-orange-600 transition-colors"
+              className="mt-4 text-sm text-sky-500 hover:text-sky-600 transition-colors"
             >
               別のお問い合わせを送る
             </button>
@@ -72,7 +72,7 @@ export default function ContactPage() {
                 id="name"
                 name="name"
                 required
-                className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent"
                 placeholder="山田 太郎"
               />
             </div>
@@ -89,7 +89,7 @@ export default function ContactPage() {
                 id="email"
                 name="email"
                 required
-                className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent"
                 placeholder="example@email.com"
               />
             </div>
@@ -106,14 +106,14 @@ export default function ContactPage() {
                 name="message"
                 required
                 rows={6}
-                className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent resize-none"
+                className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent resize-none"
                 placeholder="お問い合わせ内容をご記入ください"
               />
             </div>
 
             <button
               type="submit"
-              className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded-lg transition-colors"
+              className="w-full bg-sky-500 hover:bg-sky-600 text-white font-semibold py-3 rounded-lg transition-colors"
             >
               送信する
             </button>

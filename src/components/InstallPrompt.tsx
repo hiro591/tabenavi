@@ -51,20 +51,20 @@ export default function InstallPrompt() {
   if (!show) return null;
 
   return (
-    <div className="bg-orange-50 border-b border-orange-200 px-4 py-3">
+    <div className="bg-sky-50 border-b border-sky-200 px-4 py-3">
       <div className="max-w-lg mx-auto flex items-center justify-between gap-3">
-        <p className="text-sm text-orange-800 flex-1">
+        <p className="text-sm text-sky-800 flex-1">
           ホーム画面に追加してアプリのように使えます
         </p>
         <button
           onClick={handleInstall}
-          className="bg-orange-500 text-white text-sm font-medium px-3 py-1.5 rounded-lg shrink-0 active:scale-95 transition-transform"
+          className="bg-sky-500 text-white text-sm font-medium px-3 py-1.5 rounded-lg shrink-0 active:scale-95 transition-transform"
         >
           追加する
         </button>
         <button
           onClick={handleDismiss}
-          className="text-orange-400 text-lg shrink-0"
+          className="text-sky-400 text-lg shrink-0"
           aria-label="閉じる"
         >
           ×

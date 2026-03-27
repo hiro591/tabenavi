@@ -260,7 +260,7 @@ export default function ComboPage() {
   const getRankBadge = (index: number) => {
     if (index === 0) return { rank: "1st", bg: "bg-yellow-50 border-yellow-300" };
     if (index === 1) return { rank: "2nd", bg: "bg-gray-50 border-gray-300" };
-    if (index === 2) return { rank: "3rd", bg: "bg-orange-50 border-orange-300" };
+    if (index === 2) return { rank: "3rd", bg: "bg-sky-50 border-sky-300" };
     return null;
   };
 
@@ -292,7 +292,7 @@ export default function ComboPage() {
               <ChevronLeft className="w-5 h-5" />
             </Link>
             <div className="flex items-center gap-2">
-              <Calculator className="w-5 h-5 text-orange-500" />
+              <Calculator className="w-5 h-5 text-sky-500" />
               <h1 className="text-xl font-bold text-gray-900">
                 組み合わせ提案
               </h1>
@@ -308,7 +308,7 @@ export default function ComboPage() {
           {/* Calorie Target */}
           <div className="px-4 py-4">
             <div className="flex items-center gap-1.5 mb-3">
-              <Flame className="w-3.5 h-3.5 text-orange-500" />
+              <Flame className="w-3.5 h-3.5 text-sky-500" />
               <p className="text-xs font-bold text-gray-500 uppercase tracking-wide">残りカロリー</p>
             </div>
             <div className="flex items-center justify-center gap-3 mb-3">
@@ -342,7 +342,7 @@ export default function ComboPage() {
                   onClick={() => setCalorieTarget(v)}
                   className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
                     calorieTarget === v
-                      ? "bg-orange-500 text-white"
+                      ? "bg-sky-500 text-white"
                       : "bg-gray-100 text-gray-600"
                   }`}
                 >
@@ -389,7 +389,7 @@ export default function ComboPage() {
                   onClick={() => setProteinTarget(v)}
                   className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
                     proteinTarget === v
-                      ? "bg-orange-500 text-white"
+                      ? "bg-sky-500 text-white"
                       : "bg-gray-100 text-gray-600"
                   }`}
                 >
@@ -417,7 +417,7 @@ export default function ComboPage() {
                       onClick={() => setSelectedStoreId(store.id)}
                       className={`shrink-0 flex items-center gap-1.5 px-3 py-2 rounded-full text-sm font-medium transition-colors ${
                         selectedStoreId === store.id
-                          ? "bg-orange-500 text-white"
+                          ? "bg-sky-500 text-white"
                           : "bg-gray-100 text-gray-700"
                       }`}
                     >
@@ -436,7 +436,7 @@ export default function ComboPage() {
           <button
             onClick={handleSearch}
             disabled={!selectedStoreId || loading}
-            className="w-full bg-orange-500 active:bg-orange-600 disabled:bg-gray-300 text-white font-bold py-4 rounded-2xl shadow-lg shadow-orange-200 transition-colors text-base"
+            className="w-full bg-sky-500 active:bg-sky-600 disabled:bg-gray-300 text-white font-bold py-4 rounded-2xl shadow-lg shadow-sky-200 transition-colors text-base"
           >
             {loading ? "計算中..." : "この条件で提案する"}
           </button>
@@ -445,7 +445,7 @@ export default function ComboPage() {
         {/* Loading State */}
         {loading && (
           <div className="px-4 mt-6 text-center">
-            <div className="w-10 h-10 border-3 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+            <div className="w-10 h-10 border-3 border-sky-500 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
             <p className="text-sm text-gray-500">
               最適な組み合わせを計算中...
             </p>
@@ -576,7 +576,7 @@ export default function ComboPage() {
                                   caloriePercent > 90
                                     ? "bg-red-400"
                                     : caloriePercent > 70
-                                      ? "bg-orange-400"
+                                      ? "bg-sky-400"
                                       : "bg-green-400"
                                 }`}
                                 style={{ width: `${caloriePercent}%` }}

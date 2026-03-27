@@ -261,11 +261,11 @@ export default function CheatDayPage() {
                     <p className="text-xs text-gray-500 mb-1">{displayNote}</p>
                   )}
                   {cd.reset_plan && (
-                    <div className="bg-orange-50 rounded-lg px-3 py-2 mt-2">
-                      <p className="text-[10px] text-orange-400 font-medium mb-0.5">
+                    <div className="bg-sky-50 rounded-lg px-3 py-2 mt-2">
+                      <p className="text-[10px] text-sky-400 font-medium mb-0.5">
                         リセット計画
                       </p>
-                      <p className="text-xs text-orange-600">{cd.reset_plan}</p>
+                      <p className="text-xs text-sky-600">{cd.reset_plan}</p>
                     </div>
                   )}
                 </div>

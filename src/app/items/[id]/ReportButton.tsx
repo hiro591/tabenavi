@@ -84,7 +84,7 @@ export default function ReportButton({
     <>
       <button
         onClick={handleOpen}
-        className="flex items-center gap-1 text-[10px] text-gray-400 hover:text-orange-500 transition-colors mx-auto w-fit"
+        className="flex items-center gap-1 text-[10px] text-gray-400 hover:text-sky-500 transition-colors mx-auto w-fit"
       >
         <Flag className="w-3 h-3" />
         情報の誤りを報告
@@ -143,7 +143,7 @@ export default function ReportButton({
                         key={field}
                         className={`flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg border text-sm cursor-pointer transition-colors ${
                           checkedFields.includes(field)
-                            ? "bg-orange-50 border-orange-300 text-orange-700"
+                            ? "bg-sky-50 border-sky-300 text-sky-700"
                             : "bg-gray-50 border-gray-200 text-gray-600 hover:bg-gray-100"
                         }`}
                       >
@@ -169,7 +169,7 @@ export default function ReportButton({
                     onChange={(e) => setCorrectValues(e.target.value)}
                     placeholder="正しい値を入力してください"
                     rows={3}
-                    className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-300 focus:border-transparent resize-none"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-sky-300 focus:border-transparent resize-none"
                   />
                 </div>
 
@@ -186,7 +186,7 @@ export default function ReportButton({
                     value={source}
                     onChange={(e) => setSource(e.target.value)}
                     placeholder="例: 公式サイト"
-                    className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-300 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-sky-300 focus:border-transparent"
                   />
                 </div>
 
@@ -194,7 +194,7 @@ export default function ReportButton({
                 <button
                   type="submit"
                   disabled={checkedFields.length === 0 || submitting}
-                  className="w-full py-3 bg-orange-500 text-white rounded-xl font-medium text-sm hover:bg-orange-600 active:bg-orange-700 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="w-full py-3 bg-sky-500 text-white rounded-xl font-medium text-sm hover:bg-sky-600 active:bg-sky-700 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   {submitting ? "送信中..." : "送信"}
                 </button>

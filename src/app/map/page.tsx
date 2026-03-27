@@ -313,10 +313,10 @@ export default function MapPage() {
             <ChevronLeft className="w-5 h-5" />
           </button>
           <h1 className="text-lg font-bold text-gray-900 flex-1 flex items-center gap-1.5">
-            <MapPin className="w-4 h-4 text-orange-500" /> 近くのお店
+            <MapPin className="w-4 h-4 text-sky-500" /> 近くのお店
           </h1>
           {loadingStores && (
-            <div className="w-4 h-4 border-2 border-orange-500 border-t-transparent rounded-full animate-spin" />
+            <div className="w-4 h-4 border-2 border-sky-500 border-t-transparent rounded-full animate-spin" />
           )}
           {!loadingStores && stores.length > 0 && (
             <span className="text-xs text-gray-400">{filteredStores.length}件</span>
@@ -336,7 +336,7 @@ export default function MapPage() {
                 onClick={() => setFilter(f.value)}
                 className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
                   filter === f.value
-                    ? "bg-orange-500 text-white"
+                    ? "bg-sky-500 text-white"
                     : "bg-gray-100 text-gray-600"
                 }`}
               >
@@ -364,7 +364,7 @@ export default function MapPage() {
             <input
               type="text"
               placeholder="場所を入力（例：渋谷駅）"
-              className="flex-1 text-sm border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-300"
+              className="flex-1 text-sm border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-sky-300"
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   const query = (e.target as HTMLInputElement).value;
@@ -417,12 +417,12 @@ export default function MapPage() {
               <div className="flex items-start justify-between mb-3">
                 <div>
                   <div className="flex items-center gap-2 mb-1">
-                    <MapPin className="w-5 h-5 text-orange-500" />
+                    <MapPin className="w-5 h-5 text-sky-500" />
                     <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${
                       selected.type === "convenience_store"
                         ? "bg-blue-100 text-blue-700"
                         : selected.type === "chain_restaurant"
-                        ? "bg-orange-100 text-orange-700"
+                        ? "bg-sky-100 text-sky-700"
                         : "bg-green-100 text-green-700"
                     }`}>
                       {selected.type === "convenience_store" ? "コンビニ"
@@ -443,7 +443,7 @@ export default function MapPage() {
               <div className="flex gap-2">
                 <button
                   onClick={() => handleViewMenu(selected)}
-                  className="flex-1 py-3 bg-orange-500 text-white rounded-xl font-medium text-sm active:bg-orange-600 transition-colors"
+                  className="flex-1 py-3 bg-sky-500 text-white rounded-xl font-medium text-sm active:bg-sky-600 transition-colors"
                 >
                   このお店のメニューを見る
                 </button>

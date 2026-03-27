@@ -28,7 +28,7 @@ interface MenuItem {
 function getSourceBadge(sourceType: string | null) {
   switch (sourceType) {
     case "chain_restaurant":
-      return { label: "外食チェーン", color: "bg-orange-100 text-orange-700" };
+      return { label: "外食チェーン", color: "bg-sky-100 text-sky-700" };
     case "convenience_store":
       return { label: "コンビニ", color: "bg-blue-100 text-blue-700" };
     case "supermarket":
@@ -159,7 +159,7 @@ export default async function ItemDetailPage({
           <h1 className="text-2xl font-bold text-gray-900 mb-2">{item.name}</h1>
 
           {item.price != null && (
-            <p className="text-2xl font-bold text-orange-500">
+            <p className="text-2xl font-bold text-sky-500">
               &yen;{item.price.toLocaleString()}
             </p>
           )}
@@ -176,7 +176,7 @@ export default async function ItemDetailPage({
             {item.calories != null && (
               <div className="text-center mb-5">
                 <p className="text-xs text-gray-400 mb-1">カロリー</p>
-                <p className="text-4xl font-bold text-orange-500">
+                <p className="text-4xl font-bold text-sky-500">
                   {item.calories}
                   <span className="text-lg font-normal text-gray-400 ml-1">
                     kcal
@@ -324,8 +324,8 @@ export default async function ItemDetailPage({
                           <img src={logo.url} alt={similar.chain_restaurants?.name ?? ""} className="w-6 h-6" />
                         </div>
                       ) : (
-                        <div className="w-10 h-10 bg-orange-50 rounded-full flex items-center justify-center">
-                          <Utensils className="w-5 h-5 text-orange-400" />
+                        <div className="w-10 h-10 bg-sky-50 rounded-full flex items-center justify-center">
+                          <Utensils className="w-5 h-5 text-sky-400" />
                         </div>
                       );
                     })()}
@@ -337,7 +337,7 @@ export default async function ItemDetailPage({
                     {similar.name}
                   </p>
                   {similar.calories != null && (
-                    <p className="text-xs text-orange-500 font-medium">
+                    <p className="text-xs text-sky-500 font-medium">
                       {similar.calories} kcal
                     </p>
                   )}

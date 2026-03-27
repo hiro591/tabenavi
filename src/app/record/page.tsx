@@ -213,7 +213,7 @@ function RecordPageContent() {
             <div
               className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-colors ${
                 s <= step
-                  ? "bg-orange-500 text-white"
+                  ? "bg-sky-500 text-white"
                   : "bg-gray-200 text-gray-400"
               }`}
             >
@@ -222,7 +222,7 @@ function RecordPageContent() {
             {s < 3 && (
               <div
                 className={`w-8 h-0.5 transition-colors ${
-                  s < step ? "bg-orange-500" : "bg-gray-200"
+                  s < step ? "bg-sky-500" : "bg-gray-200"
                 }`}
               />
             )}
@@ -343,13 +343,13 @@ function RecordPageContent() {
               {/* Custom entry card - at the top */}
               <button
                 onClick={goCustom}
-                className="w-full mb-4 bg-gradient-to-r from-orange-50 to-amber-50 rounded-xl p-4 border-2 border-orange-200 hover:border-orange-400 hover:shadow-md transition-all text-left active:scale-[0.98]"
+                className="w-full mb-4 bg-gradient-to-r from-sky-50 to-cyan-50 rounded-xl p-4 border-2 border-sky-200 hover:border-sky-400 hover:shadow-md transition-all text-left active:scale-[0.98]"
               >
                 <div className="flex items-center gap-3">
-                  <Utensils className="w-5 h-5 text-orange-400" />
+                  <Utensils className="w-5 h-5 text-sky-400" />
                   <div>
                     <p className="font-bold text-gray-800">チェーン店以外を記録</p>
-                    <p className="text-sm text-orange-500">カスタムで入力する →</p>
+                    <p className="text-sm text-sky-500">カスタムで入力する →</p>
                   </div>
                 </div>
               </button>
@@ -360,13 +360,13 @@ function RecordPageContent() {
                   placeholder="お店を検索..."
                   value={chainSearch}
                   onChange={(e) => setChainSearch(e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white text-gray-800"
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent bg-white text-gray-800"
                 />
               </div>
 
               {chainsLoading ? (
                 <div className="flex justify-center py-12">
-                  <div className="w-8 h-8 border-4 border-orange-500 border-t-transparent rounded-full animate-spin" />
+                  <div className="w-8 h-8 border-4 border-sky-500 border-t-transparent rounded-full animate-spin" />
                 </div>
               ) : (
                 <div className="grid grid-cols-3 gap-3 mb-4">
@@ -377,10 +377,10 @@ function RecordPageContent() {
                         setSelectedChain(chain);
                         setStep(2);
                       }}
-                      className="bg-white rounded-xl p-4 border border-gray-100 hover:border-orange-300 hover:shadow-md transition-all text-center active:scale-95"
+                      className="bg-white rounded-xl p-4 border border-gray-100 hover:border-sky-300 hover:shadow-md transition-all text-center active:scale-95"
                     >
                       <span className="text-2xl block mb-1">
-                        <Utensils className="w-5 h-5 text-orange-400" />
+                        <Utensils className="w-5 h-5 text-sky-400" />
                       </span>
                       <span className="text-xs font-medium text-gray-700 line-clamp-2">
                         {chain.name}
@@ -403,9 +403,9 @@ function RecordPageContent() {
         >
           {step === 2 && (
             <>
-              <div className="flex items-center gap-2 mb-4 bg-orange-50 rounded-xl px-4 py-2">
+              <div className="flex items-center gap-2 mb-4 bg-sky-50 rounded-xl px-4 py-2">
                 <span className="text-xl">
-                  <Utensils className="w-5 h-5 text-orange-400" />
+                  <Utensils className="w-5 h-5 text-sky-400" />
                 </span>
                 <span className="font-medium text-gray-800">
                   {selectedChain?.name}
@@ -418,7 +418,7 @@ function RecordPageContent() {
                   placeholder="メニューを検索..."
                   value={menuSearch}
                   onChange={(e) => setMenuSearch(e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white text-gray-800"
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent bg-white text-gray-800"
                 />
               </div>
 
@@ -430,7 +430,7 @@ function RecordPageContent() {
 
               {menusLoading ? (
                 <div className="flex justify-center py-12">
-                  <div className="w-8 h-8 border-4 border-orange-500 border-t-transparent rounded-full animate-spin" />
+                  <div className="w-8 h-8 border-4 border-sky-500 border-t-transparent rounded-full animate-spin" />
                 </div>
               ) : (
                 <div className="space-y-2">
@@ -441,13 +441,13 @@ function RecordPageContent() {
                         setSelectedMenu(menu);
                         setStep(3);
                       }}
-                      className="w-full bg-white rounded-xl p-4 border border-gray-100 hover:border-orange-300 hover:shadow-md transition-all text-left active:scale-[0.98]"
+                      className="w-full bg-white rounded-xl p-4 border border-gray-100 hover:border-sky-300 hover:shadow-md transition-all text-left active:scale-[0.98]"
                     >
                       <div className="flex justify-between items-start">
                         <span className="font-medium text-gray-800">
                           {menu.name}
                         </span>
-                        <span className="text-orange-500 font-bold text-sm whitespace-nowrap ml-2">
+                        <span className="text-sky-500 font-bold text-sm whitespace-nowrap ml-2">
                           {menu.calories} kcal
                         </span>
                       </div>
@@ -492,7 +492,7 @@ function RecordPageContent() {
                       value={customName}
                       onChange={(e) => setCustomName(e.target.value)}
                       placeholder="例: 自炊のサラダ、コンビニのおにぎり"
-                      className="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-500 text-gray-800"
+                      className="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-500 text-gray-800"
                     />
                   </div>
                   <div>
@@ -506,7 +506,7 @@ function RecordPageContent() {
                         setCustomCalories(Number(e.target.value))
                       }
                       placeholder="0"
-                      className="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-500 text-gray-800"
+                      className="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-500 text-gray-800"
                     />
                   </div>
                   <div className="grid grid-cols-3 gap-3">
@@ -521,7 +521,7 @@ function RecordPageContent() {
                           setCustomProtein(Number(e.target.value))
                         }
                         placeholder="0"
-                        className="w-full px-3 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-500 text-gray-800"
+                        className="w-full px-3 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-500 text-gray-800"
                       />
                     </div>
                     <div>
@@ -535,7 +535,7 @@ function RecordPageContent() {
                           setCustomFat(Number(e.target.value))
                         }
                         placeholder="0"
-                        className="w-full px-3 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-500 text-gray-800"
+                        className="w-full px-3 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-500 text-gray-800"
                       />
                     </div>
                     <div>
@@ -549,7 +549,7 @@ function RecordPageContent() {
                           setCustomCarbs(Number(e.target.value))
                         }
                         placeholder="0"
-                        className="w-full px-3 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-500 text-gray-800"
+                        className="w-full px-3 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-500 text-gray-800"
                       />
                     </div>
                   </div>
@@ -559,7 +559,7 @@ function RecordPageContent() {
                 <div className="bg-white rounded-xl p-5 border border-gray-100 mb-4">
                   <div className="flex items-center gap-2 mb-3">
                     <span className="text-lg">
-                      <Utensils className="w-5 h-5 text-orange-400" />
+                      <Utensils className="w-5 h-5 text-sky-400" />
                     </span>
                     <span className="text-sm text-gray-500">
                       {selectedChain?.name}
@@ -569,9 +569,9 @@ function RecordPageContent() {
                     {selectedMenu?.name}
                   </h2>
                   <div className="grid grid-cols-4 gap-2 text-center">
-                    <div className="bg-orange-50 rounded-lg p-2">
+                    <div className="bg-sky-50 rounded-lg p-2">
                       <p className="text-xs text-gray-500">カロリー</p>
-                      <p className="font-bold text-orange-500">
+                      <p className="font-bold text-sky-500">
                         {finalCalories}
                       </p>
                       <p className="text-xs text-gray-400">kcal</p>
@@ -613,7 +613,7 @@ function RecordPageContent() {
                       onChange={(e) =>
                         setCalorieAdjustment(Number(e.target.value))
                       }
-                      className="w-full accent-orange-500"
+                      className="w-full accent-sky-500"
                     />
                     <div className="flex justify-between text-xs text-gray-400 mt-1">
                       <span>-200</span>
@@ -647,7 +647,7 @@ function RecordPageContent() {
                       onClick={() => setMealType(mt.value)}
                       className={`py-2 rounded-lg text-sm font-medium transition-colors ${
                         mealType === mt.value
-                          ? "bg-orange-500 text-white"
+                          ? "bg-sky-500 text-white"
                           : "bg-gray-100 text-gray-600 hover:bg-gray-200"
                       }`}
                     >
@@ -659,9 +659,9 @@ function RecordPageContent() {
 
               {/* Remaining calories banner */}
               {remainingCalories !== null && (
-                <div className="bg-orange-50 border border-orange-200 rounded-xl px-4 py-2 mb-3 text-sm">
+                <div className="bg-sky-50 border border-sky-200 rounded-xl px-4 py-2 mb-3 text-sm">
                   <span className="text-gray-600">今日の残り: </span>
-                  <span className="font-bold text-orange-600">{remainingCalories} kcal</span>
+                  <span className="font-bold text-sky-600">{remainingCalories} kcal</span>
                 </div>
               )}
 
@@ -682,7 +682,7 @@ function RecordPageContent() {
                 className={`w-full py-3.5 rounded-xl font-bold text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed ${
                   saving
                     ? "bg-gray-400 text-white cursor-not-allowed"
-                    : "bg-orange-500 text-white hover:bg-orange-600 active:scale-[0.98]"
+                    : "bg-sky-500 text-white hover:bg-sky-600 active:scale-[0.98]"
                 }`}
               >
                 {saving ? (
@@ -707,7 +707,7 @@ export default function RecordPage() {
     <Suspense
       fallback={
         <div className="flex items-center justify-center min-h-screen">
-          <div className="w-8 h-8 border-4 border-orange-500 border-t-transparent rounded-full animate-spin" />
+          <div className="w-8 h-8 border-4 border-sky-500 border-t-transparent rounded-full animate-spin" />
         </div>
       }
     >

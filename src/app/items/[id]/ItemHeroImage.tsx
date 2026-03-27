@@ -32,8 +32,8 @@ export default function ItemHeroImage({
   }
 
   return (
-    <div className="inline-flex items-center justify-center w-32 h-32 bg-orange-50 rounded-3xl shadow-sm">
-      <Utensils className="w-14 h-14 text-orange-300" />
+    <div className="inline-flex items-center justify-center w-32 h-32 bg-sky-50 rounded-3xl shadow-sm">
+      <Utensils className="w-14 h-14 text-sky-300" />
     </div>
   );
 }

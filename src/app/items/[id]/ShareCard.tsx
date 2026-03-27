@@ -29,9 +29,9 @@ function getCardStyle(sourceType: string | null) {
       };
     case "chain_restaurant":
       return {
-        gradient: "from-orange-50 to-amber-50",
-        accent: "text-orange-600",
-        badgeBg: "bg-orange-100 text-orange-700",
+        gradient: "from-sky-50 to-cyan-50",
+        accent: "text-sky-600",
+        badgeBg: "bg-sky-100 text-sky-700",
         label: "外食チェーン",
       };
     default:
@@ -130,7 +130,7 @@ export default function ShareCard({ item, variant = "default" }: ShareCardProps)
               className={`w-80 mx-auto rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-b ${cardStyle.gradient}`}
             >
               {/* Header bar */}
-              <div className="bg-orange-500 px-4 py-3 flex items-center justify-between">
+              <div className="bg-sky-500 px-4 py-3 flex items-center justify-between">
                 <span className="text-white font-bold text-sm tracking-wide">
                   たべなび
                 </span>
@@ -157,7 +157,7 @@ export default function ShareCard({ item, variant = "default" }: ShareCardProps)
               <div className="px-5 pb-4">
                 <div className="grid grid-cols-4 gap-2">
                   <div className="bg-white/80 rounded-xl p-3 text-center">
-                    <p className="text-xs font-bold text-orange-500 mb-0.5">CAL</p>
+                    <p className="text-xs font-bold text-sky-500 mb-0.5">CAL</p>
                     <p className="text-2xl font-bold text-gray-900 leading-none">
                       {item.calories ?? "-"}
                     </p>
@@ -226,7 +226,7 @@ export default function ShareCard({ item, variant = "default" }: ShareCardProps)
               {canWebShare && (
                 <button
                   onClick={handleWebShare}
-                  className="w-full py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-medium rounded-xl hover:from-orange-600 hover:to-orange-700 transition-all shadow-lg flex items-center justify-center gap-2"
+                  className="w-full py-3 bg-gradient-to-r from-sky-500 to-sky-600 text-white font-medium rounded-xl hover:from-sky-600 hover:to-sky-700 transition-all shadow-lg flex items-center justify-center gap-2"
                 >
                   <Share2 className="w-4 h-4" />
                   シェアする

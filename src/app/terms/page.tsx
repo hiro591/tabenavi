@@ -11,7 +11,7 @@ export default function TermsPage() {
         <div className="max-w-3xl mx-auto px-4 py-4">
           <Link
             href="/"
-            className="text-sm text-gray-500 hover:text-orange-500 transition-colors"
+            className="text-sm text-gray-500 hover:text-sky-500 transition-colors"
           >
             &larr; トップページに戻る
           </Link>
@@ -117,7 +117,7 @@ export default function TermsPage() {
               メール：
               <a
                 href="mailto:tabenavi.app@gmail.com"
-                className="text-orange-500 hover:text-orange-600 transition-colors"
+                className="text-sky-500 hover:text-sky-600 transition-colors"
               >
                 tabenavi.app@gmail.com
               </a>

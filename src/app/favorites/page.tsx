@@ -34,12 +34,12 @@ function getStoreBadgeStyle(
   if (n.includes("ファミリー") || n.includes("ファミマ"))
     return "bg-sky-100 text-sky-700";
   if (n.includes("マクドナルド")) return "bg-yellow-100 text-yellow-700";
-  if (n.includes("すき家")) return "bg-orange-100 text-orange-700";
+  if (n.includes("すき家")) return "bg-sky-100 text-sky-700";
   if (n.includes("吉野家")) return "bg-red-100 text-red-700";
   if (n.includes("松屋")) return "bg-amber-100 text-amber-700";
   if (n.includes("スターバックス")) return "bg-green-100 text-green-800";
   if (sourceType === "convenience_store") return "bg-blue-50 text-blue-600";
-  return "bg-orange-50 text-orange-600";
+  return "bg-sky-50 text-sky-600";
 }
 
 export default function FavoritesPage() {
@@ -84,7 +84,7 @@ export default function FavoritesPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <div className="h-1 bg-gradient-to-r from-orange-500 to-amber-400" />
+      <div className="h-1 bg-gradient-to-r from-sky-500 to-cyan-400" />
       <div className="max-w-lg mx-auto">
         {/* Header */}
         <div className="sticky top-0 z-20 bg-white border-b border-gray-100">
@@ -124,7 +124,7 @@ export default function FavoritesPage() {
                   item.source_type === "convenience_store"
                     ? "border-l-4 border-l-sky-400"
                     : item.source_type === "chain_restaurant"
-                    ? "border-l-4 border-l-orange-400"
+                    ? "border-l-4 border-l-sky-400"
                     : "border-l-4 border-l-gray-200";
                 const logoInfo = getChainLogo(item.chain_restaurants?.name || "");
                 return (
@@ -135,7 +135,7 @@ export default function FavoritesPage() {
                   >
                     <div className="flex">
                       {/* Photo placeholder */}
-                      <div className="w-24 h-24 shrink-0 bg-gradient-to-br from-orange-50 to-amber-100 flex items-center justify-center">
+                      <div className="w-24 h-24 shrink-0 bg-gradient-to-br from-sky-50 to-cyan-100 flex items-center justify-center">
                         {item.image_url ? (
                           // eslint-disable-next-line @next/next/no-img-element
                           <img
@@ -153,7 +153,7 @@ export default function FavoritesPage() {
                             onError={() => setLogoErrors((prev) => new Set(prev).add(fav.id))}
                           />
                         ) : (
-                          <Utensils className="w-9 h-9 text-orange-300" />
+                          <Utensils className="w-9 h-9 text-sky-300" />
                         )}
                       </div>
 
@@ -176,7 +176,7 @@ export default function FavoritesPage() {
                         {/* Nutrition row */}
                         <div className="flex items-center gap-2 mt-1.5 text-xs">
                           {item.calories != null && (
-                            <span className="text-orange-500 font-semibold">
+                            <span className="text-sky-500 font-semibold">
                               {item.calories}kcal
                             </span>
                           )}
@@ -220,7 +220,7 @@ export default function FavoritesPage() {
               </p>
               <button
                 onClick={() => router.push("/search")}
-                className="px-6 py-3 bg-orange-500 text-white rounded-xl font-medium hover:bg-orange-600 transition-colors"
+                className="px-6 py-3 bg-sky-500 text-white rounded-xl font-medium hover:bg-sky-600 transition-colors"
               >
                 メニューを探す
               </button>

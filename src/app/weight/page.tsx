@@ -166,7 +166,7 @@ export default function WeightPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <div className="w-8 h-8 border-4 border-orange-500 border-t-transparent rounded-full animate-spin" />
+        <div className="w-8 h-8 border-4 border-sky-500 border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
@@ -200,7 +200,7 @@ export default function WeightPage() {
               value={weight}
               onChange={(e) => setWeight(e.target.value)}
               placeholder="0.0"
-              className="text-4xl font-bold text-gray-800 w-full bg-transparent outline-none border-b-2 border-gray-200 focus:border-orange-500 transition-colors pb-1 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+              className="text-4xl font-bold text-gray-800 w-full bg-transparent outline-none border-b-2 border-gray-200 focus:border-sky-500 transition-colors pb-1 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
             />
             <span className="text-xl text-gray-400 pb-1 shrink-0">kg</span>
           </div>
@@ -210,7 +210,7 @@ export default function WeightPage() {
           <button
             onClick={handleSave}
             disabled={saving || !weight}
-            className="w-full py-3 rounded-xl bg-orange-500 text-white font-bold hover:bg-orange-600 active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full py-3 rounded-xl bg-sky-500 text-white font-bold hover:bg-sky-600 active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {saving ? "記録中..." : todayEntry ? "更新する" : "記録する"}
           </button>
@@ -283,7 +283,7 @@ export default function WeightPage() {
                   {/* Line */}
                   <polyline
                     fill="none"
-                    stroke="#f97316"
+                    stroke="#0ea5e9"
                     strokeWidth="2.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -310,7 +310,7 @@ export default function WeightPage() {
                         cx={x}
                         cy={y}
                         r="4"
-                        fill="#f97316"
+                        fill="#0ea5e9"
                         stroke="white"
                         strokeWidth="2"
                       />

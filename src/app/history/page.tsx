@@ -158,7 +158,7 @@ export default function HistoryPage() {
           <p className="text-gray-500 mb-3">まだ記録がありません</p>
           <Link
             href="/record"
-            className="inline-block px-6 py-2 bg-orange-500 text-white text-sm font-medium rounded-xl"
+            className="inline-block px-6 py-2 bg-sky-500 text-white text-sm font-medium rounded-xl"
           >
             食事を記録する
           </Link>
@@ -209,7 +209,7 @@ export default function HistoryPage() {
                 onClick={() => setSelectedDate(isSelected ? null : dateKey)}
                 className={`relative flex flex-col items-center justify-center rounded-lg p-1 min-h-[48px] transition-colors ${
                   isSelected
-                    ? "ring-2 ring-orange-400"
+                    ? "ring-2 ring-sky-400"
                     : ""
                 } ${data ? getCalorieColor(data.total) : "hover:bg-gray-50"}`}
               >
@@ -268,7 +268,7 @@ export default function HistoryPage() {
                       </span>
                     </div>
                     <div className="flex items-center gap-2 mt-0.5">
-                      <span className="text-[10px] text-orange-500 font-medium">
+                      <span className="text-[10px] text-sky-500 font-medium">
                         {getMealTypeLabel(log.meal_type)}
                       </span>
                       {log.menu_items?.chain_restaurants?.name && (
@@ -293,7 +293,7 @@ export default function HistoryPage() {
               ))}
               <div className="pt-2 border-t border-gray-100 flex justify-between">
                 <span className="text-sm font-medium text-gray-500">合計</span>
-                <span className="text-sm font-bold text-orange-500">
+                <span className="text-sm font-bold text-sky-500">
                   {dayMap[selectedDate]?.total ?? 0} kcal
                 </span>
               </div>

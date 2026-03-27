@@ -255,14 +255,14 @@ out center 50;
     remainingCalories > 500
       ? "text-green-600"
       : remainingCalories >= 200
-        ? "text-orange-500"
+        ? "text-sky-500"
         : "text-red-500";
 
   const remainingBgColor =
     remainingCalories > 500
       ? "bg-green-50 text-green-700"
       : remainingCalories >= 200
-        ? "bg-orange-50 text-orange-600"
+        ? "bg-sky-50 text-sky-600"
         : "bg-red-50 text-red-600";
 
   // Calorie tab filtering
@@ -281,7 +281,7 @@ out center 50;
   const tagStyle: Record<CategoryTag, string> = {
     ぴったり: "bg-green-100 text-green-700",
     軽め: "bg-blue-100 text-blue-700",
-    ちょうどいい: "bg-orange-100 text-orange-700",
+    ちょうどいい: "bg-sky-100 text-sky-700",
   };
 
   // Loading skeleton
@@ -348,7 +348,7 @@ out center 50;
             onClick={() => setActiveTab("map")}
             className={`flex-1 py-2.5 rounded-xl text-sm font-bold transition-colors ${
               activeTab === "map"
-                ? "bg-orange-500 text-white shadow-md"
+                ? "bg-sky-500 text-white shadow-md"
                 : "bg-white text-gray-500 shadow-sm"
             }`}
           >
@@ -358,7 +358,7 @@ out center 50;
             onClick={() => setActiveTab("calorie")}
             className={`flex-1 py-2.5 rounded-xl text-sm font-bold transition-colors ${
               activeTab === "calorie"
-                ? "bg-orange-500 text-white shadow-md"
+                ? "bg-sky-500 text-white shadow-md"
                 : "bg-white text-gray-500 shadow-sm"
             }`}
           >
@@ -384,7 +384,7 @@ out center 50;
             {/* Location states */}
             {locationLoading && (
               <div className="bg-white rounded-2xl p-8 shadow-sm text-center mb-4">
-                <div className="w-8 h-8 border-2 border-orange-500 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+                <div className="w-8 h-8 border-2 border-sky-500 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
                 <p className="text-sm text-gray-500">
                   現在地を取得しています...
                 </p>
@@ -393,8 +393,8 @@ out center 50;
 
             {locationError && (
               <div className="bg-white rounded-2xl p-6 shadow-sm text-center mb-4">
-                <div className="w-14 h-14 bg-orange-50 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <MapPin className="w-7 h-7 text-orange-300" />
+                <div className="w-14 h-14 bg-sky-50 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <MapPin className="w-7 h-7 text-sky-300" />
                 </div>
                 <p className="text-sm font-bold text-gray-700 mb-1">
                   {locationError}
@@ -404,7 +404,7 @@ out center 50;
                 </p>
                 <button
                   onClick={requestLocation}
-                  className="bg-orange-500 text-white text-sm font-semibold px-6 py-2 rounded-xl hover:bg-orange-600 transition-colors"
+                  className="bg-sky-500 text-white text-sm font-semibold px-6 py-2 rounded-xl hover:bg-sky-600 transition-colors"
                 >
                   現在地を取得
                 </button>
@@ -425,7 +425,7 @@ out center 50;
 
                 {overpassLoading && (
                   <div className="flex items-center gap-2 justify-center py-4">
-                    <div className="w-4 h-4 border-2 border-orange-500 border-t-transparent rounded-full animate-spin" />
+                    <div className="w-4 h-4 border-2 border-sky-500 border-t-transparent rounded-full animate-spin" />
                     <p className="text-xs text-gray-400">
                       周辺のチェーン店を検索中...
                     </p>
@@ -456,14 +456,14 @@ out center 50;
                           }
                           className={`w-full bg-white rounded-2xl p-4 shadow-sm text-left transition-colors ${
                             selectedPlace?.id === place.id
-                              ? "ring-2 ring-orange-400"
+                              ? "ring-2 ring-sky-400"
                               : ""
                           }`}
                         >
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
                               <span className="text-lg">
-                                <Utensils className="w-5 h-5 text-orange-400" />
+                                <Utensils className="w-5 h-5 text-sky-400" />
                               </span>
                               <div>
                                 <p className="text-sm font-bold text-gray-800">
@@ -512,7 +512,7 @@ out center 50;
                                       <p className="text-sm font-bold text-gray-800">
                                         {menuItem.name}
                                       </p>
-                                      <p className="text-sm font-bold text-orange-500 shrink-0">
+                                      <p className="text-sm font-bold text-sky-500 shrink-0">
                                         {menuItem.calories}kcal
                                       </p>
                                     </div>
@@ -524,13 +524,13 @@ out center 50;
                                         <span className="text-[10px] bg-yellow-50 text-yellow-600 px-1.5 py-0.5 rounded-full">
                                           F {menuItem.fat}g
                                         </span>
-                                        <span className="text-[10px] bg-orange-50 text-orange-600 px-1.5 py-0.5 rounded-full">
+                                        <span className="text-[10px] bg-sky-50 text-sky-600 px-1.5 py-0.5 rounded-full">
                                           C {menuItem.carbs}g
                                         </span>
                                       </div>
                                       <Link
                                         href={`/record?menu_id=${menuItem.id}`}
-                                        className="text-xs bg-orange-500 text-white font-semibold px-3 py-1 rounded-lg hover:bg-orange-600 transition-colors"
+                                        className="text-xs bg-sky-500 text-white font-semibold px-3 py-1 rounded-lg hover:bg-sky-600 transition-colors"
                                       >
                                         記録する
                                       </Link>
@@ -591,7 +591,7 @@ out center 50;
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-2">
                             <span className="text-lg">
-                              <Utensils className="w-5 h-5 text-orange-400" />
+                              <Utensils className="w-5 h-5 text-sky-400" />
                             </span>
                             <p className="text-sm font-bold text-gray-800">
                               {chain.name}
@@ -654,7 +654,7 @@ out center 50;
                       }}
                       className={`shrink-0 px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
                         calorieFilter === f.key
-                          ? "bg-orange-500 text-white"
+                          ? "bg-sky-500 text-white"
                           : "bg-white text-gray-600 shadow-sm"
                       }`}
                     >
@@ -672,7 +672,7 @@ out center 50;
                         onClick={() => setActiveChain(chain.id)}
                         className={`shrink-0 px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
                           activeChain === chain.id
-                            ? "bg-orange-500 text-white"
+                            ? "bg-sky-500 text-white"
                             : "bg-white text-gray-600 shadow-sm"
                         }`}
                       >
@@ -711,7 +711,7 @@ out center 50;
                             {item.tag}
                           </span>
                         </div>
-                        <p className="text-lg font-bold text-orange-500 mb-2">
+                        <p className="text-lg font-bold text-sky-500 mb-2">
                           {item.calories}
                           <span className="text-sm font-medium ml-0.5">
                             kcal
@@ -724,13 +724,13 @@ out center 50;
                           <span className="text-[10px] bg-yellow-50 text-yellow-600 px-2 py-0.5 rounded-full">
                             脂質 {item.fat}g
                           </span>
-                          <span className="text-[10px] bg-orange-50 text-orange-600 px-2 py-0.5 rounded-full">
+                          <span className="text-[10px] bg-sky-50 text-sky-600 px-2 py-0.5 rounded-full">
                             炭水化物 {item.carbs}g
                           </span>
                         </div>
                         <Link
                           href={`/record?menu_id=${item.id}`}
-                          className="block w-full text-center bg-orange-500 text-white text-sm font-semibold py-2 rounded-xl hover:bg-orange-600 active:scale-[0.98] transition-all"
+                          className="block w-full text-center bg-sky-500 text-white text-sm font-semibold py-2 rounded-xl hover:bg-sky-600 active:scale-[0.98] transition-all"
                         >
                           記録する
                         </Link>

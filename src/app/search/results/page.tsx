@@ -59,7 +59,7 @@ function ChainLogoPanel({
         />
       ) : (
         <div className={`w-full h-full flex items-center justify-center bg-gradient-to-br ${getCardGradient(item)}`}>
-          <Utensils className="w-10 h-10 text-orange-300" />
+          <Utensils className="w-10 h-10 text-sky-300" />
         </div>
       )}
       {fitnessBadge && (
@@ -79,13 +79,13 @@ function getCardGradient(item: MenuItem): string {
   if (n.includes("ローソン"))  return "from-blue-100 to-sky-50";
   if (n.includes("ファミリー") || n.includes("ファミマ")) return "from-sky-100 to-cyan-50";
   if (n.includes("マクドナルド")) return "from-yellow-100 to-amber-50";
-  if (n.includes("すき家"))    return "from-orange-100 to-amber-50";
+  if (n.includes("すき家"))    return "from-sky-100 to-cyan-50";
   if (n.includes("吉野家"))    return "from-red-100 to-rose-50";
   if (n.includes("松屋"))      return "from-amber-100 to-yellow-50";
   if (n.includes("スターバックス")) return "from-green-100 to-teal-50";
-  if (n.includes("モスバーガー"))   return "from-red-100 to-orange-50";
+  if (n.includes("モスバーガー"))   return "from-red-100 to-sky-50";
   if (item.source_type === "convenience_store") return "from-blue-50 to-indigo-50";
-  if (item.source_type === "chain_restaurant")  return "from-orange-50 to-amber-50";
+  if (item.source_type === "chain_restaurant")  return "from-sky-50 to-cyan-50";
   if (item.source_type === "supermarket")       return "from-emerald-50 to-green-50";
   return "from-gray-100 to-gray-50";
 }
@@ -96,13 +96,13 @@ function getStoreBadgeStyle(name: string | undefined, sourceType: string | null)
   if (n.includes("ローソン"))  return "bg-blue-100 text-blue-700";
   if (n.includes("ファミリー") || n.includes("ファミマ")) return "bg-sky-100 text-sky-700";
   if (n.includes("マクドナルド")) return "bg-yellow-100 text-yellow-700";
-  if (n.includes("すき家"))    return "bg-orange-100 text-orange-700";
+  if (n.includes("すき家"))    return "bg-sky-100 text-sky-700";
   if (n.includes("吉野家"))    return "bg-red-100 text-red-700";
   if (n.includes("松屋"))      return "bg-amber-100 text-amber-700";
   if (n.includes("スターバックス")) return "bg-green-100 text-green-800";
   if (sourceType === "convenience_store") return "bg-blue-50 text-blue-600";
   if (sourceType === "supermarket")       return "bg-emerald-50 text-emerald-600";
-  return "bg-orange-50 text-orange-600";
+  return "bg-sky-50 text-sky-600";
 }
 
 // Fitness badge: shown when protein is notably high or calories notably low
@@ -231,7 +231,7 @@ function SearchResultsContent() {
   const getLeftBorderClass = (sourceType: string | null) => {
     switch (sourceType) {
       case "convenience_store": return "border-l-4 border-l-sky-400";
-      case "chain_restaurant":  return "border-l-4 border-l-orange-400";
+      case "chain_restaurant":  return "border-l-4 border-l-sky-400";
       case "supermarket":       return "border-l-4 border-l-green-400";
       default:                  return "border-l-4 border-l-gray-200";
     }
@@ -253,7 +253,7 @@ function SearchResultsContent() {
             <h1 className="text-base font-bold text-gray-900 truncate flex-1">{pageTitle}</h1>
             <button
               onClick={() => router.push("/search")}
-              className="shrink-0 px-3 py-1.5 bg-orange-50 text-orange-500 rounded-xl text-xs font-bold active:bg-orange-100 transition-colors">
+              className="shrink-0 px-3 py-1.5 bg-sky-50 text-sky-500 rounded-xl text-xs font-bold active:bg-sky-100 transition-colors">
               条件変更
             </button>
           </div>
@@ -330,7 +330,7 @@ function SearchResultsContent() {
                       {/* Nutrition pills */}
                       <div className="flex flex-wrap gap-1 mb-2">
                         {item.calories != null && (
-                          <span className="text-[11px] bg-orange-50 text-orange-600 px-2 py-0.5 rounded-full font-semibold">
+                          <span className="text-[11px] bg-sky-50 text-sky-600 px-2 py-0.5 rounded-full font-semibold">
                             {item.calories} kcal
                           </span>
                         )}
@@ -358,7 +358,7 @@ function SearchResultsContent() {
                               target="_blank"
                               rel="noopener noreferrer"
                               onClick={(e) => e.stopPropagation()}
-                              className="text-gray-300 active:text-orange-400 transition-colors"
+                              className="text-gray-300 active:text-sky-400 transition-colors"
                             >
                               <MapPin className="w-4 h-4" />
                             </a>
@@ -371,7 +371,7 @@ function SearchResultsContent() {
                           </button>
                           <button
                             onClick={(e) => handleRecord(e, item)}
-                            className="w-7 h-7 flex items-center justify-center rounded-full bg-orange-500 text-white active:bg-orange-600 transition-colors"
+                            className="w-7 h-7 flex items-center justify-center rounded-full bg-sky-500 text-white active:bg-sky-600 transition-colors"
                           >
                             <Plus className="w-3.5 h-3.5" />
                           </button>
@@ -395,14 +395,14 @@ function SearchResultsContent() {
 
         ) : (
           <div className="flex flex-col items-center justify-center py-20 text-center">
-            <div className="w-20 h-20 bg-orange-50 rounded-full flex items-center justify-center mb-4">
-              <Utensils className="w-9 h-9 text-orange-300" />
+            <div className="w-20 h-20 bg-sky-50 rounded-full flex items-center justify-center mb-4">
+              <Utensils className="w-9 h-9 text-sky-300" />
             </div>
             <p className="text-base font-bold text-gray-700 mb-1">見つかりませんでした</p>
             <p className="text-sm text-gray-400 mb-6">条件を変えて再検索してみてください</p>
             <button
               onClick={() => router.push("/search")}
-              className="px-6 py-3 bg-orange-500 text-white rounded-xl font-bold text-sm active:bg-orange-600 transition-colors shadow-md shadow-orange-200"
+              className="px-6 py-3 bg-sky-500 text-white rounded-xl font-bold text-sm active:bg-sky-600 transition-colors shadow-md shadow-sky-200"
             >
               条件を変える
             </button>
