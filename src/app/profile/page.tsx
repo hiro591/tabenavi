@@ -134,8 +134,9 @@ export default function ProfilePage() {
       <div className="max-w-lg mx-auto px-4 pt-6">
 
         {/* ─── Avatar + Name + Bio ─── */}
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 mb-4">
-          <div className="flex items-start gap-4">
+        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 mb-4 relative overflow-hidden">
+          <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-r from-sky-400/10 to-cyan-400/10" />
+          <div className="flex items-start gap-4 relative">
             {/* Avatar */}
             <div className="relative shrink-0">
               <button onClick={() => fileInputRef.current?.click()} className="group">
@@ -179,16 +180,16 @@ export default function ProfilePage() {
         </div>
 
         {/* ─── 目標カロリー ─── */}
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 mb-4">
-          <div className="flex items-center justify-between mb-3">
+        <div className="bg-gradient-to-br from-sky-50 to-cyan-50 rounded-2xl border border-sky-100 p-5 mb-4">
+          <div className="flex items-center justify-between mb-4">
             <h2 className="text-sm font-bold text-gray-800">目標カロリー</h2>
             {onboardingData?.goal && (
-              <span className="text-[11px] text-sky-500 font-medium bg-sky-50 px-2 py-0.5 rounded-full">
+              <span className="text-[11px] text-sky-600 font-medium bg-white px-2.5 py-0.5 rounded-full border border-sky-200">
                 {goalLabel[onboardingData.goal as string] ?? ""}モード
               </span>
             )}
           </div>
-          <div className="flex items-baseline gap-1 mb-3">
+          <div className="flex items-baseline justify-center gap-1.5 mb-4">
             <input
               type="number"
               value={targetCalories}
@@ -196,7 +197,7 @@ export default function ProfilePage() {
                 const v = parseInt(e.target.value, 10);
                 if (!isNaN(v) && v > 0 && v <= 10000) setTargetCalories(v);
               }}
-              className="text-[28px] font-bold text-gray-900 w-24 outline-none bg-transparent tabular-nums"
+              className="text-[32px] font-bold text-gray-900 w-28 outline-none bg-transparent tabular-nums text-center"
             />
             <span className="text-sm text-gray-400">kcal / 日</span>
           </div>
@@ -207,8 +208,8 @@ export default function ProfilePage() {
                 onClick={() => setTargetCalories(cal)}
                 className={`flex-1 py-2 rounded-lg text-xs font-semibold transition-all ${
                   targetCalories === cal
-                    ? "bg-sky-500 text-white"
-                    : "bg-gray-50 text-gray-500 hover:bg-gray-100"
+                    ? "bg-sky-500 text-white shadow-sm"
+                    : "bg-white text-gray-500 hover:bg-gray-50 border border-gray-100"
                 }`}
               >
                 {cal}
@@ -243,10 +244,10 @@ export default function ProfilePage() {
 
         {/* ─── メニュー ─── */}
         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden mb-4">
-          <MenuItem href="/weight" icon={Scale} label="体重記録" desc="体重の推移を確認" />
-          <MenuItem href="/history" icon={History} label="食事履歴" desc="過去の記録を見る" />
-          <MenuItem href="/favorites" icon={Heart} label="お気に入り" desc="保存したメニュー" />
-          <MenuItem href="/map" icon={MapPin} label="近くのお店" desc="マップで探す" />
+          <MenuItem href="/weight" icon={Scale} label="体重記録" desc="体重の推移を確認" iconColor="text-emerald-500" iconBg="bg-emerald-50" />
+          <MenuItem href="/history" icon={History} label="食事履歴" desc="過去の記録を見る" iconColor="text-sky-500" iconBg="bg-sky-50" />
+          <MenuItem href="/favorites" icon={Heart} label="お気に入り" desc="保存したメニュー" iconColor="text-pink-500" iconBg="bg-pink-50" />
+          <MenuItem href="/map" icon={MapPin} label="近くのお店" desc="マップで探す" iconColor="text-violet-500" iconBg="bg-violet-50" />
         </div>
 
         {/* ─── アカウント ─── */}
@@ -287,18 +288,24 @@ function MenuItem({
   icon: Icon,
   label,
   desc,
+  iconColor = "text-gray-400",
+  iconBg = "bg-gray-50",
 }: {
   href: string;
   icon: React.ComponentType<{ className?: string }>;
   label: string;
   desc: string;
+  iconColor?: string;
+  iconBg?: string;
 }) {
   return (
     <Link
       href={href}
       className="flex items-center gap-3.5 px-5 py-4 hover:bg-gray-50 transition-colors border-b border-gray-50 last:border-b-0"
     >
-      <Icon className="w-5 h-5 text-gray-400" />
+      <div className={`w-9 h-9 rounded-xl ${iconBg} flex items-center justify-center shrink-0`}>
+        <Icon className={`w-4.5 h-4.5 ${iconColor}`} />
+      </div>
       <div className="flex-1">
         <p className="text-sm font-semibold text-gray-800">{label}</p>
         <p className="text-[11px] text-gray-400">{desc}</p>
