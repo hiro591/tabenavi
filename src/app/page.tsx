@@ -94,7 +94,7 @@ export default function Home() {
             </Link>
             <Link
               href="/signup"
-              className="bg-gradient-to-r from-sky-400 to-cyan-500 text-white text-sm font-semibold px-4 py-2 rounded-lg hover:from-sky-500 hover:to-cyan-600 transition-all"
+              className="bg-gradient-to-r from-sky-400 to-cyan-500 text-white text-sm font-bold px-5 py-2.5 rounded-lg hover:from-sky-500 hover:to-cyan-600 transition-all shadow-md shadow-sky-200 animate-pulse-glow"
             >
               無料で始める
             </Link>
@@ -125,18 +125,13 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-3">
               <Link
                 href="/signup"
-                className="w-full sm:w-auto bg-gradient-to-r from-sky-400 to-cyan-500 hover:from-sky-500 hover:to-cyan-600 text-white font-bold px-8 py-3.5 rounded-xl transition-all shadow-lg shadow-sky-200 active:scale-[0.98] flex items-center justify-center gap-2"
+                className="w-full sm:w-auto bg-gradient-to-r from-sky-400 to-cyan-500 hover:from-sky-500 hover:to-cyan-600 text-white font-bold px-10 py-4 rounded-xl transition-all shadow-lg shadow-sky-200 active:scale-[0.98] flex items-center justify-center gap-2 text-base"
               >
-                無料で始める
-                <ChevronRight className="w-4 h-4" />
-              </Link>
-              <Link
-                href="/guide"
-                className="w-full sm:w-auto text-gray-500 hover:text-gray-700 font-medium px-6 py-3.5 rounded-xl border border-gray-200 hover:bg-gray-50 transition-all text-center"
-              >
-                ガイド記事を読む
+                無料で始める — 30秒で登録
+                <ChevronRight className="w-5 h-5" />
               </Link>
             </div>
+            <p className="text-xs text-gray-400 mt-3 text-center lg:text-left">クレジットカード不要 · いつでも無料</p>
           </div>
 
           {/* Phone Mockup */}
@@ -504,30 +499,21 @@ export default function Home() {
       </section>
 
       {/* ─── CTA ─── */}
-      <section className="py-20 px-4 bg-gradient-to-b from-sky-50/50 to-white">
+      <section className="py-20 px-4 bg-gradient-to-b from-sky-50 to-white">
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-gray-900">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-3 text-gray-900">
             外食しながら、カラダづくり。
           </h2>
           <p className="text-gray-500 text-sm sm:text-base mb-8">
-            登録は無料。クレジットカードも不要です。
+            登録は30秒。クレジットカードも不要。完全無料。
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-            <Link
-              href="/signup"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-sky-400 to-cyan-500 hover:from-sky-500 hover:to-cyan-600 text-white font-bold px-8 py-4 rounded-xl transition-all shadow-lg shadow-sky-200 active:scale-[0.98]"
-            >
-              無料で始める
-              <ChevronRight className="w-4 h-4" />
-            </Link>
-            <Link
-              href="/guide"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-1 text-gray-500 hover:text-gray-700 font-medium px-6 py-4 transition-colors"
-            >
-              ガイド記事を読む
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
+          <Link
+            href="/signup"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-sky-400 to-cyan-500 hover:from-sky-500 hover:to-cyan-600 text-white font-bold px-10 py-4 rounded-xl transition-all shadow-lg shadow-sky-200 active:scale-[0.98] text-base"
+          >
+            無料で始める — 30秒で登録
+            <ChevronRight className="w-5 h-5" />
+          </Link>
         </div>
       </section>
 
