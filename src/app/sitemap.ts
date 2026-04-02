@@ -1,10 +1,11 @@
 import type { MetadataRoute } from "next";
+import { createClient } from "@/lib/supabase/server";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://www.tabenavi.jp";
-  const now = "2026-03-25T00:00:00.000Z";
+  const now = "2026-04-02T00:00:00.000Z";
 
-  // ─── チェーン店の栄養データページ（/guide/[slug]） ───
+  // ─── チェーン店の栄養データページ ───
   const chainSlugs = [
     "mcdonalds", "yoshinoya", "matsuya", "sukiya", "saizeriya",
     "starbucks", "conveni", "kfc", "mos", "gusto", "bamiyan",
@@ -31,6 +32,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "diet-mistakes",
   ];
 
+  // ─── メニュー詳細ページ（DBから取得） ───
+  let itemPages: MetadataRoute.Sitemap = [];
+  try {
+    const supabase = await createClient();
+    const { data: items } = await supabase
+      .from("menu_items")
+      .select("id")
+      .limit(500);
+
+    if (items) {
+      itemPages = items.map((item) => ({
+        url: `${baseUrl}/items/${item.id}`,
+        lastModified: now,
+        changeFrequency: "monthly" as const,
+        priority: 0.5,
+      }));
+    }
+  } catch {
+    // If DB fetch fails, skip item pages
+  }
+
   const chainPages: MetadataRoute.Sitemap = chainSlugs.map((slug) => ({
     url: `${baseUrl}/guide/${slug}`,
     lastModified: now,
@@ -46,22 +68,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   return [
-    // トップ
     { url: baseUrl, lastModified: now, changeFrequency: "daily", priority: 1.0 },
-
-    // ガイド一覧
     { url: `${baseUrl}/guide`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
-
-    // SEOガイド記事（高優先度）
     ...guidePages,
-
-    // チェーン店データページ
     ...chainPages,
-
-    // 主要ページ
+    ...itemPages,
     { url: `${baseUrl}/search`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
-    { url: `${baseUrl}/signup`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${baseUrl}/login`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },
     { url: `${baseUrl}/contact`, lastModified: now, changeFrequency: "yearly", priority: 0.4 },
     { url: `${baseUrl}/privacy`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
     { url: `${baseUrl}/terms`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },

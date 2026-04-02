@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { ChevronLeft, MapPin, Utensils } from "lucide-react";
 import { getChainLogo } from "@/lib/chain-logos";
 import FavoriteButton from "./FavoriteButton";
@@ -82,6 +83,32 @@ function getSuitabilityBadges(item: MenuItem) {
   return badges;
 }
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  const supabase = await createClient();
+  const { data: item } = await supabase
+    .from("menu_items")
+    .select("*, chain_restaurants(name)")
+    .eq("id", id)
+    .single();
+
+  if (!item) return { title: "メニュー | たべなび" };
+
+  const chain = item.chain_restaurants?.name ?? "";
+  const title = `${chain ? chain + " " : ""}${item.name} カロリー・栄養成分 | たべなび`;
+  const desc = `${chain ? chain + "の" : ""}${item.name}の栄養成分。カロリー${item.calories ?? "?"}kcal、タンパク質${item.protein ?? "?"}g、脂質${item.fat ?? "?"}g、炭水化物${item.carbs ?? "?"}g。`;
+
+  return {
+    title,
+    description: desc,
+    openGraph: { title, description: desc },
+  };
+}
+
 export default async function ItemDetailPage({
   params,
 }: {
@@ -124,8 +151,23 @@ export default async function ItemDetailPage({
     ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(chainName)}`
     : `https://www.google.com/maps`;
 
+  // Static server-rendered JSON-LD for nutrition data SEO
+  const itemJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "NutritionInformation",
+    name: `${chainName ? chainName + " " : ""}${item.name}`,
+    calories: item.calories ? `${item.calories} calories` : undefined,
+    proteinContent: item.protein ? `${item.protein} g` : undefined,
+    fatContent: item.fat ? `${item.fat} g` : undefined,
+    carbohydrateContent: item.carbs ? `${item.carbs} g` : undefined,
+  };
+
   return (
     <div className="min-h-screen bg-white pb-28">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemJsonLd) }}
+      />
       {/* Header */}
       <div className="sticky top-0 z-10 bg-white/90 backdrop-blur-sm border-b border-gray-100">
         <div className="max-w-lg mx-auto px-4 h-14 flex items-center justify-between">
