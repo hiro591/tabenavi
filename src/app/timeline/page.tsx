@@ -4,7 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
-import { Heart, MessageCircle, Utensils, Clock, Search, PenSquare, Trash2 } from "lucide-react";
+import { Utensils, Clock, PenSquare, Trash2 } from "lucide-react";
 import { getChainLogo } from "@/lib/chain-logos";
 
 interface PublicPost {
@@ -106,9 +106,12 @@ export default function TimelinePage() {
     if (!confirm("この投稿を削除しますか？")) return;
     setDeletingId(postId);
     try {
-      await supabase.from("public_posts").delete().eq("id", postId);
+      const { error } = await supabase.from("public_posts").delete().eq("id", postId);
+      if (error) throw error;
       setPosts((prev) => prev.filter((p) => p.id !== postId));
-    } catch {}
+    } catch {
+      alert("削除に失敗しました。もう一度お試しください。");
+    }
     setDeletingId(null);
   };
 
@@ -117,11 +120,6 @@ export default function TimelinePage() {
       {/* Header */}
       <div className="sticky top-0 z-30 bg-white border-b border-gray-100">
         <div className="max-w-lg mx-auto px-4 pt-3">
-          <div className="flex items-center gap-2 bg-gray-50 rounded-xl px-3 py-2.5 mb-3">
-            <Search className="w-4 h-4 text-gray-400" />
-            <input type="text" placeholder="メニュー・ユーザーを検索" className="bg-transparent text-sm text-gray-700 placeholder:text-gray-400 outline-none flex-1" readOnly />
-          </div>
-
           <div className="flex gap-0 -mx-4 px-4">
             {([
               { key: "all" as const, label: "みんな" },
@@ -250,14 +248,6 @@ export default function TimelinePage() {
 
                   {/* Actions */}
                   <div className="px-4 pb-3 flex items-center gap-4">
-                    <button className="flex items-center gap-1 text-gray-400 hover:text-pink-500 transition-colors">
-                      <Heart className="w-4 h-4" />
-                      <span className="text-[11px]">いいね</span>
-                    </button>
-                    <button className="flex items-center gap-1 text-gray-400 hover:text-sky-500 transition-colors">
-                      <MessageCircle className="w-4 h-4" />
-                      <span className="text-[11px]">コメント</span>
-                    </button>
                     {isOwn && (
                       <button
                         onClick={() => handleDelete(post.id)}

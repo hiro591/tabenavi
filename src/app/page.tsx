@@ -1,6 +1,8 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { ChevronRight, Search, MapPin, Sparkles, Utensils, ArrowRight } from "lucide-react";
 import { getChainLogo } from "@/lib/chain-logos";
+import { createClient } from "@/lib/supabase/server";
 
 const CHAINS = [
   "マクドナルド", "吉野家", "松屋", "すき家", "サイゼリヤ",
@@ -73,7 +75,14 @@ const jsonLd = {
   },
 };
 
-export default function Home() {
+export default async function Home() {
+  // Redirect logged-in users to dashboard
+  try {
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (user) redirect("/dashboard");
+  } catch {}
+
   return (
     <main className="min-h-screen bg-white text-gray-900">
       <script

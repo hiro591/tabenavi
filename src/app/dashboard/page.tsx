@@ -151,10 +151,10 @@ export default function DashboardPage() {
       if (error) throw error;
       setLogs((prev) => prev.filter((l) => l.id !== logId));
       setToast("削除しました");
-      setTimeout(() => setToast(""), 2000);
+      setTimeout(() => setToast(""), 3500);
     } catch {
       setToast("削除に失敗しました");
-      setTimeout(() => setToast(""), 2000);
+      setTimeout(() => setToast(""), 3500);
     } finally {
       setDeletingId(null);
     }
