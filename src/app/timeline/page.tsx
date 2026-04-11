@@ -1,10 +1,13 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
-import { Utensils, Clock, PenSquare, Trash2 } from "lucide-react";
+import {
+  Utensils, Clock, PenSquare, Trash2, Heart, MessageCircle,
+  Search, X, Send, ChevronDown,
+} from "lucide-react";
 import { getChainLogo } from "@/lib/chain-logos";
 
 interface PublicPost {
@@ -20,9 +23,18 @@ interface PublicPost {
   menu_item_id: string | null;
   photo_url: string | null;
   created_at: string;
-  profiles: {
-    display_name: string | null;
-  } | null;
+  display_name: string | null;
+  like_count: number;
+  comment_count: number;
+  liked_by_me: boolean;
+}
+
+interface Comment {
+  id: string;
+  user_id: string;
+  text: string;
+  created_at: string;
+  display_name: string | null;
 }
 
 const TAGS = [
@@ -57,6 +69,18 @@ export default function TimelinePage() {
   const [currentUserId, setCurrentUserId] = useState<string | null>(null);
   const [tab, setTab] = useState<"all" | "mine">("all");
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchOpen, setSearchOpen] = useState(false);
+
+  // Comments
+  const [openCommentPostId, setOpenCommentPostId] = useState<string | null>(null);
+  const [comments, setComments] = useState<Comment[]>([]);
+  const [commentText, setCommentText] = useState("");
+  const [loadingComments, setLoadingComments] = useState(false);
+  const [sendingComment, setSendingComment] = useState(false);
+  const commentInputRef = useRef<HTMLInputElement>(null);
+
+  // ─── Fetch posts with like/comment counts ─────────────────────────────────
 
   const fetchPosts = useCallback(async () => {
     setLoading(true);
@@ -74,33 +98,157 @@ export default function TimelinePage() {
       query = query.eq("user_id", user.id);
     }
 
-    const { data, error } = await query;
-    if (error) {
-      console.error("Timeline fetch error:", error);
-    }
-    if (data) {
-      // Fetch display names separately
-      const userIds = [...new Set(data.map((p: { user_id: string }) => p.user_id))];
-      const { data: profilesData } = await supabase
-        .from("profiles")
-        .select("id, display_name")
-        .in("id", userIds);
+    const { data } = await query;
+    if (!data) { setLoading(false); return; }
 
-      const profileMap = new Map(
-        (profilesData ?? []).map((p: { id: string; display_name: string | null }) => [p.id, p.display_name])
-      );
+    // Fetch display names
+    const userIds = [...new Set(data.map((p: { user_id: string }) => p.user_id))];
+    const { data: profilesData } = await supabase
+      .from("profiles")
+      .select("id, display_name")
+      .in("id", userIds);
+    const profileMap = new Map(
+      (profilesData ?? []).map((p: { id: string; display_name: string | null }) => [p.id, p.display_name])
+    );
 
-      const postsWithNames = data.map((p: Record<string, unknown>) => ({
-        ...p,
-        profiles: { display_name: profileMap.get(p.user_id as string) ?? null },
-      }));
+    // Fetch like counts per post
+    const postIds = data.map((p: { id: string }) => p.id);
+    const { data: likesData } = await supabase
+      .from("post_likes")
+      .select("post_id")
+      .in("post_id", postIds);
 
-      setPosts(postsWithNames as PublicPost[]);
-    }
+    const likeCounts = new Map<string, number>();
+    (likesData ?? []).forEach((l: { post_id: string }) => {
+      likeCounts.set(l.post_id, (likeCounts.get(l.post_id) ?? 0) + 1);
+    });
+
+    // Fetch my likes
+    const { data: myLikes } = await supabase
+      .from("post_likes")
+      .select("post_id")
+      .eq("user_id", user.id)
+      .in("post_id", postIds);
+    const myLikeSet = new Set((myLikes ?? []).map((l: { post_id: string }) => l.post_id));
+
+    // Fetch comment counts
+    const { data: commentsData } = await supabase
+      .from("post_comments")
+      .select("post_id")
+      .in("post_id", postIds);
+
+    const commentCounts = new Map<string, number>();
+    (commentsData ?? []).forEach((c: { post_id: string }) => {
+      commentCounts.set(c.post_id, (commentCounts.get(c.post_id) ?? 0) + 1);
+    });
+
+    const enrichedPosts: PublicPost[] = data.map((p: Record<string, unknown>) => ({
+      ...p,
+      display_name: profileMap.get(p.user_id as string) ?? null,
+      like_count: likeCounts.get(p.id as string) ?? 0,
+      comment_count: commentCounts.get(p.id as string) ?? 0,
+      liked_by_me: myLikeSet.has(p.id as string),
+    })) as PublicPost[];
+
+    setPosts(enrichedPosts);
     setLoading(false);
   }, [supabase, router, tab]);
 
   useEffect(() => { fetchPosts(); }, [fetchPosts]);
+
+  // ─── Like toggle ──────────────────────────────────────────────────────────
+
+  const toggleLike = async (postId: string) => {
+    if (!currentUserId) return;
+    const post = posts.find((p) => p.id === postId);
+    if (!post) return;
+
+    // Optimistic update
+    setPosts((prev) => prev.map((p) =>
+      p.id === postId
+        ? { ...p, liked_by_me: !p.liked_by_me, like_count: p.liked_by_me ? p.like_count - 1 : p.like_count + 1 }
+        : p
+    ));
+
+    if (post.liked_by_me) {
+      await supabase.from("post_likes").delete().eq("post_id", postId).eq("user_id", currentUserId);
+    } else {
+      await supabase.from("post_likes").insert({ post_id: postId, user_id: currentUserId });
+    }
+  };
+
+  // ─── Comments ─────────────────────────────────────────────────────────────
+
+  const openComments = async (postId: string) => {
+    if (openCommentPostId === postId) {
+      setOpenCommentPostId(null);
+      return;
+    }
+    setOpenCommentPostId(postId);
+    setLoadingComments(true);
+    setCommentText("");
+
+    const { data } = await supabase
+      .from("post_comments")
+      .select("*")
+      .eq("post_id", postId)
+      .order("created_at", { ascending: true });
+
+    if (data && data.length > 0) {
+      const userIds = [...new Set(data.map((c: { user_id: string }) => c.user_id))];
+      const { data: profiles } = await supabase
+        .from("profiles")
+        .select("id, display_name")
+        .in("id", userIds);
+      const pMap = new Map(
+        (profiles ?? []).map((p: { id: string; display_name: string | null }) => [p.id, p.display_name])
+      );
+      setComments(data.map((c: Record<string, unknown>) => ({
+        ...c,
+        display_name: pMap.get(c.user_id as string) ?? null,
+      })) as Comment[]);
+    } else {
+      setComments([]);
+    }
+    setLoadingComments(false);
+    setTimeout(() => commentInputRef.current?.focus(), 200);
+  };
+
+  const sendComment = async (postId: string) => {
+    if (!commentText.trim() || !currentUserId || sendingComment) return;
+    setSendingComment(true);
+
+    const { data, error } = await supabase
+      .from("post_comments")
+      .insert({ post_id: postId, user_id: currentUserId, text: commentText.trim() })
+      .select()
+      .single();
+
+    if (!error && data) {
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("display_name")
+        .eq("id", currentUserId)
+        .single();
+
+      setComments((prev) => [...prev, { ...data, display_name: profile?.display_name ?? null }]);
+      setPosts((prev) => prev.map((p) =>
+        p.id === postId ? { ...p, comment_count: p.comment_count + 1 } : p
+      ));
+      setCommentText("");
+    }
+    setSendingComment(false);
+  };
+
+  const deleteComment = async (commentId: string, postId: string) => {
+    await supabase.from("post_comments").delete().eq("id", commentId);
+    setComments((prev) => prev.filter((c) => c.id !== commentId));
+    setPosts((prev) => prev.map((p) =>
+      p.id === postId ? { ...p, comment_count: Math.max(0, p.comment_count - 1) } : p
+    ));
+  };
+
+  // ─── Delete post ──────────────────────────────────────────────────────────
 
   const handleDelete = async (postId: string) => {
     if (!confirm("この投稿を削除しますか？")) return;
@@ -115,11 +263,58 @@ export default function TimelinePage() {
     setDeletingId(null);
   };
 
+  // ─── Search filter ────────────────────────────────────────────────────────
+
+  const filteredPosts = searchQuery.trim()
+    ? posts.filter((p) => {
+        const q = searchQuery.toLowerCase();
+        return (
+          (p.menu_name?.toLowerCase().includes(q)) ||
+          (p.chain_name?.toLowerCase().includes(q)) ||
+          (p.text?.toLowerCase().includes(q)) ||
+          (p.display_name?.toLowerCase().includes(q))
+        );
+      })
+    : posts;
+
   return (
     <div className="min-h-screen bg-gray-50 pb-24">
       {/* Header */}
       <div className="sticky top-0 z-30 bg-white border-b border-gray-100">
         <div className="max-w-lg mx-auto px-4 pt-3">
+          {/* Search bar */}
+          {searchOpen ? (
+            <div className="flex items-center gap-2 mb-2">
+              <div className="flex-1 flex items-center gap-2 bg-gray-50 rounded-xl px-3 py-2">
+                <Search className="w-4 h-4 text-gray-400 shrink-0" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="メニュー・チェーン店・ユーザーで検索"
+                  className="bg-transparent text-sm text-gray-700 placeholder:text-gray-400 outline-none flex-1"
+                  autoFocus
+                />
+                {searchQuery && (
+                  <button onClick={() => setSearchQuery("")} className="text-gray-400">
+                    <X className="w-4 h-4" />
+                  </button>
+                )}
+              </div>
+              <button onClick={() => { setSearchOpen(false); setSearchQuery(""); }} className="text-sm text-gray-500 shrink-0">
+                閉じる
+              </button>
+            </div>
+          ) : (
+            <div className="flex items-center justify-between mb-2">
+              <h1 className="text-base font-bold text-gray-900">みんなの外食</h1>
+              <button onClick={() => setSearchOpen(true)} className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 text-gray-500">
+                <Search className="w-4.5 h-4.5" />
+              </button>
+            </div>
+          )}
+
+          {/* Tabs */}
           <div className="flex gap-0 -mx-4 px-4">
             {([
               { key: "all" as const, label: "みんな" },
@@ -137,10 +332,17 @@ export default function TimelinePage() {
           </div>
         </div>
 
+        {/* Tags */}
         <div className="max-w-lg mx-auto overflow-x-auto scrollbar-hide">
           <div className="flex gap-2 px-4 py-2.5">
             {TAGS.map((tag) => (
-              <span key={tag} className="shrink-0 text-xs text-sky-600 bg-sky-50 px-2.5 py-1 rounded-full border border-sky-100 font-medium">{tag}</span>
+              <button
+                key={tag}
+                onClick={() => { setSearchOpen(true); setSearchQuery(tag.replace("#", "")); }}
+                className="shrink-0 text-xs text-sky-600 bg-sky-50 px-2.5 py-1 rounded-full border border-sky-100 font-medium active:bg-sky-100 transition-colors"
+              >
+                {tag}
+              </button>
             ))}
           </div>
         </div>
@@ -162,25 +364,36 @@ export default function TimelinePage() {
               </div>
             ))}
           </div>
-        ) : posts.length === 0 ? (
+        ) : filteredPosts.length === 0 ? (
           <div className="text-center py-16">
             <div className="w-14 h-14 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3">
               <Utensils className="w-6 h-6 text-gray-300" />
             </div>
-            <p className="text-sm text-gray-500 font-medium">まだ投稿がありません</p>
-            <p className="text-xs text-gray-400 mt-1">最初の投稿をしてみよう！</p>
-            <Link href="/timeline/post" className="inline-block mt-4 text-sm text-sky-500 font-semibold">
-              投稿する →
-            </Link>
+            {searchQuery ? (
+              <>
+                <p className="text-sm text-gray-500 font-medium">「{searchQuery}」の検索結果がありません</p>
+                <button onClick={() => setSearchQuery("")} className="mt-3 text-sm text-sky-500 font-semibold">検索をクリア</button>
+              </>
+            ) : (
+              <>
+                <p className="text-sm text-gray-500 font-medium">まだ投稿がありません</p>
+                <p className="text-xs text-gray-400 mt-1">最初の投稿をしてみよう！</p>
+                <Link href="/timeline/post" className="inline-block mt-4 text-sm text-sky-500 font-semibold">投稿する →</Link>
+              </>
+            )}
           </div>
         ) : (
           <div className="p-4 space-y-3">
-            {posts.map((post) => {
+            {searchQuery && (
+              <p className="text-xs text-gray-400 mb-1">「{searchQuery}」の検索結果: {filteredPosts.length}件</p>
+            )}
+            {filteredPosts.map((post) => {
               const logo = post.chain_name ? getChainLogo(post.chain_name) : null;
-              const userName = post.profiles?.display_name || "ユーザー";
+              const userName = post.display_name || "ユーザー";
               const avatarChar = userName.charAt(0);
               const avatarColor = getAvatarColor(post.user_id);
               const isOwn = post.user_id === currentUserId;
+              const isCommentOpen = openCommentPostId === post.id;
 
               return (
                 <div key={post.id} className={`bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden transition-all ${deletingId === post.id ? "opacity-40 scale-95" : ""}`}>
@@ -196,7 +409,7 @@ export default function TimelinePage() {
                         {timeAgo(post.created_at)}
                       </p>
                     </div>
-                    {post.calories && (
+                    {post.calories != null && post.calories > 0 && (
                       <div className="text-right shrink-0">
                         <p className="text-lg font-bold text-gray-900 tabular-nums leading-none">{post.calories}</p>
                         <p className="text-[10px] text-gray-400">kcal</p>
@@ -247,7 +460,15 @@ export default function TimelinePage() {
                   )}
 
                   {/* Actions */}
-                  <div className="px-4 pb-3 flex items-center gap-4">
+                  <div className="px-4 pb-2 flex items-center gap-5">
+                    <button onClick={() => toggleLike(post.id)} className={`flex items-center gap-1.5 transition-colors ${post.liked_by_me ? "text-pink-500" : "text-gray-400"}`}>
+                      <Heart className={`w-[18px] h-[18px] ${post.liked_by_me ? "fill-current" : ""}`} />
+                      <span className="text-xs font-semibold tabular-nums">{post.like_count > 0 ? post.like_count : ""}</span>
+                    </button>
+                    <button onClick={() => openComments(post.id)} className={`flex items-center gap-1.5 transition-colors ${isCommentOpen ? "text-sky-500" : "text-gray-400"}`}>
+                      <MessageCircle className="w-[18px] h-[18px]" />
+                      <span className="text-xs font-semibold tabular-nums">{post.comment_count > 0 ? post.comment_count : ""}</span>
+                    </button>
                     {isOwn && (
                       <button
                         onClick={() => handleDelete(post.id)}
@@ -258,6 +479,67 @@ export default function TimelinePage() {
                       </button>
                     )}
                   </div>
+
+                  {/* Comments section */}
+                  {isCommentOpen && (
+                    <div className="border-t border-gray-100">
+                      {loadingComments ? (
+                        <div className="px-4 py-3 text-center">
+                          <p className="text-xs text-gray-400">読み込み中...</p>
+                        </div>
+                      ) : (
+                        <>
+                          {comments.length > 0 && (
+                            <div className="px-4 py-2 space-y-2 max-h-48 overflow-y-auto">
+                              {comments.map((c) => (
+                                <div key={c.id} className="flex items-start gap-2">
+                                  <div className={`w-6 h-6 rounded-full ${getAvatarColor(c.user_id)} flex items-center justify-center text-white text-[10px] font-bold shrink-0 mt-0.5`}>
+                                    {(c.display_name || "U").charAt(0)}
+                                  </div>
+                                  <div className="flex-1 min-w-0">
+                                    <p className="text-[11px]">
+                                      <span className="font-bold text-gray-700">{c.display_name || "ユーザー"}</span>
+                                      <span className="text-gray-500 ml-1.5">{c.text}</span>
+                                    </p>
+                                    <div className="flex items-center gap-2 mt-0.5">
+                                      <span className="text-[10px] text-gray-400">{timeAgo(c.created_at)}</span>
+                                      {c.user_id === currentUserId && (
+                                        <button onClick={() => deleteComment(c.id, post.id)} className="text-[10px] text-gray-400 hover:text-red-400">削除</button>
+                                      )}
+                                    </div>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                          {comments.length === 0 && (
+                            <p className="px-4 py-2 text-xs text-gray-400">まだコメントはありません</p>
+                          )}
+
+                          {/* Comment input */}
+                          <div className="px-4 py-2 flex items-center gap-2 border-t border-gray-50">
+                            <input
+                              ref={commentInputRef}
+                              type="text"
+                              value={commentText}
+                              onChange={(e) => setCommentText(e.target.value)}
+                              onKeyDown={(e) => { if (e.key === "Enter" && !e.nativeEvent.isComposing) sendComment(post.id); }}
+                              placeholder="コメントを入力..."
+                              maxLength={500}
+                              className="flex-1 text-sm bg-gray-50 rounded-full px-3 py-1.5 outline-none text-gray-700 placeholder:text-gray-400"
+                            />
+                            <button
+                              onClick={() => sendComment(post.id)}
+                              disabled={!commentText.trim() || sendingComment}
+                              className="w-8 h-8 flex items-center justify-center rounded-full bg-sky-500 text-white disabled:opacity-40 shrink-0"
+                            >
+                              <Send className="w-3.5 h-3.5" />
+                            </button>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  )}
                 </div>
               );
             })}
