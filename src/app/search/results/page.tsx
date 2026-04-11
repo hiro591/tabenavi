@@ -5,7 +5,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { getChainLogo } from "@/lib/chain-logos";
-import { ChevronLeft, Heart, Plus, Utensils, SlidersHorizontal } from "lucide-react";
+import { ChevronLeft, Heart, Plus, Utensils, SlidersHorizontal, LocateFixed, RefreshCw } from "lucide-react";
 
 const SORT_OPTIONS = [
   { label: "おすすめ順",       value: "recommended" },
@@ -48,6 +48,8 @@ function SearchResultsContent() {
   const [favoriteIds, setFavoriteIds] = useState<Set<string>>(new Set());
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [mapReady, setMapReady] = useState(false);
+  const [mapMoved, setMapMoved] = useState(false);
+  const [searchingArea, setSearchingArea] = useState(false);
 
   // Sheet position: px from top of the map container
   const [sheetPx, setSheetPx] = useState(0);
@@ -197,105 +199,134 @@ function SearchResultsContent() {
         radius: 20, fillColor: "#3b82f6", fillOpacity: 0.15, color: "#3b82f6", weight: 1, opacity: 0.3,
       }).addTo(map);
 
+      // Detect when user pans the map
+      map.on("moveend", () => {
+        if (!userLocation) return;
+        const center = map.getCenter();
+        const dist = Math.abs(center.lat - userLocation.lat) + Math.abs(center.lng - userLocation.lng);
+        if (dist > 0.005) setMapMoved(true);
+      });
+
       leafletMap.current = map;
       setMapReady(true);
 
-      // Force a resize after a tick so tiles render correctly
       setTimeout(() => map.invalidateSize(), 100);
     });
   }, [userLocation]);
 
-  // ─── Add store markers via Overpass ─────────────────────────────────────────
+  // ─── Search stores in map area via Overpass ──────────────────────────────────
 
-  useEffect(() => {
-    if (!mapReady || !leafletMap.current || items.length === 0 || !userLocation) return;
+  const searchStoresInArea = useCallback(async (bounds?: { s: number; w: number; n: number; e: number }) => {
+    if (!leafletMap.current || items.length === 0) return;
 
-    import("leaflet").then((L) => {
-      // Clear old markers
-      markersRef.current.forEach((m) => m.remove());
-      markersRef.current = [];
+    const L = await import("leaflet");
 
-      // Count menus per chain
-      const chainCounts = new Map<string, number>();
-      items.forEach((item) => {
-        const name = item.chain_restaurants?.name;
-        if (name) chainCounts.set(name, (chainCounts.get(name) ?? 0) + 1);
-      });
+    // Clear old markers
+    markersRef.current.forEach((m) => m.remove());
+    markersRef.current = [];
 
-      const chainNames = [...chainCounts.keys()];
-      if (chainNames.length === 0) return;
+    // Count menus per chain
+    const chainCounts = new Map<string, number>();
+    items.forEach((item) => {
+      const name = item.chain_restaurants?.name;
+      if (name) chainCounts.set(name, (chainCounts.get(name) ?? 0) + 1);
+    });
 
-      // Build Overpass query using regex OR: "name"~"マクドナルド|吉野家|松屋"
-      const nameRegex = chainNames.slice(0, 15).join("|");
-      const bbox = [
-        userLocation.lat - 0.03,
-        userLocation.lng - 0.04,
-        userLocation.lat + 0.03,
-        userLocation.lng + 0.04,
-      ].join(",");
+    const chainNames = [...chainCounts.keys()];
+    if (chainNames.length === 0) return;
 
-      const overpassQuery = `[out:json][timeout:15];(
-        node["amenity"="restaurant"]["name"~"${nameRegex}"](${bbox});
-        node["amenity"="fast_food"]["name"~"${nameRegex}"](${bbox});
-        node["amenity"="cafe"]["name"~"${nameRegex}"](${bbox});
-        node["shop"="convenience"]["name"~"${nameRegex}"](${bbox});
-      );out body;`;
+    // Use provided bounds or compute from current map view
+    let bbox: string;
+    if (bounds) {
+      bbox = `${bounds.s},${bounds.w},${bounds.n},${bounds.e}`;
+    } else {
+      const b = leafletMap.current.getBounds();
+      bbox = `${b.getSouth()},${b.getWest()},${b.getNorth()},${b.getEast()}`;
+    }
 
-      fetch("https://overpass-api.de/api/interpreter", {
+    const nameRegex = chainNames.slice(0, 15).join("|");
+    const overpassQuery = `[out:json][timeout:15];(
+      node["amenity"="restaurant"]["name"~"${nameRegex}"](${bbox});
+      node["amenity"="fast_food"]["name"~"${nameRegex}"](${bbox});
+      node["amenity"="cafe"]["name"~"${nameRegex}"](${bbox});
+      node["shop"="convenience"]["name"~"${nameRegex}"](${bbox});
+    );out body;`;
+
+    try {
+      const res = await fetch("https://overpass-api.de/api/interpreter", {
         method: "POST",
         body: `data=${encodeURIComponent(overpassQuery)}`,
-      })
-        .then((r) => r.json())
-        .then((data) => {
-          if (!data.elements || !leafletMap.current) return;
+      });
+      const data = await res.json();
+      if (!data.elements || !leafletMap.current) return;
 
-          const addedPositions = new Set<string>();
+      const addedPositions = new Set<string>();
 
-          data.elements.forEach((el: { lat: number; lon: number; tags?: { name?: string } }) => {
-            if (!el.tags?.name) return;
-            const storeName = el.tags.name;
+      data.elements.forEach((el: { lat: number; lon: number; tags?: { name?: string } }) => {
+        if (!el.tags?.name) return;
+        const storeName = el.tags.name;
 
-            // Find which chain this store matches
-            const matchedChain = chainNames.find((cn) => storeName.includes(cn));
-            if (!matchedChain) return;
+        const matchedChain = chainNames.find((cn) => storeName.includes(cn));
+        if (!matchedChain) return;
 
-            // Deduplicate very close markers
-            const posKey = `${el.lat.toFixed(4)},${el.lon.toFixed(4)}`;
-            if (addedPositions.has(posKey)) return;
-            addedPositions.add(posKey);
+        const posKey = `${el.lat.toFixed(4)},${el.lon.toFixed(4)}`;
+        if (addedPositions.has(posKey)) return;
+        addedPositions.add(posKey);
 
-            const count = chainCounts.get(matchedChain) ?? 0;
+        const count = chainCounts.get(matchedChain) ?? 0;
 
-            // Custom colored pin SVG
-            const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="40" height="48" viewBox="0 0 40 48">
-              <path d="M20 46 C20 46 4 28 4 18 C4 9.2 11.2 2 20 2 S36 9.2 36 18 C36 28 20 46 20 46Z" fill="#0ea5e9" stroke="white" stroke-width="2"/>
-              <circle cx="20" cy="18" r="11" fill="white"/>
-              <text x="20" y="22" text-anchor="middle" font-size="12" font-weight="bold" fill="#0ea5e9">${count}</text>
-            </svg>`;
+        const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="40" height="48" viewBox="0 0 40 48">
+          <path d="M20 46 C20 46 4 28 4 18 C4 9.2 11.2 2 20 2 S36 9.2 36 18 C36 28 20 46 20 46Z" fill="#0ea5e9" stroke="white" stroke-width="2"/>
+          <circle cx="20" cy="18" r="11" fill="white"/>
+          <text x="20" y="22" text-anchor="middle" font-size="12" font-weight="bold" fill="#0ea5e9">${count}</text>
+        </svg>`;
 
-            const icon = L.icon({
-              iconUrl: "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg),
-              iconSize: [40, 48],
-              iconAnchor: [20, 48],
-              popupAnchor: [0, -48],
-            });
+        const icon = L.icon({
+          iconUrl: "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg),
+          iconSize: [40, 48],
+          iconAnchor: [20, 48],
+          popupAnchor: [0, -48],
+        });
 
-            const marker = L.marker([el.lat, el.lon], { icon })
-              .bindPopup(
-                `<div style="text-align:center;min-width:120px">` +
-                `<b style="font-size:13px">${storeName}</b><br>` +
-                `<span style="color:#0ea5e9;font-weight:bold;font-size:14px">${count}件</span>` +
-                `<span style="color:#888;font-size:11px"> のメニューが該当</span>` +
-                `</div>`
-              )
-              .addTo(leafletMap.current!);
+        const marker = L.marker([el.lat, el.lon], { icon })
+          .bindPopup(
+            `<div style="text-align:center;min-width:120px">` +
+            `<b style="font-size:13px">${storeName}</b><br>` +
+            `<span style="color:#0ea5e9;font-weight:bold;font-size:14px">${count}件</span>` +
+            `<span style="color:#888;font-size:11px"> のメニューが該当</span>` +
+            `</div>`
+          )
+          .addTo(leafletMap.current!);
 
-            markersRef.current.push(marker);
-          });
-        })
-        .catch(() => {});
-    });
-  }, [items, mapReady, userLocation]);
+        markersRef.current.push(marker);
+      });
+    } catch {}
+  }, [items]);
+
+  // Auto-search on initial load
+  useEffect(() => {
+    if (!mapReady || items.length === 0 || !userLocation) return;
+    const bounds = {
+      s: userLocation.lat - 0.03, w: userLocation.lng - 0.04,
+      n: userLocation.lat + 0.03, e: userLocation.lng + 0.04,
+    };
+    searchStoresInArea(bounds);
+  }, [items, mapReady, userLocation, searchStoresInArea]);
+
+  // "このエリアで再検索" handler
+  const handleSearchThisArea = useCallback(async () => {
+    setSearchingArea(true);
+    await searchStoresInArea();
+    setMapMoved(false);
+    setSearchingArea(false);
+  }, [searchStoresInArea]);
+
+  // "現在地に戻る" handler
+  const goToMyLocation = useCallback(() => {
+    if (!leafletMap.current || !userLocation) return;
+    leafletMap.current.flyTo([userLocation.lat, userLocation.lng], 15, { duration: 0.8 });
+    setMapMoved(false);
+  }, [userLocation]);
 
   // ─── Fetch items ────────────────────────────────────────────────────────────
 
@@ -395,6 +426,31 @@ function SearchResultsContent() {
       <div ref={containerRef} className="flex-1 relative overflow-hidden">
         {/* Map fills entire area behind the sheet */}
         <div ref={mapRef} className="absolute inset-0 z-0" />
+
+        {/* ─── Map overlay buttons ─── */}
+        {mapReady && (
+          <>
+            {/* "このエリアで再検索" button - shown when map is panned */}
+            {mapMoved && (
+              <button
+                onClick={handleSearchThisArea}
+                disabled={searchingArea}
+                className="absolute top-3 left-1/2 -translate-x-1/2 z-10 bg-white text-sky-600 font-bold text-xs px-4 py-2 rounded-full shadow-lg border border-gray-200 flex items-center gap-1.5 disabled:opacity-60"
+              >
+                <RefreshCw className={`w-3.5 h-3.5 ${searchingArea ? "animate-spin" : ""}`} />
+                {searchingArea ? "検索中..." : "このエリアで再検索"}
+              </button>
+            )}
+
+            {/* GPS: back to my location */}
+            <button
+              onClick={goToMyLocation}
+              className="absolute top-3 right-3 z-10 w-10 h-10 bg-white rounded-full shadow-lg border border-gray-200 flex items-center justify-center text-gray-600 active:bg-gray-50"
+            >
+              <LocateFixed className="w-5 h-5" />
+            </button>
+          </>
+        )}
 
         {/* Loading overlay */}
         {!mapReady && (
