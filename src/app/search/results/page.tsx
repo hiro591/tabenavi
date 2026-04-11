@@ -28,6 +28,11 @@ interface MenuItem {
   chain_restaurants: { name: string; emoji: string } | null;
 }
 
+// Snap positions (vh percentage from top)
+const SNAP_FULL = 10;  // sheet covers 90% of screen
+const SNAP_HALF = 50;  // map and list roughly 50/50
+const SNAP_MINI = 80;  // sheet is minimized, mostly map
+
 // ─── Main Content ────────────────────────────────────────────────────────────
 
 function SearchResultsContent() {
@@ -44,12 +49,12 @@ function SearchResultsContent() {
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [mapReady, setMapReady] = useState(false);
 
-  // Sheet drag state
-  const [sheetTop, setSheetTop] = useState(55); // percentage from top (55% = map takes ~55%)
-  const isDragging = useRef(false);
+  // Sheet position: px from top of the map container
+  const [sheetPx, setSheetPx] = useState(0);
+  const [dragging, setDragging] = useState(false);
   const dragStartY = useRef(0);
-  const dragStartTop = useRef(55);
-  const sheetRef = useRef<HTMLDivElement>(null);
+  const dragStartPx = useRef(0);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const mapRef = useRef<HTMLDivElement>(null);
   const leafletMap = useRef<import("leaflet").Map | null>(null);
@@ -68,62 +73,72 @@ function SearchResultsContent() {
   const priceMax = Number(searchParams.get("price_max")) || 0;
   const sort = searchParams.get("sort") || "recommended";
 
-  // ─── Sheet drag handlers ────────────────────────────────────────────────────
-
-  const handleDragStart = useCallback((clientY: number) => {
-    isDragging.current = true;
-    dragStartY.current = clientY;
-    dragStartTop.current = sheetTop;
-  }, [sheetTop]);
-
-  const handleDragMove = useCallback((clientY: number) => {
-    if (!isDragging.current) return;
-    const delta = clientY - dragStartY.current;
-    const vh = window.innerHeight;
-    const deltaPercent = (delta / vh) * 100;
-    const newTop = Math.max(10, Math.min(85, dragStartTop.current + deltaPercent));
-    setSheetTop(newTop);
+  // Initialize sheet position to SNAP_HALF on mount
+  useEffect(() => {
+    const h = containerRef.current?.clientHeight ?? window.innerHeight;
+    setSheetPx(h * SNAP_HALF / 100);
   }, []);
 
-  const handleDragEnd = useCallback(() => {
-    if (!isDragging.current) return;
-    isDragging.current = false;
-    // Snap to nearest position: 10% (full), 55% (half), 85% (mini)
-    const snapPoints = [10, 55, 85];
-    const closest = snapPoints.reduce((a, b) =>
-      Math.abs(b - sheetTop) < Math.abs(a - sheetTop) ? b : a
-    );
-    setSheetTop(closest);
+  // ─── Sheet drag (px-based for reliable tracking) ────────────────────────────
 
-    // Resize map when sheet position changes
-    if (leafletMap.current) {
-      setTimeout(() => leafletMap.current?.invalidateSize(), 350);
-    }
-  }, [sheetTop]);
+  const snapTo = useCallback((position: number) => {
+    const h = containerRef.current?.clientHeight ?? window.innerHeight;
+    const target = h * position / 100;
+    setSheetPx(target);
+    setDragging(false);
+    // Let map recalculate its size after animation
+    setTimeout(() => leafletMap.current?.invalidateSize(), 350);
+  }, []);
 
+  const onDragStart = useCallback((clientY: number) => {
+    setDragging(true);
+    dragStartY.current = clientY;
+    dragStartPx.current = sheetPx;
+  }, [sheetPx]);
+
+  const onDragMove = useCallback((clientY: number) => {
+    if (!dragging) return;
+    const h = containerRef.current?.clientHeight ?? window.innerHeight;
+    const delta = clientY - dragStartY.current;
+    const minPx = h * SNAP_FULL / 100;
+    const maxPx = h * SNAP_MINI / 100;
+    setSheetPx(Math.max(minPx, Math.min(maxPx, dragStartPx.current + delta)));
+  }, [dragging]);
+
+  const onDragEnd = useCallback(() => {
+    if (!dragging) return;
+    const h = containerRef.current?.clientHeight ?? window.innerHeight;
+    const pct = (sheetPx / h) * 100;
+    // Snap to closest
+    const snaps = [SNAP_FULL, SNAP_HALF, SNAP_MINI];
+    const closest = snaps.reduce((a, b) => Math.abs(b - pct) < Math.abs(a - pct) ? b : a);
+    snapTo(closest);
+  }, [dragging, sheetPx, snapTo]);
+
+  // Global touch/mouse listeners for drag
   useEffect(() => {
-    const handleTouchMove = (e: TouchEvent) => {
-      if (isDragging.current) {
-        e.preventDefault();
-        handleDragMove(e.touches[0].clientY);
-      }
+    const onTouchMove = (e: TouchEvent) => {
+      if (!dragging) return;
+      e.preventDefault();
+      onDragMove(e.touches[0].clientY);
     };
-    const handleTouchEnd = () => handleDragEnd();
-    const handleMouseMove = (e: MouseEvent) => handleDragMove(e.clientY);
-    const handleMouseUp = () => handleDragEnd();
+    const onTouchEnd = () => onDragEnd();
+    const onMouseMove = (e: MouseEvent) => onDragMove(e.clientY);
+    const onMouseUp = () => onDragEnd();
 
-    window.addEventListener("touchmove", handleTouchMove, { passive: false });
-    window.addEventListener("touchend", handleTouchEnd);
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mouseup", handleMouseUp);
-
+    if (dragging) {
+      window.addEventListener("touchmove", onTouchMove, { passive: false });
+      window.addEventListener("touchend", onTouchEnd);
+      window.addEventListener("mousemove", onMouseMove);
+      window.addEventListener("mouseup", onMouseUp);
+    }
     return () => {
-      window.removeEventListener("touchmove", handleTouchMove);
-      window.removeEventListener("touchend", handleTouchEnd);
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("mouseup", handleMouseUp);
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("touchend", onTouchEnd);
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseup", onMouseUp);
     };
-  }, [handleDragMove, handleDragEnd]);
+  }, [dragging, onDragMove, onDragEnd]);
 
   // ─── Get user location ──────────────────────────────────────────────────────
 
@@ -144,7 +159,7 @@ function SearchResultsContent() {
   useEffect(() => {
     if (!userLocation || !mapRef.current || leafletMap.current) return;
 
-    // Load CSS first
+    // Load CSS
     if (!document.querySelector('link[href*="leaflet"]')) {
       const link = document.createElement("link");
       link.rel = "stylesheet";
@@ -163,82 +178,116 @@ function SearchResultsContent() {
 
       const map = L.map(mapRef.current!, {
         center: [userLocation.lat, userLocation.lng],
-        zoom: 14,
+        zoom: 15,
         zoomControl: false,
       });
 
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/">OSM</a>',
+      // Google-style tiles from CartoDB (cleaner than default OSM)
+      L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png", {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
+        maxZoom: 19,
       }).addTo(map);
 
-      // User location blue dot
+      // User location blue dot with pulse
       L.circleMarker([userLocation.lat, userLocation.lng], {
-        radius: 8, fillColor: "#3b82f6", fillOpacity: 1, color: "white", weight: 3,
+        radius: 10, fillColor: "#3b82f6", fillOpacity: 1, color: "white", weight: 3,
+      }).addTo(map);
+      // Outer pulse ring
+      L.circleMarker([userLocation.lat, userLocation.lng], {
+        radius: 20, fillColor: "#3b82f6", fillOpacity: 0.15, color: "#3b82f6", weight: 1, opacity: 0.3,
       }).addTo(map);
 
       leafletMap.current = map;
       setMapReady(true);
+
+      // Force a resize after a tick so tiles render correctly
+      setTimeout(() => map.invalidateSize(), 100);
     });
   }, [userLocation]);
 
-  // ─── Add store markers ──────────────────────────────────────────────────────
+  // ─── Add store markers via Overpass ─────────────────────────────────────────
 
   useEffect(() => {
     if (!mapReady || !leafletMap.current || items.length === 0 || !userLocation) return;
 
     import("leaflet").then((L) => {
+      // Clear old markers
       markersRef.current.forEach((m) => m.remove());
       markersRef.current = [];
 
-      const chainGroups = new Map<string, number>();
+      // Count menus per chain
+      const chainCounts = new Map<string, number>();
       items.forEach((item) => {
         const name = item.chain_restaurants?.name;
-        if (name) chainGroups.set(name, (chainGroups.get(name) ?? 0) + 1);
+        if (name) chainCounts.set(name, (chainCounts.get(name) ?? 0) + 1);
       });
 
-      const chainNames = [...chainGroups.keys()];
+      const chainNames = [...chainCounts.keys()];
       if (chainNames.length === 0) return;
 
-      // Build Overpass query for nearby stores
-      const nameFilter = chainNames.slice(0, 10).map((n) => `["name"~"${n}"]`).join("");
-      const bounds = {
-        s: userLocation.lat - 0.025,
-        w: userLocation.lng - 0.035,
-        n: userLocation.lat + 0.025,
-        e: userLocation.lng + 0.035,
-      };
-      const query = `[out:json][timeout:10];(node["amenity"~"restaurant|fast_food|cafe"]${nameFilter}(${bounds.s},${bounds.w},${bounds.n},${bounds.e}););out body;`;
+      // Build Overpass query using regex OR: "name"~"マクドナルド|吉野家|松屋"
+      const nameRegex = chainNames.slice(0, 15).join("|");
+      const bbox = [
+        userLocation.lat - 0.03,
+        userLocation.lng - 0.04,
+        userLocation.lat + 0.03,
+        userLocation.lng + 0.04,
+      ].join(",");
+
+      const overpassQuery = `[out:json][timeout:15];(
+        node["amenity"="restaurant"]["name"~"${nameRegex}"](${bbox});
+        node["amenity"="fast_food"]["name"~"${nameRegex}"](${bbox});
+        node["amenity"="cafe"]["name"~"${nameRegex}"](${bbox});
+        node["shop"="convenience"]["name"~"${nameRegex}"](${bbox});
+      );out body;`;
 
       fetch("https://overpass-api.de/api/interpreter", {
         method: "POST",
-        body: `data=${encodeURIComponent(query)}`,
+        body: `data=${encodeURIComponent(overpassQuery)}`,
       })
         .then((r) => r.json())
         .then((data) => {
-          if (!data.elements) return;
+          if (!data.elements || !leafletMap.current) return;
+
+          const addedPositions = new Set<string>();
 
           data.elements.forEach((el: { lat: number; lon: number; tags?: { name?: string } }) => {
             if (!el.tags?.name) return;
             const storeName = el.tags.name;
 
+            // Find which chain this store matches
             const matchedChain = chainNames.find((cn) => storeName.includes(cn));
             if (!matchedChain) return;
 
-            const count = chainGroups.get(matchedChain) ?? 0;
+            // Deduplicate very close markers
+            const posKey = `${el.lat.toFixed(4)},${el.lon.toFixed(4)}`;
+            if (addedPositions.has(posKey)) return;
+            addedPositions.add(posKey);
 
-            const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36">
-              <circle cx="18" cy="18" r="16" fill="#0ea5e9" stroke="white" stroke-width="2"/>
-              <text x="18" y="23" text-anchor="middle" font-size="13" font-weight="bold" fill="white">${count}</text>
+            const count = chainCounts.get(matchedChain) ?? 0;
+
+            // Custom colored pin SVG
+            const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="40" height="48" viewBox="0 0 40 48">
+              <path d="M20 46 C20 46 4 28 4 18 C4 9.2 11.2 2 20 2 S36 9.2 36 18 C36 28 20 46 20 46Z" fill="#0ea5e9" stroke="white" stroke-width="2"/>
+              <circle cx="20" cy="18" r="11" fill="white"/>
+              <text x="20" y="22" text-anchor="middle" font-size="12" font-weight="bold" fill="#0ea5e9">${count}</text>
             </svg>`;
 
             const icon = L.icon({
               iconUrl: "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg),
-              iconSize: [36, 36],
-              iconAnchor: [18, 18],
+              iconSize: [40, 48],
+              iconAnchor: [20, 48],
+              popupAnchor: [0, -48],
             });
 
             const marker = L.marker([el.lat, el.lon], { icon })
-              .bindPopup(`<b>${storeName}</b><br><span style="color:#0ea5e9;font-weight:bold">${count}件</span>のメニューが条件に合います`)
+              .bindPopup(
+                `<div style="text-align:center;min-width:120px">` +
+                `<b style="font-size:13px">${storeName}</b><br>` +
+                `<span style="color:#0ea5e9;font-weight:bold;font-size:14px">${count}件</span>` +
+                `<span style="color:#888;font-size:11px"> のメニューが該当</span>` +
+                `</div>`
+              )
               .addTo(leafletMap.current!);
 
             markersRef.current.push(marker);
@@ -334,7 +383,7 @@ function SearchResultsContent() {
             <ChevronLeft className="w-5 h-5" />
           </button>
           <h1 className="text-sm font-bold text-gray-900 truncate flex-1">{pageTitle}</h1>
-          <span className="text-xs text-gray-400">{items.length}件</span>
+          <span className="text-xs text-gray-400 shrink-0">{items.length}件</span>
           <button onClick={() => router.push("/search")} className="shrink-0 px-3 py-1.5 bg-sky-50 text-sky-600 rounded-full text-xs font-bold">
             <SlidersHorizontal className="w-3.5 h-3.5 inline mr-1" />
             条件変更
@@ -342,60 +391,70 @@ function SearchResultsContent() {
         </div>
       </div>
 
-      {/* ─── Map area (fills behind sheet) ─── */}
-      <div className="flex-1 relative">
+      {/* ─── Map + Sheet container ─── */}
+      <div ref={containerRef} className="flex-1 relative overflow-hidden">
+        {/* Map fills entire area behind the sheet */}
         <div ref={mapRef} className="absolute inset-0 z-0" />
 
-        {/* Loading overlay on map */}
+        {/* Loading overlay */}
         {!mapReady && (
           <div className="absolute inset-0 z-10 flex items-center justify-center bg-gray-100">
             <div className="text-center">
-              <div className="w-8 h-8 border-3 border-sky-400 border-t-transparent rounded-full animate-spin mx-auto mb-2" />
+              <div className="w-8 h-8 border-[3px] border-sky-400 border-t-transparent rounded-full animate-spin mx-auto mb-2" />
               <p className="text-xs text-gray-400">マップを読み込み中...</p>
             </div>
           </div>
         )}
 
-        {/* ─── Draggable bottom sheet ─── */}
+        {/* ─── Bottom sheet ─── */}
         <div
-          ref={sheetRef}
-          className="absolute left-0 right-0 bottom-0 z-20 bg-white rounded-t-2xl shadow-[0_-4px_20px_rgba(0,0,0,0.1)] flex flex-col"
+          className="absolute left-0 right-0 bottom-0 z-20 bg-white rounded-t-2xl flex flex-col"
           style={{
-            top: `${sheetTop}%`,
-            transition: isDragging.current ? "none" : "top 0.3s cubic-bezier(0.25, 1, 0.5, 1)",
+            top: sheetPx > 0 ? `${sheetPx}px` : "50%",
+            transition: dragging ? "none" : "top 0.35s cubic-bezier(0.25, 1, 0.5, 1)",
+            boxShadow: "0 -2px 20px rgba(0,0,0,0.12)",
           }}
         >
-          {/* Drag handle */}
+          {/* ─── Drag handle area (large touch target) ─── */}
           <div
-            className="flex justify-center pt-2 pb-1 cursor-grab active:cursor-grabbing touch-none"
-            onTouchStart={(e) => handleDragStart(e.touches[0].clientY)}
-            onMouseDown={(e) => { e.preventDefault(); handleDragStart(e.clientY); }}
+            className="shrink-0 cursor-grab active:cursor-grabbing select-none"
+            style={{ touchAction: "none" }}
+            onTouchStart={(e) => onDragStart(e.touches[0].clientY)}
+            onMouseDown={(e) => { e.preventDefault(); onDragStart(e.clientY); }}
           >
-            <div className="w-10 h-1 bg-gray-300 rounded-full" />
+            {/* Visual handle bar */}
+            <div className="flex justify-center py-3">
+              <div className="w-12 h-1.5 bg-gray-300 rounded-full" />
+            </div>
+
+            {/* Sort pills (inside drag area so whole top region is draggable) */}
+            <div
+              className="flex gap-1.5 px-4 pb-3 overflow-x-auto"
+              style={{ WebkitOverflowScrolling: "touch" }}
+              onTouchStart={(e) => e.stopPropagation()}
+              onMouseDown={(e) => e.stopPropagation()}
+            >
+              {SORT_OPTIONS.map((opt) => (
+                <button key={opt.value} onClick={() => updateSort(opt.value)}
+                  className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-bold transition-colors ${
+                    sort === opt.value ? "bg-sky-500 text-white" : "bg-gray-100 text-gray-500"
+                  }`}>
+                  {opt.label}
+                </button>
+              ))}
+            </div>
           </div>
 
-          {/* Sort pills */}
-          <div className="flex gap-1.5 px-4 py-2 overflow-x-auto shrink-0" style={{ WebkitOverflowScrolling: "touch" }}>
-            {SORT_OPTIONS.map((opt) => (
-              <button key={opt.value} onClick={() => updateSort(opt.value)}
-                className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-bold transition-colors ${
-                  sort === opt.value ? "bg-sky-500 text-white" : "bg-gray-100 text-gray-500"
-                }`}>
-                {opt.label}
-              </button>
-            ))}
-          </div>
-
-          {/* Results list (scrollable) */}
-          <div className="flex-1 overflow-y-auto overscroll-contain px-3 pb-24">
+          {/* ─── Results list ─── */}
+          <div className="flex-1 overflow-y-auto overscroll-contain px-3 pb-28">
             {loading ? (
-              <div className="space-y-2 pt-2">
+              <div className="space-y-2">
                 {[...Array(5)].map((_, i) => (
                   <div key={i} className="h-20 bg-gray-50 rounded-xl animate-pulse" />
                 ))}
               </div>
             ) : items.length > 0 ? (
-              <div className="space-y-2 pt-1">
+              <div className="space-y-2">
                 {items.map((item) => (
                   <MenuItemCard
                     key={item.id}
@@ -408,7 +467,7 @@ function SearchResultsContent() {
                 ))}
                 {hasMore && (
                   <button onClick={loadMore} disabled={loadingMore}
-                    className="w-full py-3 bg-gray-50 rounded-xl text-xs font-bold text-gray-500 disabled:opacity-50 mt-1">
+                    className="w-full py-3 bg-gray-50 rounded-xl text-xs font-bold text-gray-500 disabled:opacity-50">
                     {loadingMore ? "読み込み中..." : "もっと見る"}
                   </button>
                 )}
@@ -448,7 +507,7 @@ function MenuItemCard({ item, isFavorite, onTap, onFavorite, onRecord }: {
 
   return (
     <div onClick={onTap} className="flex items-center gap-3 bg-white rounded-xl p-2.5 border border-gray-100 shadow-sm active:bg-gray-50 transition-colors cursor-pointer">
-      {/* Logo / image */}
+      {/* Logo */}
       <div className="w-14 h-14 rounded-xl overflow-hidden shrink-0 flex items-center justify-center"
         style={{ backgroundColor: showLogo ? logoInfo.bg : "#f3f4f6" }}>
         {item.image_url ? (
@@ -468,18 +527,10 @@ function MenuItemCard({ item, isFavorite, onTap, onFavorite, onRecord }: {
         <p className="text-[11px] text-gray-400 leading-tight">{item.chain_restaurants?.name ?? "その他"}</p>
         <p className="text-sm font-bold text-gray-900 truncate leading-snug">{item.name}</p>
         <div className="flex items-center gap-2 mt-1">
-          {item.calories != null && (
-            <span className="text-xs font-bold text-sky-600">{item.calories} kcal</span>
-          )}
-          {item.protein != null && (
-            <span className="text-[10px] text-blue-500 font-semibold">P {item.protein}g</span>
-          )}
-          {item.fat != null && (
-            <span className="text-[10px] text-gray-400">F {item.fat}g</span>
-          )}
-          {item.price != null && (
-            <span className="text-[10px] text-gray-500 font-semibold ml-auto">¥{item.price}</span>
-          )}
+          {item.calories != null && <span className="text-xs font-bold text-sky-600">{item.calories} kcal</span>}
+          {item.protein != null && <span className="text-[10px] text-blue-500 font-semibold">P {item.protein}g</span>}
+          {item.fat != null && <span className="text-[10px] text-gray-400">F {item.fat}g</span>}
+          {item.price != null && <span className="text-[10px] text-gray-500 font-semibold ml-auto">¥{item.price}</span>}
         </div>
       </div>
 
@@ -503,7 +554,7 @@ export default function SearchResultsPage() {
     <Suspense fallback={
       <div className="fixed inset-0 bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <div className="w-8 h-8 border-3 border-sky-400 border-t-transparent rounded-full animate-spin mx-auto mb-2" />
+          <div className="w-8 h-8 border-[3px] border-sky-400 border-t-transparent rounded-full animate-spin mx-auto mb-2" />
           <p className="text-sm text-gray-400">読み込み中...</p>
         </div>
       </div>
