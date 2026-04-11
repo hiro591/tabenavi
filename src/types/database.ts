@@ -1,6 +1,9 @@
 export type Profile = {
   id: string;
   target_calories: number;
+  target_protein: number;
+  target_fat: number;
+  target_carbs: number;
   display_name: string | null;
   created_at: string;
 };
@@ -20,6 +23,9 @@ export type MenuItem = {
   protein: number;
   fat: number;
   carbs: number;
+  price: number | null;
+  category: string | null;
+  source_type: string | null;
   created_at: string;
   chain_restaurants?: ChainRestaurant;
 };
@@ -37,6 +43,17 @@ export type FoodLog = {
   logged_at: string;
   created_at: string;
   menu_items?: MenuItem & { chain_restaurants?: ChainRestaurant };
+};
+
+export type StoreLocation = {
+  id: string;
+  chain_restaurant_id: string;
+  name: string;
+  lat: number;
+  lng: number;
+  area: string | null;
+  created_at: string;
+  chain_restaurants?: ChainRestaurant;
 };
 
 export type CheatDay = {

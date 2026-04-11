@@ -199,9 +199,12 @@ export default function DashboardPage() {
 
   const displayName = profile?.display_name ?? "ゲスト";
 
-  const proteinTarget = Math.round((targetCalories * 0.15) / 4);
-  const fatTarget = Math.round((targetCalories * 0.25) / 9);
-  const carbsTarget = Math.round((targetCalories * 0.6) / 4);
+  const proteinTarget = profile?.target_protein ?? Math.round((targetCalories * 0.15) / 4);
+  const fatTarget = profile?.target_fat ?? Math.round((targetCalories * 0.25) / 9);
+  const carbsTarget = profile?.target_carbs ?? Math.round((targetCalories * 0.6) / 4);
+  const remainingProtein = Math.max(0, proteinTarget - totalProtein);
+  const remainingFat = Math.max(0, fatTarget - totalFat);
+  const remainingCarbs = Math.max(0, carbsTarget - totalCarbs);
 
   const todayStr = new Date().toISOString().split("T")[0];
 
@@ -289,6 +292,26 @@ export default function DashboardPage() {
         <PFCCard label="脂質" short="F" value={totalFat} target={fatTarget} color="bg-amber-400" bgColor="bg-amber-50" textColor="text-amber-600" />
         <PFCCard label="炭水化物" short="C" value={totalCarbs} target={carbsTarget} color="bg-emerald-400" bgColor="bg-emerald-50" textColor="text-emerald-600" />
       </div>
+
+      {/* ─── Discover CTA ─── */}
+      {remainingCalories > 0 && (
+        <Link
+          href="/recommend"
+          className="block bg-gradient-to-r from-sky-400 to-cyan-500 rounded-2xl p-4 mb-4 shadow-lg shadow-sky-200/50 active:scale-[0.98] transition-transform"
+        >
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-white text-sm font-bold mb-1">何食べよう？</p>
+              <p className="text-sky-100 text-xs">
+                残り P{remainingProtein.toFixed(0)}g ・ F{remainingFat.toFixed(0)}g ・ C{remainingCarbs.toFixed(0)}g で検索
+              </p>
+            </div>
+            <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
+              <Search className="w-5 h-5 text-white" />
+            </div>
+          </div>
+        </Link>
+      )}
 
       {/* ─── Quick Actions ─── */}
       <div className="grid grid-cols-2 gap-3 mb-4">
