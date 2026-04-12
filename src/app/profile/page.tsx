@@ -79,11 +79,37 @@ export default function ProfilePage() {
   const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
+
+    // Validate file type
+    if (!file.type.startsWith("image/")) {
+      showToast("画像ファイルを選択してください");
+      return;
+    }
+    // Validate file size (max 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      showToast("5MB以下の画像を選択してください");
+      return;
+    }
+
+    // Compress and resize via canvas (max 200x200, JPEG quality 0.7)
+    const img = new Image();
     const reader = new FileReader();
     reader.onload = (ev) => {
-      if (ev.target?.result) {
-        setAvatarUrl(ev.target.result as string);
-      }
+      if (!ev.target?.result) return;
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        const size = 200;
+        canvas.width = size;
+        canvas.height = size;
+        const ctx = canvas.getContext("2d")!;
+        // Center-crop
+        const minDim = Math.min(img.width, img.height);
+        const sx = (img.width - minDim) / 2;
+        const sy = (img.height - minDim) / 2;
+        ctx.drawImage(img, sx, sy, minDim, minDim, 0, 0, size, size);
+        setAvatarUrl(canvas.toDataURL("image/jpeg", 0.7));
+      };
+      img.src = ev.target.result as string;
     };
     reader.readAsDataURL(file);
   };
@@ -170,13 +196,19 @@ export default function ProfilePage() {
           </div>
 
           {/* Bio */}
-          <textarea
-            value={bio}
-            onChange={(e) => setBio(e.target.value)}
-            placeholder="自己紹介を書いてみよう（例: 週5外食のサラリーマン。サイゼリヤが大好き。）"
-            className="w-full mt-4 text-sm text-gray-700 placeholder:text-gray-300 outline-none bg-gray-50 rounded-xl p-3 resize-none border border-gray-100 focus:border-sky-300 focus:ring-1 focus:ring-sky-300/30 transition-colors"
-            rows={2}
-          />
+          <div className="mt-4 relative">
+            <textarea
+              value={bio}
+              onChange={(e) => { if (e.target.value.length <= 150) setBio(e.target.value); }}
+              placeholder="自己紹介を書いてみよう（例: 週5外食のサラリーマン。サイゼリヤが大好き。）"
+              className="w-full text-sm text-gray-700 placeholder:text-gray-300 outline-none bg-gray-50 rounded-xl p-3 resize-none border border-gray-100 focus:border-sky-300 focus:ring-1 focus:ring-sky-300/30 transition-colors"
+              rows={2}
+              maxLength={150}
+            />
+            <span className={`absolute bottom-2 right-3 text-[10px] ${bio.length > 130 ? "text-amber-500" : "text-gray-300"}`}>
+              {bio.length}/150
+            </span>
+          </div>
         </div>
 
         {/* ─── 目標カロリー ─── */}

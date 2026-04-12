@@ -125,8 +125,11 @@ export default function DashboardPage() {
       data?.map((log) => log.logged_at.split("T")[0]) ?? []
     );
 
+    // Start counting from yesterday if today has no logs yet
+    // (don't break streak just because user hasn't logged today yet)
     let currentStreak = 0;
-    for (let i = 0; i < 365; i++) {
+    const startOffset = loggedDates.has(todayStr) ? 0 : 1;
+    for (let i = startOffset; i < 365; i++) {
       const d = new Date();
       d.setDate(today.getDate() - i);
       const dateStr = d.toISOString().split("T")[0];

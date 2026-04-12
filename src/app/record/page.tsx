@@ -502,10 +502,13 @@ function RecordPageContent() {
                     <input
                       type="number"
                       value={customCalories || ""}
-                      onChange={(e) =>
-                        setCustomCalories(Number(e.target.value))
-                      }
+                      onChange={(e) => {
+                        const v = Math.max(0, Math.min(5000, Number(e.target.value)));
+                        setCustomCalories(v);
+                      }}
                       placeholder="0"
+                      min={0}
+                      max={5000}
                       className="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-500 text-gray-800"
                     />
                   </div>
@@ -517,10 +520,10 @@ function RecordPageContent() {
                       <input
                         type="number"
                         value={customProtein || ""}
-                        onChange={(e) =>
-                          setCustomProtein(Number(e.target.value))
-                        }
+                        onChange={(e) => setCustomProtein(Math.max(0, Math.min(500, Number(e.target.value))))}
                         placeholder="0"
+                        min={0}
+                        max={500}
                         className="w-full px-3 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-500 text-gray-800"
                       />
                     </div>
@@ -531,10 +534,10 @@ function RecordPageContent() {
                       <input
                         type="number"
                         value={customFat || ""}
-                        onChange={(e) =>
-                          setCustomFat(Number(e.target.value))
-                        }
+                        onChange={(e) => setCustomFat(Math.max(0, Math.min(500, Number(e.target.value))))}
                         placeholder="0"
+                        min={0}
+                        max={500}
                         className="w-full px-3 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-500 text-gray-800"
                       />
                     </div>
@@ -545,10 +548,10 @@ function RecordPageContent() {
                       <input
                         type="number"
                         value={customCarbs || ""}
-                        onChange={(e) =>
-                          setCustomCarbs(Number(e.target.value))
-                        }
+                        onChange={(e) => setCustomCarbs(Math.max(0, Math.min(500, Number(e.target.value))))}
                         placeholder="0"
+                        min={0}
+                        max={500}
                         className="w-full px-3 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-sky-500 text-gray-800"
                       />
                     </div>
