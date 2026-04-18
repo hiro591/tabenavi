@@ -74,6 +74,11 @@ function AffiliateProductCardInternal({
   const rakutenUrl = getValidRakutenUrl(product);
   const configured = Boolean(amazonUrl || rakutenUrl);
 
+  // 本番環境では未設定カードを完全に非表示 (壊れたUIを公開しない)
+  if (!configured && process.env.NODE_ENV !== "development") {
+    return null;
+  }
+
   return (
     <div className="my-8 bg-white rounded-xl border border-sky-100 shadow-sm overflow-hidden">
       <div className="bg-gradient-to-r from-sky-50 to-cyan-50 px-5 py-2.5 flex items-center justify-between border-b border-sky-100">
@@ -215,9 +220,12 @@ export function AffiliateProductGrid({
   productIds: string[];
   title?: string;
 }) {
+  const isDev = process.env.NODE_ENV === "development";
   const products = productIds
     .map((id) => getProductById(id))
-    .filter((p): p is AffiliateProduct => Boolean(p));
+    .filter((p): p is AffiliateProduct => Boolean(p))
+    // 本番環境では未設定商品を非表示 (dev環境では確認用に表示)
+    .filter((p) => isDev || isAffiliateConfigured(p));
 
   if (products.length === 0) return null;
 
