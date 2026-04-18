@@ -19,6 +19,10 @@ import {
   ArticleFooter,
   ArticleImage,
 } from "@/components/guide/ArticleComponents";
+import {
+  AffiliateDisclosure,
+  AffiliateProductGrid,
+} from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
@@ -95,7 +99,8 @@ export default function FamilyRestaurantDietPage() {
       <ArticleLayout tocItems={tocItems} currentSlug="family-restaurant-diet">
         {/* Authority & Date */}
         <AuthorityBadge />
-        <p className="text-sm text-gray-400 mt-3 mb-6">最終更新: 2026年3月19日</p>
+        <p className="text-sm text-gray-400 mt-3 mb-2">最終更新: 2026年3月19日</p>
+        <AffiliateDisclosure />
 
         {/* Introduction */}
         <p className="mb-4">
@@ -386,6 +391,11 @@ export default function FamilyRestaurantDietPage() {
         </TipBox>
 
         <ArticleImage src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=800&h=400&fit=crop" alt="栄養バランスの取れたヘルシーな食事プレート" />
+
+        <AffiliateProductGrid
+          title="ファミレス外食を支えるおすすめ"
+          productIds={["myprotein-impact", "inbar-protein", "tanita-scale", "ultora-whey"]}
+        />
 
         {/* Section 8: まとめ */}
         <SectionHeading id="summary">まとめ</SectionHeading>

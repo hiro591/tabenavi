@@ -15,6 +15,10 @@ import {
   NumberedList,
   ArticleFooter,
 } from "@/components/guide/ArticleComponents";
+import {
+  AffiliateDisclosure,
+  AffiliateProductGrid,
+} from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
@@ -80,11 +84,12 @@ export default function EatingOutDietPage() {
 
       <ArticleLayout tocItems={tocItems} currentSlug="eating-out-diet">
         {/* Authority Badge */}
-        <div className="mb-8">
+        <div className="mb-4">
           <AuthorityBadge />
           <p className="text-sm text-gray-400 mt-2">
             最終更新: 2026年3月 | 読了目安: 10分
           </p>
+          <AffiliateDisclosure />
         </div>
 
         {/* Mobile TOC */}
@@ -437,6 +442,11 @@ export default function EatingOutDietPage() {
             ダイエットのためとはいえ、<strong>極端なカロリー制限は逆効果</strong>です。1日1,200kcal以下の食事を続けると筋肉量が落ち、基礎代謝が低下してリバウンドしやすい体になります。1食あたり最低でも400kcalは摂取するようにしましょう。
           </p>
         </WarningBox>
+
+        <AffiliateProductGrid
+          title="外食ダイエットを支える定番アイテム"
+          productIds={["myprotein-impact", "tanita-scale", "base-food-bread", "ultora-whey"]}
+        />
 
         {/* ─── Section 5: まとめ ─── */}
         <section className="mb-12">

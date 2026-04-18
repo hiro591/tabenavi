@@ -46,6 +46,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               <li><a href="/privacy" className="hover:text-orange-400 transition-colors">プライバシーポリシー</a></li>
               <li><a href="/terms" className="hover:text-orange-400 transition-colors">利用規約</a></li>
+              <li><a href="/disclosure" className="hover:text-orange-400 transition-colors">広告掲載方針</a></li>
               <li><a href="/contact" className="hover:text-orange-400 transition-colors">お問い合わせ</a></li>
             </ul>
           </div>

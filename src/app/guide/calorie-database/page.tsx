@@ -14,6 +14,10 @@ import {
   ArticleFooter,
   ArticleImage,
 } from "@/components/guide/ArticleComponents";
+import {
+  AffiliateDisclosure,
+  AffiliateProductGrid,
+} from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
@@ -227,9 +231,10 @@ export default async function CalorieDatabasePage() {
       <ArticleLayout tocItems={tocItems} currentSlug="calorie-database">
         {/* Authority & date */}
         <AuthorityBadge />
-        <p className="text-sm text-gray-400 mt-3 mb-6">
+        <p className="text-sm text-gray-400 mt-3 mb-2">
           最終更新: 2026年3月19日
         </p>
+        <AffiliateDisclosure />
 
         <p className="text-gray-700 leading-relaxed mb-4">
           日本の主要外食チェーン<Marker>{totalChains}社</Marker>、合計<Marker color="blue">{totalMenus}メニュー</Marker>の
@@ -377,6 +382,11 @@ export default async function CalorieDatabasePage() {
         <ArticleImage
           src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=800&h=400&fit=crop"
           alt="コンビニの棚に並ぶサラダチキンやおにぎりなどの食品"
+        />
+
+        <AffiliateProductGrid
+          title="栄養管理を加速するアイテム"
+          productIds={["tanita-scale", "myprotein-impact", "shaker-bottle", "ultora-whey"]}
         />
 
         {/* まとめ */}

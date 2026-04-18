@@ -18,6 +18,10 @@ import {
   ArticleFooter,
   ArticleImage,
 } from "@/components/guide/ArticleComponents";
+import {
+  AffiliateDisclosure,
+  AffiliateProductGrid,
+} from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
@@ -94,7 +98,8 @@ export default function DailyMealPlanPage() {
       <ArticleLayout tocItems={tocItems} currentSlug="daily-meal-plan">
         {/* Authority & Date */}
         <AuthorityBadge />
-        <p className="text-sm text-gray-400 mt-3 mb-6">最終更新: 2026年3月19日</p>
+        <p className="text-sm text-gray-400 mt-3 mb-2">最終更新: 2026年3月19日</p>
+        <AffiliateDisclosure />
 
         {/* Introduction */}
         <p className="mb-4">
@@ -711,6 +716,11 @@ export default function DailyMealPlanPage() {
         <ArticleImage
           src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&h=400&fit=crop"
           alt="栄養バランスの取れた彩り豊かなディナープレート"
+        />
+
+        <AffiliateProductGrid
+          title="1日1500kcalプランをラクにするアイテム"
+          productIds={["base-food-bread", "ultora-whey", "tanita-scale", "low-carb-noodle"]}
         />
 
         {/* ─── Section 9: まとめ ─── */}

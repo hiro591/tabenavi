@@ -19,6 +19,11 @@ import {
   ComparisonTable,
   ArticleFooter,
 } from "@/components/guide/ArticleComponents";
+import {
+  AffiliateDisclosure,
+  AffiliateProductCard,
+  AffiliateProductGrid,
+} from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
@@ -93,9 +98,10 @@ export default function LowCarbEatingOutPage() {
       <ArticleLayout tocItems={tocItems} currentSlug="low-carb-eating-out">
         {/* Authority & date */}
         <AuthorityBadge />
-        <p className="text-sm text-gray-400 mt-3 mb-6">
+        <p className="text-sm text-gray-400 mt-3 mb-2">
           最終更新: 2026年3月19日
         </p>
+        <AffiliateDisclosure />
 
         <p className="text-gray-700 leading-relaxed mb-4">
           糖質制限ダイエット（ロカボダイエット）は、ごはんやパンなどの糖質を控えることで
@@ -458,6 +464,12 @@ export default function LowCarbEatingOutPage() {
         <ArticleImage
           src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=800&h=400&fit=crop"
           alt="健康的な低糖質の食事"
+        />
+
+        <AffiliateProductCard productId="base-food-bread" />
+        <AffiliateProductGrid
+          title="自宅でも糖質コントロールするためのおすすめ"
+          productIds={["low-carb-noodle", "ultora-whey", "tuna-can", "myprotein-impact"]}
         />
 
         {/* ─── Section 5: まとめ ─── */}

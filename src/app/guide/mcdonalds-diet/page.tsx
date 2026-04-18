@@ -19,6 +19,10 @@ import {
   ArticleFooter,
   ArticleImage,
 } from "@/components/guide/ArticleComponents";
+import {
+  AffiliateDisclosure,
+  AffiliateProductGrid,
+} from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
@@ -91,7 +95,8 @@ export default function McDonaldsDietPage() {
       <ArticleLayout tocItems={tocItems} currentSlug="mcdonalds-diet">
         {/* Authority & Date */}
         <AuthorityBadge />
-        <p className="text-sm text-gray-400 mt-3 mb-6">最終更新: 2026年3月19日</p>
+        <p className="text-sm text-gray-400 mt-3 mb-2">最終更新: 2026年3月19日</p>
+        <AffiliateDisclosure />
 
         {/* Introduction */}
         <p className="mb-4">
@@ -339,6 +344,11 @@ export default function McDonaldsDietPage() {
         </p>
 
         <ArticleImage src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&h=400&fit=crop" alt="スマートフォンで食事の栄養情報を確認している様子" />
+
+        <AffiliateProductGrid
+          title="ダイエットの土台を作るおすすめアイテム"
+          productIds={["tanita-scale", "ultora-whey", "base-food-bread", "myprotein-impact"]}
+        />
 
         {/* まとめ */}
         <SectionHeading id="summary">まとめ</SectionHeading>

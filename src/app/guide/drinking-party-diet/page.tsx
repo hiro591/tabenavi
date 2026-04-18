@@ -19,6 +19,10 @@ import {
   ArticleFooter,
   ArticleImage,
 } from "@/components/guide/ArticleComponents";
+import {
+  AffiliateDisclosure,
+  AffiliateProductGrid,
+} from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
@@ -94,7 +98,8 @@ export default function DrinkingPartyDietPage() {
       <ArticleLayout tocItems={tocItems} currentSlug="drinking-party-diet">
         {/* Authority & Date */}
         <AuthorityBadge />
-        <p className="text-sm text-gray-400 mt-3 mb-6">最終更新: 2026年3月19日</p>
+        <p className="text-sm text-gray-400 mt-3 mb-2">最終更新: 2026年3月19日</p>
+        <AffiliateDisclosure />
 
         {/* Introduction */}
         <p className="mb-4">
@@ -426,6 +431,11 @@ export default function DrinkingPartyDietPage() {
         <ArticleImage
           src="https://images.unsplash.com/photo-1529268209110-62be1d87fe75?w=800&h=400&fit=crop"
           alt="友人同士で乾杯しながら楽しく飲み会を過ごす様子"
+        />
+
+        <AffiliateProductGrid
+          title="飲み会の前後におすすめ"
+          productIds={["ukon", "highball-can", "miso-soup-pack", "tuna-can"]}
         />
 
         {/* Section 7: まとめ */}

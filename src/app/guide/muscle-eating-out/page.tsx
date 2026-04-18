@@ -16,6 +16,11 @@ import {
   CheckList,
   ArticleFooter,
 } from "@/components/guide/ArticleComponents";
+import {
+  AffiliateDisclosure,
+  AffiliateProductCard,
+  AffiliateProductGrid,
+} from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
@@ -83,11 +88,12 @@ export default function MuscleEatingOutPage() {
 
       <ArticleLayout tocItems={tocItems} currentSlug="muscle-eating-out">
         {/* Authority Badge */}
-        <div className="mb-8">
+        <div className="mb-4">
           <AuthorityBadge />
           <p className="text-sm text-gray-400 mt-2">
             最終更新: 2026年3月 | 読了目安: 12分
           </p>
+          <AffiliateDisclosure />
         </div>
 
         {/* Introduction */}
@@ -385,6 +391,12 @@ export default function MuscleEatingOutPage() {
               脂質をゼロに近づけようとする人がいますが、これは逆効果です。テストステロンなどのホルモン生成に脂質は不可欠。1日の脂質摂取量を<strong>総カロリーの20〜25%</strong>を下回らないようにしましょう。
             </p>
           </WarningBox>
+
+          <AffiliateProductCard productId="myprotein-impact" />
+          <AffiliateProductGrid
+            title="トレーニング効果を底上げするサプリ・補食"
+            productIds={["myprotein-bcaa", "ultora-whey", "inbar-protein", "tuna-can"]}
+          />
         </section>
 
         {/* ─── Section 5: たべなびで高タンパクメニューを探す ─── */}

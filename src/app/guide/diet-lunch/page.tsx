@@ -19,6 +19,10 @@ import {
   ComparisonTable,
   ArticleFooter,
 } from "@/components/guide/ArticleComponents";
+import {
+  AffiliateDisclosure,
+  AffiliateProductGrid,
+} from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
@@ -94,9 +98,10 @@ export default function DietLunchPage() {
       <ArticleLayout tocItems={tocItems} currentSlug="diet-lunch">
         {/* Authority & date */}
         <AuthorityBadge />
-        <p className="text-sm text-gray-400 mt-3 mb-6">
+        <p className="text-sm text-gray-400 mt-3 mb-2">
           最終更新: 2026年3月19日
         </p>
+        <AffiliateDisclosure />
 
         <p className="text-gray-700 leading-relaxed mb-4">
           ダイエット中、最も悩むのが「ランチに何を食べるか」ではないでしょうか。
@@ -508,6 +513,11 @@ export default function DietLunchPage() {
             咀嚼回数を増やすことで満腹中枢が刺激され、少量でも満足感が得られます。
           </p>
         </WarningBox>
+
+        <AffiliateProductGrid
+          title="ランチ難民を救うストック食品"
+          productIds={["base-food-bread", "salada-chicken-pack", "tuna-can", "inbar-protein"]}
+        />
 
         {/* ─── Section 6: まとめ ─── */}
         <SectionHeading id="summary">まとめ</SectionHeading>

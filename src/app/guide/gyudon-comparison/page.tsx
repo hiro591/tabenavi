@@ -17,6 +17,10 @@ import {
   ArticleFooter,
   ArticleImage,
 } from "@/components/guide/ArticleComponents";
+import {
+  AffiliateDisclosure,
+  AffiliateProductGrid,
+} from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
@@ -89,11 +93,12 @@ export default function GyudonComparisonPage() {
 
       <ArticleLayout tocItems={tocItems} currentSlug="gyudon-comparison">
         {/* Authority Badge & Date */}
-        <div className="mb-8">
+        <div className="mb-4">
           <AuthorityBadge />
           <p className="text-sm text-gray-400 mt-2">
             最終更新: 2026年3月19日 | 読了目安: 7分
           </p>
+          <AffiliateDisclosure />
         </div>
 
         {/* Introduction */}
@@ -330,6 +335,11 @@ export default function GyudonComparisonPage() {
         </section>
 
         <ArticleImage src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&h=400&fit=crop" alt="新鮮な野菜を使ったヘルシーな食事" />
+
+        <AffiliateProductGrid
+          title="牛丼の前後にあると安心の高タンパクアイテム"
+          productIds={["myprotein-impact", "inbar-protein", "tuna-can", "konjac-rice"]}
+        />
 
         {/* Section 6: まとめ */}
         <section className="mb-12">

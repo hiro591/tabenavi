@@ -18,6 +18,10 @@ import {
   ArticleFooter,
   ArticleImage,
 } from "@/components/guide/ArticleComponents";
+import {
+  AffiliateDisclosure,
+  AffiliateProductGrid,
+} from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
@@ -88,7 +92,8 @@ export default function RamenDietPage() {
       <ArticleLayout tocItems={tocItems} currentSlug="ramen-diet">
         {/* Authority & Date */}
         <AuthorityBadge />
-        <p className="text-sm text-gray-400 mt-3 mb-6">最終更新: 2026年3月23日</p>
+        <p className="text-sm text-gray-400 mt-3 mb-2">最終更新: 2026年3月23日</p>
+        <AffiliateDisclosure />
 
         {/* Introduction */}
         <p className="mb-4">
@@ -350,6 +355,11 @@ export default function RamenDietPage() {
             <p>つけ麺は「スープを残しやすいからヘルシー」と思われがちですが、実は<Marker>麺の量が通常のラーメンの1.5〜2倍</Marker>あることが多いです。並盛でも麺だけで450kcal前後。つけ麺を食べるなら必ず「麺少なめ」で注文しましょう。</p>
           </TipBox>
         </section>
+
+        <AffiliateProductGrid
+          title="ラーメン欲を抑える低糖質アイテム"
+          productIds={["low-carb-noodle", "konjac-rice", "miso-soup-pack", "myprotein-impact"]}
+        />
 
         {/* Section 5: まとめ */}
         <section className="mb-16">

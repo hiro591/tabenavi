@@ -18,6 +18,10 @@ import {
   ArticleFooter,
   ArticleImage,
 } from "@/components/guide/ArticleComponents";
+import {
+  AffiliateDisclosure,
+  AffiliateProductGrid,
+} from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
@@ -90,7 +94,8 @@ export default function SushiDietPage() {
       <ArticleLayout tocItems={tocItems} currentSlug="sushi-diet">
         {/* Authority & Date */}
         <AuthorityBadge />
-        <p className="text-sm text-gray-400 mt-3 mb-6">最終更新: 2026年3月23日</p>
+        <p className="text-sm text-gray-400 mt-3 mb-2">最終更新: 2026年3月23日</p>
+        <AffiliateDisclosure />
 
         {/* Introduction */}
         <p className="mb-4">
@@ -351,6 +356,11 @@ export default function SushiDietPage() {
         <CTABanner
           title="たべなびで寿司のカロリーを管理しよう"
           subtitle="食べた寿司の栄養成分を簡単に記録・管理できます"
+        />
+
+        <AffiliateProductGrid
+          title="寿司を楽しむ前後におすすめ"
+          productIds={["kombu-cha", "miso-soup-pack", "ukon", "myprotein-impact"]}
         />
 
         {/* ── Section 6: まとめ ── */}

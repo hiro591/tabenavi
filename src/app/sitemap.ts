@@ -67,15 +67,41 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
+  // ─── プログラマティックSEOページ（チェーン×目的） ───
+  const programmaticChains = [
+    "mcdonalds", "yoshinoya", "matsuya", "sukiya", "saizeriya",
+    "gusto", "mos", "kfc", "marugame", "starbucks", "subway",
+    "dennys", "hidakaya", "ohsho", "sushiro", "kurasushi",
+    "ootoya", "yayoiken", "doutor", "bamiyan",
+    "seven-eleven", "lawson", "familymart",
+  ];
+  const goals = [
+    "high-protein", "low-calorie", "diet", "low-fat",
+    "protein-cost", "under-500kcal", "under-500yen", "low-carb",
+  ];
+  const programmaticPages: MetadataRoute.Sitemap = [];
+  for (const chain of programmaticChains) {
+    for (const goal of goals) {
+      programmaticPages.push({
+        url: `${baseUrl}/chains/${chain}/${goal}`,
+        lastModified: now,
+        changeFrequency: "weekly",
+        priority: 0.7,
+      });
+    }
+  }
+
   return [
     { url: baseUrl, lastModified: now, changeFrequency: "daily", priority: 1.0 },
     { url: `${baseUrl}/guide`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     ...guidePages,
     ...chainPages,
+    ...programmaticPages,
     ...itemPages,
     { url: `${baseUrl}/search`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
     { url: `${baseUrl}/contact`, lastModified: now, changeFrequency: "yearly", priority: 0.4 },
     { url: `${baseUrl}/privacy`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
     { url: `${baseUrl}/terms`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
+    { url: `${baseUrl}/disclosure`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
   ];
 }

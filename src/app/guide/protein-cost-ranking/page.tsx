@@ -19,6 +19,11 @@ import {
   ComparisonTable,
   ArticleFooter,
 } from "@/components/guide/ArticleComponents";
+import {
+  AffiliateDisclosure,
+  AffiliateProductCard,
+  AffiliateProductGrid,
+} from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
@@ -92,7 +97,8 @@ export default function ProteinCostRankingPage() {
       <ArticleLayout tocItems={tocItems} currentSlug="protein-cost-ranking">
         {/* Authority & Date */}
         <AuthorityBadge />
-        <p className="text-sm text-gray-400 mt-3 mb-6">最終更新: 2026年3月19日</p>
+        <p className="text-sm text-gray-400 mt-3 mb-2">最終更新: 2026年3月19日</p>
+        <AffiliateDisclosure />
 
         {/* Introduction */}
         <p className="mb-4">
@@ -158,6 +164,8 @@ export default function ProteinCostRankingPage() {
         <TipBox title="プロテインパウダーとの比較">
           <p>参考までに、プロテインパウダー（マイプロテイン等）のコスパは<Marker>約3〜5円/g</Marker>。外食で10円/g以下を達成できれば、「固形食としてはトップクラス」と言えます。ただし外食には満足感・栄養バランス・味のバリエーションというメリットがあるため、プロテインと併用するのがベストです。</p>
         </TipBox>
+
+        <AffiliateProductCard productId="myprotein-impact" />
 
         {/* ─── Section 2: ランキングTOP20 ─── */}
         <SectionHeading id="ranking-top20">タンパク質1gあたり価格ランキングTOP20</SectionHeading>
@@ -408,6 +416,11 @@ export default function ProteinCostRankingPage() {
           <p>マクドナルドのアプリクーポン、松屋のモバイルオーダー割引など、<Marker>各チェーンのアプリを活用すれば実質コスパがさらに向上</Marker>します。特にマクドナルドはクーポンで50〜100円引きになることが多く、ダブルチーズバーガーが¥350で買えれば、コスパは¥13.3/gとサイゼリヤ超えも可能です。</p>
         </TipBox>
 
+        <AffiliateProductGrid
+          title="外食の合間に常備したい高タンパクアイテム"
+          productIds={["inbar-protein", "onebar-protein", "tuna-can", "salada-chicken-pack"]}
+        />
+
         {/* ─── Section 5: 月間シミュレーション ─── */}
         <SectionHeading id="monthly-simulation">月間タンパク質費用シミュレーション</SectionHeading>
 
@@ -492,6 +505,8 @@ export default function ProteinCostRankingPage() {
         <TipBox title="最強のハイブリッド戦略">
           <p>月間費用をさらに抑えたいなら、<Marker>朝食をプロテインパウダー（¥60・P24g）に置き換える</Marker>のが最も効果的。朝食費が1日¥400→¥60に下がり、月間で約1万円の節約。それだけで月間費用は¥45,000台に突入し、<Marker color="blue">年間で約55万円</Marker>で120g/日のタンパク質を確保できます。</p>
         </TipBox>
+
+        <AffiliateProductCard productId="ultora-whey" />
 
         {/* ─── Section 6: まとめ ─── */}
         <SectionHeading id="summary">まとめ</SectionHeading>

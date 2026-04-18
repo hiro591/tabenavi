@@ -17,6 +17,10 @@ import {
   ArticleFooter,
   ArticleImage,
 } from "@/components/guide/ArticleComponents";
+import {
+  AffiliateDisclosure,
+  AffiliateProductGrid,
+} from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
@@ -91,11 +95,12 @@ export default function ConveniProteinPage() {
 
       <ArticleLayout tocItems={tocItems} currentSlug="conveni-protein">
         {/* Authority Badge & Date */}
-        <div className="mb-8">
+        <div className="mb-4">
           <AuthorityBadge />
           <p className="text-sm text-gray-400 mt-2">
             最終更新: 2026年3月19日 | 読了目安: 8分
           </p>
+          <AffiliateDisclosure />
         </div>
 
         {/* Introduction */}
@@ -416,6 +421,11 @@ export default function ConveniProteinPage() {
               「高タンパク」と表記されたスムージーやドリンク系は、糖質も多い場合があります。必ず栄養成分表示を確認し、<Marker>タンパク質あたりのカロリー</Marker>で判断しましょう。
             </p>
           </WarningBox>
+
+          <AffiliateProductGrid
+            title="まとめ買いするとコンビニより安い高タンパクアイテム"
+            productIds={["inbar-protein", "onebar-protein", "tuna-can", "salada-chicken-pack"]}
+          />
         </section>
 
         <ArticleImage src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&h=400&fit=crop" alt="ジムでトレーニングをしているフィットネスの様子" />

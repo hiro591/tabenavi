@@ -19,6 +19,10 @@ import {
   ArticleFooter,
   ArticleImage,
 } from "@/components/guide/ArticleComponents";
+import {
+  AffiliateDisclosure,
+  AffiliateProductGrid,
+} from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
@@ -91,7 +95,8 @@ export default function SaizeriyaDietPage() {
       <ArticleLayout tocItems={tocItems} currentSlug="saizeriya-diet">
         {/* Authority & Date */}
         <AuthorityBadge />
-        <p className="text-sm text-gray-400 mt-3 mb-6">最終更新: 2026年3月19日</p>
+        <p className="text-sm text-gray-400 mt-3 mb-2">最終更新: 2026年3月19日</p>
+        <AffiliateDisclosure />
 
         {/* Introduction */}
         <p className="mb-4">
@@ -365,6 +370,11 @@ export default function SaizeriyaDietPage() {
         </p>
 
         <ArticleImage src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=400&fit=crop" alt="レストランで楽しく食事をする人々の様子" />
+
+        <AffiliateProductGrid
+          title="サイゼリヤと組み合わせたい高タンパクアイテム"
+          productIds={["myprotein-impact", "ultora-whey", "inbar-protein", "tanita-scale"]}
+        />
 
         {/* まとめ */}
         <SectionHeading id="summary">まとめ</SectionHeading>
