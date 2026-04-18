@@ -30,7 +30,20 @@ export type ProductCategory =
   | "meal-prep"
   | "convenience-protein";
 
-const PLACEHOLDER = "YOUR_AFFILIATE_LINK_HERE";
+export const AFFILIATE_PLACEHOLDER = "YOUR_AFFILIATE_LINK_HERE";
+const PLACEHOLDER = AFFILIATE_PLACEHOLDER;
+
+export function getValidAmazonUrl(product: AffiliateProduct): string | null {
+  if (!product.amazonUrl) return null;
+  if (product.amazonUrl === AFFILIATE_PLACEHOLDER) return null;
+  return product.amazonUrl;
+}
+
+export function getValidRakutenUrl(product: AffiliateProduct): string | null {
+  if (!product.rakutenUrl) return null;
+  if (product.rakutenUrl === AFFILIATE_PLACEHOLDER) return null;
+  return product.rakutenUrl;
+}
 
 export const AFFILIATE_PRODUCTS: AffiliateProduct[] = [
   // ─── プロテインパウダー ───────────────────────────────────────
@@ -41,8 +54,8 @@ export const AFFILIATE_PRODUCTS: AffiliateProduct[] = [
       "国内製造・人工甘味料不使用のホエイプロテイン。1食あたりタンパク質21g。外食でタンパク質が不足しがちな日の補完に最適。",
     imageUrl: "/affiliate/ultora.jpg",
     category: "protein-powder",
-    amazonUrl: PLACEHOLDER, // 要差し替え: もしも経由Amazonリンク
-    rakutenUrl: PLACEHOLDER,
+    amazonUrl: PLACEHOLDER,
+    rakutenUrl: "https://af.moshimo.com/af/c/click?a_id=5495270&p_id=54&pc_id=54&pl_id=616&url=https%3A%2F%2Fitem.rakuten.co.jp%2Fultora%2Fulwpi100%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fultora%2Fi%2F10000118%2F",
     priceHint: "約4,000円〜 (1kg)",
     highlight: "コスパ◎ タンパク質1gあたり約2円",
   },

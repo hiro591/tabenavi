@@ -6,6 +6,8 @@ import {
   AFFILIATE_PRODUCTS,
   getProductById,
   getProductsByCategory,
+  getValidAmazonUrl,
+  getValidRakutenUrl,
   isAffiliateConfigured,
   type AffiliateProduct,
   type ProductCategory,
@@ -68,8 +70,9 @@ function AffiliateProductCardInternal({
 }: {
   product: AffiliateProduct;
 }) {
-  const configured = isAffiliateConfigured(product);
-  const [imgError, setImgError] = useState(false);
+  const amazonUrl = getValidAmazonUrl(product);
+  const rakutenUrl = getValidRakutenUrl(product);
+  const configured = Boolean(amazonUrl || rakutenUrl);
 
   return (
     <div className="my-8 bg-white rounded-xl border border-sky-100 shadow-sm overflow-hidden">
@@ -82,20 +85,7 @@ function AffiliateProductCardInternal({
       </div>
 
       <div className="p-5 sm:p-6 grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-5 items-start">
-        <div className="w-full sm:w-[140px] aspect-square bg-gray-50 rounded-lg overflow-hidden border border-gray-100 flex-shrink-0 flex items-center justify-center">
-          {!imgError ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={product.imageUrl}
-              alt={product.name}
-              loading="lazy"
-              onError={() => setImgError(true)}
-              className="w-full h-full object-cover"
-            />
-          ) : (
-            <ShoppingBag className="w-10 h-10 text-gray-300" />
-          )}
-        </div>
+        <ProductThumbnail product={product} size={140} />
 
         <div className="min-w-0">
           {product.highlight && (
@@ -115,23 +105,21 @@ function AffiliateProductCardInternal({
           </p>
 
           <div className="flex flex-wrap gap-2">
-            {product.amazonUrl && (
+            {amazonUrl && (
               <AffiliateButton
-                href={product.amazonUrl}
+                href={amazonUrl}
                 productId={product.id}
                 network="amazon"
                 label="Amazonで見る"
-                disabled={!configured}
               />
             )}
-            {product.rakutenUrl && (
+            {rakutenUrl && (
               <AffiliateButton
-                href={product.rakutenUrl}
+                href={rakutenUrl}
                 productId={product.id}
                 network="rakuten"
                 label="楽天で見る"
                 variant="rakuten"
-                disabled={!configured}
               />
             )}
           </div>
@@ -147,6 +135,45 @@ function AffiliateProductCardInternal({
   );
 }
 
+function ProductThumbnail({
+  product,
+  size = 140,
+}: {
+  product: AffiliateProduct;
+  size?: number;
+}) {
+  const [imgError, setImgError] = useState(false);
+  const initial = product.name.charAt(0);
+  const sizeClass = size === 140 ? "w-full sm:w-[140px]" : "w-16 h-16";
+
+  if (imgError) {
+    return (
+      <div
+        className={`${sizeClass} aspect-square bg-gradient-to-br from-sky-100 via-cyan-50 to-sky-50 rounded-lg overflow-hidden border border-sky-100 flex-shrink-0 flex items-center justify-center`}
+      >
+        <span className="text-3xl font-bold text-sky-400/70 select-none">
+          {initial}
+        </span>
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className={`${sizeClass} aspect-square bg-gray-50 rounded-lg overflow-hidden border border-gray-100 flex-shrink-0 flex items-center justify-center`}
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={product.imageUrl}
+        alt={product.name}
+        loading="lazy"
+        onError={() => setImgError(true)}
+        className="w-full h-full object-cover"
+      />
+    </div>
+  );
+}
+
 // ─── 3. AffiliateButton ───────────────────────────────────────────
 function AffiliateButton({
   href,
@@ -154,31 +181,25 @@ function AffiliateButton({
   network,
   label,
   variant = "amazon",
-  disabled = false,
 }: {
   href: string;
   productId: string;
   network: Network;
   label: string;
   variant?: "amazon" | "rakuten";
-  disabled?: boolean;
 }) {
   const colorClass =
     variant === "rakuten"
       ? "bg-red-500 hover:bg-red-600 text-white"
       : "bg-amber-500 hover:bg-amber-600 text-white";
 
-  const disabledClass = disabled
-    ? "opacity-50 cursor-not-allowed pointer-events-none"
-    : "";
-
   return (
     <a
-      href={disabled ? "#" : href}
+      href={href}
       target="_blank"
       rel="sponsored nofollow noopener"
-      onClick={() => !disabled && trackAffiliateClick(productId, network)}
-      className={`${colorClass} ${disabledClass} inline-flex items-center gap-1.5 text-sm font-bold px-4 py-2 rounded-lg transition-colors`}
+      onClick={() => trackAffiliateClick(productId, network)}
+      className={`${colorClass} inline-flex items-center gap-1.5 text-sm font-bold px-4 py-2 rounded-lg transition-colors`}
     >
       {label}
       <ExternalLink className="w-3.5 h-3.5" />
@@ -219,48 +240,50 @@ export function AffiliateProductGrid({
 }
 
 function AffiliateMiniCard({ product }: { product: AffiliateProduct }) {
-  const configured = isAffiliateConfigured(product);
-  const [imgError, setImgError] = useState(false);
-  const primaryUrl = product.amazonUrl || product.rakutenUrl || "#";
-  const primaryNetwork: Network = product.amazonUrl ? "amazon" : "rakuten";
+  const amazonUrl = getValidAmazonUrl(product);
+  const rakutenUrl = getValidRakutenUrl(product);
+  const primaryUrl = amazonUrl || rakutenUrl;
+  const primaryNetwork: Network = amazonUrl ? "amazon" : "rakuten";
+  const configured = Boolean(primaryUrl);
+
+  // 共通の中身レンダラ
+  const inner = (
+    <div className="flex gap-3">
+      <ProductThumbnail product={product} size={64} />
+      <div className="min-w-0 flex-1">
+        <p className="font-bold text-gray-900 text-sm leading-snug line-clamp-2 mb-1">
+          {product.name}
+        </p>
+        {product.highlight && (
+          <p className="text-[11px] text-sky-600 font-medium">{product.highlight}</p>
+        )}
+        {product.priceHint && (
+          <p className="text-[11px] text-gray-500 mt-0.5">{product.priceHint}</p>
+        )}
+        {!configured && process.env.NODE_ENV === "development" && (
+          <p className="mt-1 text-[10px] text-amber-600 inline-block">[Dev] 未設定</p>
+        )}
+      </div>
+    </div>
+  );
+
+  if (!configured || !primaryUrl) {
+    return (
+      <div className="block bg-white rounded-lg border border-gray-200 p-4 opacity-70">
+        {inner}
+      </div>
+    );
+  }
 
   return (
     <a
-      href={configured ? primaryUrl : "#"}
+      href={primaryUrl}
       target="_blank"
       rel="sponsored nofollow noopener"
-      onClick={() => configured && trackAffiliateClick(product.id, primaryNetwork)}
-      className={`block bg-white rounded-lg border border-gray-200 hover:border-sky-300 hover:shadow-md transition-all p-4 ${
-        configured ? "" : "opacity-70"
-      }`}
+      onClick={() => trackAffiliateClick(product.id, primaryNetwork)}
+      className="block bg-white rounded-lg border border-gray-200 hover:border-sky-300 hover:shadow-md transition-all p-4"
     >
-      <div className="flex gap-3">
-        <div className="w-16 h-16 bg-gray-50 rounded overflow-hidden flex-shrink-0 flex items-center justify-center">
-          {!imgError ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={product.imageUrl}
-              alt={product.name}
-              loading="lazy"
-              onError={() => setImgError(true)}
-              className="w-full h-full object-cover"
-            />
-          ) : (
-            <ShoppingBag className="w-6 h-6 text-gray-300" />
-          )}
-        </div>
-        <div className="min-w-0 flex-1">
-          <p className="font-bold text-gray-900 text-sm leading-snug line-clamp-2 mb-1">
-            {product.name}
-          </p>
-          {product.highlight && (
-            <p className="text-[11px] text-sky-600 font-medium">{product.highlight}</p>
-          )}
-          {product.priceHint && (
-            <p className="text-[11px] text-gray-500 mt-0.5">{product.priceHint}</p>
-          )}
-        </div>
-      </div>
+      {inner}
     </a>
   );
 }
@@ -278,7 +301,9 @@ export function AffiliateInlineLink({
   const product = getProductById(productId);
   if (!product) return <>{children}</>;
   const url =
-    network === "amazon" ? product.amazonUrl : product.rakutenUrl;
+    network === "amazon"
+      ? getValidAmazonUrl(product)
+      : getValidRakutenUrl(product);
   if (!url) return <>{children}</>;
 
   return (
