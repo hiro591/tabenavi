@@ -51,37 +51,37 @@ export const AFFILIATE_PRODUCTS: AffiliateProduct[] = [
     id: "ultora-whey",
     name: "ULTORA ホエイダイエットプロテイン",
     description:
-      "国内製造・人工甘味料不使用のホエイプロテイン。1食あたりタンパク質21g。外食でタンパク質が不足しがちな日の補完に最適。",
-    imageUrl: "/affiliate/ultora.jpg",
+      "13kg痩せた1年で5袋(5kg)消費した主力。人工甘味料不使用なのにチョコ味が普通に美味い。残業で帰り遅い夜、コンビニ寄らず家でシェイカー振るだけで済む＝衝動買い防止にもなってる。",
+    imageUrl: "https://shop.r10s.jp/ultora/cabinet/12530611/12989527/imgrc0108557950.jpg",
     category: "protein-powder",
     amazonUrl: PLACEHOLDER,
     rakutenUrl: "https://af.moshimo.com/af/c/click?a_id=5495270&p_id=54&pc_id=54&pl_id=616&url=https%3A%2F%2Fitem.rakuten.co.jp%2Fultora%2Fulwpi100%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fultora%2Fi%2F10000118%2F",
     priceHint: "約4,000円〜 (1kg)",
-    highlight: "コスパ◎ タンパク質1gあたり約2円",
+    highlight: "俺の主力 / 年5袋消費",
   },
   {
     id: "myprotein-impact",
     name: "MYPROTEIN Impact ホエイプロテイン",
     description:
-      "世界No.1ブランド。60種類以上のフレーバーで飽きない。コスパ重視ならこれ。",
+      "ULTORAに飽きた時のローテ要員。ナチュラルチョコとミルクティーを試したけど、ミルクティーが当たり。セール中の5kg買いだと1食あたり50円切る。減量中の財布に優しい救世主。",
     imageUrl: "/affiliate/myprotein.jpg",
     category: "protein-powder",
     amazonUrl: PLACEHOLDER,
     rakutenUrl: PLACEHOLDER,
     priceHint: "約3,000円〜 (1kg)",
-    highlight: "60種以上のフレーバー",
+    highlight: "味選び迷ったら / 60種",
   },
   {
     id: "savas-shape",
     name: "ザバス シェイプ＆ビューティ ソイプロテイン",
     description:
-      "ソイプロテインで腹持ち◎。ダイエット中の置き換え・間食代わりに。",
+      "夜の置き換え用に2袋リピート。ホエイより腹持ちがガチで違って、寝る前に飲んでも翌朝胃もたれしない。ミルクティー味が無難に飲みやすい。スーパーでも買えるのが緊急時に地味に助かる。",
     imageUrl: "/affiliate/savas.jpg",
     category: "protein-powder",
     amazonUrl: PLACEHOLDER,
     rakutenUrl: PLACEHOLDER,
     priceHint: "約2,500円〜 (945g)",
-    highlight: "国内ブランドで安心",
+    highlight: "夜の置き換え用",
   },
 
   // ─── プロテインバー ───────────────────────────────────────
@@ -89,25 +89,25 @@ export const AFFILIATE_PRODUCTS: AffiliateProduct[] = [
     id: "inbar-protein",
     name: "in バー プロテイン Granola",
     description:
-      "1本でタンパク質10g。コンビニでも買えるが、Amazonまとめ買いが圧倒的にお得。",
+      "出社カバンに常備して1年。会議が長引いて昼食えない日、これ1本で乗り切れる。コンビニで200円弱だけどAmazon定期便なら1本140円台。月3箱ペースで買い続けてる定番。",
     imageUrl: "/affiliate/inbar.jpg",
     category: "protein-bar",
     amazonUrl: PLACEHOLDER,
     rakutenUrl: PLACEHOLDER,
     priceHint: "約2,000円〜 (12本)",
-    highlight: "外出時の高タンパク間食に",
+    highlight: "カバンに常備 / 月3箱",
   },
   {
     id: "onebar-protein",
     name: "1本満足バー プロテイン",
     description:
-      "1本でタンパク質15g。チョコ系で甘いものが食べたい時の救世主。",
+      "減量中の「甘いもの食いたい欲」をこれで殺してきた。チョコがガチでチョコ味で、満足感が普通のお菓子と変わらない。13kg痩せた1年で4箱は消費。コンビニスイーツ買うより罪悪感ゼロ。",
     imageUrl: "/affiliate/onebar.jpg",
     category: "protein-bar",
     amazonUrl: PLACEHOLDER,
     rakutenUrl: PLACEHOLDER,
     priceHint: "約2,200円〜 (12本)",
-    highlight: "甘いもの欲求対策に",
+    highlight: "甘いもの欲を殺す / 4箱消費",
   },
 
   // ─── 低糖質食品 ───────────────────────────────────────
@@ -115,25 +115,25 @@ export const AFFILIATE_PRODUCTS: AffiliateProduct[] = [
     id: "base-food-bread",
     name: "BASE BREAD (ベースブレッド)",
     description:
-      "1食で26種の栄養素が摂れる完全栄養パン。糖質制限中の朝食・ランチ代用に。",
+      "出社日の朝食、これ1個＋ブラックコーヒーで固定。栄養考えるのが面倒な朝に答え出してくれる。最初パサつき気味で正直微妙だったけど、レンチン10秒で化ける。チョコ味なら甘党も納得。",
     imageUrl: "/affiliate/base-bread.jpg",
     category: "low-carb-food",
     amazonUrl: PLACEHOLDER,
     rakutenUrl: PLACEHOLDER,
     priceHint: "約3,500円〜 (16袋)",
-    highlight: "完全栄養・タンパク質13g/袋",
+    highlight: "朝食固定で思考停止",
   },
   {
     id: "low-carb-noodle",
     name: "紀文 糖質0g麺",
     description:
-      "ラーメン代わりに。1袋で糖質0g・15kcal。ダイエット中の麺欲を満たす。",
+      "二郎食いたい夜の代替案。市販ラーメンスープに突っ込んで茹で卵とキャベツのせれば、罪悪感ゼロのなんちゃってラーメンが完成。麺感は本物の80%だけど糖質ゼロの安心感がデカい。",
     imageUrl: "/affiliate/0g-noodle.jpg",
     category: "low-carb-food",
     amazonUrl: PLACEHOLDER,
     rakutenUrl: PLACEHOLDER,
     priceHint: "約2,500円〜 (12袋)",
-    highlight: "糖質0g・15kcal",
+    highlight: "深夜の麺欲を罪悪感ゼロで",
   },
 
   // ─── キッチンスケール ───────────────────────────────────────
@@ -141,13 +141,13 @@ export const AFFILIATE_PRODUCTS: AffiliateProduct[] = [
     id: "tanita-scale",
     name: "タニタ デジタルクッキングスケール",
     description:
-      "0.1g単位で計量。自炊する日のPFC計算精度が劇的に上がる。レコーディングダイエット必携。",
+      "これ買ってからガチで世界変わった。「ご飯1膳」が実は200gだったり、目分量と実重量で200kcal違ったりする現実を突きつけられる。データ好きには必須。1500円で痩せられるなら安すぎる投資。",
     imageUrl: "/affiliate/tanita.jpg",
     category: "kitchen-scale",
     amazonUrl: PLACEHOLDER,
     rakutenUrl: PLACEHOLDER,
     priceHint: "約1,500円〜",
-    highlight: "0.1g精度・3kgまで",
+    highlight: "目分量との決別ツール",
   },
 
   // ─── サプリメント ───────────────────────────────────────
@@ -155,25 +155,25 @@ export const AFFILIATE_PRODUCTS: AffiliateProduct[] = [
     id: "myprotein-bcaa",
     name: "MYPROTEIN BCAA 4:1:1",
     description:
-      "筋肉の分解防止＆回復促進。トレーニング中の摂取で筋トレ効果UP。",
+      "週2のジムで筋肉落としたくない時用。減量中はカロリー絞ってる分、筋肉減りやすい気がして導入。トロピカル味を水筒に入れてジムで飲んでる。スポドリ感覚で続けやすい。",
     imageUrl: "/affiliate/bcaa.jpg",
     category: "supplement",
     amazonUrl: PLACEHOLDER,
     rakutenUrl: PLACEHOLDER,
     priceHint: "約3,000円〜 (500g)",
-    highlight: "コスパ最強BCAA",
+    highlight: "ジム日のお供",
   },
   {
     id: "dhc-multivitamin",
     name: "DHC マルチビタミン (60日分)",
     description:
-      "外食中心だと不足しがちなビタミンを1粒で補完。1日10円台のコスパ。",
+      "外食ばっかりだった86kg時代、明らかに野菜不足だったので保険として導入。今も毎朝1粒の習慣続いてる。サプリで何かが劇的に変わるとは思わないけど、1日10円台ならむしろ飲まない理由がない。",
     imageUrl: "/affiliate/dhc-vit.jpg",
     category: "supplement",
     amazonUrl: PLACEHOLDER,
     rakutenUrl: PLACEHOLDER,
     priceHint: "約500円",
-    highlight: "1日10円台",
+    highlight: "外食民の保険 / 1日10円",
   },
 
   // ─── 寿司・和食関連 ───────────────────────────────────────
@@ -181,25 +181,25 @@ export const AFFILIATE_PRODUCTS: AffiliateProduct[] = [
     id: "kombu-cha",
     name: "玉露園 梅こんぶ茶",
     description:
-      "外食・寿司の前後に飲むと食べ過ぎ予防に。低カロリーで満腹中枢を刺激。",
+      "回転寿司行く前にデスクで一杯。胃が温まって最初の3皿で「あれ、もう満足かも」ってなる現象を発見してから手放せない。1杯3kcalで効果アリ。デスクの引き出しに常駐してる。",
     imageUrl: "/affiliate/kombu-cha.jpg",
     category: "low-carb-food",
     amazonUrl: PLACEHOLDER,
     rakutenUrl: PLACEHOLDER,
     priceHint: "約500円〜",
-    highlight: "外食前のひと工夫",
+    highlight: "寿司前の自衛策",
   },
   {
     id: "miso-soup-pack",
     name: "永谷園 1杯でしじみ70個分の濃縮しじみ味噌汁",
     description:
-      "外食やお酒の翌朝に。低カロリーでミネラル補給。デスクに常備推奨。",
+      "飲み会翌朝の出社、これが命綱。会社の給湯室で湯を注ぐだけで人間に戻れる。1杯30kcal台でランチ前の空腹も紛れる。オフィスの引き出しに10袋ストックしてる。30代の必需品。",
     imageUrl: "/affiliate/miso-soup.jpg",
     category: "low-carb-food",
     amazonUrl: PLACEHOLDER,
     rakutenUrl: PLACEHOLDER,
     priceHint: "約800円〜 (10食)",
-    highlight: "オフィス常備に",
+    highlight: "二日酔い翌朝の命綱",
   },
 
   // ─── ラーメン・麺類関連 ───────────────────────────────────
@@ -207,13 +207,13 @@ export const AFFILIATE_PRODUCTS: AffiliateProduct[] = [
     id: "konjac-rice",
     name: "蒟蒻畑 マンナンごはん (パックごはん)",
     description:
-      "白米に混ぜるだけで糖質約25%カット。ラーメンや丼のごはん部分の置き換えに。",
+      "「ご飯抜きは無理」派の救済策。普通の白米と半々で炊くと食感も味もほぼ気にならない。停滞期に試して効いた。レンジで2分、夜の自炊サボリ日でも罪悪感少なめにご飯食える。",
     imageUrl: "/affiliate/mannan.jpg",
     category: "low-carb-food",
     amazonUrl: PLACEHOLDER,
     rakutenUrl: PLACEHOLDER,
     priceHint: "約2,500円〜 (12食)",
-    highlight: "糖質25%カット",
+    highlight: "停滞期に試して効いた",
   },
 
   // ─── 飲み会・お酒関連 ───────────────────────────────────
@@ -221,25 +221,25 @@ export const AFFILIATE_PRODUCTS: AffiliateProduct[] = [
     id: "ukon",
     name: "ハウス ウコンの力 顆粒",
     description:
-      "飲み会前の必需品。肝臓ケアでお酒の翌日も快調に。",
+      "接待の前にコンビニで買うと300円取られるけど、Amazonまとめ買いなら1袋150円。デスクの引き出しに常備して、急な飲み会前にサッと飲んでる。あるとないでは翌朝の動き出しが違う(個人の体感)。",
     imageUrl: "/affiliate/ukon.jpg",
     category: "supplement",
     amazonUrl: PLACEHOLDER,
     rakutenUrl: PLACEHOLDER,
     priceHint: "約1,500円〜 (10袋)",
-    highlight: "飲み会の必需品",
+    highlight: "急な飲み会対策",
   },
   {
     id: "highball-can",
     name: "サントリー 角ハイボール缶 (糖質ゼロ)",
     description:
-      "ダイエット中の家飲みに。糖質0g・プリン体0g。ビールから切り替えるだけで月数千kcal節約。",
+      "3年前(86kg)の俺は毎晩ビール2本で+500kcal積み上げてた。これに切り替えただけで体感そのまま月-1.5kg。糖質0g・プリン体0gで罪悪感なし。家飲みのデフォルトをこっちに変えるのが最強の節約。",
     imageUrl: "/affiliate/highball.jpg",
     category: "low-carb-food",
     amazonUrl: PLACEHOLDER,
     rakutenUrl: PLACEHOLDER,
     priceHint: "約3,000円〜 (24本)",
-    highlight: "糖質0g・プリン体0g",
+    highlight: "ビール卒業 / 月-1.5kg",
   },
 
   // ─── キッチン・調理関連 ───────────────────────────────────
@@ -247,13 +247,13 @@ export const AFFILIATE_PRODUCTS: AffiliateProduct[] = [
     id: "shaker-bottle",
     name: "ザバス プロテインシェイカー",
     description:
-      "プロテインをダマなく混ぜる定番シェイカー。割れにくく食洗機対応。",
+      "1年使ってもパッキン破損ゼロの優等生。空きペットボトルで代用してた頃はダマだらけで萎えてたけど、専用シェイカーは一振りで完璧。500円ケチって離脱するくらいなら買った方が早い。",
     imageUrl: "/affiliate/shaker.jpg",
     category: "kitchen-scale",
     amazonUrl: PLACEHOLDER,
     rakutenUrl: PLACEHOLDER,
     priceHint: "約500円〜",
-    highlight: "プロテイン民の必需品",
+    highlight: "1年使って無故障",
   },
 
   // ─── コンビニで補えない高タンパク (Amazon定期便) ─────────────
@@ -261,25 +261,25 @@ export const AFFILIATE_PRODUCTS: AffiliateProduct[] = [
     id: "salada-chicken-pack",
     name: "サラダチキン まとめ買いパック",
     description:
-      "コンビニで毎回買うより、Amazon定期便の方が1個あたり50円以上安い。",
+      "コンビニで毎回400円払ってた俺、Amazon定期便にしてから月3000円浮いた。冷蔵庫に常備しておけば「夜何食う問題」が解決。袋開けてオートミール乗せて1分で高タンパク飯完成。",
     imageUrl: "/affiliate/salada-chicken.jpg",
     category: "convenience-protein",
     amazonUrl: PLACEHOLDER,
     rakutenUrl: PLACEHOLDER,
     priceHint: "約3,000円〜 (10個)",
-    highlight: "1個あたり300円以下",
+    highlight: "コンビニ卒業 / 月3000円浮く",
   },
   {
     id: "tuna-can",
     name: "いなば ライトツナ ノンオイル",
     description:
-      "1缶でタンパク質14g・低脂質。常備しておけば外食できない日の救世主。",
+      "サラダにぶっかけて夜飯完結する個人開発者の味方。コードレビュー佳境で買い物行けない夜、これとカット野菜で5分で高タンパク飯成立。1缶80円台でタンパク質14gはコスパおかしい。常備推奨。",
     imageUrl: "/affiliate/tuna.jpg",
     category: "convenience-protein",
     amazonUrl: PLACEHOLDER,
     rakutenUrl: PLACEHOLDER,
     priceHint: "約2,000円〜 (24缶)",
-    highlight: "1缶あたり80円・タンパク質14g",
+    highlight: "残業22時の救世主",
   },
 ];
 
