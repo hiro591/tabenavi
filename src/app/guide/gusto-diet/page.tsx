@@ -19,6 +19,7 @@ import {
   ArticleFooter,
   ArticleImage,
 } from "@/components/guide/ArticleComponents";
+import { AffiliateProductGrid } from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
@@ -357,6 +358,11 @@ export default function GustoDietPage() {
             subtitle="20チェーン・500メニューの栄養データ、全部無料"
           />
         </section>
+
+        <AffiliateProductGrid
+          title="ファミレス常連の家計と栄養を救う4点"
+          productIds={["ultora-whey", "low-carb-noodle", "tanita-scale", "miso-soup-pack"]}
+        />
 
         {/* Section 6: まとめ */}
         <section className="mb-16">

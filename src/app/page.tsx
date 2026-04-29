@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { ChevronRight, Search, MapPin, Sparkles, Utensils, ArrowRight } from "lucide-react";
+import { ChevronRight, Search, MapPin, Sparkles, Utensils, ArrowRight, Smartphone } from "lucide-react";
 import { getChainLogo } from "@/lib/chain-logos";
 import { createClient } from "@/lib/supabase/server";
 
@@ -502,6 +502,46 @@ export default async function Home() {
                 「マップで近くのヘルシーメニューを探せるのが便利。ランチ選びが毎日楽しくなった。」
               </p>
               <p className="text-xs text-gray-400">20代女性 · ダイエット中</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── iOS App Coming Soon ─── */}
+      <section className="py-16 px-4 bg-gradient-to-br from-slate-900 via-sky-950 to-slate-900 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-30 pointer-events-none">
+          <div className="absolute top-10 left-10 w-72 h-72 bg-sky-500 rounded-full blur-3xl" />
+          <div className="absolute bottom-10 right-10 w-72 h-72 bg-cyan-400 rounded-full blur-3xl" />
+        </div>
+        <div className="max-w-4xl mx-auto relative">
+          <div className="flex flex-col sm:flex-row items-center gap-8 sm:gap-12">
+            <div className="flex-shrink-0">
+              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-gradient-to-br from-sky-400 to-cyan-500 flex items-center justify-center shadow-2xl shadow-sky-500/30">
+                <Smartphone className="w-10 h-10 sm:w-12 sm:h-12 text-white" />
+              </div>
+            </div>
+            <div className="flex-1 text-center sm:text-left">
+              <div className="inline-flex items-center gap-2 bg-sky-500/15 border border-sky-400/40 text-sky-200 text-xs font-semibold px-3 py-1 rounded-full mb-4">
+                <Sparkles className="w-3.5 h-3.5" />
+                iOS アプリ近日公開
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3 leading-tight">
+                ホーム画面から、<br className="sm:hidden" />ワンタップで開く。
+              </h2>
+              <p className="text-sky-100/80 text-sm sm:text-base mb-6 leading-relaxed">
+                iOS アプリ版は App Store 審査中です。<br className="hidden sm:block" />
+                公開時にお知らせを受け取りたい方は、無料登録時のメールでお届けします。
+              </p>
+              <div className="flex flex-col sm:flex-row items-center sm:items-start gap-3">
+                <Link
+                  href="/signup"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white text-slate-900 font-bold px-7 py-3.5 rounded-xl transition-all hover:bg-sky-50 active:scale-[0.98] text-sm shadow-lg"
+                >
+                  公開通知を受け取る
+                  <ChevronRight className="w-4 h-4" />
+                </Link>
+                <span className="text-xs text-sky-200/60">いまはWeb版で全機能ご利用いただけます</span>
+              </div>
             </div>
           </div>
         </div>

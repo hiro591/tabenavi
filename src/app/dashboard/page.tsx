@@ -413,26 +413,6 @@ export default function DashboardPage() {
         </Link>
       </div>
 
-      {/* ─── みんなの外食に投稿 ─── */}
-      <Link
-        href="/timeline/post"
-        className="block bg-white rounded-2xl border border-gray-100 shadow-sm p-4 mb-4 hover:bg-gray-50 transition-colors active:scale-[0.98]"
-      >
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-50 to-cyan-50 flex items-center justify-center shrink-0">
-            <svg className="w-5 h-5 text-sky-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-            </svg>
-          </div>
-          <div className="flex-1">
-            <p className="text-sm font-bold text-gray-800">みんなの外食に投稿</p>
-            <p className="text-[11px] text-gray-400">今日の外食をシェアしよう</p>
-          </div>
-          <svg className="w-4 h-4 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-          </svg>
-        </div>
-      </Link>
     </div>
   );
 }

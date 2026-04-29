@@ -56,6 +56,31 @@ export type StoreLocation = {
   chain_restaurants?: ChainRestaurant;
 };
 
+export type RestaurantRequest = {
+  id: string;
+  restaurant_name: string;
+  anon_id: string | null;
+  user_id: string | null;
+  notify_email: string | null;
+  created_at: string;
+};
+
+export type SavedCombo = {
+  id: string;
+  user_id: string | null;
+  chain_restaurant_id: string;
+  slug: string;
+  title: string;
+  items: { name: string; calories: number; protein: number; fat: number; carbs: number }[];
+  total_calories: number;
+  total_protein: number;
+  total_fat: number;
+  total_carbs: number;
+  comment: string | null;
+  created_at: string;
+  chain_restaurants?: ChainRestaurant;
+};
+
 export type CheatDay = {
   id: string;
   user_id: string;

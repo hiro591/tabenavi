@@ -4,8 +4,9 @@ import { useEffect, useState, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
-import { ChevronLeft, ChevronRight, Scale, History, Heart, Camera, MapPin } from "lucide-react";
+import { ChevronLeft, ChevronRight, Scale, History, Heart, Camera, MapPin, FileText, Shield, BookOpen, Mail } from "lucide-react";
 import type { Profile } from "@/types/database";
+import { AccountDeletion } from "@/components/profile/AccountDeletion";
 
 export default function ProfilePage() {
   const supabase = createClient();
@@ -282,6 +283,14 @@ export default function ProfilePage() {
           <MenuItem href="/map" icon={MapPin} label="近くのお店" desc="マップで探す" iconColor="text-violet-500" iconBg="bg-violet-50" />
         </div>
 
+        {/* ─── アプリ情報 ─── */}
+        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden mb-4">
+          <MenuItem href="/sources" icon={BookOpen} label="栄養データの出典" desc="公式情報の参照元" iconColor="text-amber-500" iconBg="bg-amber-50" />
+          <MenuItem href="/privacy" icon={Shield} label="プライバシーポリシー" desc="個人情報の取り扱い" iconColor="text-slate-500" iconBg="bg-slate-50" />
+          <MenuItem href="/terms" icon={FileText} label="利用規約" desc="サービスの利用条件" iconColor="text-slate-500" iconBg="bg-slate-50" />
+          <MenuItem href="/contact" icon={Mail} label="お問い合わせ" desc="ご意見・不具合報告" iconColor="text-slate-500" iconBg="bg-slate-50" />
+        </div>
+
         {/* ─── アカウント ─── */}
         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 mb-4">
           <h2 className="text-sm font-bold text-gray-800 mb-3">アカウント</h2>
@@ -292,6 +301,8 @@ export default function ProfilePage() {
             ログアウト
           </button>
         </div>
+
+        <AccountDeletion />
 
         <Link
           href="/onboarding"

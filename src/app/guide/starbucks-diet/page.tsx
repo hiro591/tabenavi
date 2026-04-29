@@ -19,6 +19,7 @@ import {
   ArticleFooter,
   ArticleImage,
 } from "@/components/guide/ArticleComponents";
+import { AffiliateProductGrid } from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
@@ -355,6 +356,11 @@ export default function StarbucksDietPage() {
         <CTABanner
           title="たべなびで外食の栄養管理を始めよう"
           subtitle="20チェーン・500メニューの栄養データ、全部無料"
+        />
+
+        <AffiliateProductGrid
+          title="スタバ作業のお供にバッグへ忍ばせる高タンパク"
+          productIds={["onebar-protein", "inbar-protein", "base-food-bread", "ultora-whey"]}
         />
 
         {/* Section 6: まとめ */}

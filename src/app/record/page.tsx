@@ -249,18 +249,6 @@ function RecordPageContent() {
             {menuName} — {finalCalories} kcal
           </p>
 
-          {/* みんなの外食に投稿 */}
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 mb-5">
-            <p className="text-sm font-bold text-gray-800 mb-1">みんなの外食に投稿しませんか？</p>
-            <p className="text-xs text-gray-400 mb-4">あなたの食事をシェアして、他のユーザーの参考に。</p>
-            <Link
-              href={`/timeline/post?menu=${encodeURIComponent(menuName ?? "")}&chain=${encodeURIComponent(chainName)}&cal=${finalCalories}`}
-              className="block w-full bg-gradient-to-r from-sky-400 to-cyan-500 text-white font-bold py-3 rounded-xl text-sm active:scale-[0.98] transition-all shadow-md shadow-sky-200"
-            >
-              みんなの外食に投稿する
-            </Link>
-          </div>
-
           <div className="flex gap-3">
             <Link
               href="/dashboard"

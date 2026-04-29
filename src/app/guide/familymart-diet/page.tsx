@@ -17,6 +17,7 @@ import {
   ArticleFooter,
   ArticleImage,
 } from "@/components/guide/ArticleComponents";
+import { AffiliateProductGrid } from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
@@ -456,6 +457,11 @@ export default function FamilyMartDietPage() {
         <CTABanner
           title="ファミマでのダイエット生活を始めよう"
           subtitle="たべなびで賢いコンビニメニュー選びをサポートします"
+        />
+
+        <AffiliateProductGrid
+          title="ファミマ常連卒業のまとめ買い4点"
+          productIds={["salada-chicken-pack", "tuna-can", "inbar-protein", "ultora-whey"]}
         />
 
         {/* Section 6: まとめ */}

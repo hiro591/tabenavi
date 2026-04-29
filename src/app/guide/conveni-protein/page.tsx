@@ -312,6 +312,11 @@ export default function ConveniProteinPage() {
           subtitle="たべなびならコンビニ商品の栄養成分をすぐに確認できます"
         />
 
+        <AffiliateProductGrid
+          title="コンビニ通いを月3000円減らせるまとめ買い"
+          productIds={["salada-chicken-pack", "tuna-can", "inbar-protein", "onebar-protein"]}
+        />
+
         {/* Section 5: 目的別おすすめ組み合わせ */}
         <section className="mb-12">
           <SectionHeading id="combos">

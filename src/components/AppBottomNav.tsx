@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Search, Users, User, Plus } from "lucide-react";
+import { Home, Search, User, Plus, Heart } from "lucide-react";
 
 // Pages where bottom nav should be hidden completely
 const HIDDEN_PATHS = [
@@ -53,7 +53,7 @@ export default function AppBottomNav() {
           </div>
         </Link>
 
-        <NavItem href="/timeline" Icon={Users} label="みんな" active={isActive("/timeline")} />
+        <NavItem href="/favorites" Icon={Heart} label="お気に入り" active={isActive("/favorites")} />
         <NavItem href="/profile" Icon={User} label="マイページ" active={isActive("/profile")} />
       </div>
     </nav>

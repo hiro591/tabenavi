@@ -6,6 +6,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { getChainLogo } from "@/lib/chain-logos";
 import { ChevronLeft, Heart, Plus, Utensils, SlidersHorizontal, LocateFixed, RefreshCw } from "lucide-react";
+import RestaurantRequest from "@/components/RestaurantRequest";
+import ShareButton from "@/components/ShareButton";
 
 const SORT_OPTIONS = [
   { label: "おすすめ順",       value: "recommended" },
@@ -529,16 +531,19 @@ function SearchResultsContent() {
                 )}
               </div>
             ) : (
-              <div className="flex flex-col items-center justify-center py-16 text-center">
+              <div className="flex flex-col items-center justify-center py-10 text-center px-4">
                 <div className="w-14 h-14 bg-sky-50 rounded-full flex items-center justify-center mb-3">
                   <Utensils className="w-6 h-6 text-sky-300" />
                 </div>
                 <p className="text-sm font-bold text-gray-700 mb-1">見つかりませんでした</p>
                 <p className="text-xs text-gray-400 mb-4">条件を変えて再検索してみてください</p>
                 <button onClick={() => router.push("/search")}
-                  className="px-5 py-2.5 bg-sky-500 text-white rounded-full font-bold text-xs">
+                  className="px-5 py-2.5 bg-sky-500 text-white rounded-full font-bold text-xs mb-6">
                   条件を変える
                 </button>
+                <div className="w-full">
+                  <RestaurantRequest searchQuery={searchParams.get("q") || ""} />
+                </div>
               </div>
             )}
           </div>
@@ -591,10 +596,13 @@ function MenuItemCard({ item, isFavorite, onTap, onFavorite, onRecord }: {
       </div>
 
       {/* Actions */}
-      <div className="flex flex-col items-center gap-2 shrink-0">
+      <div className="flex flex-col items-center gap-1.5 shrink-0">
         <button onClick={onFavorite} className={`p-1 ${isFavorite ? "text-red-500" : "text-gray-300"}`}>
           <Heart className={`w-4 h-4 ${isFavorite ? "fill-current" : ""}`} />
         </button>
+        <div onClick={(e) => e.stopPropagation()}>
+          <ShareButton item={item as any} />
+        </div>
         <button onClick={onRecord} className="w-7 h-7 flex items-center justify-center rounded-full bg-sky-500 text-white shadow-sm">
           <Plus className="w-3.5 h-3.5" />
         </button>

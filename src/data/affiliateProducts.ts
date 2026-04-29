@@ -1,10 +1,16 @@
 /**
  * アフィリエイト商品マスタ
  *
- * 使い方:
- *   1. もしもアフィリエイト/Amazonアソシエイト/楽天アフィリエイトに登録
- *   2. 各商品のamazonUrl / rakutenUrlを、自分のアフィリリンクに差し替え
- *   3. プレースホルダー文字列「YOUR_AFFILIATE_LINK_HERE」を全置換
+ * 使い方 (推奨):
+ *   1. .env.local に NEXT_PUBLIC_AMAZON_AFFILIATE_TAG を設定
+ *      → 18商品すべてが Amazon検索リンク経由で commission 計上対象になる
+ *   2. .env.local に NEXT_PUBLIC_RAKUTEN_AFFILIATE_ID を設定
+ *      → 18商品すべてが 楽天 検索リンク経由で commission 計上対象になる
+ *   3. 個別商品ページの直リンクが取得できたら amazonUrl / rakutenUrl を上書き
+ *      (検索リンクから直リンクに昇格、CVR が向上する)
+ *
+ * 旧プレースホルダー方式は廃止。未設定でも検索URLにフォールバックして
+ * "リンクが死んでいる状態" を防ぐ。
  *
  * 重要: 全商品にPR表記が自動で付与されます (景表法/ステマ規制対応)
  */
@@ -33,16 +39,59 @@ export type ProductCategory =
 export const AFFILIATE_PLACEHOLDER = "YOUR_AFFILIATE_LINK_HERE";
 const PLACEHOLDER = AFFILIATE_PLACEHOLDER;
 
-export function getValidAmazonUrl(product: AffiliateProduct): string | null {
-  if (!product.amazonUrl) return null;
-  if (product.amazonUrl === AFFILIATE_PLACEHOLDER) return null;
-  return product.amazonUrl;
+export type AffiliateLink = {
+  url: string;
+  isDirect: boolean; // true = 個別商品直リンク, false = 検索結果フォールバック
+};
+
+const AMAZON_TAG = process.env.NEXT_PUBLIC_AMAZON_AFFILIATE_TAG ?? "";
+const RAKUTEN_ID = process.env.NEXT_PUBLIC_RAKUTEN_AFFILIATE_ID ?? "";
+
+function isPlaceholder(v?: string): boolean {
+  return !v || v === AFFILIATE_PLACEHOLDER;
 }
 
+function buildAmazonSearchUrl(productName: string): string {
+  const q = encodeURIComponent(productName);
+  return AMAZON_TAG
+    ? `https://www.amazon.co.jp/s?k=${q}&tag=${AMAZON_TAG}`
+    : `https://www.amazon.co.jp/s?k=${q}`;
+}
+
+function buildRakutenSearchUrl(productName: string): string {
+  const q = encodeURIComponent(productName);
+  const search = `https://search.rakuten.co.jp/search/mall/${q}/`;
+  if (!RAKUTEN_ID) return search;
+  // 楽天アフィリエイト hgc 形式でラップ (commission 計上対象)
+  return `https://hb.afl.rakuten.co.jp/hgc/${RAKUTEN_ID}/?pc=${encodeURIComponent(search)}&link_type=hybrid_url`;
+}
+
+/** Legacy: 直リンクのみを返す。プレースホルダーや未設定は null。 */
+export function getValidAmazonUrl(product: AffiliateProduct): string | null {
+  if (isPlaceholder(product.amazonUrl)) return null;
+  return product.amazonUrl ?? null;
+}
+
+/** Legacy: 直リンクのみを返す。プレースホルダーや未設定は null。 */
 export function getValidRakutenUrl(product: AffiliateProduct): string | null {
-  if (!product.rakutenUrl) return null;
-  if (product.rakutenUrl === AFFILIATE_PLACEHOLDER) return null;
-  return product.rakutenUrl;
+  if (isPlaceholder(product.rakutenUrl)) return null;
+  return product.rakutenUrl ?? null;
+}
+
+/** 直リンク優先・なければ検索URLフォールバック。常に有効URLを返す。 */
+export function getAmazonLink(product: AffiliateProduct): AffiliateLink {
+  if (!isPlaceholder(product.amazonUrl)) {
+    return { url: product.amazonUrl as string, isDirect: true };
+  }
+  return { url: buildAmazonSearchUrl(product.name), isDirect: false };
+}
+
+/** 直リンク優先・なければ検索URLフォールバック。常に有効URLを返す。 */
+export function getRakutenLink(product: AffiliateProduct): AffiliateLink {
+  if (!isPlaceholder(product.rakutenUrl)) {
+    return { url: product.rakutenUrl as string, isDirect: true };
+  }
+  return { url: buildRakutenSearchUrl(product.name), isDirect: false };
 }
 
 export const AFFILIATE_PRODUCTS: AffiliateProduct[] = [
@@ -302,3 +351,4 @@ export function isAffiliateConfigured(product: AffiliateProduct): boolean {
       (product.rakutenUrl && product.rakutenUrl !== PLACEHOLDER)
   );
 }
+

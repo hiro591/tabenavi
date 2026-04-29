@@ -16,13 +16,46 @@
 | 主要5記事への統合 | ✅実装済み | protein-cost-ranking, conveni-protein, muscle-eating-out, low-carb-eating-out, mcdonalds-diet |
 | GA4イベント計測 | ✅実装済み | `affiliate_click` イベントが自動送信 |
 | ステマ規制対応(PR表記) | ✅実装済み | 全カードにPRバッジ自動付与 |
-| **アフィリリンク自体** | ❌**ユーザー作業必要** | プレースホルダー(`YOUR_AFFILIATE_LINK_HERE`)を差し替える |
+| **アフィリリンク自体** | ⚠️ 直リンクは未設定だが**検索URLフォールバック稼働中** | ENV設定で全18商品が即commission化 (本ガイド §0) |
 
-商品リンクは現状**全て無効化された状態**で表示されます（dev環境では`[Dev] アフィリリンク未設定`と表示、本番ではボタンが薄く表示されクリック不可）。
+**新仕様 (2026-04-25 アップデート)**:
+未設定商品は **Amazon/楽天 検索URLにフォールバック** して全カードが表示されます。
+ボタンは「Amazonで探す」「楽天で探す」と出て、商品名で検索するページに遷移します。
+→ **直リンク未設定でもユーザー体験は壊れない**。
+→ ENV変数を設定すれば、検索URLにアフィリタグが付与されて commission 計上が始まる。
 
 ---
 
-## STEP 1: もしもアフィリエイトに登録 (15分・必須)
+## STEP 0: 5分でアフィリ全18商品を稼働化 (ENV設定だけ・最優先)
+
+**今すぐやるべきこと**: アカウント審査の前後どちらでもOK。ENV設定するだけで全18商品の検索リンクがcommission計上対象になる。
+
+### Amazon
+1. Amazonアソシエイト (https://affiliate.amazon.co.jp/) に登録 → トラッキングID取得 (例: `tabenavi-22`)
+2. プロジェクトルートの `.env.local` (なければ作成) に追加:
+   ```bash
+   NEXT_PUBLIC_AMAZON_AFFILIATE_TAG=tabenavi-22
+   ```
+3. Vercel ダッシュボードで同じ環境変数を Production にも追加 → Redeploy
+
+### 楽天
+1. 楽天アフィリエイト (https://affiliate.rakuten.co.jp/) に登録 → アフィリIDを取得 (例: `19xxxxxx.xxxxxxxx.19xxxxxx.xxxxxxxx`)
+2. `.env.local` に追加:
+   ```bash
+   NEXT_PUBLIC_RAKUTEN_AFFILIATE_ID=19xxxxxx.xxxxxxxx.19xxxxxx.xxxxxxxx
+   ```
+3. Vercel に同じ env を追加 → Redeploy
+
+### 確認方法
+記事ページ (例: `/guide/protein-cost-ranking`) を開いて「Amazonで探す」をクリック → 開いた先のURLに `tag=tabenavi-22` が含まれていればOK。
+
+> **これだけで全18商品が稼働化されます**。STEP 1-4 (もしも・直リンク差し替え) は CVR を上げる**追加施策**であり、必須ではない。
+
+---
+
+## STEP 1: もしもアフィリエイトに登録 (15分・任意)
+
+> もしもは個別商品の直リンク (検索より高 CVR) を生成できる。STEP 0 の検索URLでも commission 発生するが、頻出商品は直リンクに昇格させると平均 CVR が +30〜80% になる。
 
 **なぜ「もしも」か?**
 - 1回の登録でAmazon・楽天・Yahoo!の3社のアフィリリンクを生成可能
@@ -245,8 +278,10 @@ git push
 ### Q. 商品カードが表示されない
 - `affiliateProducts.ts` の商品idと記事の `productId` プロパティが一致しているか確認
 
-### Q. ボタンが薄く表示されてクリックできない
-- → 該当商品のリンクが `YOUR_AFFILIATE_LINK_HERE` のままです。差し替えてください
+### Q. ボタンが「Amazonで探す」「楽天で探す」になっている
+- → 直リンク未設定で検索URLにフォールバック中。これは正常。
+- → 完全 commission化したい場合は STEP 0 の ENV変数 (`NEXT_PUBLIC_AMAZON_AFFILIATE_TAG`, `NEXT_PUBLIC_RAKUTEN_AFFILIATE_ID`) を設定。
+- → 該当商品のCVRをさらに上げたい場合は、もしも経由で商品個別の直リンクを取得して `affiliateProducts.ts` の該当 `amazonUrl` / `rakutenUrl` を上書き。
 
 ### Q. Amazonアソシエイト審査に落ちた
 - → もしも経由のAmazonリンクで運用してください（同等の機能）

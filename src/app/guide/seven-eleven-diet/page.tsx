@@ -17,6 +17,7 @@ import {
   ArticleFooter,
   ArticleImage,
 } from "@/components/guide/ArticleComponents";
+import { AffiliateProductGrid } from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
@@ -412,6 +413,11 @@ export default function SevenElevenDietPage() {
         <CTABanner
           title="セブンでのダイエット生活を始めよう"
           subtitle="たべなびで賢いメニュー選びをサポートします"
+        />
+
+        <AffiliateProductGrid
+          title="セブン通いを月3000円減らすまとめ買い"
+          productIds={["salada-chicken-pack", "tuna-can", "ultora-whey", "inbar-protein"]}
         />
 
         {/* Section 6: まとめ */}

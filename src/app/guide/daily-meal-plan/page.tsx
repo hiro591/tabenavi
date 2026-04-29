@@ -207,6 +207,11 @@ export default function DailyMealPlanPage() {
           alt="サラダチキンやゆで卵など栄養バランスの良い朝食メニュー"
         />
 
+        <AffiliateProductGrid
+          title="計画と計測を支える3点セット"
+          productIds={["tanita-scale", "ultora-whey", "shaker-bottle"]}
+        />
+
         {/* ─── Section 3: パターンA ─── */}
         <SectionHeading id="plan-a">パターンA：コンビニ朝 + 吉野家昼 + サイゼリヤ夜</SectionHeading>
 
@@ -494,6 +499,11 @@ export default function DailyMealPlanPage() {
         <TipBox title="コンビニ全食のメリット">
           <p><Marker>タンパク質106.5gを全てコンビニで達成</Marker>できるのは驚異的。サラダチキン・豆腐バー・ギリシャヨーグルトなど、コンビニの高タンパク商品は年々充実しています。脂質37.5gと低脂質なのもポイント。忙しい日の「コンビニ完結プラン」として覚えておきましょう。</p>
         </TipBox>
+
+        <AffiliateProductGrid
+          title="コンビニで足りない時の補完アイテム"
+          productIds={["inbar-protein", "salada-chicken-pack", "tuna-can", "onebar-protein"]}
+        />
 
         {/* ─── Section 6: パターンD ─── */}
         <SectionHeading id="plan-d">パターンD：筋トレ日プラン（高タンパク重視）</SectionHeading>

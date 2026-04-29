@@ -6,8 +6,8 @@ import {
   AFFILIATE_PRODUCTS,
   getProductById,
   getProductsByCategory,
-  getValidAmazonUrl,
-  getValidRakutenUrl,
+  getAmazonLink,
+  getRakutenLink,
   isAffiliateConfigured,
   type AffiliateProduct,
   type ProductCategory,
@@ -15,8 +15,13 @@ import {
 
 // ─── Internal: GA4イベント送信 ───────────────────────────────────
 type Network = "amazon" | "rakuten";
+type LinkType = "direct" | "search";
 
-function trackAffiliateClick(productId: string, network: Network) {
+function trackAffiliateClick(
+  productId: string,
+  network: Network,
+  linkType: LinkType,
+) {
   if (typeof window === "undefined") return;
   const win = window as unknown as {
     gtag?: (cmd: string, name: string, params: Record<string, unknown>) => void;
@@ -25,6 +30,7 @@ function trackAffiliateClick(productId: string, network: Network) {
     win.gtag("event", "affiliate_click", {
       product_id: productId,
       network,
+      link_type: linkType,
       page_path: window.location.pathname,
     });
   }
@@ -70,14 +76,8 @@ function AffiliateProductCardInternal({
 }: {
   product: AffiliateProduct;
 }) {
-  const amazonUrl = getValidAmazonUrl(product);
-  const rakutenUrl = getValidRakutenUrl(product);
-  const configured = Boolean(amazonUrl || rakutenUrl);
-
-  // 本番環境では未設定カードを完全に非表示 (壊れたUIを公開しない)
-  if (!configured && process.env.NODE_ENV !== "development") {
-    return null;
-  }
+  const amazon = getAmazonLink(product);
+  const rakuten = getRakutenLink(product);
 
   return (
     <div className="my-8 bg-white rounded-xl border border-sky-100 shadow-sm overflow-hidden">
@@ -110,30 +110,22 @@ function AffiliateProductCardInternal({
           </p>
 
           <div className="flex flex-wrap gap-2">
-            {amazonUrl && (
-              <AffiliateButton
-                href={amazonUrl}
-                productId={product.id}
-                network="amazon"
-                label="Amazonで見る"
-              />
-            )}
-            {rakutenUrl && (
-              <AffiliateButton
-                href={rakutenUrl}
-                productId={product.id}
-                network="rakuten"
-                label="楽天で見る"
-                variant="rakuten"
-              />
-            )}
+            <AffiliateButton
+              href={amazon.url}
+              productId={product.id}
+              network="amazon"
+              linkType={amazon.isDirect ? "direct" : "search"}
+              label={amazon.isDirect ? "Amazonで見る" : "Amazonで探す"}
+            />
+            <AffiliateButton
+              href={rakuten.url}
+              productId={product.id}
+              network="rakuten"
+              linkType={rakuten.isDirect ? "direct" : "search"}
+              label={rakuten.isDirect ? "楽天で見る" : "楽天で探す"}
+              variant="rakuten"
+            />
           </div>
-
-          {!configured && process.env.NODE_ENV === "development" && (
-            <p className="mt-3 text-[11px] text-amber-600 bg-amber-50 px-2 py-1 rounded inline-block">
-              [Dev] アフィリリンク未設定 (src/data/affiliateProducts.ts)
-            </p>
-          )}
         </div>
       </div>
     </div>
@@ -184,12 +176,14 @@ function AffiliateButton({
   href,
   productId,
   network,
+  linkType,
   label,
   variant = "amazon",
 }: {
   href: string;
   productId: string;
   network: Network;
+  linkType: LinkType;
   label: string;
   variant?: "amazon" | "rakuten";
 }) {
@@ -203,7 +197,7 @@ function AffiliateButton({
       href={href}
       target="_blank"
       rel="sponsored nofollow noopener"
-      onClick={() => trackAffiliateClick(productId, network)}
+      onClick={() => trackAffiliateClick(productId, network, linkType)}
       className={`${colorClass} inline-flex items-center gap-1.5 text-sm font-bold px-4 py-2 rounded-lg transition-colors`}
     >
       {label}
@@ -220,12 +214,9 @@ export function AffiliateProductGrid({
   productIds: string[];
   title?: string;
 }) {
-  const isDev = process.env.NODE_ENV === "development";
   const products = productIds
     .map((id) => getProductById(id))
-    .filter((p): p is AffiliateProduct => Boolean(p))
-    // 本番環境では未設定商品を非表示 (dev環境では確認用に表示)
-    .filter((p) => isDev || isAffiliateConfigured(p));
+    .filter((p): p is AffiliateProduct => Boolean(p));
 
   if (products.length === 0) return null;
 
@@ -248,50 +239,34 @@ export function AffiliateProductGrid({
 }
 
 function AffiliateMiniCard({ product }: { product: AffiliateProduct }) {
-  const amazonUrl = getValidAmazonUrl(product);
-  const rakutenUrl = getValidRakutenUrl(product);
-  const primaryUrl = amazonUrl || rakutenUrl;
-  const primaryNetwork: Network = amazonUrl ? "amazon" : "rakuten";
-  const configured = Boolean(primaryUrl);
-
-  // 共通の中身レンダラ
-  const inner = (
-    <div className="flex gap-3">
-      <ProductThumbnail product={product} size={64} />
-      <div className="min-w-0 flex-1">
-        <p className="font-bold text-gray-900 text-sm leading-snug line-clamp-2 mb-1">
-          {product.name}
-        </p>
-        {product.highlight && (
-          <p className="text-[11px] text-sky-600 font-medium">{product.highlight}</p>
-        )}
-        {product.priceHint && (
-          <p className="text-[11px] text-gray-500 mt-0.5">{product.priceHint}</p>
-        )}
-        {!configured && process.env.NODE_ENV === "development" && (
-          <p className="mt-1 text-[10px] text-amber-600 inline-block">[Dev] 未設定</p>
-        )}
-      </div>
-    </div>
-  );
-
-  if (!configured || !primaryUrl) {
-    return (
-      <div className="block bg-white rounded-lg border border-gray-200 p-4 opacity-70">
-        {inner}
-      </div>
-    );
-  }
+  // Amazon を主導線、なければ楽天。Amazon検索フォールバックは Amazon の方が CVR 高い
+  const amazon = getAmazonLink(product);
+  const primaryUrl = amazon.url;
+  const primaryNetwork: Network = "amazon";
+  const primaryLinkType: LinkType = amazon.isDirect ? "direct" : "search";
 
   return (
     <a
       href={primaryUrl}
       target="_blank"
       rel="sponsored nofollow noopener"
-      onClick={() => trackAffiliateClick(product.id, primaryNetwork)}
+      onClick={() => trackAffiliateClick(product.id, primaryNetwork, primaryLinkType)}
       className="block bg-white rounded-lg border border-gray-200 hover:border-sky-300 hover:shadow-md transition-all p-4"
     >
-      {inner}
+      <div className="flex gap-3">
+        <ProductThumbnail product={product} size={64} />
+        <div className="min-w-0 flex-1">
+          <p className="font-bold text-gray-900 text-sm leading-snug line-clamp-2 mb-1">
+            {product.name}
+          </p>
+          {product.highlight && (
+            <p className="text-[11px] text-sky-600 font-medium">{product.highlight}</p>
+          )}
+          {product.priceHint && (
+            <p className="text-[11px] text-gray-500 mt-0.5">{product.priceHint}</p>
+          )}
+        </div>
+      </div>
     </a>
   );
 }
@@ -308,18 +283,15 @@ export function AffiliateInlineLink({
 }) {
   const product = getProductById(productId);
   if (!product) return <>{children}</>;
-  const url =
-    network === "amazon"
-      ? getValidAmazonUrl(product)
-      : getValidRakutenUrl(product);
-  if (!url) return <>{children}</>;
+  const link = network === "amazon" ? getAmazonLink(product) : getRakutenLink(product);
+  const linkType: LinkType = link.isDirect ? "direct" : "search";
 
   return (
     <a
-      href={url}
+      href={link.url}
       target="_blank"
       rel="sponsored nofollow noopener"
-      onClick={() => trackAffiliateClick(productId, network)}
+      onClick={() => trackAffiliateClick(productId, network, linkType)}
       className="text-sky-600 underline decoration-sky-300 hover:text-sky-700 font-medium"
     >
       {children}

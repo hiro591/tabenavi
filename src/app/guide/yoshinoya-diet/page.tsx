@@ -19,6 +19,7 @@ import {
   ArticleFooter,
   ArticleImage,
 } from "@/components/guide/ArticleComponents";
+import { AffiliateProductGrid } from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
@@ -356,6 +357,11 @@ export default function YoshinoyaDietPage() {
             <p>吉野家を昼食に利用する場合、ライザップ牛サラダ（398kcal）を選べば、1日の総カロリー1,600kcalの場合でも朝・夕食に各600kcal使えます。<Marker>外食1食を400kcal以下に抑える</Marker>ことで、他の食事の自由度が格段に上がります。</p>
           </TipBox>
         </section>
+
+        <AffiliateProductGrid
+          title="吉野家の前後で整える高タンパク補給"
+          productIds={["ultora-whey", "inbar-protein", "tuna-can", "konjac-rice"]}
+        />
 
         {/* Section 6: まとめ */}
         <section className="mb-16">

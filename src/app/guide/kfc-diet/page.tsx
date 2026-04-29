@@ -19,6 +19,7 @@ import {
   ArticleFooter,
   ArticleImage,
 } from "@/components/guide/ArticleComponents";
+import { AffiliateProductGrid } from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
@@ -358,6 +359,11 @@ export default function KfcDietPage() {
             subtitle="20チェーン・500メニューの栄養データ、全部無料"
           />
         </section>
+
+        <AffiliateProductGrid
+          title="KFCの脂質を翌日にリカバリーする4点"
+          productIds={["ultora-whey", "kombu-cha", "miso-soup-pack", "tanita-scale"]}
+        />
 
         {/* Section 6: まとめ */}
         <section className="mb-16">

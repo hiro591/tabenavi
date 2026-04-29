@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
 import AppBottomNav from "@/components/AppBottomNav";
+import { NativeBootstrap } from "@/components/native/NativeBootstrap";
 
 export const metadata: Metadata = {
   title: "たべなび | 外食しながら、カラダづくり。",
@@ -50,7 +51,7 @@ export default function RootLayout({
         <meta name="mobile-web-app-capable" content="yes" />
         <meta
           name="viewport"
-          content="width=device-width, initial-scale=1, maximum-scale=1"
+          content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover"
         />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-LTKE4YGEJ1"
@@ -66,6 +67,7 @@ export default function RootLayout({
         </Script>
       </head>
       <body className="antialiased bg-gray-50 text-gray-900">
+        <NativeBootstrap />
         {children}
         <AppBottomNav />
       </body>

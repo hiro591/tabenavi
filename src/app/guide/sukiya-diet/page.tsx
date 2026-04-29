@@ -19,6 +19,7 @@ import {
   ArticleFooter,
   ArticleImage,
 } from "@/components/guide/ArticleComponents";
+import { AffiliateProductGrid } from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
@@ -364,6 +365,11 @@ export default function SukiyaDietPage() {
             特にローファットダイエットをしている方には、<Marker color="blue">まぐろたたき丼（F7.2g）は外食全体で見ても屈指の低脂質メニュー</Marker>です。牛丼チェーンでこれほど脂質の低いメニューが食べられるのはすき家だけの強みです。
           </p>
         </section>
+
+        <AffiliateProductGrid
+          title="牛丼ライト派の食卓を支える家ストック"
+          productIds={["myprotein-impact", "tuna-can", "konjac-rice", "shaker-bottle"]}
+        />
 
         {/* Section 6: まとめ */}
         <section className="mb-16">

@@ -19,6 +19,7 @@ import {
   ArticleFooter,
   ArticleImage,
 } from "@/components/guide/ArticleComponents";
+import { AffiliateProductGrid } from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
@@ -356,6 +357,11 @@ export default function MatsuyaDietPage() {
             ]}
           />
         </section>
+
+        <AffiliateProductGrid
+          title="松屋通いに加えたい家のタンパク補給"
+          productIds={["myprotein-impact", "tuna-can", "salada-chicken-pack", "shaker-bottle"]}
+        />
 
         {/* Section 6: まとめ */}
         <section className="mb-16">

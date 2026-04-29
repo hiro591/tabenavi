@@ -18,6 +18,7 @@ import {
   ArticleFooter,
   ArticleImage,
 } from "@/components/guide/ArticleComponents";
+import { AffiliateProductGrid } from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
@@ -522,6 +523,11 @@ export default function LawsonDietPage() {
         <CTABanner
           title="ローソンでのダイエット生活を始めよう"
           subtitle="たべなびで賢いメニュー選びをサポートします"
+        />
+
+        <AffiliateProductGrid
+          title="ローソン通いを置き換える定期便セット"
+          productIds={["salada-chicken-pack", "ultora-whey", "onebar-protein", "shaker-bottle"]}
         />
 
         {/* Section 7: まとめ */}

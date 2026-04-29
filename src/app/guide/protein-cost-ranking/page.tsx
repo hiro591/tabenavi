@@ -264,6 +264,11 @@ export default function ProteinCostRankingPage() {
           subtitle="たべなびで外食チェーンの栄養データを無料検索"
         />
 
+        <AffiliateProductGrid
+          title="外食コスパに勝つ「家プロテイン」3点"
+          productIds={["myprotein-impact", "ultora-whey", "shaker-bottle"]}
+        />
+
         {/* ─── Section 3: チェーン店カテゴリ別比較 ─── */}
         <SectionHeading id="chain-comparison">チェーン店カテゴリ別コスパ比較</SectionHeading>
 

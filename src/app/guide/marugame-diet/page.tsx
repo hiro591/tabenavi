@@ -17,6 +17,7 @@ import {
   ArticleFooter,
   ArticleImage,
 } from "@/components/guide/ArticleComponents";
+import { AffiliateProductGrid } from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
@@ -370,6 +371,11 @@ export default function MarugameDietPage() {
         <CTABanner
           title="外食チェーンのカロリーを一括比較"
           subtitle="たべなびで丸亀製麺と他チェーンの栄養成分を比較してみましょう"
+        />
+
+        <AffiliateProductGrid
+          title="うどん欲を罪悪感なく満たす家ストック"
+          productIds={["konjac-rice", "low-carb-noodle", "tuna-can", "miso-soup-pack"]}
         />
 
         {/* Section 6: まとめ */}
