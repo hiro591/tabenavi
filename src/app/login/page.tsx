@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
+import { signInWithProvider } from '@/lib/native/oauth'
 import { Logo } from '@/components/Logo'
 
 export default function LoginPage() {
@@ -31,23 +32,15 @@ export default function LoginPage() {
   }
 
   const handleGoogleLogin = async () => {
-    const supabase = createClient()
-    await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-        redirectTo: `${location.origin}/auth/callback`,
-      },
-    })
+    setError('')
+    const result = await signInWithProvider('google')
+    if (result.error) setError(result.error)
   }
 
   const handleAppleLogin = async () => {
-    const supabase = createClient()
-    await supabase.auth.signInWithOAuth({
-      provider: 'apple',
-      options: {
-        redirectTo: `${location.origin}/auth/callback`,
-      },
-    })
+    setError('')
+    const result = await signInWithProvider('apple')
+    if (result.error) setError(result.error)
   }
 
   return (
