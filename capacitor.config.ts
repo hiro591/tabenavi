@@ -9,7 +9,15 @@ const config: CapacitorConfig = {
     cleartext: false,
     androidScheme: "https",
     iosScheme: "https",
-    allowNavigation: ["tabenavi.jp", "www.tabenavi.jp"],
+    allowNavigation: [
+      "tabenavi.jp",
+      "www.tabenavi.jp",
+      "appleid.apple.com",
+      "accounts.google.com",
+      "accounts.youtube.com",
+      "*.supabase.co",
+      "*.supabase.com",
+    ],
   },
   ios: {
     contentInset: "always",
