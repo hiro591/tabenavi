@@ -15,32 +15,49 @@ export const signInWithProvider = async (
   const isNative = Capacitor.isNativePlatform();
 
   if (isNative) {
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider,
-      options: {
-        redirectTo: NATIVE_REDIRECT_URI,
-        skipBrowserRedirect: true,
-      },
-    });
+    let oauthUrl: string;
+    try {
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider,
+        options: {
+          redirectTo: NATIVE_REDIRECT_URI,
+          skipBrowserRedirect: true,
+        },
+      });
 
-    if (error) return { error: error.message };
-    if (!data?.url) {
-      return { error: "OAuth URL を取得できませんでした。再度お試しください。" };
+      if (error) return { error: error.message };
+      if (!data?.url) {
+        return { error: "OAuth URL を取得できませんでした。再度お試しください。" };
+      }
+      oauthUrl = data.url;
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : "認証 URL の取得に失敗しました";
+      return { error: msg };
     }
 
-    await Browser.open({
-      url: data.url,
-      presentationStyle: "popover",
-    });
-    return {};
+    try {
+      await Browser.open({
+        url: oauthUrl,
+        presentationStyle: "fullscreen",
+      });
+      return {};
+    } catch (e) {
+      const msg =
+        e instanceof Error ? e.message : "ブラウザの起動に失敗しました";
+      return { error: `${msg} (Browser plugin)` };
+    }
   }
 
-  const { error } = await supabase.auth.signInWithOAuth({
-    provider,
-    options: {
-      redirectTo: `${window.location.origin}/auth/callback`,
-    },
-  });
-
-  return error ? { error: error.message } : {};
+  try {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider,
+      options: {
+        redirectTo: `${window.location.origin}/auth/callback`,
+      },
+    });
+    return error ? { error: error.message } : {};
+  } catch (e) {
+    const msg = e instanceof Error ? e.message : "認証に失敗しました";
+    return { error: msg };
+  }
 };
