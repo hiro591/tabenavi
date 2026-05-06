@@ -1,12 +1,14 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
 import { CheckCircle, ChevronRight, Utensils, BarChart3, MapPin } from 'lucide-react'
 import { Logo } from '@/components/Logo'
 
 export default function SignupPage() {
+  const router = useRouter()
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -26,7 +28,7 @@ export default function SignupPage() {
     }
 
     const supabase = createClient()
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
@@ -39,6 +41,11 @@ export default function SignupPage() {
     if (error) {
       setError(error.message)
       setLoading(false)
+      return
+    }
+
+    if (data.session) {
+      router.push('/onboarding')
       return
     }
 
