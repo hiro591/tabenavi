@@ -521,26 +521,28 @@ export default async function Home() {
               </div>
             </div>
             <div className="flex-1 text-center sm:text-left">
-              <div className="inline-flex items-center gap-2 bg-sky-500/15 border border-sky-400/40 text-sky-200 text-xs font-semibold px-3 py-1 rounded-full mb-4">
+              <div className="inline-flex items-center gap-2 bg-emerald-500/15 border border-emerald-400/40 text-emerald-200 text-xs font-semibold px-3 py-1 rounded-full mb-4">
                 <Sparkles className="w-3.5 h-3.5" />
-                iOS アプリ近日公開
+                App Store で公開中
               </div>
               <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3 leading-tight">
                 ホーム画面から、<br className="sm:hidden" />ワンタップで開く。
               </h2>
               <p className="text-sky-100/80 text-sm sm:text-base mb-6 leading-relaxed">
-                iOS アプリ版は App Store 審査中です。<br className="hidden sm:block" />
-                公開時にお知らせを受け取りたい方は、無料登録時のメールでお届けします。
+                iOS アプリ版が App Store で公開されました。<br className="hidden sm:block" />
+                App Store から無料でダウンロードしてご利用いただけます。
               </p>
               <div className="flex flex-col sm:flex-row items-center sm:items-start gap-3">
-                <Link
-                  href="/signup"
+                <a
+                  href="https://apps.apple.com/jp/app/id6764268638"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white text-slate-900 font-bold px-7 py-3.5 rounded-xl transition-all hover:bg-sky-50 active:scale-[0.98] text-sm shadow-lg"
                 >
-                  公開通知を受け取る
+                  App Store からダウンロード
                   <ChevronRight className="w-4 h-4" />
-                </Link>
-                <span className="text-xs text-sky-200/60">いまはWeb版で全機能ご利用いただけます</span>
+                </a>
+                <span className="text-xs text-sky-200/60">Web 版でも全機能ご利用いただけます</span>
               </div>
             </div>
           </div>

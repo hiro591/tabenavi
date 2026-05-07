@@ -41,9 +41,15 @@ export const NativePushToggle = () => {
   if (!ready) return null;
   if (!isNativeApp) {
     return (
-      <div className="rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">
-        Push 通知は iOS アプリ版で利用できます。App Store からインストールしてください。
-      </div>
+      <a
+        href="https://apps.apple.com/jp/app/id6764268638"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900 hover:bg-amber-100 transition-colors"
+      >
+        Push 通知は iOS アプリ版で利用できます。
+        <span className="font-semibold underline ml-1">App Store から無料でインストール →</span>
+      </a>
     );
   }
 
