@@ -84,7 +84,7 @@ const CATEGORIES = [
 ];
 
 export default function SourcesPage() {
-  const lastUpdated = "2026-05-01";
+  const lastUpdated = "2026-05-08";
 
   return (
     <main className="min-h-screen bg-gray-50 pb-24">

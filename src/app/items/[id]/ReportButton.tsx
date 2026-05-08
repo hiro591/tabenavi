@@ -84,7 +84,7 @@ export default function ReportButton({
     <>
       <button
         onClick={handleOpen}
-        className="flex items-center gap-1 text-[10px] text-gray-400 hover:text-sky-500 transition-colors mx-auto w-fit"
+        className="flex items-center gap-1 text-[11px] text-gray-700 hover:text-sky-600 underline decoration-gray-300 underline-offset-2 transition-colors mx-auto w-fit"
       >
         <Flag className="w-3 h-3" />
         情報の誤りを報告
