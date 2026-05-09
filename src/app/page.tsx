@@ -87,6 +87,8 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen bg-white text-gray-900">
+      <ClientAuthRedirect />
+      <SessionDebugBadge />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
