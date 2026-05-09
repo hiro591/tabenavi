@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
+import { ClientAuthRedirect } from '@/components/ClientAuthRedirect'
 import { Logo } from '@/components/Logo'
 
 export default function LoginPage() {
@@ -33,6 +34,7 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+      <ClientAuthRedirect />
       <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 w-full max-w-md animate-fade-in">
         <div className="text-center mb-8">
           <div className="flex justify-center mb-2">

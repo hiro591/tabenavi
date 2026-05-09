@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
+import { ClientAuthRedirect } from '@/components/ClientAuthRedirect'
 import { CheckCircle, ChevronRight, Utensils, BarChart3, MapPin } from 'lucide-react'
 import { Logo } from '@/components/Logo'
 
@@ -79,6 +80,7 @@ export default function SignupPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+      <ClientAuthRedirect />
       <div className="w-full max-w-4xl flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
 
         {/* Left: Value proposition */}
