@@ -4,6 +4,7 @@ import { ChevronRight, Search, MapPin, Sparkles, Utensils, ArrowRight, Smartphon
 import { getChainLogo } from "@/lib/chain-logos";
 import { createClient } from "@/lib/supabase/server";
 import { ClientAuthRedirect } from "@/components/ClientAuthRedirect";
+import { SessionDebugBadge } from "@/components/SessionDebugBadge";
 
 const CHAINS = [
   "マクドナルド", "吉野家", "松屋", "すき家", "サイゼリヤ",
