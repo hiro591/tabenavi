@@ -3,8 +3,7 @@ import { redirect } from "next/navigation";
 import { ChevronRight, Search, MapPin, Sparkles, Utensils, ArrowRight, Smartphone } from "lucide-react";
 import { getChainLogo } from "@/lib/chain-logos";
 import { createClient } from "@/lib/supabase/server";
-import { ClientAuthRedirect } from "@/components/ClientAuthRedirect";
-import { SessionDebugBadge } from "@/components/SessionDebugBadge";
+import { AuthGate } from "@/components/AuthGate";
 
 const CHAINS = [
   "マクドナルド", "吉野家", "松屋", "すき家", "サイゼリヤ",
@@ -87,8 +86,7 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen bg-white text-gray-900">
-      <ClientAuthRedirect />
-      <SessionDebugBadge />
+      <AuthGate />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
