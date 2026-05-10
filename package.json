@@ -33,6 +33,7 @@
     "react-leaflet": "^5.0.0",
     "resend": "^6.9.3",
     "server-only": "^0.0.1",
+    "sonner": "^2.0.7",
     "stripe": "^22.0.2"
   },
   "devDependencies": {

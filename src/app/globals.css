@@ -153,3 +153,28 @@ body {
 .tabular-nums {
   font-variant-numeric: tabular-nums;
 }
+
+/* ─── Global tap feedback ───────────────────────── */
+@media (hover: none) {
+  button:not(:disabled):active,
+  a:not([role="link"]):active,
+  [role="button"]:not([aria-disabled="true"]):active {
+    transform: scale(0.97);
+    transition: transform 0.06s ease-out;
+  }
+}
+
+button,
+a,
+[role="button"] {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ─── Disable iOS callout / select on UI elements ─ */
+button,
+[role="button"] {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+

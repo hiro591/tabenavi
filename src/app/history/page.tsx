@@ -3,7 +3,9 @@
 import { useEffect, useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { Calendar } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
+import { EmptyState } from "@/components/EmptyState";
 import type { FoodLog } from "@/types/database";
 
 type DayData = {
@@ -154,14 +156,15 @@ export default function HistoryPage() {
       </div>
 
       {logs.length === 0 && (
-        <div className="bg-white rounded-2xl shadow-sm p-8 text-center mb-4">
-          <p className="text-gray-500 mb-3">まだ記録がありません</p>
-          <Link
-            href="/record"
-            className="inline-block px-6 py-2 bg-sky-500 text-white text-sm font-medium rounded-xl"
-          >
-            食事を記録する
-          </Link>
+        <div className="bg-white rounded-2xl shadow-sm mb-4 overflow-hidden">
+          <EmptyState
+            icon={Calendar}
+            iconColor="text-sky-500"
+            iconBg="bg-sky-50"
+            title="まだ記録がありません"
+            description="食事を記録すると、ここに履歴が表示されます"
+            cta={{ label: "食事を記録する", href: "/record" }}
+          />
         </div>
       )}
 

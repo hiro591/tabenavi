@@ -3,6 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 import AppBottomNav from "@/components/AppBottomNav";
 import { NativeBootstrap } from "@/components/native/NativeBootstrap";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "たべなび | 外食しながら、カラダづくり。",
@@ -71,6 +72,17 @@ export default function RootLayout({
         <NativeBootstrap />
         {children}
         <AppBottomNav />
+        <Toaster
+          position="top-center"
+          richColors
+          closeButton
+          duration={3000}
+          toastOptions={{
+            style: {
+              fontFamily: "inherit",
+            },
+          }}
+        />
       </body>
     </html>
   );

@@ -2,9 +2,12 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 import { createClient } from "@/lib/supabase/client";
 import { ChevronLeft, Heart, Trash2, Utensils } from "lucide-react";
 import { getChainLogo } from "@/lib/chain-logos";
+import { EmptyState } from "@/components/EmptyState";
+import { SkeletonRow } from "@/components/Skeleton";
 
 interface FavoriteItem {
   id: string;
@@ -77,8 +80,9 @@ export default function FavoritesPage() {
       const { error } = await supabase.from("favorites").delete().eq("id", favoriteId);
       if (error) throw error;
       setFavorites((prev) => prev.filter((f) => f.id !== favoriteId));
+      toast.success("お気に入りから削除しました");
     } catch {
-      alert("削除に失敗しました");
+      toast.error("削除に失敗しました。もう一度お試しください。");
     }
   };
 
@@ -208,23 +212,14 @@ export default function FavoritesPage() {
             </div>
           ) : (
             /* Empty state */
-            <div className="text-center py-20">
-              <div className="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center mb-4 mx-auto">
-                <Heart className="w-9 h-9 text-red-300" />
-              </div>
-              <p className="text-base font-medium text-gray-700 mb-2">
-                お気に入りがまだありません
-              </p>
-              <p className="text-sm text-gray-400 mb-6">
-                検索結果のハートをタップして保存しましょう
-              </p>
-              <button
-                onClick={() => router.push("/search")}
-                className="px-6 py-3 bg-sky-500 text-white rounded-xl font-medium hover:bg-sky-600 transition-colors"
-              >
-                メニューを探す
-              </button>
-            </div>
+            <EmptyState
+              icon={Heart}
+              iconColor="text-rose-400"
+              iconBg="bg-rose-50"
+              title="お気に入りがまだありません"
+              description="検索結果のハートをタップして、よく食べるメニューを保存しましょう"
+              cta={{ label: "メニューを探す", href: "/search" }}
+            />
           )}
         </div>
       </div>

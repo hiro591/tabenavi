@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { toast } from "sonner";
 import { Flag, X, CheckCircle } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 
@@ -68,7 +69,7 @@ export default function ReportButton({
       source: source || null,
     });
     if (error) {
-      alert("送信に失敗しました。もう一度お試しください。");
+      toast.error("送信に失敗しました。もう一度お試しください。");
       setSubmitting(false);
       return;
     }
