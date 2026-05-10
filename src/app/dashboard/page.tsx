@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { toast } from "sonner";
 import { createClient } from "@/lib/supabase/client";
 import {
   Settings,
@@ -47,7 +48,6 @@ export default function DashboardPage() {
   const [streak, setStreak] = useState(0);
   const [loading, setLoading] = useState(true);
   const [deletingId, setDeletingId] = useState<string | null>(null);
-  const [toast, setToast] = useState("");
 
   const fetchData = useCallback(async () => {
     const {
@@ -153,11 +153,9 @@ export default function DashboardPage() {
       const { error } = await supabase.from("food_logs").delete().eq("id", logId);
       if (error) throw error;
       setLogs((prev) => prev.filter((l) => l.id !== logId));
-      setToast("削除しました");
-      setTimeout(() => setToast(""), 3500);
+      toast.success("削除しました");
     } catch {
-      setToast("削除に失敗しました");
-      setTimeout(() => setToast(""), 3500);
+      toast.error("削除に失敗しました");
     } finally {
       setDeletingId(null);
     }
@@ -213,12 +211,6 @@ export default function DashboardPage() {
 
   return (
     <div className="px-4 pt-5 pb-24">
-      {toast && (
-        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-white text-gray-900 text-sm font-medium px-5 py-2.5 rounded-xl border border-gray-200 shadow-lg animate-fade-in">
-          {toast}
-        </div>
-      )}
-
       {/* ─── Header ─── */}
       <div className="flex items-center justify-between mb-4">
         <div>
