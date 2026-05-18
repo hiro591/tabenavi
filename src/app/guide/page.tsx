@@ -9,8 +9,10 @@ import {
   Flame,
   Search,
   BarChart3,
+  LayoutGrid,
 } from "lucide-react";
 import { getChainLogo } from "@/lib/chain-logos";
+import { ARTICLE_CATEGORIES, RELATED_ARTICLES, type ArticleCategory } from "@/lib/articles";
 
 export const metadata: Metadata = {
   title: "外食栄養ガイド｜チェーン店のカロリー・PFC一覧 | たべなび",
@@ -401,7 +403,7 @@ export default function GuidePage() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-10 text-center">
           <div className="inline-flex items-center gap-2 bg-sky-100 text-sky-700 rounded-full px-4 py-1.5 text-xs font-medium mb-5">
             <BookOpen className="w-3.5 h-3.5" />
-            全20チェーン + 14本のガイド記事
+            全44記事 + 22チェーン栄養データ
           </div>
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3 leading-tight">
             外食栄養ガイド
@@ -447,6 +449,37 @@ export default function GuidePage() {
                 </Link>
               );
             })}
+          </div>
+        </section>
+
+        {/* ─── カテゴリで探す ─── */}
+        <section className="mb-14">
+          <h2 className="text-lg font-bold text-gray-900 mb-5 flex items-center gap-2">
+            <LayoutGrid className="w-5 h-5 text-sky-500" />
+            カテゴリで探す
+          </h2>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            {(Object.keys(ARTICLE_CATEGORIES) as ArticleCategory[])
+              .filter((c) => c !== "overview")
+              .map((c) => {
+                const meta = ARTICLE_CATEGORIES[c];
+                const count = RELATED_ARTICLES.filter((a) => a.category === c).length;
+                return (
+                  <Link
+                    key={c}
+                    href={`/guide/category/${c}`}
+                    className="group relative overflow-hidden rounded-xl shadow-sm hover:shadow-md transition-all"
+                  >
+                    <div className={`bg-gradient-to-br ${meta.color} p-4 sm:p-5 h-full`}>
+                      <p className="text-sm sm:text-base font-bold text-white leading-tight">
+                        {meta.label}
+                      </p>
+                      <p className="text-[11px] text-white/80 mt-1">{count}本の記事</p>
+                      <ChevronRight className="absolute bottom-3 right-3 w-4 h-4 text-white/70 group-hover:translate-x-0.5 transition-transform" />
+                    </div>
+                  </Link>
+                );
+              })}
           </div>
         </section>
 
