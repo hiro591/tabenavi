@@ -370,15 +370,17 @@ function SearchResultsContent() {
     setLoadingMore(false);
   }, [searchQ, category, sourceType, calorieMin, calorieMax, proteinMin, proteinMax, fatMin, fatMax, priceMin, priceMax, sort, page]);
 
+  // PUBLIC: works without account. Logged-in users get favorites; guests just browse.
   useEffect(() => {
     const supabase = createClient();
     supabase.auth.getUser().then(async ({ data }) => {
-      if (!data.user) { router.replace("/login"); return; }
-      setUserId(data.user.id);
-      try {
-        const { data: favs } = await supabase.from("favorites").select("menu_item_id").eq("user_id", data.user.id);
-        setFavoriteIds(new Set(favs?.map((f) => f.menu_item_id) || []));
-      } catch {}
+      if (data.user) {
+        setUserId(data.user.id);
+        try {
+          const { data: favs } = await supabase.from("favorites").select("menu_item_id").eq("user_id", data.user.id);
+          setFavoriteIds(new Set(favs?.map((f) => f.menu_item_id) || []));
+        } catch {}
+      }
       fetchItems();
     });
   }, [router, fetchItems]);

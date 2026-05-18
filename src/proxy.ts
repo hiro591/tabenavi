@@ -29,7 +29,13 @@ export async function proxy(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const protectedPaths = ["/search", "/items", "/dashboard", "/record", "/cheatday", "/history", "/recommend", "/profile", "/weight", "/onboarding", "/favorites", "/combo", "/map"];
+  // PUBLIC paths (no auth required):
+  //   /items/[id]    - menu detail (for SEO + try-before-signup)
+  //   /search        - search experience (let users explore before signup)
+  //   /chains/...    - chain comparison pages
+  //   /guide/...     - SEO articles
+  // Auth required only for user-specific features (records, favorites, profile, etc.)
+  const protectedPaths = ["/dashboard", "/record", "/cheatday", "/history", "/recommend", "/profile", "/weight", "/onboarding", "/favorites", "/combo", "/map"];
   const isProtected = protectedPaths.some((p) =>
     request.nextUrl.pathname.startsWith(p)
   );

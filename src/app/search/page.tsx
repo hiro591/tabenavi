@@ -137,11 +137,8 @@ export default function SearchPage() {
     priceRange[0] > PRC_MIN || priceRange[1] < PRC_MAX ||
     !!sort;
 
-  useEffect(() => {
-    createClient().auth.getUser().then(({ data }) => {
-      if (!data.user) router.replace("/login");
-    });
-  }, [router]);
+  // /search is PUBLIC: users can browse without an account.
+  // Auth is required only when they try to record a meal (handled per-action).
 
   const buildParams = (overrides: Record<string, string> = {}) => {
     const p = new URLSearchParams();
