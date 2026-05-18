@@ -1,9 +1,10 @@
 import type { MetadataRoute } from "next";
 import { createClient } from "@/lib/supabase/server";
+import { ARTICLE_CATEGORIES } from "@/lib/articles";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://www.tabenavi.jp";
-  const now = "2026-04-02T00:00:00.000Z";
+  const now = new Date().toISOString();
 
   // ─── チェーン店の栄養データページ ───
   const chainSlugs = [
@@ -11,6 +12,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "starbucks", "conveni", "kfc", "mos", "gusto", "bamiyan",
     "ohsho", "hidakaya", "marugame", "kurasushi", "sushiro",
     "dennys", "doutor", "subway", "nakau", "ootoya", "yayoiken",
+    "tenya", "matsunoya", "ichibanya", "burgerking", "zetteria",
+    "seven-eleven", "lawson", "familymart",
   ];
 
   // ─── SEOガイド記事 ───
@@ -32,23 +35,28 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "diet-mistakes",
   ];
 
-  // ─── メニュー詳細ページ（DBから取得） ───
+  // ─── メニュー詳細ページ（DBから取得 / pagination で全件） ───
   let itemPages: MetadataRoute.Sitemap = [];
   try {
     const supabase = await createClient();
-    const { data: items } = await supabase
-      .from("menu_items")
-      .select("id")
-      .limit(500);
-
-    if (items) {
-      itemPages = items.map((item) => ({
-        url: `${baseUrl}/items/${item.id}`,
-        lastModified: now,
-        changeFrequency: "monthly" as const,
-        priority: 0.5,
-      }));
+    const PAGE = 1000;
+    let allItems: { id: string }[] = [];
+    for (let page = 0; ; page++) {
+      const { data } = await supabase
+        .from("menu_items")
+        .select("id")
+        .order("id", { ascending: true })
+        .range(page * PAGE, page * PAGE + PAGE - 1);
+      if (!data || data.length === 0) break;
+      allItems = allItems.concat(data);
+      if (data.length < PAGE) break;
     }
+    itemPages = allItems.map((item) => ({
+      url: `${baseUrl}/items/${item.id}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.5,
+    }));
   } catch {
     // If DB fetch fails, skip item pages
   }
@@ -74,6 +82,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "dennys", "hidakaya", "ohsho", "sushiro", "kurasushi",
     "ootoya", "yayoiken", "doutor", "bamiyan",
     "seven-eleven", "lawson", "familymart",
+    "burgerking", "zetteria", "matsunoya", "ichibanya", "tenya",
   ];
   const goals = [
     "high-protein", "low-calorie", "diet", "low-fat",
@@ -91,14 +100,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }
 
+  // ─── カテゴリハブページ ───
+  const categoryPages: MetadataRoute.Sitemap = Object.keys(ARTICLE_CATEGORIES).map((category) => ({
+    url: `${baseUrl}/guide/category/${category}`,
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: 0.85,
+  }));
+
   return [
     { url: baseUrl, lastModified: now, changeFrequency: "daily", priority: 1.0 },
     { url: `${baseUrl}/guide`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
+    ...categoryPages,
     ...guidePages,
     ...chainPages,
     ...programmaticPages,
     ...itemPages,
-    { url: `${baseUrl}/search`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
+    // /search は認証必須なので sitemap から除外
     { url: `${baseUrl}/contact`, lastModified: now, changeFrequency: "yearly", priority: 0.4 },
     { url: `${baseUrl}/privacy`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
     { url: `${baseUrl}/terms`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },

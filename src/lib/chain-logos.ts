@@ -25,9 +25,11 @@ const CHAIN_LOGO_MAP: [string, ChainLogoInfo][] = [
   ["モスバーガー",      { url: "/chain-logos/mos.svg",           bg: "#ffffff" }],
   ["バーガーキング",    { url: "/chain-logos/burgerking.svg",    bg: "#ffffff" }],
   ["サブウェイ",        { url: "/chain-logos/subway.svg",        bg: "#ffffff" }],
+  ["ゼッテリア",        { url: "/chain-logos/zetteria.png",      bg: "#ffffff" }],
 
   // ── 牛丼・定食 ───────────────────────────────────────────────────────────
   ["吉野家",            { url: "/chain-logos/yoshinoya.svg",     bg: "#ffffff" }],
+  ["松のや",            { url: "/chain-logos/matsunoya.png",     bg: "#ffffff" }],
   ["松屋",              { url: "/chain-logos/matsuya.png",       bg: "#ffffff" }],
   ["すき家",            { url: "/chain-logos/sukiya.png",        bg: "#ffffff" }],
   ["なか卯",            { url: "/chain-logos/nakau.jpg",         bg: "#ffffff" }],
@@ -61,6 +63,10 @@ const CHAIN_LOGO_MAP: [string, ChainLogoInfo][] = [
   // ── うどん・麺 ────────────────────────────────────────────────────────────
   ["丸亀製麺",          { url: "/chain-logos/marugame.svg",      bg: "#ffffff" }],
   ["丸亀",              { url: "/chain-logos/marugame.svg",      bg: "#ffffff" }],
+
+  // ── カレー ────────────────────────────────────────────────────────────────
+  ["CoCo壱番屋",        { url: "/chain-logos/ichibanya.png",     bg: "#ffffff" }],
+  ["ココイチ",          { url: "/chain-logos/ichibanya.png",     bg: "#ffffff" }],
 
   // ── 天丼・その他 ─────────────────────────────────────────────────────────
   ["天丼てんや",        { url: "/chain-logos/tenya.png",         bg: "#ffffff" }],
