@@ -18,6 +18,11 @@ import {
   ComparisonTable,
   ArticleFooter,
   ArticleImage,
+  QuickAnswer,
+  FAQSection,
+  ArticleSummary,
+  AuthorBio,
+  UpdateHistory,
 } from "@/components/guide/ArticleComponents";
 import { AffiliateProductGrid } from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
@@ -51,7 +56,7 @@ const jsonLd = {
   description:
     "吉野家のカロリー低い順ランキング、ライザップ牛サラダなどダイエット向けメニュー、PFCバランスで選ぶ食べ方を徹底解説。",
   datePublished: "2026-03-19",
-  dateModified: "2026-03-19",
+  dateModified: new Date().toISOString().split("T")[0],
   author: {
     "@type": "Organization",
     name: "たべなび",
@@ -91,7 +96,19 @@ export default function YoshinoyaDietPage() {
       <ArticleLayout tocItems={tocItems} currentSlug="yoshinoya-diet">
         {/* Authority & Date */}
         <AuthorityBadge />
-        <p className="text-sm text-gray-400 mt-3 mb-6">最終更新: 2026年3月19日</p>
+        <p className="text-sm text-gray-400 mt-3 mb-6">
+          最終更新: {new Date().toLocaleDateString("ja-JP", { year: "numeric", month: "long", day: "numeric" })}
+        </p>
+
+        {/* QuickAnswer */}
+        <QuickAnswer
+          question="吉野家でダイエット中におすすめのメニューは？牛丼並盛のカロリーは？"
+          answer={
+            <>
+              <strong>牛丼 並盛は633kcal（P19.6g/F23.6g/C88.2g）</strong>。ダイエット中なら<strong>小盛（497kcal）または牛皿並盛（241kcal/P14g）</strong>がおすすめです。最も低カロリー＆高タンパクなのは<strong>ライザップ牛サラダ（414kcal/P30g）</strong>。サイドメニューでは生野菜サラダ（37kcal）やキムチ（10kcal）を組み合わせると満足感を維持しながらカロリーを抑えられます。
+            </>
+          }
+        />
 
         {/* Introduction */}
         <p className="mb-4">
@@ -371,25 +388,71 @@ export default function YoshinoyaDietPage() {
             吉野家はメニュー選びを工夫するだけで、ダイエット中でも安心して利用できます。この記事のポイントを整理しました。
           </p>
 
-          <CheckList
-            items={[
-              "ライザップ牛サラダ（398kcal/P28g）がダイエットの大本命メニュー",
-              "牛皿（248kcal）+みそ汁で糖質制限にも対応可能",
-              "牛丼は小盛を選ぶだけで約150kcalカット",
-              "トッピング追加やサイズアップに注意。特盛は929kcalに",
+          <ArticleSummary
+            points={[
+              "ライザップ牛サラダ（414kcal/P30g）がダイエットの大本命メニュー",
+              "牛皿並盛（241kcal）+みそ汁で糖質制限にも対応可能",
+              "牛丼は小盛（497kcal）を選ぶだけで並盛比136kcalカット",
+              "トッピング追加やサイズアップに注意。超特盛は1,000kcal超に",
               "紅生姜を活用し、つゆだくは避けるのがダイエットのコツ",
             ]}
           />
 
           <p className="text-xs text-gray-400 mt-4 mb-8">
-            ※栄養成分は吉野家公式サイトの情報をもとに記載。店舗・時期により異なる場合があります。
+            ※栄養成分は<a href="https://www.yoshinoya.com/menu/info/allergy.html" target="_blank" rel="noopener noreferrer" className="text-sky-500 hover:underline">吉野家公式サイトの栄養成分情報</a>をもとに記載。店舗・時期により異なる場合があります。
           </p>
         </section>
+
+        {/* FAQ Section */}
+        <FAQSection
+          slug="yoshinoya-diet"
+          items={[
+            {
+              q: "吉野家の牛丼並盛のカロリーは？",
+              a: "吉野家の牛丼 並盛は633kcal、タンパク質19.6g、脂質23.6g、炭水化物88.2gです（2026年5月時点の吉野家公式栄養成分情報）。同シリーズの小盛は497kcal、大盛は約750kcalです。",
+            },
+            {
+              q: "吉野家でダイエット中におすすめのメニューは？",
+              a: "ライザップ牛サラダ（414kcal/P30g）が最もダイエット向きです。低糖質で高タンパク。また、牛皿並盛（241kcal/P14g）にみそ汁とお新香を組み合わせる「糖質オフセット」も人気です。牛丼を食べたい場合は小盛（497kcal）を選びましょう。",
+            },
+            {
+              q: "ライザップ牛サラダは本当に痩せますか？",
+              a: "ライザップ牛サラダ単体で痩せるわけではありませんが、外食1食で414kcal・タンパク質30gを摂れるのは非常に優秀です。1日の総摂取カロリーを管理しつつ、このメニューを活用することで継続的なダイエットが可能になります。",
+            },
+            {
+              q: "牛丼と豚丼、ダイエットにはどっちがおすすめ？",
+              a: "豚丼 並盛（576kcal）の方が牛丼 並盛（633kcal）より約60kcal低めです。ただし脂質量はほぼ同じ。糖質量も両者大差ないため、好みで選んでOKです。さらに低カロリーを目指すなら牛皿並盛（241kcal）+ご飯小盛にカスタムする方法も。",
+            },
+            {
+              q: "吉野家の朝食メニューはダイエットに向いていますか？",
+              a: "朝牛セット（約500kcal）や納豆牛小鉢定食（約450kcal）など、朝定食メニューは栄養バランスが良くダイエット向きです。特に納豆や生卵などを組み合わせることで、タンパク質を効率的に摂取できます。みそ汁を残せばさらに減塩・低カロリーに。",
+            },
+            {
+              q: "つゆだく・つゆぬきはダイエットに影響しますか？",
+              a: "つゆだくにすると糖質と塩分が増加します（具体的な数値非公開ですが、ご飯にしみ込む量で約10〜30kcal増）。ダイエット中はつゆぬき or 通常で注文し、紅生姜をたっぷり乗せて満足感を補うのがおすすめです。",
+            },
+            {
+              q: "吉野家のサイドメニューで太らないのは？",
+              a: "生野菜サラダ（37kcal）、キムチ（10kcal）、お新香（17kcal）、わかめみそ汁（24kcal）、3点盛り野菜セット（約60kcal）が低カロリーです。逆にから揚げや唐辛子サラダなど揚げ物系は200kcal超なので注意。",
+            },
+          ]}
+        />
 
         {/* End CTA */}
         <CTABanner
           title="外食のカロリーを簡単に比較"
           subtitle="たべなびで吉野家・松屋・すき家のメニューをまとめてチェック"
+        />
+
+        {/* Author Bio */}
+        <AuthorBio />
+
+        {/* Update History */}
+        <UpdateHistory
+          entries={[
+            { date: "2026-05-12", note: "全メニュー栄養データを2026年5月時点の公式情報で更新。QuickAnswer・FAQ・著者情報を追加" },
+            { date: "2026-03-19", note: "初稿公開" },
+          ]}
         />
 
         {/* ArticleFooter */}

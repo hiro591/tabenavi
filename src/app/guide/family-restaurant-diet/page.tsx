@@ -57,7 +57,7 @@ const jsonLd = {
   description:
     "サイゼリヤ・ガスト・デニーズの3大ファミレスをカロリー・PFC別に徹底比較。ダイエット中のおすすめメニューと注文テクニックを解説。",
   datePublished: "2026-03-19",
-  dateModified: "2026-03-19",
+  dateModified: new Date().toISOString().split("T")[0],
   author: {
     "@type": "Organization",
     name: "たべなび",

@@ -11,6 +11,7 @@ import {
   ExternalLink,
   Database,
 } from "lucide-react";
+import { pickRelated } from "@/lib/articles";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -553,235 +554,188 @@ export function NutritionTable({
   );
 }
 
-// ─── 15. ArticleFooter ───────────────────────────────────────────────────────
+// ─── 15. QuickAnswer ─────────────────────────────────────────────────────────
+// AI Overview / Featured Snippet 対策。記事冒頭に「結論」を提示
 
-const RELATED_ARTICLES = [
-  {
-    slug: "mcdonalds-diet",
-    title: "マクドナルドでダイエット",
-    description: "マクドナルドの低カロリーメニューを徹底解説。",
-  },
-  {
-    slug: "gyudon-comparison",
-    title: "牛丼チェーン栄養比較",
-    description: "吉野家・松屋・すき家の栄養成分を比較。",
-  },
-  {
-    slug: "conveni-protein",
-    title: "コンビニ高タンパク商品",
-    description: "コンビニで買える高タンパク商品ランキング。",
-  },
-  {
-    slug: "eating-out-diet",
-    title: "外食ダイエット完全ガイド",
-    description: "外食でもダイエットを成功させるコツを紹介。",
-  },
-  {
-    slug: "muscle-eating-out",
-    title: "筋トレ中の外食ガイド",
-    description: "筋トレ中に最適な外食メニューを紹介。",
-  },
-  {
-    slug: "saizeriya-diet",
-    title: "サイゼリヤでダイエット",
-    description: "サイゼリヤの低カロリーメニューを解説。",
-  },
-  {
-    slug: "low-fat-eating-out",
-    title: "低脂質な外食メニュー",
-    description: "脂質を抑えたい人向けの外食ガイド。",
-  },
-  {
-    slug: "calorie-database",
-    title: "外食カロリーデータベース",
-    description: "主要チェーンのカロリー情報まとめ。",
-  },
-  {
-    slug: "low-carb-eating-out",
-    title: "糖質制限×外食ガイド",
-    description: "チェーン店の低糖質メニューを徹底解説。",
-  },
-  {
-    slug: "diet-lunch",
-    title: "ダイエット中のランチガイド",
-    description: "500kcal以下のランチメニューを厳選。",
-  },
-  {
-    slug: "family-restaurant-diet",
-    title: "ファミレスダイエット比較",
-    description: "サイゼリヤ・ガスト・デニーズを徹底比較。",
-  },
-  {
-    slug: "drinking-party-diet",
-    title: "飲み会で太らないガイド",
-    description: "お酒のカロリーとおつまみの選び方。",
-  },
-  {
-    slug: "daily-meal-plan",
-    title: "1日1500kcalプラン",
-    description: "外食だけで達成する食事プラン。",
-  },
-  {
-    slug: "protein-cost-ranking",
-    title: "タンパク質コスパランキング",
-    description: "1gあたりの価格で外食メニューを比較。",
-  },
-  {
-    slug: "yoshinoya-diet",
-    title: "吉野家ダイエットガイド",
-    description: "低カロリーランキングとおすすめの食べ方。",
-  },
-  {
-    slug: "matsuya-diet",
-    title: "松屋ダイエットガイド",
-    description: "定食vs丼の比較と低カロリーメニュー。",
-  },
-  {
-    slug: "sukiya-diet",
-    title: "すき家ダイエットガイド",
-    description: "牛丼ライトで糖質オフ。",
-  },
-  {
-    slug: "kfc-diet",
-    title: "ケンタッキーダイエットガイド",
-    description: "高タンパクメニューの選び方。",
-  },
-  {
-    slug: "gusto-diet",
-    title: "ガストダイエットガイド",
-    description: "低カロリーランキングと注文テクニック。",
-  },
-  {
-    slug: "subway-diet",
-    title: "サブウェイダイエットガイド",
-    description: "低カロリーサンドの選び方。",
-  },
-  {
-    slug: "ootoya-diet",
-    title: "大戸屋ダイエットガイド",
-    description: "定食の選び方とおすすめメニュー。",
-  },
-  {
-    slug: "dennys-diet",
-    title: "デニーズダイエットガイド",
-    description: "低カロリーメニューとソース別比較。",
-  },
-  {
-    slug: "starbucks-diet",
-    title: "スタバダイエットガイド",
-    description: "低カロリードリンクとカスタマイズ術。",
-  },
-  {
-    slug: "marugame-diet",
-    title: "丸亀製麺ダイエットガイド",
-    description: "うどんは太る？低カロリーの選び方。",
-  },
-  {
-    slug: "morning-diet",
-    title: "朝食ダイエットガイド",
-    description: "朝マック・コンビニの朝食メニュー。",
-  },
-  {
-    slug: "ramen-diet",
-    title: "ラーメンとダイエット",
-    description: "カロリー比較と太らない食べ方。",
-  },
-  {
-    slug: "curry-diet",
-    title: "カレーとダイエット",
-    description: "チェーン店別カロリー比較。",
-  },
-  {
-    slug: "sushi-diet",
-    title: "回転寿司ダイエットガイド",
-    description: "ネタ別カロリーと太らない食べ方。",
-  },
-  {
-    slug: "pfc-guide",
-    title: "PFCバランス入門",
-    description: "計算方法と外食での実践ガイド。",
-  },
-  {
-    slug: "recording-diet",
-    title: "レコーディングダイエット",
-    description: "記録するだけで痩せる科学的根拠。",
-  },
-  {
-    slug: "late-night-eating",
-    title: "夜食で太らない方法",
-    description: "深夜の外食・コンビニメニュー。",
-  },
-  {
-    slug: "eating-order",
-    title: "太らない食べ順ガイド",
-    description: "食べ順ダイエットの実践方法。",
-  },
-  {
-    slug: "seven-eleven-diet",
-    title: "セブンイレブンダイエット",
-    description: "低カロリー＆高タンパク商品。",
-  },
-  {
-    slug: "bulkup-eating-out",
-    title: "増量期の外食ガイド",
-    description: "バルクアップ向きチェーン店メニュー。",
-  },
-  {
-    slug: "cheat-day",
-    title: "チートデイ完全ガイド",
-    description: "正しいやり方・頻度・メニュー。",
-  },
-  {
-    slug: "no-exercise-diet",
-    title: "運動なしダイエット",
-    description: "食事だけで痩せる方法。",
-  },
-  {
-    slug: "diet-plateau",
-    title: "停滞期の乗り越え方",
-    description: "体重が減らない時の対策。",
-  },
-  {
-    slug: "rebound-prevention",
-    title: "リバウンド防止ガイド",
-    description: "ダイエット後の体重維持。",
-  },
-  {
-    slug: "bmr-calculator",
-    title: "基礎代謝の計算と上げ方",
-    description: "痩せやすい体を作る方法。",
-  },
-  {
-    slug: "lawson-diet",
-    title: "ローソンダイエット",
-    description: "低カロリー＆高タンパク商品。",
-  },
-  {
-    slug: "familymart-diet",
-    title: "ファミマダイエット",
-    description: "RIZAP商品＆低カロリー。",
-  },
-  {
-    slug: "eat-and-lose",
-    title: "食べて痩せる方法",
-    description: "我慢しないダイエット。",
-  },
-  {
-    slug: "metabolism-boost-foods",
-    title: "代謝を上げる食べ物",
-    description: "痩せやすい体を食事で作る。",
-  },
-  {
-    slug: "diet-mistakes",
-    title: "ダイエットNG集",
-    description: "やってはいけないこと10選。",
-  },
-];
+export function QuickAnswer({
+  question,
+  answer,
+}: {
+  question: string;
+  answer: React.ReactNode;
+}) {
+  return (
+    <div className="my-6 rounded-2xl border-2 border-sky-200 bg-gradient-to-br from-sky-50 to-cyan-50/50 p-5 sm:p-6">
+      <div className="flex items-start gap-3 mb-3">
+        <div className="flex-shrink-0 w-7 h-7 rounded-full bg-sky-500 text-white flex items-center justify-center text-xs font-bold">
+          Q
+        </div>
+        <p className="text-sm sm:text-base font-bold text-gray-900 leading-snug pt-0.5">
+          {question}
+        </p>
+      </div>
+      <div className="flex items-start gap-3">
+        <div className="flex-shrink-0 w-7 h-7 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs font-bold">
+          A
+        </div>
+        <div className="text-sm sm:text-base text-gray-800 leading-relaxed pt-0.5 [&_strong]:text-sky-700 [&_strong]:font-bold">
+          {answer}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── 16. ArticleSummary ──────────────────────────────────────────────────────
+// 記事末尾の3-5箇条「この記事のポイント」
+
+export function ArticleSummary({
+  points,
+}: {
+  points: string[];
+}) {
+  return (
+    <section className="my-10 rounded-2xl border border-gray-200 bg-gray-50/50 p-6">
+      <div className="flex items-center gap-2 mb-4">
+        <CheckCircle className="w-5 h-5 text-emerald-500" />
+        <h3 className="text-base font-bold text-gray-900">この記事のポイント</h3>
+      </div>
+      <ul className="space-y-2.5">
+        {points.map((point, i) => (
+          <li key={i} className="flex items-start gap-3 text-sm text-gray-700 leading-relaxed">
+            <span className="flex-shrink-0 w-5 h-5 rounded-full bg-sky-100 text-sky-700 flex items-center justify-center text-xs font-bold mt-0.5">
+              {i + 1}
+            </span>
+            <span>{point}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+// ─── 17. FAQSection ──────────────────────────────────────────────────────────
+// FAQPage JSON-LD 自動生成つき。Google "People Also Ask" 対策
+// Note: dangerouslySetInnerHTML is safe here - JSON.stringify of structured static data.
+
+export interface FAQItem {
+  q: string;
+  a: string;
+}
+
+export function FAQSection({ items, slug }: { items: FAQItem[]; slug: string }) {
+  const [open, setOpen] = useState<number | null>(0);
+  const faqJsonLd = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((it) => ({
+      "@type": "Question",
+      name: it.q,
+      acceptedAnswer: { "@type": "Answer", text: it.a },
+    })),
+  });
+
+  return (
+    <section className="my-10">
+      <script
+        type="application/ld+json"
+        data-slug={slug}
+        // Safe: faqJsonLd is JSON.stringify of static FAQ data, no user input.
+        dangerouslySetInnerHTML={{ __html: faqJsonLd }}
+      />
+      <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">
+        よくある質問
+      </h2>
+      <div className="space-y-3">
+        {items.map((it, i) => {
+          const isOpen = open === i;
+          return (
+            <div key={i} className="rounded-xl border border-gray-200 bg-white overflow-hidden">
+              <button
+                type="button"
+                onClick={() => setOpen(isOpen ? null : i)}
+                className="w-full px-5 py-4 flex items-center justify-between gap-3 text-left hover:bg-gray-50 transition-colors"
+                aria-expanded={isOpen}
+              >
+                <span className="font-bold text-sm sm:text-base text-gray-900 leading-snug">
+                  Q. {it.q}
+                </span>
+                <ChevronRight
+                  className={`flex-shrink-0 w-5 h-5 text-gray-400 transition-transform ${
+                    isOpen ? "rotate-90" : ""
+                  }`}
+                />
+              </button>
+              {isOpen && (
+                <div className="px-5 pb-5 pt-1 text-sm sm:text-[15px] text-gray-700 leading-relaxed border-t border-gray-100">
+                  <p className="pt-3">{it.a}</p>
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+// ─── 18. AuthorBio ───────────────────────────────────────────────────────────
+// E-E-A-T シグナル: 著者・データソースの明示
+
+export function AuthorBio() {
+  return (
+    <section className="my-10 rounded-2xl border border-gray-200 bg-white p-5 sm:p-6">
+      <div className="flex items-start gap-4">
+        <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-sky-400 to-cyan-500 flex items-center justify-center text-white font-bold text-lg">
+          た
+        </div>
+        <div className="flex-1">
+          <p className="text-sm font-bold text-gray-900 mb-1">たべなび編集部</p>
+          <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-2">
+            外食チェーンの栄養データに特化したダイエット情報メディア。22チェーン・2,500以上のメニュー栄養データを各社公式サイトから取得・検証し、ダイエット・筋トレ・健康管理に役立つ実用情報を発信しています。
+          </p>
+          <Link
+            href="/sources"
+            className="inline-flex items-center gap-1 text-xs text-sky-600 hover:underline"
+          >
+            データ出典・編集方針について
+            <ChevronRight className="w-3 h-3" />
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── 19. UpdateHistory ───────────────────────────────────────────────────────
+// 更新履歴の可視化（鮮度シグナル）
+
+export function UpdateHistory({
+  entries,
+}: {
+  entries: { date: string; note: string }[];
+}) {
+  return (
+    <details className="my-8 rounded-lg border border-gray-200 bg-gray-50/60">
+      <summary className="px-4 py-3 cursor-pointer text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors">
+        更新履歴を表示（{entries.length}件）
+      </summary>
+      <ul className="px-4 pb-4 pt-1 space-y-2 text-xs text-gray-600">
+        {entries.map((e, i) => (
+          <li key={i} className="flex gap-3">
+            <span className="font-mono text-gray-500 flex-shrink-0">{e.date}</span>
+            <span>{e.note}</span>
+          </li>
+        ))}
+      </ul>
+    </details>
+  );
+}
+
+// ─── 20. ArticleFooter ───────────────────────────────────────────────────────
 
 export function ArticleFooter({ currentSlug }: { currentSlug: string }) {
-  const related = RELATED_ARTICLES.filter(
-    (a) => a.slug !== currentSlug
-  ).slice(0, 3);
+  const related = pickRelated(currentSlug);
 
   return (
     <section className="mt-12 pt-10 border-t-[3px] border-double border-gray-300">

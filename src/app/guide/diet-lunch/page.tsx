@@ -56,7 +56,7 @@ const jsonLd = {
   description:
     "ダイエット中のランチ選びに迷わない！主要外食チェーン店の500kcal以下メニューをPFCデータ付きで15品厳選。",
   datePublished: "2026-03-19",
-  dateModified: "2026-03-19",
+  dateModified: new Date().toISOString().split("T")[0],
   author: {
     "@type": "Organization",
     name: "たべなび",

@@ -50,7 +50,7 @@ const jsonLd = {
   description:
     "代謝を上げる食べ物TOP15をランキング形式で紹介。外食チェーン店での代謝アップメニュー選びも。",
   datePublished: "2026-03-25",
-  dateModified: "2026-03-25",
+  dateModified: new Date().toISOString().split("T")[0],
   author: {
     "@type": "Organization",
     name: "たべなび",

@@ -49,7 +49,7 @@ const jsonLd = {
   description:
     "朝マック・コンビニ・チェーン店のダイエット向け朝食メニューを徹底比較。PFCバランスで選ぶ朝食の正解がわかります。",
   datePublished: "2026-03-23",
-  dateModified: "2026-03-23",
+  dateModified: new Date().toISOString().split("T")[0],
   author: {
     "@type": "Organization",
     name: "たべなび",

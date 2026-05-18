@@ -16,12 +16,17 @@ import {
   ComparisonTable,
   ArticleFooter,
   ArticleImage,
+  QuickAnswer,
+  FAQSection,
+  ArticleSummary,
+  AuthorBio,
+  UpdateHistory,
 } from "@/components/guide/ArticleComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
   title:
-    "外食で低脂質メニューを選ぶ完全ガイド｜チェーン店別おすすめ | たべなび",
+    "【2026年最新版】外食で低脂質メニューを選ぶ完全ガイド｜チェーン店別おすすめ | たべなび",
   description:
     "脂質制限中でも安心して外食できるチェーン店別低脂質メニューを紹介。1日の脂質管理法から選び方のコツまで完全解説。",
   keywords: [
@@ -46,7 +51,7 @@ const jsonLd = {
   description:
     "脂質制限中でも安心して外食できるチェーン店別低脂質メニューを紹介。",
   datePublished: "2026-03-01",
-  dateModified: "2026-03-19",
+  dateModified: new Date().toISOString().split("T")[0],
   author: {
     "@type": "Organization",
     name: "たべなび",
@@ -126,8 +131,18 @@ export default async function LowFatEatingOutPage() {
         {/* Authority & date */}
         <AuthorityBadge />
         <p className="text-sm text-gray-400 mt-3 mb-6">
-          最終更新: 2026年3月19日
+          最終更新: {new Date().toLocaleDateString("ja-JP", { year: "numeric", month: "long", day: "numeric" })}
         </p>
+
+        {/* QuickAnswer */}
+        <QuickAnswer
+          question="ローファットダイエット中、外食でどう選べばいい？低脂質なメニューのおすすめは？"
+          answer={
+            <>
+              <strong>「揚げ物 NG・蒸し/焼き OK」が基本ルール</strong>。脂質15g以下のメニューを優先し、1食あたり脂質を10〜15gに抑えるのが理想です。チェーン別おすすめは<strong>マック「ハンバーガー」（脂質9.5g）/ 吉野家「ライザップ牛サラダ」（脂質13g）/ 松屋「焼鮭定食」 / サブウェイ「ローストビーフ」</strong>。揚げ物（チキンフィレオ、唐揚げ系）、クリーム系パスタ、マヨネーズ多用メニューは避けましょう。
+            </>
+          }
+        />
 
         <p className="text-gray-700 leading-relaxed mb-4">
           脂質制限ダイエット（ローファットダイエット）中の外食は、メニュー選びが非常に重要です。
@@ -323,14 +338,60 @@ export default async function LowFatEatingOutPage() {
           以下のポイントを押さえて、無理のない脂質管理を続けましょう。
         </p>
 
-        <CheckList
-          items={[
+        <ArticleSummary
+          points={[
             "脂質は1gあたり9kcal。脂質を減らすのがカロリーカットの近道",
             "揚げ物を避け、グリル・蒸し料理を選ぶのが基本",
             "外食1食あたりの脂質目標は10〜17g程度",
             "ドレッシングやソース類は別添え・控えめに",
             "外食する日は他の食事で脂質を調整する",
             "たべなびのフィルター機能で低脂質メニューを簡単検索",
+          ]}
+        />
+
+        {/* FAQ */}
+        <FAQSection
+          slug="low-fat-eating-out"
+          items={[
+            {
+              q: "ローファットダイエット中、外食で1食何gが目安？",
+              a: "1食あたりの脂質は10〜17gが目安です。1日の脂質量は体重×0.7〜1.0gが理想（体重60kgなら42〜60g/日）。3食外食するなら1食あたり15g前後に収めましょう。揚げ物1品で20g超えるので注意。",
+            },
+            {
+              q: "マクドナルドで一番低脂質のバーガーは？",
+              a: "ハンバーガー単品（259kcal/F9.5g）が脂質最少です。チーズバーガー（F13.5g）、エッグマックマフィン（F13.6g）も比較的低脂質。逆にてりやきマックバーガー（F30.2g）、倍ビッグマック（F43.1g）は要注意。",
+            },
+            {
+              q: "牛丼チェーンでローファット向きのメニューは？",
+              a: "吉野家のライザップ牛サラダ（414kcal/F13g）が脂質最少で高タンパク。次いで吉野家の牛皿並盛（241kcal/F17g）、すき家の牛丼ライト（豆腐ベース・F約15g）。普通の牛丼並盛は脂質23〜25g前後あり、ローファット中はサイズ小盛にしましょう。",
+            },
+            {
+              q: "コンビニのローファット向き商品は？",
+              a: "サラダチキン（F1〜2g）、おにぎり（F1〜3g）、納豆（F5g）、ヨーグルト無脂肪タイプ（F0〜1g）、ゆで卵（F5g）など豊富にあります。組み合わせれば1食300kcal/F10g以下で高タンパクな食事が可能です。",
+            },
+            {
+              q: "ローファットダイエットでも食べていい揚げ物はある？",
+              a: "基本的に避けるべきですが、どうしても食べる場合は「衣を残す」「サイドサラダで野菜を増やす」「次の食事で脂質ゼロにする」で調整可能。一度の脂質オーバーで太るわけではないので、週1〜2回までなら影響は限定的です。",
+            },
+            {
+              q: "ファミレスでローファット向きのメニューは？",
+              a: "サイゼリヤの若鶏のグリル（F約15g）、ガストの蒸し鶏冷麺、ジョナサンのグリルチキン系がおすすめ。逆にカルボナーラ・グラタン・ハンバーグ系は脂質30g超のものが多いので避けましょう。",
+            },
+            {
+              q: "サラダドレッシングで太らないものは？",
+              a: "和風（ノンオイル）・玉ねぎドレッシング・酢系がおすすめで、1袋あたり脂質1〜3g。一方シーザー、ごま、フレンチ系は脂質10g超。ドレッシングは「半分だけかける」「別添えにしてつける」だけで脂質を半減できます。",
+            },
+          ]}
+        />
+
+        {/* Author Bio */}
+        <AuthorBio />
+
+        {/* Update History */}
+        <UpdateHistory
+          entries={[
+            { date: "2026-05-12", note: "QuickAnswer・FAQ・著者情報を追加。最新栄養データに対応" },
+            { date: "2026-03-19", note: "初稿公開" },
           ]}
         />
 

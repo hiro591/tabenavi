@@ -51,7 +51,7 @@ const jsonLd = {
   description:
     "松屋のカロリー低い順ランキング、ダイエット向けおすすめメニュー、定食と丼の比較を徹底解説。",
   datePublished: "2026-03-19",
-  dateModified: "2026-03-19",
+  dateModified: new Date().toISOString().split("T")[0],
   author: {
     "@type": "Organization",
     name: "たべなび",

@@ -50,7 +50,7 @@ const jsonLd = {
   description:
     "食べて痩せるダイエットの科学的根拠と5つの原則を徹底解説。高タンパク・低GI・食物繊維を活用した実践メニュー。",
   datePublished: "2026-03-25",
-  dateModified: "2026-03-25",
+  dateModified: new Date().toISOString().split("T")[0],
   author: {
     "@type": "Organization",
     name: "たべなび",

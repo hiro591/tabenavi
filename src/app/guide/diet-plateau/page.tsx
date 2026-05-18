@@ -50,7 +50,7 @@ const jsonLd = {
   description:
     "ダイエット停滞期の科学的メカニズムと突破法を解説。体重が減らない原因と対策を紹介。",
   datePublished: "2026-03-25",
-  dateModified: "2026-03-25",
+  dateModified: new Date().toISOString().split("T")[0],
   author: {
     "@type": "Organization",
     name: "たべなび",

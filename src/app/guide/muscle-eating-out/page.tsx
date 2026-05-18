@@ -47,7 +47,7 @@ const jsonLd = {
   description:
     "筋トレ中の外食で迷わない。主要チェーン店の高タンパクメニューをPFCデータ付きで徹底解説。",
   datePublished: "2026-03-01",
-  dateModified: "2026-03-19",
+  dateModified: new Date().toISOString().split("T")[0],
   author: {
     "@type": "Organization",
     name: "たべなび",

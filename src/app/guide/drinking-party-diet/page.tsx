@@ -57,7 +57,7 @@ const jsonLd = {
   description:
     "飲み会でも太らないためのお酒・おつまみの選び方を徹底解説。カロリー比較と3段階テクニックで飲み会を乗り越えよう。",
   datePublished: "2026-03-19",
-  dateModified: "2026-03-19",
+  dateModified: new Date().toISOString().split("T")[0],
   author: {
     "@type": "Organization",
     name: "たべなび",

@@ -51,7 +51,7 @@ const jsonLd = {
   description:
     "ガストのカロリーランキング、ダイエット中におすすめの低カロリーメニュー、注文テクニックを徹底解説。",
   datePublished: "2026-03-19",
-  dateModified: "2026-03-19",
+  dateModified: new Date().toISOString().split("T")[0],
   author: {
     "@type": "Organization",
     name: "たべなび",

@@ -17,6 +17,11 @@ import {
   ComparisonTable,
   ArticleFooter,
   ArticleImage,
+  QuickAnswer,
+  FAQSection,
+  ArticleSummary,
+  AuthorBio,
+  UpdateHistory,
 } from "@/components/guide/ArticleComponents";
 import { AffiliateProductGrid } from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
@@ -58,7 +63,7 @@ const jsonLd = {
   description:
     "ローソンでダイエットに最適な低カロリー・高タンパク商品をランキング形式で紹介。",
   datePublished: "2026-03-25",
-  dateModified: "2026-03-25",
+  dateModified: new Date().toISOString().split("T")[0],
   author: {
     "@type": "Organization",
     name: "たべなび",
@@ -102,9 +107,19 @@ export default function LawsonDietPage() {
         <div className="mb-8">
           <AuthorityBadge />
           <p className="text-sm text-gray-400 mt-2">
-            最終更新: 2026年3月25日 | 読了目安: 11分
+            最終更新: {new Date().toLocaleDateString("ja-JP", { year: "numeric", month: "long", day: "numeric" })} | 読了目安: 11分
           </p>
         </div>
+
+        {/* QuickAnswer */}
+        <QuickAnswer
+          question="ローソンでダイエット中におすすめは？ロカボ商品とサラダチキンの定番は？"
+          answer={
+            <>
+              <strong>ローソンの強みは「ブランパン」「たんぱく質シリーズ」「ナチュラルローソン」の3本柱</strong>。糖質制限派なら<strong>ブランパン2個入り（約140kcal/糖質約4g）</strong>、高タンパク派なら<strong>サラダチキン プレーン（約110kcal/P25g）</strong>や<strong>たんぱく質が摂れるバー系商品（150〜200kcal/P15g）</strong>が定番。1食300kcal/P30g台の組み合わせが他コンビニより簡単に作れます。416商品（2026年5月時点）のラインナップで選択肢が圧倒的です。
+            </>
+          }
+        />
 
         {/* Introduction */}
         <p className="mb-4">
@@ -537,13 +552,13 @@ export default function LawsonDietPage() {
             ローソンダイエットの要点を振り返りましょう。
           </p>
 
-          <CheckList
-            items={[
+          <ArticleSummary
+            points={[
               "ローソンはロカボ商品100品目以上でコンビニNo.1の低糖質ラインナップ",
-              "ブランパンは2個で120kcal・糖質4.4gとダイエットの神商品",
-              "国産サラダチキン（114kcal / P24g）は低カロリー＆高タンパクの王道",
-              "たんぱく質がとれるからあげクンは揚げ物なのにP19gの新定番",
-              "1日990kcal・P85g・糖質75gのプランがローソンだけで実現可能",
+              "ブランパン2個入りは約140kcal・糖質約4gとダイエットの神商品",
+              "国産サラダチキン プレーン（約110kcal/P25g）は低カロリー＆高タンパクの王道",
+              "たんぱく質シリーズが豊富。バー・ドリンク・パン全カバー",
+              "1食300kcal/P30g台のプランがローソンだけで実現可能",
               "ロカボスイーツで糖質10g以下のスイーツが楽しめる",
               "Lチキ・大盛りパスタ・プレミアムロールケーキはダイエット中NG",
               "お試し引換券でダイエット商品をお得にゲット",
@@ -559,9 +574,55 @@ export default function LawsonDietPage() {
           </p>
 
           <p className="text-xs text-gray-400 mt-4">
-            ※価格・栄養成分は店舗により異なる場合があります。商品は予告なく変更・終了する場合があります。
+            ※価格・栄養成分は店舗により異なる場合があります。商品は予告なく変更・終了する場合があります。最新情報は<a href="https://www.lawson.co.jp/recommend/original/detail/" target="_blank" rel="noopener noreferrer" className="text-sky-500 hover:underline">ローソン公式オリジナル商品</a>でご確認ください。
           </p>
         </section>
+
+        {/* FAQ */}
+        <FAQSection
+          slug="lawson-diet"
+          items={[
+            {
+              q: "ローソンで一番タンパク質が多い商品は？",
+              a: "「サラダチキン プレーン」（約110kcal/P25g）が王道。バー型なら「サラダチキンバー（プレーン）」、お弁当系なら「鶏むね肉のグリル弁当」など。1商品で20g以上のタンパク質が摂れる商品が416商品中数十品あります。",
+            },
+            {
+              q: "ブランパンは本当にダイエットに効く？",
+              a: "ブランパン2個入り（約140kcal/糖質約4g）は通常パンの3分の1の糖質。1個あたりタンパク質も約5gと栄養価が高く、糖質制限中の主食代替として優秀です。サラダチキンを挟めばボリュームある低糖質サンドイッチが完成します。",
+            },
+            {
+              q: "ローソンのおにぎりでダイエット中OKは？",
+              a: "梅・鮭・昆布・おかか系（約170〜200kcal）が低カロリー＆低脂質。逆にツナマヨ（約240kcal）やチャーハン系（260kcal以上）は脂質高め。糖質制限中なら「もち麦」シリーズが食物繊維豊富でおすすめ。",
+            },
+            {
+              q: "からあげクンとLチキ、どっちがダイエット向き？",
+              a: "両者とも高タンパクですが、Lチキは1個約380kcal/F25gと脂質が高め。からあげクン（約220kcal/P15g/F12g）の方が低カロリー＆PFCバランス良好。ただし揚げ物なので頻繁には食べないこと。",
+            },
+            {
+              q: "ローソンの低カロリースイーツは？",
+              a: "「ロカボ」シリーズのスイーツ（チョコ・プリン・大福系）が糖質10g以下で罪悪感なく食べられます。「バスチー」（約220kcal）は低糖質ながら満足感あり。逆にプレミアムロールケーキは1個300kcal以上なので注意。",
+            },
+            {
+              q: "ローソンとセブン、どっちがダイエットに向いてる？",
+              a: "目的次第です。糖質制限ならローソン（ブランパン・ロカボ充実）、商品の選択肢の多さならセブン（栄養表示が完璧）。最強は「両方使い分け」。当アプリで両店の商品を一括比較できます。",
+            },
+            {
+              q: "ナチュラルローソンとは？",
+              a: "ローソンのプレミアムブランド。一般のローソン店舗の中にも一部商品が並んでいます。無添加・低糖質・有機素材を重視した商品が中心で、プロテインバー、グラノーラ、ヘルシースイーツが充実。少し価格は高めですが、栄養面では妥協なしの設計。",
+            },
+          ]}
+        />
+
+        {/* Author Bio */}
+        <AuthorBio />
+
+        {/* Update History */}
+        <UpdateHistory
+          entries={[
+            { date: "2026-05-13", note: "ローソン416商品の最新栄養データに更新。QuickAnswer・FAQ・著者情報を追加" },
+            { date: "2026-03-25", note: "初稿公開" },
+          ]}
+        />
 
         {/* Article Footer */}
         <ArticleFooter currentSlug="lawson-diet" />

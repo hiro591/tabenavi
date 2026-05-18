@@ -16,6 +16,11 @@ import {
   NumberedList,
   ArticleFooter,
   ArticleImage,
+  QuickAnswer,
+  FAQSection,
+  ArticleSummary,
+  AuthorBio,
+  UpdateHistory,
 } from "@/components/guide/ArticleComponents";
 import { AffiliateProductGrid } from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
@@ -51,7 +56,7 @@ const jsonLd = {
   description:
     "ファミリーマートでダイエットに最適な低カロリー・高タンパク商品をランキング形式で紹介。RIZAPコラボ商品の活用法も。",
   datePublished: "2026-03-25",
-  dateModified: "2026-03-25",
+  dateModified: new Date().toISOString().split("T")[0],
   author: {
     "@type": "Organization",
     name: "たべなび",
@@ -94,9 +99,19 @@ export default function FamilyMartDietPage() {
         <div className="mb-8">
           <AuthorityBadge />
           <p className="text-sm text-gray-400 mt-2">
-            最終更新: 2026年3月25日 | 読了目安: 10分
+            最終更新: {new Date().toLocaleDateString("ja-JP", { year: "numeric", month: "long", day: "numeric" })} | 読了目安: 10分
           </p>
         </div>
+
+        {/* QuickAnswer */}
+        <QuickAnswer
+          question="ファミマでダイエット中におすすめは？RIZAP共同開発商品の本命は？"
+          answer={
+            <>
+              <strong>ファミマの強みは「RIZAP共同開発商品」と「お母さん食堂シリーズ」</strong>。RIZAPサラダチキン（約125kcal/P22g）、RIZAPプロテインバー（約200kcal/P10g）が定番。お弁当系では<strong>サラダチキンとたまごのサンド（268kcal/P19g）</strong>が単品完結で優秀。1食300kcal/P30g台の組み合わせがしやすく、特に<strong>ダイエット初心者には最も使いやすいコンビニ</strong>です（220商品ラインナップ・2026年5月時点）。
+            </>
+          }
+        />
 
         {/* Introduction */}
         <p className="mb-4">
@@ -471,12 +486,13 @@ export default function FamilyMartDietPage() {
             ファミマダイエットの要点を振り返りましょう。RIZAPコラボとお母さん食堂を活用すれば、<Marker>コンビニだけで本格的なダイエット</Marker>が可能です。
           </p>
 
-          <CheckList
-            items={[
+          <ArticleSummary
+            points={[
               "RIZAPコラボ商品は常時30品目以上。糖質0g麺（22kcal）は主食の置き換えに最強",
               "お母さん食堂シリーズは低カロリーで栄養バランスに優れた副菜の宝庫",
-              "サラダチキン（114kcal / P23.8g）はタンパク質1gあたり約9.6円とコスパ抜群",
-              "1日1,226kcal・P103.2gの食事プランがファミマだけで実現可能",
+              "サラダチキン（約114kcal/P24g）はタンパク質1gあたり約10円とコスパ抜群",
+              "サラダチキンとたまごのサンド（268kcal/P19g）など完結型の弁当が充実",
+              "1食300kcal/P30g台のプランがファミマだけで実現可能（220商品ラインナップ）",
               "ファミチキ・菓子パン・大盛り弁当はダイエット中はNG",
               "ファミペイアプリのクーポンとお気に入り機能を活用して継続しやすくする",
             ]}
@@ -506,9 +522,55 @@ export default function FamilyMartDietPage() {
           </div>
 
           <p className="text-xs text-gray-400 mt-4">
-            ※価格・栄養成分は店舗や時期により異なる場合があります。商品は予告なく変更・終了する場合があります。RIZAPコラボ商品は一部店舗で取り扱いがない場合があります。
+            ※価格・栄養成分は店舗や時期により異なる場合があります。商品は予告なく変更・終了する場合があります。RIZAPコラボ商品は一部店舗で取り扱いがない場合があります。最新情報は<a href="https://www.family.co.jp/goods/" target="_blank" rel="noopener noreferrer" className="text-sky-500 hover:underline">ファミマ公式商品情報</a>でご確認ください。
           </p>
         </section>
+
+        {/* FAQ */}
+        <FAQSection
+          slug="familymart-diet"
+          items={[
+            {
+              q: "ファミマでダイエット中におすすめの定番商品は？",
+              a: "①RIZAPサラダチキン（約125kcal/P22g）、②サラダチキンとたまごのサンド（268kcal/P19g）、③RIZAPプロテインバー（約200kcal/P10g）、④お母さん食堂のひじき煮（約60kcal）、⑤ライザップ糖質0g麺（22kcal）。これら5品を組み合わせれば1食300〜400kcalで栄養バランス完璧。",
+            },
+            {
+              q: "RIZAPコラボ商品は本当にダイエット効果がある？",
+              a: "RIZAP商品は通常品より「カロリー・糖質を抑え、タンパク質を増やす」設計。例えばRIZAPサラダチキンは125kcal/P22gと栄養密度が高い。ただし「これ食べれば痩せる」訳ではなく、1日の総カロリー管理＋運動の補助として活用すると効果的。",
+            },
+            {
+              q: "ファミチキはダイエット中NG？",
+              a: "ファミチキ1個は約240kcal/P14g/F15g。タンパク質は摂れますが脂質が高めなので、ダイエット中は週1〜2回までが目安。「ファミチキの皮を一部剥がす」「サラダ＋スープと組み合わせる」など工夫すれば、たまの楽しみとしてOK。",
+            },
+            {
+              q: "ファミマの朝食でダイエット向きは？",
+              a: "「サラダチキン+おにぎり1個（昆布・梅・鮭）+ゆで卵」で約350kcal/P32g。または「お母さん食堂のおかずセット+ヨーグルト+RIZAPプロテインドリンク」で約380kcal/P25g。朝の高タンパクは1日の代謝アップに効果的。",
+            },
+            {
+              q: "ファミマのお弁当でダイエット向きは？",
+              a: "サラダチキン系の弁当（450kcal前後）、お母さん食堂シリーズの和定食弁当（500kcal前後）が低カロリー＆栄養バランス良好。逆に大盛り焼肉弁当（800kcal超）、ナポリタン大盛り（750kcal前後）は注意。",
+            },
+            {
+              q: "ファミマの低糖質スイーツは？",
+              a: "「RIZAPプロテインゼリー」（80kcal/P10g）、「ライザップカップアイス」（130kcal/糖質約7g）、「ライザップ低糖質バウムクーヘン」（150kcal/糖質約10g）など。スイーツ欲を満たしながら糖質をコントロールできます。",
+            },
+            {
+              q: "セブン・ローソンとの違いは？",
+              a: "セブン: 商品ラインナップが豊富 / ローソン: ロカボ商品が圧倒的 / ファミマ: RIZAPコラボとお母さん食堂が特徴。ダイエット初心者には「単品で完結する商品が多い」ファミマが最も使いやすいです。",
+            },
+          ]}
+        />
+
+        {/* Author Bio */}
+        <AuthorBio />
+
+        {/* Update History */}
+        <UpdateHistory
+          entries={[
+            { date: "2026-05-13", note: "ファミマ220商品の最新栄養データに更新。QuickAnswer・FAQ・著者情報を追加" },
+            { date: "2026-03-25", note: "初稿公開" },
+          ]}
+        />
 
         {/* Article Footer */}
         <ArticleFooter currentSlug="familymart-diet" />

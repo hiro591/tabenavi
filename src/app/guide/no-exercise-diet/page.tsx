@@ -50,7 +50,7 @@ const jsonLd = {
   description:
     "運動なしでも食事管理だけで痩せられる科学的根拠と実践方法を解説。",
   datePublished: "2026-03-25",
-  dateModified: "2026-03-25",
+  dateModified: new Date().toISOString().split("T")[0],
   author: {
     "@type": "Organization",
     name: "たべなび",

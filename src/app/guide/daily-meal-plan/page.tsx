@@ -17,6 +17,11 @@ import {
   ComparisonTable,
   ArticleFooter,
   ArticleImage,
+  QuickAnswer,
+  FAQSection,
+  ArticleSummary,
+  AuthorBio,
+  UpdateHistory,
 } from "@/components/guide/ArticleComponents";
 import {
   AffiliateDisclosure,
@@ -55,7 +60,7 @@ const jsonLd = {
   description:
     "外食だけで1日1500kcalに収める具体的な食事プランを5パターン紹介。実際のメニュー名とPFC付きで完全解説。",
   datePublished: "2026-03-19",
-  dateModified: "2026-03-19",
+  dateModified: new Date().toISOString().split("T")[0],
   author: {
     "@type": "Organization",
     name: "たべなび",
@@ -98,8 +103,20 @@ export default function DailyMealPlanPage() {
       <ArticleLayout tocItems={tocItems} currentSlug="daily-meal-plan">
         {/* Authority & Date */}
         <AuthorityBadge />
-        <p className="text-sm text-gray-400 mt-3 mb-2">最終更新: 2026年3月19日</p>
+        <p className="text-sm text-gray-400 mt-3 mb-2">
+          最終更新: {new Date().toLocaleDateString("ja-JP", { year: "numeric", month: "long", day: "numeric" })}
+        </p>
         <AffiliateDisclosure />
+
+        {/* QuickAnswer */}
+        <QuickAnswer
+          question="外食だけで1日1,500kcalダイエットは可能？具体的なメニュー例は？"
+          answer={
+            <>
+              <strong>結論: 可能です</strong>。1食あたり<strong>朝350kcal、昼500kcal、夜650kcal</strong>を目安にメニューを選べばOK。例えば<strong>朝: コンビニのサラダチキン+おにぎり+ヨーグルト（350kcal）→ 昼: 吉野家のライザップ牛サラダ+味噌汁（450kcal）→ 夜: ガストの蒸し鶏+サラダ（600kcal）</strong>。タンパク質は1日100g以上、脂質40g以下を意識。本記事では用途別に5つの具体プランを紹介します。
+            </>
+          }
+        />
 
         {/* Introduction */}
         <p className="mb-4">
@@ -760,7 +777,53 @@ export default function DailyMealPlanPage() {
         {/* End CTA */}
         <CTABanner
           title="たべなびで今日の外食カロリーをチェック"
-          subtitle="20チェーン・500メニューの栄養データを無料で検索"
+          subtitle="22チェーン・2,500メニューの栄養データを無料で検索"
+        />
+
+        {/* FAQ */}
+        <FAQSection
+          slug="daily-meal-plan"
+          items={[
+            {
+              q: "外食だけで本当に1,500kcalダイエットできる？",
+              a: "可能です。重要なのは「メニュー選び」と「組み合わせ」の2点。例えば朝にコンビニ朝食（350kcal）、昼に吉野家のライザップ牛サラダ（414kcal）、夜にサイゼリヤの若鶏のグリル+サラダ（600kcal）で合計約1,360kcal。さらに間食用にプロテインバー（150kcal）を加えても1,500kcal以下に収まります。",
+            },
+            {
+              q: "1日1,500kcalは少なすぎませんか？",
+              a: "成人女性（運動量低め）の場合、減量期の摂取目安は1,400〜1,600kcal、男性は1,800〜2,000kcal。1,500kcalは「軽めのカロリー赤字」で、無理なく月1〜2kg減量を目指すのに適切なレベルです。極端な低カロリー（1,200kcal以下）は基礎代謝低下を招くので避けましょう。",
+            },
+            {
+              q: "プランの中で一番続けやすいのはどれ？",
+              a: "「コンビニ中心プラン」が圧倒的に続けやすいです。理由は①セブン・ローソン・ファミマどこでも実行可能、②30秒で買えて時短、③同じメニューを週3〜4回食べても飽きにくい組み合わせ豊富。最初の1週間はこのプランから始めるのがおすすめです。",
+            },
+            {
+              q: "外食ダイエット中の朝食はどうすべき？",
+              a: "朝は「タンパク質+少量の炭水化物」が理想。おすすめは①コンビニ：おにぎり+ゆで卵+ヨーグルト（350kcal/P20g）、②吉野家：朝牛セット小盛（450kcal）、③マクドナルド：エッグマックマフィン+ブラックコーヒー（315kcal/P19g）。朝食を抜くより必ず食べる方がリバウンド防止になります。",
+            },
+            {
+              q: "間食やおやつは1,500kcalプランに含めていい？",
+              a: "含めて構いませんが、150kcal以下を目安に。プロテインバー（150kcal/P10g）、ゆで卵（80kcal/P6g）、無糖ヨーグルト（100kcal/P10g）、ナッツ少量（150kcal）が優秀。逆に菓子パン（300kcal）、ポテチ1袋（300kcal以上）は1食分のカロリーに匹敵するのでNG。",
+            },
+            {
+              q: "外食でPFCバランスを整えるコツは？",
+              a: "①メインは高タンパク（鶏肉、魚、卵、豆腐）を選ぶ、②脂質高めの揚げ物・チーズ・マヨネーズを控えめに、③炭水化物はご飯小盛にする、④野菜を必ず追加する。これら4つを意識するだけで、外食でもP30:F25:C45のバランスに近づきます。",
+            },
+            {
+              q: "週末や外食できない日はどうする？",
+              a: "週末は週内の平均でカロリー調整するのがおすすめ。例：平日5日を1,400kcalに抑えれば、週末2日は1,750kcal摂っても週平均1,500kcal。完全な禁欲より「週単位での平均化」の方が継続しやすく、リバウンド防止にも有効です。",
+            },
+          ]}
+        />
+
+        {/* Author Bio */}
+        <AuthorBio />
+
+        {/* Update History */}
+        <UpdateHistory
+          entries={[
+            { date: "2026-05-12", note: "QuickAnswer・FAQ・著者情報を追加。22チェーン2,500メニュー対応" },
+            { date: "2026-03-19", note: "初稿公開" },
+          ]}
         />
 
         {/* ArticleFooter */}

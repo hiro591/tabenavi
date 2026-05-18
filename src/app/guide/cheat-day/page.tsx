@@ -50,7 +50,7 @@ const jsonLd = {
   description:
     "チートデイの正しいやり方・頻度・おすすめメニューを科学的根拠に基づいて解説。ダイエット停滞期を突破する方法。",
   datePublished: "2026-03-25",
-  dateModified: "2026-03-25",
+  dateModified: new Date().toISOString().split("T")[0],
   author: {
     "@type": "Organization",
     name: "たべなび",

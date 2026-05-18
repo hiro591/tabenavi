@@ -50,7 +50,7 @@ const jsonLd = {
   description:
     "ダイエットで失敗する人がやりがちな間違い10選を科学的根拠とともに解説。正しいダイエットの5原則も紹介。",
   datePublished: "2026-03-25",
-  dateModified: "2026-03-25",
+  dateModified: new Date().toISOString().split("T")[0],
   author: {
     "@type": "Organization",
     name: "たべなび",

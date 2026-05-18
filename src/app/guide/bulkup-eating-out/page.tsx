@@ -50,7 +50,7 @@ const jsonLd = {
   description:
     "増量期・バルクアップ中の外食メニューを徹底解説。チェーン店別おすすめメニューと3000kcalプランを紹介。",
   datePublished: "2026-03-23",
-  dateModified: "2026-03-23",
+  dateModified: new Date().toISOString().split("T")[0],
   author: {
     "@type": "Organization",
     name: "たべなび",

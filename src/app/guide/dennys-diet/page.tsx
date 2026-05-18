@@ -50,7 +50,7 @@ const jsonLd = {
   description:
     "デニーズの低カロリーメニューランキング、ハンバーグの選び方、ダイエット中のおすすめ注文テクニックを徹底解説。",
   datePublished: "2026-03-19",
-  dateModified: "2026-03-19",
+  dateModified: new Date().toISOString().split("T")[0],
   author: {
     "@type": "Organization",
     name: "たべなび",

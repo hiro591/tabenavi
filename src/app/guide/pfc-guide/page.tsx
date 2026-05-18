@@ -20,7 +20,7 @@ import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
   title:
-    "【初心者向け】PFCバランスとは？計算方法と外食での実践ガイド | たべなび",
+    "【2026年最新版】【初心者向け】PFCバランスとは？計算方法と外食での実践ガイド | たべなび",
   description:
     "PFCバランス（タンパク質・脂質・炭水化物）の基本から計算方法まで初心者向けに解説。ダイエット・筋トレ・維持の3パターン別PFC比率と、外食で実践するコツを紹介します。",
   keywords: [
@@ -47,7 +47,7 @@ const jsonLd = {
   description:
     "PFCバランスの基本から計算方法、ダイエット・筋トレ・維持の3パターン別PFC比率、外食での実践方法を解説。",
   datePublished: "2026-03-23",
-  dateModified: "2026-03-23",
+  dateModified: new Date().toISOString().split("T")[0],
   author: {
     "@type": "Organization",
     name: "たべなび",

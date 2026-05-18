@@ -53,7 +53,7 @@ const jsonLd = {
   description:
     "ラーメンのカロリーを味別・チェーン店別に徹底比較。太らない食べ方5つのコツを紹介します。",
   datePublished: "2026-03-23",
-  dateModified: "2026-03-23",
+  dateModified: new Date().toISOString().split("T")[0],
   author: {
     "@type": "Organization",
     name: "たべなび",

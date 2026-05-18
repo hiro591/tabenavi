@@ -49,7 +49,7 @@ const jsonLd = {
   description:
     "カレーのカロリーをチェーン店別に徹底比較。CoCo壱のカリフラワーライスや太らない食べ方を解説します。",
   datePublished: "2026-03-23",
-  dateModified: "2026-03-23",
+  dateModified: new Date().toISOString().split("T")[0],
   author: {
     "@type": "Organization",
     name: "たべなび",

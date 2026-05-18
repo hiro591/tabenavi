@@ -16,6 +16,11 @@ import {
   NumberedList,
   ArticleFooter,
   ArticleImage,
+  QuickAnswer,
+  FAQSection,
+  ArticleSummary,
+  AuthorBio,
+  UpdateHistory,
 } from "@/components/guide/ArticleComponents";
 import {
   AffiliateDisclosure,
@@ -25,7 +30,7 @@ import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
   title:
-    "牛丼チェーン3社カロリー・栄養比較｜吉野家・松屋・すき家、ダイエットに最適なのは？ | たべなび",
+    "【2026年最新版】牛丼チェーン3社カロリー・栄養比較｜吉野家・松屋・すき家、ダイエットに最適なのは？ | たべなび",
   description:
     "吉野家・松屋・すき家の牛丼カロリー・タンパク質・脂質・炭水化物を徹底比較。ダイエット中に選ぶべき牛丼チェーンとおすすめメニューを紹介。",
   keywords: [
@@ -53,7 +58,7 @@ const jsonLd = {
   description:
     "吉野家・松屋・すき家の牛丼カロリー・タンパク質・脂質・炭水化物を徹底比較。ダイエット中に選ぶべき牛丼チェーンとおすすめメニューを紹介。",
   datePublished: "2026-03-18",
-  dateModified: "2026-03-19",
+  dateModified: new Date().toISOString().split("T")[0],
   author: {
     "@type": "Organization",
     name: "たべなび",
@@ -96,10 +101,20 @@ export default function GyudonComparisonPage() {
         <div className="mb-4">
           <AuthorityBadge />
           <p className="text-sm text-gray-400 mt-2">
-            最終更新: 2026年3月19日 | 読了目安: 7分
+            最終更新: {new Date().toLocaleDateString("ja-JP", { year: "numeric", month: "long", day: "numeric" })} | 読了目安: 7分
           </p>
           <AffiliateDisclosure />
         </div>
+
+        {/* QuickAnswer */}
+        <QuickAnswer
+          question="吉野家・松屋・すき家、牛丼並盛のカロリーは？ダイエットに一番向いているのは？"
+          answer={
+            <>
+              <strong>吉野家 633kcal / 松屋 687kcal / すき家 695kcal</strong>（並盛・2026年5月時点）。最低カロリーは吉野家、最高タンパクは松屋（P21.1g）です。ダイエット中に選ぶべきは<strong>糖質制限なら「すき家の牛丼ライト」（豆腐ベース）</strong>、PFCバランス重視なら<strong>吉野家のライザップ牛サラダ（414kcal/P30g）</strong>、コスパなら<strong>吉野家の小盛（497kcal）</strong>が最強。3社とも甲乙つけがたいので、好みで選んでOKです。
+            </>
+          }
+        />
 
         {/* Introduction */}
         <p className="mb-4">
@@ -348,20 +363,66 @@ export default function GyudonComparisonPage() {
             ダイエット中でも牛丼を楽しむことは十分可能です。大切なのは、チェーン選びとサイズ選び、そして前後の食事でのバランス調整です。
           </p>
 
-          <CheckList
-            items={[
-              "カロリーが最も低いのは吉野家（635kcal）",
-              "タンパク質が最も多いのは吉野家（20g）",
-              "脂質が最も低いのはすき家（20.5g）",
-              "コスパ最強は松屋（¥400＋味噌汁無料）",
-              "糖質制限ならすき家の牛丼ライト（352kcal）一択",
+          <ArticleSummary
+            points={[
+              "カロリーが最も低いのは吉野家（633kcal）",
+              "タンパク質が最も多いのは松屋（21.1g）",
+              "脂質が最も低いのは吉野家（23.6g）",
+              "コスパ最強は松屋（¥430＋味噌汁無料）",
+              "糖質制限ならすき家の牛丼ライト（豆腐ベース）一択",
             ]}
           />
 
           <p className="text-xs text-gray-400 mt-4">
-            ※ 掲載されている価格・栄養成分は公式サイト等の情報を基にしており、店舗や時期によって異なる場合があります。最新情報は各チェーンの公式サイトをご確認ください。
+            ※ 掲載されている価格・栄養成分は公式サイト等の情報を基にしており、店舗や時期によって異なる場合があります。最新情報は各チェーンの公式サイト（<a href="https://www.yoshinoya.com/menu/info/allergy.html" target="_blank" rel="noopener noreferrer" className="text-sky-500 hover:underline">吉野家</a> / <a href="https://www.matsuyafoods.co.jp/matsuya/menu/" target="_blank" rel="noopener noreferrer" className="text-sky-500 hover:underline">松屋</a> / <a href="https://www.sukiya.jp/menu/" target="_blank" rel="noopener noreferrer" className="text-sky-500 hover:underline">すき家</a>）をご確認ください。
           </p>
         </section>
+
+        {/* FAQ */}
+        <FAQSection
+          slug="gyudon-comparison"
+          items={[
+            {
+              q: "吉野家・松屋・すき家、牛丼並盛のカロリーは？",
+              a: "2026年5月時点の公式栄養情報では、吉野家 633kcal / 松屋 687kcal / すき家 695kcal です。1番カロリーが低いのは吉野家の牛丼並盛です。なお3社とも糖質量はほぼ同じ（88〜100g）で、差はほとんど脂質量と肉量によるものです。",
+            },
+            {
+              q: "ダイエット中、3社で一番おすすめなのはどこ？",
+              a: "目的によって変わります。①カロリー重視なら吉野家、②高タンパクなら松屋、③糖質制限ならすき家（牛丼ライト 豆腐ベース）。総合的には吉野家のライザップ牛サラダ（414kcal/P30g）が「ダイエット最強メニュー」として人気です。",
+            },
+            {
+              q: "牛丼ライト（すき家）は本当に痩せる？",
+              a: "ご飯の代わりに豆腐とサラダを使用しているため、糖質を大幅にカットできます。並サイズで約400kcal前後と、通常の牛丼（695kcal）と比較して300kcal近い差が出ます。ローカーボ・ケトジェニックダイエット中の方には最適です。",
+            },
+            {
+              q: "並盛・大盛・特盛、ダイエット中はどのサイズを選ぶべき？",
+              a: "ダイエット中は「並盛」または「小盛」が基本です。並盛→大盛で約150kcal、大盛→特盛でさらに約150〜250kcal増加します。吉野家の小盛（497kcal）が3社で最もカロリー控えめのサイズ選択肢です。",
+            },
+            {
+              q: "牛丼にトッピング、何が一番太りにくい？",
+              a: "卵（約80kcal/P6g）、キムチ（10〜30kcal）、紅生姜（ほぼ0kcal）、おしんこ（17kcal）がおすすめ。逆に、チーズ、温泉卵、ねぎだく等は100kcal以上追加されます。タンパク質を増やしたい場合は卵が最強です。",
+            },
+            {
+              q: "3社の朝定食、どこが一番ヘルシー？",
+              a: "吉野家の朝牛セット（約500kcal）、松屋の納豆定食（約480kcal）、すき家のたまかけ牛丼ミニ（約480kcal）。野菜を多く摂りたいなら松屋のサラダ付き朝定食が良い選択です。3社とも400〜500kcal台でダイエット中の朝食として使えます。",
+            },
+            {
+              q: "牛丼を食べた後、夕食で何を食べるべき？",
+              a: "牛丼は炭水化物が多めなので、夕食は「タンパク質+野菜中心」がおすすめです。サラダチキン+味噌汁、刺身+ほうれん草、豆腐+納豆 などで300〜400kcalに抑えれば、1日の総カロリーを管理しやすくなります。",
+            },
+          ]}
+        />
+
+        {/* Author Bio */}
+        <AuthorBio />
+
+        {/* Update History */}
+        <UpdateHistory
+          entries={[
+            { date: "2026-05-12", note: "3社の最新栄養データに更新、QuickAnswer・FAQ・著者情報を追加" },
+            { date: "2026-03-18", note: "初稿公開" },
+          ]}
+        />
 
         {/* Article Footer */}
         <ArticleFooter currentSlug="gyudon-comparison" />

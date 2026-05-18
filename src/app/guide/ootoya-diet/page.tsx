@@ -50,7 +50,7 @@ const jsonLd = {
   description:
     "大戸屋の低カロリー定食ランキング、五穀米変更のコツ、ダイエット中におすすめの定食メニューを徹底解説。",
   datePublished: "2026-03-19",
-  dateModified: "2026-03-19",
+  dateModified: new Date().toISOString().split("T")[0],
   author: {
     "@type": "Organization",
     name: "たべなび",

@@ -50,7 +50,7 @@ const jsonLd = {
   description:
     "夜食で太らないための食べ方・メニュー選びを徹底解説。深夜の外食やコンビニで太りにくいメニューを紹介。",
   datePublished: "2026-03-23",
-  dateModified: "2026-03-23",
+  dateModified: new Date().toISOString().split("T")[0],
   author: {
     "@type": "Organization",
     name: "たべなび",

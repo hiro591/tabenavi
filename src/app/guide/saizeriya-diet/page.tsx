@@ -18,6 +18,11 @@ import {
   ComparisonTable,
   ArticleFooter,
   ArticleImage,
+  QuickAnswer,
+  FAQSection,
+  ArticleSummary,
+  AuthorBio,
+  UpdateHistory,
 } from "@/components/guide/ArticleComponents";
 import {
   AffiliateDisclosure,
@@ -54,7 +59,7 @@ const jsonLd = {
   description:
     "サイゼリヤのカロリーランキング、筋トレ民におすすめの高タンパクメニュー、500円以下の神注文法を徹底解説。",
   datePublished: "2026-03-18",
-  dateModified: "2026-03-19",
+  dateModified: new Date().toISOString().split("T")[0],
   author: {
     "@type": "Organization",
     name: "たべなび",
@@ -95,8 +100,20 @@ export default function SaizeriyaDietPage() {
       <ArticleLayout tocItems={tocItems} currentSlug="saizeriya-diet">
         {/* Authority & Date */}
         <AuthorityBadge />
-        <p className="text-sm text-gray-400 mt-3 mb-2">最終更新: 2026年3月19日</p>
+        <p className="text-sm text-gray-400 mt-3 mb-2">
+          最終更新: {new Date().toLocaleDateString("ja-JP", { year: "numeric", month: "long", day: "numeric" })}
+        </p>
         <AffiliateDisclosure />
+
+        {/* QuickAnswer */}
+        <QuickAnswer
+          question="サイゼリヤでダイエット中におすすめのメニューは？500円以下で何を選べばいい？"
+          answer={
+            <>
+              <strong>「若鶏のグリル ディアボラ風」（500円・約450kcal/P35g）</strong>がコスパ最強。タンパク質1g単価15円以下は外食で破格レベルです。低カロリー優先なら<strong>「若鶏のディアボラ風」「ほうれん草のソテー」「コーンクリームスープ」</strong>を組み合わせて500円・500kcal以下に抑えられます。糖質制限派なら<strong>パスタを避けてグリルチキン+サラダ</strong>。逆に避けたいのは<strong>カルボナーラ系（800kcal超）とドリア系（700kcal超）</strong>です。
+            </>
+          }
+        />
 
         {/* Introduction */}
         <p className="mb-4">
@@ -394,8 +411,54 @@ export default function SaizeriyaDietPage() {
         />
 
         <p className="text-xs text-gray-400 mt-4 mb-8">
-          ※価格・栄養成分は店舗により異なる場合があります。最新の情報はサイゼリヤ公式サイトでご確認ください。
+          ※価格・栄養成分は店舗により異なる場合があります。最新の情報は<a href="https://www.saizeriya.co.jp/menu/" target="_blank" rel="noopener noreferrer" className="text-sky-500 hover:underline">サイゼリヤ公式サイト</a>でご確認ください。
         </p>
+
+        {/* FAQ */}
+        <FAQSection
+          slug="saizeriya-diet"
+          items={[
+            {
+              q: "サイゼリヤで一番ダイエット向きなメニューは？",
+              a: "「若鶏のグリル ディアボラ風」（500円・約450kcal/P35g）が最強です。タンパク質1g単価が約14円という外食では破格のコスパで、筋トレ・ダイエット中のメイン食として最適。サラダ・スープを追加しても合計700円以下に収まります。",
+            },
+            {
+              q: "サイゼリヤのパスタはダイエット中NG？",
+              a: "種類によります。「ペペロンチーノ」（約580kcal）「アーリオ・オーリオ」系は比較的低脂質で、ダイエット中も食べられます。一方「カルボナーラ」（800kcal超）「ミートソース」（700kcal前後）は要注意。半盛サイズが選べる店舗ではそちらを活用しましょう。",
+            },
+            {
+              q: "サイゼリヤで500円以下のおすすめ組み合わせは？",
+              a: "①「ミラノ風ドリア（300円・約548kcal）+ サラダ（約200円・約120kcal）」 で500円・670kcal、②「若鶏のグリル（500円）」単品で500円・450kcal/P35g、③「鶏肉とほうれん草のグラタン+小サラダ」など。タンパク質重視なら②が圧倒的におすすめ。",
+            },
+            {
+              q: "サイゼリヤで筋トレ後におすすめのメニューは？",
+              a: "①若鶏のグリル ディアボラ風（P35g）、②柔らか青豆の温サラダ（P9g）、③エスカルゴのオーブン焼き（P12g）の組み合わせがゴールデン。合計約750kcal/P56gで、筋トレ後の理想的なPFCバランスです。プラスでパンを追加すれば炭水化物も補給できます。",
+            },
+            {
+              q: "サイゼリヤのワインはダイエット中飲んでOK？",
+              a: "デカンタ（500ml）で約350kcal、グラスワイン（120ml）で約85kcal。糖質は乾杯ワイン1杯あたり約2gと低めです。ただし食欲増進効果でメイン+追加注文しがちなので、1〜2杯に留めて、つまみは低カロリーなサラダや前菜系にするのがおすすめ。",
+            },
+            {
+              q: "サイゼリヤの低カロリーランキングTOP5を教えて",
+              a: "1位「コーンクリームスープ」約100kcal、2位「ほうれん草のソテー」約100kcal、3位「青豆の温サラダ」約160kcal、4位「鶏もも肉のグリル（半分）」約200kcal、5位「シーフードサラダ」約220kcal。これらを組み合わせれば300kcal以下でもしっかり栄養摂取可能。",
+            },
+            {
+              q: "サイゼリヤのパンとライス、ダイエット中はどっち？",
+              a: "ライス（約220kcal）よりも小さなフォカッチャ系パン（約100〜140kcal）の方が低カロリー。ただしパンはバター・オリーブオイルをつけると一気に高カロリー化。糖質制限中ならどちらも避けて、メインは「ハンバーグ単品」「グリルチキン」を選ぶのが安全です。",
+            },
+          ]}
+        />
+
+        {/* Author Bio */}
+        <AuthorBio />
+
+        {/* Update History */}
+        <UpdateHistory
+          entries={[
+            { date: "2026-05-12", note: "QuickAnswer・FAQ・著者情報を追加" },
+            { date: "2026-03-19", note: "初稿公開" },
+          ]}
+        />
 
         {/* ArticleFooter */}
         <ArticleFooter currentSlug="saizeriya-diet" />

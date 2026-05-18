@@ -16,6 +16,11 @@ import {
   NumberedList,
   ArticleFooter,
   ArticleImage,
+  QuickAnswer,
+  FAQSection,
+  ArticleSummary,
+  AuthorBio,
+  UpdateHistory,
 } from "@/components/guide/ArticleComponents";
 import { AffiliateProductGrid } from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
@@ -51,7 +56,7 @@ const jsonLd = {
   description:
     "セブンイレブンでダイエットに最適な低カロリー・高タンパク商品をランキング形式で紹介。",
   datePublished: "2026-03-23",
-  dateModified: "2026-03-23",
+  dateModified: new Date().toISOString().split("T")[0],
   author: {
     "@type": "Organization",
     name: "たべなび",
@@ -94,9 +99,19 @@ export default function SevenElevenDietPage() {
         <div className="mb-8">
           <AuthorityBadge />
           <p className="text-sm text-gray-400 mt-2">
-            最終更新: 2026年3月23日 | 読了目安: 9分
+            最終更新: {new Date().toLocaleDateString("ja-JP", { year: "numeric", month: "long", day: "numeric" })} | 読了目安: 9分
           </p>
         </div>
+
+        {/* QuickAnswer */}
+        <QuickAnswer
+          question="セブンイレブンでダイエット中におすすめの商品は？高タンパク低カロリーの定番は？"
+          answer={
+            <>
+              <strong>サラダチキン プレーン（113kcal/P24.3g）</strong>と<strong>7プレミアム さんまの塩焼（162kcal/P30g）</strong>がツートップ。低カロリーランキング1位は<strong>味付き半熟ゆでたまご（65kcal/P6.4g）</strong>。1食300〜400kcalで組むなら「サラダチキン+おにぎり1個+ゆで卵」がP35gの理想バランス。お弁当系なら<strong>サラダチキンと野菜の弁当（448kcal/P28.5g）</strong>が単品完結で優秀です。
+            </>
+          }
+        />
 
         {/* Introduction */}
         <p className="mb-4">
@@ -162,10 +177,10 @@ export default function SevenElevenDietPage() {
           <NutritionTable
             items={[
               { name: "1位: 味付き半熟ゆでたまご", calories: 65, protein: 6.4, fat: 4.4, carbs: 0.4, highlight: true },
-              { name: "2位: 茶碗蒸し", calories: 90, protein: 7.5, fat: 4.2, carbs: 5.8 },
-              { name: "3位: サラダチキンバー（プレーン）", calories: 108, protein: 21.6, fat: 1.5, carbs: 1.8, highlight: true },
-              { name: "4位: サラダチキン（プレーン）", calories: 113, protein: 24.3, fat: 1.2, carbs: 0.5 },
-              { name: "5位: 7プレミアム 寄せ豆腐", calories: 118, protein: 10.5, fat: 6.8, carbs: 3.2 },
+              { name: "2位: 7プレミアム さんまの塩焼", calories: 162, protein: 30.0, fat: 4.6, carbs: 0.4, highlight: true },
+              { name: "3位: 7プレミアム サラダチキン スモーク", calories: 105, protein: 22.6, fat: 1.1, carbs: 0.5, highlight: true },
+              { name: "4位: サラダチキン (プレーン)", calories: 113, protein: 24.3, fat: 1.5, carbs: 0 },
+              { name: "5位: 7プレミアム 寄せ豆腐", calories: 58, protein: 5.5, fat: 3.5, carbs: 1.5 },
               { name: "6位: ほうれん草の胡麻和え", calories: 72, protein: 3.2, fat: 3.5, carbs: 6.8 },
               { name: "7位: ひじきの煮物", calories: 85, protein: 3.8, fat: 2.5, carbs: 11.2 },
               { name: "8位: 蒸し鶏のサラダ", calories: 128, protein: 14.2, fat: 5.8, carbs: 5.5 },
@@ -427,21 +442,67 @@ export default function SevenElevenDietPage() {
             セブンイレブンダイエットの要点を振り返りましょう。
           </p>
 
-          <CheckList
-            items={[
+          <ArticleSummary
+            points={[
               "セブンは7プレミアム・栄養表示・店舗数でダイエッターに最適なコンビニ",
-              "サラダチキン（113kcal / P24.3g）は低カロリー＆高タンパクの王道",
-              "ゼロカロリー寒天ゼリーは甘いもの欲求の救世主",
-              "1日1,090kcal・P87.5gの食事プランがセブンだけで実現可能",
+              "サラダチキン（113kcal/P24.3g）は低カロリー＆高タンパクの王道",
+              "7プレミアム さんまの塩焼（162kcal/P30g）は隠れた高タンパク王",
+              "1食300〜400kcal/P30g台の食事プランがセブンだけで実現可能",
               "揚げ鶏・菓子パン・大盛りパスタはダイエット中NG",
               "アプリのクーポンを活用してお得にダイエット食品をゲット",
             ]}
           />
 
           <p className="text-xs text-gray-400 mt-4">
-            ※価格・栄養成分は店舗により異なる場合があります。商品は予告なく変更・終了する場合があります。
+            ※価格・栄養成分は店舗により異なる場合があります。商品は予告なく変更・終了する場合があります。最新は<a href="https://www.sej.co.jp/products/" target="_blank" rel="noopener noreferrer" className="text-sky-500 hover:underline">セブンイレブン公式商品ページ</a>でご確認ください。
           </p>
         </section>
+
+        {/* FAQ */}
+        <FAQSection
+          slug="seven-eleven-diet"
+          items={[
+            {
+              q: "セブンイレブンで一番タンパク質が多い商品は？",
+              a: "「7プレミアム さんまの塩焼」が162kcal/P30gで圧倒的に優秀です。次いで「サラダチキン プレーン」（113kcal/P24.3g）、「サラダチキンスモーク」（105kcal/P22.6g）、「サラダチキンと野菜の弁当」（448kcal/P28.5g）など。タンパク質効率を重視するなら、これらの商品を中心に選びましょう。",
+            },
+            {
+              q: "セブンの200kcal以下のおすすめ商品は？",
+              a: "味付き半熟ゆでたまご（65kcal）、寄せ豆腐（58kcal）、サラダチキン プレーン（113kcal）、サラダチキンスモーク（105kcal）、おでん各種（55〜80kcal）が代表格。複数組み合わせれば300kcal以下で1食完結も可能です。",
+            },
+            {
+              q: "セブンの朝食にダイエット向きなのは？",
+              a: "「サラダチキン+おにぎり1個（手巻きおにぎり 紀州南高梅 166kcal/P2.9g等）+ゆで卵」で約350kcal/P30g。または「7プレミアム ヨーグルト+ゆで卵+カフェオレ」で約250kcal/P15g。朝に高タンパクを摂ることで、午前中の代謝をアップできます。",
+            },
+            {
+              q: "セブンのお弁当でダイエット向きはどれ？",
+              a: "「サラダチキンと野菜の弁当」（448kcal/P28.5g）が単品完結で最強。「炭火焼きチキン弁当」（548kcal/P28.5g）、「肉めし 炙り焼豚ロース弁当（麦飯）」（659kcal/P27.7g）も低脂質高タンパクで優秀。逆に「ロースかつ丼」（843kcal）は高カロリーなので注意。",
+            },
+            {
+              q: "セブンの夜食で太らないものは？",
+              a: "おでん（牛もつ串64kcal、牛すじハラミ串66kcal、なんこつつくね串66kcal）、寄せ豆腐（58kcal）、サラダチキン（105〜113kcal）、もずく酢（18kcal）が定番。3〜4品組み合わせても300kcal以下で済みます。",
+            },
+            {
+              q: "セブンのスイーツでダイエット中OKなのは？",
+              a: "「ゼロキロカロリー寒天ゼリー」（0kcal）、「7プレミアム もずく酢」（18kcal）が罪悪感ゼロ。アイスなら「7プレミアム 北海道バニラバーマルチ」（67kcal/個）が比較的低カロリーです。和菓子は意外と高カロリーなので、寒天系・低糖質スイーツを選びましょう。",
+            },
+            {
+              q: "セブンとローソン・ファミマ、ダイエット向きの違いは？",
+              a: "セブンは「商品ラインナップの豊富さ＆店舗数」、ローソンは「たんぱく質シリーズの本気度」、ファミマは「RIZAP共同開発商品」が強み。タンパク質量で比較するとローソンのプレミアムロースサラダチキン（120kcal/P25g）も同等レベル。3社使い分けもおすすめです。",
+            },
+          ]}
+        />
+
+        {/* Author Bio */}
+        <AuthorBio />
+
+        {/* Update History */}
+        <UpdateHistory
+          entries={[
+            { date: "2026-05-13", note: "セブン234商品の最新栄養データに更新。QuickAnswer・FAQ・著者情報を追加" },
+            { date: "2026-03-23", note: "初稿公開" },
+          ]}
+        />
 
         {/* Article Footer */}
         <ArticleFooter currentSlug="seven-eleven-diet" />

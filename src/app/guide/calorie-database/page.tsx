@@ -13,6 +13,11 @@ import {
   CheckList,
   ArticleFooter,
   ArticleImage,
+  QuickAnswer,
+  FAQSection,
+  ArticleSummary,
+  AuthorBio,
+  UpdateHistory,
 } from "@/components/guide/ArticleComponents";
 import {
   AffiliateDisclosure,
@@ -22,7 +27,7 @@ import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
   title:
-    "外食チェーン店カロリー一覧【全メニュー完全版】 | たべなび",
+    "【2026年最新版】外食チェーン店カロリー一覧【全メニュー完全版】 | たべなび",
   description:
     "マクドナルド、吉野家、サイゼリヤなど主要チェーン店のカロリー・栄養成分を完全網羅。ダイエット・筋トレ中の外食メニュー選びに。",
   keywords: [
@@ -48,7 +53,7 @@ const jsonLd = {
   description:
     "主要チェーン店のカロリー・栄養成分を完全網羅。",
   datePublished: "2026-03-01",
-  dateModified: "2026-03-19",
+  dateModified: new Date().toISOString().split("T")[0],
   author: {
     "@type": "Organization",
     name: "たべなび",
@@ -232,7 +237,7 @@ export default async function CalorieDatabasePage() {
         {/* Authority & date */}
         <AuthorityBadge />
         <p className="text-sm text-gray-400 mt-3 mb-2">
-          最終更新: 2026年3月19日
+          最終更新: {new Date().toLocaleDateString("ja-JP", { year: "numeric", month: "long", day: "numeric" })}
         </p>
         <AffiliateDisclosure />
 
@@ -241,6 +246,16 @@ export default async function CalorieDatabasePage() {
           カロリー・栄養成分（PFC）を一覧にまとめました。
           ダイエット中の外食メニュー選びや、日々の栄養管理にお役立てください。
         </p>
+
+        {/* QuickAnswer */}
+        <QuickAnswer
+          question="外食で一番低カロリーなメニューは？このDBの使い方は？"
+          answer={
+            <>
+              <strong>主要チェーン{totalChains}社・{totalMenus}メニューを公式栄養データに基づき集約</strong>。各チェーン別にカロリー昇順で表示されているので、「サイゼリヤ 350kcal以下」のような探し方に最適です。1食500kcal以下を意識すれば、外食でもダイエットは十分に可能。お気に入り機能を使えば、よく食べるメニューを記録・管理できます。
+            </>
+          }
+        />
 
         {/* Mobile TOC */}
         <div className="lg:hidden">
@@ -397,14 +412,56 @@ export default async function CalorieDatabasePage() {
           以下のポイントを意識するだけで、外食でも栄養管理がグッと楽になります。
         </p>
 
-        <CheckList
-          items={[
+        <ArticleSummary
+          points={[
             "カロリーだけでなくPFC（タンパク質・脂質・炭水化物）のバランスも確認",
             "同じチェーンでもメニューによってカロリーは2〜3倍違う",
             "ダイエット中は1食500〜700kcalを目安に選ぶ",
             "高タンパク・低脂質のメニューを優先すると満足感が高い",
             "メニュー名をタップすれば詳細な栄養情報が確認できる",
             "たべなびのフィルター機能で目的に合ったメニューを簡単検索",
+          ]}
+        />
+
+        {/* FAQ */}
+        <FAQSection
+          slug="calorie-database"
+          items={[
+            {
+              q: "このカロリー情報の出典は？",
+              a: "全データは各外食チェーンの公式サイトに掲載されている栄養成分情報をたべなび編集部が取得・検証して掲載しています。データの精度を最優先し、公式が更新された場合は随時反映しています。詳細は「データ出典・編集方針について」ページをご確認ください。",
+            },
+            {
+              q: "メニューが見つからない時はどうすればいい？",
+              a: "ページ右上の検索機能で商品名を入力するか、各チェーン名を絞り込みフィルタで選んでください。それでも見つからない場合は、新商品や限定メニューの可能性があります。「情報の誤り・新メニュー報告」フォームから連絡をいただければ追加検討します。",
+            },
+            {
+              q: "ダイエット中に1食何kcalが目安？",
+              a: "1日の総摂取カロリーの3分の1〜4分の1が目安です。成人女性（1,800kcal目安）なら1食450〜600kcal、成人男性（2,200kcal目安）なら1食550〜700kcal。運動量が多い日は外食でもしっかり食べてOKです。",
+            },
+            {
+              q: "PFCバランスはどう確認すればいい？",
+              a: "メニュー名をタップすると詳細ページに移動し、タンパク質（P）/脂質（F）/炭水化物（C）の量が確認できます。理想的なPFC比率は P15-25%, F20-30%, C45-65% が目安。高タンパク低脂質を意識すると満足感が高くなります。",
+            },
+            {
+              q: "アプリと連携できますか？",
+              a: "はい。たべなびに登録すれば、各メニューの記録・お気に入り保存・PFC合計計算が可能。iPhone/Androidアプリも公開中で、外食記録が3タップで完了します。",
+            },
+            {
+              q: "栄養成分情報が古い場合はどうすればいい？",
+              a: "公式サイトの最新情報を優先してご確認ください。たべなびでも定期的にアップデートしていますが、リニューアルや改定直後はタイムラグがある場合があります。誤りを発見された際は「情報の誤りを報告」ボタンから教えていただけると助かります。",
+            },
+          ]}
+        />
+
+        {/* Author Bio */}
+        <AuthorBio />
+
+        {/* Update History */}
+        <UpdateHistory
+          entries={[
+            { date: "2026-05-12", note: "11チェーン2,500メニューに大規模拡張。QuickAnswer・FAQ・著者情報を追加" },
+            { date: "2026-03-19", note: "初稿公開" },
           ]}
         />
 

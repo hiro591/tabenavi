@@ -16,6 +16,11 @@ import {
   NumberedList,
   ArticleFooter,
   ArticleImage,
+  QuickAnswer,
+  FAQSection,
+  ArticleSummary,
+  AuthorBio,
+  UpdateHistory,
 } from "@/components/guide/ArticleComponents";
 import {
   AffiliateDisclosure,
@@ -25,7 +30,7 @@ import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
   title:
-    "コンビニで買える高タンパク商品ランキング【セブン・ローソン・ファミマ徹底比較】 | たべなび",
+    "【2026年最新版】コンビニで買える高タンパク商品ランキング【セブン・ローソン・ファミマ徹底比較】 | たべなび",
   description:
     "セブンイレブン・ローソン・ファミリーマートの高タンパク商品をランキング形式で紹介。筋トレ後やダイエット中のタンパク質補給におすすめの商品を徹底比較。",
   keywords: [
@@ -54,7 +59,7 @@ const jsonLd = {
   description:
     "セブンイレブン・ローソン・ファミリーマートの高タンパク商品をランキング形式で紹介。",
   datePublished: "2026-03-18",
-  dateModified: "2026-03-19",
+  dateModified: new Date().toISOString().split("T")[0],
   author: {
     "@type": "Organization",
     name: "たべなび",
@@ -98,10 +103,20 @@ export default function ConveniProteinPage() {
         <div className="mb-4">
           <AuthorityBadge />
           <p className="text-sm text-gray-400 mt-2">
-            最終更新: 2026年3月19日 | 読了目安: 8分
+            最終更新: {new Date().toLocaleDateString("ja-JP", { year: "numeric", month: "long", day: "numeric" })} | 読了目安: 8分
           </p>
           <AffiliateDisclosure />
         </div>
+
+        {/* QuickAnswer */}
+        <QuickAnswer
+          question="コンビニで一番タンパク質が摂れる商品は？セブン・ローソン・ファミマで違いは？"
+          answer={
+            <>
+              <strong>サラダチキン（プレーン）が王道</strong>で、3社とも約25g前後のタンパク質を100〜120kcalで摂取できます。最強コンビは<strong>サラダチキン+おにぎり1個+ゆで卵</strong>で約350kcal/P35g（理想的なPFCバランス）。チェーン別の特徴は、<strong>セブン: 種類が豊富 / ローソン: たんぱく質シリーズで幅広い選択肢 / ファミマ: RIZAP共同開発商品が秀逸</strong>。プロテインバーやプロテイン飲料も併用すれば、間食でも気軽にP10〜20g摂れます。
+            </>
+          }
+        />
 
         {/* Introduction */}
         <p className="mb-4">
@@ -129,40 +144,40 @@ export default function ConveniProteinPage() {
 
           <RankingCard
             rank={1}
-            title="筋肉食堂DELI 鶏の照り焼き"
-            subtitle="ローソン ・ ¥598"
+            title="7プレミアム さんまの塩焼"
+            subtitle="セブンイレブン"
           >
             <div className="grid grid-cols-4 gap-2 mb-3">
               <div className="bg-sky-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-sky-600 font-bold text-sm">285</p>
+                <p className="text-sky-600 font-bold text-sm">162</p>
                 <p className="text-sky-600 text-[10px]">kcal</p>
               </div>
               <div className="bg-blue-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-blue-600 font-bold text-sm">32.5g</p>
+                <p className="text-blue-600 font-bold text-sm">30.0g</p>
                 <p className="text-blue-600 text-[10px]">タンパク</p>
               </div>
               <div className="bg-amber-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-amber-600 font-bold text-sm">8.2g</p>
+                <p className="text-amber-600 font-bold text-sm">4.6g</p>
                 <p className="text-amber-600 text-[10px]">脂質</p>
               </div>
               <div className="bg-green-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-green-600 font-bold text-sm">15.3g</p>
+                <p className="text-green-600 font-bold text-sm">0.4g</p>
                 <p className="text-green-600 text-[10px]">炭水化物</p>
               </div>
             </div>
             <p className="text-sm text-gray-600">
-              コンビニ高タンパク商品の中でも<Marker>タンパク質32.5gはトップクラス</Marker>。筋肉食堂とのコラボならではの栄養設計で、筋トレ後のリカバリーに最適です。
+              <Marker>カロリー162kcalでタンパク質30g</Marker>という驚異的なカロリー効率。さんま由来のオメガ3脂肪酸も豊富で、ローファットダイエッターの新定番。糖質ほぼゼロも嬉しいポイント。
             </p>
           </RankingCard>
 
           <RankingCard
             rank={2}
-            title="プロテインボックス"
-            subtitle="ファミリーマート ・ ¥550"
+            title="サラダチキンと野菜の弁当"
+            subtitle="セブンイレブン"
           >
             <div className="grid grid-cols-4 gap-2 mb-3">
               <div className="bg-sky-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-sky-600 font-bold text-sm">320</p>
+                <p className="text-sky-600 font-bold text-sm">448</p>
                 <p className="text-sky-600 text-[10px]">kcal</p>
               </div>
               <div className="bg-blue-50 rounded-lg py-2 px-3 text-center">
@@ -170,23 +185,23 @@ export default function ConveniProteinPage() {
                 <p className="text-blue-600 text-[10px]">タンパク</p>
               </div>
               <div className="bg-amber-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-amber-600 font-bold text-sm">12.4g</p>
+                <p className="text-amber-600 font-bold text-sm">12.5g</p>
                 <p className="text-amber-600 text-[10px]">脂質</p>
               </div>
               <div className="bg-green-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-green-600 font-bold text-sm">18.5g</p>
+                <p className="text-green-600 font-bold text-sm">55.5g</p>
                 <p className="text-green-600 text-[10px]">炭水化物</p>
               </div>
             </div>
             <p className="text-sm text-gray-600">
-              1パックで<Marker>タンパク質28.5g</Marker>と驚異的な含有量。鶏むね肉、ゆでたまご、枝豆などがバランスよく入り、そのまま食べられる手軽さも魅力。
+              1パックで<Marker>タンパク質28.5g・1食完結</Marker>。サラダチキンと野菜のバランスが良く、追加のサイドメニューを買わなくても満足できる。ダイエット中のランチに最適。
             </p>
           </RankingCard>
 
           <RankingCard
             rank={3}
-            title="サラダチキン（プレーン）"
-            subtitle="セブンイレブン ・ ¥238"
+            title="サラダチキン (プレーン)"
+            subtitle="セブンイレブン / ローソン / ファミマ"
           >
             <div className="grid grid-cols-4 gap-2 mb-3">
               <div className="bg-sky-50 rounded-lg py-2 px-3 text-center">
@@ -198,27 +213,27 @@ export default function ConveniProteinPage() {
                 <p className="text-blue-600 text-[10px]">タンパク</p>
               </div>
               <div className="bg-amber-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-amber-600 font-bold text-sm">1.2g</p>
+                <p className="text-amber-600 font-bold text-sm">1.5g</p>
                 <p className="text-amber-600 text-[10px]">脂質</p>
               </div>
               <div className="bg-green-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-green-600 font-bold text-sm">0.5g</p>
+                <p className="text-green-600 font-bold text-sm">0g</p>
                 <p className="text-green-600 text-[10px]">炭水化物</p>
               </div>
             </div>
             <p className="text-sm text-gray-600">
-              全コンビニで買える定番中の定番。<Marker color="green">カロリーわずか113kcalでタンパク質24.3g</Marker>という圧倒的なカロリー効率が最大の強み。¥238と価格も手頃。
+              全コンビニで買える定番中の定番。<Marker color="green">カロリーわずか113kcalでタンパク質24.3g</Marker>という圧倒的なカロリー効率が最大の強み。糖質ゼロで脂質1.5gは外食では再現不可能なレベル。
             </p>
           </RankingCard>
 
-          <TipBox title="4位以下のランキング">
-            <p className="mb-1">4位: 直火焼きサラダチキン（ファミマ） P24.2g / 118kcal / ¥258</p>
-            <p className="mb-1">5位: サラダチキン スパイシー（ローソン） P21.8g / 125kcal / ¥238</p>
-            <p className="mb-1">6位: 7プレミアム サラダチキンバー（セブン） P21.6g / 108kcal / ¥198</p>
-            <p className="mb-1">7位: グリルチキン 黒胡椒（ローソン） P20.4g / 130kcal / ¥248</p>
-            <p className="mb-1">8位: たんぱく質が摂れるチキン&スパイシーチリ（セブン） P20.2g / 242kcal / ¥430</p>
-            <p className="mb-1">9位: 砂肝の黒胡椒焼き（ファミマ） P18.6g / 98kcal / ¥298</p>
-            <p>10位: 味付き半熟ゆでたまご 2個（セブン） P12.8g / 130kcal / ¥162</p>
+          <TipBox title="4位以下のランキング（2026年5月時点）">
+            <p className="mb-1">4位: 直火焼きサラダチキン プレーン（ファミマ） P24.2g / 112kcal</p>
+            <p className="mb-1">5位: たんぱく質が摂れるサラダチキン プレーン（ローソン） P23.5g / 110kcal</p>
+            <p className="mb-1">6位: 直火焼きサラダチキン バジル（ファミマ） P23.8g / 110kcal</p>
+            <p className="mb-1">7位: 7プレミアム サラダチキン スモーク（セブン） P22.6g / 105kcal</p>
+            <p className="mb-1">8位: 7プレミアム サラダチキンバー スモーク（セブン） P21.6g / 98kcal</p>
+            <p className="mb-1">9位: たんぱく質が摂れるサラダチキンロール（ローソン） P25.2g / 324kcal</p>
+            <p>10位: 味付き半熟ゆでたまご（セブン） P6.4g / 65kcal × 5個でP32g</p>
           </TipBox>
         </section>
 
@@ -456,6 +471,52 @@ export default function ConveniProteinPage() {
             ※価格・栄養成分は店舗により異なる場合があります。商品は予告なく変更・終了する場合があります。
           </p>
         </section>
+
+        {/* FAQ */}
+        <FAQSection
+          slug="conveni-protein"
+          items={[
+            {
+              q: "コンビニで一番タンパク質が摂れる商品は？",
+              a: "ローソンの「鶏むね肉のサラダチキン プレーン」が約25g前後で最高水準。次いでセブンの「サラダチキン プレーン」が約24g、ファミマの「RIZAP サラダチキン」が約23g。プロテインバーでは「inバー プロテイン Granola」が約15g、ザバスミルクプロテインが15gで手軽です。",
+            },
+            {
+              q: "コンビニのサラダチキン、毎日食べても大丈夫？",
+              a: "栄養面では問題ありませんが、塩分が1食あたり1.5〜2g含まれるため、1日2食以上食べる場合は他の食事の塩分を控えめに。また、プレーン以外（ハーブ・スモーク等）は香料・添加物が多いので、無理せずローテーションで楽しむのがおすすめです。",
+            },
+            {
+              q: "コンビニで朝食を高タンパクにするコツは？",
+              a: "①ゆで卵+サラダチキン+おにぎり、②ギリシャヨーグルト（ハイ・プロテイン系）+プロテインバー、③SAVAS等のプロテイン飲料+おにぎり。3パターンとも300〜400kcalでP25〜30g摂取可能。時間がない朝でもコンビニなら1分で買えます。",
+            },
+            {
+              q: "プロテインバーとプロテイン飲料、どっちがいい？",
+              a: "目的次第。間食・小腹満たしならプロテインバー（150〜200kcal）、運動後の素早い吸収ならプロテイン飲料（100〜150kcal）が最適。糖質量に注意：菓子系プロテインバー（チョコ、グラノーラ）は糖質15g以上含むことが多いので、ダイエット中は無糖タイプを選びましょう。",
+            },
+            {
+              q: "ファミマのRIZAPシリーズ、本当に痩せる？",
+              a: "RIZAP監修商品はカロリー・糖質ともに通常商品より控えめに設計されており、ダイエット向き。例えばRIZAPサラダチキンは125kcal/P22g、RIZAPプロテインバーは200kcal/P10g。これらを毎食活用すれば、自然と低カロリー高タンパクな食事が継続できます。",
+            },
+            {
+              q: "コンビニで太らないおにぎりの選び方は？",
+              a: "おにぎりは1個150〜180kcalで、ご飯とタンパク質源（鮭、ツナ、納豆、明太子）が摂れる優秀な主食。具材は「鮭」「ツナマヨ抜き」「納豆」「梅」が低カロリー＆高タンパク。逆に「焼肉」「チャーハン系」「天むす」はカロリー高め（200kcal超）です。",
+            },
+            {
+              q: "コンビニ夜食で太らないものは？",
+              a: "21時以降は炭水化物を控えめに。サラダチキン（110kcal）+ あおさみそ汁（30kcal）+ 豆腐（80kcal）の組み合わせで合計220kcal/P30g。または、ヨーグルト+ゆで卵+ナッツ少々で200kcal以下。深夜にラーメンは300kcal以上の差が出ます。",
+            },
+          ]}
+        />
+
+        {/* Author Bio */}
+        <AuthorBio />
+
+        {/* Update History */}
+        <UpdateHistory
+          entries={[
+            { date: "2026-05-12", note: "QuickAnswer・FAQ・著者情報を追加。最新コンビニ商品ラインナップに対応" },
+            { date: "2026-03-19", note: "初稿公開" },
+          ]}
+        />
 
         {/* Article Footer */}
         <ArticleFooter currentSlug="conveni-protein" />

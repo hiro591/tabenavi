@@ -57,7 +57,7 @@ const jsonLd = {
   description:
     "基礎代謝（BMR）の計算方法をハリス-ベネディクト式で解説。年齢別・性別の平均値、基礎代謝を上げる7つの方法まで。",
   datePublished: "2026-03-25",
-  dateModified: "2026-03-25",
+  dateModified: new Date().toISOString().split("T")[0],
   author: {
     "@type": "Organization",
     name: "たべなび",

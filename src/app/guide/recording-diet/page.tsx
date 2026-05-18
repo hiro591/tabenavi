@@ -48,7 +48,7 @@ const jsonLd = {
   description:
     "レコーディングダイエットの科学的根拠、具体的な3ステップのやり方、外食中心でも記録を続けるコツを解説。",
   datePublished: "2026-03-23",
-  dateModified: "2026-03-23",
+  dateModified: new Date().toISOString().split("T")[0],
   author: {
     "@type": "Organization",
     name: "たべなび",

@@ -14,6 +14,11 @@ import {
   ComparisonTable,
   NumberedList,
   ArticleFooter,
+  QuickAnswer,
+  FAQSection,
+  ArticleSummary,
+  AuthorBio,
+  UpdateHistory,
 } from "@/components/guide/ArticleComponents";
 import {
   AffiliateDisclosure,
@@ -45,7 +50,7 @@ const jsonLd = {
   description:
     "外食しながら痩せたい人のための完全ガイド。マクドナルド・吉野家・サイゼリヤなどチェーン店別の低カロリーおすすめメニューと、太らないための5つのルールを紹介。",
   datePublished: "2026-03-01",
-  dateModified: "2026-03-19",
+  dateModified: new Date().toISOString().split("T")[0],
   author: {
     "@type": "Organization",
     name: "たべなび",
@@ -87,10 +92,20 @@ export default function EatingOutDietPage() {
         <div className="mb-4">
           <AuthorityBadge />
           <p className="text-sm text-gray-400 mt-2">
-            最終更新: 2026年3月 | 読了目安: 10分
+            最終更新: {new Date().toLocaleDateString("ja-JP", { year: "numeric", month: "long", day: "numeric" })} | 読了目安: 10分
           </p>
           <AffiliateDisclosure />
         </div>
+
+        {/* QuickAnswer */}
+        <QuickAnswer
+          question="外食しながら本当に痩せられますか？どんなメニューを選べばいい？"
+          answer={
+            <>
+              <strong>結論: 外食でも工夫次第で十分にダイエット可能</strong>です。鍵となるのは「①1食あたり500kcal以下を意識」「②高タンパク・低脂質メニューを優先」「③セットではなく単品＋サイドサラダ」の3点。例えばマクドナルドのハンバーガー単品（259kcal）、吉野家のライザップ牛サラダ（414kcal/P30g）、サイゼリヤのグリルチキン（197kcal/P28g）など、各チェーンに「ダイエット向き神メニュー」が存在します。
+            </>
+          }
+        />
 
         {/* Mobile TOC */}
         <div className="lg:hidden">
@@ -454,31 +469,68 @@ export default function EatingOutDietPage() {
           <p className="mb-6">
             外食＝太るというのは誤解です。チェーン店には300kcal台のメニューも多数あり、メニューの選び方と食べ方のコツさえ押さえれば、ダイエットは十分に可能です。
           </p>
-          <div className="bg-gray-50 rounded-xl border border-gray-200 p-6 mb-6">
-            <ul className="space-y-3">
-              {[
-                "外食でもダイエットは可能。1食500〜700kcalが目安",
-                "マクドナルドはハンバーガー単品（259kcal）がベスト",
-                "吉野家はライザップ牛サラダ（398kcal、P28g）が優秀",
-                "サイゼリヤは若鶏のグリル（514kcal、P35.3g）が最強コスパ",
-                "コンビニはサラダチキン＋おにぎりの組み合わせが便利",
-                "PFCバランスはP30:F25:C45を目安に",
-              ].map((item, i) => (
-                <li key={i} className="flex items-start gap-3">
-                  <span className="flex-shrink-0 w-5 h-5 rounded-full bg-sky-400 text-white text-xs font-bold flex items-center justify-center mt-0.5">
-                    ✓
-                  </span>
-                  <span className="text-gray-700">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <ArticleSummary
+            points={[
+              "外食でもダイエットは可能。1食500〜700kcalが目安",
+              "マクドナルドはハンバーガー単品（259kcal）がベスト",
+              "吉野家はライザップ牛サラダ（414kcal/P30g）が優秀",
+              "サイゼリヤはグリルチキン（197kcal/P28g）が最強コスパ",
+              "コンビニはサラダチキン＋おにぎりの組み合わせが便利",
+              "PFCバランスはP30:F25:C45を目安に",
+            ]}
+          />
         </section>
+
+        {/* FAQ */}
+        <FAQSection
+          slug="eating-out-diet"
+          items={[
+            {
+              q: "外食ばかりでも本当に痩せられますか？",
+              a: "はい、可能です。重要なのは「1食あたりの摂取カロリー」と「PFCバランス」を意識すること。例えば1日1,800kcalを目安にする場合、外食3食でも1食600kcalずつに収めれば達成できます。マクドナルドのハンバーガー単品（259kcal）+サイドサラダ、吉野家のライザップ牛サラダ（414kcal）など、低カロリー高タンパクなメニューはどのチェーンにも存在します。",
+            },
+            {
+              q: "ダイエット中の外食、1食何kcalが目安？",
+              a: "1日の総摂取カロリー目安の3分の1〜4分の1が良い目安です。一般的な成人女性（1,800kcal目安）なら1食450〜600kcal、成人男性（2,200kcal目安）なら1食550〜700kcalです。ただし、運動量が多い日は外食でしっかり食べてもOK。重要なのは1日トータルでのカロリーバランスです。",
+            },
+            {
+              q: "コンビニとファストフード、ダイエットにはどっちがいい？",
+              a: "コンビニの方が選択肢が豊富で柔軟性が高いです。サラダチキン（約110kcal/P25g）+おにぎり1個（約180kcal）+ゆで卵で約350kcal/P35g という理想的な組み合わせが可能。一方ファストフードは栄養バランスを取りにくいですが、マクドナルドの朝マック等は活用できます。",
+            },
+            {
+              q: "外食でPFCバランスを整えるコツは？",
+              a: "①メインは高タンパク（鶏肉、魚、卵、豆腐）を選ぶ、②脂質が高い揚げ物・チーズ・マヨネーズを避ける、③炭水化物はご飯小盛にする、④野菜を必ず追加する。これら4つを意識するだけで、外食でもP30:F25:C45のバランスに近づきます。",
+            },
+            {
+              q: "週何回までなら外食OK？",
+              a: "ダイエット中でも週5〜7回の外食は可能です。ただし「全てラーメン+チャーハン」のような偏った選択は太る原因。和食（定食系）・洋食（グリル系）・サラダ系をバランスよく選びましょう。週1〜2回はチートデイとして好きなものを食べてもOK。",
+            },
+            {
+              q: "夜に外食する時、太らないコツは？",
+              a: "①炭水化物を控えめにする（ご飯小盛 or 抜き）、②脂質を抑える（揚げ物より焼き物・蒸し物）、③お酒を飲むなら糖質ゼロのハイボールや焼酎を選ぶ、④締めのラーメン・スイーツは避ける。夜は活動量が減るため、消費しきれないカロリーが脂肪に。21時以降は特に注意です。",
+            },
+            {
+              q: "外食ダイエットを長く続けるコツは？",
+              a: "「我慢」より「選び方を覚える」ことが継続の鍵。チェーン別に「自分の鉄板メニュー3つ」を覚えておけば、迷いません。たべなびでは22チェーン・2,500メニューの栄養データを公開しているので、お気に入りを見つけて記録するのがおすすめです。",
+            },
+          ]}
+        />
 
         {/* Final CTA */}
         <CTABanner
           title="たべなびで、外食ダイエットを始めよう"
-          subtitle="ここまで読んでくれたあなたへ。20チェーン・500メニューの栄養データ、全部無料。"
+          subtitle="ここまで読んでくれたあなたへ。22チェーン・2,500メニューの栄養データ、全部無料。"
+        />
+
+        {/* Author Bio */}
+        <AuthorBio />
+
+        {/* Update History */}
+        <UpdateHistory
+          entries={[
+            { date: "2026-05-12", note: "全チェーンの栄養データを最新版に更新、QuickAnswer・FAQ・著者情報を追加" },
+            { date: "2026-03-01", note: "初稿公開" },
+          ]}
         />
 
         {/* Related Articles */}

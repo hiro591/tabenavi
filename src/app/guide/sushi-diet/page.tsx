@@ -54,7 +54,7 @@ const jsonLd = {
   description:
     "回転寿司のカロリーをネタ別に徹底比較。スシローとくら寿司の栄養成分ランキング、太らない食べ方5つのルールを解説。",
   datePublished: "2026-03-23",
-  dateModified: "2026-03-23",
+  dateModified: new Date().toISOString().split("T")[0],
   author: {
     "@type": "Organization",
     name: "たべなび",

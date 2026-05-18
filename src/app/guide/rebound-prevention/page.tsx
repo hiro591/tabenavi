@@ -52,7 +52,7 @@ const jsonLd = {
   description:
     "リバウンドしないダイエット方法を科学的根拠に基づいて解説。代謝適応やホルモン変化のメカニズムから体重維持の具体的アプローチまで。",
   datePublished: "2026-03-25",
-  dateModified: "2026-03-25",
+  dateModified: new Date().toISOString().split("T")[0],
   author: {
     "@type": "Organization",
     name: "たべなび",

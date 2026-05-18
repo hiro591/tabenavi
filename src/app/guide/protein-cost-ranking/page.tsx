@@ -57,7 +57,7 @@ const jsonLd = {
   description:
     "外食チェーンのタンパク質コスパを1gあたりの価格で徹底比較。20メニューをランキング形式で紹介。",
   datePublished: "2026-03-19",
-  dateModified: "2026-03-19",
+  dateModified: new Date().toISOString().split("T")[0],
   author: {
     "@type": "Organization",
     name: "たべなび",

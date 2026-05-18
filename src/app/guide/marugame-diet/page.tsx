@@ -50,7 +50,7 @@ const jsonLd = {
   description:
     "丸亀製麺のカロリー・PFC一覧、ダイエット中のおすすめメニュー、天ぷらの落とし穴を徹底解説。うどんは実は低脂質でダイエット向き。",
   datePublished: "2026-03-19",
-  dateModified: "2026-03-19",
+  dateModified: new Date().toISOString().split("T")[0],
   author: {
     "@type": "Organization",
     name: "たべなび",

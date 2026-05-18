@@ -51,7 +51,7 @@ const jsonLd = {
   description:
     "スタバの低カロリードリンクランキング、無脂肪ミルク変更やシロップ減量などのカスタマイズ術を徹底解説。",
   datePublished: "2026-03-19",
-  dateModified: "2026-03-19",
+  dateModified: new Date().toISOString().split("T")[0],
   author: {
     "@type": "Organization",
     name: "たべなび",

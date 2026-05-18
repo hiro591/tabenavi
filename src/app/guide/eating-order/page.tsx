@@ -49,7 +49,7 @@ const jsonLd = {
   description:
     "食べ順を変えるだけで太りにくくなる科学的な理由と外食での実践法を解説。",
   datePublished: "2026-03-23",
-  dateModified: "2026-03-23",
+  dateModified: new Date().toISOString().split("T")[0],
   author: {
     "@type": "Organization",
     name: "たべなび",
