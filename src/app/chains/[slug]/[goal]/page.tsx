@@ -3,6 +3,9 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
 
+// ISR: programmatic SEO pages cached 24h. Each (chain × goal) combo regenerates daily at most.
+export const revalidate = 86400;
+
 // ─── Chain & Goal definitions ───
 
 const CHAINS: Record<string, { name: string; emoji: string }> = {

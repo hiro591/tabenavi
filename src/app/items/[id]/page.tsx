@@ -83,6 +83,10 @@ function getSuitabilityBadges(item: MenuItem) {
   return badges;
 }
 
+// ISR: cache page for 24 hours. Massive CPU savings vs SSR on every request.
+// Menu data changes infrequently — 24h freshness is acceptable.
+export const revalidate = 86400;
+
 export async function generateMetadata({
   params,
 }: {

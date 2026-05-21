@@ -23,6 +23,9 @@ import {
   AffiliateDisclosure,
   AffiliateProductGrid,
 } from "@/components/guide/AffiliateComponents";
+
+// ISR: cache DB-driven calorie list for 12 hours (CPU optimization).
+export const revalidate = 43200;
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {

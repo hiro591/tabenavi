@@ -2,6 +2,9 @@ import type { MetadataRoute } from "next";
 import { createClient } from "@/lib/supabase/server";
 import { ARTICLE_CATEGORIES } from "@/lib/articles";
 
+// ISR: sitemap regenerates at most every 6 hours. Googlebot reads frequently but content changes slowly.
+export const revalidate = 21600;
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://www.tabenavi.jp";
   const now = new Date().toISOString();

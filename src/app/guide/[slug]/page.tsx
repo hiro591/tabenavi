@@ -189,6 +189,9 @@ const TIPS_MAP: Record<string, string> = {
     "ファミマはRIZAP共同開発商品とお母さん食堂シリーズが軸。ダイエット初心者にも使いやすい単品完結型の商品が多いのが強みです。",
 };
 
+// ISR: cache chain nutrition pages for 12 hours (CPU optimization).
+export const revalidate = 43200;
+
 interface MenuItem {
   id: string;
   name: string;

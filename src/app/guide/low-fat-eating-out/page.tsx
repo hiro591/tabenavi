@@ -24,6 +24,9 @@ import {
 } from "@/components/guide/ArticleComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
+// ISR: cache for 24 hours (CPU optimization).
+export const revalidate = 86400;
+
 export const metadata: Metadata = {
   title:
     "【2026年最新版】外食で低脂質メニューを選ぶ完全ガイド｜チェーン店別おすすめ | たべなび",
