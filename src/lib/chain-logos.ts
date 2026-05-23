@@ -37,11 +37,16 @@ const CHAIN_LOGO_MAP: [string, ChainLogoInfo][] = [
   ["やよい軒",          { url: "/chain-logos/yayoiken.svg",      bg: "#ffffff" }],
 
   // ── ファミレス ───────────────────────────────────────────────────────────
+  // ステーキガスト は ガスト より先に置く（部分一致回避）
+  ["ステーキガスト",    { url: "/chain-logos/steak-gusto.svg",   bg: "#ffffff" }],
   ["サイゼリヤ",        { url: "/chain-logos/saizeriya.png",     bg: "#ffffff" }],
   ["ガスト",            { url: "/chain-logos/gusto.png",         bg: "#ffffff" }],
   ["ジョナサン",        { url: "/chain-logos/jonathan.png",      bg: "#ffffff" }],
   ["バーミヤン",        { url: "/chain-logos/bamiyan.png",       bg: "#ffffff" }],
   ["デニーズ",          { url: "/chain-logos/dennys.svg",        bg: "#ffffff" }],
+  ["ジョイフル",        { url: "/chain-logos/joyfull.png",       bg: "#ffffff" }],
+  ["びっくりドンキー",  { url: "/chain-logos/bikkuri-donkey.svg", bg: "#ffffff" }],
+  ["ココス",            { url: "/chain-logos/cocos.png",         bg: "#ffffff" }],
 
   // ── 中華・ラーメン ────────────────────────────────────────────────────────
   ["餃子の王将",        { url: "/chain-logos/ohsho.png",         bg: "#ffffff" }],
