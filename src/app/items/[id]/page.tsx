@@ -201,28 +201,35 @@ export default async function ItemDetailPage({
   // ─── AEO(AI Overview対策): データ駆動FAQ ───────────────────────────────
   // 2026年: FAQリッチリザルトは廃止されたが FAQPage schema は AI Overview 引用に有効(可視Q&A必須)。
   // 各回答に実数値を埋め込むため、6,200ページそれぞれで回答が一意 = 薄いコンテンツ判定を回避。
-  const dispName = chainName ? `${chainName}の${item.name}` : item.name;
+  // 表示はカード(.toFixed(1))と統一。閾値判定は生値で行い、表示だけ整形する。
   const faqs: { q: string; a: string }[] = [];
+  const g1 = (n: number) => n.toFixed(1); // P/F/C 表示用(小数1桁、カードと一致)
 
   if (item.calories != null) {
     faqs.push({
-      q: `${dispName}のカロリーは何kcalですか？`,
+      q: `${item.name}のカロリーは何kcalですか？`,
       a: `${item.name}のカロリーは${item.calories}kcalです。${chainName ? `${chainName}の公式栄養データに基づきます。` : ""}`,
     });
   }
   if (item.protein != null && item.fat != null && item.carbs != null) {
     faqs.push({
       q: `${item.name}のPFC（タンパク質・脂質・炭水化物）は？`,
-      a: `タンパク質${item.protein}g、脂質${item.fat}g、炭水化物${item.carbs}gです。`,
+      a: `タンパク質${g1(item.protein)}g、脂質${g1(item.fat)}g、炭水化物${g1(item.carbs)}gです。`,
     });
   }
   if (item.protein != null) {
+    // 高タンパクバッジ(protein > 20)と閾値を統一。5段階で回答を多様化(単調なボイラープレート回避)。
+    const p = item.protein;
     const a =
-      item.protein >= 20
-        ? `タンパク質${item.protein}gと高タンパクで、筋トレ・ボディメイク中にもおすすめです。`
-        : item.protein >= 10
-          ? `タンパク質は${item.protein}gです。不足分は他の食事やプロテインで補うと効率的です。`
-          : `タンパク質は${item.protein}gとやや控えめです。高タンパクなサイドメニューと組み合わせるのがおすすめです。`;
+      p >= 30
+        ? `タンパク質${g1(p)}gと非常に高タンパクで、1食でしっかりタンパク質を確保できます。`
+        : p > 20
+          ? `タンパク質${g1(p)}gと高タンパクで、筋トレ・ボディメイク中にもおすすめです。`
+          : p >= 15
+            ? `タンパク質${g1(p)}gと比較的しっかり摂れる量です。`
+            : p >= 10
+              ? `タンパク質は${g1(p)}gです。不足分は他の食事やプロテインで補うと効率的です。`
+              : `タンパク質は${g1(p)}gとやや控えめです。高タンパクなサイドメニューと組み合わせるのがおすすめです。`;
     faqs.push({ q: `${item.name}は高タンパクですか？`, a });
   }
   if (item.calories != null) {
@@ -230,26 +237,28 @@ export default async function ItemDetailPage({
     faqs.push({
       q: `${item.name}はダイエット向きですか？`,
       a: dietFriendly
-        ? `${item.calories}kcalと比較的低カロリーで、ダイエット中でも選びやすいメニューです。${item.protein != null && item.protein >= 15 ? `タンパク質も${item.protein}gと十分です。` : ""}`
+        ? `${item.calories}kcalと比較的低カロリーで、ダイエット中でも選びやすいメニューです。${item.protein != null && item.protein >= 15 ? `タンパク質も${g1(item.protein)}gと十分で、満足感を保ちやすいのも利点です。` : "サラダや汁物を添えると満足感が高まります。"}`
         : `${item.calories}kcalです。ダイエット中はライス少なめやサイドメニューの調整でカロリーを抑えるのがおすすめです。`,
     });
   }
   if (item.carbs != null) {
+    // DBは総炭水化物のみ(食物繊維値なし)。糖質≒炭水化物として誤情報を出さないよう「総量」と明記。
     faqs.push({
-      q: `${item.name}の糖質（炭水化物）はどれくらいですか？`,
-      a: `炭水化物は${item.carbs}gです。${item.carbs <= 20 ? "糖質制限中でも比較的選びやすい量です。" : "糖質を抑えたい場合はご飯・パン・麺を減らすのがおすすめです。"}`,
+      q: `${item.name}の糖質・炭水化物はどれくらいですか？`,
+      a: `炭水化物は${g1(item.carbs)}gです（食物繊維を含む総量）。${item.carbs <= 20 ? "糖質制限中でも比較的選びやすい量です。" : "糖質を抑えたい場合はご飯・パン・麺を減らすのがおすすめです。"}`,
     });
   }
-  if (item.price != null) {
+  if (item.price != null && item.price > 0) {
     faqs.push({
       q: `${item.name}の値段はいくらですか？`,
-      a: `${item.price}円です（店舗・時期により異なる場合があります）。`,
+      a: `${item.price}円です（店舗・時期により異なる場合があるため、最新価格は公式サイトでご確認ください）。`,
     });
   }
 
-  // FAQ が2件以上揃ったページのみ schema を出す(空/薄いFAQにschemaを付けない)
+  // FAQ が3件以上揃ったページのみ schema を出す(kcal+価格だけの薄いペアにschemaを付けない)。
+  // 可視Q&Aは2件以上で表示する(下記JSX)。
   const faqJsonLd =
-    faqs.length >= 2
+    faqs.length >= 3
       ? {
           "@context": "https://schema.org",
           "@type": "FAQPage",
