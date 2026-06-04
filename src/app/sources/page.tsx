@@ -1,10 +1,11 @@
 import Link from "next/link";
-import { ChevronLeft, ExternalLink, BookOpen, Calculator, RefreshCw, AlertCircle } from "lucide-react";
+import { ChevronLeft, ExternalLink, BookOpen, Calculator, RefreshCw, AlertCircle, ShieldCheck, User } from "lucide-react";
 
 export const metadata = {
-  title: "栄養成分データの出典と計算方法 | たべなび",
+  title: "栄養成分データの出典・編集方針・運営者情報 | たべなび",
   description:
-    "たべなびの栄養成分データの出典、カロリー・PFC計算方法、データ更新プロセスを記載しています。",
+    "たべなびの栄養成分データは全32チェーンを各社公式サイトから手動で取得・検証しています(AI推定ではありません)。出典一覧・計算方法・更新プロセス・運営者情報を公開。",
+  alternates: { canonical: "https://www.tabenavi.jp/sources" },
 };
 
 type Chain = {
@@ -14,77 +15,77 @@ type Chain = {
   note?: string;
 };
 
+// 掲載チェーンは「アプリに実データを収録済みの32チェーン」と完全一致させている。
+// データを持たないチェーンを出典として載せない(=信頼性の担保)。
 const CHAINS: Chain[] = [
   // コンビニ
-  { name: "セブンイレブン", url: "https://www.sej.co.jp/", category: "コンビニ", note: "「商品情報」→「中食」より各メニューの栄養成分を確認" },
-  { name: "ファミリーマート", url: "https://www.family.co.jp/services/", category: "コンビニ", note: "サービス一覧 →「お弁当・調理麺カロリー」より閲覧" },
-  { name: "ローソン", url: "https://www.lawson.co.jp/recommend/", category: "コンビニ", note: "おすすめ→「カロリー・栄養成分」より閲覧" },
+  { name: "セブンイレブン", url: "https://www.sej.co.jp/products/", category: "コンビニ", note: "「商品情報」より各カテゴリの栄養成分を確認" },
+  { name: "ファミリーマート", url: "https://www.family.co.jp/goods/", category: "コンビニ", note: "「商品情報」より各メニューの栄養成分を確認" },
+  { name: "ローソン", url: "https://www.lawson.co.jp/recommend/original/", category: "コンビニ", note: "オリジナル商品ページより栄養成分を確認" },
 
-  // ファストフード
-  { name: "マクドナルド", url: "https://www.mcdonalds.co.jp/quality/", category: "ファストフード", note: "「品質と安全」→「アレルギー・栄養成分」より閲覧" },
-  { name: "スターバックス", url: "https://www.starbucks.co.jp/menu/", category: "ファストフード", note: "各メニュー詳細ページ内に栄養成分情報PDF" },
-  { name: "ケンタッキーフライドチキン", url: "https://www.kfc.co.jp/", category: "ファストフード", note: "「メニュー一覧」→アレルゲンタブより栄養成分を確認" },
-  { name: "モスバーガー", url: "https://www.mos.jp/menu/", category: "ファストフード", note: "メニューページ →「カロリー・アレルゲン」より閲覧" },
-  { name: "バーガーキング", url: "https://burgerkingjapan.co.jp/", category: "ファストフード", note: "メニューページの各商品詳細に栄養成分表示" },
-  { name: "サブウェイ", url: "https://www.subway.co.jp/menu/", category: "ファストフード", note: "メニューページ各商品に栄養成分表示" },
+  // ハンバーガー・ファストフード
+  { name: "マクドナルド", url: "https://www.mcdonalds.co.jp/quality/allergy_Nutrition/", category: "ハンバーガー・ファストフード", note: "「アレルギー・栄養成分」公式ページ" },
+  { name: "モスバーガー", url: "https://www.mos.jp/menu/", category: "ハンバーガー・ファストフード", note: "メニューページ →「カロリー・アレルゲン」より閲覧" },
+  { name: "ケンタッキー", url: "https://www.kfc.co.jp/menu/", category: "ハンバーガー・ファストフード", note: "メニュー一覧 → アレルゲン・栄養成分より確認" },
+  { name: "バーガーキング", url: "https://www.burgerkingjapan.co.jp/", category: "ハンバーガー・ファストフード", note: "各商品詳細に栄養成分表示" },
+  { name: "ゼッテリア", url: "https://www.zetteria.jp/", category: "ハンバーガー・ファストフード", note: "メニューページ各商品に栄養成分表示" },
+  { name: "サブウェイ", url: "https://www.subway.co.jp/menu/", category: "ハンバーガー・ファストフード", note: "各商品に栄養成分表示" },
 
   // 牛丼・定食
-  { name: "吉野家", url: "https://www.yoshinoya.com/menu/", category: "牛丼・定食", note: "メニューページ各商品に栄養成分表示" },
-  { name: "松屋", url: "https://www.matsuyafoods.co.jp/", category: "牛丼・定食", note: "メニュー一覧 →「アレルギー・栄養成分」より閲覧" },
-  { name: "すき家", url: "https://www.sukiya.jp/menu/in/", category: "牛丼・定食", note: "アレルゲン情報内に栄養成分一覧" },
-  { name: "なか卯", url: "https://www.nakau.co.jp/jp/menu/", category: "牛丼・定食", note: "メニュー一覧 →「栄養成分」より閲覧" },
-  { name: "大戸屋", url: "https://www.ootoya.com/menu/", category: "牛丼・定食", note: "各メニュー詳細ページ内に栄養成分表示" },
+  { name: "吉野家", url: "https://www.yoshinoya.com/menu/info/allergy.html", category: "牛丼・定食", note: "「アレルギー・栄養成分一覧」公式ページ" },
+  { name: "松屋", url: "https://www.matsuyafoods.co.jp/matsuya/menu/", category: "牛丼・定食", note: "メニュー一覧 →「アレルギー・栄養成分」より閲覧" },
+  { name: "すき家", url: "https://www.sukiya.jp/menu/", category: "牛丼・定食", note: "メニュー → アレルゲン・栄養成分一覧" },
+  { name: "大戸屋", url: "https://www.ootoya.com/menu_list/", category: "牛丼・定食", note: "各メニュー詳細ページ内に栄養成分表示" },
   { name: "やよい軒", url: "https://www.yayoiken.com/menu/", category: "牛丼・定食", note: "各メニュー詳細ページ内に栄養成分表示" },
+  { name: "松のや", url: "https://www.matsuyafoods.co.jp/matsunoya/menu/", category: "牛丼・定食", note: "メニュー一覧より栄養成分を確認" },
 
   // ファミレス
-  { name: "サイゼリヤ", url: "https://www.saizeriya.co.jp/", category: "ファミレス", note: "メニュー一覧 →「カロリー&アレルゲン」より閲覧" },
-  { name: "ガスト", url: "https://www.skylark.co.jp/gusto/", category: "ファミレス", note: "メニュー一覧 →「アレルゲン・栄養成分」より閲覧" },
-  { name: "ジョナサン", url: "https://www.skylark.co.jp/jonathan/", category: "ファミレス", note: "メニュー一覧 →「アレルゲン・栄養成分」より閲覧" },
-  { name: "バーミヤン", url: "https://www.skylark.co.jp/bamiyan/", category: "ファミレス", note: "メニュー一覧 →「アレルゲン・栄養成分」より閲覧" },
-  { name: "デニーズ", url: "https://www.dennys.jp/", category: "ファミレス", note: "メニュー一覧 →「アレルゲン・栄養成分」より閲覧" },
+  { name: "サイゼリヤ", url: "https://www.saizeriya.co.jp/menu/", category: "ファミレス", note: "メニュー一覧 →「カロリー・アレルゲン」より閲覧" },
+  { name: "ガスト", url: "https://www.skylark.co.jp/gusto/menu/", category: "ファミレス", note: "メニュー一覧 →「アレルゲン・栄養成分」より閲覧" },
+  { name: "バーミヤン", url: "https://www.skylark.co.jp/bamiyan/menu/", category: "ファミレス", note: "メニュー一覧 →「アレルゲン・栄養成分」より閲覧" },
+  { name: "デニーズ", url: "https://www.dennys.jp/menu/", category: "ファミレス", note: "メニュー一覧 →「アレルゲン・栄養成分」より閲覧" },
+  { name: "ジョイフル", url: "https://www.joyfull.co.jp/menu/", category: "ファミレス", note: "メニュー一覧より栄養成分を確認" },
+  { name: "ココス", url: "https://www.cocos-jpn.co.jp/menu/", category: "ファミレス", note: "メニュー一覧より栄養成分を確認" },
+  { name: "びっくりドンキー", url: "https://www.bikkuri-donkey.com/menu/", category: "ファミレス", note: "メニュー一覧より栄養成分を確認" },
+  { name: "ステーキガスト", url: "https://www.skylark.co.jp/steak_gusto/menu/", category: "ファミレス", note: "メニュー一覧 →「アレルゲン・栄養成分」より閲覧" },
 
   // 中華・ラーメン
-  { name: "餃子の王将", url: "https://www.ohsho.co.jp/menu/index.html", category: "中華・ラーメン", note: "メニュー一覧 →「アレルゲン情報」より栄養成分を確認" },
-  { name: "日高屋", url: "https://hiday.co.jp/", category: "中華・ラーメン", note: "メニュー一覧から各商品の栄養成分を確認" },
-  { name: "幸楽苑", url: "https://www.kourakuen.co.jp/", category: "中華・ラーメン", note: "メニュー一覧から各商品の栄養成分を確認" },
+  { name: "餃子の王将", url: "https://www.ohsho.co.jp/menu/", category: "中華・ラーメン", note: "メニュー一覧 →「アレルゲン情報」より栄養成分を確認" },
+  { name: "日高屋", url: "https://hiday.co.jp/menu/", category: "中華・ラーメン", note: "メニュー一覧から各商品の栄養成分を確認" },
 
-  // カフェ・ベーカリー
-  { name: "コメダ珈琲店", url: "https://www.komeda.co.jp/menu/index.html", category: "カフェ・ベーカリー", note: "各メニュー詳細ページ内に栄養成分表示" },
-  { name: "ドトールコーヒー", url: "https://www.doutor.co.jp/", category: "カフェ・ベーカリー", note: "メニュー →「カロリー・アレルゲン」より閲覧" },
-  { name: "ミスタードーナツ", url: "https://www.misterdonut.jp/m_menu/", category: "カフェ・ベーカリー", note: "メニュー一覧 →「カロリー」より閲覧" },
+  // カフェ
+  { name: "スターバックス", url: "https://www.starbucks.co.jp/menu/", category: "カフェ", note: "各メニュー詳細ページ内に栄養成分情報" },
+  { name: "ドトールコーヒー", url: "https://www.doutor.co.jp/dcs/menu/", category: "カフェ", note: "メニュー →「カロリー・アレルゲン」より閲覧" },
 
   // 回転寿司
-  { name: "くら寿司", url: "https://www.kurasushi.co.jp/", category: "回転寿司", note: "メニュー一覧 →「アレルゲン・カロリー」より閲覧" },
-  { name: "はま寿司", url: "https://www.hamazushi.com/", category: "回転寿司", note: "メニュー一覧 →「カロリー・アレルゲン」より閲覧" },
+  { name: "くら寿司", url: "https://www.kurasushi.co.jp/menu/", category: "回転寿司", note: "メニュー一覧 →「アレルゲン・カロリー」より閲覧" },
   { name: "スシロー", url: "https://www.akindo-sushiro.co.jp/menu/", category: "回転寿司", note: "各メニュー詳細ページ内に栄養成分表示" },
-  { name: "かっぱ寿司", url: "https://www.kappasushi.jp/menu/", category: "回転寿司", note: "各メニュー詳細ページ内に栄養成分表示" },
+
+  // カレー
+  { name: "CoCo壱番屋", url: "https://www.ichibanya.co.jp/menu/", category: "カレー", note: "メニュー一覧より栄養成分・アレルゲンを確認" },
 
   // 麺類
-  { name: "丸亀製麺", url: "https://www.marugame-seimen.com/", category: "麺類", note: "メニュー一覧 →「カロリー・栄養成分」より閲覧" },
+  { name: "丸亀製麺", url: "https://www.marugame-seimen.com/menu/", category: "麺類", note: "メニュー一覧 →「カロリー・栄養成分」より閲覧" },
 
   // 天丼
-  { name: "天丼てんや", url: "https://www.tenya.co.jp/menu/index.html", category: "天丼", note: "メニュー一覧から各商品の栄養成分を確認" },
-
-  // ピザ
-  { name: "ドミノ・ピザ", url: "https://www.dominos.jp/", category: "ピザ", note: "メニュー一覧 →「アレルゲン・栄養成分」より閲覧" },
-  { name: "ピザハット", url: "https://pizzahut.jp/", category: "ピザ", note: "メニュー一覧 →「アレルゲン情報」より閲覧" },
+  { name: "天丼てんや", url: "https://www.tenya.co.jp/menu/", category: "天丼", note: "メニュー一覧から各商品の栄養成分を確認" },
 ];
 
 const CATEGORIES = [
   "コンビニ",
-  "ファストフード",
+  "ハンバーガー・ファストフード",
   "牛丼・定食",
   "ファミレス",
   "中華・ラーメン",
-  "カフェ・ベーカリー",
+  "カフェ",
   "回転寿司",
+  "カレー",
   "麺類",
   "天丼",
-  "ピザ",
 ];
 
 export default function SourcesPage() {
-  const lastUpdated = "2026-05-08";
+  const lastUpdated = "2026年6月";
 
   return (
     <main className="min-h-screen bg-gray-50 pb-24">
@@ -106,9 +107,44 @@ export default function SourcesPage() {
         {/* Intro */}
         <section className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
           <p className="text-sm text-gray-700 leading-relaxed mb-3">
-            たべなびで提供する栄養成分データ (kcal・タンパク質・脂質・炭水化物) と、目標カロリー・PFC の計算方法、データ更新プロセスについて記載しています。
+            たべなびで提供する栄養成分データ (kcal・タンパク質・脂質・炭水化物) と、目標カロリー・PFC の計算方法、データ更新プロセス、運営者情報について記載しています。
           </p>
+          <div className="flex items-start gap-2 bg-emerald-50 border border-emerald-100 rounded-xl p-3 mb-3">
+            <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+            <p className="text-xs text-emerald-800 leading-relaxed">
+              <span className="font-bold">全32チェーン・6,000品以上のデータは、各社公式サイトから1件ずつ手動で取得・検証しています。</span>
+              AI による推定値や自動生成は使用していません。掲載しているのは「アプリに実データを収録済みのチェーンのみ」です。
+            </p>
+          </div>
           <p className="text-xs text-gray-500">最終更新: {lastUpdated}</p>
+        </section>
+
+        {/* 運営者情報 (E-E-A-T) */}
+        <section className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+          <div className="flex items-center gap-2 mb-3">
+            <User className="w-4 h-4 text-sky-500" />
+            <h2 className="text-sm font-bold text-gray-900">運営者情報</h2>
+          </div>
+          <div className="flex items-start gap-4">
+            <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-sky-400 to-cyan-500 flex items-center justify-center text-white font-bold text-lg">
+              ヒ
+            </div>
+            <div className="flex-1 text-xs text-gray-700 leading-relaxed space-y-2">
+              <p>
+                <span className="font-bold text-gray-900">ヒロ（たべなび 開発・運営）</span>
+              </p>
+              <p>
+                外食中心の生活で体重が86kgまで増えた後、外食のカロリー・PFCを「数字で選ぶ」ことを習慣化し、73kgまで13kgの減量に成功。
+                「外食しかしない人でも、数字さえ分かれば痩せられる」という実体験から、外食・コンビニ専門の栄養管理アプリ「たべなび」を個人で開発・運営しています。
+              </p>
+              <p>
+                栄養成分データは外部委託や自動収集に頼らず、各チェーンの公式情報を開発者自身が照合して収録しています。
+                データの誤りや改善のご指摘は{" "}
+                <Link href="/contact" className="text-sky-600 underline">お問い合わせ</Link>
+                {" "}より歓迎しています。
+              </p>
+            </div>
+          </div>
         </section>
 
         {/* §1 計算方法 */}
@@ -192,7 +228,7 @@ export default function SourcesPage() {
           </div>
 
           <p className="text-xs text-gray-700 leading-relaxed mb-4">
-            以下の各外食チェーン公式サイトで公開されている栄養成分データ (アレルギー情報、カロリー表、メニュー詳細ページ等) を出典としています。各チェーンのリンク先記載に従って栄養成分情報をご確認いただけます。
+            たべなびに収録している<span className="font-bold">全32チェーン</span>について、各社公式サイトで公開されている栄養成分データ (アレルギー情報、カロリー表、メニュー詳細ページ等) を出典としています。下記リンクから一次情報をご確認いただけます。
           </p>
 
           {CATEGORIES.map((category) => {
