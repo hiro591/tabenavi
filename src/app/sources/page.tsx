@@ -312,6 +312,24 @@ export default function SourcesPage() {
           </ul>
         </section>
 
+        {/* §5 引用・出典利用について(リンカブルアセット: 第三者の引用を歓迎して被リンクを誘発) */}
+        <section className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+          <div className="flex items-center gap-2 mb-3">
+            <BookOpen className="w-4 h-4 text-sky-500" />
+            <h2 className="text-sm font-bold text-gray-900">5. 引用・出典利用について</h2>
+          </div>
+          <p className="text-xs text-gray-700 leading-relaxed mb-3">
+            たべなびがまとめた外食チェーンの栄養データ・比較情報は、<span className="font-bold">出典を明記いただければ、ブログ・記事・SNS等で自由に引用・リンク</span>していただけます（クリエイティブ・コモンズ 表示 4.0 国際 / CC BY 4.0 相当）。ダイエット・栄養に関する記事の参考資料としてご活用ください。
+          </p>
+          <p className="text-xs font-bold text-gray-700 mb-1">▼ 出典表記のコピー例</p>
+          <div className="bg-gray-50 rounded-lg p-3 font-mono text-[11px] text-gray-700 leading-relaxed break-all select-all">
+            出典: たべなび（外食栄養管理アプリ）https://www.tabenavi.jp
+          </div>
+          <p className="text-[11px] text-gray-500 mt-2 leading-relaxed">
+            ※各メニューの数値は各チェーン公式情報に基づきます。引用の際は本ページ（出典・編集方針）または該当メニューページへのリンクを推奨します。商用・非商用を問わずご利用いただけます。
+          </p>
+        </section>
+
         {/* Back link */}
         <Link
           href="/profile"
