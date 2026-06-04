@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { createClient } from "@/lib/supabase/server";
 import { ARTICLE_CATEGORIES } from "@/lib/articles";
+import { CHAIN_SLUGS, GOAL_KEYS } from "@/lib/chains";
 
 // ISR: sitemap regenerates at most every 6 hours. Googlebot reads frequently but content changes slowly.
 export const revalidate = 21600;
@@ -14,7 +15,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "mcdonalds", "yoshinoya", "matsuya", "sukiya", "saizeriya",
     "starbucks", "conveni", "kfc", "mos", "gusto", "bamiyan",
     "ohsho", "hidakaya", "marugame", "kurasushi", "sushiro",
-    "dennys", "doutor", "subway", "nakau", "ootoya", "yayoiken",
+    "dennys", "doutor", "subway", "ootoya", "yayoiken",
     "tenya", "matsunoya", "ichibanya", "burgerking", "zetteria",
     "seven-eleven", "lawson", "familymart",
     "joyfull", "bikkuri-donkey", "cocos", "steak-gusto",
@@ -80,22 +81,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   // ─── プログラマティックSEOページ（チェーン×目的） ───
-  const programmaticChains = [
-    "mcdonalds", "yoshinoya", "matsuya", "sukiya", "saizeriya",
-    "gusto", "mos", "kfc", "marugame", "starbucks", "subway",
-    "dennys", "hidakaya", "ohsho", "sushiro", "kurasushi",
-    "ootoya", "yayoiken", "doutor", "bamiyan",
-    "seven-eleven", "lawson", "familymart",
-    "burgerking", "zetteria", "matsunoya", "ichibanya", "tenya",
-    "joyfull", "bikkuri-donkey", "cocos", "steak-gusto",
-  ];
-  const goals = [
-    "high-protein", "low-calorie", "diet", "low-fat",
-    "protein-cost", "under-500kcal", "under-500yen", "low-carb",
-  ];
+  // CHAIN_SLUGS / GOAL_KEYS は src/lib/chains.ts が単一の真実。
+  // goalページの CHAINS/GOALS と必ず一致 → sitemap とページ実体の drift(=ソフト404) が原理的に起きない。
   const programmaticPages: MetadataRoute.Sitemap = [];
-  for (const chain of programmaticChains) {
-    for (const goal of goals) {
+  for (const chain of CHAIN_SLUGS) {
+    for (const goal of GOAL_KEYS) {
       programmaticPages.push({
         url: `${baseUrl}/chains/${chain}/${goal}`,
         lastModified: now,

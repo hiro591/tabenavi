@@ -4,6 +4,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { ChevronLeft, MapPin, Utensils } from "lucide-react";
 import { getChainLogo } from "@/lib/chain-logos";
+import { chainSlugByName, GOALS } from "@/lib/chains";
 import FavoriteButton from "./FavoriteButton";
 import ShareCard from "./ShareCard";
 import ItemHeroImage from "./ItemHeroImage";
@@ -151,9 +152,22 @@ export default async function ItemDetailPage({
       : null;
   const badges = getSuitabilityBadges(item);
   const chainName = item.chain_restaurants?.name ?? "";
+  // メニューが属するチェーンの URL slug（パンくず・チェーンページへのリンク用）。
+  // これで孤児だった商品ページがチェーンページ/目的別ランキングと相互リンクする。
+  const chainSlug = chainSlugByName(chainName);
   const mapsUrl = chainName
     ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(chainName)}`
     : `https://www.google.com/maps`;
+
+  // チェーンページに繋ぐ目的別ランキング(全8目的)。chainSlug がある場合のみ。
+  // 6,200のメニューページから8目的ランキング全てに内部リンクを通す。
+  const rankingLinks = chainSlug
+    ? Object.entries(GOALS).map(([key, g]) => ({
+        key,
+        title: g.title,
+        href: `/chains/${chainSlug}/${key}`,
+      }))
+    : [];
 
   // Static server-rendered JSON-LD for nutrition data SEO
   const itemJsonLd = {
@@ -166,11 +180,34 @@ export default async function ItemDetailPage({
     carbohydrateContent: item.carbs ? `${item.carbs} g` : undefined,
   };
 
+  // BreadcrumbList JSON-LD: たべなび → (チェーン) → メニュー。検索結果にパンくず表示 + 内部リンク構造を明示。
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "たべなび", item: "https://www.tabenavi.jp" },
+      ...(chainSlug
+        ? [{ "@type": "ListItem", position: 2, name: chainName, item: `https://www.tabenavi.jp/guide/${chainSlug}` }]
+        : []),
+      {
+        "@type": "ListItem",
+        position: chainSlug ? 3 : 2,
+        name: item.name,
+        item: `https://www.tabenavi.jp/items/${item.id}`,
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen bg-white pb-28">
+      {/* 静的な構造化データ(ユーザー入力なし) */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       {/* Header */}
       <div className="sticky top-0 z-10 bg-white/90 backdrop-blur-sm border-b border-gray-100">
@@ -187,6 +224,20 @@ export default async function ItemDetailPage({
       </div>
 
       <div className="max-w-lg mx-auto px-4">
+        {/* 可視パンくず(内部リンク + UX) */}
+        <nav className="flex items-center gap-1.5 text-xs text-gray-400 pt-3 flex-wrap">
+          <Link href="/" className="hover:text-sky-500">たべなび</Link>
+          {chainSlug && (
+            <>
+              <span>/</span>
+              <Link href={`/guide/${chainSlug}`} className="hover:text-sky-500">
+                {chainName}
+              </Link>
+            </>
+          )}
+          <span>/</span>
+          <span className="text-gray-600 truncate max-w-[180px]">{item.name}</span>
+        </nav>
         {/* Hero Section */}
         <div className="pt-8 pb-6 text-center">
           <div className="flex justify-center mb-4">
@@ -390,6 +441,33 @@ export default async function ItemDetailPage({
                 </Link>
               ))}
             </div>
+          </div>
+        )}
+
+        {/* チェーンの目的別ランキングへの内部リンク(孤児ページをチェーンページ/ランキングに接続) */}
+        {chainSlug && rankingLinks.length > 0 && (
+          <div className="mb-6">
+            <h2 className="text-sm font-semibold text-gray-500 mb-3">
+              {chainName}のメニューを目的別に探す
+            </h2>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              {rankingLinks.map((r) => (
+                <Link
+                  key={r.key}
+                  href={r.href}
+                  className="flex items-center justify-between bg-white rounded-xl border border-gray-100 shadow-sm px-3.5 py-3 hover:bg-sky-50 transition-colors"
+                >
+                  <span className="text-sm font-medium text-gray-800">{r.title}</span>
+                  <ChevronLeft className="w-4 h-4 text-gray-300 rotate-180" />
+                </Link>
+              ))}
+            </div>
+            <Link
+              href={`/guide/${chainSlug}`}
+              className="mt-2 block text-center text-xs text-sky-600 hover:underline"
+            >
+              {chainName}の全メニュー栄養一覧を見る →
+            </Link>
           </div>
         )}
       </div>

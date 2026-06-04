@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+node_modules/
 /.pnp
 .pnp.*
 .yarn/*
@@ -41,3 +42,11 @@ yarn-error.log*
 next-env.d.ts
 .gstack/
 *.p8
+
+# remotion-ads のビルド成果物・生成メディア(リポジトリに入れない)
+marketing/remotion-ads/node_modules/
+marketing/remotion-ads/.cache/
+marketing/remotion-ads/out/
+marketing/remotion-ads/ai-assets/
+marketing/remotion-ads/public/*.mp4
+*.mp4

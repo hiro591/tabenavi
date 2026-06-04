@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
+import { GOALS, CHAINS as PROGRAMMATIC_CHAINS } from "@/lib/chains";
 
 const CHAIN_MAP: Record<string, { name: string; description: string }> = {
   mcdonalds: {
@@ -81,10 +82,6 @@ const CHAIN_MAP: Record<string, { name: string; description: string }> = {
   subway: {
     name: "サブウェイ",
     description: "サブウェイの全メニューのカロリー・栄養成分一覧です。",
-  },
-  nakau: {
-    name: "なか卯",
-    description: "なか卯の全メニューのカロリー・栄養成分一覧です。",
   },
   ootoya: {
     name: "大戸屋",
@@ -181,8 +178,6 @@ const TIPS_MAP: Record<string, string> = {
     "ドトールではブレンドコーヒーやティーがほぼゼロカロリーです。フードメニューを選ぶ場合、全粒粉サンドやトーストなど軽食系がカロリー控えめです。ミラノサンドは具材によってカロリーが大きく変わるので確認しましょう。",
   subway:
     "サブウェイでは野菜を多めにカスタマイズできるのが最大の強みです。パンを全粒粉に変更し、ソースはオイル＆ビネガーやマスタードを選ぶと脂質を抑えられます。ローストチキンやターキーが高タンパクでおすすめです。",
-  nakau:
-    "なか卯では親子丼が比較的バランスの良いメニューです。うどんセットよりも単品で注文し、サイドに温泉たまごを追加するとタンパク質を補えます。",
   ootoya:
     "大戸屋では手作り定食が栄養バランスに優れています。五穀米に変更できるメニューを選ぶと食物繊維を増やせます。チキンかあさん煮やしまほっけ定食など、高タンパクメニューがおすすめです。",
   yayoiken:
@@ -296,6 +291,12 @@ export default async function GuideArticlePage({
 
   const items = await fetchItems(slug);
 
+  // データが無いチェーンページは薄いコンテンツになるため404にする(thin content/インデックス汚染を防ぐ)。
+  // isGeneralGuide(総合ガイド)は別ロジックなので除外。
+  if (!isGeneralGuide && items.length === 0) {
+    notFound();
+  }
+
   const lowCalItems = [...items]
     .filter((i) => i.calories != null)
     .sort((a, b) => (a.calories ?? 0) - (b.calories ?? 0))
@@ -357,7 +358,9 @@ export default async function GuideArticlePage({
         <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
           {title}
         </h1>
-        <p className="text-sm text-gray-400 mb-8">最終更新: 2026年3月</p>
+        <p className="text-sm text-gray-400 mb-8">
+          最終更新: {new Date().toLocaleDateString("ja-JP", { year: "numeric", month: "long" })}
+        </p>
 
         {/* Introduction text */}
         {chain && (
@@ -366,6 +369,26 @@ export default async function GuideArticlePage({
             ダイエットや筋トレ中の食事選びにお役立てください。
             ※価格・栄養成分は店舗により異なる場合があります。
           </p>
+        )}
+
+        {/* 目的別ランキングへの内部リンク(チェーンページ=ハブ → 8目的ランキング → 各メニュー) */}
+        {slug in PROGRAMMATIC_CHAINS && chain && (
+          <section className="mb-12">
+            <h2 className="text-lg font-bold text-gray-900 mb-4">
+              {chain.name}を目的別に探す
+            </h2>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              {Object.entries(GOALS).map(([goalKey, g]) => (
+                <Link
+                  key={goalKey}
+                  href={`/chains/${slug}/${goalKey}`}
+                  className="flex items-center justify-center text-center bg-sky-50 hover:bg-sky-100 text-sky-700 rounded-xl px-3 py-3 text-xs font-bold transition-colors leading-tight"
+                >
+                  {g.title}
+                </Link>
+              ))}
+            </div>
+          </section>
         )}
 
         {/* Full Nutrition Table */}
