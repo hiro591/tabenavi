@@ -17,6 +17,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "dennys", "doutor", "subway", "nakau", "ootoya", "yayoiken",
     "tenya", "matsunoya", "ichibanya", "burgerking", "zetteria",
     "seven-eleven", "lawson", "familymart",
+    "joyfull", "bikkuri-donkey", "cocos", "steak-gusto",
   ];
 
   // ─── SEOガイド記事 ───
@@ -86,6 +87,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "ootoya", "yayoiken", "doutor", "bamiyan",
     "seven-eleven", "lawson", "familymart",
     "burgerking", "zetteria", "matsunoya", "ichibanya", "tenya",
+    "joyfull", "bikkuri-donkey", "cocos", "steak-gusto",
   ];
   const goals = [
     "high-protein", "low-calorie", "diet", "low-fat",

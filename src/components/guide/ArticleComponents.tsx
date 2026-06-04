@@ -687,12 +687,12 @@ export function AuthorBio() {
     <section className="my-10 rounded-2xl border border-gray-200 bg-white p-5 sm:p-6">
       <div className="flex items-start gap-4">
         <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-sky-400 to-cyan-500 flex items-center justify-center text-white font-bold text-lg">
-          た
+          ヒ
         </div>
         <div className="flex-1">
-          <p className="text-sm font-bold text-gray-900 mb-1">たべなび編集部</p>
+          <p className="text-sm font-bold text-gray-900 mb-1">ヒロ（たべなび開発者）</p>
           <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-2">
-            外食チェーンの栄養データに特化したダイエット情報メディア。22チェーン・2,500以上のメニュー栄養データを各社公式サイトから取得・検証し、ダイエット・筋トレ・健康管理に役立つ実用情報を発信しています。
+            外食中心の生活で86kgまで増えた後、外食のカロリー・PFCを「数字で選ぶ」ことで73kgまで13kg減量。その経験から、外食・コンビニ31チェーン・6,200以上のメニュー栄養データを各社公式サイトから取得・検証した「たべなび」を個人開発・運営しています。
           </p>
           <Link
             href="/sources"

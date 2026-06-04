@@ -111,8 +111,24 @@ const CHAIN_MAP: Record<string, { name: string; description: string }> = {
     description: "CoCo壱番屋の全メニューのカロリー・栄養成分一覧です。",
   },
   tenya: {
-    name: "天丼てんや",
+    name: "てんや",
     description: "天丼てんやの全メニューのカロリー・栄養成分一覧です。",
+  },
+  joyfull: {
+    name: "ジョイフル",
+    description: "ジョイフルの全メニューのカロリー・栄養成分一覧です。",
+  },
+  "bikkuri-donkey": {
+    name: "びっくりドンキー",
+    description: "びっくりドンキーの全メニューのカロリー・栄養成分一覧です。",
+  },
+  cocos: {
+    name: "ココス",
+    description: "ココスの全メニューのカロリー・栄養成分一覧です。",
+  },
+  "steak-gusto": {
+    name: "ステーキガスト",
+    description: "ステーキガストの全メニューのカロリー・栄養成分一覧です。",
   },
   "seven-eleven": {
     name: "セブンイレブン",
@@ -187,6 +203,14 @@ const TIPS_MAP: Record<string, string> = {
     "ローソンはブランパンや「たんぱく質」シリーズが充実。糖質制限ダイエッターはコンビニNo.1の選択肢量。",
   familymart:
     "ファミマはRIZAP共同開発商品とお母さん食堂シリーズが軸。ダイエット初心者にも使いやすい単品完結型の商品が多いのが強みです。",
+  joyfull:
+    "ジョイフルは低価格帯ファミレス。日替わりランチや単品の小鉢を組み合わせると、コスパよくカロリー調整できます。揚げ物より和膳・グリル系を選ぶのがコツ。",
+  "bikkuri-donkey":
+    "びっくりドンキーはハンバーグ専門。ディッシュのライス量を少なめにし、サラダやスープを足すとPFCバランスが整います。チーズ・ソース増しは脂質が跳ねるので注意。",
+  cocos:
+    "ココスは朝food/サラダバーが強み。グリル系メイン+サラダバーで野菜を確保し、ライスを控えめにするとダイエット向きの一食になります。",
+  "steak-gusto":
+    "ステーキガストは赤身ステーキ+サラダバーで高タンパク低脂質を狙えます。ライス・カレー・パンの食べ放題は糖質が増えやすいので量を意識しましょう。",
 };
 
 // ISR: cache chain nutrition pages for 12 hours (CPU optimization).

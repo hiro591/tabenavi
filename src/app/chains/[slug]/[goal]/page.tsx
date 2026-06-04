@@ -32,6 +32,17 @@ const CHAINS: Record<string, { name: string; emoji: string }> = {
   "seven-eleven": { name: "セブンイレブン", emoji: "🏪" },
   lawson: { name: "ローソン", emoji: "🏪" },
   familymart: { name: "ファミリーマート", emoji: "🏪" },
+  // sitemap に送信済みだが未定義でソフト404になっていた5チェーン
+  burgerking: { name: "バーガーキング", emoji: "🍔" },
+  zetteria: { name: "ゼッテリア", emoji: "🍔" },
+  matsunoya: { name: "松のや", emoji: "🍴" },
+  ichibanya: { name: "CoCo壱番屋", emoji: "🍛" },
+  tenya: { name: "てんや", emoji: "🍤" },
+  // 検索流入を取りこぼしていた新規ファミレス4チェーン
+  joyfull: { name: "ジョイフル", emoji: "🍴" },
+  "bikkuri-donkey": { name: "びっくりドンキー", emoji: "🍔" },
+  cocos: { name: "ココス", emoji: "🍳" },
+  "steak-gusto": { name: "ステーキガスト", emoji: "🥩" },
 };
 
 const GOALS: Record<string, { title: string; description: string; filterFn: string; sortFn: string }> = {
