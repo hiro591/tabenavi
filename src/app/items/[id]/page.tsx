@@ -198,6 +198,69 @@ export default async function ItemDetailPage({
     ],
   };
 
+  // ─── AEO(AI Overview対策): データ駆動FAQ ───────────────────────────────
+  // 2026年: FAQリッチリザルトは廃止されたが FAQPage schema は AI Overview 引用に有効(可視Q&A必須)。
+  // 各回答に実数値を埋め込むため、6,200ページそれぞれで回答が一意 = 薄いコンテンツ判定を回避。
+  const dispName = chainName ? `${chainName}の${item.name}` : item.name;
+  const faqs: { q: string; a: string }[] = [];
+
+  if (item.calories != null) {
+    faqs.push({
+      q: `${dispName}のカロリーは何kcalですか？`,
+      a: `${item.name}のカロリーは${item.calories}kcalです。${chainName ? `${chainName}の公式栄養データに基づきます。` : ""}`,
+    });
+  }
+  if (item.protein != null && item.fat != null && item.carbs != null) {
+    faqs.push({
+      q: `${item.name}のPFC（タンパク質・脂質・炭水化物）は？`,
+      a: `タンパク質${item.protein}g、脂質${item.fat}g、炭水化物${item.carbs}gです。`,
+    });
+  }
+  if (item.protein != null) {
+    const a =
+      item.protein >= 20
+        ? `タンパク質${item.protein}gと高タンパクで、筋トレ・ボディメイク中にもおすすめです。`
+        : item.protein >= 10
+          ? `タンパク質は${item.protein}gです。不足分は他の食事やプロテインで補うと効率的です。`
+          : `タンパク質は${item.protein}gとやや控えめです。高タンパクなサイドメニューと組み合わせるのがおすすめです。`;
+    faqs.push({ q: `${item.name}は高タンパクですか？`, a });
+  }
+  if (item.calories != null) {
+    const dietFriendly = badges.some((b) => b.label === "ダイエット向き" || b.label === "低カロリー");
+    faqs.push({
+      q: `${item.name}はダイエット向きですか？`,
+      a: dietFriendly
+        ? `${item.calories}kcalと比較的低カロリーで、ダイエット中でも選びやすいメニューです。${item.protein != null && item.protein >= 15 ? `タンパク質も${item.protein}gと十分です。` : ""}`
+        : `${item.calories}kcalです。ダイエット中はライス少なめやサイドメニューの調整でカロリーを抑えるのがおすすめです。`,
+    });
+  }
+  if (item.carbs != null) {
+    faqs.push({
+      q: `${item.name}の糖質（炭水化物）はどれくらいですか？`,
+      a: `炭水化物は${item.carbs}gです。${item.carbs <= 20 ? "糖質制限中でも比較的選びやすい量です。" : "糖質を抑えたい場合はご飯・パン・麺を減らすのがおすすめです。"}`,
+    });
+  }
+  if (item.price != null) {
+    faqs.push({
+      q: `${item.name}の値段はいくらですか？`,
+      a: `${item.price}円です（店舗・時期により異なる場合があります）。`,
+    });
+  }
+
+  // FAQ が2件以上揃ったページのみ schema を出す(空/薄いFAQにschemaを付けない)
+  const faqJsonLd =
+    faqs.length >= 2
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqs.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
+        }
+      : null;
+
   return (
     <div className="min-h-screen bg-white pb-28">
       {/* 静的な構造化データ(ユーザー入力なし) */}
@@ -209,6 +272,12 @@ export default async function ItemDetailPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
       {/* Header */}
       <div className="sticky top-0 z-10 bg-white/90 backdrop-blur-sm border-b border-gray-100">
         <div className="max-w-lg mx-auto px-4 h-14 flex items-center justify-between">
@@ -468,6 +537,24 @@ export default async function ItemDetailPage({
             >
               {chainName}の全メニュー栄養一覧を見る →
             </Link>
+          </div>
+        )}
+
+        {/* よくある質問(AEO: 可視Q&A + FAQPage schema。AI Overview/PAA 引用対策) */}
+        {faqs.length >= 2 && (
+          <div className="mb-6">
+            <h2 className="text-sm font-semibold text-gray-500 mb-3">よくある質問</h2>
+            <div className="space-y-2">
+              {faqs.map((f, i) => (
+                <div key={i} className="bg-white rounded-xl border border-gray-100 shadow-sm p-4">
+                  <p className="text-sm font-bold text-gray-900 mb-1.5">Q. {f.q}</p>
+                  <p className="text-sm text-gray-600 leading-relaxed">A. {f.a}</p>
+                </div>
+              ))}
+            </div>
+            <p className="text-[10px] text-gray-400 mt-2">
+              ※栄養成分は各チェーンの公式情報に基づきます（店舗・時期により変動する場合があります）。
+            </p>
           </div>
         )}
       </div>
