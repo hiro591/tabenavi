@@ -110,7 +110,7 @@ export default function SaizeriyaDietPage() {
           question="サイゼリヤでダイエット中におすすめのメニューは？500円以下で何を選べばいい？"
           answer={
             <>
-              <strong>「若鶏のグリル ディアボラ風」（500円・約450kcal/P35g）</strong>がコスパ最強。タンパク質1g単価15円以下は外食で破格レベルです。低カロリー優先なら<strong>「若鶏のディアボラ風」「ほうれん草のソテー」「コーンクリームスープ」</strong>を組み合わせて500円・500kcal以下に抑えられます。糖質制限派なら<strong>パスタを避けてグリルチキン+サラダ</strong>。逆に避けたいのは<strong>カルボナーラ系（800kcal超）とドリア系（700kcal超）</strong>です。
+              <strong>「若鶏のグリル ディアボラ風」（500円・約480kcal/P35g）</strong>がコスパ最強。タンパク質1g単価15円以下は外食で破格レベルです。低カロリー優先なら<strong>「若鶏のディアボラ風」「ほうれん草のソテー」「コーンクリームスープ」</strong>を組み合わせて500円・500kcal以下に抑えられます。糖質制限派なら<strong>パスタを避けてグリルチキン+サラダ</strong>。逆に避けたいのは<strong>カルボナーラ系（800kcal超）とドリア系（700kcal超）</strong>です。
             </>
           }
         />
@@ -178,7 +178,7 @@ export default function SaizeriyaDietPage() {
             { name: "ハンバーグステーキ", calories: 458, protein: 22.5, fat: 32.4, carbs: 18.2 },
             { name: "若鶏のグリル（ディアボラ風）", calories: 480, protein: 35.2, fat: 30.5, carbs: 12.8 },
             { name: "リブステーキ", calories: 502, protein: 28.8, fat: 35.2, carbs: 12.5 },
-            { name: "ペペロンチーノ", calories: 528, protein: 14.2, fat: 12.5, carbs: 88.4 },
+            { name: "ペペロンチーノ", calories: 578, protein: 16.0, fat: 18.0, carbs: 85.0 },
             { name: "ミックスグリル", calories: 542, protein: 32.0, fat: 38.5, carbs: 14.2 },
             { name: "ミラノ風ドリア", calories: 548, protein: 15.8, fat: 22.4, carbs: 68.5 },
             { name: "マルゲリータピザ", calories: 568, protein: 22.4, fat: 18.5, carbs: 72.8 },
@@ -311,7 +311,7 @@ export default function SaizeriyaDietPage() {
             <li><span className="font-bold">パルマ風スパゲッティ（612kcal）</span> ─ 炭水化物86.5gとほぼ糖質の塊。タンパク質18.5gに対してカロリーが高すぎます。</li>
             <li><span className="font-bold">マルゲリータピザ（568kcal）</span> ─ チーズのタンパク質22.4gは魅力的だが、炭水化物72.8gが難点。</li>
             <li><span className="font-bold">ミラノ風ドリア（548kcal）</span> ─ 300円と安いのでつい頼みがちですが、548kcalで炭水化物68.5g。コスパの良さに釣られないよう注意。</li>
-            <li><span className="font-bold">ペペロンチーノ（528kcal）</span> ─ 一見シンプルで低カロリーに見えますが、炭水化物88.4gと最も糖質が高い。</li>
+            <li><span className="font-bold">ペペロンチーノ（578kcal）</span> ─ 一見シンプルで低カロリーに見えますが、炭水化物85gと最も糖質が高い。</li>
           </ul>
         </WarningBox>
 
@@ -420,7 +420,7 @@ export default function SaizeriyaDietPage() {
           items={[
             {
               q: "サイゼリヤで一番ダイエット向きなメニューは？",
-              a: "「若鶏のグリル ディアボラ風」（500円・約450kcal/P35g）が最強です。タンパク質1g単価が約14円という外食では破格のコスパで、筋トレ・ダイエット中のメイン食として最適。サラダ・スープを追加しても合計700円以下に収まります。",
+              a: "「若鶏のグリル ディアボラ風」（500円・約480kcal/P35g）が最強です。タンパク質1g単価が約14円という外食では破格のコスパで、筋トレ・ダイエット中のメイン食として最適。サラダ・スープを追加しても合計700円以下に収まります。",
             },
             {
               q: "サイゼリヤのパスタはダイエット中NG？",

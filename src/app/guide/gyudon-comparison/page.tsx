@@ -111,7 +111,7 @@ export default function GyudonComparisonPage() {
           question="吉野家・松屋・すき家、牛丼並盛のカロリーは？ダイエットに一番向いているのは？"
           answer={
             <>
-              <strong>吉野家 633kcal / 松屋 687kcal / すき家 695kcal</strong>（並盛・2026年5月時点）。最低カロリーは吉野家、最高タンパクは松屋（P21.1g）です。ダイエット中に選ぶべきは<strong>糖質制限なら「すき家の牛丼ライト」（豆腐ベース）</strong>、PFCバランス重視なら<strong>吉野家のライザップ牛サラダ（414kcal/P30g）</strong>、コスパなら<strong>吉野家の小盛（497kcal）</strong>が最強。3社とも甲乙つけがたいので、好みで選んでOKです。
+              <strong>吉野家 633kcal / 松屋 687kcal / すき家 695kcal</strong>（並盛・2026年5月時点）。最低カロリーは吉野家、最高タンパクはすき家（P21.7g）です。ダイエット中に選ぶべきは<strong>糖質制限なら「すき家の牛丼ライト」（豆腐ベース）</strong>、PFCバランス重視なら<strong>吉野家のライザップ牛サラダ（398kcal/P28g）</strong>、コスパなら<strong>吉野家の小盛（474kcal）</strong>が最強。3社とも甲乙つけがたいので、好みで選んでOKです。
             </>
           }
         />
@@ -143,16 +143,16 @@ export default function GyudonComparisonPage() {
           <ComparisonTable
             headers={["チェーン", "価格", "カロリー", "タンパク質", "脂質", "炭水化物"]}
             rows={[
-              ["吉野家", "¥498", "635 kcal", "20.0g", "23.0g", "89.0g"],
-              ["松屋", "¥400", "709 kcal", "17.8g", "25.2g", "100.5g"],
-              ["すき家", "¥400", "638 kcal", "17.0g", "20.5g", "95.0g"],
+              ["吉野家", "¥498", "633 kcal", "19.6g", "23.6g", "88.2g"],
+              ["松屋", "¥400", "687 kcal", "17.1g", "28.9g", "85.5g"],
+              ["すき家", "¥400", "695 kcal", "21.7g", "23.4g", "99.8g"],
             ]}
             bestRowIndex={0}
           />
 
           <TipBox title="3社比較のポイント">
             <p>
-              吉野家は<Marker color="blue">タンパク質20.0gで3社中トップ</Marker>、かつカロリーも635kcalで最も低い。松屋は709kcalと約70kcal高めですが、<Marker color="green">味噌汁が無料</Marker>でつくのでコスパは最強。すき家は<Marker>脂質20.5gで最も低い</Marker>のが特徴です。
+              吉野家は<Marker color="blue">カロリー633kcalで3社中最も低い</Marker>のが強み。すき家は<Marker>タンパク質21.7gで最も多い</Marker>一方、松屋は687kcalで<Marker color="green">味噌汁が無料</Marker>でつくのでコスパは良好です。
             </p>
           </TipBox>
 
@@ -173,10 +173,10 @@ export default function GyudonComparisonPage() {
           <ComparisonTable
             headers={["サイズ", "吉野家", "松屋", "すき家"]}
             rows={[
-              ["ミニ / 小盛", "488 kcal", "527 kcal", "496 kcal"],
-              ["並盛", "635 kcal", "709 kcal", "638 kcal"],
-              ["大盛", "863 kcal", "945 kcal", "863 kcal"],
-              ["特盛", "1,013 kcal", "1,135 kcal", "1,027 kcal"],
+              ["小盛 / ミニ", "474 kcal", "507 kcal", "464 kcal"],
+              ["並盛", "633 kcal", "687 kcal", "695 kcal"],
+              ["大盛", "823 kcal", "933 kcal", "908 kcal"],
+              ["特盛", "1,006 kcal", "1,237 kcal", "1,100 kcal"],
             ]}
           />
 
@@ -196,17 +196,17 @@ export default function GyudonComparisonPage() {
             3社のデータを比較すると、目的によっておすすめのチェーンが異なります。
           </p>
 
-          <SubSectionHeading>タンパク質重視なら → 吉野家</SubSectionHeading>
+          <SubSectionHeading>タンパク質重視なら → すき家</SubSectionHeading>
           <div className="bg-sky-50/60 rounded-lg border border-sky-200 p-5 mb-6">
             <p className="text-sm text-gray-700 leading-relaxed">
-              並盛で<Marker color="blue">タンパク質20gは3社中トップ</Marker>。筋トレ中の方は吉野家がベストチョイスです。PFCバランスも3社中最も優れています。
+              並盛で<Marker color="blue">タンパク質21.7gは3社中トップ</Marker>。筋トレ中の方はすき家がベストチョイスです。吉野家（19.6g）も僅差で高タンパクです。
             </p>
           </div>
 
-          <SubSectionHeading>カロリー重視なら → 吉野家 / すき家</SubSectionHeading>
+          <SubSectionHeading>カロリー重視なら → 吉野家</SubSectionHeading>
           <div className="bg-sky-50/60 rounded-lg border border-sky-200 p-5 mb-6">
             <p className="text-sm text-gray-700 leading-relaxed">
-              吉野家635kcal、すき家638kcalとほぼ同等。松屋は709kcalと約70kcal高めです。<Marker color="green">脂質が最も低いのはすき家（20.5g）</Marker>です。
+              並盛のカロリーは吉野家633kcalが最も低く、松屋687kcal、すき家695kcalと続きます。<Marker color="green">脂質が最も低いのはすき家（23.4g）</Marker>です。
             </p>
           </div>
 
@@ -246,36 +246,36 @@ export default function GyudonComparisonPage() {
             <NutritionCard
               name="牛丼（小盛）"
               chain="吉野家"
-              calories={488}
-              protein={15.0}
-              fat={17.0}
-              carbs={68.0}
+              calories={474}
+              protein={15.4}
+              fat={19.6}
+              carbs={60.9}
             />
           </div>
           <TipBox title="吉野家の攻略ポイント">
             <p>
-              <Marker>ライザップ牛サラダ（414kcal / P30g）</Marker>は高タンパク・低糖質の代表メニュー。ご飯の代わりにサラダなので糖質制限中でも安心です。
+              <Marker>ライザップ牛サラダ（398kcal / P28g）</Marker>は高タンパク・低糖質の代表メニュー。ご飯の代わりにサラダなので糖質制限中でも安心です。
             </p>
           </TipBox>
 
           <SubSectionHeading>松屋のおすすめ</SubSectionHeading>
           <div className="grid gap-4 mb-6">
             <NutritionCard
-              name="牛めし（ミニ）"
+              name="牛めし（小盛）"
               chain="松屋"
-              calories={527}
-              protein={13.0}
-              fat={18.0}
-              carbs={75.0}
+              calories={507}
+              protein={13.1}
+              fat={22.8}
+              carbs={59.6}
               recommended
             />
             <NutritionCard
               name="ネギたっぷり旨辛ネギたま牛めし"
               chain="松屋"
-              calories={782}
-              protein={24.0}
-              fat={30.0}
-              carbs={102.0}
+              calories={818}
+              protein={24.7}
+              fat={36.2}
+              carbs={94.1}
             />
           </div>
           <TipBox title="松屋の攻略ポイント">
@@ -289,24 +289,24 @@ export default function GyudonComparisonPage() {
             <NutritionCard
               name="牛丼ライト"
               chain="すき家"
-              calories={352}
-              protein={20.0}
-              fat={18.0}
-              carbs={26.0}
+              calories={397}
+              protein={22.8}
+              fat={26.8}
+              carbs={16.8}
               recommended
             />
             <NutritionCard
               name="牛丼（ミニ）"
               chain="すき家"
-              calories={496}
-              protein={13.0}
-              fat={15.5}
-              carbs={73.0}
+              calories={464}
+              protein={14.8}
+              fat={16.0}
+              carbs={65.7}
             />
           </div>
           <TipBox title="すき家の攻略ポイント">
             <p>
-              <Marker color="blue">牛丼ライト（352kcal / P20g）</Marker>はご飯の代わりに豆腐を使った糖質制限メニュー。3社の全メニューの中で最もダイエット向きです。
+              <Marker color="blue">牛丼ライト（397kcal / P22.8g）</Marker>はご飯の代わりに豆腐を使った糖質制限メニュー。3社の全メニューの中で最もダイエット向きです。
             </p>
           </TipBox>
         </section>
@@ -366,7 +366,7 @@ export default function GyudonComparisonPage() {
           <ArticleSummary
             points={[
               "カロリーが最も低いのは吉野家（633kcal）",
-              "タンパク質が最も多いのは松屋（21.1g）",
+              "タンパク質が最も多いのはすき家（21.7g）",
               "脂質が最も低いのは吉野家（23.6g）",
               "コスパ最強は松屋（¥430＋味噌汁無料）",
               "糖質制限ならすき家の牛丼ライト（豆腐ベース）一択",
@@ -389,11 +389,11 @@ export default function GyudonComparisonPage() {
           items={[
             {
               q: "吉野家・松屋・すき家、牛丼並盛のカロリーは？",
-              a: "2026年5月時点の公式栄養情報では、吉野家 633kcal / 松屋 687kcal / すき家 695kcal です。1番カロリーが低いのは吉野家の牛丼並盛です。なお3社とも糖質量はほぼ同じ（88〜100g）で、差はほとんど脂質量と肉量によるものです。",
+              a: "2026年5月時点の公式栄養情報では、吉野家 633kcal / 松屋 687kcal / すき家 695kcal です。1番カロリーが低いのは吉野家の牛丼並盛です。なお3社とも糖質量はほぼ同じ（85〜100g）で、差はほとんど脂質量と肉量によるものです。",
             },
             {
               q: "ダイエット中、3社で一番おすすめなのはどこ？",
-              a: "目的によって変わります。①カロリー重視なら吉野家、②高タンパクなら松屋、③糖質制限ならすき家（牛丼ライト 豆腐ベース）。総合的には吉野家のライザップ牛サラダ（414kcal/P30g）が「ダイエット最強メニュー」として人気です。",
+              a: "目的によって変わります。①カロリー重視なら吉野家、②高タンパクならすき家、③糖質制限ならすき家（牛丼ライト 豆腐ベース）。総合的には吉野家のライザップ牛サラダ（398kcal/P28g）が「ダイエット最強メニュー」として人気です。",
             },
             {
               q: "牛丼ライト（すき家）は本当に痩せる？",

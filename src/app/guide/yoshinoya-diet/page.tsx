@@ -105,7 +105,7 @@ export default function YoshinoyaDietPage() {
           question="吉野家でダイエット中におすすめのメニューは？牛丼並盛のカロリーは？"
           answer={
             <>
-              <strong>牛丼 並盛は633kcal（P19.6g/F23.6g/C88.2g）</strong>。ダイエット中なら<strong>小盛（497kcal）または牛皿並盛（241kcal/P14g）</strong>がおすすめです。最も低カロリー＆高タンパクなのは<strong>ライザップ牛サラダ（414kcal/P30g）</strong>。サイドメニューでは生野菜サラダ（37kcal）やキムチ（10kcal）を組み合わせると満足感を維持しながらカロリーを抑えられます。
+              <strong>牛丼 並盛は633kcal（P19.6g/F23.6g/C88.2g）</strong>。ダイエット中なら<strong>小盛（474kcal）または牛皿並盛（281kcal/P13.5g）</strong>がおすすめです。最も低カロリー＆高タンパクなのは<strong>ライザップ牛サラダ（398kcal/P28g）</strong>。サイドメニューでは生野菜サラダ（88kcal）やキムチ（10kcal）を組み合わせると満足感を維持しながらカロリーを抑えられます。
             </>
           }
         />
@@ -115,7 +115,7 @@ export default function YoshinoyaDietPage() {
           「ダイエット中に牛丼は食べていいの？」――これは多くのダイエッターが抱える疑問です。結論から言えば、<Marker>メニューの選び方とサイズの工夫で吉野家は十分にダイエット向き</Marker>です。
         </p>
         <p className="mb-4">
-          吉野家には<Marker color="blue">ライザップ牛サラダ（398kcal/P28g）</Marker>という低カロリー高タンパクの優秀メニューがあり、牛丼のご飯を抜いた牛皿（248kcal）も活用できます。一方で牛丼の特盛は929kcalと高カロリー。選び方次第で大きな差が出ます。
+          吉野家には<Marker color="blue">ライザップ牛サラダ（398kcal/P28g）</Marker>という低カロリー高タンパクの優秀メニューがあり、牛丼のご飯を抜いた牛皿（281kcal）も活用できます。一方で牛丼の特盛は1,006kcalと高カロリー。選び方次第で大きな差が出ます。
         </p>
         <p className="mb-8">
           この記事では、吉野家の全メニューをカロリー低い順にランキングし、ダイエットに最適なメニューやサイズ選びのコツを詳しく解説します。
@@ -138,15 +138,15 @@ export default function YoshinoyaDietPage() {
 
           <NutritionTable
             items={[
-              { name: "牛皿（並盛）", calories: 248, protein: 14.8, fat: 17.5, carbs: 5.8, highlight: true },
+              { name: "牛皿（並盛）", calories: 281, protein: 13.5, fat: 22.9, carbs: 5.2, highlight: true },
               { name: "ライザップ牛サラダ", calories: 398, protein: 28.0, fat: 24.5, carbs: 17.2, highlight: true },
-              { name: "牛丼（小盛）", calories: 488, protein: 16.2, fat: 17.8, carbs: 63.5 },
-              { name: "から揚げ丼（並盛）", calories: 594, protein: 22.5, fat: 17.8, carbs: 85.2 },
-              { name: "牛丼（並盛）", calories: 635, protein: 20.0, fat: 20.4, carbs: 89.0 },
-              { name: "豚丼（並盛）", calories: 656, protein: 22.0, fat: 22.8, carbs: 89.5 },
-              { name: "ねぎ玉牛丼（並盛）", calories: 731, protein: 25.2, fat: 28.5, carbs: 92.0 },
-              { name: "牛丼（大盛）", calories: 846, protein: 27.6, fat: 28.0, carbs: 118.4 },
-              { name: "牛丼（特盛）", calories: 929, protein: 32.8, fat: 32.5, carbs: 126.0 },
+              { name: "牛丼（小盛）", calories: 474, protein: 15.4, fat: 19.6, carbs: 60.9 },
+              { name: "豚丼（並盛）", calories: 576, protein: 14.4, fat: 18.6, carbs: 88.1 },
+              { name: "牛丼（並盛）", calories: 633, protein: 19.6, fat: 23.6, carbs: 88.2 },
+              { name: "ねぎ塩牛丼", calories: 670, protein: 20.5, fat: 24.9, carbs: 93.9 },
+              { name: "牛丼（大盛）", calories: 823, protein: 24.8, fat: 29.0, carbs: 119.5 },
+              { name: "から揚げ丼（並盛）", calories: 943, protein: 31.9, fat: 44.0, carbs: 104.5 },
+              { name: "牛丼（特盛）", calories: 1006, protein: 33.5, fat: 44.2, carbs: 122.3 },
             ]}
           />
 
@@ -155,7 +155,7 @@ export default function YoshinoyaDietPage() {
           </p>
 
           <TipBox title="カロリーランキングのポイント">
-            <p><Marker>牛皿（248kcal）とライザップ牛サラダ（398kcal）</Marker>がダイエット向きの2大メニュー。ご飯なしの牛皿はタンパク質14.8gを低カロリーで摂取でき、ライザップ牛サラダは野菜もたっぷり。この2つを覚えておけば安心です。</p>
+            <p><Marker>牛皿（281kcal）とライザップ牛サラダ（398kcal）</Marker>がダイエット向きの2大メニュー。ご飯なしの牛皿はタンパク質13.5gを低カロリーで摂取でき、ライザップ牛サラダは野菜もたっぷり。この2つを覚えておけば安心です。</p>
           </TipBox>
         </section>
 
@@ -176,18 +176,18 @@ export default function YoshinoyaDietPage() {
             </p>
           </RankingCard>
 
-          <RankingCard rank={2} title="牛皿（並盛）" subtitle="248kcal / P14.8g / F17.5g / C5.8g">
+          <RankingCard rank={2} title="牛皿（並盛）" subtitle="281kcal / P13.5g / F22.9g / C5.2g">
             <p className="text-sm text-gray-700 leading-relaxed mb-3">
-              <Marker color="blue">ご飯なしで248kcal、糖質わずか5.8g</Marker>。究極の低糖質メニューです。牛丼のご飯部分（約400kcal）をカットすることで大幅なカロリーダウンが可能。
+              <Marker color="blue">ご飯なしで281kcal、糖質わずか5.2g</Marker>。究極の低糖質メニューです。牛丼のご飯部分（約350kcal）をカットすることで大幅なカロリーダウンが可能。
             </p>
             <p className="text-sm text-gray-700 leading-relaxed">
               サラダやみそ汁と組み合わせれば、バランスの良い低糖質食の完成。糖質制限中の方には最もおすすめです。
             </p>
           </RankingCard>
 
-          <RankingCard rank={3} title="牛丼（小盛）" subtitle="488kcal / P16.2g / F17.8g / C63.5g">
+          <RankingCard rank={3} title="牛丼（小盛）" subtitle="474kcal / P15.4g / F19.6g / C60.9g">
             <p className="text-sm text-gray-700 leading-relaxed">
-              「やっぱり牛丼が食べたい」という方におすすめなのが小盛。並盛（635kcal）から<Marker color="green">約150kcalのカロリーダウン</Marker>で、しっかり牛丼の満足感を得られます。ご飯もお肉も楽しみたい方に最適なサイズ感です。
+              「やっぱり牛丼が食べたい」という方におすすめなのが小盛。並盛（633kcal）から<Marker color="green">約159kcalのカロリーダウン</Marker>で、しっかり牛丼の満足感を得られます。ご飯もお肉も楽しみたい方に最適なサイズ感です。
             </p>
           </RankingCard>
 
@@ -216,7 +216,7 @@ export default function YoshinoyaDietPage() {
           />
 
           <p className="mb-8 mt-4">
-            27kcalで体を温めてくれるみそ汁は、食事の最初に飲むことで満腹感を高める効果があります。牛皿+みそ汁で275kcalという低カロリーな組み合わせが可能です。
+            27kcalで体を温めてくれるみそ汁は、食事の最初に飲むことで満腹感を高める効果があります。牛皿+みそ汁で308kcalという低カロリーな組み合わせが可能です。
           </p>
 
           <ArticleImage src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&h=400&fit=crop" alt="ヘルシーなサラダボウルのイメージ" />
@@ -233,17 +233,17 @@ export default function YoshinoyaDietPage() {
           <ComparisonTable
             headers={["サイズ", "カロリー", "タンパク質", "脂質", "炭水化物"]}
             rows={[
-              ["小盛", "488 kcal", "P 16.2g", "F 17.8g", "C 63.5g"],
-              ["並盛", "635 kcal", "P 20.0g", "F 20.4g", "C 89.0g"],
-              ["アタマの大盛", "745 kcal", "P 25.5g", "F 25.8g", "C 96.5g"],
-              ["大盛", "846 kcal", "P 27.6g", "F 28.0g", "C 118.4g"],
-              ["特盛", "929 kcal", "P 32.8g", "F 32.5g", "C 126.0g"],
+              ["小盛", "474 kcal", "P 15.4g", "F 19.6g", "C 60.9g"],
+              ["並盛", "633 kcal", "P 19.6g", "F 23.6g", "C 88.2g"],
+              ["アタマの大盛", "725 kcal", "P 23.0g", "F 28.8g", "C 96.6g"],
+              ["大盛", "823 kcal", "P 24.8g", "F 29.0g", "C 119.5g"],
+              ["特盛", "1,006 kcal", "P 33.5g", "F 44.2g", "C 122.3g"],
             ]}
             bestRowIndex={0}
           />
 
           <TipBox title="サイズ選びのコツ">
-            <p>並盛から小盛に変えるだけで<Marker>約150kcalのカロリーカット</Marker>。物足りないと感じる場合は、牛皿を追加する「牛皿＋ミニ牛丼」方式にすると、タンパク質を増やしつつカロリーの総量を調整しやすくなります。</p>
+            <p>並盛から小盛に変えるだけで<Marker>約159kcalのカロリーカット</Marker>。物足りないと感じる場合は、牛皿を追加する「牛皿＋ミニ牛丼」方式にすると、タンパク質を増やしつつカロリーの総量を調整しやすくなります。</p>
           </TipBox>
 
           <p className="mb-4">
@@ -255,15 +255,15 @@ export default function YoshinoyaDietPage() {
           <ComparisonTable
             headers={["チェーン", "最小サイズ", "カロリー", "タンパク質"]}
             rows={[
-              ["吉野家（小盛）", "小盛", "488 kcal", "P 16.2g"],
-              ["松屋（ミニ盛）", "ミニ盛", "380 kcal", "P 12.5g"],
-              ["すき家（ミニ）", "ミニ", "496 kcal", "P 15.2g"],
+              ["吉野家（小盛）", "小盛", "474 kcal", "P 15.4g"],
+              ["松屋（小盛）", "小盛", "507 kcal", "P 13.1g"],
+              ["すき家（ミニ）", "ミニ", "464 kcal", "P 14.8g"],
             ]}
-            bestRowIndex={1}
+            bestRowIndex={2}
           />
 
           <p className="mb-4">
-            吉野家の小盛は488kcalで、松屋のミニ盛（380kcal）よりやや高め。ただし<Marker color="green">ライザップ牛サラダ（398kcal）やうな牛皿（248kcal）</Marker>など、ご飯を使わないダイエットメニューの選択肢が豊富なのが吉野家の強みです。
+            吉野家の小盛は474kcalで、すき家のミニ（464kcal）とほぼ同等。さらに<Marker color="green">ライザップ牛サラダ（398kcal）や牛皿（281kcal）</Marker>など、ご飯を使わないダイエットメニューの選択肢が豊富なのが吉野家の強みです。
           </p>
         </section>
 
@@ -283,9 +283,9 @@ export default function YoshinoyaDietPage() {
 
           <WarningBox title="ダイエット中は避けたいメニュー">
             <ul className="space-y-2">
-              <li><span className="font-bold">牛丼特盛（929kcal）</span> ─ 1食で1日の摂取カロリーの半分近く。タンパク質32.8gに対して炭水化物126gと糖質過多。</li>
-              <li><span className="font-bold">ねぎ玉牛丼・並盛（731kcal）</span> ─ 並盛にトッピングが加わり脂質28.5g。卵と追加ソースでカロリーが跳ね上がります。</li>
-              <li><span className="font-bold">牛丼大盛（846kcal）</span> ─ 並盛の約1.3倍のカロリー。ご飯の量が大幅に増え、炭水化物118.4gに。</li>
+              <li><span className="font-bold">牛丼特盛（1,006kcal）</span> ─ 1食で1日の摂取カロリーの半分近く。タンパク質33.5gに対して炭水化物122gと糖質過多。</li>
+              <li><span className="font-bold">ねぎ塩牛丼（670kcal）</span> ─ 並盛にねぎ塩だれが加わり脂質24.9g。トッピングでカロリーが加わります。</li>
+              <li><span className="font-bold">牛丼大盛（823kcal）</span> ─ 並盛の約1.3倍のカロリー。ご飯の量が大幅に増え、炭水化物119.5gに。</li>
               <li><span className="font-bold">牛カルビ丼・並盛（827kcal）</span> ─ カルビ肉は脂質が非常に多く、脂質35.2gとトップクラス。</li>
               <li><span className="font-bold">月見牛とじ丼（780kcal）</span> ─ 卵とじで見た目はヘルシーですが、卵2個分と甘辛だしでカロリーが高め。</li>
             </ul>
@@ -311,11 +311,11 @@ export default function YoshinoyaDietPage() {
             items={[
               {
                 title: "牛皿+みそ汁で低糖質セットに",
-                body: "牛皿（248kcal）+みそ汁（27kcal）=合計275kcal。ご飯を完全にカットすることで、糖質をわずか8.3gに抑えられます。糖質制限ダイエット中の方に最もおすすめの注文法です。",
+                body: "牛皿（281kcal）+みそ汁（27kcal）=合計308kcal。ご飯を完全にカットすることで、糖質をわずか7.7gに抑えられます。糖質制限ダイエット中の方に最もおすすめの注文法です。",
               },
               {
                 title: "小盛を活用してご飯を減らす",
-                body: "並盛から小盛にするだけで約150kcalカット。「ご飯少なめ」と口頭で伝えるよりも確実にカロリーを抑えられます。物足りなさは牛皿の追加で調整しましょう。",
+                body: "並盛から小盛にするだけで約159kcalカット。「ご飯少なめ」と口頭で伝えるよりも確実にカロリーを抑えられます。物足りなさは牛皿の追加で調整しましょう。",
               },
               {
                 title: "ライザップ牛サラダを活用する",
@@ -339,9 +339,9 @@ export default function YoshinoyaDietPage() {
           <ComparisonTable
             headers={["パターン", "メニュー構成", "カロリー", "タンパク質"]}
             rows={[
-              ["低糖質", "牛皿 + みそ汁 + お新香", "290 kcal", "P 17.1g"],
+              ["低糖質", "牛皿 + みそ汁 + お新香", "323 kcal", "P 15.8g"],
               ["バランス型", "ライザップ牛サラダ + みそ汁", "425 kcal", "P 29.8g"],
-              ["満足型", "牛丼小盛 + みそ汁", "515 kcal", "P 18.0g"],
+              ["満足型", "牛丼小盛 + みそ汁", "501 kcal", "P 17.2g"],
             ]}
             bestRowIndex={1}
           />
@@ -359,15 +359,15 @@ export default function YoshinoyaDietPage() {
           <ComparisonTable
             headers={["目的", "おすすめメニュー", "P/F/C比率", "ポイント"]}
             rows={[
-              ["糖質制限", "牛皿（並盛）", "P24%/F63%/C13%", "糖質5.8gと超低糖質"],
-              ["ローファット", "ライザップ牛サラダ", "P40%/F35%/C25%", "脂質控えめ高タンパク"],
-              ["バランス型", "牛丼（小盛）", "P13%/F15%/C72%", "無理なく続けられる"],
+              ["糖質制限", "牛皿（並盛）", "P19%/F73%/C8%", "糖質5.2gと超低糖質"],
+              ["高タンパク", "ライザップ牛サラダ", "P28%/F55%/C17%", "野菜と高タンパクを両立"],
+              ["バランス型", "牛丼（小盛）", "P13%/F37%/C51%", "無理なく続けられる"],
             ]}
             bestRowIndex={1}
           />
 
           <p className="mb-4">
-            糖質制限なら牛皿、ローファットならライザップ牛サラダ、カロリー制限ならわら牛丼小盛と、<Marker color="blue">ダイエットの方針によって最適なメニューが変わります</Marker>。自分のダイエット方針に合ったメニューを選びましょう。
+            糖質制限なら牛皿、高タンパクならライザップ牛サラダ、カロリー制限なら牛丼小盛と、<Marker color="blue">ダイエットの方針によって最適なメニューが変わります</Marker>。自分のダイエット方針に合ったメニューを選びましょう。
           </p>
 
           <TipBox title="1日の食事プランに組み込むコツ">
@@ -391,8 +391,8 @@ export default function YoshinoyaDietPage() {
           <ArticleSummary
             points={[
               "ライザップ牛サラダがダイエットの大本命メニュー（吉野家公式栄養成分を確認してください）",
-              "牛皿並盛（241kcal）+みそ汁で糖質制限にも対応可能",
-              "牛丼は小盛（497kcal）を選ぶだけで並盛比136kcalカット",
+              "牛皿並盛（281kcal）+みそ汁で糖質制限にも対応可能",
+              "牛丼は小盛（474kcal）を選ぶだけで並盛比159kcalカット",
               "トッピング追加やサイズアップに注意。超特盛は1,000kcal超に",
               "紅生姜を活用し、つゆだくは避けるのがダイエットのコツ",
             ]}
@@ -409,19 +409,19 @@ export default function YoshinoyaDietPage() {
           items={[
             {
               q: "吉野家の牛丼並盛のカロリーは？",
-              a: "吉野家の牛丼 並盛は633kcal、タンパク質19.6g、脂質23.6g、炭水化物88.2gです（2026年5月時点の吉野家公式栄養成分情報）。同シリーズの小盛は497kcal、大盛は約750kcalです。",
+              a: "吉野家の牛丼 並盛は633kcal、タンパク質19.6g、脂質23.6g、炭水化物88.2gです（2026年5月時点の吉野家公式栄養成分情報）。同シリーズの小盛は474kcal、大盛は823kcalです。",
             },
             {
               q: "吉野家でダイエット中におすすめのメニューは？",
-              a: "ライザップ牛サラダ（414kcal/P30g）が最もダイエット向きです。低糖質で高タンパク。また、牛皿並盛（241kcal/P14g）にみそ汁とお新香を組み合わせる「糖質オフセット」も人気です。牛丼を食べたい場合は小盛（497kcal）を選びましょう。",
+              a: "ライザップ牛サラダ（398kcal/P28g）が最もダイエット向きです。低糖質で高タンパク。また、牛皿並盛（281kcal/P13.5g）にみそ汁とお新香を組み合わせる「糖質オフセット」も人気です。牛丼を食べたい場合は小盛（474kcal）を選びましょう。",
             },
             {
               q: "ライザップ牛サラダは本当に痩せますか？",
-              a: "ライザップ牛サラダ単体で痩せるわけではありませんが、外食1食で414kcal・タンパク質30gを摂れるのは非常に優秀です。1日の総摂取カロリーを管理しつつ、このメニューを活用することで継続的なダイエットが可能になります。",
+              a: "ライザップ牛サラダ単体で痩せるわけではありませんが、外食1食で398kcal・タンパク質28gを摂れるのは非常に優秀です。1日の総摂取カロリーを管理しつつ、このメニューを活用することで継続的なダイエットが可能になります。",
             },
             {
               q: "牛丼と豚丼、ダイエットにはどっちがおすすめ？",
-              a: "豚丼 並盛（576kcal）の方が牛丼 並盛（633kcal）より約60kcal低めです。ただし脂質量はほぼ同じ。糖質量も両者大差ないため、好みで選んでOKです。さらに低カロリーを目指すなら牛皿並盛（241kcal）+ご飯小盛にカスタムする方法も。",
+              a: "豚丼 並盛（576kcal）の方が牛丼 並盛（633kcal）より約60kcal低めです。ただし脂質量はほぼ同じ。糖質量も両者大差ないため、好みで選んでOKです。さらに低カロリーを目指すなら牛皿並盛（281kcal）+ご飯小盛にカスタムする方法も。",
             },
             {
               q: "吉野家の朝食メニューはダイエットに向いていますか？",
@@ -433,7 +433,7 @@ export default function YoshinoyaDietPage() {
             },
             {
               q: "吉野家のサイドメニューで太らないのは？",
-              a: "生野菜サラダ（37kcal）、キムチ（10kcal）、お新香（17kcal）、わかめみそ汁（24kcal）、3点盛り野菜セット（約60kcal）が低カロリーです。逆にから揚げや唐辛子サラダなど揚げ物系は200kcal超なので注意。",
+              a: "生野菜サラダ（88kcal）、キムチ（10kcal）、お新香（17kcal）、わかめみそ汁（24kcal）、3点盛り野菜セット（約60kcal）が低カロリーです。逆にから揚げや唐辛子サラダなど揚げ物系は200kcal超なので注意。",
             },
           ]}
         />
