@@ -142,7 +142,7 @@ export default function MorningDietPage() {
           />
 
           <TipBox title="朝食の理想カロリーは？">
-            <p>ダイエット中の朝食は<Marker>300〜500kcal</Marker>が理想的。1日の摂取カロリーが1,500kcalの場合、朝食400kcal・昼食500kcal・夕食500kcal・間食100kcalという配分がバランス良く痩せやすい体をつくります。</p>
+            <p>ダイエット中の朝食は<Marker>300〜500kcal</Marker>が理想的。1日の摂取カロリーが1,500kcalの場合、朝食400kcal・昼食500kcal・夕食500kcal・間食100kcalという配分がバランス良い食事配分は、ダイエット継続に有利な場合が多いとされています。</p>
           </TipBox>
         </section>
 

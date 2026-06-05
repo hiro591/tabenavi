@@ -380,7 +380,7 @@ export default function BmrCalculatorPage() {
 
           <SubSectionHeading>3. 水分を十分に摂取する</SubSectionHeading>
           <p className="mb-4">
-            水を飲むだけで代謝が上がることが研究で確認されています。500mlの水を飲むと、<Marker>約30分後に代謝が約30%上昇し、40~60分程度持続する</Marker>ことが報告されています（Boschmann et al., 2003）。
+            水を飲むだけで代謝が上がることが研究で確認されています。500mlの水を飲むと<Marker>代謝が一時的に上昇する</Marker>ことが報告されています（Boschmann et al., 2003）。ただしその程度には個人差があります。
           </p>
           <p className="mb-4">
             1日に2リットルの水を飲む習慣があれば、それだけで約100kcal/日の追加消費が見込めます。特に<Marker color="green">冷たい水よりも常温~やや温かい水が効果的</Marker>です。
@@ -388,7 +388,7 @@ export default function BmrCalculatorPage() {
 
           <SubSectionHeading>4. 十分な睡眠を取る</SubSectionHeading>
           <p className="mb-4">
-            睡眠不足は基礎代謝を低下させます。シカゴ大学の研究では、<Marker>睡眠を5.5時間に制限すると、8.5時間睡眠と比べて脂肪の減少が55%少なくなった</Marker>ことが報告されています。
+            睡眠不足は基礎代謝を低下させます。シカゴ大学の研究では、<Marker>睡眠不足は脂肪の減少を妨げることが研究で示されていますが、その程度は研究条件や個人差によって異なります</Marker>ことが報告されています。
           </p>
           <p className="mb-4">
             また、睡眠不足はグレリン（空腹ホルモン）を増加させ、レプチン（満腹ホルモン）を減少させるため、食欲のコントロールも難しくなります。<Marker color="blue">最低7時間、理想は7.5~8時間の睡眠</Marker>を確保しましょう。
@@ -396,7 +396,7 @@ export default function BmrCalculatorPage() {
 
           <SubSectionHeading>5. 温活で体温を上げる</SubSectionHeading>
           <p className="mb-4">
-            体温が1度上がると基礎代謝は約13%上昇すると言われています。日本人の平均体温は過去50年間で約0.7度低下しており、これが現代人の代謝低下の一因です。
+            体温の上昇は基礎代謝に影響を与えることが報告されていますが、その程度は個人差があります。日本人の平均体温は過去50年間で約0.7度低下しており、これが現代人の代謝低下の一因です。
           </p>
 
           <CheckList
@@ -411,7 +411,7 @@ export default function BmrCalculatorPage() {
 
           <SubSectionHeading>6. カフェインを活用する</SubSectionHeading>
           <p className="mb-4">
-            カフェインには代謝を<Marker>約3~11%上昇させる効果</Marker>があることが複数の研究で確認されています。コーヒー1杯（カフェイン約80mg）で約30~50kcalの追加消費が見込めます。
+            カフェインには代謝を<Marker>上昇させる効果</Marker>があることが複数の研究で確認されていますが、その程度は摂取量や個人の体質によって異なります。
           </p>
 
           <WarningBox title="カフェインの注意点">
@@ -428,7 +428,7 @@ export default function BmrCalculatorPage() {
 
           <SubSectionHeading>7. NEAT（非運動性活動熱産生）を増やす</SubSectionHeading>
           <p className="mb-4">
-            NEATとは、運動以外の日常動作で消費されるカロリーのことです。<Marker>立ち仕事・歩行・家事・そわそわした動きなど</Marker>が含まれます。実はNEATの差は個人間で1日最大2,000kcalにもなると言われています。
+            NEATとは、運動以外の日常動作で消費されるカロリーのことです。<Marker>立ち仕事・歩行・家事・そわそわした動きなど</Marker>が含まれます。実はNEATには個人差がかなり大きいことが示唆されています。
           </p>
 
           <NumberedList

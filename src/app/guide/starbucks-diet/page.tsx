@@ -187,7 +187,7 @@ export default function StarbucksDietPage() {
 
           <RankingCard rank={1} title="ドリップコーヒー / アメリカーノ" subtitle="10〜15kcal / ほぼゼロカロリー">
             <p className="text-sm text-gray-700 leading-relaxed">
-              <Marker>ダイエット中のスタバはブラック系一択</Marker>。ドリップコーヒーは15kcal、コールドブリューは10kcalと実質ゼロカロリー。カフェインの覚醒作用と脂肪燃焼効果も期待でき、トレーニング前のドリンクとしても最適です。
+              <Marker>ダイエット中のスタバはブラック系一択</Marker>。ドリップコーヒーは15kcal、コールドブリューは10kcalと実質ゼロカロリー。カフェインの覚醒作用も期待でき、トレーニング前のドリンクとしても最適です。
             </p>
           </RankingCard>
 

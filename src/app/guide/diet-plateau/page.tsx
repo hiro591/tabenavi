@@ -299,7 +299,7 @@ export default function DietPlateauPage() {
 
           <SubSectionHeading>突破法3：食べる順番を変える</SubSectionHeading>
           <p className="mb-4">
-            <Link href="/guide/eating-order" className="text-sky-500 hover:text-sky-600">食べ順ダイエット</Link>を実践していない場合、停滞期をきっかけに導入しましょう。<Marker color="blue">野菜・汁物 → タンパク質 → 炭水化物</Marker>の順番で食べることで、同じメニューでも血糖値の上昇が約30〜40%抑えられ、脂肪蓄積が減ります。
+            <Link href="/guide/eating-order" className="text-sky-500 hover:text-sky-600">食べ順ダイエット</Link>を実践していない場合、停滞期をきっかけに導入しましょう。<Marker color="blue">野菜・汁物 → タンパク質 → 炭水化物</Marker>の順番で食べることで、同じメニューでも血糖値の上昇が抑えられやすく、脂肪蓄積が減りやすくなります。
           </p>
           <p className="mb-4">
             すでに実践している場合は、食事前に<Marker>食物繊維サプリメント（難消化性デキストリンなど）</Marker>を水に溶かして飲むことで、さらに血糖値コントロールを強化できます。

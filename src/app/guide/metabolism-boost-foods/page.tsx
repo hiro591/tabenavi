@@ -292,7 +292,7 @@ export default function MetabolismBoostFoodsPage() {
               <p><strong className="text-gray-800">卵:</strong> 完全栄養食品。ビタミンB群が糖質・脂質の代謝をサポート。朝食に卵を食べると1日の食欲が安定する研究結果も。</p>
               <p><strong className="text-gray-800">鮭:</strong> アスタキサンチンが抗酸化作用で細胞のミトコンドリア機能を活性化。オメガ3脂肪酸が脂肪燃焼を促進。</p>
               <p><strong className="text-gray-800">納豆:</strong> ナットウキナーゼが血流を改善し代謝を促進。大豆タンパク質でDITも上昇。朝食に1パック摂取が理想的。</p>
-              <p><strong className="text-gray-800">コーヒー:</strong> カフェインが交感神経を活性化し、基礎代謝を3〜11%上昇させる。ただしブラックで飲むことが条件。</p>
+              <p><strong className="text-gray-800">コーヒー:</strong> カフェインが交感神経を活性化し、短期的な代謝率を上昇させる可能性があります。その程度は個人差が大きく、継続的な基礎代謝の上昇については根拠が限定的です。ただしブラックで飲むことが推奨されます。</p>
             </div>
           </div>
 
