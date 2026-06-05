@@ -260,6 +260,14 @@ export default async function CalorieDatabasePage() {
           }
         />
 
+        <p className="mb-6 text-sm text-gray-500">
+          このデータベース全体を集計・分析した
+          <Link href="/guide/eating-out-nutrition-report" className="text-sky-600 underline">
+            外食6,097品の統計レポート
+          </Link>
+          では、外食の平均カロリーや「ダイエット向きメニューの割合」など全体傾向がわかります。
+        </p>
+
         {/* Mobile TOC */}
         <div className="lg:hidden">
           <TableOfContents items={tocItems} />

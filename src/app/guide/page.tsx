@@ -30,6 +30,13 @@ export const metadata: Metadata = {
 
 const featuredArticles = [
   {
+    slug: "eating-out-nutrition-report",
+    title: "外食6,097品を全部調べた統計レポート",
+    description: "32チェーンの公式データで判明「ダイエット向きは10.8%だけ」",
+    icon: BarChart3,
+    color: "from-violet-400 to-fuchsia-400",
+  },
+  {
     slug: "eating-out-diet",
     title: "外食ダイエット完全ガイド",
     description: "チェーン店別おすすめメニューと太らない食べ方",
@@ -45,7 +52,7 @@ const featuredArticles = [
   },
   {
     slug: "calorie-database",
-    title: "外食カロリーDB【全500メニュー】",
+    title: "外食カロリーDB【全6,000品】",
     description: "主要チェーン店のカロリー・PFCを完全網羅",
     icon: BarChart3,
     color: "from-emerald-400 to-teal-400",

@@ -376,6 +376,11 @@ export default function GyudonComparisonPage() {
           <p className="text-xs text-gray-400 mt-4">
             ※ 掲載されている価格・栄養成分は公式サイト等の情報を基にしており、店舗や時期によって異なる場合があります。最新情報は各チェーンの公式サイト（<a href="https://www.yoshinoya.com/menu/info/allergy.html" target="_blank" rel="noopener noreferrer" className="text-sky-500 hover:underline">吉野家</a> / <a href="https://www.matsuyafoods.co.jp/matsuya/menu/" target="_blank" rel="noopener noreferrer" className="text-sky-500 hover:underline">松屋</a> / <a href="https://www.sukiya.jp/menu/" target="_blank" rel="noopener noreferrer" className="text-sky-500 hover:underline">すき家</a>）をご確認ください。
           </p>
+          <p className="text-xs text-gray-500 mt-3">
+            牛丼を含む外食32チェーン・6,097品を横断集計した
+            <Link href="/guide/eating-out-nutrition-report" className="text-sky-600 underline">外食栄養データ統計レポート</Link>
+            では、外食全体のなかで牛丼がどの位置づけかも分析しています。
+          </p>
         </section>
 
         {/* FAQ */}

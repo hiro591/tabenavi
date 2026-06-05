@@ -127,6 +127,13 @@ export default function EatingOutDietPage() {
           </strong>
           とともに紹介し、外食でも確実に痩せるための実践的なルールを解説します。
         </p>
+        <p className="mb-10 text-sm text-gray-500">
+          ※本記事の前提となるデータ根拠は
+          <Link href="/guide/eating-out-nutrition-report" className="text-sky-600 underline">
+            外食6,097品を全数集計した統計レポート
+          </Link>
+          にまとめています。
+        </p>
 
         {/* Table of Contents — desktop uses sidebar */}
 
