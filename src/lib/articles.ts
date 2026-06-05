@@ -56,6 +56,7 @@ export const RELATED_ARTICLES: RelatedArticle[] = [
   { slug: "pfc-guide", title: "PFCバランス入門", description: "計算方法と外食での実践ガイド。", category: "tool" },
   { slug: "bmr-calculator", title: "基礎代謝の計算と上げ方", description: "痩せやすい体を作る方法。", category: "tool" },
   { slug: "calorie-database", title: "外食カロリーデータベース", description: "主要チェーンのカロリー情報まとめ。", category: "tool" },
+  { slug: "eating-out-nutrition-report", title: "外食6,097品を全部調べた統計レポート", description: "32チェーンの公式栄養データを全数検証してわかった真実。", category: "tool" },
 
   // ─── support (5) ──────────────────────────────────
   { slug: "cheat-day", title: "チートデイ完全ガイド", description: "正しいやり方・頻度・メニュー。", category: "support" },

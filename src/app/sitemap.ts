@@ -37,7 +37,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "cheat-day", "no-exercise-diet", "diet-plateau",
     "rebound-prevention", "bmr-calculator", "lawson-diet",
     "familymart-diet", "eat-and-lose", "metabolism-boost-foods",
-    "diet-mistakes",
+    "diet-mistakes", "eating-out-nutrition-report",
   ];
 
   // ─── メニュー詳細ページ（DBから取得 / pagination で全件） ───
