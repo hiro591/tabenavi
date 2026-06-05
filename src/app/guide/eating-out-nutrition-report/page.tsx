@@ -137,7 +137,7 @@ export default function EatingOutNutritionReportPage() {
         {/* §2 */}
         <SectionHeading id="average">外食の平均カロリーは442kcal</SectionHeading>
         <p className="mb-4">
-          まず意外な事実から。6,097品の<Marker>平均カロリーは442kcal</Marker>。そして<Marker color="green">63.3%（約3,860品）が500kcal以下</Marker>でした。「外食＝高カロリー」というイメージほど、全体は高くありません。
+          まず意外な事実から。6,097品の<Marker>平均カロリーは442kcal</Marker>。そして<Marker color="green">63.3%（3,858品）が500kcal以下</Marker>でした。「外食＝高カロリー」というイメージほど、全体は高くありません。
         </p>
         <ComparisonTable
           headers={["カロリー帯", "該当メニュー数", "全体に占める割合"]}
@@ -198,6 +198,14 @@ export default function EatingOutNutritionReportPage() {
         <TipBox title="コンビニが強い理由">
           <p>コンビニ各社は近年「たんぱく質が摂れる」シリーズに注力しており、200kcal前後でタンパク質20g超えの商品が豊富。<Marker color="green">サラダチキン・鶏むね系サラダ・焼き魚</Marker>が鉄板の"当たり"です。</p>
         </TipBox>
+        <p className="text-sm text-gray-600 mb-6">
+          各チェーンの高タンパクメニューは、目的別ランキングで一覧できます：
+          <Link href="/chains/lawson/high-protein" className="text-sky-600 underline">ローソン</Link>・
+          <Link href="/chains/seven-eleven/high-protein" className="text-sky-600 underline">セブンイレブン</Link>・
+          <Link href="/chains/familymart/high-protein" className="text-sky-600 underline">ファミリーマート</Link>・
+          <Link href="/chains/kfc/high-protein" className="text-sky-600 underline">ケンタッキー</Link>
+          の高タンパクランキングをチェック。
+        </p>
 
         {/* §5 */}
         <SectionHeading id="cost">タンパク質コスパ最強メニュー</SectionHeading>
@@ -217,6 +225,10 @@ export default function EatingOutNutritionReportPage() {
         />
         <p className="mb-4 mt-4">
           コスパ王者は<Marker color="blue">マクドナルドのエグチ（エッグチーズバーガー）。¥200でタンパク質22.4g＝100円あたり11.2g</Marker>と圧倒的。プロテイン飲料に匹敵する効率です。
+          チェーン別のコスパは
+          <Link href="/chains/mcdonalds/protein-cost" className="text-sky-600 underline">マクドナルド</Link>・
+          <Link href="/chains/sukiya/protein-cost" className="text-sky-600 underline">すき家</Link>
+          のタンパク質コスパランキングで確認できます。
         </p>
 
         {/* §6 */}
@@ -232,7 +244,7 @@ export default function EatingOutNutritionReportPage() {
           ]}
         />
         <p className="mb-4 mt-2">
-          差は最大62kcal。毎日1杯食べるなら、選び方だけで1ヶ月約1.5kg分のカロリー差になります。より詳しくは
+          差は最大62kcal。毎日1杯置き換えるだけでも1ヶ月で約1,860kcal（脂肪換算で約0.25kg）の差が積み重なります。より詳しくは
           <Link href="/guide/gyudon-comparison" className="text-sky-600 underline">牛丼チェーン3社カロリー比較</Link>
           で解説しています。
         </p>
@@ -240,7 +252,7 @@ export default function EatingOutNutritionReportPage() {
         {/* §7 */}
         <SectionHeading id="trap">高カロリーの罠：定食・丼・カレー系</SectionHeading>
         <p className="mb-4">
-          逆に「うっかり高カロリー」になりやすいのはどのジャンルか。カテゴリ別の平均カロリーを集計すると、<Marker>定食・丼・カレー系が平均865〜1,116kcal</Marker>と突出していました。
+          逆に「うっかり高カロリー」になりやすいのはどのジャンルか。カテゴリ別の平均カロリーを集計すると、<Marker>定食・丼・カレー系が平均880〜1,116kcal</Marker>と突出していました。
         </p>
         <ComparisonTable
           headers={["カテゴリ", "平均カロリー"]}
@@ -258,7 +270,7 @@ export default function EatingOutNutritionReportPage() {
 
         <CTABanner
           title="あなたの外食メニューのカロリーを今すぐ検索"
-          subtitle="32チェーン・6,000品以上を登録不要・無料で検索できます"
+          subtitle="32チェーン・6,097品を登録不要・無料で検索できます"
         />
 
         {/* §8 */}
@@ -269,8 +281,8 @@ export default function EatingOutNutritionReportPage() {
             "ただし5品に1品（18.9%）は800kcal超。太るかは「どの1品を選ぶか」で決まる",
             "高タンパクは28.5%あるが、低カロリー×高タンパクの理想は2.8%（168品）と希少",
             "高タンパク低カロリーの上位はコンビニ勢が席巻（サラダチキン・焼き魚系）",
-            "タンパク質コスパ王はマクドナルドのエグチ（100円で22.4÷2≒11.2g）",
-            "高カロリーの罠は定食・丼・カレー系（平均865〜1,116kcal）。ご飯少なめで調整可能",
+            "タンパク質コスパ王はマクドナルドのエグチ（¥200でタンパク質22.4g＝100円あたり11.2g）",
+            "高カロリーの罠は定食・丼・カレー系（平均880〜1,116kcal）。ご飯少なめで調整可能",
           ]}
         />
 
@@ -295,7 +307,7 @@ export default function EatingOutNutritionReportPage() {
             },
             {
               q: "外食で高カロリーになりやすいメニューは？",
-              a: "定食・丼・カレー系が平均865〜1,116kcalと突出しています。ご飯・揚げ物・ソースが重なりやすいためで、ご飯少なめ・サイドをサラダや汁物に変えることで数百kcalの調整が可能です。",
+              a: "定食・丼・カレー系が平均880〜1,116kcalと突出しています。ご飯・揚げ物・ソースが重なりやすいためで、ご飯少なめ・サイドをサラダや汁物に変えることで数百kcalの調整が可能です。",
             },
           ]}
         />
