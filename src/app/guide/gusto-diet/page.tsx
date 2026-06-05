@@ -18,6 +18,8 @@ import {
   ComparisonTable,
   ArticleFooter,
   ArticleImage,
+  QuickAnswer,
+  FAQSection,
 } from "@/components/guide/ArticleComponents";
 import { AffiliateProductGrid } from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
@@ -112,7 +114,12 @@ export default function GustoDietPage() {
 
         {/* Section 1: ガストがダイエットに向いてる理由 */}
         <section className="mb-16">
-          <SectionHeading id="why-gusto">ガストがダイエットに向いてる理由</SectionHeading>
+                  <QuickAnswer
+          question={"ガストのダイエット向きメニューはどれですか？"}
+          answer={"ガストのダイエット向きメニューは、チキテキ・ピリ辛スパイス焼き（645kcal/タンパク質33.5g）、1日分の野菜のベジ塩タンメン（460kcal）、若鶏のグリル大葉おろし（478kcal/タンパク質30.2g）が上位3つです。特にタンパク質とカロリーのバランスが優れており、ライスを抜いたり単品を組み合わせることで、さらにカロリーをコントロールできます。"}
+        />
+
+        <SectionHeading id="why-gusto">ガストがダイエットに向いてる理由</SectionHeading>
 
           <p className="mb-4">
             数あるファミレスの中でも、ガストがダイエットに向いている理由は主に3つあります。
@@ -389,6 +396,17 @@ export default function GustoDietPage() {
         </section>
 
         {/* ArticleFooter */}
+        <FAQSection
+          slug="gusto-diet"
+          items={[
+            { q: "ガストでカロリーが最も低いメニューは？", a: "シーザーサラダの176kcalが最も低カロリーです。次いでベジ塩タンメン460kcal、サラダうどん418kcalと、サラダと麺類が低カロリー帯。ただしタンパク質量も重要なので、目的に応じた選択が大切です。" },
+            { q: "ガストでタンパク質が多いメニューは何ですか？", a: "チキテキ・ピリ辛スパイス焼きが33.5gでNo.1。次点は若鶏のグリル大葉おろし30.2g。ライス抜きやサラダとの組み合わせで、500kcal台でタンパク質38g以上も達成可能です。" },
+            { q: "ガストで避けるべきメニューは？", a: "からあげ定食842kcal、ビーフシチューハンバーグ758kcal、チーズINハンバーグ712kcalが高カロリーメニュー。同じお肉料理でも選択で大きく変わり、若鶏グリル478kcalとは最大約360kcalの差があります。" },
+            { q: "ガストのライス抜き注文でどれくらいカロリーカット？", a: "ガストのライス普通盛りは約250kcal。ライス抜きで250kcal、小盛りで約80kcal節約できます。チキテキはライス抜きで約395kcalまで低減。炭水化物制限中も無料で選択可能です。" },
+            { q: "ガストで最も低脂質のメニューは？", a: "海老と山芋オクラのねばとろサラダうどんが脂質8.2gで最も低い。418kcalで脂質が控えめ、かつ食物繊維も豊富。脂質制限ダイエット中に特におすすめです。" },
+          ]}
+        />
+
         <ArticleFooter currentSlug="gusto-diet" />
 
         {/* Back link */}

@@ -16,6 +16,8 @@ import {
   ComparisonTable,
   ArticleFooter,
   ArticleImage,
+  QuickAnswer,
+  FAQSection,
 } from "@/components/guide/ArticleComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -121,7 +123,12 @@ export default function CheatDayPage() {
 
         {/* Section 1: チートデイとは */}
         <section className="mb-16">
-          <SectionHeading id="what-is-cheatday">
+                  <QuickAnswer
+          question={"チートデイとは何か、ダイエット中にやるべき理由は？"}
+          answer={"チートデイはダイエット中に計画的に高カロリー食を摂取する日のこと。カロリー制限で低下するレプチン（代謝を司るホルモン）を回復させ、基礎代謝が3～8%回復し、停滞期を突破する効果が期待できます。正しいやり方では科学的根拠に基づいた戦略的なダイエット手法です。"}
+        />
+
+        <SectionHeading id="what-is-cheatday">
             チートデイとは？科学的メカニズムを解説
           </SectionHeading>
 
@@ -551,6 +558,17 @@ export default function CheatDayPage() {
             ※効果には個人差があります。持病のある方は医師にご相談ください。
           </p>
         </section>
+
+        <FAQSection
+          slug="cheat-day"
+          items={[
+            { q: "チートデイの頻度は週に何回が目安？", a: "体脂肪率によって異なります。男性15%以下・女性25%以下なら5～7日に1回、男性10～15%・女性20～25%なら7～10日に1回が推奨。体脂肪率が高い段階では14～21日に1回程度に留めます。" },
+            { q: "チートデイで摂るべきカロリー量は？", a: "目安は体重(kg) × 40～45kcal。体重65kgなら2,600～2,925kcalです。無制限ではなく、この範囲内に収めることで1週間分のカロリー制限が台無しになるのを防げます。" },
+            { q: "チートデイで太りやすい食べ物を選ぶのはなぜダメ？", a: "脂質中心だとレプチン回復効果が低いため。炭水化物がレプチン分泌に最も効果的。寿司、カレーライス、ラーメン、パスタなど炭水化物中心のメニューが効果的です。" },
+            { q: "チートデイの翌日、体重が1～2kg増えた場合の対応は？", a: "大部分は水分と食物の重量で、実脂肪増は200～300g程度。通常の食事制限に戻し、水分を2～3リットル、食物繊維を多めに摂取して2～3日で元に戻ります。翌日の断食は避けてください。" },
+            { q: "チートデイを避けるべき人は？", a: "ダイエット初期（2週間未満）、体脂肪率が高い人（男性25%以上・女性35%以上）、食べ始めると止められない過食傾向がある人、糖尿病など代謝疾患がある人は医師に相談が必要です。" },
+          ]}
+        />
 
         <ArticleFooter currentSlug="cheat-day" />
 

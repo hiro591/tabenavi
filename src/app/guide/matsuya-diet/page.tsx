@@ -18,6 +18,8 @@ import {
   ComparisonTable,
   ArticleFooter,
   ArticleImage,
+  QuickAnswer,
+  FAQSection,
 } from "@/components/guide/ArticleComponents";
 import { AffiliateProductGrid } from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
@@ -113,7 +115,12 @@ export default function MatsuyaDietPage() {
 
         {/* Section 1: カロリーランキング */}
         <section className="mb-16">
-          <SectionHeading id="calorie-ranking">松屋メニューのカロリーランキング</SectionHeading>
+                  <QuickAnswer
+          question={"松屋でダイエット向きのメニューは何ですか？"}
+          answer={"松屋は無料みそ汁と定食メニューが充実しており、ダイエット向きです。最もカロリーを抑えたいなら牛めしミニ盛（380kcal）がおすすめ。ご飯をカットして牛皿+みそ汁+サラダなら310kcalの低糖質セットが完成します。定食系ならご飯をミニに変更することで、タンパク質を維持しながら糖質をカットできます。"}
+        />
+
+        <SectionHeading id="calorie-ranking">松屋メニューのカロリーランキング</SectionHeading>
 
           <p className="mb-4">
             松屋の主要メニューをカロリーの低い順に並べました。<Marker color="blue">ミニ盛や小鉢系を活用する</Marker>のがカロリーコントロールの鍵です。
@@ -393,6 +400,17 @@ export default function MatsuyaDietPage() {
         />
 
         {/* ArticleFooter */}
+        <FAQSection
+          slug="matsuya-diet"
+          items={[
+            { q: "松屋のカロリーが最も低いメニューは何ですか？", a: "豚汁が最も低く168kcal、次に牛皿（並盛）243kcal、牛めしミニ盛380kcalです。豚汁は具が多く満足感も高いため、単品やメイン前の一品としておすすめです。" },
+            { q: "松屋の牛めし並盛と丼メニューの違いは何ですか？", a: "牛めし並盛は640kcal、タンパク質19.8gに対し、牛焼肉定食は827kcalながらタンパク質34.2gと約1.7倍。定食には野菜サラダも付き、栄養バランスが優れています。ダイエット向きは定食スタイルです。" },
+            { q: "ダイエット中に避けるべき松屋のメニューは何ですか？", a: "牛めし大盛（855kcal）、牛焼肉定食（827kcal）、カルビ焼肉定食（756kcal）は800kcal前後で高カロリー。また、牛めし+カレーセットは1,000kcal超えになるため避けましょう。" },
+            { q: "松屋でご飯の量を調整する方法はありますか？", a: "券売機で「ミニ盛」を選ぶか、口頭で「ご飯少なめ」と注文できます。ご飯を半分にするだけで約150kcalカットになり、定食系との相性も良くおすすめです。" },
+            { q: "松屋ダイエットで満腹感を高めるコツは何ですか？", a: "無料のみそ汁を食事の最初に飲むことが重要。胃が温まり満腹感を感じやすくなります。豚汁（168kcal）に変更すれば具材で更に満足感が高まります。" },
+          ]}
+        />
+
         <ArticleFooter currentSlug="matsuya-diet" />
 
         {/* Back link */}

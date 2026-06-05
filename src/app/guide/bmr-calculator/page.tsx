@@ -16,6 +16,8 @@ import {
   ComparisonTable,
   ArticleFooter,
   ArticleImage,
+  QuickAnswer,
+  FAQSection,
 } from "@/components/guide/ArticleComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -128,7 +130,12 @@ export default function BmrCalculatorPage() {
 
         {/* Section 1: 基礎代謝とは */}
         <section className="mb-16">
-          <SectionHeading id="what-is-bmr">
+                  <QuickAnswer
+          question={"基礎代謝（BMR）とはどのように計算しますか？"}
+          answer={"基礎代謝はハリス-ベネディクト式で計算できます。男性は「BMR = 88.362 + (13.397 × 体重kg) + (4.799 × 身長cm) - (5.677 × 年齢)」、女性は「BMR = 447.593 + (9.247 × 体重kg) + (3.098 × 身長cm) - (4.330 × 年齢)」です。例えば30歳男性170cm/70kgの場合、基礎代謝は約1,672kcal/日となり、これが1日の消費カロリーの60~70%を占めます。"}
+        />
+
+        <SectionHeading id="what-is-bmr">
             基礎代謝とは
           </SectionHeading>
 
@@ -647,6 +654,17 @@ export default function BmrCalculatorPage() {
         </section>
 
         {/* Article Footer */}
+        <FAQSection
+          slug="bmr-calculator"
+          items={[
+            { q: "基礎代謝を上げる最も効果的な方法は何ですか？", a: "筋肉量を増やすことが最重要です。筋肉1kgあたり約13kcal/日を消費するため、筋トレで筋肉量を3kg増やすと年間で約14,235kcal、脂肪約2kg分の消費増加につながります。スクワット・ベンチプレス・デッドリフトなど大きな筋肉群を鍛えるのが効率的です。" },
+            { q: "基礎代謝と1日の摂取カロリーの関係は？", a: "1日の消費カロリー（TDEE）は「基礎代謝×活動係数」で求めます。例えば基礎代謝1,672kcalで週3回ジム通い（係数1.55）の場合、TDEE=約2,592kcal/日。減量は月2kg目安で500kcal減（約2,092kcal）、維持は2,592kcalが目安です。摂取カロリーを基礎代謝以下にすると筋肉減少とリバウンドリスクが高まります。" },
+            { q: "タンパク質を多く摂ると代謝が上がるのはなぜですか？", a: "タンパク質は食事誘発性熱産生（DIT）が最も高く、摂取カロリーの20~30%が消化・吸収で消費されます。炭水化物は5~10%、脂質は0~3%なため、タンパク質の割合を増やすだけで1日60kcal多く消費でき、年間21,900kcal、脂肪約3kgの差につながります。" },
+            { q: "年齢とともに基礎代謝が低下する理由は？", a: "基礎代謝は10代後半をピークに低下し、30代以降は10年ごとに約2~3%ずつ減少します。これが「年齢とともに太りやすくなる」主原因です。ただし筋肉量を維持すればこの低下を大幅に抑制可能。30~49歳男性の平均は約1,530kcal、50~64歳は約1,480kcalです。" },
+            { q: "外食でカロリー管理をするコツは何ですか？", a: "大手チェーン店は栄養情報が公開されているため計画的に選べます。例えば減量中1,500kcal目標なら、朝セブン・イレブン（230kcal）、昼サブウェイローストチキン（310kcal）、夜大戸屋定食（680kcal）で目標内に収まります。サブウェイ・大戸屋・ガストなど高タンパクメニューを活用するのが効果的です。" },
+          ]}
+        />
+
         <ArticleFooter currentSlug="bmr-calculator" />
 
         {/* Back link */}

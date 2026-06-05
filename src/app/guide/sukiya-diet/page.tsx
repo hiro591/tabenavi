@@ -18,6 +18,8 @@ import {
   ComparisonTable,
   ArticleFooter,
   ArticleImage,
+  QuickAnswer,
+  FAQSection,
 } from "@/components/guide/ArticleComponents";
 import { AffiliateProductGrid } from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
@@ -113,7 +115,12 @@ export default function SukiyaDietPage() {
 
         {/* Section 1: カロリーランキング */}
         <section className="mb-16">
-          <SectionHeading id="calorie-ranking">すき家メニューのカロリーランキング</SectionHeading>
+                  <QuickAnswer
+          question={"すき家でダイエット中に選ぶべき一番低カロリーなメニューは何ですか？"}
+          answer={"すき家の牛丼ライト（352kcal）がダイエットに最適です。通常の牛丼並盛（733kcal）の半分以下に抑えられ、ご飯を豆腐と野菜で置き換えることでタンパク質20g、糖質24.8gと低糖質を実現。牛丼チェーンの中で唯一このメニューを提供しており、ダイエッターの強い味方です。"}
+        />
+
+        <SectionHeading id="calorie-ranking">すき家メニューのカロリーランキング</SectionHeading>
 
           <p className="mb-4">
             すき家の主要メニューをカロリーの低い順に並べました。<Marker color="blue">牛丼ライトと魚系メニュー</Marker>がダイエット向けの上位を占めています。
@@ -401,6 +408,17 @@ export default function SukiyaDietPage() {
         />
 
         {/* ArticleFooter */}
+        <FAQSection
+          slug="sukiya-diet"
+          items={[
+            { q: "すき家の牛丼ライトのカロリーと栄養はどうですか？", a: "牛丼ライトは352kcal、タンパク質20.0g、脂質18.5g、糖質24.8g。ご飯を豆腐と野菜サラダで置き換えており、並盛の733kcalから381kcal削減できます。糖質制限とローファットの両立が可能です。" },
+            { q: "すき家でローファットダイエット向けのメニューは？", a: "まぐろたたき丼（並盛）が脂質7.2g、タンパク質28.5g、455kcalで最適。DHA・EPAなどの良質な脂肪酸も摂取でき、他の牛丼チェーンでは珍しい低脂質メニューです。ローファットダイエット中の方に最も推奨できます。" },
+            { q: "すき家の牛丼ミニのカロリーは？", a: "牛丼ミニは496kcal、タンパク質15.2g。並盛から237kcal削減でき、500kcal以下に抑えられます。普通の牛丼の味わいを保ちながらカロリーを抑えたい方に最適なサイズです。" },
+            { q: "すき家のダイエット中に避けるべきメニューは？", a: "牛丼メガ（1,174kcal）、牛丼大盛（966kcal）、ねぎ玉牛丼（810kcal）を避けましょう。また、チーズ（+117kcal）やマヨネーズ（+100kcal）などのトッピング追加も要注意。高カロリー・高脂質になります。" },
+            { q: "すき家の朝食メニューはダイエット向き？", a: "鮭朝食は468kcal、タンパク質24.5g、脂質10.8g。ご飯・みそ汁・おかずが揃った定食スタイルで、朝から栄養バランスの良い食事が取れます。ダイエット中の朝食として活用できます。" },
+          ]}
+        />
+
         <ArticleFooter currentSlug="sukiya-diet" />
 
         {/* Back link */}

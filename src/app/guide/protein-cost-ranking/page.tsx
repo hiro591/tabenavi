@@ -18,6 +18,8 @@ import {
   NumberedList,
   ComparisonTable,
   ArticleFooter,
+  QuickAnswer,
+  FAQSection,
 } from "@/components/guide/ArticleComponents";
 import {
   AffiliateDisclosure,
@@ -123,6 +125,11 @@ export default function ProteinCostRankingPage() {
         </div>
 
         {/* ─── Section 1: なぜコスパが重要か ─── */}
+                <QuickAnswer
+          question={"外食でタンパク質を最もコスパよく摂るにはどのメニューを選べばいいですか?"}
+          answer={"コンビニのサラダチキン(プレーン)が1gあたり9.9円で最強のコスパ。温かい食事ではサイゼリヤの若鶏のグリル(14.2円/g)が最優秀です。牛丼チェーンなら松屋の牛めしに卵を追加すると、1食480円でタンパク質29g(16.6円/g)を確保できます。"}
+        />
+
         <SectionHeading id="why-cost">なぜタンパク質のコスパが重要か</SectionHeading>
 
         <p className="mb-4">
@@ -544,6 +551,17 @@ export default function ProteinCostRankingPage() {
         />
 
         {/* ArticleFooter */}
+        <FAQSection
+          slug="protein-cost-ranking"
+          items={[
+            { q: "筋トレ中に必要なタンパク質量は1日どのくらいですか?", a: "体重1kgあたり1.6~2.2gが目安。体重70kgの男性なら112~154g/日が必要。一般成人の推奨量(男性65g)の2倍近くです。継続的に確保するにはコスパが重要になります。" },
+            { q: "コンビニとファミレスではどちらがタンパク質コスパが良いですか?", a: "コンビニが平均12.8円/gで勝ります。ただしファミレス全体ではなくサイゼリヤ限定で16.5円/gと競争力あり。他のファミレス(ガスト・ジョナサン)は27~28円/gと割高です。" },
+            { q: "牛丼チェーンでコスパを上げるコツは何ですか?", a: "松屋の牛めしに卵を追加するのが効果的。追加80円でタンパク質6.2gが増え、追加分は12.9円/g。通常より安くタンパク質を足せます。肉大盛りも同様にコスパが向上します。" },
+            { q: "月間でタンパク質コスパ最優先ならいくら必要ですか?", a: "体重70kg男性が1日120gを確保する場合、月55,740円(1食平均14.3円/g)で実現可能。コスパ無視の場合は月107,670円で、年間60万円以上の差が出ます。" },
+            { q: "ファストフードでタンパク質コスパが良いメニューはありますか?", a: "マクドナルドのダブルチーズバーガーが15.2円/g。ただし揚げ物が多く脂質高め。低脂質重視ならサブウェイのローストチキン(22.3円/g・脂質4.0g)が最適です。" },
+          ]}
+        />
+
         <ArticleFooter currentSlug="protein-cost-ranking" />
 
         {/* Back link */}

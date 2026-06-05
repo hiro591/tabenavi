@@ -17,6 +17,8 @@ import {
   ComparisonTable,
   ArticleFooter,
   ArticleImage,
+  QuickAnswer,
+  FAQSection,
 } from "@/components/guide/ArticleComponents";
 import {
   AffiliateDisclosure,
@@ -115,7 +117,12 @@ export default function SushiDietPage() {
 
         {/* ── Section 1: 寿司はダイエット向き ── */}
         <section className="mb-16">
-          <SectionHeading id="why-sushi">寿司は実はダイエット向き？その3つの理由</SectionHeading>
+                  <QuickAnswer
+          question={"回転寿司はダイエット向きですか？"}
+          answer={"寿司はダイエットに非常に向いた外食です。1貫あたり60～100kcalと低カロリーで脂質も少なく、ハンバーガー1個（約400kcal）と比べて3～5貫程度の方が同等程度。えび・いか・たこなどのネタを中心に選び、シャリハーフを活用、サイドメニューを避ければ、10皿で700～800kcal程度に抑えられます。"}
+        />
+
+        <SectionHeading id="why-sushi">寿司は実はダイエット向き？その3つの理由</SectionHeading>
 
           <p className="mb-4">
             「寿司＝シャリ＝糖質＝太る」というイメージがありますが、実際のデータを見ると印象は変わります。寿司がダイエットに向いている理由を3つ解説します。
@@ -393,6 +400,17 @@ export default function SushiDietPage() {
         </section>
 
         {/* ArticleFooter */}
+        <FAQSection
+          slug="sushi-diet"
+          items={[
+            { q: "寿司ダイエット中に選ぶべきネタは何ですか？", a: "80kcal以下の「安全ネタ」5種を中心に。えび（60kcal）・いか（62kcal）・たこ（64kcal）・まぐろ赤身（68kcal）・ホタテ（70kcal）が低カロリーで高タンパク。避けるべきはマヨ系・天ぷら系（炙りサーモンマヨは108kcal）です。" },
+            { q: "回転寿司で最も太りやすい落とし穴は何ですか？", a: "サイドメニューです。ラーメン（約420kcal）とフライドポテト（約300kcal）を追加すると寿司5～8皿分のカロリーが上乗せされます。寿司のみで帰る強い意志が成功の鍵。味噌汁は約40kcalで最適です。" },
+            { q: "スシローとくら寿司ではどちらが低カロリーですか？", a: "大きな差はありません。両チェーン比較でくら寿司がやや2～6kcal低い傾向ですが、誤差の範囲。重要なのはネタ選びとサイドメニュー選択です。両チェーンとも全メニューの栄養成分を公開しているので活用しましょう。" },
+            { q: "シャリハーフでどれくらいカロリーを減らせますか？", a: "1貫あたり12～15kcal程度カット可能。10皿すべてをシャリハーフにすると120～150kcal削減できます。シャリが少ない分ネタの味がダイレクトに感じられ、満足度も高いのがメリットです。" },
+            { q: "ダイエット中の回転寿司1回の適切な食べる量は？", a: "10皿（20貫）を上限にしましょう。これで約700～800kcalに収まります。最初に皿数を決めておくことがポイント。満足感を高めるため、多様なネタを1皿ずつ選ぶのがおすすめです。" },
+          ]}
+        />
+
         <ArticleFooter currentSlug="sushi-diet" />
 
         {/* Back link */}

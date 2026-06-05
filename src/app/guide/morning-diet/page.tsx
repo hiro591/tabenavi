@@ -17,6 +17,8 @@ import {
   ComparisonTable,
   ArticleFooter,
   ArticleImage,
+  QuickAnswer,
+  FAQSection,
 } from "@/components/guide/ArticleComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -111,7 +113,12 @@ export default function MorningDietPage() {
 
         {/* Section 1: 朝食を食べるべき理由 */}
         <section className="mb-16">
-          <SectionHeading id="why-breakfast">ダイエット中に朝食を食べるべき3つの理由</SectionHeading>
+                  <QuickAnswer
+          question={"ダイエット中の朝食は食べた方がいい？避けた方がいい？"}
+          answer={"ダイエット中でも朝食は食べた方が有利です。朝食により食事誘発熱産生が生じ、昼食のドカ食いも防げます。ただし300～500kcal、タンパク質20g以上の栄養バランスを意識することが重要。エッグマックマフィン（311kcal）やコンビニのサラダチキン組み合わせ（420kcal）など、正しいメニュー選びで効果が期待できます。"}
+        />
+
+        <SectionHeading id="why-breakfast">ダイエット中に朝食を食べるべき3つの理由</SectionHeading>
 
           <p className="mb-4">
             朝食を抜くダイエットは一時的にカロリーカットできますが、<Marker>長期的には逆効果</Marker>になることが多くの研究で示されています。
@@ -385,6 +392,17 @@ export default function MorningDietPage() {
         />
 
         {/* ArticleFooter */}
+        <FAQSection
+          slug="morning-diet"
+          items={[
+            { q: "朝マックのおすすめメニューは？", a: "エッグマックマフィン（311kcal / タンパク質19.2g）が最適です。高タンパク・低カロリーで、卵・チーズ・カナディアンベーコンで朝に必要なタンパク質を十分補給できます。避けるべきはメガマフィン（688kcal）とホットケーキセット（640kcal）。" },
+            { q: "コンビニ朝食の最強組み合わせは？", a: "おにぎり（鮭）＋サラダチキン＋インスタント味噌汁が推奨。約420kcalでタンパク質32g確保でき、価格500円程度とコスパも抜群。自分でPFC比率を調整できるのがコンビニの最大利点です。" },
+            { q: "松屋やなか卯の朝食でダイエット向けは？", a: "松屋の焼鮭定食（520kcal / タンパク質28g）、なか卯の親子丼ミニ（395kcal / タンパク質18.5g）がおすすめ。どちらも定食スタイルで栄養バランスが良く、しっかり食べたい日に最適です。" },
+            { q: "ダイエット朝食で避けるべき食べ物は？", a: "菓子パン（350～500kcal、タンパク質5～8g）、コンビニスイーツ、砂糖入りカフェラテは避けましょう。血糖値が急上昇し、その後の急降下で眠気と空腹感が生じます。朝から甘いものは避けが鉄則です。" },
+            { q: "朝食のタンパク質はなぜ重要？", a: "朝にタンパク質を摂ることで筋肉の分解が防げ、代謝の高い体を維持できます。理想は20～30g。食事誘発性熱産生（DIT）により脂肪燃焼も促進され、基礎代謝のアップにつながります。" },
+          ]}
+        />
+
         <ArticleFooter currentSlug="morning-diet" />
 
         {/* Back link */}

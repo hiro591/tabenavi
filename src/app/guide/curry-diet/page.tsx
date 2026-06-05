@@ -17,6 +17,8 @@ import {
   ComparisonTable,
   ArticleFooter,
   ArticleImage,
+  QuickAnswer,
+  FAQSection,
 } from "@/components/guide/ArticleComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -110,7 +112,12 @@ export default function CurryDietPage() {
 
         {/* Section 1: カレーのカロリー事情 */}
         <section className="mb-16">
-          <SectionHeading id="curry-calories">カレーライスのカロリー事情：なぜ高カロリーなのか</SectionHeading>
+                  <QuickAnswer
+          question={"カレーのカロリーはどのくらいですか？ダイエット中に食べられますか？"}
+          answer={"一般的なカレーライスは700〜900kcalですが、CoCo壱のカリフラワーライスなら355kcalで約50%の糖質カットが可能。ご飯を少なめにする、具材をチキンに選ぶ、サラダを先に食べるなどの工夫で、ダイエット中でも無理なく食べられます。"}
+        />
+
+        <SectionHeading id="curry-calories">カレーライスのカロリー事情：なぜ高カロリーなのか</SectionHeading>
 
           <p className="mb-4">
             カレーライスが高カロリーになる原因は大きく3つあります。<Marker>ルウの脂質・ご飯の糖質・トッピング</Marker>の三重構造です。
@@ -401,6 +408,17 @@ export default function CurryDietPage() {
         />
 
         {/* ArticleFooter */}
+        <FAQSection
+          slug="curry-diet"
+          items={[
+            { q: "CoCo壱のカリフラワーライスカレーはなぜダイエット向きですか？", a: "通常ライス（755kcal・糖質118g）からカロリー400kcal、糖質90gをカット。食物繊維が4倍で血糖値の急上昇を抑え、追加料金150円で実現できるコスパの優れた選択肢です。" },
+            { q: "カレーに含まれるカロリーの最大要因は何ですか？", a: "ご飯（250〜300g）で約420kcalと全体の55%を占めます。カレールウは200kcal程度。ご飯の量を減らすことが最も効果的なカロリーカット方法です。" },
+            { q: "チェーン店のカレーで最もカロリーが低いのはどれですか？", a: "CoCo壱カリフラワーライス（355kcal）が最も低く、次になか卯カレーうどん（590kcal）、CoCo壱ご飯少なめ（585kcal）です。同じチェーン店でも差は最大815kcal。" },
+            { q: "カレーを食べるときのコツは何ですか？", a: "カリフラワーライス選択、具材をチキンまたはシーフード選び、サラダを先に食べるベジファースト、ご飯の量を200gに減らす、前後の食事で1日のカロリー調整が有効です。" },
+            { q: "ダイエット中、カレーは週何回まで食べてもいいですか？", a: "カリフラワーライス使用なら週2回、通常ライスの場合は週1回程度が目安。カレーの日を「ご褒美の日」と設定してモチベーション維持につなげるのが効果的です。" },
+          ]}
+        />
+
         <ArticleFooter currentSlug="curry-diet" />
 
         {/* Back link */}

@@ -18,6 +18,8 @@ import {
   ComparisonTable,
   ArticleFooter,
   ArticleImage,
+  QuickAnswer,
+  FAQSection,
 } from "@/components/guide/ArticleComponents";
 import {
   AffiliateDisclosure,
@@ -121,6 +123,11 @@ export default function FamilyRestaurantDietPage() {
         <ArticleImage src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=400&fit=crop" alt="明るく清潔感のあるファミリーレストランの店内" />
 
         {/* Section 1: ファミレスがダイエットに向いている理由 */}
+                <QuickAnswer
+          question={"ダイエット中はファミレスで何を食べるべき?"}
+          answer={"ダイエット中のファミレス選びは、事前にカロリーをチェックしてから注文することが鍵。サイゼリヤはハンバーグが462kcalと低カロリー、ガストは若鶏のグリル(431kcal)、デニーズは鶏のスパイスグリル(486kcal)がおすすめ。ライス少なめ・ドレッシング別添えなど、注文テクニックで100〜300kcalカット可能。セットメニューは避け、メイン+サラダの組み合わせが効果的です。"}
+        />
+
         <SectionHeading id="why-family-restaurant">ファミレスがダイエットに向いている理由</SectionHeading>
 
         <p className="mb-4">
@@ -430,6 +437,17 @@ export default function FamilyRestaurantDietPage() {
         />
 
         {/* ArticleFooter */}
+        <FAQSection
+          slug="family-restaurant-diet"
+          items={[
+            { q: "ファミレスのメニューでもっとも低カロリーは?", a: "サイゼリヤの柔らか青豆の温サラダが166kcal、デニーズの彩りサラダが142kcalと最も低カロリー。メインメニューではガストの若鶏のグリル大葉おろしが431kcalでタンパク質35.6gと、ダイエット向きの栄養バランスです。" },
+            { q: "ファミレスで避けるべき高カロリーメニューは?", a: "ガストのミックスフライ定食(1,282kcal)、マヨコーンピザ(864kcal)、デニーズのデミハンバーグ定食(948kcal)は1食で1,000kcal超えの危険メニュー。ピザ・揚げ物・デザートは脂質も高く、ダイエット中は避けるべきです。" },
+            { q: "パスタはダイエット中に食べても大丈夫?", a: "パスタは全チェーンで500kcal以上、炭水化物は80g前後と非常に多いため糖質制限中は避けるべき。どうしても食べたい場合はサイゼリヤのペペロンチーノ(510kcal)が最も低カロリーですが、できれば避けた方が無難です。" },
+            { q: "ファミレスで注文するときのコツは?", a: "ライスを少なめまたはなしにして約300kcalカット、ドレッシングは別添えで50〜100kcal削減、サラダを先に食べて血糖値上昇を防ぐ、ドリンクはお茶やブラックコーヒーにするなど。これらで100〜300kcalのカロリー削減が可能です。" },
+            { q: "3つのファミレスでダイエット向きなのはどれ?", a: "サイゼリヤは圧倒的なコスパで継続しやすく、ガストは糖質控えめメニューが豊富、デニーズは素材の質にこだわっています。ライフスタイルや予算で選択し、各チェーンの公式サイトでカロリーを確認してから来店するのが成功のコツです。" },
+          ]}
+        />
+
         <ArticleFooter currentSlug="family-restaurant-diet" />
 
         {/* Back link */}

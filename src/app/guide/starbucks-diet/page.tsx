@@ -18,6 +18,8 @@ import {
   ComparisonTable,
   ArticleFooter,
   ArticleImage,
+  QuickAnswer,
+  FAQSection,
 } from "@/components/guide/ArticleComponents";
 import { AffiliateProductGrid } from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
@@ -111,7 +113,12 @@ export default function StarbucksDietPage() {
 
         {/* Section 1: スタバドリンクのカロリー事情 */}
         <section className="mb-16">
-          <SectionHeading id="calorie-facts">スタバドリンクのカロリー事情</SectionHeading>
+                  <QuickAnswer
+          question={"スタバでカロリーの低いドリンクは何ですか？"}
+          answer={"ドリップコーヒーとコールドブリューはわずか10～15kcalで、ダイエット中の最強の選択肢です。ラテが飲みたい場合は、無脂肪ミルク（無料）に変更することで通常の150kcalから88kcalまで削減でき、ダイエット中でも安心して楽しめます。"}
+        />
+
+        <SectionHeading id="calorie-facts">スタバドリンクのカロリー事情</SectionHeading>
 
           <p className="mb-4">
             スタバドリンクのカロリーは、使われる<Marker>ミルクの種類・シロップの量・ホイップの有無</Marker>で大きく変わります。まずはカロリーの仕組みを理解しましょう。
@@ -389,6 +396,17 @@ export default function StarbucksDietPage() {
         </section>
 
         {/* ArticleFooter */}
+        <FAQSection
+          slug="starbucks-diet"
+          items={[
+            { q: "スタバのラテをカロリーカットしたい場合、どうすればいいですか？", a: "無脂肪ミルルへの変更（無料、約40～60kcalカット）、シロップ少なめ（約40kcalカット）、ホイップなし（約90kcalカット）の3つを組み合わせられます。特に無脂肪ミルク変更は最も効果的で手軽な方法です。" },
+            { q: "スタバのフラペチーノはダイエット中に飲めますか？", a: "フラペチーノ系は300～500kcalでショートケーキ並みのカロリーがあり、ダイエット中は避けるべきメニューです。どうしても飲みたい場合は、ホイップなしやシロップ少なめで注文し、カロリーを最小限に抑えましょう。" },
+            { q: "スタバのフードメニューで低カロリーなものは？", a: "ヨーグルト＆グラノーラ（220kcal）やサラダラップ（235kcal）がおすすめです。フードを選ぶ場合は、ドリンクをドリップコーヒー（15kcal）などブラック系にすることで、全体のカロリーを抑えられます。" },
+            { q: "スタバのサイズ選びはカロリーに影響しますか？", a: "大きく影響します。カフェラテの場合、Short（103kcal）→ Tall（150kcal）→ Grande（200kcal）→ Venti（270kcal）と段階的に増加。ダイエット中はShortやTallを選ぶだけで数十kcalのカットになります。" },
+            { q: "スタバで避けるべきフードメニューは何ですか？", a: "チョコレートチャンクスコーン（約420kcal、脂質22g以上）、シナモンロール（約380kcal、糖質50g以上）、ニューヨークチーズケーキ（約410kcal、脂質28g）は特に高カロリー・高脂質のため注意が必要です。" },
+          ]}
+        />
+
         <ArticleFooter currentSlug="starbucks-diet" />
 
         {/* Back link */}

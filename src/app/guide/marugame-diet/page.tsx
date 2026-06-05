@@ -16,6 +16,8 @@ import {
   ComparisonTable,
   ArticleFooter,
   ArticleImage,
+  QuickAnswer,
+  FAQSection,
 } from "@/components/guide/ArticleComponents";
 import { AffiliateProductGrid } from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
@@ -110,7 +112,12 @@ export default function MarugameDietPage() {
 
         {/* Section 1: うどんはダイエットに向いてる？ */}
         <section className="mb-16">
-          <SectionHeading id="udon-diet">うどんはダイエットに向いてる？（実は低脂質）</SectionHeading>
+                  <QuickAnswer
+          question={"丸亀製麺のうどんはダイエット向き？低カロリーメニューの選び方は？"}
+          answer={"丸亀製麺のかけうどん(並)は305kcal・脂質1.5gと低脂質で、脂質制限ダイエットに最適です。ただし天ぷらを付けると600kcal超に。ダイエット中のおすすめは、シンプルなうどん + 天ぷらは1個まで(かしわ天推奨) + 温泉たまごでタンパク質補給です。"}
+        />
+
+        <SectionHeading id="udon-diet">うどんはダイエットに向いてる？（実は低脂質）</SectionHeading>
 
           <p className="mb-4">
             うどんは「炭水化物の塊だから太る」と思われがちですが、栄養データを見ると印象が一変します。<Marker>丸亀製麺のかけうどん（並）は305kcal・脂質わずか1.5g</Marker>。これは外食チェーンの中でも驚異的な低脂質です。
@@ -404,6 +411,17 @@ export default function MarugameDietPage() {
         </section>
 
         {/* ArticleFooter */}
+        <FAQSection
+          slug="marugame-diet"
+          items={[
+            { q: "丸亀製麺で一番低カロリーなうどんメニューは？", a: "ぶっかけうどん(冷・並)の303kcalが最も低く、次点がかけうどん(並)305kcal。両メニューとも脂質1.5g前後と圧倒的に低脂質です。ぶっかけ冷は冷やすことでレジスタントスターチが増加し、糖の吸収が穏やかになるメリットもあります。" },
+            { q: "うどんにトッピングする天ぷらで避けるべきメニューは？", a: "野菜かき揚げ(250kcal)は最も危険。1個でかけうどんの約80%のカロリーを追加します。さつまいも天(160kcal)も炭水化物22gと糖質が高め。かけうどんとの組み合わせなら、ちくわ磯辺天(95kcal)かえび天(110kcal)に限定するか、かしわ天(140kcal)でタンパク質を補いましょう。" },
+            { q: "丸亀製麺のうどんで、天ぷら2個を追加するとカロリーはどうなる？", a: "かけうどん(305kcal) + かき揚げ(250kcal) + かしわ天(140kcal)で695kcal、脂質23.3gに跳ね上がります。「うどんはヘルシー」と油断して複数の天ぷらを追加すると、簡単に600kcal超になるため注意が必要です。" },
+            { q: "丸亀製麺のうどんに温泉たまごを追加するとカロリーはいくら？", a: "かけうどん(並・305kcal) + 温泉たまご(約70kcal)で合計375kcal。タンパク質が8.5gから14.7gに増加し、うどんの栄養バランスを改善できます。低カロリーでタンパク質補給できる最もおすすめのトッピングです。" },
+            { q: "無料の天かす・ネギ・生姜をたくさんかけると太る？", a: "ネギと生姜はほぼカロリーゼロで安全。しかし天かすは見落としやすく、たっぷり入れると50～80kcal・脂質4～6gが加算されます。無料だからと大盛りにすると、低脂質の利点が台無しになるため、スプーン1杯程度に抑えましょう。" },
+          ]}
+        />
+
         <ArticleFooter currentSlug="marugame-diet" />
 
         {/* Back link */}

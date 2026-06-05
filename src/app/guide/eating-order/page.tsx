@@ -15,6 +15,8 @@ import {
   NumberedList,
   ArticleFooter,
   ArticleImage,
+  QuickAnswer,
+  FAQSection,
 } from "@/components/guide/ArticleComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -116,7 +118,12 @@ export default function EatingOrderPage() {
 
         {/* Section 1: 食べ順が重要な理由 */}
         <section className="mb-16">
-          <SectionHeading id="why-order">
+                  <QuickAnswer
+          question={"食べ順を変えるだけで太りにくくなるのは本当ですか？"}
+          answer={"本当です。野菜→タンパク質→炭水化物の順に食べると、食後血糖値の上昇が約30〜40%抑えられます。血糖値スパイクを防ぐことで、インスリンの過剰分泌を抑制し、脂肪蓄積を減らせるため、同じメニューでも食べ方次第で体への影響が大きく異なります。"}
+        />
+
+        <SectionHeading id="why-order">
             食べ順が重要な理由
           </SectionHeading>
 
@@ -384,6 +391,17 @@ export default function EatingOrderPage() {
         </section>
 
         {/* Article Footer */}
+        <FAQSection
+          slug="eating-order"
+          items={[
+            { q: "食べ順ダイエットの理想的な順番は何ですか？", a: "野菜・サラダから5分、タンパク質（肉・魚・卵・豆腐）を次の10分、炭水化物（ご飯・パン・麺）を最後の5分で食べるのが理想的です。食物繊維が先に腸内でバリアを作り、糖の吸収を緩やかにします。" },
+            { q: "定食チェーン（やよい軒・大戸屋）での食べ順は？", a: "サラダ・漬物・小鉢→味噌汁→メインのおかず（肉・魚）→残りの味噌汁→ご飯の順がおすすめです。定食は食べ順ダイエットに最適なスタイルで、この順序で実践しやすいメニュー構成になっています。" },
+            { q: "牛丼チェーン（すき家・吉野家）で食べ順を実践するには？", a: "セットのサラダを先に食べ、次に味噌汁を飲んでから、牛丼の具（牛肉）を先に食べてご飯は後から食べます。「ご飯少なめ」で注文するのも効果的です。丼物でも工夫次第で実践できます。" },
+            { q: "早食いが太る理由は何ですか？", a: "早食いは肥満リスクを約2倍にします。満腹中枢が信号を出すまで20分かかるため、満腹感を感じる前に食べ過ぎてしまい、血糖値も急上昇するためです。1口20〜30回噛むことを意識しましょう。" },
+            { q: "白米を玄米に変えるとどう違いますか？", a: "白米のGI値は88、玄米は56です。同じ150gでも玄米の方がカロリーが4kcal低く、炭水化物も2.3g少なく、タンパク質は0.4g多いため、血糖値上昇が緩やかです。やよい軒では十六穀米への変更も可能。" },
+          ]}
+        />
+
         <ArticleFooter currentSlug="eating-order" />
 
         {/* Back link */}

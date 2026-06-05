@@ -16,6 +16,8 @@ import {
   NumberedList,
   ArticleFooter,
   ArticleImage,
+  QuickAnswer,
+  FAQSection,
 } from "@/components/guide/ArticleComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -119,7 +121,12 @@ export default function DietMistakesPage() {
 
         {/* Section 1: ダイエット失敗率の現実 */}
         <section className="mb-16">
-          <SectionHeading id="failure-rate">
+                  <QuickAnswer
+          question={"ダイエットに失敗する人の共通点は何ですか？"}
+          answer={"ダイエット失敗者の最大原因は「間違った方法」です。極端なカロリー制限・朝食抜き・脂質完全カット・完璧主義など、科学的根拠のないNG行動を続けると、基礎代謝が低下してリバウンドしやすくなります。UCLA研究によると5年以内にリバウンドする率は80%。適度なカロリー赤字・高タンパク・十分な睡眠など科学的に正しい方法を選ぶことが成功の鍵です。"}
+        />
+
+        <SectionHeading id="failure-rate">
             ダイエット失敗率の衝撃的な現実
           </SectionHeading>
 
@@ -170,7 +177,7 @@ export default function DietMistakesPage() {
           <div className="bg-white rounded-lg border border-gray-200 p-5 mb-6 shadow-sm">
             <div className="flex items-center gap-2 mb-3">
               <span className="bg-red-100 text-red-700 text-xs font-bold px-2.5 py-1 rounded-full">危険度: 最大</span>
-              <span className="bg-gray-100 text-gray-600 text-xs px-2.5 py-1 rounded-full">リバウンド率: 95%以上</span>
+              <span className="bg-gray-100 text-gray-600 text-xs px-2.5 py-1 rounded-full">リバウンド率: 高い</span>
             </div>
             <p className="text-sm text-gray-600 mb-3">
               1日1,000kcal以下の極端なカロリー制限は、短期的には体重が落ちますが、体は「飢餓状態」と判断して<Marker>基礎代謝を最大40%低下</Marker>させます（Minnesota Starvation Experiment）。その結果、通常の食事に戻した途端に以前より太りやすい体になります。
@@ -513,6 +520,17 @@ export default function DietMistakesPage() {
         </section>
 
         {/* Article Footer */}
+        <FAQSection
+          slug="diet-mistakes"
+          items={[
+            { q: "極端なカロリー制限はなぜ危険ですか？", a: "1日1,000kcal以下の極端な制限は、体が飢餓状態と判断して基礎代謝を低下させます。短期的に体重は落ちますが、通常の食事に戻ると逆に太りやすい体になり、リバウンドリスクが高まります。" },
+            { q: "朝食抜きでカロリーカットできませんか？", a: "逆効果です。朝食を抜くと昼食時に血糖値が急上昇し、インスリンが大量分泌されて脂肪蓄積が促進されます。研究では朝食抜き習慣がある人のBMIが平均1.8ポイント高いことが報告されています。" },
+            { q: "ダイエット中にタンパク質はどのくらい必要ですか？", a: "体重1kgあたり1.2～1.6gが推奨されます。体重60kgなら72～96g必要です。毎食20～30gを目安に、鶏むね肉・卵・サラダチキン・ヨーグルトなど手軽に摂取できる食品を活用しましょう。" },
+            { q: "睡眠不足がダイエットに与える影響は？", a: "睡眠不足は脂肪よりも筋肉の減少を促進し、食欲増進ホルモンの分泌を高める傾向があります。個人差が大きいため、7～9時間の確保が推奨されています。" },
+            { q: "完璧主義がダイエット失敗につながるのはなぜ？", a: "「ケーキを1個食べたからもう台無し」という思考が、暴食へ転じる心理的効果（What-The-Hell Effect）を引き起こします。80点ルール（週80%の良い食事でOK）を採用し、1回の逸脱は翌日で調整するアプローチが継続につながります。" },
+          ]}
+        />
+
         <ArticleFooter currentSlug="diet-mistakes" />
 
         {/* Back link */}

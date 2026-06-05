@@ -16,6 +16,8 @@ import {
   ComparisonTable,
   ArticleFooter,
   ArticleImage,
+  QuickAnswer,
+  FAQSection,
 } from "@/components/guide/ArticleComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -122,7 +124,12 @@ export default function ReboundPreventionPage() {
 
         {/* Section 1: なぜリバウンドするのか */}
         <section className="mb-16">
-          <SectionHeading id="why-rebound">
+                  <QuickAnswer
+          question={"ダイエット後のリバウンドを防ぐ方法は？"}
+          answer={"リバウンドは代謝適応・ホルモン変化による生理現象です。防止には月1～2kgの緩やかな減量、タンパク質を体重×1.6～2.0g摂取、食事記録の継続、メンテナンスカロリーの把握、計画的なチートデイが効果的。正しい維持戦略で5年後の体重維持成功率は40%まで向上します。"}
+        />
+
+        <SectionHeading id="why-rebound">
             なぜリバウンドするのか（科学的メカニズム）
           </SectionHeading>
 
@@ -595,6 +602,17 @@ export default function ReboundPreventionPage() {
         </section>
 
         {/* Article Footer */}
+        <FAQSection
+          slug="rebound-prevention"
+          items={[
+            { q: "リバウンドする理由は何か？", a: "リバウンドの主な原因は代謝適応（基礎代謝が低下）、ホルモン変化（レプチン減少・グレリン増加）、心理的要因の3つ。急激なダイエットほど代謝適応が強く、ダイエット終了後も数ヶ月～1年以上続きます。" },
+            { q: "ダイエット後、メンテナンスカロリーはどう決める？", a: "活動レベルに応じて体重×30～40kcalが目安。体重60kgでデスクワーク中心なら1,800kcal。ダイエット終了後いきなり上げず、2～4週間かけて100～200kcalずつ増やす「リバースダイエット」が重要です。" },
+            { q: "外食でリバウンドを防ぐコツは？", a: "よく行くチェーン店で「定番ヘルシーメニュー」3～5個を決めておく。松屋の牛めし並、大戸屋のしまほっけ定食、サブウェイのローストチキンなど栄養バランスの良い選択肢を活用すると管理が容易です。" },
+            { q: "タンパク質はどの程度摂取すべき？", a: "ダイエット中・維持期ともに体重×1.6～2.0gが推奨。タンパク質は筋肉維持で代謝低下を防ぎ、満腹感が持続し間食を抑えられます。体重60kgなら1日96～120g程度を目標にしましょう。" },
+            { q: "食事記録はずっと続ける必要がある？", a: "13kg以上の減量を1年以上維持している人の78%が食事記録を継続しています。維持期は完全な記録不要で、週3～4日程度ざっくりとした記録で十分。たべなびなどのツール活用が効果的です。" },
+          ]}
+        />
+
         <ArticleFooter currentSlug="rebound-prevention" />
 
         {/* Back link */}

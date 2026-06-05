@@ -16,6 +16,8 @@ import {
   NumberedList,
   ArticleFooter,
   ArticleImage,
+  QuickAnswer,
+  FAQSection,
 } from "@/components/guide/ArticleComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -117,7 +119,12 @@ export default function LateNightEatingPage() {
 
         {/* Section 1: 夜食が太ると言われる理由 */}
         <section className="mb-16">
-          <SectionHeading id="why-fat">
+                  <QuickAnswer
+          question={"深夜に食べても太りにくいメニューはどのように選べばよいですか?"}
+          answer={"低脂質(10g以下)・高タンパク(15g以上)・消化が良い の3条件を満たすメニューを選びましょう。コンビニならサラダチキン(113kcal、タンパク24.3g)やゆでたまご(130kcal)がおすすめ。夜食は200~300kcal以内に抑えることが目安です。"}
+        />
+
+        <SectionHeading id="why-fat">
             夜食が太ると言われる理由
           </SectionHeading>
           <p className="mb-4">
@@ -394,6 +401,17 @@ export default function LateNightEatingPage() {
         </section>
 
         {/* Article Footer */}
+        <FAQSection
+          slug="late-night-eating"
+          items={[
+            { q: "なぜ夜食は太ると言われているのですか?", a: "体内時計を司るBMAL1は午後10時~午前2時に発現が高まり、この時間帯は栄養吸収が効率的になるとされています。加えて夜間は消化機能が低下し、食べ物の胃滞留時間が長くなるため、摂取した食物が脂肪に変わりやすくなる傾向があります。" },
+            { q: "深夜の外食チェーン店で選ぶべきメニューは?", a: "すき家の牛丼ライト豆腐版(281kcal)、松屋の湯豆腐定食(260kcal)、吉野家のライザップ牛サラダ(398kcal)が目安。ご飯を豆腐に変更することで糖質を大幅カットできます。" },
+            { q: "深夜に避けるべき食べ物は?", a: "ラーメン(約800kcal)・カツ丼(約900kcal)・菓子パン・スナック菓子・アイスクリームなど、高脂質・高糖質の組み合わせは特に危険。血糖値の急上昇でインスリン過剰分泌につながります。" },
+            { q: "コンビニで最もヘルシーな夜食は何ですか?", a: "サラダチキン(プレーン)が最適。113kcalでタンパク質24.3g、脂質わずか1.2g。消化も良く、次点はゆでたまご(130kcal)と茶碗蒸し(90kcal)です。" },
+            { q: "夜食のタンパク質が重要な理由は何ですか?", a: "タンパク質は食事誘発性熱産生(DIT)が高く、摂取カロリーの約30%が消化吸収に消費されるため実質的なカロリーが低くなります。15g以上の摂取が夜食選びの指標です。" },
+          ]}
+        />
+
         <ArticleFooter currentSlug="late-night-eating" />
 
         {/* Back link */}

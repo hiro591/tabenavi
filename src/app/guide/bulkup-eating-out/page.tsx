@@ -16,6 +16,8 @@ import {
   NumberedList,
   ArticleFooter,
   ArticleImage,
+  QuickAnswer,
+  FAQSection,
 } from "@/components/guide/ArticleComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -116,7 +118,12 @@ export default function BulkupEatingOutPage() {
 
         {/* Section 1: 増量期に必要なカロリーとPFC */}
         <section className="mb-16">
-          <SectionHeading id="pfc">
+                  <QuickAnswer
+          question={"バルクアップ中に外食で1日3000kcalを達成するにはどうすればいい？"}
+          answer={"やよい軒（ご飯おかわり無料）・すき家・いきなり！ステーキなどチェーン店を活用すれば実現可能。朝食820kcal、昼食1150kcal、夕食1060kcal（計3030kcal・タンパク質150g以上）のプランを参考に、各自の体重と目標に合わせて調整してください。"}
+        />
+
+        <SectionHeading id="pfc">
             増量期に必要なカロリーとPFC
           </SectionHeading>
 
@@ -474,6 +481,17 @@ export default function BulkupEatingOutPage() {
         </section>
 
         {/* Article Footer */}
+        <FAQSection
+          slug="bulkup-eating-out"
+          items={[
+            { q: "増量期に必要なカロリーの計算方法は？", a: "体重(kg)×40～45kcalが目安。例えば体重70kgなら1日2800～3150kcal。個人差があるため、実際の体重変化を見ながら調整してください。" },
+            { q: "増量期のタンパク質摂取量はどのくらい必要？", a: "体重×2.0～2.5gが推奨。70kgなら1日140～175g。3～4時間おきに30～40gずつ摂取して、筋合成を最大化することが理想です。" },
+            { q: "増量期に最適なチェーン店メニューは？", a: "やよい軒のしまほっけ定食（ご飯3杯で1150kcal・タンパク質52g）、いきなり！ステーキのワイルドステーキ300g（810kcal・タンパク質65g）がおすすめ。高タンパク・低脂質がポイント。" },
+            { q: "クリーンバルクとダーティバルクの違いは？", a: "クリーンバルクは良質な食材で増量し脂肪を最小限に。ダーティバルクはジャンクフードも含め手軽にカロリーを稼ぎます。おすすめは両者の中間で、基本はクリーンバルク、足りない時だけ高カロリー食を追加する方法。" },
+            { q: "増量期に避けるべきメニューは？", a: "ラーメン二郎系（脂質80g）や大盛りポテトなど脂質が過多なメニューは避けるべき。脂質が多すぎると脂肪ばかり増えます。1食で脂質30g以内を目安に選びましょう。" },
+          ]}
+        />
+
         <ArticleFooter currentSlug="bulkup-eating-out" />
 
         {/* Back link */}

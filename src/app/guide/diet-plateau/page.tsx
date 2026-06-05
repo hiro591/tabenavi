@@ -16,6 +16,8 @@ import {
   ComparisonTable,
   ArticleFooter,
   ArticleImage,
+  QuickAnswer,
+  FAQSection,
 } from "@/components/guide/ArticleComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -120,7 +122,12 @@ export default function DietPlateauPage() {
 
         {/* Section 1: 科学的メカニズム */}
         <section className="mb-16">
-          <SectionHeading id="mechanism">
+                  <QuickAnswer
+          question={"ダイエットの停滞期を乗り越えるにはどうしたらいい？"}
+          answer={"停滞期は体が急激な体重減少から身を守るホメオスタシスが発動している正常な状態です。焦らず、食事内容の変更（カロリーはそのまま）、チートデイの活用、食べる順の改善、1日2～2.5リットルの水分摂取、7～8時間の睡眠を心がけることで2週間～1ヶ月で突破できます。カロリーの大幅カットは逆効果です。"}
+        />
+
+        <SectionHeading id="mechanism">
             停滞期が起こる科学的メカニズム
           </SectionHeading>
 
@@ -528,6 +535,17 @@ export default function DietPlateauPage() {
             ※効果には個人差があります。持病のある方は医師にご相談ください。
           </p>
         </section>
+
+        <FAQSection
+          slug="diet-plateau"
+          items={[
+            { q: "ダイエット停滞期はいつから始まる？", a: "一般的には体重が開始時の5%減少したタイミングで始まることが多いです。例えば70kgの人なら3.5kg減って66.5kgになったあたりで最初の停滞期が訪れることが多くあります。" },
+            { q: "停滞期はどのくらい続く？", a: "個人差が大きいですが、一般的には2週間～1ヶ月程度です。適切な対策を取れば短縮でき、焦って極端な行動に出ると長引くこともあります。2週間以上正確なカロリー管理をしているのに体重が変わらない場合が目安です。" },
+            { q: "停滞期に食事量を減らしたら痩せる？", a: "逆効果です。カロリーをさらに減らすと体はさらに代謝を低下させて対抗します。基礎代謝を下回る食事を続けると筋肉の分解が進み、後のリバウンドリスクが大幅に上がります。" },
+            { q: "停滞期に効果的なチートデイのやり方は？", a: "摂取カロリー目安は体重(kg)×40～45kcal、炭水化物を中心に増やします。必ず1日で終わらせ、翌日から通常のカロリー制限に戻してください。低下したレプチンの分泌回復に最も効果的です。" },
+            { q: "外食ダイエット中の停滞期対策は？", a: "いつも同じチェーン店の同じメニューを避け、異なるチェーン店と異なるメニューに切り替えることが効果的です。同じカロリーでもPFCバランス（タンパク質・脂質・炭水化物の比率）を変えることで体の反応が変わり、停滞期突破のきっかけになります。" },
+          ]}
+        />
 
         <ArticleFooter currentSlug="diet-plateau" />
 

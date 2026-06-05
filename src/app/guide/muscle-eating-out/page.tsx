@@ -15,6 +15,8 @@ import {
   RankingCard,
   CheckList,
   ArticleFooter,
+  QuickAnswer,
+  FAQSection,
 } from "@/components/guide/ArticleComponents";
 import {
   AffiliateDisclosure,
@@ -114,7 +116,12 @@ export default function MuscleEatingOutPage() {
 
         {/* ─── Section 1: 筋トレ中に外食しても大丈夫？ ─── */}
         <section className="mb-14">
-          <SectionHeading id="is-it-ok">
+                  <QuickAnswer
+          question={"筋トレ中に外食しても大丈夫ですか？"}
+          answer={"筋トレ中の外食はまったく問題ありません。むしろ正しく選べば味方になります。大戸屋・やよい軒・サイゼリヤなど主要チェーン店には1食でタンパク質30g以上が摂れるメニューが豊富。体重70kg人なら1日112〜154gのタンパク質が推奨されており、外食でも達成可能です。"}
+        />
+
+        <SectionHeading id="is-it-ok">
             筋トレ中に外食しても大丈夫？
           </SectionHeading>
           <p className="mb-4">
@@ -465,6 +472,17 @@ export default function MuscleEatingOutPage() {
         </section>
 
         {/* Related Articles */}
+        <FAQSection
+          slug="muscle-eating-out"
+          items={[
+            { q: "筋トレ中の1食あたりのタンパク質はどれくらい摂るべき？", a: "1食あたり20〜40gが筋タンパク質合成の「ゴールデンゾーン」です。これ以下では刺激が不十分、これ以上では上乗せ効果が小さくなります。体重70kg人の場合、1日112〜154g（1.6〜2.2g/kg）を3食で割ると約37〜51gの目安となります。" },
+            { q: "筋トレ民におすすめのチェーン店はどこ？", a: "タンパク質30g以上のメニュー数・コスパ・多様性で評価すると、大戸屋が1位（定食メニュー全般）、やよい軒が2位（ご飯おかわり無料）、サイゼリヤが3位（若鶏グリル¥500でP35.3g）がTOP3です。牛丼チェーンやコンビニも活用できます。" },
+            { q: "最も高コスパな高タンパクメニューは？", a: "サイゼリヤの若鶏のグリル（税込¥500でタンパク質35.3g、カロリー514kcal）が圧倒的コスパです。次点でミックスグリル（¥500台、P32.2g）。毎日通っても財布に優しく、筋トレ民SNSでも「聖地」と話題です。" },
+            { q: "筋トレ後の外食で脂質と炭水化物はどう扱う？", a: "脂質は控えめに（減量期特に注意）。グリル・焼き物・蒸し料理を選び、総カロリーの20〜25%は下回らないこと。炭水化物は筋グリコーゲン消耗時期なので筋トレ後なら多めでもOK。やよい軒のご飯おかわり無料は増量期に活用価値が高いです。" },
+            { q: "コンビニでも筋トレ向きの食事が見つかりますか？", a: "見つかります。サラダチキン（プレーン）でP24.1gなど、24時間いつでもタンパク質補給できるのが最大のメリット。近年は「たんぱく質が摂れる」シリーズなど筋トレ民向け商品が急増中。ジムの帰りに即購入できる最強スポットです。" },
+          ]}
+        />
+
         <ArticleFooter currentSlug="muscle-eating-out" />
 
         {/* Back link */}

@@ -18,6 +18,8 @@ import {
   ComparisonTable,
   ArticleFooter,
   ArticleImage,
+  QuickAnswer,
+  FAQSection,
 } from "@/components/guide/ArticleComponents";
 import {
   AffiliateDisclosure,
@@ -123,6 +125,11 @@ export default function DrinkingPartyDietPage() {
         />
 
         {/* Section 1: 飲み会はダイエットの大敵？ */}
+                <QuickAnswer
+          question={"飲み会で太らないようにするには、どのお酒とおつまみを選べばいい？"}
+          answer={"ハイボール（約70kcal/杯）をベースに、枝豆・刺身・焼き鳥（塩）などの高タンパク・低脂質なおつまみを選びましょう。飲み会1回のカロリーを、通常の3,000kcalから990kcal以下に抑えることが可能です。"}
+        />
+
         <SectionHeading id="alcohol-enemy">飲み会はダイエットの大敵？アルコールと体脂肪の関係</SectionHeading>
 
         <p className="mb-4">
@@ -472,6 +479,17 @@ export default function DrinkingPartyDietPage() {
         />
 
         {/* ArticleFooter */}
+        <FAQSection
+          slug="drinking-party-diet"
+          items={[
+            { q: "飲み会でビールを飲む場合、カロリーを抑えるコツは？", a: "生ビール（中・約145kcal）は最初の1杯だけに限定し、2杯目からはハイボール（約70kcal）に切り替えるのがおすすめです。ビール5杯より、ビール1杯＋ハイボール3杯の方が410kcal少なくなります。" },
+            { q: "居酒屋でおすすめのおつまみは何か？", a: "枝豆（タンパク質11.7g・135kcal）、刺身盛り（タンパク質28.6g・180kcal）、焼き鳥塩（1本約80kcal）、冷奴（80kcal）が最適です。注文時に『とりあえず枝豆と刺身！』と言うのが鉄則です。" },
+            { q: "飲み会で絶対に避けるべきおつまみは？", a: "フライドポテト（420kcal）、唐揚げ（380kcal）、ピザ（550kcal）、焼きそば（480kcal）、締めのラーメン（500kcal）は避けましょう。揚げ物や炭水化物は脂質代謝が低下した状態では体脂肪になりやすいです。" },
+            { q: "飲み会の前後に何をすればダイエット効果が高まる？", a: "飲み会30分前にプロテイン1杯とお水500mlを摂取し、飲み会中は『お酒1杯=お水1杯』ルールを守りましょう。翌朝は軽い食事と30分のウォーキングでリカバリーします。" },
+            { q: "飲み放題の場合、カロリーを抑えるポイントは？", a: "飲み放題では『元を取ろう』と飲みすぎになりやすく、ビール5杯＋おつまみで2,500kcalを超える危険があります。『3杯までに限定する』と自分ルールを決めることが最重要です。" },
+          ]}
+        />
+
         <ArticleFooter currentSlug="drinking-party-diet" />
 
         {/* Back link */}

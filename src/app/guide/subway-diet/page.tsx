@@ -18,6 +18,8 @@ import {
   ComparisonTable,
   ArticleFooter,
   ArticleImage,
+  QuickAnswer,
+  FAQSection,
 } from "@/components/guide/ArticleComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -111,7 +113,12 @@ export default function SubwayDietPage() {
 
         {/* Section 1: サブウェイがダイエットに最適な理由 */}
         <section className="mb-16">
-          <SectionHeading id="why-subway">サブウェイがダイエットに最適な理由</SectionHeading>
+                  <QuickAnswer
+          question={"サブウェイはダイエット向けですか？おすすめメニューを教えてください。"}
+          answer={"サブウェイはダイエットに最適な外食チェーンです。ローストチキン（282kcal・タンパク質22.5g）やターキーブレスト（262kcal・タンパク質20.8g）など、300kcal以下で高タンパクなメニューが豊富。野菜は無料で増量でき、ドレッシングも低カロリー選択肢が充実しているため、カスタマイズで栄養バランスを大幅に改善できます。"}
+        />
+
+        <SectionHeading id="why-subway">サブウェイがダイエットに最適な理由</SectionHeading>
 
           <p className="mb-4">
             数あるファストフードチェーンの中でも、<Marker>サブウェイがダイエットに最も向いている</Marker>と言い切れる理由は大きく3つあります。
@@ -397,6 +404,17 @@ export default function SubwayDietPage() {
         </section>
 
         {/* ArticleFooter */}
+        <FAQSection
+          slug="subway-diet"
+          items={[
+            { q: "サブウェイのカロリーが低い理由は何ですか？", a: "野菜が無料で増量できる、300kcal以下のメニューが豊富、パン・ソース・トッピングをカスタマイズできるという3つの理由。特にマクドナルドのチキンフィレオ（465kcal）と比べてローストチキン（282kcal）は183kcal低く、タンパク質は3.7g多いです。" },
+            { q: "ダイエット中はどのパンを選ぶべきですか？", a: "ウィートブレッド（169kcal）がおすすめ。全粒粉入りで食物繊維が豊富、血糖値の急上昇を抑えます。フラットブレッド（210kcal）は一見ヘルシーですが、実はサブウェイで最もカロリーが高い点に注意。" },
+            { q: "ドレッシングはどれを選べば良いですか？", a: "バルサミコソース（5kcal）またはわさび醤油ソース（18kcal）を選択。マヨネーズ（78kcal）を避けるだけで60〜70kcal削減できます。ドレッシング選択だけで栄養バランスが大きく変わります。" },
+            { q: "たまごサンドはダイエットに適していますか？", a: "避けるべきメニューです。たまごサンド（378kcal・脂質15.8g）は脂質がサブウェイで最も高く、ローストチキン（脂質5.8g）と比較してタンパク質も6g少なく、コスパが悪い。" },
+            { q: "サブウェイをサラダで注文する方法もありますか？", a: "はい。サンドの中身をパンなしの「サラダ」として注文可能。パンのカロリー（約170kcal）を削減でき、ローストチキンで約110kcal・タンパク質22gの超低カロリー食が実現。糖質制限中に特におすすめです。" },
+          ]}
+        />
+
         <ArticleFooter currentSlug="subway-diet" />
 
         {/* Back link */}

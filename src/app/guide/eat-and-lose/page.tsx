@@ -16,6 +16,8 @@ import {
   NumberedList,
   ArticleFooter,
   ArticleImage,
+  QuickAnswer,
+  FAQSection,
 } from "@/components/guide/ArticleComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -120,7 +122,12 @@ export default function EatAndLosePage() {
 
         {/* Section 1: 食べて痩せるは可能か */}
         <section className="mb-16">
-          <SectionHeading id="is-it-possible">
+                  <QuickAnswer
+          question={"食べて痩せるダイエットは本当に可能ですか？"}
+          answer={"食べて痩せるは科学的に可能です。カギはDIT（食事誘発性熱産生）で、タンパク質は摂取カロリーの30%が消化に使われるのに対し、脂質は4%しか使われません。正しい栄養選択をすれば、基礎代謝を維持しながら月2〜3kgの減量は十分達成できます。"}
+        />
+
+        <SectionHeading id="is-it-possible">
             「食べて痩せる」は本当に可能なのか？科学的根拠を解説
           </SectionHeading>
 
@@ -637,6 +644,17 @@ export default function EatAndLosePage() {
         </section>
 
         {/* Article Footer */}
+        <FAQSection
+          slug="eat-and-lose"
+          items={[
+            { q: "食べて痩せるために最も重要な栄養素は何ですか？", a: "タンパク質です。満腹感を最も長く持続させ、DIT値が約30%と最も高い栄養素です。American Journal of Clinical Nutritionの研究では、タンパク質を総カロリーの25〜30%にした群は、15%の群より1日平均441kcal少なく食べていました。" },
+            { q: "低GI食品を選ぶとなぜダイエットに有利ですか？", a: "GI値が高い食品は血糖値を急上昇させ、インスリンが大量分泌されて脂肪蓄積が促進されます。白米(84)より玄米(56)やそば(46)など低GI食品を選ぶと、血糖値の急上昇を防ぎ、脂肪がつきにくい状態を作れます。" },
+            { q: "チェーン店でも食べて痩せるダイエットは実践できますか？", a: "できます。大戸屋のしまほっけ定食（五穀米変更）530kcal・P32g、サブウェイのローストチキン全粒粉パン310kcal・P22g、すき家の牛丼ライト425kcal・P26gなど、正しい選択をすれば実践可能です。" },
+            { q: "1日の最低カロリー数は何kcalですか？", a: "女性は1,200kcal、男性は1,500kcal以上が目安です。これを下回ると基礎代謝が低下して痩せにくくなります。極端な食事制限ダイエットは83%がリバウンドするため、この最低ラインを守ることが重要です。" },
+            { q: "水を飲むだけで代謝は本当に上がりますか？", a: "研究では500mlの水を飲むと、食事誘発性熱産生により短期的に代謝が一時的に上昇することが報告されています。1日2リットルの水を習慣にすれば、わずかながら追加消費が期待でき、食前に水を飲むことで食べ過ぎを防ぎ、複数の研究で体重管理に効果的であることが示されています。" },
+          ]}
+        />
+
         <ArticleFooter currentSlug="eat-and-lose" />
 
         {/* Back link */}

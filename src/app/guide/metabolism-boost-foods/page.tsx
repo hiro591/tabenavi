@@ -16,6 +16,8 @@ import {
   NumberedList,
   ArticleFooter,
   ArticleImage,
+  QuickAnswer,
+  FAQSection,
 } from "@/components/guide/ArticleComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -120,7 +122,12 @@ export default function MetabolismBoostFoodsPage() {
 
         {/* Section 1: 代謝が上がるとは */}
         <section className="mb-16">
-          <SectionHeading id="what-is-metabolism">
+                  <QuickAnswer
+          question={"代謝を上げるために最適な食べ物は何ですか？"}
+          answer={"鶏むね肉・唐辛子・生姜が代謝アップ食材の上位3つです。鶏むね肉は高タンパク（23.3g/100g）でDIT30%により消化時の消費カロリーが高く、唐辛子のカプサイシンと生姜のショウガオールは体温を上昇させてNEATを増加させます。これらを組み合わせることで相乗効果が期待できます。"}
+        />
+
+        <SectionHeading id="what-is-metabolism">
             「代謝が上がる」とは？DIT・基礎代謝・NEATを理解する
           </SectionHeading>
 
@@ -252,7 +259,7 @@ export default function MetabolismBoostFoodsPage() {
               </div>
             </div>
             <p className="text-sm text-gray-600">
-              生姜は加熱することでジンゲロールがショウガオールに変化し、<Marker color="green">体を深部から温める効果が強まります</Marker>。研究では生姜摂取後に基礎代謝が約20%上昇するデータも。味噌汁に生姜を入れる、生姜焼きを選ぶなど、日常的に取り入れやすい食材です。
+              生姜は加熱することでジンゲロールがショウガオールに変化し、<Marker color="green">体を深部から温める効果が強まります</Marker>。研究では生姜摂取が代謝に若干の上昇効果を示すデータもありますが、効果は限定的で個人差があります。味噌汁に生姜を入れる、生姜焼きを選ぶなど、日常的に取り入れやすい食材です。
             </p>
           </RankingCard>
 
@@ -513,6 +520,17 @@ export default function MetabolismBoostFoodsPage() {
         </section>
 
         {/* Article Footer */}
+        <FAQSection
+          slug="metabolism-boost-foods"
+          items={[
+            { q: "基礎代謝と食事誘発性熱産生（DIT）の違いは？", a: "基礎代謝は生きているだけで消費されるエネルギー（成人で約1,200～1,500kcal/日）で全消費の60～70%。DITは食事を消化・吸収・代謝する際に消費されるエネルギーで全体の約10%。タンパク質のDITは約30%と栄養素の中で最も高いため、高タンパク食で効率的に代謝を上げられます。" },
+            { q: "唐辛子と生姜はどのくらい代謝を上げますか？", a: "研究では生姜摂取が代謝に若干の上昇効果を示すデータもあり、個人差が大きいですが、その効果は限定的とされています。" },
+            { q: "外食で代謝を上げるメニュー選びのコツは？", a: "「高タンパク」「スパイス入り」「温かいメニュー」を基準に選びます。吉野家の豚生姜焼き定食（28.5gP）、サイゼリヤの若鶏グリルディアボラ風（38.2gP）、コンビニのサラダチキン+生姜味噌汁+緑茶（28.0gP）が具体例です。" },
+            { q: "代謝を下げる食べ物にはどのようなものがあります？", a: "トランス脂肪酸（マーガリン・菓子パン）、精製糖（清涼飲料水）、過度なアルコール、高GI食品（白いパン・うどん）、人工甘味料の過剰摂取が該当します。これらは血糖値の急上昇やインスリン分泌を促進し、脂肪蓄積を加速させます。" },
+            { q: "1日の代謝アップ食事で何カロリーくらい追加消費できますか？", a: "記事のプランでは高タンパク食（P105g）、緑茶3～5杯で約80kcal、唐辛子で約50kcalの追加消費が期待でき、合計約130～180kcalの追加消費が見込まれます。個人差がありますが、継続することで痩せやすい体づくりに貢献します。" },
+          ]}
+        />
+
         <ArticleFooter currentSlug="metabolism-boost-foods" />
 
         {/* Back link */}

@@ -15,6 +15,8 @@ import {
   ComparisonTable,
   ArticleFooter,
   ArticleImage,
+  QuickAnswer,
+  FAQSection,
 } from "@/components/guide/ArticleComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -107,7 +109,12 @@ export default function PfcGuidePage() {
 
         {/* ── Section 1: PFCバランスとは ── */}
         <section className="mb-16">
-          <SectionHeading id="what-is-pfc">PFCバランスとは？3大栄養素の基本</SectionHeading>
+                  <QuickAnswer
+          question={"PFCバランスとは何ですか？ダイエットに役立つのはなぜ？"}
+          answer={"PFCバランスとは、P（タンパク質）・F（脂質）・C（炭水化物）の3大栄養素の摂取比率のこと。同じカロリーでもこのバランスを意識すると、体の変化が大きく変わります。特にダイエット中はタンパク質を30～35%確保することで、筋肉維持と食事誘発性熱産生の向上が期待でき、基礎代謝の低下を最小限に抑えられます。"}
+        />
+
+        <SectionHeading id="what-is-pfc">PFCバランスとは？3大栄養素の基本</SectionHeading>
 
           <p className="mb-4">
             PFCとは、<Marker>P = Protein（タンパク質）、F = Fat（脂質）、C = Carbohydrate（炭水化物）</Marker>の頭文字をとった略語です。これら3つは「三大栄養素（マクロ栄養素）」と呼ばれ、体のエネルギー源として欠かせない栄養素です。
@@ -387,6 +394,17 @@ export default function PfcGuidePage() {
         </section>
 
         {/* ArticleFooter */}
+        <FAQSection
+          slug="pfc-guide"
+          items={[
+            { q: "タンパク質・脂質・炭水化物の1gあたりのカロリーは？", a: "タンパク質と炭水化物は各1gあたり4kcal、脂質は1gあたり9kcalです。脂質は最もカロリーが高いですが、ホルモンと細胞膜の構成要素として最低でも体重×0.5g以上の摂取が必要です。" },
+            { q: "体重60kgでダイエット中の1日のPFC目安量は？", a: "目標カロリーは60×25=1,500kcal。タンパク質60×2g=120g（480kcal）、脂質1,500×25%÷9≒42g、炭水化物約161gが目安。毎食「タンパク質手のひら1枚分、脂質親指1本分、炭水化物拳1つ分」で大まかに管理できます。" },
+            { q: "ダイエット・筋トレ・体重維持で最適なPFC比率は異なる？", a: "はい、異なります。ダイエットはP30～35%・F20～25%・C40～50%、筋トレはP25～30%・F20～25%・C45～55%、維持はP20～25%・F25～30%・C50～55%が目安です。目的に合わせた調整が成功の鍵です。" },
+            { q: "外食でPFCバランスを管理するコツは何ですか？", a: "チェーン店は栄養データが公開されているため管理しやすいです。タンパク質ファーストで店を選ぶ、ご飯の量で炭水化物調整、ノンオイルドレッシング選択、事前にメニュー確認が効果的。サブウェイ・大戸屋・すき家などが実践しやすいチェーンです。" },
+            { q: "PFCバランス管理で避けるべき間違いは？", a: "カロリーだけを見てPFCを無視する、脂質を極端にカット、毎食完璧なPFCを目指す、炭水化物の完全カットが危険です。1日トータルでバランスを取る柔軟な考え方と、「ゆるく長く」続けることが成功につながります。" },
+          ]}
+        />
+
         <ArticleFooter currentSlug="pfc-guide" />
 
         {/* Back link */}

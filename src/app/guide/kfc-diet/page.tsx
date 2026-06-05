@@ -18,6 +18,8 @@ import {
   ComparisonTable,
   ArticleFooter,
   ArticleImage,
+  QuickAnswer,
+  FAQSection,
 } from "@/components/guide/ArticleComponents";
 import { AffiliateProductGrid } from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
@@ -114,7 +116,12 @@ export default function KfcDietPage() {
 
         {/* Section 1: KFCはダイエットに向いてる? */}
         <section className="mb-16">
-          <SectionHeading id="why-kfc">KFCはダイエットに向いてる?</SectionHeading>
+                  <QuickAnswer
+          question={"ケンタッキー（KFC）はダイエット中に食べられる？"}
+          answer={"ケンタッキーはダイエットに向いているチェーン店です。オリジナルチキン1ピースは237kcal・タンパク質16.7g・炭水化物7.4gと高タンパク低糖質。チキン単品を選び、サイドはコールスロー、ドリンクはゼロカロリーにするなどメニュー選びを工夫することで、ダイエット中でも活用できます。"}
+        />
+
+        <SectionHeading id="why-kfc">KFCはダイエットに向いてる?</SectionHeading>
 
           <p className="mb-4">
             結論から言えば、<Marker>ケンタッキーはダイエットに「向いている」チェーン</Marker>です。その理由は、チキン自体が高タンパク食材であり、衣の部分を除けば脂質もそこまで高くないため。
@@ -390,6 +397,17 @@ export default function KfcDietPage() {
         </section>
 
         {/* ArticleFooter */}
+        <FAQSection
+          slug="kfc-diet"
+          items={[
+            { q: "ケンタッキーで最もカロリーが低いメニューは何？", a: "カーネルクリスピーが130kcal、骨なしケンタッキーが204kcalです。タンパク質とのバランスを考えると、骨なしケンタッキー（204kcal・タンパク質15.8g）が最も優秀なカロリーパフォーマンスを発揮します。" },
+            { q: "ケンタッキーで避けるべきメニューは？", a: "避けるべきは和風チキンカツサンド（478kcal）、フライドポテト（195kcal・タンパク質2.8g）、セットメニューです。セットはポテト・ドリンク・ビスケットで+400kcal以上。単品注文を徹底しましょう。" },
+            { q: "ケンタッキーでタンパク質が最も多いメニューは？", a: "チキンフィレサンドが22.0gで最高。オリジナルチキン2ピースなら33.4gと、サンド類よりも多くのタンパク質を確保できてカロリーは低いため、ダイエット中はチキン単品がおすすめです。" },
+            { q: "ケンタッキーで賢い食べ方のコツは？", a: "衣を一部はがすと50～60kcalカット、サイドはポテト（195kcal）からコールスロー（92kcal）に変更すると100kcalカット。ドリンクはゼロカロリー、食べるなら昼食時がおすすめです。" },
+            { q: "ケンタッキーで高タンパクなおすすめメニュー組み合わせは？", a: "「オリジナルチキン2ピース＋コールスローS＋ペプシゼロ」で566kcal・タンパク質34.2g。または「骨なしケンタッキー2個＋コールスロー」で500kcal・タンパク質32.4gがおすすめです。" },
+          ]}
+        />
+
         <ArticleFooter currentSlug="kfc-diet" />
 
         {/* Back link */}

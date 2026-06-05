@@ -16,6 +16,8 @@ import {
   ComparisonTable,
   ArticleFooter,
   ArticleImage,
+  QuickAnswer,
+  FAQSection,
 } from "@/components/guide/ArticleComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -121,7 +123,12 @@ export default function NoExerciseDietPage() {
 
         {/* Section 1: 科学的根拠 */}
         <section className="mb-16">
-          <SectionHeading id="science">
+                  <QuickAnswer
+          question={"運動なしで痩せることは可能ですか？"}
+          answer={"はい、可能です。体重減少の約8割は食事で決まり、CICO原則（摂取カロリー<消費カロリー）に基づいて食事を管理すれば必ず痩せます。運動で30分間に消費できるカロリーはおにぎり1個程度に過ぎず、食事管理の方が効率的です。"}
+        />
+
+        <SectionHeading id="science">
             運動なしで痩せられる科学的根拠
           </SectionHeading>
 
@@ -543,6 +550,17 @@ export default function NoExerciseDietPage() {
             ※効果には個人差があります。持病のある方は医師にご相談ください。
           </p>
         </section>
+
+        <FAQSection
+          slug="no-exercise-diet"
+          items={[
+            { q: "1日の目標摂取カロリーはどう決めるのか", a: "基礎代謝をハリス・ベネディクト方程式で計算し、活動係数1.2を掛けて総消費カロリー（TDEE）を出します。そこから300～500kcal引いた値が目標です。例：体重75kg・30歳男性は約1,730kcal基礎代謝→約2,076kcal総消費→目標1,576kcal（月2kg減）。" },
+            { q: "食事だけダイエットで筋肉が減らないようにするには", a: "タンパク質を体重1kgあたり1.2～1.6g摂取し、毎食25～35g意識的に取ります。カロリー赤字は月2kg以内、食事を3～4回に分けて摂取、階段利用など日常活動を増やすことで筋肉への刺激を維持できます。" },
+            { q: "運動なしダイエットで避けるべき食事パターンは何か", a: "極端な糖質制限（水分減少のみで脂肪はほぼ減らない）、1日1食（血糖値急変動）、置き換えダイエットのみ（リバウンド確実）、低カロリー偏食（筋肉低下）。通常食でカロリー管理する習慣が長期成功の鍵です。" },
+            { q: "外食チェーンでカロリー管理しながら痩せられるか", a: "できます。セブンイレブン、大戸屋、やよい軒、ガスト、サイゼリヤなど栄養データ充実のチェーンを活用すれば1日1,600kcal程度で管理可能。例えば朝卵サンド298kcal→昼黒酢あん定食580kcal→夜ほっけ定食485kcalで構成できます。" },
+            { q: "カロリー制限で代謝が低下する（適応熱産生）対策は", a: "2～3ヶ月ごとに1～2週間のダイエット休止（メンテナンスカロリー摂取）、チートデイの活用、水分1日2ℓ以上、7～8時間睡眠確保、コーヒー・緑茶でカフェイン摂取が有効とされています。研究により、交互方式は継続的なカロリー制限と比べて効果がある可能性が示唆されていますが、個人差が大きいため注意が必要です。" },
+          ]}
+        />
 
         <ArticleFooter currentSlug="no-exercise-diet" />
 

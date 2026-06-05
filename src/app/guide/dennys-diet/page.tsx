@@ -18,6 +18,8 @@ import {
   ComparisonTable,
   ArticleFooter,
   ArticleImage,
+  QuickAnswer,
+  FAQSection,
 } from "@/components/guide/ArticleComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -113,7 +115,12 @@ export default function DennysDietPage() {
 
         {/* Section 1: デニーズがダイエットに使える理由 */}
         <section className="mb-16">
-          <SectionHeading id="why-dennys">デニーズがダイエットに使える理由</SectionHeading>
+                  <QuickAnswer
+          question={"デニーズでダイエット中に選ぶべきメニューは何ですか？"}
+          answer={"和風ハンバーグ（535kcal・タンパク質28g）と豆腐ハンバーグ（385kcal・タンパク質22.5g）がダイエット向きです。ソースの脂質で100〜200kcalの差が出るため、チーズやデミグラス系は避けて和風おろしを選ぶのが重要。メインの前にサラダを食べてベジファーストを実践しましょう。"}
+        />
+
+        <SectionHeading id="why-dennys">デニーズがダイエットに使える理由</SectionHeading>
 
           <p className="mb-4">
             ファミレスチェーンの中でも、デニーズがダイエットに向いている理由を解説します。
@@ -384,6 +391,17 @@ export default function DennysDietPage() {
         </section>
 
         {/* ArticleFooter */}
+        <FAQSection
+          slug="dennys-diet"
+          items={[
+            { q: "デニーズの最も低カロリーなメニューは？", a: "グリーンサラダ（82kcal）がメニュー全体で最低。ハンバーグなどのメインを選ぶなら豆腐ハンバーグ（385kcal）が最も低カロリーで、脂質18.2g・タンパク質22.5gとバランスも優秀です。" },
+            { q: "デニーズで700kcal超のメニューにはどんなものがある？", a: "デミグラスハンバーグ（698kcal）、ハンバーグカレードリア（742kcal）、チーズインハンバーグ（785kcal）、オムライス（824kcal）、ビーフシチューセット（865kcal）など。ダイエット中は避けるべきメニューです。" },
+            { q: "デニーズのハンバーグを食べるときのカロリーカット方法は？", a: "ライスを小盛りにして約80kcalカット、ドレッシングは和風選択で約30kcalカット、ソースは和風系を選んで100〜200kcルカット。メインの前にサラダを食べるベジファーストで血糖値上昇を防げます。" },
+            { q: "他のファミレスと比べてデニーズはダイエット向き？", a: "はい。デニーズの和風ハンバーグ（535kcal）は、ガストのチーズINハンバーグ（約750kcal）やロイヤルホストの黒×黒ハンバーグ（約820kcal）より低カロリー。メニューにカロリー表示があるのも判断しやすい利点です。" },
+            { q: "デニーズのデザートはダイエット中に選べるものがある？", a: "パンケーキは約450kcal、パフェは300〜500kcalと高い。低カロリーのゼリー系（約80kcal）なら選択可能ですが、基本的にはデザートはスキップするか友人とシェアする工夫が重要です。" },
+          ]}
+        />
+
         <ArticleFooter currentSlug="dennys-diet" />
 
         {/* Back link */}

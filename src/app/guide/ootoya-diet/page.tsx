@@ -18,6 +18,8 @@ import {
   ComparisonTable,
   ArticleFooter,
   ArticleImage,
+  QuickAnswer,
+  FAQSection,
 } from "@/components/guide/ArticleComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -113,7 +115,12 @@ export default function OotoyaDietPage() {
 
         {/* Section 1: 大戸屋がダイエットに最適な理由 */}
         <section className="mb-16">
-          <SectionHeading id="why-ootoya">大戸屋がダイエットに最適な理由</SectionHeading>
+                  <QuickAnswer
+          question={"大戸屋でダイエット向きのメニューは何ですか？"}
+          answer={"大戸屋でダイエットに最適なのは低カロリーメニューです。しまほっけの炭火焼き定食（642kcal・タンパク質36.8g）が最もおすすめ。白米を五穀米に無料変更し、ご飯を少なめにすることで、カロリーをさらに削減。焼き魚・蒸し鶏・煮メニューを選び、揚げ物を避けることが成功の鍵です。"}
+        />
+
+        <SectionHeading id="why-ootoya">大戸屋がダイエットに最適な理由</SectionHeading>
 
           <p className="mb-4">
             数ある外食チェーンの中でも、大戸屋がダイエットに向いている理由は大きく3つあります。
@@ -383,6 +390,17 @@ export default function OotoyaDietPage() {
         </section>
 
         {/* ArticleFooter */}
+        <FAQSection
+          slug="ootoya-diet"
+          items={[
+            { q: "大戸屋の白米を五穀米に変更するメリットは何ですか？", a: "五穀米は白米（GI値88）より低GI値（55程度）で、血糖値の急上昇を抑えます。食物繊維も約2倍で満腹感が続き、間食を防げます。カロリーはほぼ同等ですが、ダイエット効果が大きく異なります。" },
+            { q: "大戸屋の定食でダイエット中に避けるべきメニューは？", a: "四元豚ロースかつ定食（985kcal・脂質45.2g）、通常ロースかつ定食（948kcal）、チキン南蛮定食（892kcal・脂質38.2g）は高脂質。大盛りメニューも+150kcal増加するため避けましょう。" },
+            { q: "大戸屋の定食でご飯を少なめにするとカロリーは何kcal減りますか？", a: "ご飯少なめで約80～100kcalをカットできます。五穀米への変更と組み合わせると、しまほっけ定食は約560kcalまで低下。同じメニューでも注文方法で大きな差が生まれます。" },
+            { q: "チキンかあさん煮定食がダイエット向きなのはなぜですか？", a: "揚げた鶏肉を出汁で煮るため、衣の油が煮汁に落ちます。804kcal・タンパク質40.2gで、同じ揚げ鶏のチキン南蛮（38.2g脂質）より脂質が10g少ない設計です。大戸屋独自のヘルシーメニューです。" },
+            { q: "大戸屋でダイエット中の食べる順序のコツはありますか？", a: "味噌汁→副菜→メイン→ご飯の順が理想的。味噌汁で胃を温め、野菜から食べることで血糖値上昇を抑え、満腹中枢が早く刺激されます。ベジファーストの実践がダイエット効果を最大化します。" },
+          ]}
+        />
+
         <ArticleFooter currentSlug="ootoya-diet" />
 
         {/* Back link */}

@@ -17,6 +17,8 @@ import {
   ComparisonTable,
   ArticleFooter,
   ArticleImage,
+  QuickAnswer,
+  FAQSection,
 } from "@/components/guide/ArticleComponents";
 import {
   AffiliateDisclosure,
@@ -115,7 +117,12 @@ export default function RamenDietPage() {
 
         {/* Section 1: ラーメンのカロリー事情 */}
         <section className="mb-16">
-          <SectionHeading id="ramen-calories">ラーメンのカロリー事情：味別で徹底比較</SectionHeading>
+                  <QuickAnswer
+          question={"ラーメンはダイエット中に食べていいの？"}
+          answer={"ラーメンはダイエット中でも食べてOKです。味別では塩ラーメン（470kcal）や醤油ラーメン（500kcal）を選び、スープを残す・麺少なめにするなどの工夫で、豚骨ラーメンでも300kcal台まで減らせます。ダイエット中の頻度は週1回程度が目安です。"}
+        />
+
+        <SectionHeading id="ramen-calories">ラーメンのカロリー事情：味別で徹底比較</SectionHeading>
 
           <p className="mb-4">
             ラーメンのカロリーは<Marker>スープのベース</Marker>によって大きく変わります。同じ1杯でも、あっさり系とこってり系では300〜400kcalの差がつくことも珍しくありません。
@@ -393,6 +400,17 @@ export default function RamenDietPage() {
         />
 
         {/* ArticleFooter */}
+        <FAQSection
+          slug="ramen-diet"
+          items={[
+            { q: "ラーメンと他の麺類でカロリーが低いのはどれ？", a: "丸亀製麺のかけうどん（305kcal）が最も低カロリーです。次にリンガーハット長崎ちゃんぽん麺半分（390kcal）、日高屋中華そば（430kcal）がおすすめ。タンメンなら野菜たっぷりで490kcalで栄養バランスも優秀です。" },
+            { q: "ラーメンのスープを残すとどのくらいカロリーが減る？", a: "スープを残すだけで150〜250kcalカットできます。ラーメンのカロリーの約30〜40%がスープに含まれており、この削減が最も効果的なカロリーコントロール法です。同時に塩分過剰摂取によるむくみも防げます。" },
+            { q: "ダイエット中に避けるべきラーメンはどれ？", a: "二郎系ラーメン（約1,500kcal）と天下一品こってり（799kcal、脂質42g）は避けるべき。豚骨味噌ラーメン（750kcal）やつけ麺（800〜1,000kcal）も控えめにして、塩・醤油などあっさり系を週1回程度に制限するのが目安です。" },
+            { q: "ラーメン1杯のタンパク質はどのくらい摂れる？", a: "塩ラーメンで18g、醤油ラーメンで20.5g、豚骨ラーメンで25gほど摂取できます。チャーシューや味玉などタンパク質豊富なトッピングを選べば、さらに10〜20g増やせるため、ダイエット食としても悪くない選択肢です。" },
+            { q: "スープと麺を半分にするとラーメンのカロリーはいくらになる？", a: "豚骨ラーメン（通常650kcal）をスープ残す＋麺半分にすると約300kcalまで下げられます。これにタンパク質豊富なトッピング（味玉など80kcal）を追加しても380kcalで、おにぎり2個以下のカロリーで満足感も得られます。" },
+          ]}
+        />
+
         <ArticleFooter currentSlug="ramen-diet" />
 
         {/* Back link */}
