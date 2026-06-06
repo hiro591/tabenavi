@@ -7,6 +7,7 @@ import { createClient } from "@/lib/supabase/client";
 import { ChevronLeft, ChevronRight, Scale, History, Heart, Camera, MapPin, FileText, Shield, BookOpen, Mail } from "lucide-react";
 import type { Profile } from "@/types/database";
 import { AccountDeletion } from "@/components/profile/AccountDeletion";
+import { NativePushToggle } from "@/components/native/NativePushToggle";
 
 export default function ProfilePage() {
   const supabase = createClient();
@@ -281,6 +282,12 @@ export default function ProfilePage() {
           <MenuItem href="/history" icon={History} label="食事履歴" desc="過去の記録を見る" iconColor="text-sky-500" iconBg="bg-sky-50" />
           <MenuItem href="/favorites" icon={Heart} label="お気に入り" desc="保存したメニュー" iconColor="text-pink-500" iconBg="bg-pink-50" />
           <MenuItem href="/map" icon={MapPin} label="近くのお店" desc="マップで探す" iconColor="text-violet-500" iconBg="bg-violet-50" />
+        </div>
+
+        {/* ─── 通知 ─── */}
+        <div className="mb-4">
+          <h2 className="text-sm font-bold text-gray-800 mb-2 px-1">通知</h2>
+          <NativePushToggle />
         </div>
 
         {/* ─── アプリ情報 ─── */}

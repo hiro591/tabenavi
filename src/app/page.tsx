@@ -57,7 +57,7 @@ const jsonLd = {
   applicationCategory: "HealthApplication",
   operatingSystem: "Web",
   url: "https://www.tabenavi.jp",
-  description: "外食専門の栄養管理アプリ。カロリー・PFCで外食先を絞り込み、マップで近くの高タンパクメニューを発見。20チェーン・500メニュー対応。",
+  description: "外食専門の栄養管理アプリ。カロリー・PFCで外食先を絞り込み、マップで近くの高タンパクメニューを発見。32チェーン・6,000品以上対応。",
   offers: {
     "@type": "Offer",
     price: "0",
@@ -104,10 +104,10 @@ export default async function Home() {
               ログイン
             </Link>
             <Link
-              href="/signup"
+              href="/search"
               className="bg-gradient-to-r from-sky-400 to-cyan-500 text-white text-sm font-bold px-5 py-2.5 rounded-lg hover:from-sky-500 hover:to-cyan-600 transition-all shadow-md shadow-sky-200 animate-pulse-glow"
             >
-              無料で始める
+              メニューを検索
             </Link>
           </div>
         </div>
@@ -119,7 +119,7 @@ export default async function Home() {
           <div className="flex-1 text-center lg:text-left">
             <div className="inline-flex items-center gap-2 bg-sky-50 border border-sky-200 text-sky-600 text-xs font-medium px-3 py-1 rounded-full mb-6">
               <Sparkles className="w-3.5 h-3.5" />
-              20チェーン・500メニュー対応
+              32チェーン・6,000品以上対応
             </div>
 
             <h1 className="text-[30px] sm:text-[42px] font-bold leading-tight mb-5 text-gray-900">
@@ -135,14 +135,21 @@ export default async function Home() {
 
             <div className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-3">
               <Link
-                href="/signup"
+                href="/search"
                 className="w-full sm:w-auto bg-gradient-to-r from-sky-400 to-cyan-500 hover:from-sky-500 hover:to-cyan-600 text-white font-bold px-10 py-4 rounded-xl transition-all shadow-lg shadow-sky-200 active:scale-[0.98] flex items-center justify-center gap-2 text-base"
               >
-                無料で始める — 30秒で登録
+                メニューを無料で検索
                 <ChevronRight className="w-5 h-5" />
               </Link>
+              <Link
+                href="/signup"
+                className="w-full sm:w-auto text-gray-500 hover:text-gray-800 font-semibold px-6 py-4 rounded-xl transition-colors flex items-center justify-center gap-1.5 text-base"
+              >
+                記録するなら登録
+                <ChevronRight className="w-4 h-4" />
+              </Link>
             </div>
-            <p className="text-xs text-gray-400 mt-3 text-center lg:text-left">クレジットカード不要 · いつでも無料</p>
+            <p className="text-xs text-gray-400 mt-3 text-center lg:text-left">登録不要で今すぐ検索 · 完全無料</p>
           </div>
 
           {/* Phone Mockup */}
@@ -426,7 +433,7 @@ export default async function Home() {
         <div className="max-w-4xl mx-auto">
           <p className="text-center text-xs text-sky-500 uppercase tracking-widest mb-3 font-semibold">Supported chains</p>
           <h2 className="text-center text-2xl sm:text-3xl font-bold mb-4 text-gray-900">
-            主要チェーン20社に対応
+            32チェーン・6,000品以上に対応
           </h2>
           <p className="text-center text-sm text-gray-400 mb-10">
             公式の栄養データに基づく正確な情報

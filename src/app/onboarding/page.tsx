@@ -6,6 +6,7 @@ import { createClient } from "@/lib/supabase/client";
 import { ChevronRight, ChevronLeft, SkipForward, CheckCircle } from "lucide-react";
 import { LogoIcon } from "@/components/Logo";
 import ScrollPicker from "@/components/ScrollPicker";
+import { NativePushToggle } from "@/components/native/NativePushToggle";
 
 const TOTAL_STEPS = 12;
 
@@ -321,6 +322,11 @@ export default function OnboardingPage() {
               <Row label="身長" value={`${height} cm`} />
               <Row label="体重" value={`${weight} kg → ${targetWeight} kg`} />
               {activityLevel && <Row label="活動量" value={activityLevel === "sedentary" ? "低い" : activityLevel === "light" ? "やや低い" : activityLevel === "moderate" ? "中程度" : "高い"} />}
+            </div>
+
+            {/* 再訪トリガー: 食事リマインドのopt-in(ネイティブ=トグル / Web=アプリ誘導) */}
+            <div className="w-full mb-6">
+              <NativePushToggle />
             </div>
 
             {saveError && (
