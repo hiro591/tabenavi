@@ -136,17 +136,29 @@ export default async function ChainGoalPage({
   const otherGoals = Object.entries(GOALS).filter(([k]) => k !== goal); // 全目的へ内部リンク(ハブ強化)
   const otherChains = Object.entries(CHAINS).filter(([k]) => k !== slug).slice(0, 8);
 
-  const jsonLd = JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: `${chain.name}の${goalInfo.title}ランキング`,
-    description: `${chain.name}の${goalInfo.description}`,
-    author: { "@type": "Organization", name: "たべなび" },
-    publisher: { "@type": "Organization", name: "たべなび", url: "https://www.tabenavi.jp" },
-    datePublished: "2026-04-13",
-    dateModified: "2026-04-13",
-    mainEntityOfPage: `https://www.tabenavi.jp/chains/${slug}/${goal}`,
-  });
+  const jsonLd = JSON.stringify([
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: `${chain.name}の${goalInfo.title}ランキング`,
+      description: `${chain.name}の${goalInfo.description}`,
+      author: { "@type": "Organization", name: "たべなび" },
+      publisher: { "@type": "Organization", name: "たべなび", url: "https://www.tabenavi.jp" },
+      datePublished: "2026-04-13",
+      dateModified: "2026-04-13",
+      mainEntityOfPage: `https://www.tabenavi.jp/chains/${slug}/${goal}`,
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "たべなび", item: "https://www.tabenavi.jp" },
+        { "@type": "ListItem", position: 2, name: "チェーン一覧", item: "https://www.tabenavi.jp/chains" },
+        { "@type": "ListItem", position: 3, name: chain.name, item: `https://www.tabenavi.jp/chains/${slug}` },
+        { "@type": "ListItem", position: 4, name: goalInfo.title, item: `https://www.tabenavi.jp/chains/${slug}/${goal}` },
+      ],
+    },
+  ]);
 
   return (
     <>
@@ -156,7 +168,9 @@ export default async function ChainGoalPage({
         <nav className="text-xs text-gray-400 mb-6 flex items-center gap-1.5">
           <Link href="/" className="hover:text-sky-500">たべなび</Link>
           <span>/</span>
-          <Link href={`/guide/${slug}`} className="hover:text-sky-500">{chain.name}</Link>
+          <Link href="/chains" className="hover:text-sky-500">チェーン一覧</Link>
+          <span>/</span>
+          <Link href={`/chains/${slug}`} className="hover:text-sky-500">{chain.name}</Link>
           <span>/</span>
           <span className="text-gray-600">{goalInfo.title}</span>
         </nav>
@@ -231,10 +245,16 @@ export default async function ChainGoalPage({
           <p className="text-sm font-bold text-gray-900 mb-1">全チェーン横断で栄養検索できます</p>
           <p className="text-xs text-gray-500 mb-3">32チェーン・6,000品以上をPFC・カロリー・価格で検索</p>
           <Link
-            href="/signup"
-            className="inline-block px-6 py-2.5 bg-gradient-to-r from-sky-400 to-cyan-500 text-white text-sm font-bold rounded-xl shadow-lg shadow-sky-200"
+            href={`/chains/${slug}`}
+            className="inline-block px-5 py-2.5 bg-white border border-sky-200 text-sky-600 text-sm font-bold rounded-xl mr-2 mb-2"
           >
-            無料で始める
+            {chain.name}の他のランキング
+          </Link>
+          <Link
+            href="/search"
+            className="inline-block px-6 py-2.5 bg-gradient-to-r from-sky-400 to-cyan-500 text-white text-sm font-bold rounded-xl shadow-lg shadow-sky-200 mb-2"
+          >
+            メニューを無料で検索
           </Link>
         </div>
 

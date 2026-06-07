@@ -17,11 +17,11 @@ import { ARTICLE_CATEGORIES, RELATED_ARTICLES, type ArticleCategory } from "@/li
 export const metadata: Metadata = {
   title: "外食栄養ガイド｜チェーン店のカロリー・PFC一覧 | たべなび",
   description:
-    "マクドナルド、吉野家、サイゼリヤなど20以上のチェーン店の栄養成分データ。ダイエット・筋トレ・糖質制限中の外食メニュー選びに。全14本の専門ガイド記事も。",
+    "マクドナルド、吉野家、サイゼリヤなど32チェーンの栄養成分データ。ダイエット・筋トレ・糖質制限中の外食メニュー選びに。40本以上の専門ガイド記事も。",
   openGraph: {
     title: "外食栄養ガイド｜チェーン店のカロリー・PFC一覧",
     description:
-      "20以上のチェーン店の栄養データ + 14本の専門ガイド記事。",
+      "32チェーンの栄養データ + 40本以上の専門ガイド記事。",
     type: "website",
   },
 };
@@ -410,7 +410,7 @@ export default function GuidePage() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-10 text-center">
           <div className="inline-flex items-center gap-2 bg-sky-100 text-sky-700 rounded-full px-4 py-1.5 text-xs font-medium mb-5">
             <BookOpen className="w-3.5 h-3.5" />
-            全44記事 + 22チェーン栄養データ
+            全44記事 + 32チェーン栄養データ
           </div>
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3 leading-tight">
             外食栄養ガイド
@@ -529,9 +529,21 @@ export default function GuidePage() {
             <Utensils className="w-5 h-5 text-sky-500" />
             チェーン店別 栄養データ
           </h2>
-          <p className="text-sm text-gray-500 mb-6">
+          <p className="text-sm text-gray-500 mb-4">
             カロリー・タンパク質・脂質・炭水化物の一覧を確認できます
           </p>
+
+          {/* 目的別ランキングハブへの導線(高タンパク/低カロリー/ダイエット等) */}
+          <Link
+            href="/chains"
+            className="flex items-center justify-between gap-3 bg-gradient-to-r from-sky-50 to-cyan-50 border border-sky-100 rounded-xl px-5 py-4 mb-6 hover:shadow-md transition-all"
+          >
+            <div>
+              <p className="text-sm font-bold text-gray-900">目的別ランキングから探す</p>
+              <p className="text-xs text-gray-500 mt-0.5">32チェーン × 高タンパク・低カロリー・ダイエット・低糖質ほか</p>
+            </div>
+            <ChevronRight className="w-5 h-5 text-sky-400 flex-shrink-0" />
+          </Link>
 
           <div className="space-y-8">
             {chainCategories.map((category) => (
@@ -559,7 +571,7 @@ export default function GuidePage() {
             外食の栄養管理を、もっとラクに。
           </h2>
           <p className="text-sky-100 text-sm sm:text-base mb-6 max-w-lg mx-auto">
-            20チェーン・500メニューの栄養データ。3タップで記録完了。
+            32チェーン・6,000品以上の栄養データ。3タップで記録完了。
           </p>
           <Link
             href="/signup"

@@ -95,6 +95,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }
 
+  // ─── チェーンハブページ（/chains/[slug]） ───
+  // 256の目的別ランキング(/chains/[slug]/[goal])の親ハブ。CHAIN_SLUGS が単一の真実。
+  const chainHubPages: MetadataRoute.Sitemap = CHAIN_SLUGS.map((slug) => ({
+    url: `${baseUrl}/chains/${slug}`,
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: 0.8,
+  }));
+
   // ─── カテゴリハブページ ───
   const categoryPages: MetadataRoute.Sitemap = Object.keys(ARTICLE_CATEGORIES).map((category) => ({
     url: `${baseUrl}/guide/category/${category}`,
@@ -106,9 +115,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     { url: baseUrl, lastModified: now, changeFrequency: "daily", priority: 1.0 },
     { url: `${baseUrl}/guide`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${baseUrl}/chains`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     ...categoryPages,
     ...guidePages,
     ...chainPages,
+    ...chainHubPages,
     ...programmaticPages,
     ...itemPages,
     // /search は認証必須なので sitemap から除外
