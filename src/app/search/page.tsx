@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { Search, SlidersHorizontal, Store, Utensils, ShoppingCart, Dumbbell, Flame, Leaf, Zap, Tag } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
+import { trackEvent } from "@/lib/track";
 
 // ─── DualRangeSlider ─────────────────────────────────────────────────────────
 
@@ -158,11 +159,13 @@ export default function SearchPage() {
   };
 
   const handleSearch = () => {
+    trackEvent("search_submit", { method: "filter" });
     router.push(`/search/results?${buildParams()}`);
     setShowSheet(false);
   };
 
   const handleCategoryTap = (catValue: string) => {
+    trackEvent("search_submit", { method: "category", category: catValue });
     const p = new URLSearchParams();
     p.set("category", catValue);
     if (storeType) p.set("source_type", storeType);
@@ -170,6 +173,7 @@ export default function SearchPage() {
   };
 
   const handleQuickFilter = (params: Record<string, string>) => {
+    trackEvent("search_submit", { method: "quick" });
     const p = new URLSearchParams(params);
     router.push(`/search/results?${p.toString()}`);
   };

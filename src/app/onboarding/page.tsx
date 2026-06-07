@@ -7,6 +7,7 @@ import { ChevronRight, ChevronLeft, SkipForward, CheckCircle } from "lucide-reac
 import { LogoIcon } from "@/components/Logo";
 import ScrollPicker from "@/components/ScrollPicker";
 import { NativePushToggle } from "@/components/native/NativePushToggle";
+import { trackEvent } from "@/lib/track";
 
 const TOTAL_STEPS = 12;
 
@@ -113,6 +114,7 @@ export default function OnboardingPage() {
         targetWeight, activityLevel, favoriteChains, favoriteFoods,
         targetCalories, completedAt: new Date().toISOString(),
       }));
+      trackEvent("onboarding_complete", { goal });
       router.push("/dashboard");
     } catch {
       setSaving(false);
