@@ -23,6 +23,7 @@ import { AffiliateProductGrid } from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.tabenavi.jp/guide/marugame-diet" },
   title:
     "【2026年最新】丸亀製麺ダイエットガイド｜うどんは太る？低カロリーメニューの選び方 | たべなび",
   description:

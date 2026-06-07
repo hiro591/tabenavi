@@ -22,6 +22,7 @@ import {
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.tabenavi.jp/guide/no-exercise-diet" },
   title:
     "【2026年最新】運動なしで痩せる！食事だけで確実に体重を落とす方法 | たべなび",
   description:

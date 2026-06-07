@@ -24,6 +24,7 @@ import {
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.tabenavi.jp/guide/ootoya-diet" },
   title:
     "【2026年最新】大戸屋ダイエットガイド｜定食の選び方とおすすめ低カロリーメニュー | たべなび",
   description:

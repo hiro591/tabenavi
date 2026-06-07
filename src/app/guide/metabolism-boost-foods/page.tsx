@@ -22,6 +22,7 @@ import {
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.tabenavi.jp/guide/metabolism-boost-foods" },
   title:
     "【2026年最新】代謝を上げる食べ物ランキングTOP15｜痩せやすい体を食事で作る | たべなび",
   description:

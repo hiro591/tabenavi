@@ -30,6 +30,7 @@ import {
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.tabenavi.jp/guide/mcdonalds-diet" },
   title:
     "マクドナルドでダイエット｜低カロリーメニューランキングと太らない食べ方【2026年最新】 | たべなび",
   description:

@@ -23,6 +23,7 @@ import {
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.tabenavi.jp/guide/curry-diet" },
   title:
     "【2026年最新】カレーのカロリーは？ダイエット中の食べ方とチェーン店別比較 | たべなび",
   description:

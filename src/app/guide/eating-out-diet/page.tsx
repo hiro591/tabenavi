@@ -27,6 +27,7 @@ import {
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.tabenavi.jp/guide/eating-out-diet" },
   title:
     "【2026年最新】外食ダイエット完全ガイド｜チェーン店別おすすめメニューと太らない食べ方 | たべなび",
   description:

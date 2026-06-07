@@ -93,11 +93,13 @@ export async function generateMetadata({
 
   const title = `${chain.name}の${goalInfo.title}ランキング【2026年最新】| たべなび`;
   const description = `${chain.name}の${goalInfo.description}公式栄養データに基づくPFC・カロリー・価格を一覧比較。`;
+  const url = `https://www.tabenavi.jp/chains/${slug}/${goal}`;
 
   return {
     title,
     description,
-    openGraph: { title, description, type: "article", url: `https://www.tabenavi.jp/chains/${slug}/${goal}` },
+    alternates: { canonical: url },
+    openGraph: { title, description, type: "article", url },
   };
 }
 

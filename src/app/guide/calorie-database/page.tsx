@@ -29,6 +29,7 @@ export const revalidate = 43200;
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.tabenavi.jp/guide/calorie-database" },
   title:
     "【2026年最新版】外食チェーン店カロリー一覧【全メニュー完全版】 | たべなび",
   description:

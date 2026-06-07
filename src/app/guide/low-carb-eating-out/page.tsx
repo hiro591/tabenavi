@@ -32,6 +32,7 @@ import {
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.tabenavi.jp/guide/low-carb-eating-out" },
   title:
     "【2026年最新】糖質制限中でも外食OK！チェーン店の低糖質メニュー完全ガイド | たべなび",
   description:

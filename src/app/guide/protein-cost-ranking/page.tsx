@@ -29,6 +29,7 @@ import {
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.tabenavi.jp/guide/protein-cost-ranking" },
   title:
     "【2026年最新】外食タンパク質コスパ最強ランキング｜1gあたりの価格で徹底比較 | たべなび",
   description:

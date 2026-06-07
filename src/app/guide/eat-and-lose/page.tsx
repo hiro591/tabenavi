@@ -22,6 +22,7 @@ import {
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.tabenavi.jp/guide/eat-and-lose" },
   title:
     "【2026年最新】食べて痩せるダイエット完全ガイド｜我慢しないで確実に体重を落とす方法 | たべなび",
   description:

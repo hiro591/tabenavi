@@ -107,10 +107,12 @@ export async function generateMetadata({
   const title = `${chain ? chain + " " : ""}${item.name} カロリー・栄養成分 | たべなび`;
   const desc = `${chain ? chain + "の" : ""}${item.name}の栄養成分。カロリー${item.calories ?? "?"}kcal、タンパク質${item.protein ?? "?"}g、脂質${item.fat ?? "?"}g、炭水化物${item.carbs ?? "?"}g。`;
 
+  const url = `https://www.tabenavi.jp/items/${id}`;
   return {
     title,
     description: desc,
-    openGraph: { title, description: desc },
+    alternates: { canonical: url },
+    openGraph: { title, description: desc, url },
   };
 }
 

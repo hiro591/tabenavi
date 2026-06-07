@@ -26,6 +26,7 @@ import { AffiliateProductGrid } from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.tabenavi.jp/guide/familymart-diet" },
   title:
     "【2026年最新】ファミマダイエット完全ガイド｜低カロリー＆高タンパク商品ランキング | たべなび",
   description:

@@ -16,6 +16,7 @@ import { ARTICLE_CATEGORIES, RELATED_ARTICLES, type ArticleCategory } from "@/li
 
 export const metadata: Metadata = {
   title: "外食栄養ガイド｜チェーン店のカロリー・PFC一覧 | たべなび",
+  alternates: { canonical: "https://www.tabenavi.jp/guide" },
   description:
     "マクドナルド、吉野家、サイゼリヤなど32チェーンの栄養成分データ。ダイエット・筋トレ・糖質制限中の外食メニュー選びに。40本以上の専門ガイド記事も。",
   openGraph: {

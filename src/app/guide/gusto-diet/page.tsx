@@ -25,6 +25,7 @@ import { AffiliateProductGrid } from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.tabenavi.jp/guide/gusto-diet" },
   title:
     "【2026年最新】ガストダイエットガイド｜低カロリーメニューランキングとおすすめの食べ方 | たべなび",
   description:

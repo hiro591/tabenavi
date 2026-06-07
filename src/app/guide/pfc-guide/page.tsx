@@ -21,6 +21,7 @@ import {
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.tabenavi.jp/guide/pfc-guide" },
   title:
     "【2026年最新版】【初心者向け】PFCバランスとは？計算方法と外食での実践ガイド | たべなび",
   description:

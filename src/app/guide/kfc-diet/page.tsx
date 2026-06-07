@@ -25,6 +25,7 @@ import { AffiliateProductGrid } from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.tabenavi.jp/guide/kfc-diet" },
   title:
     "【2026年最新】ケンタッキーダイエットガイド｜意外と高タンパクなメニューの選び方 | たべなび",
   description:

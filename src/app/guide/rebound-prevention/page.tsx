@@ -22,6 +22,7 @@ import {
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.tabenavi.jp/guide/rebound-prevention" },
   title:
     "【2026年最新】リバウンドしない方法｜ダイエット後に体重を維持する科学的アプローチ | たべなび",
   description:

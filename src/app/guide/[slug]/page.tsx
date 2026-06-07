@@ -236,6 +236,7 @@ export async function generateMetadata({
       : `【2026年最新】${chain?.name ?? "外食"} カロリー・栄養成分一覧｜全メニューPFC表 | たべなび`,
     description:
       chain?.description ?? "外食チェーンの栄養成分一覧",
+    alternates: { canonical: `https://www.tabenavi.jp/guide/${slug}` },
   };
 }
 

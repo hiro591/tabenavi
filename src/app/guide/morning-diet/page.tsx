@@ -23,6 +23,7 @@ import {
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.tabenavi.jp/guide/morning-diet" },
   title:
     "【2026年最新】ダイエット中の朝食完全ガイド｜朝マック・コンビニ・チェーン店のおすすめメニュー | たべなび",
   description:

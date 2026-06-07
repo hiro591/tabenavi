@@ -22,6 +22,7 @@ import {
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.tabenavi.jp/guide/diet-plateau" },
   title:
     "【2026年最新】ダイエット停滞期の原因と乗り越え方｜体重が減らない時の5つの対策 | たべなび",
   description:

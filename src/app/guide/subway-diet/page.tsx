@@ -24,6 +24,7 @@ import {
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.tabenavi.jp/guide/subway-diet" },
   title:
     "【2026年最新】サブウェイダイエットガイド｜低カロリー＆高タンパクサンドの選び方 | たべなび",
   description:

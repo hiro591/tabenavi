@@ -22,6 +22,7 @@ import {
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.tabenavi.jp/guide/late-night-eating" },
   title:
     "【2026年最新】夜食で太らない方法｜深夜の外食・コンビニメニューおすすめガイド | たべなび",
   description:

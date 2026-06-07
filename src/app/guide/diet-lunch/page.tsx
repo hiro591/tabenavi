@@ -28,6 +28,7 @@ import {
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.tabenavi.jp/guide/diet-lunch" },
   title:
     "【2026年最新】ダイエット中のランチ完全ガイド｜外食チェーン店で500kcal以下のおすすめメニュー | たべなび",
   description:

@@ -21,6 +21,7 @@ import {
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.tabenavi.jp/guide/recording-diet" },
   title:
     "【2026年最新】レコーディングダイエットとは？記録するだけで痩せる科学的な理由と実践方法 | たべなび",
   description:

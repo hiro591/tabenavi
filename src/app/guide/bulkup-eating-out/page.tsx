@@ -22,6 +22,7 @@ import {
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.tabenavi.jp/guide/bulkup-eating-out" },
   title:
     "【2026年最新】増量期の外食完全ガイド｜バルクアップに最適なチェーン店メニュー | たべなび",
   description:

@@ -28,6 +28,7 @@ import {
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.tabenavi.jp/guide/family-restaurant-diet" },
   title:
     "【2026年最新】ファミレスダイエット完全ガイド｜サイゼリヤ・ガスト・デニーズのカロリー比較 | たべなび",
   description:

@@ -24,6 +24,7 @@ import {
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.tabenavi.jp/guide/dennys-diet" },
   title:
     "【2026年最新】デニーズダイエットガイド｜低カロリーメニューランキングとおすすめの食べ方 | たべなび",
   description:

@@ -28,6 +28,7 @@ import {
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.tabenavi.jp/guide/drinking-party-diet" },
   title:
     "【2026年最新】飲み会で太らない完全ガイド｜居酒屋メニューのカロリー・おつまみの選び方 | たべなび",
   description:

@@ -31,6 +31,7 @@ import {
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.tabenavi.jp/guide/saizeriya-diet" },
   title:
     "サイゼリヤでダイエット｜低カロリー＆高タンパクメニュー完全ガイド【2026年最新】 | たべなび",
   description:

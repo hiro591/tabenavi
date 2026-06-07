@@ -22,6 +22,7 @@ import {
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.tabenavi.jp/guide/cheat-day" },
   title:
     "【2026年最新】チートデイ完全ガイド｜正しいやり方・頻度・おすすめメニューを徹底解説 | たべなび",
   description:

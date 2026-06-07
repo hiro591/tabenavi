@@ -26,6 +26,7 @@ import {
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.tabenavi.jp/guide/muscle-eating-out" },
   title:
     "【2026年最新】筋トレ中の外食はこれで決まり！高タンパクチェーン店メニュー完全ガイド | たべなび",
   description:

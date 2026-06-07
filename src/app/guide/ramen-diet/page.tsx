@@ -27,6 +27,7 @@ import {
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.tabenavi.jp/guide/ramen-diet" },
   title:
     "【2026年最新】ラーメンはダイエット中に食べていい？カロリー比較と太らない食べ方 | たべなび",
   description:

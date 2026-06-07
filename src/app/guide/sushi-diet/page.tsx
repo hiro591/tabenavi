@@ -27,6 +27,7 @@ import {
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.tabenavi.jp/guide/sushi-diet" },
   title:
     "【2026年最新】回転寿司ダイエットガイド｜スシロー・くら寿司のカロリーと太らない食べ方 | たべなび",
   description:

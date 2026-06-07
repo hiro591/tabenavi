@@ -30,6 +30,7 @@ import {
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.tabenavi.jp/guide/daily-meal-plan" },
   title:
     "【2026年最新】外食だけで1日1500kcal！ダイエット食事プラン完全ガイド | たべなび",
   description:

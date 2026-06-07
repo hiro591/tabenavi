@@ -28,6 +28,7 @@ import { ArticleLayout } from "@/components/guide/ArticleLayout";
 export const revalidate = 86400;
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.tabenavi.jp/guide/low-fat-eating-out" },
   title:
     "【2026年最新版】外食で低脂質メニューを選ぶ完全ガイド｜チェーン店別おすすめ | たべなび",
   description:

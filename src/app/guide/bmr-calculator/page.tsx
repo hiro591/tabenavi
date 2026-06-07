@@ -22,6 +22,7 @@ import {
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.tabenavi.jp/guide/bmr-calculator" },
   title:
     "【2026年最新】基礎代謝の計算方法と上げ方｜痩せやすい体を作る完全ガイド | たべなび",
   description:

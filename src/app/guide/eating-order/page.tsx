@@ -21,6 +21,7 @@ import {
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.tabenavi.jp/guide/eating-order" },
   title:
     "【2026年最新】太らない食べ方・食べ順ガイド｜外食で実践できる5つのテクニック | たべなび",
   description:

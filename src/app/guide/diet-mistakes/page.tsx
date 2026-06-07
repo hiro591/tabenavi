@@ -22,6 +22,7 @@ import {
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.tabenavi.jp/guide/diet-mistakes" },
   title:
     "【2026年最新】ダイエットで絶対やってはいけないこと10選｜失敗する人の共通点 | たべなび",
   description:

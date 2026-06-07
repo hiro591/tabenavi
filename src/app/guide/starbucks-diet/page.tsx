@@ -25,6 +25,7 @@ import { AffiliateProductGrid } from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "https://www.tabenavi.jp/guide/starbucks-diet" },
   title:
     "【2026年最新】スタバダイエットガイド｜低カロリードリンクランキングと太らない注文術 | たべなび",
   description:
