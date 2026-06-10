@@ -327,7 +327,6 @@ const chainCategories = [
       { slug: "yoshinoya", chain: "吉野家" },
       { slug: "matsuya", chain: "松屋" },
       { slug: "sukiya", chain: "すき家" },
-      { slug: "nakau", chain: "なか卯" },
       { slug: "ootoya", chain: "大戸屋" },
       { slug: "yayoiken", chain: "やよい軒" },
     ],
@@ -411,7 +410,7 @@ export default function GuidePage() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-10 text-center">
           <div className="inline-flex items-center gap-2 bg-sky-100 text-sky-700 rounded-full px-4 py-1.5 text-xs font-medium mb-5">
             <BookOpen className="w-3.5 h-3.5" />
-            全44記事 + 32チェーン栄養データ
+            全45記事 + 32チェーン栄養データ
           </div>
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3 leading-tight">
             外食栄養ガイド

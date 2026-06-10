@@ -399,7 +399,7 @@ export default function ReboundPreventionPage() {
         {/* Mid-article CTA */}
         <CTABanner
           title="外食でも栄養管理を続けよう"
-          subtitle="たべなびなら20チェーン・500メニューの栄養データを無料で検索"
+          subtitle="たべなびなら32チェーン・6,000品以上の栄養データを無料で検索"
         />
 
         {/* Section 4: 外食生活でリバウンドを防ぐコツ */}

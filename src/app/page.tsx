@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { ChevronRight, Search, MapPin, Sparkles, Utensils, ArrowRight, Smartphone } from "lucide-react";
 import { getChainLogo } from "@/lib/chain-logos";
@@ -63,17 +64,15 @@ const jsonLd = {
     price: "0",
     priceCurrency: "JPY",
   },
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "4.8",
-    ratingCount: "32",
-    bestRating: "5",
-  },
   author: {
     "@type": "Organization",
     name: "たべなび",
     url: "https://www.tabenavi.jp",
   },
+};
+
+export const metadata: Metadata = {
+  alternates: { canonical: "https://www.tabenavi.jp" },
 };
 
 export default async function Home() {
@@ -465,53 +464,15 @@ export default async function Home() {
               );
             })}
           </div>
-        </div>
-      </section>
 
-      {/* ─── User Voices ─── */}
-      <section className="py-16 px-4 bg-gray-50">
-        <div className="max-w-4xl mx-auto">
-          <p className="text-center text-xs text-sky-500 uppercase tracking-widest mb-3 font-semibold">User voices</p>
-          <h2 className="text-center text-2xl sm:text-3xl font-bold mb-10 text-gray-900">
-            ユーザーの声
-          </h2>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-            <div className="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm">
-              <div className="flex items-center gap-0.5 mb-3">
-                {[...Array(5)].map((_, i) => (
-                  <svg key={i} className="w-3.5 h-3.5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
-                ))}
-              </div>
-              <p className="text-sm text-gray-600 leading-relaxed mb-3">
-                「PFCで検索できるのが神。筋トレ後にタンパク質30g以上で近くの店を探せるのは、たべなびだけ。」
-              </p>
-              <p className="text-xs text-gray-400">20代男性 · 筋トレ歴2年</p>
-            </div>
-
-            <div className="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm">
-              <div className="flex items-center gap-0.5 mb-3">
-                {[...Array(5)].map((_, i) => (
-                  <svg key={i} className="w-3.5 h-3.5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
-                ))}
-              </div>
-              <p className="text-sm text-gray-600 leading-relaxed mb-3">
-                「週5で外食の生活でも、カロリー管理が続けられた。チェーン店のデータが正確なのが信頼できる。」
-              </p>
-              <p className="text-xs text-gray-400">30代男性 · 会社員</p>
-            </div>
-
-            <div className="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm">
-              <div className="flex items-center gap-0.5 mb-3">
-                {[...Array(5)].map((_, i) => (
-                  <svg key={i} className="w-3.5 h-3.5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
-                ))}
-              </div>
-              <p className="text-sm text-gray-600 leading-relaxed mb-3">
-                「マップで近くのヘルシーメニューを探せるのが便利。ランチ選びが毎日楽しくなった。」
-              </p>
-              <p className="text-xs text-gray-400">20代女性 · ダイエット中</p>
-            </div>
+          <div className="text-center mt-7">
+            <Link
+              href="/chains"
+              className="inline-flex items-center gap-1 text-sm font-semibold text-sky-600 hover:text-sky-700 transition-colors"
+            >
+              チェーン別のカロリー・PFC一覧を見る
+              <ChevronRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </section>
@@ -604,6 +565,7 @@ export default async function Home() {
             </div>
             <div className="flex items-center gap-6 text-xs text-gray-400">
               <Link href="/guide" className="hover:text-gray-600 transition-colors">ガイド</Link>
+              <Link href="/chains" className="hover:text-gray-600 transition-colors">チェーン一覧</Link>
               <Link href="/privacy" className="hover:text-gray-600 transition-colors">プライバシー</Link>
               <Link href="/terms" className="hover:text-gray-600 transition-colors">利用規約</Link>
               <Link href="/contact" className="hover:text-gray-600 transition-colors">お問い合わせ</Link>

@@ -253,7 +253,7 @@ export default function NoExerciseDietPage() {
 
         <CTABanner
           title="外食メニューのカロリーを簡単チェック"
-          subtitle="たべなびなら20チェーン500メニューの栄養データが無料で使える"
+          subtitle="たべなびなら32チェーン・6,000品以上の栄養データが無料で使える"
         />
 
         {/* Section 3: 外食中心の食事プラン */}

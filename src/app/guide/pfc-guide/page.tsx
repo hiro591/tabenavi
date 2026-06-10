@@ -234,7 +234,7 @@ export default function PfcGuidePage() {
         {/* Mid-article CTA */}
         <CTABanner
           title="外食のPFCバランスをサクッと確認"
-          subtitle="たべなびなら20チェーン・500メニューの栄養成分をすぐに検索できます"
+          subtitle="たべなびなら32チェーン・6,000品以上の栄養成分をすぐに検索できます"
         />
 
         {/* ── Section 4: 外食でPFCを実践する方法 ── */}

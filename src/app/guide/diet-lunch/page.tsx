@@ -553,7 +553,7 @@ export default function DietLunchPage() {
         {/* End CTA */}
         <CTABanner
           title="あなたに合ったダイエットランチを探そう"
-          subtitle="たべなびで20チェーン以上のメニューからカロリーの低い順に検索できます"
+          subtitle="たべなびで32チェーン・6,000品以上からカロリーの低い順に検索できます"
         />
 
         {/* ArticleFooter */}

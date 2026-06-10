@@ -236,7 +236,7 @@ export default function LowCarbEatingOutPage() {
             items={[
               { name: "ライザップ牛サラダ", calories: 414, protein: 28.0, fat: 27.4, carbs: 17.2, highlight: true },
               { name: "牛皿（並）", calories: 267, protein: 15.3, fat: 19.4, carbs: 6.5, highlight: true },
-              { name: "牛丼（並）※参考", calories: 635, protein: 20.0, fat: 23.4, carbs: 89.0 },
+              { name: "牛丼（並）※参考", calories: 633, protein: 19.6, fat: 23.6, carbs: 88.2 },
             ]}
           />
           <TipBox title="吉野家で糖質を抑えるコツ">
@@ -367,7 +367,7 @@ export default function LowCarbEatingOutPage() {
           headers={["チェーン店", "おすすめメニュー", "カロリー", "糖質(C)", "タンパク質(P)"]}
           rows={[
             ["サイゼリヤ", "若鶏のグリル", "514 kcal", "10.8g", "35.6g"],
-            ["吉野家", "ライザップ牛サラダ", "414 kcal", "17.2g", "28.0g"],
+            ["吉野家", "ライザップ牛サラダ", "398 kcal", "17.2g", "28.0g"],
             ["すき家", "牛丼ライト", "425 kcal", "22.5g", "25.5g"],
             ["マクドナルド", "ナゲット5個+サラダ", "280 kcal", "15.2g", "16.4g"],
             ["サブウェイ", "チキンブレスト(サラダ)", "148 kcal", "10.5g", "18.0g"],
@@ -514,7 +514,7 @@ export default function LowCarbEatingOutPage() {
         {/* End CTA */}
         <CTABanner
           title="あなたに合った低糖質メニューを探そう"
-          subtitle="たべなびで22チェーン2,500メニューから糖質の低い順に検索できます"
+          subtitle="たべなびで32チェーン・6,000品以上から糖質の低い順に検索できます"
         />
 
         {/* FAQ */}
@@ -558,6 +558,7 @@ export default function LowCarbEatingOutPage() {
         {/* Update History */}
         <UpdateHistory
           entries={[
+            { date: "2026-06-08", note: "32チェーン・6,000品以上に対応拡大。栄養数値を公式データで再検証" },
             { date: "2026-05-12", note: "QuickAnswer・FAQ・著者情報を追加。22チェーン対応" },
             { date: "2026-03-19", note: "初稿公開" },
           ]}

@@ -364,7 +364,7 @@ export default function KfcDietPage() {
 
           <CTABanner
             title="たべなびで栄養管理を始めよう"
-            subtitle="20チェーン・500メニューの栄養データ、全部無料"
+            subtitle="32チェーン・6,000品以上の栄養データ、全部無料"
           />
         </section>
 

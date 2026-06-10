@@ -68,7 +68,8 @@ export default async function ChainHubPage({
   if (items.length === 0) notFound();
 
   // ハイライト指標(チェーンの特徴を一目で)
-  const withCal = items.filter((i) => (i.calories ?? 0) > 0);
+  // カロリー下限50: 山椒・紅生姜・たれ等の調味料/薬味を除外し、主要メニュー欄に実際の料理が並ぶようにする
+  const withCal = items.filter((i) => (i.calories ?? 0) >= 50);
   const withProtein = items.filter((i) => (i.protein ?? 0) > 0);
   const lowestCal = withCal.length
     ? withCal.reduce((a, b) => ((a.calories ?? 0) <= (b.calories ?? 0) ? a : b))

@@ -240,7 +240,7 @@ export default function EatingOutDietPage() {
             <p className="mb-4">
               吉野家でダイエット中に最も重要なのは
               <strong className="text-gray-900">サイズ選び</strong>
-              です。牛丼は並盛（635kcal）と大盛（863kcal）で約230kcalもの差があります。
+              です。牛丼は並盛（633kcal）と大盛（823kcal）で約190kcalもの差があります。
             </p>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 mb-4">
               <NutritionCard
@@ -519,7 +519,7 @@ export default function EatingOutDietPage() {
             },
             {
               q: "外食ダイエットを長く続けるコツは？",
-              a: "「我慢」より「選び方を覚える」ことが継続の鍵。チェーン別に「自分の鉄板メニュー3つ」を覚えておけば、迷いません。たべなびでは22チェーン・2,500メニューの栄養データを公開しているので、お気に入りを見つけて記録するのがおすすめです。",
+              a: "「我慢」より「選び方を覚える」ことが継続の鍵。チェーン別に「自分の鉄板メニュー3つ」を覚えておけば、迷いません。たべなびでは32チェーン・6,000品以上の栄養データを公開しているので、お気に入りを見つけて記録するのがおすすめです。",
             },
           ]}
         />
@@ -527,7 +527,7 @@ export default function EatingOutDietPage() {
         {/* Final CTA */}
         <CTABanner
           title="たべなびで、外食ダイエットを始めよう"
-          subtitle="ここまで読んでくれたあなたへ。22チェーン・2,500メニューの栄養データ、全部無料。"
+          subtitle="ここまで読んでくれたあなたへ。32チェーン・6,000品以上の栄養データ、全部無料。"
         />
 
         {/* Author Bio */}

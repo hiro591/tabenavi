@@ -86,7 +86,7 @@ const CHAIN_CATEGORIES = [
   },
   {
     category: "牛丼・定食チェーン",
-    chains: ["吉野家", "松屋", "すき家", "なか卯", "大戸屋", "やよい軒"],
+    chains: ["吉野家", "松屋", "すき家", "大戸屋", "やよい軒"],
     slug: "gyudon-teishoku",
   },
   {
@@ -119,7 +119,6 @@ const CHAIN_SLUG_MAP: Record<string, string> = {
   "吉野家": "yoshinoya",
   "松屋": "matsuya",
   "すき家": "sukiya",
-  "なか卯": "nakau",
   "大戸屋": "ootoya",
   "やよい軒": "yayoiken",
   "サイゼリヤ": "saizeriya",
@@ -472,6 +471,7 @@ export default async function CalorieDatabasePage() {
         {/* Update History */}
         <UpdateHistory
           entries={[
+            { date: "2026-06-08", note: "32チェーン・6,000品以上に対応拡大。栄養数値を公式データで再検証" },
             { date: "2026-05-12", note: "11チェーン2,500メニューに大規模拡張。QuickAnswer・FAQ・著者情報を追加" },
             { date: "2026-03-19", note: "初稿公開" },
           ]}

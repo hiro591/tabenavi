@@ -106,7 +106,7 @@ export default function SignupPage() {
                 <Utensils className="w-[18px] h-[18px] text-sky-500" />
               </div>
               <div>
-                <p className="font-semibold text-gray-700 text-sm">20チェーン・500メニュー対応</p>
+                <p className="font-semibold text-gray-700 text-sm">32チェーン・6,000品以上対応</p>
                 <p className="text-xs text-gray-400 mt-0.5">マクドナルド・吉野家・サイゼリヤなど主要チェーンを網羅</p>
               </div>
             </div>

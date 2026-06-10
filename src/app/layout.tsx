@@ -8,6 +8,7 @@ import { Analytics } from "@/components/Analytics";
 import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.tabenavi.jp"),
   title: "たべなび | 外食しながら、カラダづくり。",
   description:
     "外食専門の栄養管理アプリ。32チェーン・6,000品以上のカロリー・PFCを3タップで記録。マップで近くの高タンパクメニューを発見。外食しながら、カラダづくり。",

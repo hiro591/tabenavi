@@ -597,7 +597,7 @@ export default function BmrCalculatorPage() {
               { name: "サブウェイ ローストチキン", calories: 310, protein: 22.5, fat: 4.5, carbs: 42.0, highlight: true },
               { name: "大戸屋 しまほっけ定食", calories: 520, protein: 38.0, fat: 15.0, carbs: 55.0, highlight: true },
               { name: "ガスト 若鶏のグリル", calories: 350, protein: 32.0, fat: 12.5, carbs: 22.0, highlight: true },
-              { name: "吉野家 牛丼並盛", calories: 635, protein: 20.0, fat: 20.4, carbs: 92.0 },
+              { name: "吉野家 牛丼並盛", calories: 633, protein: 19.6, fat: 23.6, carbs: 88.2 },
               { name: "すき家 牛丼ライト", calories: 425, protein: 26.5, fat: 22.0, carbs: 24.0 },
               { name: "松屋 定食（焼き魚）", calories: 550, protein: 35.0, fat: 12.0, carbs: 70.0 },
             ]}

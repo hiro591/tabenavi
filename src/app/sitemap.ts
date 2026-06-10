@@ -122,7 +122,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...chainHubPages,
     ...programmaticPages,
     ...itemPages,
-    // /search は認証必須なので sitemap から除外
+    // /search は公開済み(登録不要・2026-06ファネル開放) — 索引対象
+    { url: `${baseUrl}/search`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/contact`, lastModified: now, changeFrequency: "yearly", priority: 0.4 },
     { url: `${baseUrl}/privacy`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
     { url: `${baseUrl}/terms`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },

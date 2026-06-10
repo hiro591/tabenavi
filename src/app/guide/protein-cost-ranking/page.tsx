@@ -548,7 +548,7 @@ export default function ProteinCostRankingPage() {
         {/* End CTA */}
         <CTABanner
           title="たべなびでタンパク質量をサクッと検索"
-          subtitle="20チェーン・500メニューの栄養データを無料で比較"
+          subtitle="32チェーン・6,000品以上の栄養データを無料で比較"
         />
 
         {/* ArticleFooter */}

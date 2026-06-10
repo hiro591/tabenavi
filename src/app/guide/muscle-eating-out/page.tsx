@@ -428,7 +428,7 @@ export default function MuscleEatingOutPage() {
 
         <CTABanner
           title="筋トレ×外食の最強パートナー"
-          subtitle="ここまで読んでくれたあなたへ。20チェーン・500メニューの栄養データ、全部無料。"
+          subtitle="ここまで読んでくれたあなたへ。32チェーン・6,000品以上の栄養データ、全部無料。"
         />
 
         {/* ─── Section 6: まとめ ─── */}

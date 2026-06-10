@@ -338,7 +338,7 @@ export function ArticleImage({
 
 export function CTABanner({
   title = "たべなびで栄養管理を始めよう",
-  subtitle = "20チェーン・500メニューの栄養データ、全部無料",
+  subtitle = "32チェーン・6,000品以上の栄養データ、全部無料",
 }: {
   title?: string;
   subtitle?: string;
@@ -692,7 +692,7 @@ export function AuthorBio() {
         <div className="flex-1">
           <p className="text-sm font-bold text-gray-900 mb-1">ヒロ（たべなび開発者）</p>
           <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-2">
-            外食中心の生活で86kgまで増えた後、外食のカロリー・PFCを「数字で選ぶ」ことで73kgまで13kg減量。その経験から、外食・コンビニ31チェーン・6,200以上のメニュー栄養データを各社公式サイトから取得・検証した「たべなび」を個人開発・運営しています。
+            外食中心の生活で86kgまで増えた後、外食のカロリー・PFCを「数字で選ぶ」ことで73kgまで13kg減量。その経験から、外食・コンビニ32チェーン・6,000品以上のメニュー栄養データを各社公式サイトから取得・検証した「たべなび」を個人開発・運営しています。
           </p>
           <Link
             href="/sources"

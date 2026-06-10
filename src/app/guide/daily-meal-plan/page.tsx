@@ -262,7 +262,7 @@ export default function DailyMealPlanPage() {
 
         <NutritionTable
           items={[
-            { name: "牛丼（並盛）", calories: 635, protein: 22.0, fat: 22.4, carbs: 89.0 },
+            { name: "牛丼（並盛）", calories: 633, protein: 19.6, fat: 23.6, carbs: 88.2 },
             { name: "牛皿（並盛）＋ライスS", calories: 528, protein: 20.5, fat: 20.2, carbs: 62.8, highlight: true },
           ]}
           highlightProtein
@@ -424,7 +424,7 @@ export default function DailyMealPlanPage() {
         {/* Mid-article CTA */}
         <CTABanner
           title="外食メニューのカロリーをすぐ検索"
-          subtitle="たべなびなら20チェーン・500メニューの栄養データが全部無料"
+          subtitle="たべなびなら32チェーン・6,000品以上の栄養データが全部無料"
         />
 
         {/* ─── Section 5: パターンC ─── */}
@@ -778,7 +778,7 @@ export default function DailyMealPlanPage() {
         {/* End CTA */}
         <CTABanner
           title="たべなびで今日の外食カロリーをチェック"
-          subtitle="22チェーン・2,500メニューの栄養データを無料で検索"
+          subtitle="32チェーン・6,000品以上の栄養データを無料で検索"
         />
 
         {/* FAQ */}
@@ -787,7 +787,7 @@ export default function DailyMealPlanPage() {
           items={[
             {
               q: "外食だけで本当に1,500kcalダイエットできる？",
-              a: "可能です。重要なのは「メニュー選び」と「組み合わせ」の2点。例えば朝にコンビニ朝食（350kcal）、昼に吉野家のライザップ牛サラダ（414kcal）、夜にサイゼリヤの若鶏のグリル+サラダ（600kcal）で合計約1,360kcal。さらに間食用にプロテインバー（150kcal）を加えても1,500kcal以下に収まります。",
+              a: "可能です。重要なのは「メニュー選び」と「組み合わせ」の2点。例えば朝にコンビニ朝食（350kcal）、昼に吉野家のライザップ牛サラダ（398kcal）、夜にサイゼリヤの若鶏のグリル+サラダ（600kcal）で合計約1,350kcal。さらに間食用にプロテインバー（150kcal）を加えても1,500kcal以下に収まります。",
             },
             {
               q: "1日1,500kcalは少なすぎませんか？",
@@ -822,6 +822,7 @@ export default function DailyMealPlanPage() {
         {/* Update History */}
         <UpdateHistory
           entries={[
+            { date: "2026-06-08", note: "32チェーン・6,000品以上に対応拡大。栄養数値を公式データで再検証" },
             { date: "2026-05-12", note: "QuickAnswer・FAQ・著者情報を追加。22チェーン2,500メニュー対応" },
             { date: "2026-03-19", note: "初稿公開" },
           ]}

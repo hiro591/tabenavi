@@ -162,7 +162,7 @@ export default async function ItemDetailPage({
     : `https://www.google.com/maps`;
 
   // チェーンページに繋ぐ目的別ランキング(全8目的)。chainSlug がある場合のみ。
-  // 6,200のメニューページから8目的ランキング全てに内部リンクを通す。
+  // 約6,000のメニューページから8目的ランキング全てに内部リンクを通す。
   const rankingLinks = chainSlug
     ? Object.entries(GOALS).map(([key, g]) => ({
         key,
@@ -202,7 +202,7 @@ export default async function ItemDetailPage({
 
   // ─── AEO(AI Overview対策): データ駆動FAQ ───────────────────────────────
   // 2026年: FAQリッチリザルトは廃止されたが FAQPage schema は AI Overview 引用に有効(可視Q&A必須)。
-  // 各回答に実数値を埋め込むため、6,200ページそれぞれで回答が一意 = 薄いコンテンツ判定を回避。
+  // 各回答に実数値を埋め込むため、約6,000ページそれぞれで回答が一意 = 薄いコンテンツ判定を回避。
   // 表示はカード(.toFixed(1))と統一。閾値判定は生値で行い、表示だけ整形する。
   const faqs: { q: string; a: string }[] = [];
   const g1 = (n: number) => n.toFixed(1); // P/F/C 表示用(小数1桁、カードと一致)
