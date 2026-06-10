@@ -3,6 +3,9 @@
 作成: 2026-06-04 / 使い方: 各セクションをコピペして該当サイトのフォーム・メールに貼るだけ。
 原則: **同文の大量送信は厳禁**(Googleペナルティ/送信ドメイン評価低下)。個別化マーク `【★個別化】` の箇所は必ず相手ごとに書き換えること。
 
+⚠ **送信前の必須確認**: 文中の連絡先 `tabenavi.app@gmail.com` が実際に受信できるか確認すること(未取得なら取得するか、実アドレスに全箇所差し替え)。被リンク営業の返信は全てここに来るため、放置すると返信が静かに全滅する。
+⚠ 「広告なし」の訴求は使わない(ガイド記事にPR表記付きアフィリエイトがあるため矛盾)。
+
 ---
 
 ## A-1. Appliv レビュー掲載依頼（フォーム本文・日本語）
@@ -23,7 +26,7 @@ App Store：「たべなび」で検索
 【他のダイエットアプリと違う点】
 ・マクドナルド/吉野家/サイゼリヤ/コンビニ3社など32チェーン・6,000品以上を収録
 ・栄養データは全て各社公式サイトから1件ずつ手動で取得・検証（AI推定値は不使用）
-・登録不要で全メニューを検索可能／完全無料・広告なし
+・登録不要で全メニューを検索可能／完全無料
 ・「タンパク質30g以上」「500kcal以下」など条件で店・メニューを横断検索できる
 
 【開発の背景】
@@ -47,7 +50,7 @@ Calorie & PFC tracker for eating out & konbini in Japan
 
 ※ 説明文（英語）:
 ```
-Tabenavi is a free calorie and PFC (protein/fat/carb) tracker built specifically for people who eat out or rely on convenience stores in Japan. It covers 6,000+ menu items from 32 major Japanese chains (McDonald's, Yoshinoya, Saizeriya, 7-Eleven, Lawson, FamilyMart, Sushiro, and more). All nutrition data is manually collected and verified from each chain's official source — no AI estimates. Search by goal ("30g+ protein", "under 500 kcal"), log a meal in 3 taps, and track daily totals. No sign-up required to search. Free, no ads. iOS and Web.
+Tabenavi is a free calorie and PFC (protein/fat/carb) tracker built specifically for people who eat out or rely on convenience stores in Japan. It covers 6,000+ menu items from 32 major Japanese chains (McDonald's, Yoshinoya, Saizeriya, 7-Eleven, Lawson, FamilyMart, Sushiro, and more). All nutrition data is manually collected and verified from each chain's official source — no AI estimates. Search by goal ("30g+ protein", "under 500 kcal"), log a meal in 3 taps, and track daily totals. No sign-up required to search. Free. iOS and Web.
 ```
 カテゴリ/タグ: Health & Fitness, Calorie Counter, Diet, Nutrition, Japan
 
@@ -77,7 +80,7 @@ Tabenavi is a free calorie and PFC (protein/fat/carb) tracker built specifically
 
 ▼ たべなびの特徴
 ・32チェーン6,000品以上のカロリー・PFCを収録（各社公式から手動検証・AI推定不使用）
-・登録不要で検索可能／完全無料・広告なし
+・登録不要で検索可能／完全無料
 ・データ出典と編集方針を全公開: https://www.tabenavi.jp/sources
 
 もし掲載候補としてご検討いただける場合、スクリーンショットや追加情報を喜んでお送りします。
@@ -104,7 +107,7 @@ tabenavi.app@gmail.com
 
 ### 中（〜120字）
 ```
-たべなびは、外食・コンビニ中心の人のための栄養管理アプリ。マクドナルド・吉野家・サイゼ・コンビニ3社など32チェーン6,000品以上のカロリー・PFCを各社公式から手動検証して収録。登録不要・無料・広告なしで検索でき、3タップで食事記録。iOS / Web対応。
+たべなびは、外食・コンビニ中心の人のための栄養管理アプリ。マクドナルド・吉野家・サイゼ・コンビニ3社など32チェーン6,000品以上のカロリー・PFCを各社公式から手動検証して収録。登録不要・無料で検索でき、無料登録すれば3タップで食事記録。iOS / Web対応。
 ```
 
 ### 長（〜300字）
@@ -113,7 +116,7 @@ tabenavi.app@gmail.com
 
 収録は32チェーン・6,000品以上（マクドナルド/吉野家/松屋/すき家/サイゼリヤ/ガスト/スシロー/くら寿司/セブン・ローソン・ファミマ ほか）。栄養データは全て各社公式サイトから1件ずつ手動で取得・検証しており、AIによる推定値は使用していません。
 
-「タンパク質30g以上」「500kcal以下」など目的で横断検索でき、登録不要・完全無料・広告なし。開発者自身が外食で13kg減量した実体験から個人開発しています。
+「タンパク質30g以上」「500kcal以下」など目的で横断検索でき、登録不要・完全無料。開発者自身が外食で13kg減量した実体験から個人開発しています。
 
 Web: https://www.tabenavi.jp ／ App Store「たべなび」で検索
 ```
@@ -123,9 +126,9 @@ Web: https://www.tabenavi.jp ／ App Store「たべなび」で検索
 ## 送信チェックリスト（今週）
 
 - [ ] 月: AlternativeTo（A-2）/ Appliv（A-1）/ SaaSHub（A-4短英訳）
-- [ ] 火: 個人開発ディレクトリ5件（A-4）/ BetaList 申請
+- [ ] 火: 個人開発ディレクトリ5件（A-4）
 - [ ] 水: 比較メディア個別ピッチ 3件（A-3、1通ずつ個別化）
-- [ ] 木: 比較メディア個別ピッチ 残り + 無料アプリレビュー窓口（アプリゲット/TABROID等）
+- [ ] 木: 比較メディア個別ピッチ 残り + 無料アプリレビュー窓口（アプリゲット等）
 - [ ] 金: 独自調査記事を公開（B-1、別途用意）
 
 ## KPI（2週間後）
