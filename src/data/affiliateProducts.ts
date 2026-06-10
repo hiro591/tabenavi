@@ -104,7 +104,7 @@ export const AFFILIATE_PRODUCTS: AffiliateProduct[] = [
     imageUrl: "https://shop.r10s.jp/ultora/cabinet/12530611/12989527/imgrc0108557950.jpg",
     category: "protein-powder",
     amazonUrl: PLACEHOLDER,
-    rakutenUrl: "https://af.moshimo.com/af/c/click?a_id=5495270&p_id=54&pc_id=54&pl_id=616&url=https%3A%2F%2Fitem.rakuten.co.jp%2Fultora%2Fulwpi100%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fultora%2Fi%2F10000118%2F",
+    rakutenUrl: PLACEHOLDER, // 旧もしも直リンクは商品ページ販売終了で死にリンク化 → 楽天ID付き検索リンクにフォールバック(2026-06-08)
     priceHint: "約4,000円〜 (1kg)",
     highlight: "俺の主力 / 年5袋消費",
   },

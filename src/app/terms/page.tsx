@@ -116,10 +116,10 @@ export default function TermsPage() {
             <p className="mt-2 font-medium text-gray-900">
               メール：
               <a
-                href="mailto:tabenavi.app@gmail.com"
+                href="mailto:hirokin20070518@gmail.com"
                 className="text-sky-500 hover:text-sky-600 transition-colors"
               >
-                tabenavi.app@gmail.com
+                hirokin20070518@gmail.com
               </a>
             </p>
           </section>

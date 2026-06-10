@@ -35,10 +35,10 @@ export default function ContactPage() {
         <div className="bg-sky-50 border border-sky-200 rounded-xl p-6 mb-10">
           <p className="text-sm text-gray-700 mb-1">メールでのお問い合わせ</p>
           <a
-            href="mailto:tabenavi.app@gmail.com"
+            href="mailto:hirokin20070518@gmail.com"
             className="text-lg font-semibold text-sky-600 hover:text-sky-700 transition-colors"
           >
-            tabenavi.app@gmail.com
+            hirokin20070518@gmail.com
           </a>
         </div>
 
