@@ -122,6 +122,12 @@ const guideArticles = [
     tag: "牛丼",
   },
   {
+    slug: "hamburger-comparison",
+    title: "ハンバーガー5社カロリー比較",
+    description: "マック・モス・バーキン・ケンタ・ゼッテリアを比較",
+    tag: "バーガー",
+  },
+  {
     slug: "low-fat-eating-out",
     title: "低脂質な外食メニューガイド",
     description: "脂質を抑えたい人向けの外食選び",
@@ -410,7 +416,7 @@ export default function GuidePage() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-10 text-center">
           <div className="inline-flex items-center gap-2 bg-sky-100 text-sky-700 rounded-full px-4 py-1.5 text-xs font-medium mb-5">
             <BookOpen className="w-3.5 h-3.5" />
-            全45記事 + 32チェーン栄養データ
+            全46記事 + 32チェーン栄養データ
           </div>
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3 leading-tight">
             外食栄養ガイド

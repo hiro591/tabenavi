@@ -70,8 +70,9 @@ export const RELATED_ARTICLES: RelatedArticle[] = [
   { slug: "diet-lunch", title: "ダイエット中のランチガイド", description: "500kcal以下のランチメニューを厳選。", category: "scene" },
   { slug: "drinking-party-diet", title: "飲み会で太らないガイド", description: "お酒のカロリーとおつまみの選び方。", category: "scene" },
 
-  // ─── cuisine (5) ──────────────────────────────────
+  // ─── cuisine (6) ──────────────────────────────────
   { slug: "gyudon-comparison", title: "牛丼チェーン栄養比較", description: "吉野家・松屋・すき家の栄養成分を比較。", category: "cuisine" },
+  { slug: "hamburger-comparison", title: "ハンバーガー5社カロリー比較", description: "マック・モス・バーキン・ケンタ・ゼッテリアを徹底比較。", category: "cuisine" },
   { slug: "ramen-diet", title: "ラーメンとダイエット", description: "カロリー比較と太らない食べ方。", category: "cuisine" },
   { slug: "curry-diet", title: "カレーとダイエット", description: "チェーン店別カロリー比較。", category: "cuisine" },
   { slug: "sushi-diet", title: "回転寿司ダイエットガイド", description: "ネタ別カロリーと太らない食べ方。", category: "cuisine" },
