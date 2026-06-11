@@ -1,15 +1,18 @@
 'use client'
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useState, Suspense } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
 import { ClientAuthRedirect } from '@/components/ClientAuthRedirect'
 import { CheckCircle, ChevronRight, Utensils, BarChart3, MapPin } from 'lucide-react'
 import { Logo } from '@/components/Logo'
+import { authErrorMessage, safeNextPath } from '@/lib/auth-errors'
 
-export default function SignupPage() {
+function SignupForm() {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const next = safeNextPath(searchParams.get('next'))
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -40,13 +43,14 @@ export default function SignupPage() {
     })
 
     if (error) {
-      setError(error.message)
+      setError(authErrorMessage(error, '登録に失敗しました。時間をおいてお試しください。'))
       setLoading(false)
       return
     }
 
     if (data.session) {
-      router.push('/onboarding')
+      // オンボーディング完了後に元の文脈(記録CTA等)へ復帰できるよう next を引き回す
+      router.push(next ? `/onboarding?next=${encodeURIComponent(next)}` : '/onboarding')
       return
     }
 
@@ -223,7 +227,7 @@ export default function SignupPage() {
 
           <p className="text-center text-xs text-gray-400 mt-5">
             すでにアカウントをお持ちの方は
-            <Link href="/login" className="text-sky-500 hover:text-sky-600 font-medium ml-1 transition-colors">
+            <Link href={next ? `/login?next=${encodeURIComponent(next)}` : '/login'} className="text-sky-500 hover:text-sky-600 font-medium ml-1 transition-colors">
               ログイン
             </Link>
           </p>
@@ -234,5 +238,13 @@ export default function SignupPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function SignupPage() {
+  return (
+    <Suspense fallback={null}>
+      <SignupForm />
+    </Suspense>
   )
 }

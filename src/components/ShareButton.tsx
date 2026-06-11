@@ -3,10 +3,20 @@
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { Share2, Check, MessageCircle } from "lucide-react";
-import type { MenuItem, ChainRestaurant } from "@/types/database";
+
+// 栄養値はDB上nullableなので、null安全な構造的型で受ける(検索結果のnull栄養値でクラッシュしない)
+type ShareItem = {
+  id: string;
+  name: string;
+  calories: number | null;
+  protein: number | null;
+  fat: number | null;
+  carbs: number | null;
+  chain_restaurants?: { name: string } | null;
+};
 
 type Props = {
-  item: MenuItem & { chain_restaurants?: ChainRestaurant };
+  item: ShareItem;
   variant?: "icon" | "full";
 };
 
@@ -16,7 +26,8 @@ export default function ShareButton({ item, variant = "icon" }: Props) {
   const [copied, setCopied] = useState(false);
 
   const chainName = item.chain_restaurants?.name || "";
-  const shareText = `${chainName} ${item.name}\n${item.calories}kcal｜P${item.protein.toFixed(1)}g F${item.fat.toFixed(1)}g C${item.carbs.toFixed(1)}g`;
+  const fmt = (v: number | null) => (v != null ? v.toFixed(1) : "-");
+  const shareText = `${chainName} ${item.name}\n${item.calories ?? "-"}kcal｜P${fmt(item.protein)}g F${fmt(item.fat)}g C${fmt(item.carbs)}g`;
   const shareUrl = `https://www.tabenavi.jp/items/${item.id}?utm_source=share&utm_medium=social`;
 
   const logShare = async (platform: string) => {

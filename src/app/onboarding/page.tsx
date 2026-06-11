@@ -1,13 +1,14 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
-import { useRouter } from "next/navigation";
+import { useState, useEffect, useMemo, Suspense } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { ChevronRight, ChevronLeft, SkipForward, CheckCircle } from "lucide-react";
 import { LogoIcon } from "@/components/Logo";
 import ScrollPicker from "@/components/ScrollPicker";
 import { NativePushToggle } from "@/components/native/NativePushToggle";
 import { trackEvent } from "@/lib/track";
+import { safeNextPath } from "@/lib/auth-errors";
 
 const TOTAL_STEPS = 12;
 
@@ -62,8 +63,10 @@ function calculateTargetCalories({
 
 // ─── Page ────────────────────────────────────────────────────────────────────
 
-export default function OnboardingPage() {
+function OnboardingFlow() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const nextPath = safeNextPath(searchParams.get("next"));
   const [step, setStep] = useState(1);
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState(false);
@@ -78,7 +81,6 @@ export default function OnboardingPage() {
   const [targetWeight, setTargetWeight] = useState<number>(60);
   const [activityLevel, setActivityLevel] = useState<string | null>(null);
   const [favoriteChains, setFavoriteChains] = useState<string[]>([]);
-  const [favoriteFoods, setFavoriteFoods] = useState<string[]>([]);
 
   const [chains, setChains] = useState<Chain[]>([]);
 
@@ -97,7 +99,6 @@ export default function OnboardingPage() {
   const prev = () => setStep((s) => Math.max(s - 1, 1));
 
   const toggleChain = (id: string) => setFavoriteChains((p) => p.includes(id) ? p.filter((c) => c !== id) : [...p, id]);
-  const toggleFood = (f: string) => setFavoriteFoods((p) => p.includes(f) ? p.filter((x) => x !== f) : [...p, f]);
 
   const handleComplete = async () => {
     setSaving(true);
@@ -111,11 +112,12 @@ export default function OnboardingPage() {
       }
       localStorage.setItem("onboarding", JSON.stringify({
         goal, timeline, eatingOutFreq, gender, birthYear, height, weight,
-        targetWeight, activityLevel, favoriteChains, favoriteFoods,
+        targetWeight, activityLevel, favoriteChains,
         targetCalories, completedAt: new Date().toISOString(),
       }));
       trackEvent("onboarding_complete", { goal });
-      router.push("/dashboard");
+      // 記録CTA等から登録した場合は元の文脈(例: /record?menu_id=xxx)へ復帰
+      router.push(nextPath ?? "/dashboard");
     } catch {
       setSaving(false);
       setSaveError(true);
@@ -408,5 +410,13 @@ function Row({ label, value }: { label: string; value: string }) {
       <span className="text-gray-400">{label}</span>
       <span className="font-semibold text-gray-700">{value}</span>
     </div>
+  );
+}
+
+export default function OnboardingPage() {
+  return (
+    <Suspense fallback={null}>
+      <OnboardingFlow />
+    </Suspense>
   );
 }

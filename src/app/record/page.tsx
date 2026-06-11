@@ -3,6 +3,7 @@
 import { useEffect, useState, useMemo } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { localDayRangeISO } from "@/lib/date";
 import type { ChainRestaurant, MenuItem } from "@/types/database";
 import Link from "next/link";
 import { Suspense } from "react";
@@ -126,11 +127,12 @@ function RecordPageContent() {
     async function fetchRemaining() {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return;
-      const today = new Date().toISOString().split("T")[0];
+      // ローカル日(JST等)基準。UTC日付だと朝9時前の記録が前日扱いになる
+      const { startISO, endISO } = localDayRangeISO();
       const [profileRes, logsRes] = await Promise.all([
         supabase.from("profiles").select("target_calories").eq("id", user.id).single(),
         supabase.from("food_logs").select("calories").eq("user_id", user.id)
-          .gte("logged_at", `${today}T00:00:00`).lte("logged_at", `${today}T23:59:59`),
+          .gte("logged_at", startISO).lt("logged_at", endISO),
       ]);
       const target = profileRes.data?.target_calories ?? 2000;
       const consumed = logsRes.data?.reduce((sum, l) => sum + (l.calories || 0), 0) ?? 0;
@@ -432,7 +434,7 @@ function RecordPageContent() {
                       className="w-full bg-white rounded-xl p-4 border border-gray-100 hover:border-sky-300 hover:shadow-md transition-all text-left active:scale-[0.98]"
                     >
                       <div className="flex justify-between items-start">
-                        <span className="font-medium text-gray-800">
+                        <span className="font-medium text-gray-800 line-clamp-2 min-w-0">
                           {menu.name}
                         </span>
                         <span className="text-sky-500 font-bold text-sm whitespace-nowrap ml-2">

@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
+import { createPublicClient } from "@/lib/supabase/public";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -116,7 +116,7 @@ export default async function ChainGoalPage({
 
   if (!chain || !goalInfo) notFound();
 
-  const supabase = await createClient();
+  const supabase = createPublicClient();
 
   const { data: chainRow } = await supabase
     .from("chain_restaurants")

@@ -8,6 +8,8 @@ import { Home, Search, User, Plus, Heart } from "lucide-react";
 const HIDDEN_PATHS = [
   "/login",
   "/signup",
+  "/reset-password",
+  "/update-password",
   "/onboarding",
   "/admin",
   "/guide",
@@ -46,6 +48,7 @@ export default function AppBottomNav() {
         {/* Center FAB - Record */}
         <Link
           href="/record"
+          aria-label="食事を記録"
           className="flex items-center justify-center -mt-5"
         >
           <div className="w-12 h-12 bg-gradient-to-br from-sky-400 to-cyan-500 rounded-full shadow-lg shadow-sky-200 flex items-center justify-center text-white active:scale-95 transition-transform">
@@ -74,6 +77,7 @@ function NavItem({
   return (
     <Link
       href={href}
+      aria-current={active ? "page" : undefined}
       className={`flex flex-col items-center gap-0.5 min-w-[48px] py-1 transition-colors ${
         active ? "text-sky-500" : "text-gray-400"
       }`}

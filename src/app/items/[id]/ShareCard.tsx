@@ -56,7 +56,7 @@ export default function ShareCard({ item, variant = "default" }: ShareCardProps)
   const storeName = item.chain_restaurants?.name ?? "";
   const cardStyle = getCardStyle(item.source_type);
 
-  const shareUrl = `https://tabenavi.jp/items/${item.id}`;
+  const shareUrl = `https://www.tabenavi.jp/items/${item.id}?utm_source=share&utm_medium=social`;
   const shareText = `【${storeName}】${item.name}\n${item.calories ?? "-"}kcal / タンパク質${item.protein ?? "-"}g\n\n#筋トレ飯 #マクロ管理 #たべなび`;
 
   async function handleWebShare() {

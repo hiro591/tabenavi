@@ -1,4 +1,5 @@
-import { createClient } from "@/lib/supabase/server";
+import { cache } from "react";
+import { createPublicClient } from "@/lib/supabase/public";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -88,18 +89,30 @@ function getSuitabilityBadges(item: MenuItem) {
 // Menu data changes infrequently — 24h freshness is acceptable.
 export const revalidate = 86400;
 
+// 6,000ページをビルド時に全生成はしない(ビルド時間対策)。
+// 空のgenerateStaticParamsでSSGにオプトインし、初回アクセス時に生成→24hキャッシュ(オンデマンドISR)。
+export async function generateStaticParams() {
+  return [];
+}
+
+// generateMetadataとページ本体で同一クエリを共有(cache()でリクエスト内1回に)
+const getItem = cache(async (id: string) => {
+  const supabase = createPublicClient();
+  const { data } = await supabase
+    .from("menu_items")
+    .select("*, chain_restaurants(name, emoji)")
+    .eq("id", id)
+    .single<MenuItem>();
+  return data;
+});
+
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ id: string }>;
 }): Promise<Metadata> {
   const { id } = await params;
-  const supabase = await createClient();
-  const { data: item } = await supabase
-    .from("menu_items")
-    .select("*, chain_restaurants(name)")
-    .eq("id", id)
-    .single();
+  const item = await getItem(id);
 
   if (!item) return { title: "メニュー | たべなび" };
 
@@ -122,18 +135,14 @@ export default async function ItemDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const supabase = await createClient();
 
-  const { data: item } = await supabase
-    .from("menu_items")
-    .select("*, chain_restaurants(name, emoji)")
-    .eq("id", id)
-    .single<MenuItem>();
+  const item = await getItem(id);
 
   if (!item) {
     notFound();
   }
 
+  const supabase = createPublicClient();
   const { data: similarItems } = await supabase
     .from("menu_items")
     .select("*, chain_restaurants(name, emoji)")
@@ -571,7 +580,7 @@ export default async function ItemDetailPage({
       </div>
 
       {/* Sticky Bottom Action Bar */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-t border-gray-100 py-3 px-4 z-50">
+      <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-t border-gray-100 pt-3 px-4 pb-[calc(0.75rem+env(safe-area-inset-bottom))] z-50">
         <div className="max-w-lg mx-auto space-y-2">
           <div className="flex gap-2">
             <a

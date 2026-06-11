@@ -15,6 +15,7 @@ import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
+import { localDateStr, localDateStrDaysAgo } from "@/lib/date";
 
 type WeightLog = {
   id: string;
@@ -37,7 +38,7 @@ export default function WeightPage() {
   const [deleting, setDeleting] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const today = new Date().toISOString().split("T")[0];
+  const today = localDateStr(); // ローカル日付(UTC日付だと朝9時前が前日になる)
 
   const fetchData = useCallback(async () => {
     const {
@@ -48,9 +49,7 @@ export default function WeightPage() {
       return;
     }
 
-    const thirtyDaysAgo = new Date();
-    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-    const thirtyDaysAgoStr = thirtyDaysAgo.toISOString().split("T")[0];
+    const thirtyDaysAgoStr = localDateStrDaysAgo(30);
 
     // Fetch last 30 days for chart
     const { data: logs30 } = await supabase
@@ -84,8 +83,9 @@ export default function WeightPage() {
       .eq("logged_at", today)
       .maybeSingle();
 
+    // 削除直後でも todayEntry を必ず実状態に同期(古いIDへの0件UPDATEによるサイレント喪失を防ぐ)
+    setTodayEntry((todayData as WeightLog) ?? null);
     if (todayData) {
-      setTodayEntry(todayData as WeightLog);
       setWeight(String(todayData.weight));
     }
 

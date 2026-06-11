@@ -1,12 +1,18 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter, usePathname } from "next/navigation";
+import { toast } from "sonner";
 import { createClient } from "@/lib/supabase/client";
+import { trackEvent } from "@/lib/track";
 
 export default function FavoriteButton({ itemId }: { itemId: string }) {
+  const router = useRouter();
+  const pathname = usePathname();
   const [isFavorited, setIsFavorited] = useState(false);
   const [userId, setUserId] = useState<string>("");
   const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     const supabase = createClient();
@@ -31,22 +37,39 @@ export default function FavoriteButton({ itemId }: { itemId: string }) {
   }, [itemId]);
 
   const toggleFavorite = async () => {
-    if (!userId) return;
-    const supabase = createClient();
-
-    if (isFavorited) {
-      setIsFavorited(false);
-      await supabase
-        .from("favorites")
-        .delete()
-        .eq("menu_item_id", itemId)
-        .eq("user_id", userId);
-    } else {
-      setIsFavorited(true);
-      await supabase
-        .from("favorites")
-        .insert({ user_id: userId, menu_item_id: itemId });
+    // 匿名ユーザー: 無言no-opにせず、登録の価値を伝えて誘導(完了後はこのページに復帰)
+    if (!userId) {
+      trackEvent("favorite_tap_anonymous", { item_id: itemId });
+      toast("お気に入りは無料登録（30秒）で使えます", {
+        description: "よく食べるメニューを保存して、すぐ呼び出せます",
+        action: {
+          label: "無料登録",
+          onClick: () => router.push(`/signup?next=${encodeURIComponent(pathname)}`),
+        },
+      });
+      return;
     }
+    if (saving) return; // 連打ガード
+    const supabase = createClient();
+    const prev = isFavorited;
+    setIsFavorited(!prev); // 楽観更新
+    setSaving(true);
+
+    const { error } = prev
+      ? await supabase
+          .from("favorites")
+          .delete()
+          .eq("menu_item_id", itemId)
+          .eq("user_id", userId)
+      : await supabase
+          .from("favorites")
+          .insert({ user_id: userId, menu_item_id: itemId });
+
+    if (error) {
+      setIsFavorited(prev); // 失敗時ロールバック
+      toast.error("お気に入りの更新に失敗しました。もう一度お試しください");
+    }
+    setSaving(false);
   };
 
   if (loading) {
@@ -73,6 +96,8 @@ export default function FavoriteButton({ itemId }: { itemId: string }) {
   return (
     <button
       onClick={toggleFavorite}
+      aria-pressed={isFavorited}
+      aria-label={isFavorited ? "お気に入りから削除" : "お気に入りに追加"}
       className={`flex items-center justify-center gap-1 px-4 py-3 border rounded-xl transition-colors ${
         isFavorited
           ? "border-red-200 bg-red-50 text-red-500"

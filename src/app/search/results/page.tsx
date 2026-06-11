@@ -8,6 +8,8 @@ import { getChainLogo } from "@/lib/chain-logos";
 import { ChevronLeft, Heart, Plus, Utensils, SlidersHorizontal, LocateFixed, RefreshCw } from "lucide-react";
 import RestaurantRequest from "@/components/RestaurantRequest";
 import ShareButton from "@/components/ShareButton";
+import { toast } from "sonner";
+import { trackEvent } from "@/lib/track";
 
 const SORT_OPTIONS = [
   { label: "おすすめ順",       value: "recommended" },
@@ -46,6 +48,10 @@ function SearchResultsContent() {
   const [loadingMore, setLoadingMore] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
+  const [fetchError, setFetchError] = useState(false);
+  const [totalCount, setTotalCount] = useState<number | null>(null);
+  const latestReq = useRef(0); // 後着の旧レスポンスがUIを上書きするのを防ぐ世代ガード
+  const lastFilterKey = useRef<string | null>(null);
   const [userId, setUserId] = useState<string>("");
   const [favoriteIds, setFavoriteIds] = useState<Set<string>>(new Set());
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
@@ -246,7 +252,9 @@ function SearchResultsContent() {
       bbox = `${b.getSouth()},${b.getWest()},${b.getNorth()},${b.getEast()}`;
     }
 
-    const nameRegex = chainNames.slice(0, 15).join("|");
+    // チェーン名の正規表現メタ文字をエスケープ(「(」や「+」を含む店名でクエリが壊れるのを防ぐ)
+    const escapeRe = (v: string) => v.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const nameRegex = chainNames.slice(0, 15).map(escapeRe).join("|");
     const overpassQuery = `[out:json][timeout:15];(
       node["amenity"="restaurant"]["name"~"${nameRegex}"](${bbox});
       node["amenity"="fast_food"]["name"~"${nameRegex}"](${bbox});
@@ -302,7 +310,9 @@ function SearchResultsContent() {
 
         markersRef.current.push(marker);
       });
-    } catch {}
+    } catch {
+      toast("周辺店舗を取得できませんでした", { description: "時間をおいて再検索してください" });
+    }
   }, [items]);
 
   // Auto-search on initial load
@@ -332,10 +342,23 @@ function SearchResultsContent() {
 
   // ─── Fetch items ────────────────────────────────────────────────────────────
 
+  const filterKey = [searchQ, category, sourceType, calorieMin, calorieMax, proteinMin, proteinMax, fatMin, fatMax, priceMin, priceMax, sort].join("|");
+
   const fetchItems = useCallback(async () => {
+    // フィルタが変わったらページを1に戻してから取得(古いpageで新フィルタを取らない)
+    if (lastFilterKey.current !== filterKey && page !== 1) {
+      lastFilterKey.current = filterKey;
+      setPage(1);
+      return;
+    }
+    lastFilterKey.current = filterKey;
+    const reqId = ++latestReq.current;
     if (page === 1) setLoading(true);
+    setFetchError(false);
     const supabase = createClient();
-    let query = supabase.from("menu_items").select("*, chain_restaurants(name, emoji)");
+    let query = supabase
+      .from("menu_items")
+      .select("id, name, calories, protein, fat, carbs, price, category, source_type, image_url, description, chain_restaurants(name, emoji)", { count: "exact" });
 
     if (searchQ) {
       const { data: chains } = await supabase.from("chain_restaurants").select("id").ilike("name", `%${searchQ}%`);
@@ -362,15 +385,26 @@ function SearchResultsContent() {
     else if (sort === "price_asc") query = query.order("price", { ascending: true });
     else query = query.order("protein", { ascending: false });
 
-    const { data } = await query.range(0, page * 20 - 1);
-    const fetched = (data as MenuItem[]) || [];
-    setItems(fetched);
-    setHasMore(fetched.length === page * 20);
+    const from = (page - 1) * 20;
+    const { data, error, count } = await query.range(from, from + 19);
+    if (reqId !== latestReq.current) return; // 後着の旧レスポンスは破棄
+    if (error) {
+      setFetchError(true);
+      setLoading(false);
+      setLoadingMore(false);
+      return;
+    }
+    const fetched = (data as unknown as MenuItem[]) || [];
+    // 2ページ目以降は追記(毎回先頭から全再取得しない)
+    setItems((prev) => (page === 1 ? fetched : [...prev, ...fetched]));
+    setTotalCount(count ?? null);
+    setHasMore(count != null ? from + fetched.length < count : fetched.length === 20);
     setLoading(false);
     setLoadingMore(false);
-  }, [searchQ, category, sourceType, calorieMin, calorieMax, proteinMin, proteinMax, fatMin, fatMax, priceMin, priceMax, sort, page]);
+  }, [filterKey, searchQ, category, sourceType, calorieMin, calorieMax, proteinMin, proteinMax, fatMin, fatMax, priceMin, priceMax, sort, page]);
 
   // PUBLIC: works without account. Logged-in users get favorites; guests just browse.
+  // 認証+お気に入り取得はマウント時1回(ソート変更のたびに再取得しない)。結果取得とは独立に走らせる
   useEffect(() => {
     const supabase = createClient();
     supabase.auth.getUser().then(async ({ data }) => {
@@ -381,9 +415,13 @@ function SearchResultsContent() {
           setFavoriteIds(new Set(favs?.map((f) => f.menu_item_id) || []));
         } catch {}
       }
-      fetchItems();
     });
-  }, [router, fetchItems]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    fetchItems();
+  }, [fetchItems]);
 
   const updateSort = (newSort: string) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -394,14 +432,37 @@ function SearchResultsContent() {
 
   const toggleFavorite = async (e: React.MouseEvent, itemId: string) => {
     e.stopPropagation();
-    if (!userId) return;
+    // 匿名: 無言no-opにせず登録の価値を伝える(完了後はこの検索結果に復帰)
+    if (!userId) {
+      trackEvent("favorite_tap_anonymous", { item_id: itemId });
+      toast("お気に入りは無料登録（30秒）で使えます", {
+        description: "よく食べるメニューを保存して、すぐ呼び出せます",
+        action: {
+          label: "無料登録",
+          onClick: () => router.push(`/signup?next=${encodeURIComponent(`/search/results?${searchParams.toString()}`)}`),
+        },
+      });
+      return;
+    }
     const supabase = createClient();
-    if (favoriteIds.has(itemId)) {
-      setFavoriteIds((prev) => { const s = new Set(prev); s.delete(itemId); return s; });
-      await supabase.from("favorites").delete().eq("menu_item_id", itemId).eq("user_id", userId);
-    } else {
-      setFavoriteIds((prev) => new Set([...prev, itemId]));
-      await supabase.from("favorites").insert({ user_id: userId, menu_item_id: itemId });
+    const wasFavorite = favoriteIds.has(itemId);
+    // 楽観更新
+    setFavoriteIds((prev) => {
+      const s = new Set(prev);
+      if (wasFavorite) s.delete(itemId); else s.add(itemId);
+      return s;
+    });
+    const { error } = wasFavorite
+      ? await supabase.from("favorites").delete().eq("menu_item_id", itemId).eq("user_id", userId)
+      : await supabase.from("favorites").insert({ user_id: userId, menu_item_id: itemId });
+    if (error) {
+      // 失敗時ロールバック
+      setFavoriteIds((prev) => {
+        const s = new Set(prev);
+        if (wasFavorite) s.add(itemId); else s.delete(itemId);
+        return s;
+      });
+      toast.error("お気に入りの更新に失敗しました。もう一度お試しください");
     }
   };
 
@@ -414,11 +475,11 @@ function SearchResultsContent() {
       {/* ─── Header ─── */}
       <div className="bg-white border-b border-gray-200 z-30 shrink-0">
         <div className="flex items-center gap-2 px-3 py-2">
-          <button onClick={() => router.back()} className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 text-gray-600 shrink-0">
+          <button onClick={() => router.back()} aria-label="戻る" className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 text-gray-600 shrink-0">
             <ChevronLeft className="w-5 h-5" />
           </button>
           <h1 className="text-sm font-bold text-gray-900 truncate flex-1">{pageTitle}</h1>
-          <span className="text-xs text-gray-400 shrink-0">{items.length}件</span>
+          <span className="text-xs text-gray-400 shrink-0">{totalCount != null ? `全${totalCount}件` : `${items.length}件`}</span>
           <button onClick={() => router.push("/search")} className="shrink-0 px-3 py-1.5 bg-sky-50 text-sky-600 rounded-full text-xs font-bold">
             <SlidersHorizontal className="w-3.5 h-3.5 inline mr-1" />
             条件変更
@@ -513,6 +574,15 @@ function SearchResultsContent() {
                   <div key={i} className="h-20 bg-gray-50 rounded-xl animate-pulse" />
                 ))}
               </div>
+            ) : fetchError ? (
+              <div className="flex flex-col items-center justify-center py-10 text-center px-4">
+                <p className="text-sm font-bold text-gray-700 mb-1">読み込みに失敗しました</p>
+                <p className="text-xs text-gray-400 mb-4">通信環境をご確認のうえ、もう一度お試しください</p>
+                <button onClick={() => fetchItems()}
+                  className="px-5 py-2.5 bg-sky-500 text-white rounded-full font-bold text-xs">
+                  再試行
+                </button>
+              </div>
             ) : items.length > 0 ? (
               <div className="space-y-2">
                 {items.map((item) => (
@@ -575,10 +645,10 @@ function MenuItemCard({ item, isFavorite, onTap, onFavorite, onRecord }: {
         style={{ backgroundColor: showLogo ? logoInfo.bg : "#f3f4f6" }}>
         {item.image_url ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={item.image_url} alt={item.name} className="w-full h-full object-cover" />
+          <img src={item.image_url} alt={item.name} loading="lazy" decoding="async" width={56} height={56} className="w-full h-full object-cover" />
         ) : showLogo ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={logoInfo.url} alt="" className="w-9 h-9 object-contain"
+          <img src={logoInfo.url} alt="" loading="lazy" decoding="async" width={36} height={36} className="w-9 h-9 object-contain"
             onError={() => setLogoFailed(true)} />
         ) : (
           <Utensils className="w-6 h-6 text-gray-300" />
@@ -587,7 +657,7 @@ function MenuItemCard({ item, isFavorite, onTap, onFavorite, onRecord }: {
 
       {/* Info */}
       <div className="flex-1 min-w-0">
-        <p className="text-[11px] text-gray-400 leading-tight">{item.chain_restaurants?.name ?? "その他"}</p>
+        <p className="text-[11px] text-gray-400 leading-tight truncate">{item.chain_restaurants?.name ?? "その他"}</p>
         <p className="text-sm font-bold text-gray-900 truncate leading-snug">{item.name}</p>
         <div className="flex items-center gap-2 mt-1">
           {item.calories != null && <span className="text-xs font-bold text-sky-600">{item.calories} kcal</span>}
@@ -599,13 +669,13 @@ function MenuItemCard({ item, isFavorite, onTap, onFavorite, onRecord }: {
 
       {/* Actions */}
       <div className="flex flex-col items-center gap-1.5 shrink-0">
-        <button onClick={onFavorite} className={`p-1 ${isFavorite ? "text-red-500" : "text-gray-300"}`}>
+        <button onClick={onFavorite} aria-label={isFavorite ? "お気に入りから削除" : "お気に入りに追加"} aria-pressed={isFavorite} className={`p-1.5 -m-0.5 ${isFavorite ? "text-red-500" : "text-gray-300"}`}>
           <Heart className={`w-4 h-4 ${isFavorite ? "fill-current" : ""}`} />
         </button>
         <div onClick={(e) => e.stopPropagation()}>
-          <ShareButton item={item as any} />
+          <ShareButton item={item} />
         </div>
-        <button onClick={onRecord} className="w-7 h-7 flex items-center justify-center rounded-full bg-sky-500 text-white shadow-sm">
+        <button onClick={onRecord} aria-label="この食事を記録" className="w-7 h-7 flex items-center justify-center rounded-full bg-sky-500 text-white shadow-sm">
           <Plus className="w-3.5 h-3.5" />
         </button>
       </div>

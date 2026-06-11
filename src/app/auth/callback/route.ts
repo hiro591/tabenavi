@@ -4,6 +4,8 @@ import { NextResponse } from 'next/server'
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url)
   const code = searchParams.get('code')
+  const nextParam = searchParams.get('next')
+  const next = nextParam && nextParam.startsWith('/') && !nextParam.startsWith('//') ? nextParam : null
 
   if (code) {
     const supabase = await createClient()
@@ -23,11 +25,11 @@ export async function GET(request: Request) {
         const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000)
 
         if (createdAt > fiveMinutesAgo) {
-          return NextResponse.redirect(`${origin}/onboarding`)
+          return NextResponse.redirect(`${origin}/onboarding${next ? `?next=${encodeURIComponent(next)}` : ''}`)
         }
       }
     }
   }
 
-  return NextResponse.redirect(`${origin}/dashboard`)
+  return NextResponse.redirect(`${origin}${next ?? '/dashboard'}`)
 }

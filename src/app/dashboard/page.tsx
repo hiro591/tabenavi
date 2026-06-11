@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { toast } from "sonner";
 import { createClient } from "@/lib/supabase/client";
+import { localDateStr, localDayRangeISO, toLocalDateStr } from "@/lib/date";
 import {
   Settings,
   Search,
@@ -58,11 +59,11 @@ export default function DashboardPage() {
       return;
     }
 
-    const today = new Date();
-    const todayStr = today.toISOString().split("T")[0];
+    // ローカル日(JST等)基準のレンジ。UTC日付だと朝9時前の記録が前日扱いになる
+    const { startISO: todayStartISO, endISO: todayEndISO } = localDayRangeISO();
     const sevenDaysAgo = new Date();
     sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 6);
-    const sevenDaysAgoStr = sevenDaysAgo.toISOString().split("T")[0];
+    const { startISO: weekStartISO } = localDayRangeISO(sevenDaysAgo);
 
     const [profileRes, logsRes, weeklyLogsRes] = await Promise.all([
       supabase.from("profiles").select("*").eq("id", currentUser.id).single(),
@@ -70,14 +71,14 @@ export default function DashboardPage() {
         .from("food_logs")
         .select("*, menu_items(name, chain_restaurants(name, emoji))")
         .eq("user_id", currentUser.id)
-        .gte("logged_at", `${todayStr}T00:00:00`)
-        .lte("logged_at", `${todayStr}T23:59:59`)
+        .gte("logged_at", todayStartISO)
+        .lt("logged_at", todayEndISO)
         .order("logged_at", { ascending: false }),
       supabase
         .from("food_logs")
         .select("calories, logged_at")
         .eq("user_id", currentUser.id)
-        .gte("logged_at", `${sevenDaysAgoStr}T00:00:00`)
+        .gte("logged_at", weekStartISO)
         .order("logged_at", { ascending: false }),
     ]);
 
@@ -89,9 +90,9 @@ export default function DashboardPage() {
     for (let i = 6; i >= 0; i--) {
       const d = new Date();
       d.setDate(d.getDate() - i);
-      const dateStr = d.toISOString().split("T")[0];
-      const dayLogs = weeklyLogsRes.data?.filter((l) =>
-        l.logged_at.startsWith(dateStr)
+      const dateStr = localDateStr(d);
+      const dayLogs = weeklyLogsRes.data?.filter(
+        (l) => toLocalDateStr(l.logged_at) === dateStr
       );
       const total =
         dayLogs?.reduce((sum, l) => sum + (l.calories || 0), 0) ?? 0;
@@ -103,7 +104,7 @@ export default function DashboardPage() {
       });
     }
     setWeeklySummary(weeklyData);
-    await calculateStreak(currentUser.id);
+    void calculateStreak(currentUser.id); // 非ブロック(ストリーク表示のみ遅延)
     setLoading(false);
   }, [supabase, router]);
 
@@ -111,18 +112,19 @@ export default function DashboardPage() {
     const today = new Date();
     const yearAgo = new Date();
     yearAgo.setDate(today.getDate() - 364);
-    const yearAgoStr = yearAgo.toISOString().split("T")[0];
-    const todayStr = today.toISOString().split("T")[0];
+    const { startISO: yearAgoStartISO } = localDayRangeISO(yearAgo);
+    const { endISO: todayEndISO } = localDayRangeISO(today);
+    const todayStr = localDateStr(today);
 
     const { data } = await supabase
       .from("food_logs")
       .select("logged_at")
       .eq("user_id", userId)
-      .gte("logged_at", `${yearAgoStr}T00:00:00`)
-      .lte("logged_at", `${todayStr}T23:59:59`);
+      .gte("logged_at", yearAgoStartISO)
+      .lt("logged_at", todayEndISO);
 
     const loggedDates = new Set(
-      data?.map((log) => log.logged_at.split("T")[0]) ?? []
+      data?.map((log) => toLocalDateStr(log.logged_at)) ?? []
     );
 
     // Start counting from yesterday if today has no logs yet
@@ -132,7 +134,7 @@ export default function DashboardPage() {
     for (let i = startOffset; i < 365; i++) {
       const d = new Date();
       d.setDate(today.getDate() - i);
-      const dateStr = d.toISOString().split("T")[0];
+      const dateStr = localDateStr(d);
       if (loggedDates.has(dateStr)) {
         currentStreak++;
       } else {
@@ -225,10 +227,10 @@ export default function DashboardPage() {
         <div className="flex items-center gap-2">
           <Link
             href="/notifications"
+            aria-label="お知らせ"
             className="relative w-9 h-9 flex items-center justify-center rounded-full bg-white border border-gray-100 text-gray-400 hover:text-gray-700 hover:bg-gray-50 transition-colors shadow-sm"
           >
             <Bell className="w-4 h-4" />
-            <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white" />
           </Link>
           <Link
             href="/profile"

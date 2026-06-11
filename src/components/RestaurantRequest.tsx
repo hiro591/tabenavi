@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { Send, Check, Bell } from "lucide-react";
+import { toast } from "sonner";
 
 type Props = {
   searchQuery?: string;
@@ -33,12 +34,18 @@ export default function RestaurantRequest({ searchQuery, onRequested }: Props) {
       data: { user },
     } = await supabase.auth.getUser();
 
-    await supabase.from("restaurant_requests").insert({
+    const { error } = await supabase.from("restaurant_requests").insert({
       restaurant_name: name.trim(),
       anon_id: anonId,
       user_id: user?.id || null,
       notify_email: email.trim() || null,
     });
+
+    if (error) {
+      toast.error("送信に失敗しました。時間をおいてお試しください");
+      setLoading(false);
+      return;
+    }
 
     setSubmitted(true);
     setLoading(false);
