@@ -42,6 +42,8 @@ https://www.tabenavi.jp/sources
 
 ## A-2. AlternativeTo 登録（英語）
 
+> 進捗(2026-06-08): Appliv送信済み✅。AlternativeToはアカウント年齢制限(7日)により **6/15以降に登録**(アカウント作成済み・文面は下記をそのまま使用)。
+
 登録先: https://alternativeto.net/ （MyFitnessPal / calorie tracker の代替として）
 ※ タグライン（60字以内）:
 ```
