@@ -79,13 +79,20 @@ const { data } = await supabase
 
 `.not("calories", "is", null)` でnull除外、調味料等のノイズは `カロリー下限50` で弾く（/chains/[slug]で実績ある対処）。
 
-## 新規記事の登録チェックリスト（漏れると孤児ページになる）
+## 新規記事の作成手順
 
-1. `src/app/guide/<slug>/page.tsx` を作成
-2. `src/lib/articles.ts` の RELATED_ARTICLES に追加（カテゴリを選ぶ — /guide一覧と関連記事レコメンドの出所）
-3. `src/app/sitemap.ts` の guideSlugs に追加
-4. 内部リンク: 関連する `/chains/[slug]` ハブと、テーマが近い既存記事の本文から最低1本ずつリンクを張る（孤立ページはインデックスされにくい）
-5. `npm run build` で確認（Vercelはgit pushで自動デプロイ）
+**手作業で3ファイルを触らない。** 同梱のスキャフォールドが page.tsx の生成と registry 登録（articles.ts / sitemap.ts）を一括で行い、登録漏れ＝孤児ページ事故を構造的に防ぐ:
+
+```bash
+node .agents/skills/tabenavi-seo-writer/scripts/new-article.mjs <slug> \
+  --title "記事タイトル" --description "メタディスクリプション" \
+  --category <chain|method|training|tool|support|scene|cuisine|overview>
+```
+
+重複slug・なか卯（DB非収載）は自動で拒否される。実行後:
+1. 生成された page.tsx の TODO を埋める（数値はDB検算してから）
+2. 内部リンク: 関連する `/chains/[slug]` ハブと、テーマが近い既存記事の本文から最低1本ずつリンクを張る（孤立ページはインデックスされにくい）
+3. `npm run build` で確認（Vercelはgit pushで自動デプロイ）
 
 ## 競合に勝つポイント
 
