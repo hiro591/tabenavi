@@ -116,6 +116,12 @@ const guideArticles = [
     tag: "コンビニ",
   },
   {
+    slug: "conveni-comparison",
+    title: "コンビニ3社カロリー比較",
+    description: "セブン・ローソン・ファミマ ダイエットならどこ？",
+    tag: "コンビニ",
+  },
+  {
     slug: "gyudon-comparison",
     title: "牛丼3社カロリー比較",
     description: "吉野家・松屋・すき家を徹底比較",
@@ -416,7 +422,7 @@ export default function GuidePage() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-10 text-center">
           <div className="inline-flex items-center gap-2 bg-sky-100 text-sky-700 rounded-full px-4 py-1.5 text-xs font-medium mb-5">
             <BookOpen className="w-3.5 h-3.5" />
-            全46記事 + 32チェーン栄養データ
+            全47記事 + 32チェーン栄養データ
           </div>
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3 leading-tight">
             外食栄養ガイド

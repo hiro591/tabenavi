@@ -77,6 +77,7 @@ export const RELATED_ARTICLES: RelatedArticle[] = [
   { slug: "curry-diet", title: "カレーとダイエット", description: "チェーン店別カロリー比較。", category: "cuisine" },
   { slug: "sushi-diet", title: "回転寿司ダイエットガイド", description: "ネタ別カロリーと太らない食べ方。", category: "cuisine" },
   { slug: "family-restaurant-diet", title: "ファミレスダイエット比較", description: "サイゼリヤ・ガスト・デニーズを徹底比較。", category: "cuisine" },
+  { slug: "conveni-comparison", title: "コンビニ3社カロリー比較", description: "セブン・ローソン・ファミマを栄養データで横断比較。", category: "chain" },
 ];
 
 export const ARTICLE_CATEGORIES = {
