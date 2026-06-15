@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
+import { createPublicClient } from "@/lib/supabase/public";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
@@ -211,6 +211,11 @@ const TIPS_MAP: Record<string, string> = {
 // ISR: cache chain nutrition pages for 12 hours (CPU optimization).
 export const revalidate = 43200;
 
+// 初回アクセス時に生成→キャッシュ(オンデマンドISR)。これで毎リクエストのSSRを避ける。
+export async function generateStaticParams() {
+  return [];
+}
+
 interface MenuItem {
   id: string;
   name: string;
@@ -241,7 +246,7 @@ export async function generateMetadata({
 }
 
 async function fetchItems(slug: string) {
-  const supabase = await createClient();
+  const supabase = createPublicClient();
 
   if (slug === "conveni") {
     const { data } = await supabase

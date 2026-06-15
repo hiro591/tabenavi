@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
+import { createPublicClient } from "@/lib/supabase/public";
 import Link from "next/link";
 import type { Metadata } from "next";
 import {
@@ -85,7 +85,7 @@ interface LowFatItem {
 }
 
 async function fetchLowFatItems() {
-  const supabase = await createClient();
+  const supabase = createPublicClient();
   const { data } = await supabase
     .from("menu_items")
     .select(

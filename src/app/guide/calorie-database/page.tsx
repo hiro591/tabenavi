@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
+import { createPublicClient } from "@/lib/supabase/public";
 import Link from "next/link";
 import type { Metadata } from "next";
 import {
@@ -135,7 +135,7 @@ const CHAIN_SLUG_MAP: Record<string, string> = {
 };
 
 async function fetchAllItems() {
-  const supabase = await createClient();
+  const supabase = createPublicClient();
   const { data } = await supabase
     .from("menu_items")
     .select(

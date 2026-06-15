@@ -63,8 +63,22 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  // 静的アセット(チェーンロゴ・アフィリ画像・アイコン類)はミドルウェアを通さない
+  // 認証が関係するパスだけでミドルウェアを起動する(公開ページ=guide/chains/items/home等では
+  // 起動しない)。以前は全ページで起動しており、6,000超の公開ページへのボットクロールごとに
+  // Edge Middleware が走って使用量を押し上げていた。
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|api|chain-logos|affiliate|manifest.json|.*\\.(?:png|jpg|jpeg|svg|ico|webp)$).*)",
+    "/dashboard/:path*",
+    "/record/:path*",
+    "/cheatday/:path*",
+    "/history/:path*",
+    "/recommend/:path*",
+    "/profile/:path*",
+    "/weight/:path*",
+    "/onboarding/:path*",
+    "/favorites/:path*",
+    "/combo/:path*",
+    "/map/:path*",
+    "/login",
+    "/signup",
   ],
 };
