@@ -18,6 +18,7 @@ import {
   ArticleImage,
   QuickAnswer,
   FAQSection,
+  UpdateHistory,
 } from "@/components/guide/ArticleComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -53,7 +54,7 @@ const jsonLd = {
   description:
     "チートデイの正しいやり方・頻度・おすすめメニューを科学的根拠に基づいて解説。ダイエット停滞期を突破する方法。",
   datePublished: "2026-03-25",
-  dateModified: new Date().toISOString().split("T")[0],
+  dateModified: "2026-06-23",
   author: {
       "@type": "Person",
       name: "ヒロ",
@@ -341,26 +342,30 @@ export default function CheatDayPage() {
 
           <NutritionTable
             items={[
-              { name: "ビッグマックセット（ポテトM+コーラM）", calories: 1085, protein: 31.5, fat: 48.2, carbs: 128.5, highlight: true },
-              { name: "てりやきマックバーガーセット", calories: 998, protein: 25.8, fat: 42.1, carbs: 122.3 },
-              { name: "ダブルチーズバーガーセット", calories: 1042, protein: 35.2, fat: 46.8, carbs: 118.7 },
-              { name: "チキンフィレオセット", calories: 952, protein: 27.3, fat: 38.5, carbs: 125.1 },
+              { name: "ビッグマックセット（ポテトM+コーラM）", calories: 1079, protein: 31.6, fat: 47.8, carbs: 131.0, highlight: true },
+              { name: "てりやきマックバーガーセット（ポテトM+コーラM）", calories: 1031, protein: 20.0, fat: 50.0, carbs: 126.4 },
+              { name: "ダブルチーズバーガーセット（ポテトM+コーラM）", calories: 1013, protein: 31.9, fat: 44.9, carbs: 120.7 },
+              { name: "チキンフィレオセット（ポテトM+コーラM）", calories: 1033, protein: 25.4, fat: 43.6, carbs: 135.9 },
             ]}
           />
 
-          <SubSectionHeading>ラーメンチェーンのチートデイメニュー</SubSectionHeading>
+          <SubSectionHeading>麺類チェーンのチートデイメニュー</SubSectionHeading>
           <p className="mb-4">
-            <Link href="/guide/ramen-diet" className="text-sky-500 hover:text-sky-600">ラーメン</Link>はチートデイにぴったりのメニューです。普段は我慢している濃厚な味を堪能しましょう。
+            <Link href="/guide/ramen-diet" className="text-sky-500 hover:text-sky-600">ラーメン</Link>やうどんはチートデイにぴったりの炭水化物中心メニューです。普段は我慢している濃厚な一杯を堪能しましょう。下記はたべなびのデータベースに収録されたチェーン店の実数値です。
           </p>
 
           <NutritionTable
             items={[
-              { name: "天下一品 こってり（並）", calories: 949, protein: 37.5, fat: 66.2, carbs: 53.6, highlight: true },
-              { name: "一蘭 天然とんこつラーメン", calories: 525, protein: 24.8, fat: 15.2, carbs: 72.4 },
-              { name: "二郎系ラーメン（野菜マシ）", calories: 1550, protein: 55.0, fat: 65.0, carbs: 180.0 },
-              { name: "丸亀製麺 カレーうどん（並）", calories: 598, protein: 18.5, fat: 14.2, carbs: 95.3 },
+              { name: "丸亀製麺 トマたまカレーうどん（並・温）", calories: 702, protein: 15.3, fat: 23.7, carbs: 107.1, highlight: true },
+              { name: "丸亀製麺 とろ玉うどん（並・温）", calories: 407, protein: 16.7, fat: 7.0, carbs: 68.1 },
+              { name: "丸亀製麺 きつねうどん（並・温）", calories: 434, protein: 15.4, fat: 9.6, carbs: 71.2 },
+              { name: "丸亀製麺 釜玉うどん（並・温）", calories: 372, protein: 15.4, fat: 7.0, carbs: 60.7 },
             ]}
           />
+
+          <p className="text-xs text-gray-400 mt-2 mb-4">
+            ※日高屋の味噌ラーメン（940kcal）・とんこつラーメン（670kcal）もチートデイ向きですが、P/F/C（タンパク質・脂質・炭水化物）が公式に非公開のためカロリーのみが分かります。また天下一品・一蘭・二郎系など一部の人気ラーメン店は栄養成分を公表しておらず正確な数値を確認できませんが、一般に背脂・とんこつ系の一杯は800〜1,000kcal、二郎系は1,500kcal前後と高カロリーになりやすい点に注意しましょう。
+          </p>
 
           <SubSectionHeading>回転寿司のチートデイメニュー</SubSectionHeading>
           <p className="mb-4">
@@ -454,10 +459,10 @@ export default function CheatDayPage() {
 
           <NutritionTable
             items={[
-              { name: "大戸屋 しまほっけの炭火焼き定食", calories: 542, protein: 32.8, fat: 15.2, carbs: 62.5, highlight: true },
-              { name: "やよい軒 しょうが焼き定食", calories: 635, protein: 28.5, fat: 18.3, carbs: 78.2 },
-              { name: "サブウェイ ローストチキン", calories: 282, protein: 22.5, fat: 4.8, carbs: 38.6, highlight: true },
-              { name: "すき家 牛丼ライト（お肉ミニ）", calories: 275, protein: 18.2, fat: 11.5, carbs: 25.8 },
+              { name: "大戸屋 しまほっけの炭火焼き定食", calories: 612, protein: 45.5, fat: 13.1, carbs: 79.3, highlight: true },
+              { name: "サブウェイ チリチキン", calories: 273, protein: 20.5, fat: 4.1, carbs: 39.7, highlight: true },
+              { name: "すき家 牛丼ライト（ミニ）", calories: 309, protein: 18.5, fat: 19.9, carbs: 14.8 },
+              { name: "やよい軒 しょうが焼定食", calories: 717, protein: 26.2, fat: 37.1, carbs: 72.9 },
             ]}
             highlightProtein
           />
@@ -569,6 +574,12 @@ export default function CheatDayPage() {
             { q: "チートデイで太りやすい食べ物を選ぶのはなぜダメ？", a: "脂質中心だとレプチン回復効果が低いため。炭水化物がレプチン分泌に最も効果的。寿司、カレーライス、ラーメン、パスタなど炭水化物中心のメニューが効果的です。" },
             { q: "チートデイの翌日、体重が1～2kg増えた場合の対応は？", a: "大部分は水分と食物の重量で、実脂肪増は200～300g程度。通常の食事制限に戻し、水分を2～3リットル、食物繊維を多めに摂取して2～3日で元に戻ります。翌日の断食は避けてください。" },
             { q: "チートデイを避けるべき人は？", a: "ダイエット初期（2週間未満）、体脂肪率が高い人（男性25%以上・女性35%以上）、食べ始めると止められない過食傾向がある人、糖尿病など代謝疾患がある人は医師に相談が必要です。" },
+          ]}
+        />
+
+        <UpdateHistory
+          entries={[
+            { date: "2026-06-23", note: "DB実値と乖離した数値・実在しないメニュー・PFC非公開チェーンの架空PFCを全面是正" },
           ]}
         />
 

@@ -17,6 +17,7 @@ import {
   ArticleImage,
   QuickAnswer,
   FAQSection,
+  UpdateHistory,
 } from "@/components/guide/ArticleComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -52,7 +53,7 @@ const jsonLd = {
   description:
     "食べ順を変えるだけで太りにくくなる科学的な理由と外食での実践法を解説。",
   datePublished: "2026-03-23",
-  dateModified: new Date().toISOString().split("T")[0],
+  dateModified: "2026-06-23",
   author: {
       "@type": "Person",
       name: "ヒロ",
@@ -96,7 +97,7 @@ export default function EatingOrderPage() {
         <div className="mb-8">
           <AuthorityBadge />
           <p className="text-sm text-gray-400 mt-2">
-            最終更新: 2026年3月23日 | 読了目安: 7分
+            最終更新: 2026年6月23日 | 読了目安: 7分
           </p>
         </div>
 
@@ -239,7 +240,7 @@ export default function EatingOrderPage() {
             <p className="text-sm text-gray-600 mb-1">- セットのスープ・サラダを最初に完食</p>
             <p className="text-sm text-gray-600 mb-1">- メインディッシュの肉・魚を食べる</p>
             <p className="text-sm text-gray-600 mb-1">- パン・ライスは最後に</p>
-            <p className="text-sm text-gray-600">- サイゼリヤなら小エビのサラダ（税込300円）が食物繊維豊富でおすすめ</p>
+            <p className="text-sm text-gray-600">- サイゼリヤなら小エビのサラダ（税込350円）が食物繊維豊富でおすすめ</p>
           </div>
 
           <SubSectionHeading>コンビニ食でも食べ順は有効</SubSectionHeading>
@@ -326,7 +327,7 @@ export default function EatingOrderPage() {
 
           <SubSectionHeading>低GI食品を選ぶ</SubSectionHeading>
           <p className="mb-4">
-            同じ炭水化物でも、GI値の低い食品を選ぶことで血糖値の上昇を抑えられます。外食チェーンでも<Marker>白米を玄米や雑穀米に変更</Marker>できるお店が増えています。大戸屋では五穀米、やよい軒では十六穀米に変更可能です。
+            同じ炭水化物でも、GI値の低い食品を選ぶことで血糖値の上昇を抑えられます。外食チェーンでも<Marker>白米を雑穀米に変更</Marker>できるお店が増えています。たとえば大戸屋では五穀ご飯（普通盛り180gで283kcal）を選べます。
           </p>
 
           <NutritionTable
@@ -400,7 +401,14 @@ export default function EatingOrderPage() {
             { q: "定食チェーン（やよい軒・大戸屋）での食べ順は？", a: "サラダ・漬物・小鉢→味噌汁→メインのおかず（肉・魚）→残りの味噌汁→ご飯の順がおすすめです。定食は食べ順ダイエットに最適なスタイルで、この順序で実践しやすいメニュー構成になっています。" },
             { q: "牛丼チェーン（すき家・吉野家）で食べ順を実践するには？", a: "セットのサラダを先に食べ、次に味噌汁を飲んでから、牛丼の具（牛肉）を先に食べてご飯は後から食べます。「ご飯少なめ」で注文するのも効果的です。丼物でも工夫次第で実践できます。" },
             { q: "早食いが太る理由は何ですか？", a: "早食いは肥満リスクを約2倍にします。満腹中枢が信号を出すまで20分かかるため、満腹感を感じる前に食べ過ぎてしまい、血糖値も急上昇するためです。1口20〜30回噛むことを意識しましょう。" },
-            { q: "白米を玄米に変えるとどう違いますか？", a: "白米のGI値は88、玄米は56です。同じ150gでも玄米の方がカロリーが4kcal低く、炭水化物も2.3g少なく、タンパク質は0.4g多いため、血糖値上昇が緩やかです。やよい軒では十六穀米への変更も可能。" },
+            { q: "白米を玄米に変えるとどう違いますか？", a: "白米のGI値は88、玄米は56です。同じ150gでも玄米の方がカロリーが4kcal低く、炭水化物も2.3g少なく、タンパク質は0.4g多いため、血糖値上昇が緩やかです。大戸屋では白米を五穀ご飯に変更できます。" },
+          ]}
+        />
+
+        {/* Update History */}
+        <UpdateHistory
+          entries={[
+            { date: "2026-06-23", note: "DB実値と乖離した数値・実在しないメニュー・PFC非公開チェーンの架空PFCを全面是正" },
           ]}
         />
 

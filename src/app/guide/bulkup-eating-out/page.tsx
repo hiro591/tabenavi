@@ -18,6 +18,7 @@ import {
   ArticleImage,
   QuickAnswer,
   FAQSection,
+  UpdateHistory,
 } from "@/components/guide/ArticleComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -53,7 +54,7 @@ const jsonLd = {
   description:
     "増量期・バルクアップ中の外食メニューを徹底解説。チェーン店別おすすめメニューと3000kcalプランを紹介。",
   datePublished: "2026-03-23",
-  dateModified: new Date().toISOString().split("T")[0],
+  dateModified: "2026-06-23",
   author: {
       "@type": "Person",
       name: "ヒロ",
@@ -96,7 +97,7 @@ export default function BulkupEatingOutPage() {
         <div className="mb-8">
           <AuthorityBadge />
           <p className="text-sm text-gray-400 mt-2">
-            最終更新: 2026年3月23日 | 読了目安: 9分
+            最終更新: 2026年6月23日 | 読了目安: 9分
           </p>
         </div>
 
@@ -122,7 +123,7 @@ export default function BulkupEatingOutPage() {
         <section className="mb-16">
                   <QuickAnswer
           question={"バルクアップ中に外食で1日3000kcalを達成するにはどうすればいい？"}
-          answer={"やよい軒（ご飯おかわり無料）・すき家・いきなり！ステーキなどチェーン店を活用すれば実現可能。朝食820kcal、昼食1150kcal、夕食1060kcal（計3030kcal・タンパク質150g以上）のプランを参考に、各自の体重と目標に合わせて調整してください。"}
+          answer={"やよい軒（ご飯おかわり無料）・すき家・びっくりドンキーなどチェーン店を活用すれば実現可能。朝食762kcal、昼食約1131kcal、夕食約1196kcal（計約3089kcal・タンパク質150g以上）のプランを参考に、各自の体重と目標に合わせて調整してください。"}
         />
 
         <SectionHeading id="pfc">
@@ -192,48 +193,51 @@ export default function BulkupEatingOutPage() {
 
           <SubSectionHeading>やよい軒（ご飯おかわり無料！）</SubSectionHeading>
           <p className="mb-4">
-            増量期最強のチェーン店が<Marker>やよい軒</Marker>です。なぜなら<Marker color="blue">ご飯おかわり無料</Marker>だから。白米を3杯おかわりすれば、それだけで約750kcal・タンパク質15gを追加できます。
+            増量期最強のチェーン店が<Marker>やよい軒</Marker>です。なぜなら<Marker color="blue">ご飯おかわり無料</Marker>だから。白米を2杯おかわりすれば、それだけで約500kcal・炭水化物110gを追加できます。
           </p>
 
           <NutritionTable
             items={[
-              { name: "しまほっけ定食 + ご飯3杯", calories: 1150, protein: 52.0, fat: 18.5, carbs: 168.0, highlight: true },
-              { name: "チキン南蛮定食 + ご飯2杯", calories: 1280, protein: 45.0, fat: 38.5, carbs: 165.0 },
-              { name: "すき焼き定食 + ご飯2杯", calories: 1100, protein: 48.0, fat: 28.0, carbs: 145.0 },
-              { name: "味噌かつ煮定食 + ご飯2杯", calories: 1320, protein: 42.0, fat: 42.0, carbs: 172.0 },
+              { name: "しまほっけ定食 + ご飯2杯", calories: 1131, protein: 58.7, fat: 21.3, carbs: 171.4, highlight: true },
+              { name: "味噌かつ煮定食 + ご飯2杯", calories: 1345, protein: 48.6, fat: 33.2, carbs: 210.2 },
+              { name: "しょうが焼定食 + ご飯2杯", calories: 1217, protein: 34.2, fat: 37.1, carbs: 182.9 },
+              { name: "チキン南蛮定食 + ご飯2杯", calories: 1343, protein: 35.6, fat: 37.7, carbs: 210.7 },
             ]}
           />
+          <p className="text-xs text-gray-400 mb-6">
+            ※定食はやよい軒公式の白米・普通盛の数値。「ご飯2杯」は普通盛のおかわり2杯分（1杯あたり約250kcal・炭水化物約55g）を加算した概算です。
+          </p>
 
           <TipBox title="やよい軒の増量テクニック">
             <p>
-              しまほっけ定食がおすすめの理由は<Marker>高タンパク・低脂質</Marker>だから。魚のタンパク質に加え、ご飯3杯で炭水化物をガッツリ摂取。合計1,150kcal / P52gは増量期の昼食として理想的です。
+              しまほっけ定食がおすすめの理由は<Marker>高タンパク・低脂質</Marker>だから。定食単体でタンパク質50.7g（白米普通盛込み）と魚のタンパク質が豊富で、ご飯のおかわりで炭水化物をガッツリ追加できます。合計約1,131kcal / P58.7gは増量期の昼食として理想的です。
             </p>
           </TipBox>
 
           <SubSectionHeading>すき家</SubSectionHeading>
           <NutritionTable
             items={[
-              { name: "牛丼 メガ盛り", calories: 1168, protein: 38.5, fat: 52.5, carbs: 128.5, highlight: true },
-              { name: "とりそぼろ丼 特盛 + 牛皿", calories: 985, protein: 42.0, fat: 28.0, carbs: 132.0 },
-              { name: "まぜのっけごはん朝食 特盛", calories: 820, protein: 28.5, fat: 18.0, carbs: 128.0 },
+              { name: "牛丼 メガ", calories: 1365, protein: 50.8, fat: 66.3, carbs: 141.6, highlight: true },
+              { name: "旨だしとりそぼろ丼 特盛 + 牛皿(並)", calories: 1268, protein: 62.9, fat: 43.3, carbs: 155.0 },
+              { name: "牛まぜのっけ朝食 大盛", calories: 762, protein: 24.6, fat: 17.1, carbs: 127.7 },
             ]}
           />
 
           <SubSectionHeading>松屋</SubSectionHeading>
           <NutritionTable
             items={[
-              { name: "牛焼肉定食 W（ダブル）", calories: 1085, protein: 45.0, fat: 35.0, carbs: 138.0, highlight: true },
-              { name: "カルビ焼肉定食", calories: 862, protein: 32.0, fat: 32.5, carbs: 108.0 },
-              { name: "牛めし 特盛", calories: 932, protein: 26.5, fat: 32.0, carbs: 125.0 },
+              { name: "牛焼肉W定食", calories: 1209, protein: 38.4, fat: 80.5, carbs: 88.1, highlight: true },
+              { name: "牛めし 特盛", calories: 1237, protein: 31.0, fat: 56.3, carbs: 145.1 },
+              { name: "カルビ焼肉生野菜セット", calories: 573, protein: 19.9, fat: 45.4, carbs: 16.2 },
             ]}
           />
 
           <SubSectionHeading>吉野家</SubSectionHeading>
           <NutritionTable
             items={[
-              { name: "牛丼 特盛", calories: 1030, protein: 28.0, fat: 38.5, carbs: 135.0, highlight: true },
-              { name: "から揚げ定食（4個）", calories: 885, protein: 35.0, fat: 30.0, carbs: 112.0 },
-              { name: "鰻重 二枚盛", calories: 910, protein: 38.0, fat: 22.0, carbs: 132.0 },
+              { name: "から揚げ定食 並盛", calories: 1168, protein: 42.2, fat: 59.0, carbs: 115.9, highlight: true },
+              { name: "鰻重牛小鉢セット 二枚盛", calories: 1210, protein: 66.2, fat: 59.4, carbs: 110.3 },
+              { name: "牛丼 特盛", calories: 1006, protein: 33.5, fat: 44.2, carbs: 122.3 },
             ]}
           />
 
@@ -241,57 +245,57 @@ export default function BulkupEatingOutPage() {
 
           <RankingCard
             rank={1}
-            title="いきなり！ステーキ ワイルドステーキ300g"
+            title="びっくりドンキー ガーリックチキン＆ハンバーグステーキL"
             subtitle="高タンパク増量メニューの王道"
           >
             <div className="grid grid-cols-4 gap-2 mb-3">
               <div className="bg-sky-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-sky-600 font-bold text-sm">810</p>
+                <p className="text-sky-600 font-bold text-sm">860</p>
                 <p className="text-sky-600 text-[10px]">kcal</p>
               </div>
               <div className="bg-blue-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-blue-600 font-bold text-sm">65.0g</p>
+                <p className="text-blue-600 font-bold text-sm">70.6g</p>
                 <p className="text-blue-600 text-[10px]">タンパク</p>
               </div>
               <div className="bg-amber-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-amber-600 font-bold text-sm">45.0g</p>
+                <p className="text-amber-600 font-bold text-sm">47.7g</p>
                 <p className="text-amber-600 text-[10px]">脂質</p>
               </div>
               <div className="bg-green-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-green-600 font-bold text-sm">35.0g</p>
+                <p className="text-green-600 font-bold text-sm">37.9g</p>
                 <p className="text-green-600 text-[10px]">炭水化物</p>
               </div>
             </div>
             <p className="text-sm text-gray-600">
-              <Marker>1食でタンパク質65g</Marker>は圧倒的。ライスを追加すれば1,000kcal超え。増量期のディナーに最適です。
+              <Marker>1食でタンパク質70.6g</Marker>は圧倒的。チキンとハンバーグのダブルで、ライス（336kcal）を追加すれば約1,200kcal・タンパク質75g超え。増量期のディナーに最適です。
             </p>
           </RankingCard>
 
           <RankingCard
             rank={2}
-            title="CoCo壱 手仕込みチキンカツカレー 400g"
+            title="CoCo壱番屋 チキンカツカレー"
             subtitle="炭水化物ガッツリ増量メニュー"
           >
             <div className="grid grid-cols-4 gap-2 mb-3">
               <div className="bg-sky-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-sky-600 font-bold text-sm">1125</p>
+                <p className="text-sky-600 font-bold text-sm">1115</p>
                 <p className="text-sky-600 text-[10px]">kcal</p>
               </div>
               <div className="bg-blue-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-blue-600 font-bold text-sm">32.0g</p>
+                <p className="text-blue-600 font-bold text-sm">32.3g</p>
                 <p className="text-blue-600 text-[10px]">タンパク</p>
               </div>
               <div className="bg-amber-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-amber-600 font-bold text-sm">38.0g</p>
+                <p className="text-amber-600 font-bold text-sm">43.7g</p>
                 <p className="text-amber-600 text-[10px]">脂質</p>
               </div>
               <div className="bg-green-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-green-600 font-bold text-sm">155.0g</p>
+                <p className="text-green-600 font-bold text-sm">151.6g</p>
                 <p className="text-green-600 text-[10px]">炭水化物</p>
               </div>
             </div>
             <p className="text-sm text-gray-600">
-              <Marker color="blue">1食1,125kcalで炭水化物155g</Marker>。トレーニング後の糖質補給に最適。ライス量は300g〜1,300gまで選べるので増量ペースに合わせて調整可能。
+              <Marker color="blue">1食1,115kcalで炭水化物151.6g</Marker>。トレーニング後の糖質補給に最適。ライス量は標準300gから増量でき、増量ペースに合わせて調整可能です。
             </p>
           </RankingCard>
         </section>
@@ -316,66 +320,66 @@ export default function BulkupEatingOutPage() {
             体重70kgの方を想定した、<Marker>1日3,000kcal・タンパク質150g以上</Marker>の外食プランを紹介します。
           </p>
 
-          <SubSectionHeading>朝食: すき家 まぜのっけごはん朝食 特盛（820kcal）</SubSectionHeading>
+          <SubSectionHeading>朝食: すき家 牛まぜのっけ朝食 大盛（762kcal）</SubSectionHeading>
           <div className="bg-white rounded-lg border border-gray-200 p-5 mb-6 shadow-sm">
             <div className="flex flex-wrap gap-2 mb-3">
               <span className="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full font-bold">
-                P 28.5g
+                P 24.6g
               </span>
               <span className="text-xs bg-sky-50 text-sky-700 px-2.5 py-1 rounded-full font-bold">
-                820 kcal
+                762 kcal
               </span>
               <span className="text-xs bg-amber-50 text-amber-700 px-2.5 py-1 rounded-full font-bold">
-                F 18.0g
+                F 17.1g
               </span>
               <span className="text-xs bg-green-50 text-green-700 px-2.5 py-1 rounded-full font-bold">
-                C 128.0g
+                C 127.7g
               </span>
             </div>
             <p className="text-sm text-gray-600 leading-relaxed">
-              朝から炭水化物をしっかり摂取。たまご・納豆・しらすのタンパク質でバランスも良好。すき家は朝5時から営業なので早朝トレーニング後にも対応。
+              朝から炭水化物をしっかり摂取。牛肉・たまご・とろろのタンパク質でバランスも良好。すき家は朝5時から営業なので早朝トレーニング後にも対応。
             </p>
           </div>
 
-          <SubSectionHeading>昼食: やよい軒 しまほっけ定食 + ご飯3杯（1,150kcal）</SubSectionHeading>
+          <SubSectionHeading>昼食: やよい軒 しまほっけ定食 + ご飯2杯（約1,131kcal）</SubSectionHeading>
           <div className="bg-white rounded-lg border border-gray-200 p-5 mb-6 shadow-sm">
             <div className="flex flex-wrap gap-2 mb-3">
               <span className="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full font-bold">
-                P 52.0g
+                P 58.7g
               </span>
               <span className="text-xs bg-sky-50 text-sky-700 px-2.5 py-1 rounded-full font-bold">
-                1,150 kcal
+                約1,131 kcal
               </span>
               <span className="text-xs bg-amber-50 text-amber-700 px-2.5 py-1 rounded-full font-bold">
-                F 18.5g
+                F 21.3g
               </span>
               <span className="text-xs bg-green-50 text-green-700 px-2.5 py-1 rounded-full font-bold">
-                C 168.0g
+                C 171.4g
               </span>
             </div>
             <p className="text-sm text-gray-600 leading-relaxed">
-              <Marker>ご飯おかわり無料</Marker>のやよい軒は増量期の昼食に最適。ほっけは高タンパク低脂質で、ご飯3杯と合わせてクリーンバルクが可能。
+              <Marker>ご飯おかわり無料</Marker>のやよい軒は増量期の昼食に最適。ほっけは高タンパク低脂質で、ご飯2杯（普通盛の概算）と合わせてクリーンバルクが可能。
             </p>
           </div>
 
-          <SubSectionHeading>夕食: いきなり！ステーキ ワイルドステーキ300g + ライス（1,060kcal）</SubSectionHeading>
+          <SubSectionHeading>夕食: びっくりドンキー ガーリックチキン＆ハンバーグステーキL + ライス（約1,196kcal）</SubSectionHeading>
           <div className="bg-white rounded-lg border border-gray-200 p-5 mb-6 shadow-sm">
             <div className="flex flex-wrap gap-2 mb-3">
               <span className="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full font-bold">
-                P 70.0g
+                P 75.6g
               </span>
               <span className="text-xs bg-sky-50 text-sky-700 px-2.5 py-1 rounded-full font-bold">
-                1,060 kcal
+                約1,196 kcal
               </span>
               <span className="text-xs bg-amber-50 text-amber-700 px-2.5 py-1 rounded-full font-bold">
-                F 48.0g
+                F 48.3g
               </span>
               <span className="text-xs bg-green-50 text-green-700 px-2.5 py-1 rounded-full font-bold">
-                C 92.0g
+                C 112.1g
               </span>
             </div>
             <p className="text-sm text-gray-600 leading-relaxed">
-              ステーキ300gで<Marker color="blue">タンパク質70gを一気に摂取</Marker>。トレーニング後のディナーに最適。ライスを追加して炭水化物も確保。
+              チキンとハンバーグのダブルで<Marker color="blue">タンパク質70gを一気に摂取</Marker>。トレーニング後のディナーに最適。ライス（336kcal）を追加して炭水化物も確保。
             </p>
           </div>
 
@@ -383,19 +387,19 @@ export default function BulkupEatingOutPage() {
             <p className="font-bold text-sky-900 mb-2 text-lg">1日トータル</p>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               <div className="bg-white rounded-lg py-3 px-4 text-center shadow-sm">
-                <p className="text-sky-600 font-bold text-xl">3,030</p>
+                <p className="text-sky-600 font-bold text-xl">約3,089</p>
                 <p className="text-sky-600 text-xs">kcal</p>
               </div>
               <div className="bg-white rounded-lg py-3 px-4 text-center shadow-sm">
-                <p className="text-blue-600 font-bold text-xl">150.5g</p>
+                <p className="text-blue-600 font-bold text-xl">158.9g</p>
                 <p className="text-blue-600 text-xs">タンパク質</p>
               </div>
               <div className="bg-white rounded-lg py-3 px-4 text-center shadow-sm">
-                <p className="text-amber-600 font-bold text-xl">84.5g</p>
+                <p className="text-amber-600 font-bold text-xl">86.7g</p>
                 <p className="text-amber-600 text-xs">脂質</p>
               </div>
               <div className="bg-white rounded-lg py-3 px-4 text-center shadow-sm">
-                <p className="text-green-600 font-bold text-xl">388.0g</p>
+                <p className="text-green-600 font-bold text-xl">411.2g</p>
                 <p className="text-green-600 text-xs">炭水化物</p>
               </div>
             </div>
@@ -419,10 +423,10 @@ export default function BulkupEatingOutPage() {
 
           <WarningBox title="増量期NGメニュー">
             <p className="mb-2">
-              <strong>ラーメン二郎系（約1,500kcal / F80g）:</strong> 脂質が多く（カロリー比で約48%）、過剰な脂肪摂取は脂肪蓄積につながりやすい。増量期でも脂質は1食30g以内が理想。
+              <strong>こってり系ラーメン（背脂・豚骨系の大盛り）:</strong> 麺・スープ・トッピングで脂質が非常に多くなりやすく、過剰な脂肪摂取は脂肪蓄積につながりやすい。増量期でも脂質は1食30g以内が理想です。
             </p>
             <p className="mb-2">
-              <strong>大盛りポテトフライ（約500kcal / F25g）:</strong> ほぼ脂質と炭水化物だけでタンパク質がほとんどない。増量期のカロリー源としては非効率。
+              <strong>大盛りポテトフライ（マックフライポテトLで515kcal / F25g）:</strong> ほぼ脂質と炭水化物だけでタンパク質がほとんどない。増量期のカロリー源としては非効率。
             </p>
             <p className="mb-2">
               <strong>甘いスイーツ・ドーナツ:</strong> 砂糖と脂質の同時摂取は、脂肪蓄積を加速させやすいという研究がある。血糖値スパイクも起こしやすく、体脂肪の蓄積を加速させます。
@@ -435,15 +439,15 @@ export default function BulkupEatingOutPage() {
           <SubSectionHeading>良い増量 vs 悪い増量</SubSectionHeading>
           <NutritionTable
             items={[
-              { name: "やよい軒 しまほっけ定食+ご飯3杯", calories: 1150, protein: 52.0, fat: 18.5, carbs: 168.0, highlight: true },
-              { name: "ラーメン二郎 大（脂マシ）", calories: 1520, protein: 55.0, fat: 80.0, carbs: 145.0 },
-              { name: "マクドナルド ビッグマックセット", calories: 1085, protein: 28.0, fat: 48.0, carbs: 132.0 },
+              { name: "やよい軒 しまほっけ定食+ご飯2杯", calories: 1131, protein: 58.7, fat: 21.3, carbs: 171.4, highlight: true },
+              { name: "松屋 牛焼肉W定食", calories: 1209, protein: 38.4, fat: 80.5, carbs: 88.1 },
+              { name: "マクドナルド ビッグマックセット", calories: 1079, protein: 31.6, fat: 47.8, carbs: 131.0 },
             ]}
           />
 
           <TipBox title="脂質の目安">
             <p>
-              同じ1,150kcalでも、しまほっけ定食は脂質18.5gに対し、ビッグマックセットは脂質48g。<Marker>脂質の差が体脂肪の蓄積量を左右</Marker>します。カロリーだけでなくPFCバランスを意識しましょう。
+              ほぼ同じカロリーでも、しまほっけ定食+ご飯2杯は脂質21.3gに対し、松屋の牛焼肉W定食は脂質80.5g。<Marker>脂質の差が体脂肪の蓄積量を左右</Marker>します。カロリーだけでなくPFCバランスを意識しましょう。
             </p>
           </TipBox>
         </section>
@@ -472,7 +476,7 @@ export default function BulkupEatingOutPage() {
               "タンパク質は体重 x 2.0〜2.5g、3〜4時間おきに摂取が理想",
               "やよい軒のご飯おかわり無料は増量期最強のシステム",
               "1日3,000kcal・P150gは外食チェーン3食で達成可能",
-              "脂質が多すぎるメニュー（ラーメン二郎系、ポテト等）は脂肪増加の原因",
+              "脂質が多すぎるメニュー（こってり系ラーメン、大盛りポテト等）は脂肪増加の原因",
               "クリーンバルクを基本に、必要に応じて高カロリー食品を追加",
             ]}
           />
@@ -488,9 +492,18 @@ export default function BulkupEatingOutPage() {
           items={[
             { q: "増量期に必要なカロリーの計算方法は？", a: "体重(kg)×40～45kcalが目安。例えば体重70kgなら1日2800～3150kcal。個人差があるため、実際の体重変化を見ながら調整してください。" },
             { q: "増量期のタンパク質摂取量はどのくらい必要？", a: "体重×2.0～2.5gが推奨。70kgなら1日140～175g。3～4時間おきに30～40gずつ摂取して、筋合成を最大化することが理想です。" },
-            { q: "増量期に最適なチェーン店メニューは？", a: "やよい軒のしまほっけ定食（ご飯3杯で1150kcal・タンパク質52g）、いきなり！ステーキのワイルドステーキ300g（810kcal・タンパク質65g）がおすすめ。高タンパク・低脂質がポイント。" },
+            { q: "増量期に最適なチェーン店メニューは？", a: "やよい軒のしまほっけ定食（定食単体で631kcal・タンパク質50.7g、ご飯2杯のおかわりで約1131kcal）、びっくりドンキーのガーリックチキン＆ハンバーグステーキL（860kcal・タンパク質70.6g）がおすすめ。高タンパクがポイントです。" },
             { q: "クリーンバルクとダーティバルクの違いは？", a: "クリーンバルクは良質な食材で増量し脂肪を最小限に。ダーティバルクはジャンクフードも含め手軽にカロリーを稼ぎます。おすすめは両者の中間で、基本はクリーンバルク、足りない時だけ高カロリー食を追加する方法。" },
-            { q: "増量期に避けるべきメニューは？", a: "ラーメン二郎系（脂質80g）や大盛りポテトなど脂質が過多なメニューは避けるべき。脂質が多すぎると脂肪ばかり増えます。1食で脂質30g以内を目安に選びましょう。" },
+            { q: "増量期に避けるべきメニューは？", a: "こってり系ラーメンや大盛りポテト、松屋の牛焼肉W定食（脂質80.5g）など脂質が過多なメニューは避けるべき。脂質が多すぎると脂肪ばかり増えます。1食で脂質30g前後を目安に選びましょう。" },
+          ]}
+        />
+
+        {/* Update History */}
+        <UpdateHistory
+          entries={[
+            { date: "2026-06-23", note: "DB実値と乖離した数値・実在しないメニュー・PFC非公開チェーンの架空PFCを全面是正" },
+            { date: "2026-06-08", note: "32チェーン・6,000品以上に対応拡大。栄養数値を公式データで再検証" },
+            { date: "2026-03-23", note: "初稿公開" },
           ]}
         />
 

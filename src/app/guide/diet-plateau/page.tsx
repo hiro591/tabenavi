@@ -18,6 +18,7 @@ import {
   ArticleImage,
   QuickAnswer,
   FAQSection,
+  UpdateHistory,
 } from "@/components/guide/ArticleComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -53,7 +54,7 @@ const jsonLd = {
   description:
     "ダイエット停滞期の科学的メカニズムと突破法を解説。体重が減らない原因と対策を紹介。",
   datePublished: "2026-03-25",
-  dateModified: new Date().toISOString().split("T")[0],
+  dateModified: "2026-06-23",
   author: {
       "@type": "Person",
       name: "ヒロ",
@@ -97,7 +98,7 @@ export default function DietPlateauPage() {
         <div className="mb-8">
           <AuthorityBadge />
           <p className="text-sm text-gray-400 mt-2">
-            最終更新: 2026年3月25日 | 読了目安: 10分
+            最終更新: 2026年6月23日 | 読了目安: 10分
           </p>
         </div>
 
@@ -438,11 +439,11 @@ export default function DietPlateauPage() {
 
           <NutritionTable
             items={[
-              { name: "月〜火：大戸屋 鶏むね肉の炭火焼き定食", calories: 520, protein: 35.2, fat: 12.8, carbs: 58.5, highlight: true },
-              { name: "水〜木：サブウェイ BLT（ウィートブレッド）", calories: 315, protein: 14.8, fat: 10.2, carbs: 42.5 },
-              { name: "金：ガスト 若鶏のグリル", calories: 398, protein: 35.2, fat: 12.5, carbs: 32.8, highlight: true },
-              { name: "土：すき家 牛丼ライト（お肉1.5倍）", calories: 375, protein: 25.8, fat: 18.5, carbs: 28.2 },
-              { name: "日：サイゼリヤ 柔らか青豆の温サラダ + ハンバーグ", calories: 485, protein: 22.5, fat: 25.8, carbs: 38.6 },
+              { name: "月〜火：大戸屋 もろみチキンの炭火焼き定食", calories: 802, protein: 42.3, fat: 30.9, carbs: 82.3, highlight: true },
+              { name: "水〜木：サブウェイ チリチキン", calories: 273, protein: 20.5, fat: 4.1, carbs: 39.7 },
+              { name: "金：大戸屋 しまほっけの炭火焼き定食", calories: 612, protein: 45.5, fat: 13.1, carbs: 79.3, highlight: true },
+              { name: "土：すき家 ねぎ玉牛丼ライト（並盛）", calories: 485, protein: 29.6, fat: 33.1, carbs: 18.4 },
+              { name: "日：サブウェイ サラダチキン サラダ", calories: 93, protein: 14.7, fat: 0.8, carbs: 8.3 },
             ]}
             highlightProtein
           />
@@ -474,10 +475,10 @@ export default function DietPlateauPage() {
 
           <NutritionTable
             items={[
-              { name: "セブンイレブン もずくスープ", calories: 18, protein: 0.8, fat: 0.3, carbs: 3.2, highlight: true },
-              { name: "ファミマ 海藻サラダ", calories: 22, protein: 1.2, fat: 0.5, carbs: 3.8 },
-              { name: "サイゼリヤ 小エビのサラダ", calories: 125, protein: 5.8, fat: 8.2, carbs: 6.5 },
-              { name: "大戸屋 ひじきの煮物", calories: 65, protein: 2.5, fat: 2.8, carbs: 8.2, highlight: true },
+              { name: "セブンイレブン 国産黄金生姜 ぽかぽか和風スープ", calories: 120, protein: 8.2, fat: 3.5, carbs: 15.3, highlight: true },
+              { name: "ファミマ トマトとわかめのサラダ", calories: 40, protein: 2.8, fat: 1.5, carbs: 5.1 },
+              { name: "セブンイレブン 7プレミアム ごぼうサラダ", calories: 142, protein: 1.6, fat: 10.9, carbs: 10.6 },
+              { name: "大戸屋 ひじきの煮物", calories: 28, protein: 1.3, fat: 1.2, carbs: 3.8, highlight: true },
               { name: "味噌汁（わかめ・豆腐）", calories: 42, protein: 3.2, fat: 1.5, carbs: 4.2 },
             ]}
           />
@@ -546,6 +547,13 @@ export default function DietPlateauPage() {
             { q: "停滞期に食事量を減らしたら痩せる？", a: "逆効果です。カロリーをさらに減らすと体はさらに代謝を低下させて対抗します。基礎代謝を下回る食事を続けると筋肉の分解が進み、後のリバウンドリスクが大幅に上がります。" },
             { q: "停滞期に効果的なチートデイのやり方は？", a: "摂取カロリー目安は体重(kg)×40～45kcal、炭水化物を中心に増やします。必ず1日で終わらせ、翌日から通常のカロリー制限に戻してください。低下したレプチンの分泌回復に最も効果的です。" },
             { q: "外食ダイエット中の停滞期対策は？", a: "いつも同じチェーン店の同じメニューを避け、異なるチェーン店と異なるメニューに切り替えることが効果的です。同じカロリーでもPFCバランス（タンパク質・脂質・炭水化物の比率）を変えることで体の反応が変わり、停滞期突破のきっかけになります。" },
+          ]}
+        />
+
+        <UpdateHistory
+          entries={[
+            { date: "2026-06-23", note: "DB実値と乖離した数値・実在しないメニュー・PFC非公開チェーンの架空PFCを全面是正" },
+            { date: "2026-03-25", note: "初稿公開" },
           ]}
         />
 

@@ -18,6 +18,7 @@ import {
   ArticleImage,
   QuickAnswer,
   FAQSection,
+  UpdateHistory,
 } from "@/components/guide/ArticleComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -53,7 +54,7 @@ const jsonLd = {
   description:
     "代謝を上げる食べ物TOP15をランキング形式で紹介。外食チェーン店での代謝アップメニュー選びも。",
   datePublished: "2026-03-25",
-  dateModified: new Date().toISOString().split("T")[0],
+  dateModified: "2026-06-23",
   author: {
       "@type": "Person",
       name: "ヒロ",
@@ -97,7 +98,7 @@ export default function MetabolismBoostFoodsPage() {
         <div className="mb-8">
           <AuthorityBadge />
           <p className="text-sm text-gray-400 mt-2">
-            最終更新: 2026年3月25日 | 読了目安: 11分
+            最終更新: 2026年6月23日 | 読了目安: 11分
           </p>
         </div>
 
@@ -364,42 +365,41 @@ export default function MetabolismBoostFoodsPage() {
             外食チェーン店でも代謝アップ食材を意識したメニュー選びは十分に可能です。<Marker>「高タンパク」「スパイス入り」「温かいメニュー」</Marker>の3つを基準に選びましょう。
           </p>
 
-          <SubSectionHeading>吉野家 - 生姜焼き定食で代謝アップ</SubSectionHeading>
+          <SubSectionHeading>吉野家 - 旨ダレ生姜の定食で代謝アップ</SubSectionHeading>
           <div className="bg-white rounded-lg border border-gray-200 p-5 mb-6 shadow-sm">
-            <p className="font-bold text-gray-900 mb-2">豚生姜焼き定食</p>
+            <p className="font-bold text-gray-900 mb-2">大判豚肩ロース焼き定食（旨ダレ生姜）</p>
             <div className="flex flex-wrap gap-2 mb-3">
-              <span className="text-xs bg-sky-50 text-sky-700 px-2.5 py-1 rounded-full font-bold">652kcal</span>
-              <span className="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full font-bold">P 28.5g</span>
-              <span className="text-xs bg-amber-50 text-amber-700 px-2.5 py-1 rounded-full font-bold">F 22.3g</span>
+              <span className="text-xs bg-sky-50 text-sky-700 px-2.5 py-1 rounded-full font-bold">788kcal</span>
+              <span className="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full font-bold">P 30.5g</span>
+              <span className="text-xs bg-amber-50 text-amber-700 px-2.5 py-1 rounded-full font-bold">F 27.5g</span>
             </div>
             <p className="text-sm text-gray-600">
-              豚肉のビタミンB1（糖質代謝を促進）+ 生姜のショウガオール（体温上昇）のコンボ。牛丼より高タンパクでDITも高い。味噌汁の大豆タンパク質もプラス。<Link href="/guide/yoshinoya-diet" className="text-sky-600 hover:text-sky-800 underline">吉野家ダイエットガイド</Link>で詳しく解説。
+              豚肉のビタミンB1（糖質代謝を促進）+ 旨ダレ生姜のショウガオール（体温上昇）のコンボ。牛丼より高タンパクでDITも高い。味噌汁の大豆タンパク質もプラス。<Link href="/guide/yoshinoya-diet" className="text-sky-600 hover:text-sky-800 underline">吉野家ダイエットガイド</Link>で詳しく解説。
             </p>
           </div>
 
-          <SubSectionHeading>サイゼリヤ - 高タンパク×低価格</SubSectionHeading>
+          <SubSectionHeading>サイゼリヤ - スパイス×低価格</SubSectionHeading>
           <div className="bg-white rounded-lg border border-gray-200 p-5 mb-6 shadow-sm">
-            <p className="font-bold text-gray-900 mb-2">若鶏のグリル（ディアボラ風） + 小エビのサラダ</p>
+            <p className="font-bold text-gray-900 mb-2">若鶏のディアボラ風 + 小エビのサラダ</p>
             <div className="flex flex-wrap gap-2 mb-3">
-              <span className="text-xs bg-sky-50 text-sky-700 px-2.5 py-1 rounded-full font-bold">約480kcal</span>
-              <span className="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full font-bold">P 38.2g</span>
-              <span className="text-xs bg-amber-50 text-amber-700 px-2.5 py-1 rounded-full font-bold">F 28.5g</span>
+              <span className="text-xs bg-sky-50 text-sky-700 px-2.5 py-1 rounded-full font-bold">約881kcal</span>
+              <span className="text-xs bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded-full font-bold">¥850</span>
             </div>
             <p className="text-sm text-gray-600">
-              ディアボラ風のスパイシーなソースにはにんにく・唐辛子が使われており代謝アップ効果あり。鶏肉の高タンパクでDITも上昇。<Marker>2品合わせて900円以下</Marker>とコスパも優秀。<Link href="/guide/saizeriya-diet" className="text-sky-600 hover:text-sky-800 underline">サイゼリヤダイエットガイド</Link>も参考にどうぞ。
+              ディアボラ風のスパイシーなソースにはにんにく・唐辛子が使われており代謝アップ効果あり。鶏肉の高タンパクでDITも上昇。<Marker>2品合わせて¥850</Marker>とコスパも優秀。<Link href="/guide/saizeriya-diet" className="text-sky-600 hover:text-sky-800 underline">サイゼリヤダイエットガイド</Link>も参考にどうぞ。なおサイゼリヤは公式にPFC値を非公開のため、ここではカロリー・価格のみ掲載しています。
             </p>
           </div>
 
           <SubSectionHeading>松屋 - キムチで手軽に代謝アップ</SubSectionHeading>
           <div className="bg-white rounded-lg border border-gray-200 p-5 mb-6 shadow-sm">
-            <p className="font-bold text-gray-900 mb-2">牛焼肉定食 + 豆腐キムチセット</p>
+            <p className="font-bold text-gray-900 mb-2">牛焼肉定食 + キムチ</p>
             <div className="flex flex-wrap gap-2 mb-3">
-              <span className="text-xs bg-sky-50 text-sky-700 px-2.5 py-1 rounded-full font-bold">約720kcal</span>
-              <span className="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full font-bold">P 35.0g</span>
-              <span className="text-xs bg-amber-50 text-amber-700 px-2.5 py-1 rounded-full font-bold">F 28.8g</span>
+              <span className="text-xs bg-sky-50 text-sky-700 px-2.5 py-1 rounded-full font-bold">約851kcal</span>
+              <span className="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full font-bold">P 24.7g</span>
+              <span className="text-xs bg-amber-50 text-amber-700 px-2.5 py-1 rounded-full font-bold">F 41.8g</span>
             </div>
             <p className="text-sm text-gray-600">
-              キムチのカプサイシン + 豆腐の大豆タンパク + 牛肉のL-カルニチン（脂肪燃焼を助けるアミノ酸）。松屋はキムチが無料トッピングなのでコスパも良好。<Link href="/guide/matsuya-diet" className="text-sky-600 hover:text-sky-800 underline">松屋ダイエットガイド</Link>もチェック。
+              キムチのカプサイシン + 牛肉のL-カルニチン（脂肪燃焼を助けるアミノ酸）の組み合わせ。脂質はやや高めなので、ご飯を少なめにするなど調整するとよいでしょう。<Link href="/guide/matsuya-diet" className="text-sky-600 hover:text-sky-800 underline">松屋ダイエットガイド</Link>もチェック。
             </p>
           </div>
 
@@ -432,7 +432,7 @@ export default function MetabolismBoostFoodsPage() {
           </p>
 
           <div className="bg-white rounded-lg border border-gray-200 p-5 mb-6 shadow-sm">
-            <p className="font-bold text-gray-900 mb-4 text-lg">代謝アップ1日食事プラン（約1,580kcal / P105g）</p>
+            <p className="font-bold text-gray-900 mb-4 text-lg">代謝アップ1日食事プラン（約1,950kcal / P97g）</p>
             <div className="space-y-4">
               <div className="border-l-4 border-sky-400 pl-4">
                 <p className="text-xs font-bold text-sky-600 mb-1">朝食（7:00）- 約380kcal / P28g</p>
@@ -440,9 +440,9 @@ export default function MetabolismBoostFoodsPage() {
                 <p className="text-xs text-gray-500 mt-1">代謝アップ食材: 卵（DIT）、納豆（ナットウキナーゼ）、生姜（体温上昇）、緑茶（カテキン）</p>
               </div>
               <div className="border-l-4 border-amber-400 pl-4">
-                <p className="text-xs font-bold text-amber-600 mb-1">昼食（12:00）- 約580kcal / P35g</p>
-                <p className="text-sm font-bold text-gray-800">大戸屋: 鶏むね肉と野菜の黒酢あん定食（五穀米）</p>
-                <p className="text-xs text-gray-500 mt-1">代謝アップ食材: 鶏むね肉（高タンパクDIT）、黒酢（アミノ酸）、五穀米（低GI）</p>
+                <p className="text-xs font-bold text-amber-600 mb-1">昼食（12:00）- 約952kcal / P27.5g</p>
+                <p className="text-sm font-bold text-gray-800">大戸屋: 鶏と野菜の黒酢あん（定食）</p>
+                <p className="text-xs text-gray-500 mt-1">代謝アップ食材: 鶏肉（高タンパクDIT）、黒酢（アミノ酸）、野菜（食物繊維）</p>
               </div>
               <div className="border-l-4 border-green-400 pl-4">
                 <p className="text-xs font-bold text-green-600 mb-1">間食（15:00）- 約200kcal / P18g</p>
@@ -527,9 +527,17 @@ export default function MetabolismBoostFoodsPage() {
           items={[
             { q: "基礎代謝と食事誘発性熱産生（DIT）の違いは？", a: "基礎代謝は生きているだけで消費されるエネルギー（成人で約1,200～1,500kcal/日）で全消費の60～70%。DITは食事を消化・吸収・代謝する際に消費されるエネルギーで全体の約10%。タンパク質のDITは約30%と栄養素の中で最も高いため、高タンパク食で効率的に代謝を上げられます。" },
             { q: "唐辛子と生姜はどのくらい代謝を上げますか？", a: "研究では生姜摂取が代謝に若干の上昇効果を示すデータもあり、個人差が大きいですが、その効果は限定的とされています。" },
-            { q: "外食で代謝を上げるメニュー選びのコツは？", a: "「高タンパク」「スパイス入り」「温かいメニュー」を基準に選びます。吉野家の豚生姜焼き定食（28.5gP）、サイゼリヤの若鶏グリルディアボラ風（38.2gP）、コンビニのサラダチキン+生姜味噌汁+緑茶（28.0gP）が具体例です。" },
+            { q: "外食で代謝を上げるメニュー選びのコツは？", a: "「高タンパク」「スパイス入り」「温かいメニュー」を基準に選びます。吉野家の大判豚肩ロース焼き定食（旨ダレ生姜）（30.5gP）、サイゼリヤの若鶏のディアボラ風（カロリー683kcal、サイゼリヤはPFC非公開）、コンビニのサラダチキン+生姜味噌汁+緑茶（28.0gP）が具体例です。" },
             { q: "代謝を下げる食べ物にはどのようなものがあります？", a: "トランス脂肪酸（マーガリン・菓子パン）、精製糖（清涼飲料水）、過度なアルコール、高GI食品（白いパン・うどん）、人工甘味料の過剰摂取が該当します。これらは血糖値の急上昇やインスリン分泌を促進し、脂肪蓄積を加速させます。" },
-            { q: "1日の代謝アップ食事で何カロリーくらい追加消費できますか？", a: "記事のプランでは高タンパク食（P105g）、緑茶3～5杯で約80kcal、唐辛子で約50kcalの追加消費が期待でき、合計約130～180kcalの追加消費が見込まれます。個人差がありますが、継続することで痩せやすい体づくりに貢献します。" },
+            { q: "1日の代謝アップ食事で何カロリーくらい追加消費できますか？", a: "記事のプランでは高タンパク食（P97g）、緑茶3～5杯で約80kcal、唐辛子で約50kcalの追加消費が期待でき、合計約130～180kcalの追加消費が見込まれます。個人差がありますが、継続することで痩せやすい体づくりに貢献します。" },
+          ]}
+        />
+
+        {/* Update History */}
+        <UpdateHistory
+          entries={[
+            { date: "2026-06-23", note: "DB実値と乖離した数値・実在しないメニュー・PFC非公開チェーンの架空PFCを全面是正" },
+            { date: "2026-03-25", note: "初稿公開" },
           ]}
         />
 

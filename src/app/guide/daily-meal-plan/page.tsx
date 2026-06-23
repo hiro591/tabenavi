@@ -61,7 +61,7 @@ const jsonLd = {
   description:
     "外食だけで1日1500kcalに収める具体的な食事プランを5パターン紹介。実際のメニュー名とPFC付きで完全解説。",
   datePublished: "2026-03-19",
-  dateModified: new Date().toISOString().split("T")[0],
+  dateModified: "2026-06-23",
   author: {
       "@type": "Person",
       name: "ヒロ",
@@ -115,7 +115,7 @@ export default function DailyMealPlanPage() {
           question="外食だけで1日1,500kcalダイエットは可能？具体的なメニュー例は？"
           answer={
             <>
-              <strong>結論: 可能です</strong>。1食あたり<strong>朝350kcal、昼500kcal、夜650kcal</strong>を目安にメニューを選べばOK。例えば<strong>朝: コンビニのサラダチキン+おにぎり+ヨーグルト（350kcal）→ 昼: 吉野家のライザップ牛サラダ+味噌汁（450kcal）→ 夜: ガストの蒸し鶏+サラダ（600kcal）</strong>。タンパク質は1日100g以上、脂質40g以下を意識。本記事では用途別に5つの具体プランを紹介します。
+              <strong>結論: 可能です</strong>。1食あたり<strong>朝350kcal、昼500kcal、夜650kcal</strong>を目安にメニューを選べばOK。例えば<strong>朝: コンビニのおにぎり+ゆで卵+サラダ（350kcal）→ 昼: 吉野家の牛皿（並）+ご飯少なめ（約500kcal）→ 夜: サイゼリヤの若鶏のディアボラ風+サラダ（カロリー控えめに）</strong>。タンパク質は1日100g以上、脂質40g以下を意識。本記事では用途別に5つの具体プランを紹介します。
             </>
           }
         />
@@ -238,13 +238,12 @@ export default function DailyMealPlanPage() {
           最もバランスが良く、初心者におすすめの王道パターン。<Marker>朝はコンビニで手軽に、昼は吉野家でガッツリ、夜はサイゼリヤでヘルシー</Marker>に。
         </p>
 
-        <SubSectionHeading>朝食：セブンイレブン（約310kcal）</SubSectionHeading>
+        <SubSectionHeading>朝食：セブンイレブン（約327kcal）</SubSectionHeading>
 
         <NutritionTable
           items={[
-            { name: "サラダチキン（プレーン）", calories: 114, protein: 24.1, fat: 1.2, carbs: 1.0, highlight: true },
-            { name: "味付きゆで卵（2個）", calories: 128, protein: 12.4, fat: 8.6, carbs: 0.8 },
-            { name: "野菜スティック", calories: 68, protein: 1.5, fat: 3.2, carbs: 8.4 },
+            { name: "たんぱく質が摂れる鶏むね肉サラダ", calories: 199, protein: 21.8, fat: 10.9, carbs: 4.4, highlight: true },
+            { name: "味付きゆで卵（2個・コンビニ各社）", calories: 128, protein: 12.4, fat: 8.6, carbs: 0.8 },
           ]}
           highlightProtein
         />
@@ -252,73 +251,68 @@ export default function DailyMealPlanPage() {
         <NutritionCard
           name="朝食合計"
           chain="セブンイレブン"
-          calories={310}
-          protein={38.0}
-          fat={13.0}
-          carbs={10.2}
-          price={650}
+          calories={327}
+          protein={34.2}
+          fat={19.5}
+          carbs={5.2}
+          price={500}
         />
 
-        <SubSectionHeading>昼食：吉野家（約530kcal）</SubSectionHeading>
+        <SubSectionHeading>昼食：吉野家（約474kcal）</SubSectionHeading>
 
         <NutritionTable
           items={[
-            { name: "牛丼（並盛）", calories: 633, protein: 19.6, fat: 23.6, carbs: 88.2 },
-            { name: "牛皿（並盛）＋ライスS", calories: 528, protein: 20.5, fat: 20.2, carbs: 62.8, highlight: true },
+            { name: "牛丼（並）", calories: 633, protein: 19.6, fat: 23.6, carbs: 88.2 },
+            { name: "牛丼（小盛）", calories: 474, protein: 15.4, fat: 19.6, carbs: 60.9, highlight: true },
           ]}
           highlightProtein
         />
 
         <p className="mb-4">
-          ポイントは<Marker>牛丼ではなく「牛皿 + ライスS」</Marker>を注文すること。ご飯の量を減らせるので約100kcalカットできます。
+          ポイントは<Marker>並盛ではなく「小盛」</Marker>を選ぶこと。ご飯の量が減るので約160kcalカットできます。
         </p>
 
         <NutritionCard
-          name="昼食：牛皿（並）+ ライスS"
+          name="昼食：牛丼（小盛）"
           chain="吉野家"
-          calories={528}
-          protein={20.5}
-          fat={20.2}
-          carbs={62.8}
-          price={487}
+          calories={474}
+          protein={15.4}
+          fat={19.6}
+          carbs={60.9}
+          price={398}
         />
 
-        <SubSectionHeading>夕食：サイゼリヤ（約618kcal）</SubSectionHeading>
+        <SubSectionHeading>夕食：サイゼリヤ（約889kcal）</SubSectionHeading>
 
-        <NutritionTable
-          items={[
-            { name: "若鶏のグリル（ディアボラ風）", calories: 480, protein: 35.2, fat: 30.5, carbs: 12.8, highlight: true },
-            { name: "柔らか青豆の温サラダ", calories: 138, protein: 5.8, fat: 9.2, carbs: 8.5 },
+        <ComparisonTable
+          headers={["メニュー", "カロリー", "価格"]}
+          rows={[
+            ["若鶏のディアボラ風", "683 kcal", "¥500"],
+            ["柔らか青豆の温サラダ", "206 kcal", "¥200"],
+            ["夕食合計", "889 kcal", "¥700"],
           ]}
-          highlightProtein
+          bestRowIndex={2}
         />
 
-        <NutritionCard
-          name="夕食：若鶏のグリル + 青豆サラダ"
-          chain="サイゼリヤ"
-          calories={618}
-          protein={41.0}
-          fat={39.7}
-          carbs={21.3}
-          price={700}
-          recommended
-        />
+        <WarningBox title="サイゼリヤのPFCについて">
+          <p>サイゼリヤは公式にタンパク質・脂質・炭水化物（PFC）の数値を公開していないため、本記事では<span className="font-bold">カロリーのみ</span>を掲載しています。若鶏のディアボラ風は鶏もも肉のグリルで高タンパクが期待できますが、油も使われるため<span className="font-bold">カロリーは683kcalと高め</span>。夜に選ぶ場合はご飯やパンを足さず、サラダと組み合わせるのがおすすめです。</p>
+        </WarningBox>
 
         <SubSectionHeading>パターンAの1日合計</SubSectionHeading>
 
         <ComparisonTable
           headers={["食事", "カロリー", "P", "F", "C", "価格"]}
           rows={[
-            ["朝食（コンビニ）", "310 kcal", "38.0g", "13.0g", "10.2g", "¥650"],
-            ["昼食（吉野家）", "528 kcal", "20.5g", "20.2g", "62.8g", "¥487"],
-            ["夕食（サイゼリヤ）", "618 kcal", "41.0g", "39.7g", "21.3g", "¥700"],
-            ["1日合計", "1,456 kcal", "99.5g", "72.9g", "94.3g", "¥1,837"],
+            ["朝食（コンビニ）", "327 kcal", "34.2g", "19.5g", "5.2g", "¥500"],
+            ["昼食（吉野家）", "474 kcal", "15.4g", "19.6g", "60.9g", "¥398"],
+            ["夕食（サイゼリヤ）", "889 kcal", "—", "—", "—", "¥700"],
+            ["1日合計", "1,690 kcal", "—", "—", "—", "¥1,598"],
           ]}
           bestRowIndex={3}
         />
 
         <TipBox title="パターンAのポイント">
-          <p><Marker>1日合計1,456kcal・タンパク質99.5g</Marker>で、予算は1,837円。朝のサラダチキンでタンパク質を稼ぎ、夜のサイゼリヤでさらに上乗せするのがコツ。50kcalほど余裕があるので、間食にプロテインバー（約100kcal）を追加しても1500kcal台に収まります。</p>
+          <p><Marker>1日合計は約1,690kcal</Marker>で、予算は1,598円。朝のコンビニ高タンパクサラダとゆで卵だけでタンパク質を約34g確保できます。サイゼリヤはPFC非公開のため夕食のP/F/Cは表記していませんが、若鶏のディアボラ風は683kcalと高めなので、<span className="font-bold">夕食のサラダはドレッシング控えめ、昼の牛丼は小盛</span>でカロリーを調整するのがコツです。</p>
         </TipBox>
 
         {/* ─── Section 4: パターンB ─── */}
@@ -328,13 +322,13 @@ export default function DailyMealPlanPage() {
           マクドナルドの朝マックは実は低カロリー。<Marker>サブウェイの野菜たっぷりサンドイッチで昼を軽く</Marker>、大戸屋で和定食の夕食という組み合わせ。
         </p>
 
-        <SubSectionHeading>朝食：マクドナルド 朝マック（約305kcal）</SubSectionHeading>
+        <SubSectionHeading>朝食：マクドナルド 朝マック（約310kcal）</SubSectionHeading>
 
         <NutritionTable
           items={[
-            { name: "エッグマックマフィン", calories: 305, protein: 19.2, fat: 13.5, carbs: 27.0, highlight: true },
-            { name: "ソーセージマフィン", calories: 393, protein: 15.5, fat: 24.8, carbs: 26.8 },
-            { name: "ホットケーキ", calories: 322, protein: 7.5, fat: 8.8, carbs: 55.2 },
+            { name: "エッグマックマフィン", calories: 310, protein: 18.6, fat: 13.6, carbs: 27.2, highlight: true },
+            { name: "ソーセージマフィン", calories: 397, protein: 15.5, fat: 25.1, carbs: 27.1 },
+            { name: "ホットケーキ", calories: 323, protein: 8.3, fat: 9.3, carbs: 53.5 },
           ]}
           highlightProtein
         />
@@ -342,61 +336,59 @@ export default function DailyMealPlanPage() {
         <NutritionCard
           name="朝食：エッグマックマフィン"
           chain="マクドナルド"
-          calories={305}
-          protein={19.2}
-          fat={13.5}
-          carbs={27.0}
-          price={200}
+          calories={310}
+          protein={18.6}
+          fat={13.6}
+          carbs={27.2}
+          price={290}
         />
 
         <p className="mb-6">
-          朝マックの中でも<Marker>エッグマックマフィンは305kcal・P19.2gと優秀</Marker>。ソーセージマフィンは脂質24.8gと高いのでNG。飲み物はブラックコーヒー（6kcal）にしましょう。
+          朝マックの中でも<Marker>エッグマックマフィンは310kcal・P18.6gと優秀</Marker>。ソーセージマフィンは脂質25.1gと高いのでNG。飲み物はブラックコーヒー（数kcal）にしましょう。
         </p>
 
-        <SubSectionHeading>昼食：サブウェイ（約310kcal）</SubSectionHeading>
+        <SubSectionHeading>昼食：サブウェイ（約273kcal）</SubSectionHeading>
 
         <NutritionTable
           items={[
-            { name: "ローストチキン（小麦）", calories: 282, protein: 22.0, fat: 4.0, carbs: 42.8, highlight: true },
-            { name: "BLT（小麦）", calories: 318, protein: 15.5, fat: 9.8, carbs: 42.4 },
-            { name: "えびアボカド（小麦）", calories: 330, protein: 13.5, fat: 10.2, carbs: 45.0 },
+            { name: "チリチキン", calories: 273, protein: 20.5, fat: 4.1, carbs: 39.7, highlight: true },
+            { name: "BLT", calories: 335, protein: 11.3, fat: 14.2, carbs: 41.9 },
+            { name: "えびアボカド", calories: 319, protein: 11.9, fat: 12.2, carbs: 41.1 },
           ]}
           highlightProtein
         />
 
         <NutritionCard
-          name="昼食：ローストチキン（レギュラー）"
+          name="昼食：チリチキン（レギュラー）"
           chain="サブウェイ"
-          calories={282}
-          protein={22.0}
-          fat={4.0}
-          carbs={42.8}
-          price={490}
+          calories={273}
+          protein={20.5}
+          fat={4.1}
+          carbs={39.7}
         />
 
         <p className="mb-6">
-          サブウェイは<Marker color="blue">野菜たっぷりで脂質がわずか4.0g</Marker>と驚異的な低脂質。ドレッシングは「わさび醤油」や「オイル&ビネガー」を選ぶとカロリーを抑えられます。
+          サブウェイのチリチキンは<Marker color="blue">P20.5gで脂質わずか4.1g</Marker>という驚異的な高タンパク低脂質。ドレッシングは「わさび醤油」や「オイル&ビネガー」を選ぶとカロリーを抑えられます。
         </p>
 
-        <SubSectionHeading>夕食：大戸屋（約680kcal）</SubSectionHeading>
+        <SubSectionHeading>夕食：大戸屋（約612kcal）</SubSectionHeading>
 
         <NutritionTable
           items={[
-            { name: "しまほっけの炭火焼き定食", calories: 602, protein: 38.5, fat: 18.2, carbs: 68.0 },
-            { name: "鶏むね肉の塩麹漬け焼き定食", calories: 678, protein: 42.2, fat: 16.8, carbs: 72.5, highlight: true },
-            { name: "大戸屋風チキン南蛮定食", calories: 892, protein: 32.5, fat: 38.2, carbs: 98.0 },
+            { name: "しまほっけの炭火焼き", calories: 612, protein: 45.5, fat: 13.1, carbs: 79.3, highlight: true },
+            { name: "もろみチキンの炭火焼き", calories: 802, protein: 42.3, fat: 30.9, carbs: 82.3 },
+            { name: "大戸屋風チキン南蛮", calories: 1283, protein: 44.1, fat: 70.8, carbs: 109.6 },
           ]}
           highlightProtein
         />
 
         <NutritionCard
-          name="夕食：鶏むね肉の塩麹漬け焼き定食"
+          name="夕食：しまほっけの炭火焼き"
           chain="大戸屋"
-          calories={678}
-          protein={42.2}
-          fat={16.8}
-          carbs={72.5}
-          price={990}
+          calories={612}
+          protein={45.5}
+          fat={13.1}
+          carbs={79.3}
           recommended
         />
 
@@ -405,16 +397,16 @@ export default function DailyMealPlanPage() {
         <ComparisonTable
           headers={["食事", "カロリー", "P", "F", "C", "価格"]}
           rows={[
-            ["朝食（マクドナルド）", "305 kcal", "19.2g", "13.5g", "27.0g", "¥200"],
-            ["昼食（サブウェイ）", "282 kcal", "22.0g", "4.0g", "42.8g", "¥490"],
-            ["夕食（大戸屋）", "678 kcal", "42.2g", "16.8g", "72.5g", "¥990"],
-            ["1日合計", "1,265 kcal", "83.4g", "34.3g", "142.3g", "¥1,680"],
+            ["朝食（マクドナルド）", "310 kcal", "18.6g", "13.6g", "27.2g", "¥290"],
+            ["昼食（サブウェイ）", "273 kcal", "20.5g", "4.1g", "39.7g", "—"],
+            ["夕食（大戸屋）", "612 kcal", "45.5g", "13.1g", "79.3g", "—"],
+            ["1日合計", "1,195 kcal", "84.6g", "30.8g", "146.2g", "—"],
           ]}
           bestRowIndex={3}
         />
 
         <TipBox title="パターンBのポイント">
-          <p><Marker>脂質わずか34.3gという超低脂質プラン</Marker>。1,265kcalと余裕があるので、間食にプロテインシェイク（約120kcal・P24g）を追加するのがおすすめ。タンパク質を100g以上に引き上げられます。大戸屋のチキン南蛮定食（892kcal）は揚げ物なので避けましょう。</p>
+          <p><Marker>脂質わずか30.8gという超低脂質プラン</Marker>。1,195kcalと余裕があるので、間食にプロテインシェイク（約120kcal・P24g）を追加するのがおすすめ。タンパク質を100g以上に引き上げられます。大戸屋風チキン南蛮（1,283kcal）は揚げ物で脂質も70g超なので避けましょう。なおサブウェイ・大戸屋は公式に価格を一律で公開していないため、価格は店舗でご確認ください。</p>
         </TipBox>
 
         <ArticleImage
@@ -439,7 +431,7 @@ export default function DailyMealPlanPage() {
 
         <NutritionCard
           name="ギリシャヨーグルト + プロテインバー"
-          chain="セブンイレブン"
+          chain="コンビニ各社"
           calories={278}
           protein={28.5}
           fat={8.2}
@@ -534,61 +526,50 @@ export default function DailyMealPlanPage() {
         <SubSectionHeading>朝食：コンビニ（約320kcal）</SubSectionHeading>
 
         <NutritionCard
-          name="サラダチキン + ゆで卵2個 + プロテインドリンク"
-          chain="セブンイレブン"
-          calories={322}
-          protein={48.5}
-          fat={11.8}
-          carbs={5.2}
+          name="鶏むね肉サラダ + ゆで卵2個 + プロテインドリンク"
+          chain="コンビニ各社"
+          calories={411}
+          protein={46.5}
+          fat={21.7}
+          carbs={12.8}
           price={700}
           recommended
         />
 
         <NutritionTable
           items={[
-            { name: "サラダチキン（ハーブ）", calories: 110, protein: 23.8, fat: 1.0, carbs: 1.2, highlight: true },
-            { name: "味付きゆで卵（2個）", calories: 128, protein: 12.4, fat: 8.6, carbs: 0.8 },
-            { name: "プロテインドリンク（ザバス）", calories: 84, protein: 12.3, fat: 2.2, carbs: 3.2, highlight: true },
+            { name: "たんぱく質が摂れる鶏むね肉サラダ（セブン）", calories: 199, protein: 21.8, fat: 10.9, carbs: 4.4, highlight: true },
+            { name: "味付きゆで卵（2個・コンビニ各社）", calories: 128, protein: 12.4, fat: 8.6, carbs: 0.8 },
+            { name: "プロテインドリンク（コンビニ各社）", calories: 84, protein: 12.3, fat: 2.2, carbs: 3.2, highlight: true },
           ]}
           highlightProtein
         />
 
-        <SubSectionHeading>昼食：松屋（約520kcal）</SubSectionHeading>
+        <SubSectionHeading>昼食：松屋（約430kcal）</SubSectionHeading>
 
         <NutritionCard
-          name="鶏の甘辛味噌定食（ミニ盛）"
+          name="鶏そぼろ玉子丼（小盛）"
           chain="松屋"
-          calories={518}
-          protein={32.5}
-          fat={14.2}
-          carbs={58.8}
-          price={650}
+          calories={430}
+          protein={19.6}
+          fat={9.2}
+          carbs={63.4}
         />
 
-        <SubSectionHeading>夕食：サイゼリヤ（約620kcal）</SubSectionHeading>
+        <SubSectionHeading>夕食：サイゼリヤ（約881kcal）</SubSectionHeading>
 
-        <NutritionCard
-          name="若鶏のグリル + 小エビのサラダ + 辛味チキン"
-          chain="サイゼリヤ"
-          calories={610}
-          protein={59.8}
-          fat={36.5}
-          carbs={21.2}
-          price={950}
-          recommended
-        />
-
-        <NutritionTable
-          items={[
-            { name: "若鶏のグリル（ディアボラ風）", calories: 480, protein: 35.2, fat: 30.5, carbs: 12.8, highlight: true },
-            { name: "辛味チキン（3本）", calories: 218, protein: 16.5, fat: 12.8, carbs: 9.2 },
-            { name: "小エビのサラダ（ドレッシングなし）", calories: 82, protein: 8.1, fat: 3.2, carbs: 5.2 },
+        <ComparisonTable
+          headers={["メニュー", "カロリー", "価格"]}
+          rows={[
+            ["若鶏のディアボラ風", "683 kcal", "¥500"],
+            ["小エビのサラダ", "198 kcal", "¥350"],
+            ["夕食合計", "881 kcal", "¥850"],
           ]}
-          highlightProtein
+          bestRowIndex={2}
         />
 
         <p className="mb-4">
-          夕食の注目点は<Marker color="blue">サイゼリヤでタンパク質59.8gという驚異的な数値</Marker>。若鶏のグリルと辛味チキンのダブルチキンがカギです。
+          夕食はサイゼリヤの<Marker color="blue">若鶏のディアボラ風（鶏もも肉のグリル）</Marker>でしっかりタンパク質を確保。ただし<span className="font-bold">サイゼリヤは公式にPFC値を公開していない</span>ため、本記事ではカロリーのみを掲載しています。さらにチキンを足したい場合は辛味チキン（295kcal）を追加できますが、その分カロリーが増える点に注意しましょう。
         </p>
 
         <SubSectionHeading>パターンDの1日合計</SubSectionHeading>
@@ -596,16 +577,16 @@ export default function DailyMealPlanPage() {
         <ComparisonTable
           headers={["食事", "カロリー", "P", "F", "C", "価格"]}
           rows={[
-            ["朝食（コンビニ）", "322 kcal", "48.5g", "11.8g", "5.2g", "¥700"],
-            ["昼食（松屋）", "518 kcal", "32.5g", "14.2g", "58.8g", "¥650"],
-            ["夕食（サイゼリヤ）", "610 kcal", "59.8g", "36.5g", "21.2g", "¥950"],
-            ["1日合計", "1,450 kcal", "140.8g", "62.5g", "85.2g", "¥2,300"],
+            ["朝食（コンビニ）", "411 kcal", "46.5g", "21.7g", "12.8g", "¥700"],
+            ["昼食（松屋）", "430 kcal", "19.6g", "9.2g", "63.4g", "—"],
+            ["夕食（サイゼリヤ）", "881 kcal", "—", "—", "—", "¥850"],
+            ["1日合計", "1,722 kcal", "—", "—", "—", "—"],
           ]}
           bestRowIndex={3}
         />
 
         <TipBox title="筋トレ日のPFCバランス">
-          <p><Marker>タンパク質140.8gで1,450kcal</Marker>。体重70kgの人なら体重1kgあたり2gのタンパク質を確保でき、筋肥大に最適なバランスです。炭水化物が85.2gとやや少なめなので、トレーニング前にバナナ（約90kcal・C22g）を追加するのも良いでしょう。</p>
+          <p>朝食と昼食だけで<Marker>タンパク質は約66g</Marker>を確保。朝のコンビニ高タンパク食材でしっかり積み上げるのがコツです。夕食のサイゼリヤはPFC非公開のためP/F/Cは表記していませんが、若鶏のディアボラ風（鶏もも肉）で追加のタンパク質を補えます。合計は約1,722kcalとやや多めなので、減量中はサラダのドレッシングや昼の丼サイズで微調整しましょう。</p>
         </TipBox>
 
         {/* ─── Section 7: パターンE ─── */}
@@ -615,16 +596,15 @@ export default function DailyMealPlanPage() {
           「週末くらいは好きなもの食べたい」そんな気持ちに応える、<Marker>満足感重視だけど1500kcalに収まるプラン</Marker>です。
         </p>
 
-        <SubSectionHeading>ブランチ：スターバックス（約380kcal）</SubSectionHeading>
+        <SubSectionHeading>ブランチ：スターバックス（約272kcal）</SubSectionHeading>
 
         <NutritionCard
-          name="ハム&エッグ ホットサンド + ドリップコーヒー"
+          name="ハム＆チーズ 石窯カンパーニュサンド + ブリュードコーヒー"
           chain="スターバックス"
-          calories={378}
-          protein={16.2}
-          fat={14.8}
-          carbs={42.5}
-          price={780}
+          calories={272}
+          protein={18.4}
+          fat={13.8}
+          carbs={19.0}
         />
 
         <SubSectionHeading>おやつ：コンビニ（約150kcal）</SubSectionHeading>
@@ -643,10 +623,10 @@ export default function DailyMealPlanPage() {
 
         <NutritionTable
           items={[
-            { name: "ポークカレー（普通盛・ライス200g）", calories: 548, protein: 15.2, fat: 14.5, carbs: 88.2 },
-            { name: "手仕込チキンカツカレー（ライス200g）", calories: 782, protein: 28.5, fat: 28.2, carbs: 102.5 },
-            { name: "ほうれん草カレー（ライス200g）", calories: 582, protein: 16.8, fat: 16.0, carbs: 90.5 },
-            { name: "チキンにこみカレー（ライス200g）", calories: 672, protein: 32.0, fat: 18.5, carbs: 92.2, highlight: true },
+            { name: "ポークカレー（ライス200g）", calories: 545, protein: 8.5, fat: 18.0, carbs: 89.8 },
+            { name: "チキンカツカレー（ライス200g）", calories: 959, protein: 29.8, fat: 43.4, carbs: 114.5 },
+            { name: "ほうれん草カレー（ライス200g）", calories: 556, protein: 10.0, fat: 18.2, carbs: 91.5 },
+            { name: "チキンにこみカレー（ライス200g）", calories: 613, protein: 21.9, fat: 19.4, carbs: 91.6, highlight: true },
           ]}
           highlightProtein
         />
@@ -654,16 +634,16 @@ export default function DailyMealPlanPage() {
         <NutritionCard
           name="夕食：チキンにこみカレー（ライス200g）"
           chain="CoCo壱番屋"
-          calories={672}
-          protein={32.0}
-          fat={18.5}
-          carbs={92.2}
-          price={860}
+          calories={613}
+          protein={21.9}
+          fat={19.4}
+          carbs={91.6}
+          price={520}
           recommended
         />
 
         <p className="mb-4">
-          CoCo壱番屋のポイントは<Marker color="blue">ライスを200gに減量すること</Marker>（通常300g）。これだけで約150kcalカット。チキンにこみカレーはP32gと高タンパクで満足感も抜群です。
+          CoCo壱番屋のポイントは<Marker color="blue">ライスを200gに減量すること</Marker>（標準300g）。これだけでご飯1杯分の約156kcalをカットできます。チキンにこみカレーはP約22gと高タンパクで満足感も抜群です（数値は標準300gの公式値からライス100g分を差し引いて算出）。
         </p>
 
         <SubSectionHeading>パターンEの1日合計</SubSectionHeading>
@@ -671,16 +651,16 @@ export default function DailyMealPlanPage() {
         <ComparisonTable
           headers={["食事", "カロリー", "P", "F", "C", "価格"]}
           rows={[
-            ["ブランチ（スタバ）", "378 kcal", "16.2g", "14.8g", "42.5g", "¥780"],
+            ["ブランチ（スタバ）", "272 kcal", "18.4g", "13.8g", "19.0g", "—"],
             ["おやつ（コンビニ）", "148 kcal", "11.5g", "0.2g", "24.8g", "¥250"],
-            ["夕食（CoCo壱）", "672 kcal", "32.0g", "18.5g", "92.2g", "¥860"],
-            ["1日合計", "1,198 kcal", "59.7g", "33.5g", "159.5g", "¥1,890"],
+            ["夕食（CoCo壱）", "613 kcal", "21.9g", "19.4g", "91.6g", "¥520"],
+            ["1日合計", "1,033 kcal", "51.8g", "33.4g", "135.4g", "—"],
           ]}
           bestRowIndex={3}
         />
 
         <WarningBox title="週末プランの注意点">
-          <p>パターンEは<span className="font-bold">1,198kcalとやや低め</span>で、タンパク質も59.7gと不足気味。週末限定の「チートデイ寄りプラン」として使い、<span className="font-bold">間食にプロテインシェイク（120kcal・P24g）を追加</span>してタンパク質を80g以上に引き上げましょう。毎日このプランだと筋肉が落ちるリスクがあります。</p>
+          <p>パターンEは<span className="font-bold">1,033kcalとやや低め</span>で、タンパク質も51.8gと不足気味。週末限定の「リラックス寄りプラン」として使い、<span className="font-bold">間食にプロテインシェイク（120kcal・P24g）を追加</span>してタンパク質を80g以上に引き上げましょう。毎日このプランだと筋肉が落ちるリスクがあります。</p>
         </WarningBox>
 
         {/* ─── 5パターン比較まとめ ─── */}
@@ -689,14 +669,18 @@ export default function DailyMealPlanPage() {
         <ComparisonTable
           headers={["パターン", "カロリー", "P", "F", "C", "予算", "特徴"]}
           rows={[
-            ["A（王道）", "1,456 kcal", "99.5g", "72.9g", "94.3g", "¥1,837", "バランス型"],
-            ["B（低脂質）", "1,265 kcal", "83.4g", "34.3g", "142.3g", "¥1,680", "脂質最小"],
+            ["A（王道）", "1,690 kcal", "—", "—", "—", "¥1,598", "バランス型※"],
+            ["B（低脂質）", "1,195 kcal", "84.6g", "30.8g", "146.2g", "—", "脂質最小"],
             ["C（コンビニ）", "1,478 kcal", "106.5g", "37.5g", "163.4g", "¥1,920", "手軽さ重視"],
-            ["D（筋トレ）", "1,450 kcal", "140.8g", "62.5g", "85.2g", "¥2,300", "P最大"],
-            ["E（週末）", "1,198 kcal", "59.7g", "33.5g", "159.5g", "¥1,890", "満足感重視"],
+            ["D（筋トレ）", "1,722 kcal", "—", "—", "—", "—", "高タンパク※"],
+            ["E（週末）", "1,033 kcal", "51.8g", "33.4g", "135.4g", "—", "満足感重視"],
           ]}
           bestRowIndex={2}
         />
+
+        <p className="text-xs text-gray-400 mt-2 mb-6">
+          ※サイゼリヤを含むパターンA・Dは、サイゼリヤが公式にPFC（タンパク質・脂質・炭水化物）を公開していないため、PFC合計を「—」としています。価格が「—」のパターンは、サブウェイ・大戸屋・松屋・スターバックスなど一部チェーンが価格を一律公開していないため合計を出していません。
+        </p>
 
         {/* ─── Section 8: NGパターン ─── */}
         <SectionHeading id="ng-patterns">避けるべきNGパターン</SectionHeading>
@@ -764,10 +748,10 @@ export default function DailyMealPlanPage() {
             "1500kcalで月2kg減のペース。男性は600kcal/日の赤字、女性は運動を組み合わせると効果的",
             "おすすめの配分は「朝300：昼500：夜700」の夕食重視型",
             "5パターンをローテーションすれば飽きずに継続できる",
-            "パターンA（王道）：1,456kcal / P99.5g / ¥1,837",
-            "パターンC（コンビニ）：1,478kcal / P106.5g が最も手軽",
-            "パターンD（筋トレ）：1,450kcal / P140.8g で筋肥大にも対応",
-            "タンパク質は最低100g/日を目標に。サラダチキン・グリル系を活用",
+            "パターンC（コンビニ）：1,478kcal / P106.5g が最も手軽で高タンパク",
+            "パターンB（低脂質）：1,195kcal / P84.6g / 脂質30.8gと低脂質",
+            "サイゼリヤなどPFC非公開チェーンはカロリーで管理。グリル系を高タンパク源に活用",
+            "タンパク質は最低100g/日を目標に。コンビニの高タンパクサラダ・グリル系を活用",
             "朝食抜き・サラダだけ・ドリンクのカロリー無視はNG",
           ]}
         />
@@ -788,7 +772,7 @@ export default function DailyMealPlanPage() {
           items={[
             {
               q: "外食だけで本当に1,500kcalダイエットできる？",
-              a: "可能です。重要なのは「メニュー選び」と「組み合わせ」の2点。例えば朝にコンビニ朝食（350kcal）、昼に吉野家のライザップ牛サラダ（398kcal）、夜にサイゼリヤの若鶏のグリル+サラダ（600kcal）で合計約1,350kcal。さらに間食用にプロテインバー（150kcal）を加えても1,500kcal以下に収まります。",
+              a: "可能です。重要なのは「メニュー選び」と「組み合わせ」の2点。例えば朝にコンビニ朝食（350kcal）、昼に吉野家の牛丼（小盛・474kcal）、夜はサブウェイのチリチキン（273kcal）など低脂質サンドにすれば合計約1,100kcal。さらに間食用にプロテインバー（150kcal）を加えても1,500kcal以下に収まります。サイゼリヤの若鶏のディアボラ風（683kcal）のように、カロリー高めのメニューを選んだ日は他の2食を軽くして調整しましょう。",
             },
             {
               q: "1日1,500kcalは少なすぎませんか？",
@@ -800,7 +784,7 @@ export default function DailyMealPlanPage() {
             },
             {
               q: "外食ダイエット中の朝食はどうすべき？",
-              a: "朝は「タンパク質+少量の炭水化物」が理想。おすすめは①コンビニ：おにぎり+ゆで卵+ヨーグルト（350kcal/P20g）、②吉野家：朝牛セット小盛（450kcal）、③マクドナルド：エッグマックマフィン+ブラックコーヒー（315kcal/P19g）。朝食を抜くより必ず食べる方がリバウンド防止になります。",
+              a: "朝は「タンパク質+少量の炭水化物」が理想。おすすめは①コンビニ：おにぎり+ゆで卵+高タンパクサラダ（350kcal/P20g前後）、②吉野家：ミニ牛丼（352kcal）、③マクドナルド：エッグマックマフィン+ブラックコーヒー（310kcal/P18.6g）。朝食を抜くより必ず食べる方がリバウンド防止になります。",
             },
             {
               q: "間食やおやつは1,500kcalプランに含めていい？",
@@ -823,6 +807,7 @@ export default function DailyMealPlanPage() {
         {/* Update History */}
         <UpdateHistory
           entries={[
+            { date: "2026-06-23", note: "DB実値と乖離した数値・実在しないメニュー・PFC非公開チェーンの架空PFCを全面是正" },
             { date: "2026-06-08", note: "32チェーン・6,000品以上に対応拡大。栄養数値を公式データで再検証" },
             { date: "2026-05-12", note: "QuickAnswer・FAQ・著者情報を追加。22チェーン2,500メニュー対応" },
             { date: "2026-03-19", note: "初稿公開" },

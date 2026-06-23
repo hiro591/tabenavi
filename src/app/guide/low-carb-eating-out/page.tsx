@@ -63,7 +63,7 @@ const jsonLd = {
   description:
     "糖質制限・ロカボダイエット中でも安心して外食できるチェーン店の低糖質メニューを徹底紹介。",
   datePublished: "2026-03-19",
-  dateModified: new Date().toISOString().split("T")[0],
+  dateModified: "2026-06-23",
   author: {
       "@type": "Person",
       name: "ヒロ",
@@ -115,7 +115,7 @@ export default function LowCarbEatingOutPage() {
           question="糖質制限中、外食で何を選ぶべき？1食あたり糖質20g以下のメニューは？"
           answer={
             <>
-              <strong>「ご飯・パン・パスタを抜いて、肉/魚/卵/野菜をメインに」</strong>が基本ルール。糖質制限中の外食ベストは<strong>すき家「牛丼ライト」（豆腐ベース・糖質約20g）/ 吉野家「ライザップ牛サラダ」（糖質約14g）/ 焼肉系（タレなし）/ サラダチキン</strong>。逆に避けたいのは<strong>丼物（糖質80g超）・ラーメン（糖質60g超）・パスタ（糖質70g超）・サンドイッチ（糖質40g超）</strong>。コンビニならゆで卵・サラダチキン・チーズ・ナッツが鉄板です。
+              <strong>「ご飯・パン・パスタを抜いて、肉/魚/卵/野菜をメインに」</strong>が基本ルール。糖質制限中の外食ベストは<strong>すき家「牛丼ライト 並盛」（豆腐ベース・糖質約17g）/ 吉野家「牛皿 並盛」（糖質約5g）＋サラダ / 焼肉系（タレなし）/ コンビニのサラダチキン</strong>。逆に避けたいのは<strong>丼物（糖質80g超）・ラーメン（糖質60g超）・パスタ（糖質70g超）・サンドイッチ（糖質40g超）</strong>。コンビニならゆで卵・鶏むね肉サラダ・チーズ・ナッツが鉄板です。
             </>
           }
         />
@@ -202,22 +202,28 @@ export default function LowCarbEatingOutPage() {
           <p className="text-gray-700 text-sm leading-relaxed mb-4">
             サイゼリヤは<Marker>おかず単品が充実</Marker>しており、
             ライスを頼まなければ自然と低糖質になります。
-            特に肉料理・前菜系は糖質が低く、糖質制限の強い味方です。
+            特に肉料理・前菜系は主食を抜きやすく、糖質制限の強い味方です。
           </p>
-          <NutritionTable
-            items={[
-              { name: "若鶏のグリル（ディアボラ風）", calories: 514, protein: 35.6, fat: 37.1, carbs: 10.8, highlight: true },
-              { name: "リブステーキ", calories: 556, protein: 30.0, fat: 41.7, carbs: 12.3 },
-              { name: "辛味チキン", calories: 280, protein: 22.3, fat: 19.0, carbs: 5.0, highlight: true },
-              { name: "柔らか青豆の温サラダ", calories: 171, protein: 6.4, fat: 11.7, carbs: 9.5 },
-              { name: "小エビのサラダ", calories: 120, protein: 7.8, fat: 7.2, carbs: 5.1 },
+          <ComparisonTable
+            headers={["メニュー", "カロリー", "価格", "タイプ"]}
+            rows={[
+              ["若鶏のディアボラ風", "683 kcal", "¥500", "肉料理（主食なし）"],
+              ["辛味チキン", "295 kcal", "¥300", "肉料理（主食なし）"],
+              ["ビーフステーキ", "374 kcal", "¥1,090", "肉料理（主食なし）"],
+              ["柔らか青豆の温サラダ", "206 kcal", "¥200", "前菜・サラダ"],
+              ["小エビのサラダ", "198 kcal", "¥350", "前菜・サラダ"],
             ]}
+            bestRowIndex={0}
           />
+          <p className="text-xs text-gray-400 mt-2 mb-2">
+            ※ サイゼリヤは公式にタンパク質・脂質・炭水化物（PFC）の数値を非公開のため、本記事ではカロリーと価格のみ掲載しています。糖質量を厳密に管理したい場合は、ライス・パンを頼まないことを基準にメニューを選んでください。
+          </p>
           <TipBox title="サイゼリヤ攻略法">
             <p>
-              若鶏のグリルは<strong>糖質わずか10.8g</strong>でタンパク質35.6g。
-              糖質制限中の最強メニューです。サラダ＋肉料理の組み合わせで、
-              1食の糖質を20g以下に抑えられます。ライスとパンは我慢しましょう。
+              若鶏のディアボラ風やビーフステーキなど、
+              <strong>主食（ライス・パン）を頼まない肉料理</strong>が糖質制限の基本選択です。
+              サラダ＋肉料理の組み合わせで、ご飯由来の糖質を丸ごとカットできます。
+              ライスとパンは我慢しましょう。
             </p>
           </TipBox>
         </RankingCard>
@@ -226,25 +232,25 @@ export default function LowCarbEatingOutPage() {
         <RankingCard
           rank={2}
           title="吉野家"
-          subtitle="ライザップ牛サラダで糖質制限の定番に"
+          subtitle="牛皿＋生野菜サラダでご飯抜きの糖質制限に"
         >
           <p className="text-gray-700 text-sm leading-relaxed mb-4">
-            吉野家は牛丼チェーンですが、実は<Marker>糖質制限対応メニュー</Marker>があります。
-            特にライザップとのコラボメニュー「ライザップ牛サラダ」は、
-            ごはんの代わりに豆腐と野菜を使った糖質制限者向けの人気メニューです。
+            吉野家は牛丼チェーンですが、<Marker>牛皿（ご飯なし）＋生野菜サラダ</Marker>の
+            組み合わせなら糖質を大きく抑えられます。
+            ごはんを別オーダーにせず、おかず中心で注文するのがコツです。
           </p>
           <NutritionTable
             items={[
-              { name: "ライザップ牛サラダ", calories: 414, protein: 28.0, fat: 27.4, carbs: 17.2, highlight: true },
-              { name: "牛皿（並）", calories: 267, protein: 15.3, fat: 19.4, carbs: 6.5, highlight: true },
+              { name: "牛皿 並盛", calories: 281, protein: 13.5, fat: 22.9, carbs: 5.2, highlight: true },
+              { name: "生野菜サラダ", calories: 88, protein: 1.7, fat: 4.8, carbs: 9.7, highlight: true },
               { name: "牛丼（並）※参考", calories: 633, protein: 19.6, fat: 23.6, carbs: 88.2 },
             ]}
           />
           <TipBox title="吉野家で糖質を抑えるコツ">
             <p>
-              牛丼並盛の糖質は<strong>約89g</strong>と1食分を大幅に超えます。
-              ライザップ牛サラダなら<strong>糖質17.2g</strong>で済むので、
-              差は約72g。牛皿単品＋サラダという注文も糖質を抑える有効な手段です。
+              牛丼並盛の糖質は<strong>約88g</strong>と1食分を大幅に超えます。
+              牛皿並盛（糖質5.2g）＋生野菜サラダ（糖質9.7g）なら合計でも約15gに収まり、
+              ご飯ありの牛丼と比べて糖質を約73gカットできます。
             </p>
           </TipBox>
         </RankingCard>
@@ -257,18 +263,18 @@ export default function LowCarbEatingOutPage() {
         >
           <p className="text-gray-700 text-sm leading-relaxed mb-4">
             すき家の「牛丼ライト」は、ごはんの代わりに豆腐を使用したメニューで、
-            通常の牛丼と比べて<Marker>糖質を約60%カット</Marker>できます。
+            通常の牛丼と比べて<Marker>糖質を約8割カット</Marker>できます。
           </p>
           <NutritionTable
             items={[
-              { name: "牛丼ライト（並）", calories: 425, protein: 25.5, fat: 26.0, carbs: 22.5, highlight: true },
-              { name: "まぐろたたき丼ライト", calories: 307, protein: 22.8, fat: 12.1, carbs: 25.6 },
-              { name: "牛丼（並）※参考", calories: 638, protein: 17.2, fat: 22.0, carbs: 90.5 },
+              { name: "牛丼ライト 並盛", calories: 397, protein: 22.8, fat: 26.8, carbs: 16.8, highlight: true },
+              { name: "牛丼ライト ミニ", calories: 309, protein: 18.5, fat: 19.9, carbs: 14.8, highlight: true },
+              { name: "牛丼（並）※参考", calories: 695, protein: 21.7, fat: 23.4, carbs: 99.8 },
             ]}
           />
           <p className="text-gray-700 text-sm leading-relaxed mt-3">
-            牛丼ライトの糖質22.5gは、スタンダード糖質制限の基準（20〜40g）を
-            クリアしています。通常の牛丼（90.5g）と比較すると<Marker color="green">糖質68g削減</Marker>です。
+            牛丼ライト並盛の糖質16.8gは、スーパー糖質制限の基準（10〜20g）すら
+            クリアしています。通常の牛丼（99.8g）と比較すると<Marker color="green">糖質83g削減</Marker>です。
           </p>
         </RankingCard>
 
@@ -281,18 +287,18 @@ export default function LowCarbEatingOutPage() {
         </p>
         <NutritionTable
           items={[
-            { name: "チキンマックナゲット（5個）", calories: 270, protein: 15.8, fat: 17.2, carbs: 13.1, highlight: true },
-            { name: "サイドサラダ", calories: 10, protein: 0.6, fat: 0.1, carbs: 2.1, highlight: true },
-            { name: "エッグマックマフィン", calories: 311, protein: 19.2, fat: 13.5, carbs: 27.0 },
-            { name: "ハンバーガー", calories: 256, protein: 12.8, fat: 9.4, carbs: 30.3 },
-            { name: "マックフライポテト（M）※参考", calories: 410, protein: 5.3, fat: 20.1, carbs: 51.0 },
+            { name: "チキンマックナゲット 5ピース", calories: 262, protein: 15.3, fat: 15.9, carbs: 14.4, highlight: true },
+            { name: "サイドサラダ", calories: 10, protein: 0.5, fat: 0.1, carbs: 2.3, highlight: true },
+            { name: "エッグマックマフィン", calories: 310, protein: 18.6, fat: 13.6, carbs: 27.2 },
+            { name: "ハンバーガー", calories: 259, protein: 13.0, fat: 9.5, carbs: 30.3 },
+            { name: "マックフライポテト(M)※参考", calories: 409, protein: 5.5, fat: 19.8, carbs: 52.4 },
           ]}
         />
         <WarningBox title="マクドナルドの注意点">
           <p>
             バーガー1個でも糖質は<strong>27〜30g</strong>あります。
-            ポテトM（糖質51g）をセットにすると1食で80g超え。
-            糖質制限中はナゲット＋サラダの組み合わせ（糖質計15.2g）がベストです。
+            ポテトM（糖質52g）をセットにすると1食で80g超え。
+            糖質制限中はナゲット＋サラダの組み合わせ（糖質計16.7g）がベストです。
             てりやきソース系は砂糖が多いので避けましょう。
           </p>
         </WarningBox>
@@ -301,20 +307,22 @@ export default function LowCarbEatingOutPage() {
         <SubSectionHeading>サブウェイ</SubSectionHeading>
         <p className="text-gray-700 leading-relaxed mb-4">
           サブウェイはパンのサイズを選べるのが強みです。
-          また、サラダに変更できるため、糖質制限中はサラダ版を選ぶのがおすすめです。
+          また、サンドイッチとは別にサラダメニューも用意されているため、
+          糖質制限中はパンなしのサラダを選ぶのがおすすめです。
         </p>
         <NutritionTable
           items={[
-            { name: "チキンブレスト（サラダ）", calories: 148, protein: 18.0, fat: 3.8, carbs: 10.5, highlight: true },
-            { name: "ローストビーフ（サラダ）", calories: 139, protein: 15.2, fat: 4.1, carbs: 10.8, highlight: true },
-            { name: "ターキーブレスト（サラダ）", calories: 132, protein: 15.5, fat: 3.0, carbs: 10.2, highlight: true },
-            { name: "BLT（レギュラー）※参考", calories: 328, protein: 13.6, fat: 11.8, carbs: 41.5 },
+            { name: "サラダチキン サラダ", calories: 93, protein: 14.7, fat: 0.8, carbs: 8.3, highlight: true },
+            { name: "サイドサラダ プレーン", calories: 96, protein: 7.3, fat: 5.2, carbs: 5.3, highlight: true },
+            { name: "サラダチキン（ハニーマスタードソース）※参考", calories: 281, protein: 21.2, fat: 2.8, carbs: 44.1 },
+            { name: "BLT（レギュラー）※参考", calories: 335, protein: 11.3, fat: 14.2, carbs: 41.9 },
           ]}
         />
         <TipBox title="サブウェイ糖質制限テクニック">
           <p>
-            すべてのサンドイッチは<strong>「サラダに変更」</strong>が可能です。
-            パンをなくすだけで糖質を約30g削減できます。
+            パンを使うサンドイッチは糖質が40g前後あるため、
+            糖質制限中は<strong>サラダメニュー</strong>を選ぶのが基本です。
+            サラダチキン サラダなら糖質8.3g・脂質0.8gと非常にヘルシー。
             ドレッシングはオイル＆ビネガー（糖質約1g）を選びましょう。
             マヨネーズ系も糖質は低め（約0.5g）です。
           </p>
@@ -329,22 +337,25 @@ export default function LowCarbEatingOutPage() {
         </p>
         <NutritionTable
           items={[
-            { name: "サラダチキン（プレーン）", calories: 114, protein: 24.1, fat: 1.2, carbs: 0.3, highlight: true },
-            { name: "ゆでたまご（2個入り）", calories: 134, protein: 11.0, fat: 9.4, carbs: 0.6, highlight: true },
-            { name: "ブランパン（ローソン・2個入）", calories: 120, protein: 6.8, fat: 3.6, carbs: 4.4, highlight: true },
+            { name: "たんぱく質が摂れる 国産鶏むね肉のサラダ（ローソン）", calories: 206, protein: 23.1, fat: 11.0, carbs: 4.9, highlight: true },
+            { name: "ゆでたまご（2個）", calories: 134, protein: 11.0, fat: 9.4, carbs: 0.6, highlight: true },
+            { name: "NL たんぱく質が摂れるブランパン 2個入（ローソン）", calories: 66, protein: 6.1, fat: 2.8, carbs: 6.1, highlight: true },
             { name: "枝豆（冷凍）", calories: 118, protein: 10.2, fat: 5.3, carbs: 5.8 },
             { name: "ギリシャヨーグルト", calories: 90, protein: 10.0, fat: 0.2, carbs: 11.0 },
             { name: "おにぎり（鮭）※参考", calories: 179, protein: 4.7, fat: 1.4, carbs: 38.2 },
           ]}
         />
+        <p className="text-xs text-gray-400 mt-2 mb-2">
+          ※ 枝豆・ギリシャヨーグルト等の一般食材は商品により数値が異なります。チェーン名を冠した値はローソン公式データに基づきます。
+        </p>
         <TipBox title="コンビニ低糖質ランチの組み合わせ例">
-          <p className="mb-2">以下の組み合わせで<strong>合計糖質5.3g、タンパク質35.1g</strong>：</p>
+          <p className="mb-2">以下の組み合わせで<strong>合計糖質9.9g、タンパク質35.3g</strong>：</p>
           <ul className="space-y-1">
-            <li>・ サラダチキン（糖質0.3g / P24.1g）</li>
+            <li>・ 国産鶏むね肉のサラダ（糖質4.9g / P23.1g）</li>
             <li>・ ゆでたまご2個（糖質0.6g / P11.0g）</li>
             <li>・ ミックスサラダ（糖質4.4g / P1.2g）</li>
           </ul>
-          <p className="mt-2">合計カロリーも約300kcalと非常にヘルシーです。</p>
+          <p className="mt-2">合計カロリーも約400kcalと、糖質を抑えつつ満足感のある組み合わせです。</p>
         </TipBox>
 
         {/* Mid-article CTA */}
@@ -367,15 +378,18 @@ export default function LowCarbEatingOutPage() {
         <ComparisonTable
           headers={["チェーン店", "おすすめメニュー", "カロリー", "糖質(C)", "タンパク質(P)"]}
           rows={[
-            ["サイゼリヤ", "若鶏のグリル", "514 kcal", "10.8g", "35.6g"],
-            ["吉野家", "ライザップ牛サラダ", "398 kcal", "17.2g", "28.0g"],
-            ["すき家", "牛丼ライト", "425 kcal", "22.5g", "25.5g"],
-            ["マクドナルド", "ナゲット5個+サラダ", "280 kcal", "15.2g", "16.4g"],
-            ["サブウェイ", "チキンブレスト(サラダ)", "148 kcal", "10.5g", "18.0g"],
-            ["コンビニ", "サラダチキン+ゆで卵", "248 kcal", "0.9g", "35.1g"],
+            ["サイゼリヤ", "若鶏のディアボラ風", "683 kcal", "非公開", "非公開"],
+            ["吉野家", "牛皿 並盛", "281 kcal", "5.2g", "13.5g"],
+            ["すき家", "牛丼ライト 並盛", "397 kcal", "16.8g", "22.8g"],
+            ["マクドナルド", "ナゲット5個+サラダ", "272 kcal", "16.7g", "15.8g"],
+            ["サブウェイ", "サラダチキン サラダ", "93 kcal", "8.3g", "14.7g"],
+            ["コンビニ", "鶏むね肉のサラダ+ゆで卵", "340 kcal", "5.5g", "34.1g"],
           ]}
           bestRowIndex={5}
         />
+        <p className="text-xs text-gray-400 mt-2 mb-2">
+          ※ サイゼリヤは公式にPFCを非公開のためカロリーのみ掲載。
+        </p>
 
         {/* ─── Section 3: 避けるべきメニュー ─── */}
         <SectionHeading id="avoid-menus">
@@ -391,7 +405,7 @@ export default function LowCarbEatingOutPage() {
         <ComparisonTable
           headers={["メニュー", "糖質(C)", "1食目安との差"]}
           rows={[
-            ["牛丼（並）", "89〜90g", "+50〜70g"],
+            ["牛丼（並）", "88〜100g", "+50〜80g"],
             ["カツ丼", "110〜120g", "+70〜100g"],
             ["親子丼", "95〜105g", "+55〜85g"],
             ["カレーライス", "100〜130g", "+60〜110g"],
@@ -449,7 +463,7 @@ export default function LowCarbEatingOutPage() {
             },
             {
               title: "タンパク質と脂質でお腹を満たす",
-              body: "糖質を減らすとお腹が空きやすくなります。その分、肉・魚・卵・チーズなどタンパク質と良質な脂質を増やしましょう。サイゼリヤの若鶏のグリルやステーキは高タンパク低糖質の代表格です。",
+              body: "糖質を減らすとお腹が空きやすくなります。その分、肉・魚・卵・チーズなどタンパク質と良質な脂質を増やしましょう。サイゼリヤの若鶏のディアボラ風やビーフステーキは、ライス・パンを抜けば糖質を抑えやすい肉料理の代表格です。",
             },
             {
               title: "ソース・タレの糖質に注意する",
@@ -501,11 +515,11 @@ export default function LowCarbEatingOutPage() {
         <CheckList
           items={[
             "スタンダード糖質制限は1食あたり糖質20〜40gが目安",
-            "サイゼリヤの若鶏のグリル（糖質10.8g）が最強コスパ",
-            "吉野家はライザップ牛サラダ（糖質17.2g）を選ぶ",
-            "すき家は牛丼ライト（糖質22.5g）で糖質60%カット",
-            "マクドナルドはナゲット＋サラダ（糖質15.2g）が正解",
-            "コンビニのサラダチキン＋ゆで卵なら糖質1g以下",
+            "サイゼリヤは若鶏のディアボラ風などライス・パンを抜く肉料理を選ぶ（PFCは公式非公開）",
+            "吉野家は牛皿 並盛（糖質5.2g）＋生野菜サラダを選ぶ",
+            "すき家は牛丼ライト 並盛（糖質16.8g）で糖質約8割カット",
+            "マクドナルドはナゲット＋サラダ（糖質16.7g）が正解",
+            "コンビニの鶏むね肉サラダ＋ゆで卵なら糖質約5gに収まる",
             "主食を抜く・減らすだけで1食40〜60gの糖質カット",
             "ソース・タレ・飲み物の隠れ糖質に注意",
             "たべなびで事前にメニューの栄養成分をチェック",
@@ -528,11 +542,11 @@ export default function LowCarbEatingOutPage() {
             },
             {
               q: "外食で一番低糖質なメニューは？",
-              a: "焼肉のカルビ・ロース（タレなし）、サラダチキン、刺身、ステーキ、グリルチキンなどの「肉/魚＋野菜のみ」メニューが最強で、糖質5g以下に抑えられます。具体的な定番は「すき家の牛丼ライト（豆腐ベース）」「吉野家のライザップ牛サラダ」「ガストの蒸し鶏冷麺（麺なし）」など。",
+              a: "焼肉のカルビ・ロース（タレなし）、サラダチキン、刺身、ステーキ、グリルチキンなどの「肉/魚＋野菜のみ」メニューが最強で、糖質5g以下に抑えられます。具体的な定番は「すき家の牛丼ライト（豆腐ベース）」「吉野家の牛皿＋生野菜サラダ」「ガストの蒸し鶏と彩り野菜のサラダ」など。",
             },
             {
               q: "牛丼チェーンで糖質制限できる？",
-              a: "可能です。①すき家の牛丼ライト（豆腐ベース・糖質約20g）が最強、②吉野家の牛皿並盛（糖質5.8g）+ サラダ、③松屋の牛皿+生野菜+味噌汁。普通の牛丼並盛は糖質88g前後あるため、ご飯抜きor牛皿+サラダで対応するのが鉄則です。",
+              a: "可能です。①すき家の牛丼ライト 並盛（豆腐ベース・糖質約17g）が最強、②吉野家の牛皿 並盛（糖質5.2g）+ 生野菜サラダ、③松屋の牛皿+生野菜+味噌汁。普通の牛丼並盛は糖質88〜100g前後あるため、ご飯抜きor牛皿+サラダで対応するのが鉄則です。",
             },
             {
               q: "コンビニで糖質制限する時のおすすめは？",
@@ -540,7 +554,7 @@ export default function LowCarbEatingOutPage() {
             },
             {
               q: "ファミレスで糖質制限OKなメニューは？",
-              a: "ガストの「鶏もも肉のグリル」「メキシカンスタイル」、サイゼリヤの「若鶏のグリル ディアボラ風」「魚介サラダ」、デニーズの「テンダーロインステーキ」など。共通点は「肉/魚メインで、ライス・パンを抜ける」こと。ライスは必ず別オーダーにしておくと食べてしまわないコツ。",
+              a: "ガストの「蒸し鶏と彩り野菜のサラダ」、サイゼリヤの「若鶏のディアボラ風」「小エビのサラダ」、デニーズの「カットステーキ」「サーロインステーキ」など。共通点は「肉/魚メインで、ライス・パンを抜ける」こと。ライスは必ず別オーダーにしておくと食べてしまわないコツ。なおサイゼリヤ・ガストは公式にPFCを非公開のため、糖質量を厳密に管理したい場合はカロリー基準で選ぶのがおすすめです。",
             },
             {
               q: "糖質制限中、お酒は飲んでもいい？",
@@ -559,6 +573,7 @@ export default function LowCarbEatingOutPage() {
         {/* Update History */}
         <UpdateHistory
           entries={[
+            { date: "2026-06-23", note: "DB実値と乖離した数値・実在しないメニュー・PFC非公開チェーンの架空PFCを全面是正" },
             { date: "2026-06-08", note: "32チェーン・6,000品以上に対応拡大。栄養数値を公式データで再検証" },
             { date: "2026-05-12", note: "QuickAnswer・FAQ・著者情報を追加。22チェーン対応" },
             { date: "2026-03-19", note: "初稿公開" },

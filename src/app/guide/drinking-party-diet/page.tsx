@@ -20,6 +20,7 @@ import {
   ArticleImage,
   QuickAnswer,
   FAQSection,
+  UpdateHistory,
 } from "@/components/guide/ArticleComponents";
 import {
   AffiliateDisclosure,
@@ -60,7 +61,7 @@ const jsonLd = {
   description:
     "飲み会でも太らないためのお酒・おつまみの選び方を徹底解説。カロリー比較と3段階テクニックで飲み会を乗り越えよう。",
   datePublished: "2026-03-19",
-  dateModified: new Date().toISOString().split("T")[0],
+  dateModified: "2026-06-23",
   author: {
       "@type": "Person",
       name: "ヒロ",
@@ -369,48 +370,30 @@ export default function DrinkingPartyDietPage() {
         </TipBox>
 
         {/* Section 6: チェーン居酒屋 */}
-        <SectionHeading id="chain-izakaya">チェーン居酒屋のダイエットメニュー</SectionHeading>
+        <SectionHeading id="chain-izakaya">居酒屋メニューのダイエット的な選び方</SectionHeading>
 
         <p className="mb-6">
-          チェーン居酒屋は栄養成分が公開されているため、<Marker>事前にカロリーを確認して注文計画を立てられる</Marker>のがメリットです。主要チェーンのおすすめメニューを紹介します。
+          居酒屋はメニューの幅が広く、選び方次第でカロリーが大きく変わります。チェーンによって栄養成分の公開状況は異なりますが、<Marker>「調理法」と「食材」で見分ける</Marker>クセをつければ、店が変わっても太りにくいメニューを選べます。
         </p>
 
-        <SubSectionHeading>鳥貴族のおすすめメニュー</SubSectionHeading>
+        <SubSectionHeading>焼き鳥は「塩」「むね・ささみ」を選ぶ</SubSectionHeading>
 
         <p className="mb-4">
-          全品370円均一の鳥貴族は、焼き鳥が充実していてダイエット向き。<Marker color="blue">もも貴族焼（塩）は1本約80kcalで高タンパク</Marker>です。
+          焼き鳥は<Marker color="blue">塩＋むね・ささみ・砂肝</Marker>を選べば、高タンパク・低脂質のおつまみになります。タレは砂糖で糖質が上乗せされるため塩がおすすめ。逆に皮・つくね・手羽は脂質が多めなので量を控えましょう。具体的な数値は本記事冒頭の「おつまみBEST10」の焼き鳥（塩・もも1本約80kcal／P12.4g）を目安にしてください。
         </p>
 
-        <NutritionTable
-          items={[
-            { name: "もも貴族焼（塩）", calories: 80, protein: 12.4, fat: 3.2, carbs: 0.2, highlight: true },
-            { name: "むね貴族焼（塩）", calories: 65, protein: 14.2, fat: 1.4, carbs: 0.2, highlight: true },
-            { name: "ささみ（塩）", calories: 48, protein: 10.8, fat: 0.6, carbs: 0.1, highlight: true },
-            { name: "砂ずり（塩）", calories: 56, protein: 12.2, fat: 1.2, carbs: 0.1 },
-            { name: "キャベツ盛り", calories: 28, protein: 1.4, fat: 0.2, carbs: 5.6, highlight: true },
-          ]}
-          highlightProtein
-        />
+        <SubSectionHeading>刺身・冷奴・枝豆・海藻サラダは鉄板の低カロリー枠</SubSectionHeading>
 
-        <TipBox title="鳥貴族のダイエットモデルプラン">
-          <p>ハイボール3杯（210kcal）+ むね貴族焼2本（130kcal）+ もも貴族焼2本（160kcal）+ キャベツ盛り（28kcal）+ 枝豆（135kcal）= <Marker>合計約663kcal</Marker>。お腹も満足しながらカロリーを抑えられる理想的なプランです。</p>
+        <p className="mb-4">
+          どの居酒屋でも置いてある<Marker>刺身・冷奴・枝豆・海藻サラダ</Marker>は、高タンパクまたは低カロリーで失敗が少ない定番。刺身は脂の乗ったトロより赤身、サラダはドレッシングを別添えにするとさらにカロリーを抑えられます。揚げ出し豆腐よりは冷奴、ポテトサラダよりは海藻サラダを選びましょう。
+        </p>
+
+        <TipBox title="店が変わっても使える注文ルール">
+          <p>細かい数値が分からないチェーンでも、<Marker>「焼く・蒸す・茹でる＞揚げる」「塩＞タレ」「むね・ささみ＞皮・つくね」</Marker>の3原則で選べば大きく外しません。最初に枝豆・冷奴・海藻サラダ・刺身を頼み、メインは焼き鳥（塩）でタンパク質を確保するのが太りにくい基本形です。</p>
         </TipBox>
 
-        <SubSectionHeading>その他チェーン居酒屋の低カロリーおつまみ</SubSectionHeading>
-
-        <NutritionTable
-          items={[
-            { name: "【和民】枝豆", calories: 138, protein: 11.2, fat: 6.4, carbs: 9.2, highlight: true },
-            { name: "【和民】冷奴", calories: 85, protein: 7.2, fat: 4.6, carbs: 3.2, highlight: true },
-            { name: "【魚民】まぐろ刺身", calories: 92, protein: 18.4, fat: 1.2, carbs: 0.4, highlight: true },
-            { name: "【白木屋】海藻サラダ", calories: 48, protein: 2.0, fat: 0.6, carbs: 8.8, highlight: true },
-            { name: "【笑笑】だし巻き卵", calories: 132, protein: 10.4, fat: 8.8, carbs: 2.6 },
-          ]}
-          highlightProtein
-        />
-
         <p className="mb-8 text-sm text-gray-600">
-          ※栄養成分は参考値です。各チェーンの公式サイトで最新情報をご確認ください。
+          ※カロリー・栄養成分はチェーンや店舗・盛り付けにより異なります。栄養成分を公開しているチェーンでは、たべなびや公式サイトで事前に確認すると確実です。
         </p>
 
         <SubSectionHeading>飲み会1回のカロリーシミュレーション</SubSectionHeading>
@@ -489,6 +472,14 @@ export default function DrinkingPartyDietPage() {
             { q: "飲み会で絶対に避けるべきおつまみは？", a: "フライドポテト（420kcal）、唐揚げ（380kcal）、ピザ（550kcal）、焼きそば（480kcal）、締めのラーメン（500kcal）は避けましょう。揚げ物や炭水化物は脂質代謝が低下した状態では体脂肪になりやすいです。" },
             { q: "飲み会の前後に何をすればダイエット効果が高まる？", a: "飲み会30分前にプロテイン1杯とお水500mlを摂取し、飲み会中は『お酒1杯=お水1杯』ルールを守りましょう。翌朝は軽い食事と30分のウォーキングでリカバリーします。" },
             { q: "飲み放題の場合、カロリーを抑えるポイントは？", a: "飲み放題では『元を取ろう』と飲みすぎになりやすく、ビール5杯＋おつまみで2,500kcalを超える危険があります。『3杯までに限定する』と自分ルールを決めることが最重要です。" },
+          ]}
+        />
+
+        {/* Update History */}
+        <UpdateHistory
+          entries={[
+            { date: "2026-06-23", note: "DB実値と乖離した数値・実在しないメニュー・PFC非公開チェーンの架空PFCを全面是正" },
+            { date: "2026-03-19", note: "初稿公開" },
           ]}
         />
 

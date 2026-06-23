@@ -17,6 +17,7 @@ import {
   ArticleFooter,
   QuickAnswer,
   FAQSection,
+  UpdateHistory,
 } from "@/components/guide/ArticleComponents";
 import {
   AffiliateDisclosure,
@@ -50,7 +51,7 @@ const jsonLd = {
   description:
     "筋トレ中の外食で迷わない。主要チェーン店の高タンパクメニューをPFCデータ付きで徹底解説。",
   datePublished: "2026-03-01",
-  dateModified: new Date().toISOString().split("T")[0],
+  dateModified: "2026-06-23",
   author: {
       "@type": "Person",
       name: "ヒロ",
@@ -95,7 +96,7 @@ export default function MuscleEatingOutPage() {
         <div className="mb-4">
           <AuthorityBadge />
           <p className="text-sm text-gray-400 mt-2">
-            最終更新: 2026年3月 | 読了目安: 12分
+            最終更新: 2026年6月 | 読了目安: 12分
           </p>
           <AffiliateDisclosure />
         </div>
@@ -169,9 +170,9 @@ export default function MuscleEatingOutPage() {
             <NutritionTable
               highlightProtein
               items={[
-                { name: "チキンかあさん煮定食", calories: 804, protein: 40.2, fat: 24.5, carbs: 102.3, highlight: true },
-                { name: "しまほっけの炭火焼き定食", calories: 642, protein: 36.8, fat: 18.3, carbs: 78.5 },
-                { name: "鶏と野菜の黒酢あん定食", calories: 752, protein: 32.5, fat: 22.1, carbs: 98.7 },
+                { name: "しまほっけの炭火焼き定食", calories: 612, protein: 45.5, fat: 13.1, carbs: 79.3, highlight: true },
+                { name: "鶏と野菜の黒酢あん定食", calories: 952, protein: 27.5, fat: 33.5, carbs: 135.3 },
+                { name: "チキンかあさん煮定食", calories: 897, protein: 29.5, fat: 32.2, carbs: 118.8 },
               ]}
             />
             <p className="text-sm text-gray-500">
@@ -182,14 +183,14 @@ export default function MuscleEatingOutPage() {
           {/* Rank 2: やよい軒 */}
           <RankingCard rank={2} title="やよい軒" subtitle="ご飯おかわり無料。増量期のコスパ最強">
             <p className="text-sm text-gray-600 leading-relaxed mb-3">
-              やよい軒最大の特徴はご飯おかわり無料。増量期の筋トレ民にはありがたすぎるシステムです。定食メニューはどれもタンパク質が豊富で、しょうが焼き定食は1食でP32gを摂取可能。値段も800〜1,000円台とコスパに優れています。
+              やよい軒最大の特徴はご飯おかわり無料。増量期の筋トレ民にはありがたすぎるシステムです。定食メニューはどれもタンパク質が豊富で、サバの味噌煮定食は1食でP30gを摂取可能。値段も800〜1,000円台とコスパに優れています。
             </p>
             <NutritionTable
               highlightProtein
               items={[
-                { name: "しょうが焼定食", calories: 768, protein: 32.0, fat: 25.4, carbs: 98.5, highlight: true },
-                { name: "チキン南蛮定食", calories: 912, protein: 35.6, fat: 35.2, carbs: 105.3 },
-                { name: "サバの味噌煮定食", calories: 695, protein: 30.5, fat: 21.8, carbs: 85.2 },
+                { name: "サバの味噌煮定食", calories: 621, protein: 30.4, fat: 24.9, carbs: 71.4, highlight: true },
+                { name: "チキン南蛮定食", calories: 843, protein: 27.6, fat: 37.7, carbs: 100.7 },
+                { name: "しょうが焼定食", calories: 717, protein: 26.2, fat: 37.1, carbs: 72.9 },
               ]}
             />
             <p className="text-sm text-gray-500">
@@ -198,18 +199,41 @@ export default function MuscleEatingOutPage() {
           </RankingCard>
 
           {/* Rank 3: サイゼリヤ */}
-          <RankingCard rank={3} title="サイゼリヤ" subtitle="500円以下で高タンパク。筋トレ民の味方">
+          <RankingCard rank={3} title="サイゼリヤ" subtitle="500円台のグリル系が豊富。コスパで選ぶならここ">
             <p className="text-sm text-gray-600 leading-relaxed mb-3">
-              サイゼリヤはグリル系メニューの圧倒的コスパが魅力。若鶏のグリル（税込500円）で35.3gのタンパク質が摂れるのは驚異的です。ミックスグリル（P32.2g）も500円台で、毎日通っても財布に優しい。<Marker>筋トレ民のSNSでも「サイゼは筋トレ飯の聖地」と話題</Marker>です。
+              サイゼリヤはグリル系メニューの圧倒的コスパが魅力。若鶏のディアボラ風やディアボラ風ハンバーグが税込500円で食べられ、毎日通っても財布に優しい。肉のグリルを主菜に、サラダを追加すればバランスの良い1食になります。<Marker>筋トレ民のSNSでも「サイゼはコスパ最強」と話題</Marker>です。
             </p>
-            <NutritionTable
-              highlightProtein
-              items={[
-                { name: "若鶏のグリル", calories: 514, protein: 35.3, fat: 28.7, carbs: 26.6, highlight: true },
-                { name: "ミックスグリル", calories: 478, protein: 32.2, fat: 30.5, carbs: 16.0, highlight: true },
-                { name: "ディアボラ風ハンバーグ", calories: 542, protein: 27.5, fat: 34.1, carbs: 28.7 },
-              ]}
-            />
+            <div className="overflow-hidden rounded-lg border border-gray-100 mb-3">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="bg-gray-50 text-gray-500 text-xs">
+                    <th className="text-left font-medium px-3 py-2">メニュー</th>
+                    <th className="text-right font-medium px-3 py-2">カロリー</th>
+                    <th className="text-right font-medium px-3 py-2">価格</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-100">
+                  <tr>
+                    <td className="px-3 py-2">若鶏のディアボラ風</td>
+                    <td className="px-3 py-2 text-right">683kcal</td>
+                    <td className="px-3 py-2 text-right">¥500</td>
+                  </tr>
+                  <tr>
+                    <td className="px-3 py-2">ミックスグリル</td>
+                    <td className="px-3 py-2 text-right">702kcal</td>
+                    <td className="px-3 py-2 text-right">¥650</td>
+                  </tr>
+                  <tr>
+                    <td className="px-3 py-2">ディアボラ風ハンバーグ</td>
+                    <td className="px-3 py-2 text-right">654kcal</td>
+                    <td className="px-3 py-2 text-right">¥500</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p className="text-xs text-gray-400 mb-2">
+              ※サイゼリヤは公式にタンパク質・脂質・炭水化物の数値を公開していないため、本記事ではカロリーと価格のみを掲載しています。
+            </p>
             <p className="text-sm text-gray-500">
               <Link href="/guide/saizeriya" className="text-sky-500 hover:text-sky-600 underline">サイゼリヤの全メニュー栄養成分一覧はこちら</Link>
             </p>
@@ -218,14 +242,14 @@ export default function MuscleEatingOutPage() {
           {/* Rank 4: サブウェイ */}
           <RankingCard rank={4} title="サブウェイ" subtitle="カスタマイズ自在。野菜も摂れる高タンパクサンド">
             <p className="text-sm text-gray-600 leading-relaxed mb-3">
-              サブウェイは自分でカスタマイズできるのが強み。ローストチキン系のサンドを選び、野菜を多めにすれば高タンパク・低脂質の理想的な食事に。パンを全粒粉に変更すれば食物繊維もアップ。タンパク質は20g以上確保できます。
+              サブウェイは自分でカスタマイズできるのが強み。チリチキンなどのチキン系サンドを選び、野菜を多めにすれば高タンパク・低脂質の理想的な食事に。パンを全粒粉に変更すれば食物繊維もアップ。タンパク質は20g前後を確保できます。
             </p>
             <NutritionTable
               highlightProtein
               items={[
-                { name: "ローストチキン", calories: 282, protein: 22.5, fat: 4.6, carbs: 38.5, highlight: true },
-                { name: "チキンブレスト", calories: 305, protein: 25.0, fat: 5.2, carbs: 40.1 },
-                { name: "ターキーブレスト", calories: 262, protein: 20.8, fat: 3.8, carbs: 37.5 },
+                { name: "チリチキン", calories: 273, protein: 20.5, fat: 4.1, carbs: 39.7, highlight: true },
+                { name: "てり焼きチキン", calories: 346, protein: 19.7, fat: 9.9, carbs: 45.5 },
+                { name: "サラダチキン サラダ", calories: 93, protein: 14.7, fat: 0.8, carbs: 8.3 },
               ]}
             />
             <p className="text-sm text-gray-500">
@@ -236,14 +260,14 @@ export default function MuscleEatingOutPage() {
           {/* Rank 5: マクドナルド */}
           <RankingCard rank={5} title="マクドナルド" subtitle="意外にも高タンパク。ダブルチーズバーガーはP26.4g">
             <p className="text-sm text-gray-600 leading-relaxed mb-3">
-              マクドナルドは「ジャンクフード」のイメージが強いですが、実はバーガー類のタンパク質含有量は侮れません。ダブルチーズバーガー（P26.4g）やチキンフィレオ（P24.0g）なら、単品でも十分なタンパク質が摂れます。全国どこにでもあるのも筋トレ民には嬉しいポイント。
+              マクドナルドは「ジャンクフード」のイメージが強いですが、実はバーガー類のタンパク質含有量は侮れません。ダブルチーズバーガー（P26.4g）やビッグマック（P26.1g）なら、単品でも十分なタンパク質が摂れます。全国どこにでもあるのも筋トレ民には嬉しいポイント。
             </p>
             <NutritionTable
               highlightProtein
               items={[
-                { name: "ダブルチーズバーガー", calories: 457, protein: 26.4, fat: 25.0, carbs: 30.5, highlight: true },
-                { name: "チキンフィレオ", calories: 465, protein: 24.0, fat: 21.6, carbs: 43.5 },
-                { name: "ビッグマック", calories: 525, protein: 26.0, fat: 28.2, carbs: 41.8 },
+                { name: "ダブルチーズバーガー", calories: 459, protein: 26.4, fat: 25.1, carbs: 31.8, highlight: true },
+                { name: "ビッグマック", calories: 525, protein: 26.1, fat: 28.0, carbs: 42.1 },
+                { name: "チキンフィレオ", calories: 479, protein: 19.9, fat: 23.8, carbs: 47.0 },
               ]}
             />
             <p className="text-sm text-gray-500">
@@ -276,9 +300,9 @@ export default function MuscleEatingOutPage() {
             <NutritionTable
               highlightProtein
               items={[
-                { name: "松屋 牛焼肉定食", calories: 827, protein: 34.2, fat: 28.5, carbs: 105.3, highlight: true },
-                { name: "すき家 まぐろたたき丼（並盛）", calories: 455, protein: 28.5, fat: 5.2, carbs: 78.3, highlight: true },
-                { name: "吉野家 牛皿定食", calories: 680, protein: 28.0, fat: 22.5, carbs: 82.0, highlight: true },
+                { name: "すき家 山かけまぐろたたき丼（並盛）", calories: 639, protein: 30.2, fat: 10.1, carbs: 106.7, highlight: true },
+                { name: "吉野家 牛皿定食（並盛）", calories: 719, protein: 26.4, fat: 29.3, carbs: 89.5, highlight: true },
+                { name: "松屋 牛焼肉定食", calories: 806, protein: 23.3, fat: 41.3, carbs: 86.5 },
               ]}
             />
             <div className="flex gap-2 text-sm mt-2">
@@ -292,16 +316,37 @@ export default function MuscleEatingOutPage() {
           <div className="mb-10">
             <SubSectionHeading>ファミレス（サイゼリヤ・ガスト・デニーズ）</SubSectionHeading>
             <p className="text-gray-600 leading-relaxed mb-4">
-              ファミレスはメニューの種類が豊富で、グリル系やステーキなど高タンパクメニューが充実。サイドメニューでサラダやスープを追加してバランスを取れるのもメリットです。
+              ファミレスはメニューの種類が豊富で、グリル系やステーキなど高タンパクメニューが充実。サイドメニューでサラダやスープを追加してバランスを取れるのもメリットです。デニーズのAll Beefハンバーグ（おろしソース）はP22.7gと高タンパク。サイゼリヤ・ガストはタンパク質量を公式に非公開のため、下表ではカロリーのみを掲載しています。
             </p>
             <NutritionTable
               highlightProtein
               items={[
-                { name: "サイゼリヤ 若鶏のグリル", calories: 514, protein: 35.3, fat: 28.7, carbs: 26.6, highlight: true },
-                { name: "ガスト チキテキ・ピリ辛スパイス焼き", calories: 645, protein: 33.5, fat: 30.2, carbs: 55.8, highlight: true },
-                { name: "デニーズ All Beefハンバーグ", calories: 620, protein: 30.5, fat: 32.8, carbs: 48.2, highlight: true },
+                { name: "デニーズ All Beefハンバーグ～おろしソース", calories: 444, protein: 22.7, fat: 30.1, carbs: 21.0, highlight: true },
               ]}
             />
+            <div className="overflow-hidden rounded-lg border border-gray-100 mt-3">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="bg-gray-50 text-gray-500 text-xs">
+                    <th className="text-left font-medium px-3 py-2">メニュー（PFC非公開チェーン）</th>
+                    <th className="text-right font-medium px-3 py-2">カロリー</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-100">
+                  <tr>
+                    <td className="px-3 py-2">サイゼリヤ 若鶏のディアボラ風</td>
+                    <td className="px-3 py-2 text-right">683kcal</td>
+                  </tr>
+                  <tr>
+                    <td className="px-3 py-2">ガスト チキテキスパイス焼き</td>
+                    <td className="px-3 py-2 text-right">695kcal</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p className="text-xs text-gray-400 mt-2">
+              ※サイゼリヤ・ガストはタンパク質・脂質・炭水化物の数値を公式に公開していないため、カロリーのみ掲載。
+            </p>
             <div className="flex gap-2 text-sm mt-2">
               <Link href="/guide/saizeriya" className="text-sky-500 hover:text-sky-600 underline">サイゼリヤ</Link>
               <Link href="/guide/gusto" className="text-sky-500 hover:text-sky-600 underline">ガスト</Link>
@@ -324,9 +369,9 @@ export default function MuscleEatingOutPage() {
             <NutritionTable
               highlightProtein
               items={[
-                { name: "マクドナルド 倍ビッグマック", calories: 724, protein: 40.5, fat: 43.2, carbs: 42.0, highlight: true },
-                { name: "モスバーガー スパイシーモスバーガー", calories: 370, protein: 18.5, fat: 17.8, carbs: 34.2 },
-                { name: "KFC オリジナルチキン 2ピース", calories: 474, protein: 33.4, fat: 28.6, carbs: 17.8, highlight: true },
+                { name: "マクドナルド 倍ビッグマック", calories: 723, protein: 41.3, fat: 43.1, carbs: 42.1, highlight: true },
+                { name: "KFC オリジナルチキン 2ピース", calories: 436, protein: 33.0, fat: 25.6, carbs: 18.2, highlight: true },
+                { name: "モスバーガー スパイシーモスバーガー", calories: 375, protein: 15.3, fat: 17.1, carbs: 40.4 },
               ]}
             />
             <div className="flex gap-2 text-sm mt-2">
@@ -345,9 +390,9 @@ export default function MuscleEatingOutPage() {
             <NutritionTable
               highlightProtein
               items={[
-                { name: "サラダチキン（プレーン）", calories: 114, protein: 24.1, fat: 1.2, carbs: 1.0, highlight: true },
-                { name: "たんぱく質が摂れるチキン＆スパイシーチリ", calories: 252, protein: 27.4, fat: 9.3, carbs: 15.7, highlight: true },
-                { name: "ザバス MILK PROTEIN 200ml", calories: 102, protein: 15.0, fat: 0.0, carbs: 10.5, highlight: true },
+                { name: "ローソン たんぱく質が摂れる 国産鶏むね肉のサラダ", calories: 206, protein: 23.1, fat: 11.0, carbs: 4.9, highlight: true },
+                { name: "ファミマ たんぱく質が摂れる！鶏むね肉とたまごのサラダ", calories: 169, protein: 23.0, fat: 7.2, carbs: 3.4, highlight: true },
+                { name: "セブン たんぱく質が摂れる鶏むね肉サラダ", calories: 199, protein: 21.8, fat: 10.9, carbs: 4.4, highlight: true },
               ]}
             />
             <p className="text-sm text-gray-500 mt-2">
@@ -371,7 +416,7 @@ export default function MuscleEatingOutPage() {
               筋タンパク質合成（MPS）を最大化するには、1食あたり20〜40gのタンパク質摂取が推奨されています。これ以下だと合成刺激が不十分、これ以上だと上乗せ効果が小さくなります。
             </p>
             <p className="mt-2">
-              プロテインシェイカーを持ち歩かなくても、<Marker>大戸屋のチキンかあさん煮（P40.2g）</Marker>や<Marker>サイゼリヤの若鶏のグリル（P35.3g）</Marker>を食べれば十分です。
+              プロテインシェイカーを持ち歩かなくても、<Marker>大戸屋のしまほっけの炭火焼き定食（P45.5g）</Marker>や<Marker>やよい軒のサバの味噌煮定食（P30.4g）</Marker>を食べれば十分です。
             </p>
           </TipBox>
 
@@ -441,7 +486,7 @@ export default function MuscleEatingOutPage() {
             items={[
               "筋トレ中の外食はまったく問題ない。正しく選べばむしろ味方になる",
               "高タンパクチェーン店TOP3は大戸屋・やよい軒・サイゼリヤ",
-              "大戸屋 チキンかあさん煮（P40.2g）、サイゼリヤ 若鶏のグリル（P35.3g/¥500）がイチオシ",
+              "大戸屋 しまほっけの炭火焼き定食（P45.5g）、やよい軒 サバの味噌煮定食（P30.4g）がイチオシ",
               "1食あたりの目標: タンパク質20〜40g",
               "筋トレ後は炭水化物を多めに摂ってもOK。脂質は控えめに",
               "たべなびなら外食チェーンのPFCデータが一目でわかり、3タップで記録完了",
@@ -478,10 +523,17 @@ export default function MuscleEatingOutPage() {
           slug="muscle-eating-out"
           items={[
             { q: "筋トレ中の1食あたりのタンパク質はどれくらい摂るべき？", a: "1食あたり20〜40gが筋タンパク質合成の「ゴールデンゾーン」です。これ以下では刺激が不十分、これ以上では上乗せ効果が小さくなります。体重70kg人の場合、1日112〜154g（1.6〜2.2g/kg）を3食で割ると約37〜51gの目安となります。" },
-            { q: "筋トレ民におすすめのチェーン店はどこ？", a: "タンパク質30g以上のメニュー数・コスパ・多様性で評価すると、大戸屋が1位（定食メニュー全般）、やよい軒が2位（ご飯おかわり無料）、サイゼリヤが3位（若鶏グリル¥500でP35.3g）がTOP3です。牛丼チェーンやコンビニも活用できます。" },
-            { q: "最も高コスパな高タンパクメニューは？", a: "サイゼリヤの若鶏のグリル（税込¥500でタンパク質35.3g、カロリー514kcal）が圧倒的コスパです。次点でミックスグリル（¥500台、P32.2g）。毎日通っても財布に優しく、筋トレ民SNSでも「聖地」と話題です。" },
+            { q: "筋トレ民におすすめのチェーン店はどこ？", a: "タンパク質30g以上のメニュー数・コスパ・多様性で評価すると、大戸屋が1位（しまほっけの炭火焼き定食でP45.5g）、やよい軒が2位（ご飯おかわり無料、サバの味噌煮定食でP30.4g）、サイゼリヤが3位（500円台のグリル系が豊富）がTOP3です。牛丼チェーンやコンビニも活用できます。" },
+            { q: "最も高タンパクなチェーン店メニューは？", a: "大戸屋のしまほっけの炭火焼き定食（612kcalでタンパク質45.5g）が単品でも圧倒的です。やよい軒のサバの味噌煮定食（621kcal/P30.4g）も高タンパク。サイゼリヤはコスパ抜群ですがタンパク質量を公式に非公開のため、数値で比較するなら大戸屋・やよい軒の定食が確実です。" },
             { q: "筋トレ後の外食で脂質と炭水化物はどう扱う？", a: "脂質は控えめに（減量期特に注意）。グリル・焼き物・蒸し料理を選び、総カロリーの20〜25%は下回らないこと。炭水化物は筋グリコーゲン消耗時期なので筋トレ後なら多めでもOK。やよい軒のご飯おかわり無料は増量期に活用価値が高いです。" },
-            { q: "コンビニでも筋トレ向きの食事が見つかりますか？", a: "見つかります。サラダチキン（プレーン）でP24.1gなど、24時間いつでもタンパク質補給できるのが最大のメリット。近年は「たんぱく質が摂れる」シリーズなど筋トレ民向け商品が急増中。ジムの帰りに即購入できる最強スポットです。" },
+            { q: "コンビニでも筋トレ向きの食事が見つかりますか？", a: "見つかります。セブンの「たんぱく質が摂れる鶏むね肉サラダ」（199kcal/P21.8g）やローソンの「たんぱく質が摂れる 国産鶏むね肉のサラダ」（206kcal/P23.1g）など、24時間いつでもタンパク質補給できるのが最大のメリット。近年は「たんぱく質が摂れる」シリーズが各社で急増中。ジムの帰りに即購入できる最強スポットです。" },
+          ]}
+        />
+
+        {/* Update History */}
+        <UpdateHistory
+          entries={[
+            { date: "2026-06-23", note: "DB実値と乖離した数値・実在しないメニュー・PFC非公開チェーンの架空PFCを全面是正" },
           ]}
         />
 

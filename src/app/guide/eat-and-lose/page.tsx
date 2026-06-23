@@ -18,6 +18,7 @@ import {
   ArticleImage,
   QuickAnswer,
   FAQSection,
+  UpdateHistory,
 } from "@/components/guide/ArticleComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -53,7 +54,7 @@ const jsonLd = {
   description:
     "食べて痩せるダイエットの科学的根拠と5つの原則を徹底解説。高タンパク・低GI・食物繊維を活用した実践メニュー。",
   datePublished: "2026-03-25",
-  dateModified: new Date().toISOString().split("T")[0],
+  dateModified: "2026-06-23",
   author: {
       "@type": "Person",
       name: "ヒロ",
@@ -364,27 +365,27 @@ export default function EatAndLosePage() {
               おすすめ: しまほっけの炭火焼き定食（五穀米に変更）
             </p>
             <div className="flex flex-wrap gap-2 mb-3">
-              <span className="text-xs bg-sky-50 text-sky-700 px-2.5 py-1 rounded-full font-bold">約530kcal</span>
-              <span className="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full font-bold">P 32.5g</span>
-              <span className="text-xs bg-amber-50 text-amber-700 px-2.5 py-1 rounded-full font-bold">F 15.8g</span>
+              <span className="text-xs bg-sky-50 text-sky-700 px-2.5 py-1 rounded-full font-bold">612kcal</span>
+              <span className="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full font-bold">P 45.5g</span>
+              <span className="text-xs bg-amber-50 text-amber-700 px-2.5 py-1 rounded-full font-bold">F 13.1g</span>
             </div>
             <p className="text-sm text-gray-600">
-              魚のタンパク質＋五穀米の低GI＋味噌汁の食物繊維。大戸屋は白米を五穀米に無料変更可能で、食物繊維とミネラルを追加摂取できます。詳しくは<Link href="/guide/ootoya-diet" className="text-sky-600 hover:text-sky-800 underline">大戸屋ダイエットガイド</Link>で紹介しています。
+              魚のタンパク質＋五穀米の低GI＋味噌汁の食物繊維。脂質が控えめなのに高タンパクなのが魅力です。大戸屋は白米を五穀米に無料変更可能で、食物繊維とミネラルを追加摂取できます。詳しくは<Link href="/guide/ootoya-diet" className="text-sky-600 hover:text-sky-800 underline">大戸屋ダイエットガイド</Link>で紹介しています。
             </p>
           </div>
 
           <SubSectionHeading>サブウェイ - カスタマイズ自在の高タンパクサンド</SubSectionHeading>
           <div className="bg-white rounded-lg border border-gray-200 p-5 mb-6 shadow-sm">
             <p className="font-bold text-gray-900 mb-2">
-              おすすめ: ローストチキン（全粒粉パン・野菜多め）
+              おすすめ: チリチキン（全粒粉パン・野菜多め）
             </p>
             <div className="flex flex-wrap gap-2 mb-3">
-              <span className="text-xs bg-sky-50 text-sky-700 px-2.5 py-1 rounded-full font-bold">約310kcal</span>
-              <span className="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full font-bold">P 22.0g</span>
-              <span className="text-xs bg-amber-50 text-amber-700 px-2.5 py-1 rounded-full font-bold">F 5.8g</span>
+              <span className="text-xs bg-sky-50 text-sky-700 px-2.5 py-1 rounded-full font-bold">273kcal</span>
+              <span className="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full font-bold">P 20.5g</span>
+              <span className="text-xs bg-amber-50 text-amber-700 px-2.5 py-1 rounded-full font-bold">F 4.1g</span>
             </div>
             <p className="text-sm text-gray-600">
-              全粒粉パンでGI値を抑え、野菜多めで食物繊維もたっぷり。マヨネーズの代わりにマスタードを選ぶと脂質をさらにカットできます。<Link href="/guide/subway-diet" className="text-sky-600 hover:text-sky-800 underline">サブウェイダイエットガイド</Link>も参考にどうぞ。
+              チリチキンは脂質わずか4.1gで高タンパクなサブウェイの低脂質サンド。全粒粉パンでGI値を抑え、野菜多めで食物繊維もたっぷり。マヨネーズの代わりにマスタードを選ぶと脂質をさらにカットできます。<Link href="/guide/subway-diet" className="text-sky-600 hover:text-sky-800 underline">サブウェイダイエットガイド</Link>も参考にどうぞ。
             </p>
           </div>
 
@@ -394,12 +395,12 @@ export default function EatAndLosePage() {
               おすすめ: 牛丼ライト（豆腐ベース）+ たまご
             </p>
             <div className="flex flex-wrap gap-2 mb-3">
-              <span className="text-xs bg-sky-50 text-sky-700 px-2.5 py-1 rounded-full font-bold">約425kcal</span>
-              <span className="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full font-bold">P 25.8g</span>
-              <span className="text-xs bg-amber-50 text-amber-700 px-2.5 py-1 rounded-full font-bold">F 22.5g</span>
+              <span className="text-xs bg-sky-50 text-sky-700 px-2.5 py-1 rounded-full font-bold">約481kcal</span>
+              <span className="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full font-bold">P 29.7g</span>
+              <span className="text-xs bg-amber-50 text-amber-700 px-2.5 py-1 rounded-full font-bold">F 32.5g</span>
             </div>
             <p className="text-sm text-gray-600">
-              ご飯の代わりに豆腐を使った「牛丼ライト」は糖質を大幅カット。通常の牛丼（約735kcal）と比べて<Marker>約310kcalのカットが可能</Marker>。卵を追加することでタンパク質を強化できます。<Link href="/guide/sukiya-diet" className="text-sky-600 hover:text-sky-800 underline">すき家ダイエットガイド</Link>もぜひ。
+              ご飯の代わりに豆腐を使った「牛丼ライト（並盛・397kcal）」は糖質を大幅カット。通常の牛丼（並盛・695kcal）と比べて<Marker>約300kcalのカットが可能</Marker>。たまご（84kcal）を追加することでタンパク質を強化できます。<Link href="/guide/sukiya-diet" className="text-sky-600 hover:text-sky-800 underline">すき家ダイエットガイド</Link>もぜひ。
             </p>
           </div>
 
@@ -521,7 +522,7 @@ export default function EatAndLosePage() {
             </div>
           </div>
 
-          <SubSectionHeading>パターンB: 外食チェーン中心プラン（1,520kcal / P88g）</SubSectionHeading>
+          <SubSectionHeading>パターンB: 外食チェーン中心プラン（約1,577kcal）</SubSectionHeading>
           <div className="bg-white rounded-lg border border-gray-200 p-5 mb-6 shadow-sm">
             <div className="space-y-3">
               <div className="flex items-start gap-3">
@@ -533,7 +534,7 @@ export default function EatAndLosePage() {
               <div className="flex items-start gap-3">
                 <span className="flex-shrink-0 text-xs font-bold text-amber-600 bg-amber-50 rounded-full px-3 py-1">昼</span>
                 <div>
-                  <p className="text-sm font-bold text-gray-800">大戸屋: しまほっけの炭火焼き定食・五穀米（530kcal / P32g）</p>
+                  <p className="text-sm font-bold text-gray-800">大戸屋: しまほっけの炭火焼き定食・五穀米（612kcal / P45.5g）</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
@@ -545,13 +546,13 @@ export default function EatAndLosePage() {
               <div className="flex items-start gap-3">
                 <span className="flex-shrink-0 text-xs font-bold text-purple-600 bg-purple-50 rounded-full px-3 py-1">夜</span>
                 <div>
-                  <p className="text-sm font-bold text-gray-800">サイゼリヤ: 若鶏のグリル + 小エビのサラダ（460kcal / P28g）</p>
+                  <p className="text-sm font-bold text-gray-800">サイゼリヤ: チキンのサラダ + 小エビのサラダ（計435kcal ※PFCは非公開）</p>
                 </div>
               </div>
             </div>
           </div>
 
-          <SubSectionHeading>パターンC: 混合プラン（1,450kcal / P95g）</SubSectionHeading>
+          <SubSectionHeading>パターンC: 混合プラン（約1,383kcal / P98g）</SubSectionHeading>
           <div className="bg-white rounded-lg border border-gray-200 p-5 mb-6 shadow-sm">
             <div className="space-y-3">
               <div className="flex items-start gap-3">
@@ -563,7 +564,7 @@ export default function EatAndLosePage() {
               <div className="flex items-start gap-3">
                 <span className="flex-shrink-0 text-xs font-bold text-amber-600 bg-amber-50 rounded-full px-3 py-1">昼</span>
                 <div>
-                  <p className="text-sm font-bold text-gray-800">サブウェイ: ローストチキン全粒粉パン + ミネストローネ（420kcal / P26g）</p>
+                  <p className="text-sm font-bold text-gray-800">サブウェイ: チリチキン全粒粉パン + ゴロゴロ野菜のトマト＆クラムスープ（335kcal / P23.7g）</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
@@ -575,7 +576,7 @@ export default function EatAndLosePage() {
               <div className="flex items-start gap-3">
                 <span className="flex-shrink-0 text-xs font-bold text-purple-600 bg-purple-50 rounded-full px-3 py-1">夜</span>
                 <div>
-                  <p className="text-sm font-bold text-gray-800">すき家: 牛丼ライト + たまご + 味噌汁（500kcal / P27g）</p>
+                  <p className="text-sm font-bold text-gray-800">すき家: 牛丼ライト + たまご + みそ汁（518kcal / P32g）</p>
                 </div>
               </div>
             </div>
@@ -651,9 +652,16 @@ export default function EatAndLosePage() {
           items={[
             { q: "食べて痩せるために最も重要な栄養素は何ですか？", a: "タンパク質です。満腹感を最も長く持続させ、DIT値が約30%と最も高い栄養素です。American Journal of Clinical Nutritionの研究では、タンパク質を総カロリーの25〜30%にした群は、15%の群より1日平均441kcal少なく食べていました。" },
             { q: "低GI食品を選ぶとなぜダイエットに有利ですか？", a: "GI値が高い食品は血糖値を急上昇させ、インスリンが大量分泌されて脂肪蓄積が促進されます。白米(84)より玄米(56)やそば(46)など低GI食品を選ぶと、血糖値の急上昇を防ぎ、脂肪がつきにくい状態を作れます。" },
-            { q: "チェーン店でも食べて痩せるダイエットは実践できますか？", a: "できます。大戸屋のしまほっけ定食（五穀米変更）530kcal・P32g、サブウェイのローストチキン全粒粉パン310kcal・P22g、すき家の牛丼ライト425kcal・P26gなど、正しい選択をすれば実践可能です。" },
+            { q: "チェーン店でも食べて痩せるダイエットは実践できますか？", a: "できます。大戸屋のしまほっけ定食612kcal・P45.5g、サブウェイのチリチキン273kcal・P20.5g（脂質わずか4.1g）、すき家の牛丼ライト（並盛）397kcal・P22.8gなど、正しい選択をすれば実践可能です。" },
             { q: "1日の最低カロリー数は何kcalですか？", a: "女性は1,200kcal、男性は1,500kcal以上が目安です。これを下回ると基礎代謝が低下して痩せにくくなります。極端な食事制限ダイエットは83%がリバウンドするため、この最低ラインを守ることが重要です。" },
             { q: "水を飲むだけで代謝は本当に上がりますか？", a: "研究では500mlの水を飲むと、食事誘発性熱産生により短期的に代謝が一時的に上昇することが報告されています。1日2リットルの水を習慣にすれば、わずかながら追加消費が期待でき、食前に水を飲むことで食べ過ぎを防ぎ、複数の研究で体重管理に効果的であることが示されています。" },
+          ]}
+        />
+
+        {/* Update History */}
+        <UpdateHistory
+          entries={[
+            { date: "2026-06-23", note: "DB実値と乖離した数値・実在しないメニュー・PFC非公開チェーンの架空PFCを全面是正" },
           ]}
         />
 

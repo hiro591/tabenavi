@@ -18,6 +18,7 @@ import {
   ArticleImage,
   QuickAnswer,
   FAQSection,
+  UpdateHistory,
 } from "@/components/guide/ArticleComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -55,7 +56,7 @@ const jsonLd = {
   description:
     "リバウンドしないダイエット方法を科学的根拠に基づいて解説。代謝適応やホルモン変化のメカニズムから体重維持の具体的アプローチまで。",
   datePublished: "2026-03-25",
-  dateModified: new Date().toISOString().split("T")[0],
+  dateModified: "2026-06-23",
   author: {
       "@type": "Person",
       name: "ヒロ",
@@ -99,7 +100,7 @@ export default function ReboundPreventionPage() {
         <div className="mb-8">
           <AuthorityBadge />
           <p className="text-sm text-gray-400 mt-2">
-            最終更新: 2026年3月25日 | 読了目安: 12分
+            最終更新: 2026年6月23日 | 読了目安: 12分
           </p>
         </div>
 
@@ -420,11 +421,11 @@ export default function ReboundPreventionPage() {
 
           <NutritionTable
             items={[
-              { name: "松屋 / 牛めし並（ご飯少なめ）", calories: 580, protein: 18.5, fat: 20.2, carbs: 78.0 },
-              { name: "大戸屋 / しまほっけ定食", calories: 520, protein: 38.0, fat: 15.0, carbs: 55.0, highlight: true },
-              { name: "サブウェイ / ローストチキンSUB", calories: 310, protein: 22.5, fat: 4.5, carbs: 42.0, highlight: true },
-              { name: "すき家 / 牛丼ライト", calories: 425, protein: 26.5, fat: 22.0, carbs: 24.0 },
-              { name: "ガスト / 若鶏のグリル", calories: 350, protein: 32.0, fat: 12.5, carbs: 22.0, highlight: true },
+              { name: "松屋 / 牛めし（小盛）", calories: 507, protein: 13.1, fat: 22.8, carbs: 59.6 },
+              { name: "大戸屋 / しまほっけの炭火焼き定食", calories: 612, protein: 45.5, fat: 13.1, carbs: 79.3, highlight: true },
+              { name: "サブウェイ / チリチキン", calories: 273, protein: 20.5, fat: 4.1, carbs: 39.7, highlight: true },
+              { name: "すき家 / 牛丼ライト（並盛）", calories: 397, protein: 22.8, fat: 26.8, carbs: 16.8 },
+              { name: "モスバーガー / 香る醤油のローストチキン", calories: 208, protein: 20.3, fat: 12.9, carbs: 2.6, highlight: true },
             ]}
           />
 
@@ -509,23 +510,23 @@ export default function ReboundPreventionPage() {
           <SubSectionHeading>プラン B: チェーン外食中心</SubSectionHeading>
           <div className="bg-white rounded-lg border border-gray-200 p-5 mb-6 shadow-sm">
             <p className="font-bold text-gray-900 mb-2">
-              朝: すき家 / まぜのっけごはん朝食（約470kcal / P22g）
+              朝: すき家 / まぜのっけ朝食 並盛（約531kcal / P17g）
             </p>
             <p className="font-bold text-gray-900 mb-2">
-              昼: サブウェイ / ローストチキンSUB（約310kcal / P22g）
+              昼: サブウェイ / チリチキン（約273kcal / P20g）
             </p>
             <p className="font-bold text-gray-900 mb-2">
-              夜: 大戸屋 / 鶏むね肉と野菜の黒酢あん定食（約680kcal / P35g）
+              夜: 大戸屋 / しまほっけの炭火焼き定食（約612kcal / P45g）
             </p>
             <p className="font-bold text-gray-900 mb-2">
               間食: ゆでたまご + ナッツ25g（約230kcal / P10g）
             </p>
             <div className="flex flex-wrap gap-2 mt-3">
               <span className="text-xs bg-sky-50 text-sky-700 px-2.5 py-1 rounded-full font-bold">
-                合計 1,690 kcal
+                合計 1,646 kcal
               </span>
               <span className="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full font-bold">
-                P 89g
+                P 93g
               </span>
               <span className="text-xs bg-green-50 text-green-700 px-2.5 py-1 rounded-full font-bold">
                 メンテナンス範囲内
@@ -539,7 +540,7 @@ export default function ReboundPreventionPage() {
               朝: オートミール + プロテイン + ブルーベリー（約350kcal / P30g）
             </p>
             <p className="font-bold text-gray-900 mb-2">
-              昼: 松屋 / 牛めし並（ご飯少なめ）+ 生野菜（約620kcal / P20g）
+              昼: 松屋 / 牛めし（小盛）+ 生野菜（約531kcal / P14g）
             </p>
             <p className="font-bold text-gray-900 mb-2">
               夜: 自炊 / 鶏むね肉のソテー + 玄米 + サラダ（約550kcal / P40g）
@@ -549,10 +550,10 @@ export default function ReboundPreventionPage() {
             </p>
             <div className="flex flex-wrap gap-2 mt-3">
               <span className="text-xs bg-sky-50 text-sky-700 px-2.5 py-1 rounded-full font-bold">
-                合計 1,620 kcal
+                合計 1,531 kcal
               </span>
               <span className="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full font-bold">
-                P 102g
+                P 96g
               </span>
               <span className="text-xs bg-green-50 text-green-700 px-2.5 py-1 rounded-full font-bold">
                 メンテナンス範囲内
@@ -609,9 +610,17 @@ export default function ReboundPreventionPage() {
           items={[
             { q: "リバウンドする理由は何か？", a: "リバウンドの主な原因は代謝適応（基礎代謝が低下）、ホルモン変化（レプチン減少・グレリン増加）、心理的要因の3つ。急激なダイエットほど代謝適応が強く、ダイエット終了後も数ヶ月～1年以上続きます。" },
             { q: "ダイエット後、メンテナンスカロリーはどう決める？", a: "活動レベルに応じて体重×30～40kcalが目安。体重60kgでデスクワーク中心なら1,800kcal。ダイエット終了後いきなり上げず、2～4週間かけて100～200kcalずつ増やす「リバースダイエット」が重要です。" },
-            { q: "外食でリバウンドを防ぐコツは？", a: "よく行くチェーン店で「定番ヘルシーメニュー」3～5個を決めておく。松屋の牛めし並、大戸屋のしまほっけ定食、サブウェイのローストチキンなど栄養バランスの良い選択肢を活用すると管理が容易です。" },
+            { q: "外食でリバウンドを防ぐコツは？", a: "よく行くチェーン店で「定番ヘルシーメニュー」3～5個を決めておく。松屋の牛めし（小盛）、大戸屋のしまほっけの炭火焼き定食、サブウェイのチリチキンなど栄養バランスの良い選択肢を活用すると管理が容易です。" },
             { q: "タンパク質はどの程度摂取すべき？", a: "ダイエット中・維持期ともに体重×1.6～2.0gが推奨。タンパク質は筋肉維持で代謝低下を防ぎ、満腹感が持続し間食を抑えられます。体重60kgなら1日96～120g程度を目標にしましょう。" },
             { q: "食事記録はずっと続ける必要がある？", a: "13kg以上の減量を1年以上維持している人の78%が食事記録を継続しています。維持期は完全な記録不要で、週3～4日程度ざっくりとした記録で十分。たべなびなどのツール活用が効果的です。" },
+          ]}
+        />
+
+        {/* Update History */}
+        <UpdateHistory
+          entries={[
+            { date: "2026-06-23", note: "DB実値と乖離した数値・実在しないメニュー・PFC非公開チェーンの架空PFCを全面是正" },
+            { date: "2026-03-25", note: "初稿公開" },
           ]}
         />
 

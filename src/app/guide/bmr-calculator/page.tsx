@@ -18,6 +18,7 @@ import {
   ArticleImage,
   QuickAnswer,
   FAQSection,
+  UpdateHistory,
 } from "@/components/guide/ArticleComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -60,7 +61,7 @@ const jsonLd = {
   description:
     "基礎代謝（BMR）の計算方法をハリス-ベネディクト式で解説。年齢別・性別の平均値、基礎代謝を上げる7つの方法まで。",
   datePublished: "2026-03-25",
-  dateModified: new Date().toISOString().split("T")[0],
+  dateModified: "2026-06-23",
   author: {
       "@type": "Person",
       name: "ヒロ",
@@ -564,23 +565,23 @@ export default function BmrCalculatorPage() {
           <div className="bg-white rounded-lg border border-gray-200 p-5 mb-6 shadow-sm">
             <p className="font-bold text-gray-900 mb-3">1日の目標: 1,500kcal（減量中）/ P120g</p>
             <p className="font-bold text-gray-900 mb-2">
-              朝: セブンイレブン / ゆでたまご2個 + ギリシャヨーグルト（230kcal / P22g）
+              朝: セブンイレブン / たんぱく質が摂れる鶏むね肉サラダ（199kcal / P21.8g）
             </p>
             <p className="font-bold text-gray-900 mb-2">
-              昼: サブウェイ / ローストチキンSUB（310kcal / P22g）
+              昼: サブウェイ / チリチキン（273kcal / P20.5g）
             </p>
             <p className="font-bold text-gray-900 mb-2">
-              夜: 大戸屋 / 鶏むね肉と野菜の黒酢あん定食（680kcal / P35g）
+              夜: 大戸屋 / しまほっけの炭火焼き定食（612kcal / P45.5g）
             </p>
             <p className="font-bold text-gray-900 mb-2">
               間食: サラダチキンバー（108kcal / P21.6g）
             </p>
             <div className="flex flex-wrap gap-2 mt-3">
               <span className="text-xs bg-sky-50 text-sky-700 px-2.5 py-1 rounded-full font-bold">
-                合計 1,328 kcal
+                合計 1,192 kcal
               </span>
               <span className="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full font-bold">
-                P 100.6g
+                P 109.4g
               </span>
               <span className="text-xs bg-green-50 text-green-700 px-2.5 py-1 rounded-full font-bold">
                 目標内でクリア
@@ -595,14 +596,17 @@ export default function BmrCalculatorPage() {
 
           <NutritionTable
             items={[
-              { name: "サブウェイ ローストチキン", calories: 310, protein: 22.5, fat: 4.5, carbs: 42.0, highlight: true },
-              { name: "大戸屋 しまほっけ定食", calories: 520, protein: 38.0, fat: 15.0, carbs: 55.0, highlight: true },
-              { name: "ガスト 若鶏のグリル", calories: 350, protein: 32.0, fat: 12.5, carbs: 22.0, highlight: true },
+              { name: "サブウェイ チリチキン", calories: 273, protein: 20.5, fat: 4.1, carbs: 39.7, highlight: true },
+              { name: "大戸屋 しまほっけの炭火焼き定食", calories: 612, protein: 45.5, fat: 13.1, carbs: 79.3, highlight: true },
+              { name: "松屋 炙り焼鮭定食", calories: 698, protein: 25.7, fat: 24.0, carbs: 91.0, highlight: true },
               { name: "吉野家 牛丼並盛", calories: 633, protein: 19.6, fat: 23.6, carbs: 88.2 },
-              { name: "すき家 牛丼ライト", calories: 425, protein: 26.5, fat: 22.0, carbs: 24.0 },
-              { name: "松屋 定食（焼き魚）", calories: 550, protein: 35.0, fat: 12.0, carbs: 70.0 },
+              { name: "すき家 牛丼ライト並盛", calories: 397, protein: 22.8, fat: 26.8, carbs: 16.8 },
             ]}
           />
+
+          <p className="text-xs text-gray-400 mt-3">
+            ※ガストなどPFC（タンパク質・脂質・炭水化物）の内訳を公式に公開していないチェーンは、本表ではカロリーのみ確認できます。例えばガストの「ジューシー若鶏グリル大葉おろし」は660kcal（PFC内訳は非公開）です。
+          </p>
 
           <p className="mb-4">
             各チェーンの詳細なダイエットメニューは以下のガイドを参照してください:
@@ -663,7 +667,13 @@ export default function BmrCalculatorPage() {
             { q: "基礎代謝と1日の摂取カロリーの関係は？", a: "1日の消費カロリー（TDEE）は「基礎代謝×活動係数」で求めます。例えば基礎代謝1,672kcalで週3回ジム通い（係数1.55）の場合、TDEE=約2,592kcal/日。減量は月2kg目安で500kcal減（約2,092kcal）、維持は2,592kcalが目安です。摂取カロリーを基礎代謝以下にすると筋肉減少とリバウンドリスクが高まります。" },
             { q: "タンパク質を多く摂ると代謝が上がるのはなぜですか？", a: "タンパク質は食事誘発性熱産生（DIT）が最も高く、摂取カロリーの20~30%が消化・吸収で消費されます。炭水化物は5~10%、脂質は0~3%なため、タンパク質の割合を増やすだけで1日60kcal多く消費でき、年間21,900kcal、脂肪約3kgの差につながります。" },
             { q: "年齢とともに基礎代謝が低下する理由は？", a: "基礎代謝は10代後半をピークに低下し、30代以降は10年ごとに約2~3%ずつ減少します。これが「年齢とともに太りやすくなる」主原因です。ただし筋肉量を維持すればこの低下を大幅に抑制可能。30~49歳男性の平均は約1,530kcal、50~64歳は約1,480kcalです。" },
-            { q: "外食でカロリー管理をするコツは何ですか？", a: "大手チェーン店は栄養情報が公開されているため計画的に選べます。例えば減量中1,500kcal目標なら、朝セブン・イレブン（230kcal）、昼サブウェイローストチキン（310kcal）、夜大戸屋定食（680kcal）で目標内に収まります。サブウェイ・大戸屋・ガストなど高タンパクメニューを活用するのが効果的です。" },
+            { q: "外食でカロリー管理をするコツは何ですか？", a: "大手チェーン店は栄養情報が公開されているため計画的に選べます。例えば減量中1,500kcal目標なら、朝セブン-イレブンのたんぱく質が摂れる鶏むね肉サラダ（199kcal/P21.8g）、昼サブウェイのチリチキン（273kcal/P20.5g）、夜大戸屋のしまほっけの炭火焼き定食（612kcal/P45.5g）で目標内に収まります。サブウェイ・大戸屋など高タンパクメニューを活用するのが効果的です。なおガストやサイゼリヤのようにPFCの内訳を公式に公開していないチェーンは、カロリーのみを目安にしましょう。" },
+          ]}
+        />
+
+        <UpdateHistory
+          entries={[
+            { date: "2026-06-23", note: "DB実値と乖離した数値・実在しないメニュー・PFC非公開チェーンの架空PFCを全面是正" },
           ]}
         />
 

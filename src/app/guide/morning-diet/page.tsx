@@ -19,6 +19,7 @@ import {
   ArticleImage,
   QuickAnswer,
   FAQSection,
+  UpdateHistory,
 } from "@/components/guide/ArticleComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -52,7 +53,7 @@ const jsonLd = {
   description:
     "朝マック・コンビニ・チェーン店のダイエット向け朝食メニューを徹底比較。PFCバランスで選ぶ朝食の正解がわかります。",
   datePublished: "2026-03-23",
-  dateModified: new Date().toISOString().split("T")[0],
+  dateModified: "2026-06-23",
   author: {
       "@type": "Person",
       name: "ヒロ",
@@ -93,14 +94,14 @@ export default function MorningDietPage() {
       <ArticleLayout tocItems={tocItems} currentSlug="morning-diet">
         {/* Authority & Date */}
         <AuthorityBadge />
-        <p className="text-sm text-gray-400 mt-3 mb-6">最終更新: 2026年3月23日</p>
+        <p className="text-sm text-gray-400 mt-3 mb-6">最終更新: 2026年6月23日</p>
 
         {/* Introduction */}
         <p className="mb-4">
           「ダイエット中は朝食を抜くべき？」と悩む方は多いですが、結論から言うと<Marker>朝食は食べた方がダイエットに有利</Marker>です。朝食を抜くと基礎代謝が落ち、昼食でのドカ食いにつながりやすくなります。
         </p>
         <p className="mb-4">
-          とはいえ、何でも食べていいわけではありません。<Marker color="blue">朝マックのエッグマックマフィンは311kcalで意外と優秀</Marker>ですが、ホットケーキセットは640kcalと高カロリー。正しいメニュー選びが重要です。
+          とはいえ、何でも食べていいわけではありません。<Marker color="blue">朝マックのエッグマックマフィンは310kcalで意外と優秀</Marker>ですが、メガマフィンは693kcalと高カロリー。正しいメニュー選びが重要です。
         </p>
         <p className="mb-8">
           この記事では、朝マック・コンビニ・松屋やなか卯などのチェーン店モーニングを徹底比較し、ダイエット中の朝食の最適解をPFCバランスの観点からお伝えします。
@@ -117,7 +118,7 @@ export default function MorningDietPage() {
         <section className="mb-16">
                   <QuickAnswer
           question={"ダイエット中の朝食は食べた方がいい？避けた方がいい？"}
-          answer={"ダイエット中でも朝食は食べた方が有利です。朝食により食事誘発熱産生が生じ、昼食のドカ食いも防げます。ただし300～500kcal、タンパク質20g以上の栄養バランスを意識することが重要。エッグマックマフィン（311kcal）やコンビニのサラダチキン組み合わせ（420kcal）など、正しいメニュー選びで効果が期待できます。"}
+          answer={"ダイエット中でも朝食は食べた方が有利です。朝食により食事誘発熱産生が生じ、昼食のドカ食いも防げます。ただし300～500kcal、タンパク質20g以上の栄養バランスを意識することが重要。エッグマックマフィン（310kcal）やコンビニのサラダチキン組み合わせ（約420kcal）など、正しいメニュー選びで効果が期待できます。"}
         />
 
         <SectionHeading id="why-breakfast">ダイエット中に朝食を食べるべき3つの理由</SectionHeading>
@@ -158,13 +159,13 @@ export default function MorningDietPage() {
 
           <NutritionTable
             items={[
-              { name: "エッグマックマフィン", calories: 311, protein: 19.2, fat: 13.5, carbs: 27.0, highlight: true },
-              { name: "ソーセージマフィン", calories: 392, protein: 15.5, fat: 23.5, carbs: 27.5 },
-              { name: "ソーセージエッグマフィン", calories: 475, protein: 22.0, fat: 28.5, carbs: 28.0 },
-              { name: "マックグリドル ソーセージ", calories: 420, protein: 12.8, fat: 22.0, carbs: 42.5 },
-              { name: "フィレオフィッシュ", calories: 341, protein: 14.5, fat: 14.0, carbs: 38.0, highlight: true },
-              { name: "ホットケーキ（3枚）", calories: 320, protein: 8.5, fat: 7.5, carbs: 55.0 },
-              { name: "メガマフィン", calories: 688, protein: 30.2, fat: 44.5, carbs: 39.0 },
+              { name: "エッグマックマフィン", calories: 310, protein: 18.6, fat: 13.6, carbs: 27.2, highlight: true },
+              { name: "ソーセージマフィン", calories: 397, protein: 15.5, fat: 25.1, carbs: 27.1 },
+              { name: "ソーセージエッグマフィン", calories: 477, protein: 21.9, fat: 30.6, carbs: 27.3 },
+              { name: "マックグリドル ソーセージ", calories: 414, protein: 10.5, fat: 23.4, carbs: 40.4 },
+              { name: "フィレオフィッシュ", calories: 338, protein: 15.0, fat: 14.2, carbs: 37.4, highlight: true },
+              { name: "ホットケーキ", calories: 323, protein: 8.3, fat: 9.3, carbs: 53.5 },
+              { name: "メガマフィン", calories: 693, protein: 30.0, fat: 49.3, carbs: 31.2 },
             ]}
           />
 
@@ -175,27 +176,27 @@ export default function MorningDietPage() {
           <SubSectionHeading>朝マックのベストチョイス：エッグマックマフィン</SubSectionHeading>
 
           <p className="mb-4">
-            <Marker color="blue">エッグマックマフィン（311kcal / P19.2g / F13.5g / C27.0g）</Marker>は朝マックのダイエットメニューで圧倒的No.1です。タンパク質19.2gは卵1個+チーズ+カナディアンベーコンの組み合わせによるもので、朝に必要なタンパク質を十分に補えます。
+            <Marker color="blue">エッグマックマフィン（310kcal / P18.6g / F13.6g / C27.2g）</Marker>は朝マックのダイエットメニューで圧倒的No.1です。タンパク質18.6gは卵1個+チーズ+カナディアンベーコンの組み合わせによるもので、朝に必要なタンパク質を十分に補えます。
           </p>
 
           <p className="mb-4">
-            一方で<Marker>避けるべきはメガマフィン（688kcal）</Marker>。脂質44.5gと朝食としては多すぎます。ソーセージエッグマフィン（475kcal）も脂質28.5gとやや高め。
+            一方で<Marker>避けるべきはメガマフィン（693kcal）</Marker>。脂質49.3gと朝食としては多すぎます。ソーセージエッグマフィン（477kcal）も脂質30.6gとやや高め。
           </p>
 
           <ComparisonTable
             headers={["おすすめ朝マックセット", "カロリー", "タンパク質", "脂質"]}
             rows={[
-              ["エッグマックマフィン + ブラックコーヒー", "315 kcal", "P 19.2g", "F 13.5g"],
-              ["エッグマックマフィン + サラダ + 爽健美茶", "370 kcal", "P 20.5g", "F 13.8g"],
-              ["フィレオフィッシュ + ブラックコーヒー", "345 kcal", "P 14.5g", "F 14.0g"],
+              ["エッグマックマフィン + ブラックコーヒー", "315 kcal", "P 18.6g", "F 13.6g"],
+              ["エッグマックマフィン + サイドサラダ + 爽健美茶", "320 kcal", "P 19.5g", "F 13.8g"],
+              ["フィレオフィッシュ + ブラックコーヒー", "343 kcal", "P 15.0g", "F 14.2g"],
             ]}
             bestRowIndex={0}
           />
 
           <WarningBox title="朝マックで避けるべき組み合わせ">
             <ul className="space-y-2">
-              <li><span className="font-bold">メガマフィン + ハッシュポテト + コーラ（計920kcal超）</span> ─ 朝食だけで1日の半分以上のカロリーを摂ることに。</li>
-              <li><span className="font-bold">ホットケーキ + シロップ + ハッシュポテト（計510kcal）</span> ─ 糖質が80g超え。タンパク質は10g程度と少なく栄養バランスも悪い。</li>
+              <li><span className="font-bold">メガマフィン + ハッシュポテト + コーラ（計990kcal前後）</span> ─ 朝食だけで1日の半分以上のカロリーを摂ることに。</li>
+              <li><span className="font-bold">ホットケーキ + シロップ + ハッシュポテト（計約600kcal）</span> ─ 糖質が90g超え。タンパク質は10g程度と少なく栄養バランスも悪い。</li>
             </ul>
           </WarningBox>
 
@@ -271,29 +272,25 @@ export default function MorningDietPage() {
 
           <NutritionTable
             items={[
-              { name: "ソーセージエッグ定食", calories: 580, protein: 22.5, fat: 20.0, carbs: 75.0 },
-              { name: "焼鮭定食", calories: 520, protein: 28.0, fat: 12.5, carbs: 72.0, highlight: true },
-              { name: "納豆定食", calories: 495, protein: 20.0, fat: 10.0, carbs: 78.0, highlight: true },
-              { name: "牛めしミニ盛（朝利用）", calories: 380, protein: 12.5, fat: 13.2, carbs: 50.8, highlight: true },
+              { name: "ソーセージエッグ定食（朝）", calories: 639, protein: 18.0, fat: 19.7, carbs: 92.2 },
+              { name: "炙り焼鮭朝定食", calories: 520, protein: 20.0, fat: 9.6, carbs: 84.8, highlight: true },
+              { name: "たまごかけ朝定食", calories: 451, protein: 12.7, fat: 6.8, carbs: 79.9, highlight: true },
+              { name: "牛めし（小盛・朝利用）", calories: 507, protein: 13.1, fat: 22.8, carbs: 59.6 },
             ]}
           />
 
           <p className="mb-4">
-            松屋の朝定食で最もおすすめは<Marker color="blue">焼鮭定食（520kcal / P28.0g）</Marker>。タンパク質28gと高タンパクで脂質は12.5gと控えめ。さらに無料の味噌汁付きで満足感も十分です。
+            松屋の朝定食で最もおすすめは<Marker color="blue">炙り焼鮭朝定食（520kcal / P20.0g）</Marker>。タンパク質20gを確保しつつ脂質は9.6gと控えめ。さらに無料の味噌汁付きで満足感も十分です。
           </p>
 
-          <SubSectionHeading>なか卯の朝食</SubSectionHeading>
-
-          <NutritionTable
-            items={[
-              { name: "目玉焼き朝定食", calories: 530, protein: 20.0, fat: 15.0, carbs: 75.5 },
-              { name: "納豆朝定食", calories: 480, protein: 19.5, fat: 9.5, carbs: 76.0, highlight: true },
-              { name: "こだわり卵の親子丼（ミニ）", calories: 395, protein: 18.5, fat: 8.5, carbs: 58.0, highlight: true },
-            ]}
-          />
+          <SubSectionHeading>その他チェーンの朝食を選ぶコツ</SubSectionHeading>
 
           <p className="mb-4">
-            なか卯の<Marker>親子丼ミニ（395kcal）</Marker>は朝食として絶妙なカロリー設定。卵と鶏肉でタンパク質18.5gを確保しつつ、脂質8.5gと低脂質。朝からしっかりタンパク質を摂りたい方におすすめです。
+            なか卯やファミレスなどの和朝食を選ぶときは、<Marker>「主菜が卵・魚・納豆」かつ「丼より定食」</Marker>を意識すると低脂質・高タンパクに寄せやすくなります。親子丼や卵かけごはんのミニサイズは卵と鶏肉でタンパク質を確保しやすく、朝食として扱いやすいカテゴリです。
+          </p>
+
+          <p className="text-xs text-gray-400 mb-4">
+            ※なか卯など一部チェーンの個別メニューはたべなびのデータベース未収録のため、本記事では具体的な数値の断定は控えています。最新の栄養成分は各チェーン公式サイトでご確認ください。
           </p>
 
           <SubSectionHeading>チェーン店朝食の総合比較</SubSectionHeading>
@@ -301,10 +298,9 @@ export default function MorningDietPage() {
           <ComparisonTable
             headers={["チェーン店", "おすすめメニュー", "カロリー", "P", "コスパ"]}
             rows={[
-              ["朝マック", "エッグマックマフィン", "311 kcal", "19.2g", "約200円"],
-              ["松屋", "焼鮭定食", "520 kcal", "28.0g", "約500円"],
-              ["なか卯", "親子丼ミニ", "395 kcal", "18.5g", "約350円"],
-              ["すき家", "たまかけ朝食", "470 kcal", "16.0g", "約350円"],
+              ["朝マック", "エッグマックマフィン", "310 kcal", "18.6g", "約290円"],
+              ["松屋", "炙り焼鮭朝定食", "520 kcal", "20.0g", "約500円"],
+              ["すき家", "たまかけ朝食（ミニ）", "411 kcal", "15.1g", "約350円"],
             ]}
             bestRowIndex={0}
           />
@@ -312,7 +308,7 @@ export default function MorningDietPage() {
           <ArticleImage src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&h=400&fit=crop" alt="チェーン店の和朝食イメージ" />
 
           <TipBox title="朝食チェーン店の使い分け">
-            <p>時間がない日は朝マック（エッグマックマフィン311kcal）、しっかり食べたい日は松屋の焼鮭定食（520kcal）、バランス良く済ませたい日はなか卯の親子丼ミニ（395kcal）と<Marker>状況に応じて使い分ける</Marker>のが賢い方法です。</p>
+            <p>時間がない日は朝マック（エッグマックマフィン310kcal）、しっかり食べたい日は松屋の炙り焼鮭朝定食（520kcal）、軽めに済ませたい日はすき家のたまかけ朝食ミニ（411kcal）と<Marker>状況に応じて使い分ける</Marker>のが賢い方法です。</p>
           </TipBox>
         </section>
 
@@ -345,7 +341,7 @@ export default function MorningDietPage() {
               ["糖質制限", "300 kcal", "サラダチキン + ゆで卵 + サラダ", "糖質3g以下"],
               ["ローファット", "400 kcal", "おにぎり + サラダチキン + 味噌汁", "脂質6g"],
               ["カロリー制限", "350 kcal", "エッグマックマフィン + ブラックコーヒー", "手軽で続けやすい"],
-              ["筋トレ併用", "500 kcal", "焼鮭定食（松屋）", "P28gの高タンパク"],
+              ["筋トレ併用", "520 kcal", "炙り焼鮭朝定食（松屋）", "P20gの高タンパク"],
             ]}
             bestRowIndex={1}
           />
@@ -374,10 +370,10 @@ export default function MorningDietPage() {
           <CheckList
             items={[
               "朝食は300〜500kcal、タンパク質20g以上が理想",
-              "朝マックならエッグマックマフィン（311kcal / P19.2g）がベスト",
+              "朝マックならエッグマックマフィン（310kcal / P18.6g）がベスト",
               "コンビニは「おにぎり + サラダチキン + 味噌汁」の組み合わせが最強（約420kcal / P32g）",
-              "松屋の焼鮭定食（520kcal / P28g）はしっかり食べたい日に最適",
-              "なか卯の親子丼ミニ（395kcal / P18.5g）はバランス型の優等生",
+              "松屋の炙り焼鮭朝定食（520kcal / P20g）はしっかり食べたい日に最適",
+              "丼より定食・主菜は卵や魚を選ぶと低脂質・高タンパクに寄せやすい",
               "菓子パン・甘い飲み物は避け、タンパク質中心の朝食を心がける",
             ]}
           />
@@ -397,11 +393,19 @@ export default function MorningDietPage() {
         <FAQSection
           slug="morning-diet"
           items={[
-            { q: "朝マックのおすすめメニューは？", a: "エッグマックマフィン（311kcal / タンパク質19.2g）が最適です。高タンパク・低カロリーで、卵・チーズ・カナディアンベーコンで朝に必要なタンパク質を十分補給できます。避けるべきはメガマフィン（688kcal）とホットケーキセット（640kcal）。" },
+            { q: "朝マックのおすすめメニューは？", a: "エッグマックマフィン（310kcal / タンパク質18.6g）が最適です。高タンパク・低カロリーで、卵・チーズ・カナディアンベーコンで朝に必要なタンパク質を十分補給できます。避けるべきはメガマフィン（693kcal）やマックグリドル ソーセージエッグ（545kcal）。" },
             { q: "コンビニ朝食の最強組み合わせは？", a: "おにぎり（鮭）＋サラダチキン＋インスタント味噌汁が推奨。約420kcalでタンパク質32g確保でき、価格500円程度とコスパも抜群。自分でPFC比率を調整できるのがコンビニの最大利点です。" },
-            { q: "松屋やなか卯の朝食でダイエット向けは？", a: "松屋の焼鮭定食（520kcal / タンパク質28g）、なか卯の親子丼ミニ（395kcal / タンパク質18.5g）がおすすめ。どちらも定食スタイルで栄養バランスが良く、しっかり食べたい日に最適です。" },
+            { q: "松屋やすき家の朝食でダイエット向けは？", a: "松屋の炙り焼鮭朝定食（520kcal / タンパク質20g）、すき家のたまかけ朝食ミニ（411kcal / タンパク質15.1g）がおすすめ。どちらも定食・和朝食スタイルで栄養バランスが良く、卵や魚で高タンパクに寄せやすい点が魅力です。なお、なか卯など一部チェーンの個別数値はデータベース未収録のため本記事では断定を控えています。" },
             { q: "ダイエット朝食で避けるべき食べ物は？", a: "菓子パン（350～500kcal、タンパク質5～8g）、コンビニスイーツ、砂糖入りカフェラテは避けましょう。血糖値が急上昇し、その後の急降下で眠気と空腹感が生じます。朝から甘いものは避けが鉄則です。" },
             { q: "朝食のタンパク質はなぜ重要？", a: "朝にタンパク質を摂ることで筋肉の分解が防げ、代謝の高い体を維持できます。理想は20～30g。食事誘発性熱産生（DIT）により脂肪燃焼も促進され、基礎代謝のアップにつながります。" },
+          ]}
+        />
+
+        {/* Update History */}
+        <UpdateHistory
+          entries={[
+            { date: "2026-06-23", note: "DB実値と乖離した数値・実在しないメニュー・PFC非公開チェーンの架空PFCを全面是正" },
+            { date: "2026-03-23", note: "初稿公開" },
           ]}
         />
 

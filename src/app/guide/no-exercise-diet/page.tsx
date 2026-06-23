@@ -18,6 +18,7 @@ import {
   ArticleImage,
   QuickAnswer,
   FAQSection,
+  UpdateHistory,
 } from "@/components/guide/ArticleComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -53,7 +54,7 @@ const jsonLd = {
   description:
     "運動なしでも食事管理だけで痩せられる科学的根拠と実践方法を解説。",
   datePublished: "2026-03-25",
-  dateModified: new Date().toISOString().split("T")[0],
+  dateModified: "2026-06-23",
   author: {
       "@type": "Person",
       name: "ヒロ",
@@ -98,7 +99,7 @@ export default function NoExerciseDietPage() {
         <div className="mb-8">
           <AuthorityBadge />
           <p className="text-sm text-gray-400 mt-2">
-            最終更新: 2026年3月25日 | 読了目安: 11分
+            最終更新: 2026年6月23日 | 読了目安: 11分
           </p>
         </div>
 
@@ -274,16 +275,16 @@ export default function NoExerciseDietPage() {
 
           <NutritionTable
             items={[
-              { name: "朝：セブンイレブン たまごサンド", calories: 298, protein: 10.2, fat: 16.5, carbs: 26.8 },
-              { name: "昼：大戸屋 鶏むね肉と野菜の黒酢あん定食", calories: 580, protein: 28.5, fat: 12.8, carbs: 82.3, highlight: true },
-              { name: "夜：やよい軒 しまほっけ定食（ご飯少なめ）", calories: 485, protein: 30.2, fat: 14.5, carbs: 55.8, highlight: true },
+              { name: "朝：セブンイレブン たまご＆ハムレタスサンド", calories: 307, protein: 12.5, fat: 17.8, carbs: 24.8 },
+              { name: "昼：大戸屋 しまほっけの炭火焼き定食", calories: 612, protein: 45.5, fat: 13.1, carbs: 79.3, highlight: true },
+              { name: "夜：やよい軒 サバの味噌煮定食", calories: 621, protein: 30.4, fat: 24.9, carbs: 71.4, highlight: true },
               { name: "間食：ギリシャヨーグルト", calories: 100, protein: 10.0, fat: 0.5, carbs: 12.5 },
             ]}
             highlightProtein
           />
 
           <p className="mb-6 text-sm text-gray-600">
-            合計：約1,463kcal / P:78.9g / F:44.3g / C:177.4g
+            合計：約1,640kcal / P:98.4g / F:56.3g / C:188.0g
           </p>
 
           <SubSectionHeading>プランB：コンビニ活用スタイル</SubSectionHeading>
@@ -312,16 +313,19 @@ export default function NoExerciseDietPage() {
 
           <NutritionTable
             items={[
-              { name: "朝：サブウェイ ローストチキン（ウィートブレッド）", calories: 282, protein: 22.5, fat: 4.8, carbs: 38.6, highlight: true },
-              { name: "昼：ガスト 若鶏のグリル 大葉おろしの醤油ソース", calories: 398, protein: 35.2, fat: 12.5, carbs: 32.8, highlight: true },
-              { name: "夜：サイゼリヤ 若鶏のディアボラ風 + 小エビのサラダ", calories: 610, protein: 32.8, fat: 28.5, carbs: 52.3 },
+              { name: "朝：サブウェイ チリチキン", calories: 273, protein: 20.5, fat: 4.1, carbs: 39.7, highlight: true },
+              { name: "昼：デニーズ グリルチキン～選べるソース", calories: 425, protein: 37.6, fat: 27.6, carbs: 7.2, highlight: true },
+              { name: "夜：ココス チキンステーキ", calories: 461, protein: 33.6, fat: 29.0, carbs: 13.6 },
               { name: "間食：ナッツ（25g）", calories: 155, protein: 5.2, fat: 13.5, carbs: 3.8 },
             ]}
             highlightProtein
           />
 
           <p className="mb-6 text-sm text-gray-600">
-            合計：約1,445kcal / P:95.7g / F:59.3g / C:127.5g
+            合計：約1,314kcal / P:96.9g / F:74.2g / C:64.3g
+          </p>
+          <p className="mb-6 text-[11px] text-gray-400">
+            ※サイゼリヤ・ガストはPFC値を公式に非公開のため、PFCが検証できる実在メニュー（サブウェイ・デニーズ・ココス）で構成しています。
           </p>
 
           <TipBox title="食事だけで痩せるためのPFCバランス">
@@ -559,8 +563,15 @@ export default function NoExerciseDietPage() {
             { q: "1日の目標摂取カロリーはどう決めるのか", a: "基礎代謝をハリス・ベネディクト方程式で計算し、活動係数1.2を掛けて総消費カロリー（TDEE）を出します。そこから300～500kcal引いた値が目標です。例：体重75kg・30歳男性は約1,730kcal基礎代謝→約2,076kcal総消費→目標1,576kcal（月2kg減）。" },
             { q: "食事だけダイエットで筋肉が減らないようにするには", a: "タンパク質を体重1kgあたり1.2～1.6g摂取し、毎食25～35g意識的に取ります。カロリー赤字は月2kg以内、食事を3～4回に分けて摂取、階段利用など日常活動を増やすことで筋肉への刺激を維持できます。" },
             { q: "運動なしダイエットで避けるべき食事パターンは何か", a: "極端な糖質制限（水分減少のみで脂肪はほぼ減らない）、1日1食（血糖値急変動）、置き換えダイエットのみ（リバウンド確実）、低カロリー偏食（筋肉低下）。通常食でカロリー管理する習慣が長期成功の鍵です。" },
-            { q: "外食チェーンでカロリー管理しながら痩せられるか", a: "できます。セブンイレブン、大戸屋、やよい軒、ガスト、サイゼリヤなど栄養データ充実のチェーンを活用すれば1日1,600kcal程度で管理可能。例えば朝卵サンド298kcal→昼黒酢あん定食580kcal→夜ほっけ定食485kcalで構成できます。" },
+            { q: "外食チェーンでカロリー管理しながら痩せられるか", a: "できます。セブンイレブン、大戸屋、やよい軒、デニーズ、ココスなど栄養データを公開しているチェーンを活用すれば1日1,600kcal前後で管理可能。例えば朝たまご＆ハムレタスサンド307kcal→昼しまほっけの炭火焼き定食612kcal→夜サバの味噌煮定食621kcalで構成できます。なおサイゼリヤやガストはカロリーは公開していますがPFC値は非公開のため、PFC管理を重視するならPFCを公開しているチェーンを選ぶのが確実です。" },
             { q: "カロリー制限で代謝が低下する（適応熱産生）対策は", a: "2～3ヶ月ごとに1～2週間のダイエット休止（メンテナンスカロリー摂取）、チートデイの活用、水分1日2ℓ以上、7～8時間睡眠確保、コーヒー・緑茶でカフェイン摂取が有効とされています。研究により、交互方式は継続的なカロリー制限と比べて効果がある可能性が示唆されていますが、個人差が大きいため注意が必要です。" },
+          ]}
+        />
+
+        <UpdateHistory
+          entries={[
+            { date: "2026-06-23", note: "DB実値と乖離した数値・実在しないメニュー・PFC非公開チェーンの架空PFCを全面是正" },
+            { date: "2026-03-25", note: "初稿公開" },
           ]}
         />
 

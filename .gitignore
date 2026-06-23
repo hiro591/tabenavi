@@ -54,3 +54,6 @@ marketing/remotion-ads/public/*.mp4
 # Google Search Console service account key (never commit)
 gsc-key.json
 *-gsc-key.json
+
+# 一時的な監査結果(コミットしない)
+scripts/data-update/.wave3-findings.json

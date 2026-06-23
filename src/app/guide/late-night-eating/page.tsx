@@ -18,6 +18,7 @@ import {
   ArticleImage,
   QuickAnswer,
   FAQSection,
+  UpdateHistory,
 } from "@/components/guide/ArticleComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -53,7 +54,7 @@ const jsonLd = {
   description:
     "夜食で太らないための食べ方・メニュー選びを徹底解説。深夜の外食やコンビニで太りにくいメニューを紹介。",
   datePublished: "2026-03-23",
-  dateModified: new Date().toISOString().split("T")[0],
+  dateModified: "2026-06-23",
   author: {
       "@type": "Person",
       name: "ヒロ",
@@ -299,31 +300,31 @@ export default function LateNightEatingPage() {
             チェーン店の夜食メニュー
           </SectionHeading>
           <p className="mb-4">
-            深夜営業しているチェーン店で、太りにくい夜食メニューを厳選。<Marker>300kcal以下・低脂質</Marker>のメニューを中心に紹介します。
+            深夜営業しているチェーン店で、比較的太りにくい夜食メニューを厳選。<Marker>ご飯を豆腐に変える・小盛を選ぶ</Marker>など、カロリーと糖質を抑える選び方を中心に紹介します。
           </p>
 
           <SubSectionHeading>すき家</SubSectionHeading>
           <NutritionTable
             items={[
-              { name: "牛丼ライト（ご飯の代わりに豆腐）", calories: 281, protein: 18.5, fat: 15.2, carbs: 14.8, highlight: true },
-              { name: "まぐろたたき丼 ミニ", calories: 327, protein: 16.2, fat: 3.5, carbs: 58.2 },
-              { name: "鮭朝食（ご飯少なめ）", calories: 358, protein: 22.1, fat: 8.5, carbs: 48.5 },
+              { name: "牛丼ライト ミニ（ご飯の代わりに豆腐）", calories: 309, protein: 18.5, fat: 19.9, carbs: 14.8, highlight: true },
+              { name: "牛丼ライト 並盛（ご飯の代わりに豆腐）", calories: 397, protein: 22.8, fat: 26.8, carbs: 16.8 },
+              { name: "鮭定食 ミニ", calories: 436, protein: 21.2, fat: 10.1, carbs: 66.4 },
             ]}
           />
 
           <SubSectionHeading>松屋</SubSectionHeading>
           <NutritionTable
             items={[
-              { name: "湯豆腐変更の定食", calories: 260, protein: 22.0, fat: 12.5, carbs: 8.2, highlight: true },
-              { name: "牛めし ミニ", calories: 509, protein: 14.8, fat: 18.2, carbs: 68.5 },
+              { name: "牛めし（小盛）", calories: 507, protein: 13.1, fat: 22.8, carbs: 59.6, highlight: true },
+              { name: "牛めし（並）", calories: 687, protein: 17.1, fat: 28.9, carbs: 85.5 },
             ]}
           />
 
           <SubSectionHeading>吉野家</SubSectionHeading>
           <NutritionTable
             items={[
-              { name: "ライザップ牛サラダ", calories: 398, protein: 28.0, fat: 23.5, carbs: 17.2, highlight: true },
-              { name: "牛丼 小盛", calories: 488, protein: 14.2, fat: 16.8, carbs: 67.5 },
+              { name: "生野菜サラダ", calories: 88, protein: 1.7, fat: 4.8, carbs: 9.7, highlight: true },
+              { name: "牛丼（小盛）", calories: 474, protein: 15.4, fat: 19.6, carbs: 60.9 },
             ]}
           />
 
@@ -407,10 +408,17 @@ export default function LateNightEatingPage() {
           slug="late-night-eating"
           items={[
             { q: "なぜ夜食は太ると言われているのですか?", a: "体内時計を司るBMAL1は午後10時~午前2時に発現が高まり、この時間帯は栄養吸収が効率的になるとされています。加えて夜間は消化機能が低下し、食べ物の胃滞留時間が長くなるため、摂取した食物が脂肪に変わりやすくなる傾向があります。" },
-            { q: "深夜の外食チェーン店で選ぶべきメニューは?", a: "すき家の牛丼ライト豆腐版(281kcal)、松屋の湯豆腐定食(260kcal)、吉野家のライザップ牛サラダ(398kcal)が目安。ご飯を豆腐に変更することで糖質を大幅カットできます。" },
+            { q: "深夜の外食チェーン店で選ぶべきメニューは?", a: "すき家の牛丼ライト ミニ(ご飯を豆腐に変更・309kcal、タンパク18.5g)が目安。ご飯を豆腐に変更することで糖質を大幅カットできます。サラダ単品(吉野家の生野菜サラダ88kcalなど)を組み合わせると、より軽く済ませられます。" },
             { q: "深夜に避けるべき食べ物は?", a: "ラーメン(約800kcal)・カツ丼(約900kcal)・菓子パン・スナック菓子・アイスクリームなど、高脂質・高糖質の組み合わせは特に危険。血糖値の急上昇でインスリン過剰分泌につながります。" },
             { q: "コンビニで最もヘルシーな夜食は何ですか?", a: "サラダチキン(プレーン)が最適。113kcalでタンパク質24.3g、脂質わずか1.2g。消化も良く、次点はゆでたまご(130kcal)と茶碗蒸し(90kcal)です。" },
             { q: "夜食のタンパク質が重要な理由は何ですか?", a: "タンパク質は食事誘発性熱産生(DIT)が高く、摂取カロリーの約30%が消化吸収に消費されるため実質的なカロリーが低くなります。15g以上の摂取が夜食選びの指標です。" },
+          ]}
+        />
+
+        {/* Update History */}
+        <UpdateHistory
+          entries={[
+            { date: "2026-06-23", note: "DB実値と乖離した数値・実在しないメニュー・PFC非公開チェーンの架空PFCを全面是正" },
           ]}
         />
 
