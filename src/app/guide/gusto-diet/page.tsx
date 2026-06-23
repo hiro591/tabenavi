@@ -6,8 +6,6 @@ import {
   TableOfContents,
   SectionHeading,
   SubSectionHeading,
-  NutritionCard,
-  NutritionTable,
   TipBox,
   WarningBox,
   Marker,
@@ -20,6 +18,8 @@ import {
   ArticleImage,
   QuickAnswer,
   FAQSection,
+  CompareBar,
+  UpdateHistory,
 } from "@/components/guide/ArticleComponents";
 import { AffiliateProductGrid } from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
@@ -29,13 +29,13 @@ export const metadata: Metadata = {
   title:
     "【2026年最新】ガストダイエットガイド｜低カロリーメニューランキングとおすすめの食べ方 | たべなび",
   description:
-    "ガストのカロリーランキング、ダイエット中におすすめの低カロリーメニュー、注文テクニックを徹底解説。チキテキ645kcal・P33.5g、ベジ塩タンメン460kcalなど具体的な栄養データで紹介。",
+    "ガストのカロリーランキング、ダイエット中におすすめの低カロリーメニュー、注文テクニックを徹底解説。蒸し鶏と彩り野菜のサラダ38kcal、ねばとろサラダうどん393kcal、チキテキスパイス焼き695kcalなど実カロリーデータで紹介。",
   keywords: [
     "ガスト ダイエット",
     "ガスト カロリー",
     "ガスト 低カロリー",
-    "ガスト タンパク質",
-    "ガスト 筋トレ",
+    "ガスト メニュー",
+    "ガスト サラダ",
   ],
   openGraph: {
     title: "【2026年最新】ガストダイエットガイド｜低カロリーメニューランキングとおすすめの食べ方",
@@ -56,10 +56,11 @@ const jsonLd = {
   datePublished: "2026-03-19",
   dateModified: new Date().toISOString().split("T")[0],
   author: {
-    "@type": "Organization",
-    name: "たべなび",
-    url: "https://www.tabenavi.jp",
-  },
+      "@type": "Person",
+      name: "ヒロ",
+      description: "外食で13kg減量した、たべなび開発者",
+      url: "https://www.tabenavi.jp/sources",
+    },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
@@ -95,18 +96,22 @@ export default function GustoDietPage() {
       <ArticleLayout tocItems={tocItems} currentSlug="gusto-diet">
         {/* Authority & Date */}
         <AuthorityBadge />
-        <p className="text-sm text-gray-400 mt-3 mb-6">最終更新: 2026年3月19日</p>
+        <p className="text-sm text-gray-400 mt-3 mb-6">最終更新: 2026年6月22日</p>
 
         {/* Introduction */}
         <p className="mb-4">
           ガストは全国に約1,300店舗を展開するファミリーレストランチェーンです。メニューの幅広さとリーズナブルな価格が魅力ですが、実は<Marker>ダイエット中の外食先としても非常に優秀</Marker>。サラダ・グリル・麺類まで、低カロリーな選択肢が豊富に揃っています。
         </p>
         <p className="mb-4">
-          特に注目は<Marker color="blue">チキテキ・ピリ辛スパイス焼き（645kcal / P33.5g）</Marker>。ファミレスの定食メニューとしてはトップクラスの高タンパクで、筋トレ中の方にも人気があります。
+          特に注目は<Marker color="blue">蒸し鶏と彩り野菜のサラダ（S・38kcal）</Marker>や<Marker color="blue">ねばとろサラダうどん（393kcal）</Marker>。野菜やさっぱり系の選択肢が多く、メイン料理を選ぶ際もカロリーで比較しやすいのが強みです。
         </p>
         <p className="mb-8">
-          この記事では、ガストのメニューをカロリー順にランキングし、ダイエット中におすすめのメニューと注文テクニックをPFCデータとともに徹底解説します。
+          この記事では、ガストのメニューをカロリー順にランキングし、ダイエット中におすすめのメニューと注文テクニックを実カロリーデータとともに解説します。
         </p>
+
+        <TipBox title="この記事の数値について">
+          <p>本記事のカロリーは、たべなびが収録するガストの公開メニューデータに基づきます。ガストはタンパク質・脂質・炭水化物（PFC）の公式値が公開されていないため、<Marker>本記事ではPFCの断定値は使わず、カロリーを基準に</Marker>メニューを比較しています。栄養成分は店舗・時期により変わる場合があるため、最新情報は公式でご確認ください。</p>
+        </TipBox>
 
         {/* Mobile TOC */}
         <div className="lg:hidden">
@@ -117,7 +122,7 @@ export default function GustoDietPage() {
         <section className="mb-16">
                   <QuickAnswer
           question={"ガストのダイエット向きメニューはどれですか？"}
-          answer={"ガストのダイエット向きメニューは、チキテキ・ピリ辛スパイス焼き（645kcal/タンパク質33.5g）、1日分の野菜のベジ塩タンメン（460kcal）、若鶏のグリル大葉おろし（478kcal/タンパク質30.2g）が上位3つです。特にタンパク質とカロリーのバランスが優れており、ライスを抜いたり単品を組み合わせることで、さらにカロリーをコントロールできます。"}
+          answer={"カロリーで見ると、蒸し鶏と彩り野菜のサラダ（S・38kcal）や海老アボカドと彩り野菜のサラダ（S・74kcal）といったサラダ系が最も低カロリーです。食事として満足感のある一品なら、ねばとろサラダうどん（393kcal）や赤身ビーフステーキ約100g（423kcal）が選びやすい候補。ライスを少なめライス（165kcal）にしたり、サラダを組み合わせることでカロリーをコントロールできます。"}
         />
 
         <SectionHeading id="why-gusto">ガストがダイエットに向いてる理由</SectionHeading>
@@ -155,33 +160,33 @@ export default function GustoDietPage() {
           <SectionHeading id="calorie-ranking">ガスト カロリーランキング</SectionHeading>
 
           <p className="mb-4">
-            ガストの主要メニューをカロリーの低い順にランキングしました。<Marker color="blue">サラダ系は100〜200kcal台、メイン料理は400〜700kcal台</Marker>と幅広く分布しています。
+            ガストの代表的なメニューをカロリーの低い順に並べました。<Marker color="blue">サラダ系は数十kcal、定食・グリル系のメインは400〜900kcal台</Marker>と幅広く分布しています。
           </p>
 
-          <NutritionTable
+          <CompareBar
+            title="ガスト 主要メニュー カロリー比較（低い順）"
             items={[
-              { name: "シーザーサラダ", calories: 176, protein: 4.8, fat: 14.2, carbs: 7.5, highlight: true },
-              { name: "山盛りポテトフライ", calories: 358, protein: 4.2, fat: 18.5, carbs: 42.8 },
-              { name: "1日分の野菜のベジ塩タンメン", calories: 460, protein: 15.2, fat: 12.8, carbs: 68.5, highlight: true },
-              { name: "海老と山芋オクラのねばとろサラダうどん", calories: 418, protein: 18.5, fat: 8.2, carbs: 65.8, highlight: true },
-              { name: "若鶏のグリル（大葉おろし）", calories: 478, protein: 30.2, fat: 28.5, carbs: 18.4 },
-              { name: "チキテキ・ピリ辛スパイス焼き", calories: 645, protein: 33.5, fat: 38.2, carbs: 35.8 },
-              { name: "ハンバーグステーキ", calories: 572, protein: 22.8, fat: 35.2, carbs: 38.5 },
-              { name: "マルゲリータピザ", calories: 538, protein: 18.5, fat: 22.4, carbs: 62.8 },
-              { name: "ミックスグリル", calories: 698, protein: 35.8, fat: 42.5, carbs: 38.2 },
-              { name: "チーズINハンバーグ", calories: 712, protein: 28.5, fat: 45.2, carbs: 42.8 },
-              { name: "ビーフシチューハンバーグ", calories: 758, protein: 26.2, fat: 42.8, carbs: 58.5 },
-              { name: "からあげ定食", calories: 842, protein: 28.8, fat: 38.5, carbs: 88.2 },
+              { name: "蒸し鶏と彩り野菜のサラダ（S）", value: 38 },
+              { name: "海老アボカドと彩り野菜のサラダ（S）", value: 74 },
+              { name: "ねばとろサラダうどん", value: 393 },
+              { name: "赤身ビーフステーキ 約100g", value: 423 },
+              { name: "ミートドリア", value: 459 },
+              { name: "若鶏の唐揚げ（5コ）", value: 483 },
+              { name: "THE職人ビーフハンバーグ", value: 593 },
+              { name: "ジューシー若鶏グリル大葉おろし", value: 660 },
+              { name: "チキテキスパイス焼き", value: 695 },
+              { name: "鉄板ハンバーグミックスグリル", value: 729 },
+              { name: "マルゲリータピザ", value: 892 },
             ]}
-            highlightProtein
+            unit="kcal"
+            metric="calorie"
+            sort="asc"
+            highlightTop={2}
+            caption="※カロリーはたべなび収録データに基づく。定食・ランチセットはライス等を含む数値。ガストはPFC公式値が非公開のため本記事はカロリー基準で比較しています。"
           />
 
-          <p className="text-xs text-gray-400 mb-8">
-            ※栄養成分は公式情報を基に作成。セットメニューはライス・味噌汁込みの数値。おすすめマークはダイエット向きメニューに表示。
-          </p>
-
           <TipBox title="カロリーランキングの読み解き方">
-            <p><Marker>400kcal台のメニューが「ダイエット合格ライン」</Marker>。ベジ塩タンメン（460kcal）やサラダうどん（418kcal）は野菜もしっかり摂れて満足感が高い。逆にハンバーグ系は600〜750kcalと高めなので、ライス抜き or サラダセットに変更するなどの工夫が必要です。</p>
+            <p><Marker>400kcal前後のメニューが「ダイエット合格ライン」</Marker>。ねばとろサラダうどん（393kcal）や赤身ビーフステーキ約100g（423kcal）は満足感が高め。一方でマルゲリータピザ（892kcal）や鉄板ハンバーグミックスグリル（729kcal）は高めなので、サラダを足して分け合う、ライスを少なめにするなどの工夫が役立ちます。</p>
           </TipBox>
         </section>
 
@@ -190,62 +195,66 @@ export default function GustoDietPage() {
           <SectionHeading id="recommended">ダイエット中のおすすめメニュー</SectionHeading>
 
           <p className="mb-6">
-            ガストでダイエット中に積極的に選びたいメニューをランキング形式で紹介します。<Marker>カロリーとタンパク質のバランスが優れたメニュー</Marker>を厳選しました。
+            ガストでダイエット中に積極的に選びたいメニューをランキング形式で紹介します。<Marker>カロリーを抑えつつ満足感が得られるメニュー</Marker>を厳選しました。
           </p>
 
-          <RankingCard rank={1} title="チキテキ・ピリ辛スパイス焼き" subtitle="645kcal / P33.5g / F38.2g / C35.8g / ¥879">
+          <RankingCard rank={1} title="ねばとろサラダうどん" subtitle="393kcal">
             <p className="text-sm text-gray-700 leading-relaxed mb-3">
-              ガストの<Marker>タンパク質No.1メニュー</Marker>。ピリ辛スパイスで味付けされた大きなチキンステーキは、P33.5gと非常に高タンパク。ライス抜きで注文すれば約500kcal・C10g程度まで抑えられます。
+              食事としてしっかり満足できるのに<Marker>393kcalに収まる</Marker>のが魅力。ネバネバ食材や野菜が入っており、さっぱり食べられます。夏場の食欲がない日にもおすすめの一品です。
             </p>
             <p className="text-sm text-gray-700 leading-relaxed">
-              脂質38.2gとやや高めですが、チキンの脂質は良質な不飽和脂肪酸を含むため、トレーニング後の栄養補給にも適しています。ガスト筋トレ飯の定番です。
+              さらにカロリーを抑えたい日はサラダ単品を、しっかり食べたい日は麺1.5倍（503kcal）を、と気分や目的で調整しやすいのもポイントです。
             </p>
           </RankingCard>
 
-          <RankingCard rank={2} title="1日分の野菜のベジ塩タンメン" subtitle="460kcal / P15.2g / F12.8g / C68.5g / ¥769">
+          <RankingCard rank={2} title="赤身ビーフステーキ 約100g" subtitle="423kcal">
             <p className="text-sm text-gray-700 leading-relaxed">
-              <Marker color="blue">460kcalで1日分の野菜350gが摂れる</Marker>という驚異的な栄養バランス。キャベツ・もやし・にんじん・コーンなどの野菜がたっぷりで、食物繊維も豊富。ダイエット中に不足しがちなビタミン・ミネラルも補給できます。タンパク質は15.2gとやや控えめなので、追加でサイドメニューを組み合わせるのがベスト。
+              <Marker color="blue">423kcalと、ステーキながら抑えめのカロリー</Marker>。脂の少ない赤身肉で食べ応えがあり、ライスを少なめライス（165kcal）にすれば全体で600kcal前後にまとめられます。ボリュームを確保したい日に向いた選択肢です。
             </p>
           </RankingCard>
 
-          <RankingCard rank={3} title="若鶏のグリル（大葉おろし）" subtitle="478kcal / P30.2g / F28.5g / C18.4g / ¥769">
+          <RankingCard rank={3} title="ミートドリア" subtitle="459kcal">
             <p className="text-sm text-gray-700 leading-relaxed">
-              大葉おろしのさっぱりした味わいが人気の鶏グリル。<Marker color="green">478kcalでP30.2g、炭水化物わずか18.4g</Marker>と、低糖質ダイエットに最適なバランス。ライスなしでも十分満足できる味付けです。
+              ガストの定番ドリアでも<Marker color="green">459kcal</Marker>と比較的おさえめ。1品で満足感があり、サイドにサラダ（蒸し鶏と彩り野菜のサラダS・38kcalなど）を足しても合計500kcal前後に収まります。
             </p>
           </RankingCard>
 
-          <SubSectionHeading>番外編：海老と山芋オクラのねばとろサラダうどん</SubSectionHeading>
+          <SubSectionHeading>番外編：サラダ系の低カロリー候補</SubSectionHeading>
 
-          <NutritionCard
-            name="海老と山芋オクラのねばとろサラダうどん"
-            chain="ガスト"
-            calories={418}
-            protein={18.5}
-            fat={8.2}
-            carbs={65.8}
-            price={769}
-            recommended
+          <CompareBar
+            title="ガスト 低カロリーなサラダ（カロリー目安）"
+            items={[
+              { name: "ゴロゴロ野菜サラダ", value: 24 },
+              { name: "トマトのグリーンサラダ", value: 39 },
+              { name: "蒸し鶏と彩り野菜のサラダ（S）", value: 38 },
+              { name: "海老アボカドと彩り野菜のサラダ（S）", value: 74 },
+              { name: "蒸し鶏と彩り野菜のサラダ（L）", value: 76 },
+            ]}
+            unit="kcal"
+            metric="calorie"
+            sort="asc"
+            highlightTop={1}
           />
 
           <p className="mb-4 mt-4">
-            <Marker>418kcalで脂質わずか8.2g</Marker>というガスト随一の低脂質メニュー。ネバネバ食材で食物繊維も豊富。脂質制限ダイエットをしている方には特におすすめです。夏場の食欲がない日にもさっぱり食べられます。
+            <Marker>数十kcal台</Marker>のサラダがそろっています。メインに付け合わせる、あるいはセットのライスと置き換える形で使うと、全体のカロリーを大きく抑えられます。
           </p>
 
-          <SubSectionHeading>目的別おすすめ組み合わせ</SubSectionHeading>
+          <SubSectionHeading>目的別おすすめ組み合わせ（カロリー目安）</SubSectionHeading>
 
           <ComparisonTable
-            headers={["目的", "組み合わせ", "カロリー", "タンパク質"]}
+            headers={["目的", "組み合わせ", "カロリー目安"]}
             rows={[
-              ["低カロリー重視", "ベジ塩タンメン単品", "460 kcal", "15.2g"],
-              ["高タンパク重視", "チキテキ（ライスなし）+ サラダ", "571 kcal", "38.3g"],
-              ["バランス重視", "若鶏グリル + ライス小盛り", "598 kcal", "32.5g"],
-              ["低脂質重視", "サラダうどん単品", "418 kcal", "18.5g"],
+              ["とにかく低カロリー", "蒸し鶏と彩り野菜のサラダ（S）単品", "約 38 kcal"],
+              ["さっぱり1品で", "ねばとろサラダうどん単品", "約 393 kcal"],
+              ["ボリューム重視", "赤身ビーフステーキ約100g + 少なめライス", "約 588 kcal"],
+              ["メイン+野菜を足す", "ミートドリア + 蒸し鶏サラダ（S）", "約 497 kcal"],
             ]}
             bestRowIndex={1}
           />
 
           <p className="mb-8">
-            <Marker color="green">目的に合わせて組み合わせを変えるのがガストダイエットの上級者</Marker>。トレーニングした日は高タンパク、休息日は低カロリー、と使い分けることで無理なくダイエットを継続できます。
+            <Marker color="green">目的に合わせて組み合わせを変えるのがガストダイエットの上級者</Marker>。しっかり食べたい日はステーキやドリア、軽く済ませたい日はサラダやサラダうどん、と使い分けることで無理なく継続できます。
           </p>
 
           <ArticleImage src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&h=400&fit=crop" alt="新鮮な野菜がたっぷり入ったヘルシーな料理" />
@@ -266,30 +275,35 @@ export default function GustoDietPage() {
 
           <WarningBox title="ダイエット中は要注意なメニュー">
             <ul className="space-y-2">
-              <li><span className="font-bold">からあげ定食（842kcal）</span> ─ ライス込みで842kcal、炭水化物88.2g。揚げ物 + 白米の組み合わせはダイエットの大敵。</li>
-              <li><span className="font-bold">ビーフシチューハンバーグ（758kcal）</span> ─ シチューソースが高脂質で脂質42.8g。炭水化物58.5gもありカロリーオーバーしやすい。</li>
-              <li><span className="font-bold">チーズINハンバーグ（712kcal）</span> ─ チーズ追加で脂質45.2g。同じハンバーグなら通常のハンバーグステーキの方が140kcal低い。</li>
-              <li><span className="font-bold">山盛りポテトフライ（358kcal）</span> ─ タンパク質わずか4.2gで炭水化物42.8g。サイドメニューとして最も避けるべき一品。</li>
-              <li><span className="font-bold">マルゲリータピザ（538kcal）</span> ─ 炭水化物62.8gとほぼ糖質の塊。シェアして食べるなら許容範囲ですが、1人で1枚は避けましょう。</li>
+              <li><span className="font-bold">マルゲリータピザ（892kcal）</span> ─ ガストでも高カロリーな一品。1人で1枚は避け、シェアして食べるのが無難です。</li>
+              <li><span className="font-bold">おろしから揚げ定食 3個（857kcal）</span> ─ 揚げ物 + 白米の組み合わせで高カロリー。から好し定食3個（813kcal）も同様に高めです。</li>
+              <li><span className="font-bold">鉄板ハンバーグミックスグリル（729kcal）</span> ─ 複数のお肉が乗る分カロリーが上がります。ハンバーグ単品より高めです。</li>
+              <li><span className="font-bold">チキテキスパイス焼きランチ（ライス付き・942kcal）</span> ─ ランチセットはライス込みで900kcal超。単品のチキテキ（695kcal）とは別物なので注意。</li>
+              <li><span className="font-bold">山盛りポテトフライ（570kcal）</span> ─ サイドメニューながら高カロリー。少量で済ませたいならちょい盛りポテトフライ（195kcal）が無難です。</li>
             </ul>
           </WarningBox>
 
-          <ComparisonTable
-            headers={["メニュー", "カロリー", "タンパク質", "脂質"]}
-            rows={[
-              ["若鶏のグリル（大葉おろし）", "478 kcal", "30.2g", "28.5g"],
-              ["チーズINハンバーグ", "712 kcal", "28.5g", "45.2g"],
-              ["からあげ定食", "842 kcal", "28.8g", "38.5g"],
+          <CompareBar
+            title="「お肉メイン」のカロリー差を見る"
+            items={[
+              { name: "赤身ビーフステーキ 約100g", value: 423 },
+              { name: "若鶏の唐揚げ（5コ）", value: 483 },
+              { name: "チーズINハンバーグ", value: 591 },
+              { name: "鉄板ハンバーグミックスグリル", value: 729 },
+              { name: "おろしから揚げ定食 3個", value: 857 },
             ]}
-            bestRowIndex={0}
+            unit="kcal"
+            metric="calorie"
+            sort="asc"
+            highlightTop={1}
           />
 
           <p className="mb-6 text-sm text-gray-700">
-            タンパク質はほぼ同じ（28〜30g台）なのに、<Marker>カロリーは478kcal vs 842kcalと約1.8倍の差</Marker>。同じ「お肉メニュー」でも選択次第で大きく変わります。
+            同じ「お肉メニュー」でも、<Marker>赤身ビーフステーキ約100g（423kcal）とおろしから揚げ定食3個（857kcal）では約2倍の差</Marker>。選択次第でカロリーは大きく変わります。
           </p>
 
           <TipBox title="ハンバーグ好きのための妥協案">
-            <p>どうしてもハンバーグが食べたい場合は、<Marker>通常のハンバーグステーキ（572kcal）をライスなしで注文</Marker>しましょう。約322kcal / P22.8gまでカットできます。チーズIN（712kcal）やビーフシチュー（758kcal）よりも150〜200kcal低く、ハンバーグの満足感を得つつダイエットを維持できます。</p>
+            <p>どうしてもハンバーグが食べたい場合は、<Marker>チーズINハンバーグ（591kcal）よりTHE職人ビーフハンバーグ（593kcal）など単品を選び、ライスを少なめライス（165kcal）にする</Marker>のがおすすめ。鉄板ハンバーグミックスグリル（729kcal）よりカロリーを抑えつつ、ハンバーグの満足感を得られます。</p>
           </TipBox>
         </section>
 
@@ -303,12 +317,12 @@ export default function GustoDietPage() {
 
           <SubSectionHeading>テクニック1：ライスをカットする</SubSectionHeading>
           <p className="mb-6">
-            ガストのライス（普通盛り）は約250kcal / C55g。<Marker color="blue">ライスを抜くだけでメインのカロリーを大幅にカット</Marker>できます。例えばチキテキ・ピリ辛スパイス焼きはライス抜きで約395kcalに。どうしても炭水化物が欲しい場合は小盛り（約170kcal）を選びましょう。
+            ガストのライス（普通盛り）は247kcal。<Marker color="blue">ライスを少なめにするだけでカロリーをカット</Marker>できます。少なめライスは165kcalなので、普通盛りから約80kcalの節約に。逆に大ライスは412kcalと一気に増えるので、ダイエット中は普通盛り以下を選びましょう。
           </p>
 
-          <SubSectionHeading>テクニック2：セットをサラダセットに変更</SubSectionHeading>
+          <SubSectionHeading>テクニック2：ライスをサラダに置き換える</SubSectionHeading>
           <p className="mb-6">
-            定食セットのライス＋味噌汁を、<Marker color="green">サラダセットに変更するとカロリーを150〜200kcalカット</Marker>可能。シーザーサラダ（176kcal）に変更すれば野菜も摂れて一石二鳥です。タッチパネルから簡単に変更できます。
+            定食セットのライスを、<Marker color="green">低カロリーなサラダに置き換えるとカロリーを抑えられます</Marker>。蒸し鶏と彩り野菜のサラダ（S・38kcal）に置き換えれば、ライス247kcalとの差で約200kcalカットでき、野菜も摂れて一石二鳥です。タッチパネルから簡単に変更できます。
           </p>
 
           <SubSectionHeading>テクニック3：ドリンクバーの活用法</SubSectionHeading>
@@ -318,41 +332,29 @@ export default function GustoDietPage() {
 
           <SubSectionHeading>テクニック4：単品の組み合わせで攻める</SubSectionHeading>
           <p className="mb-4">
-            セットメニューではなく、単品を組み合わせるのがガストダイエットの上級テクニック。<Marker>「シーザーサラダ＋チキテキ（ライスなし）」なら合計約571kcal / P38.3g</Marker>と高タンパク低カロリーな食事が完成します。
+            セットメニューではなく、単品を組み合わせるのがガストダイエットの上級テクニック。<Marker>「赤身ビーフステーキ約100g＋蒸し鶏と彩り野菜のサラダ（S）」なら合計約461kcal</Marker>と、しっかり食べられて低カロリーな食事が完成します。
           </p>
 
-          <NutritionCard
-            name="シーザーサラダ + チキテキ（ライスなし）"
-            chain="ガスト"
-            calories={571}
-            protein={38.3}
-            fat={52.4}
-            carbs={43.3}
-            price={1098}
-            recommended
-          />
-
-          <p className="mb-4 mt-4">
-            もう一つのおすすめパターンも紹介します。
-          </p>
-
-          <NutritionCard
-            name="若鶏のグリル（ライスなし）+ ミニサラダ"
-            chain="ガスト"
-            calories={378}
-            protein={31.5}
-            fat={24.2}
-            carbs={12.8}
-            price={869}
-            recommended
+          <CompareBar
+            title="単品組み合わせのカロリー目安"
+            items={[
+              { name: "蒸し鶏サラダ（S）+ ねばとろサラダうどん", value: 431, note: "38+393" },
+              { name: "赤身ステーキ約100g + 蒸し鶏サラダ（S）", value: 461, note: "423+38" },
+              { name: "ミートドリア + 蒸し鶏サラダ（S）", value: 497, note: "459+38" },
+              { name: "ジューシー若鶏グリル大葉おろし 単品", value: 660 },
+            ]}
+            unit="kcal"
+            metric="calorie"
+            sort="asc"
+            highlightTop={1}
           />
 
           <p className="mb-8 mt-4">
-            <Marker color="blue">378kcalでP31.5g、炭水化物わずか12.8g</Marker>。低糖質ダイエットをしている方にはこちらがベストな組み合わせです。価格も900円以下と手頃で、平日のランチにも使いやすいメニューです。
+            <Marker color="blue">サラダ系は数十kcalなので、メインに足してもカロリーをほとんど押し上げません</Marker>。ボリュームが欲しい日はステーキやドリアに、軽く済ませたい日はサラダうどん中心に、と組み合わせを変えるのがコツです。
           </p>
 
           <WarningBox title="デザートの誘惑に注意">
-            <p>ガストのデザートメニューは低価格で魅力的ですが、<Marker>パンケーキ（約580kcal）やパフェ（約450kcal）</Marker>を追加すると、せっかくの低カロリーメニュー選びが台無しに。どうしてもデザートが欲しい場合は、ソフトクリーム（約150kcal）に留めましょう。</p>
+            <p>ガストのデザートメニューは低価格で魅力的ですが、<Marker>パンケーキ（536kcal）やフルーツパンケーキ（564kcal）</Marker>を追加すると、せっかくの低カロリーメニュー選びが台無しに。どうしてもデザートが欲しい場合は、ソフトクリーム（160kcal）やガストプリン（156kcal）に留めましょう。</p>
           </WarningBox>
 
           <TipBox title="お得なクーポンでさらにコスパUP">
@@ -362,8 +364,8 @@ export default function GustoDietPage() {
           <ArticleImage src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=800&h=400&fit=crop" alt="栄養バランスの良い食事のイメージ" />
 
           <CTABanner
-            title="たべなびで栄養管理を始めよう"
-            subtitle="32チェーン・6,000品以上の栄養データ、全部無料"
+            title="そのメニュー、何kcal？ たべなびで今すぐ検索"
+            subtitle="32チェーン・6,000品以上を、カロリー・タンパク質・脂質で絞り込み検索。登録不要・無料です。"
           />
         </section>
 
@@ -382,12 +384,12 @@ export default function GustoDietPage() {
 
           <CheckList
             items={[
-              "チキテキ・ピリ辛スパイス焼き（645kcal / P33.5g）がタンパク質No.1メニュー",
-              "ベジ塩タンメン（460kcal）は1日分の野菜が摂れる低カロリーメニュー",
-              "若鶏のグリル大葉おろし（478kcal / P30.2g）は低糖質ダイエットに最適",
-              "ライスを抜くだけで約250kcalカット。小盛りでも80kcal節約",
-              "からあげ定食（842kcal）やチーズINハンバーグ（712kcal）は避ける",
-              "サラダ + グリル系の単品組み合わせが最強のダイエット注文法",
+              "サラダ系（蒸し鶏と彩り野菜のサラダS・38kcalなど）はカロリーが数十kcal台で最強の低カロリー枠",
+              "ねばとろサラダうどん（393kcal）はさっぱり1品で満足できる低カロリーメニュー",
+              "赤身ビーフステーキ約100g（423kcal）はボリュームの割にカロリー控えめ",
+              "ライスは少なめライス（165kcal）で普通盛り（247kcal）より約80kcal節約",
+              "マルゲリータピザ（892kcal）やおろしから揚げ定食3個（857kcal）は高カロリーなので注意",
+              "メイン + 低カロリーサラダの単品組み合わせがダイエット向きの注文法",
             ]}
           />
 
@@ -400,11 +402,24 @@ export default function GustoDietPage() {
         <FAQSection
           slug="gusto-diet"
           items={[
-            { q: "ガストでカロリーが最も低いメニューは？", a: "シーザーサラダの176kcalが最も低カロリーです。次いでベジ塩タンメン460kcal、サラダうどん418kcalと、サラダと麺類が低カロリー帯。ただしタンパク質量も重要なので、目的に応じた選択が大切です。" },
-            { q: "ガストでタンパク質が多いメニューは何ですか？", a: "チキテキ・ピリ辛スパイス焼きが33.5gでNo.1。次点は若鶏のグリル大葉おろし30.2g。ライス抜きやサラダとの組み合わせで、500kcal台でタンパク質38g以上も達成可能です。" },
-            { q: "ガストで避けるべきメニューは？", a: "からあげ定食842kcal、ビーフシチューハンバーグ758kcal、チーズINハンバーグ712kcalが高カロリーメニュー。同じお肉料理でも選択で大きく変わり、若鶏グリル478kcalとは最大約360kcalの差があります。" },
-            { q: "ガストのライス抜き注文でどれくらいカロリーカット？", a: "ガストのライス普通盛りは約250kcal。ライス抜きで250kcal、小盛りで約80kcal節約できます。チキテキはライス抜きで約395kcalまで低減。炭水化物制限中も無料で選択可能です。" },
-            { q: "ガストで最も低脂質のメニューは？", a: "海老と山芋オクラのねばとろサラダうどんが脂質8.2gで最も低い。418kcalで脂質が控えめ、かつ食物繊維も豊富。脂質制限ダイエット中に特におすすめです。" },
+            { q: "ガストでカロリーが最も低いメニューは？", a: "サラダ系がもっとも低カロリーで、ゴロゴロ野菜サラダは24kcal、蒸し鶏と彩り野菜のサラダ（S）は38kcal、トマトのグリーンサラダは39kcalです。食事として満足感のある一品では、ねばとろサラダうどん（393kcal）が低カロリー帯の候補になります。" },
+            { q: "ガストで食事として満足感がありつつ低カロリーなメニューは？", a: "ねばとろサラダうどん（393kcal）、赤身ビーフステーキ約100g（423kcal）、ミートドリア（459kcal）あたりが、ボリュームの割にカロリーを抑えやすい候補です。サラダを足してもカロリーがほとんど増えないので、組み合わせもしやすいです。" },
+            { q: "ガストで避けるべき（高カロリーな）メニューは？", a: "マルゲリータピザ（892kcal）、おろしから揚げ定食3個（857kcal）、鉄板ハンバーグミックスグリル（729kcal）などが高カロリーです。同じお肉料理でも、赤身ビーフステーキ約100g（423kcal）とおろしから揚げ定食3個（857kcal）では約2倍の差があります。" },
+            { q: "ガストのライスを少なめにするとどれくらいカロリーカット？", a: "ガストのライス普通盛りは247kcal、少なめライスは165kcalなので、約80kcalの節約になります。さらにライスを蒸し鶏と彩り野菜のサラダ（S・38kcal）に置き換えれば、約200kcalのカットも可能です。" },
+            { q: "ガストはタンパク質などのPFCを公式で確認できますか？", a: "ガストはカロリーは公開していますが、タンパク質・脂質・炭水化物（PFC）の公式値は公開されていません。そのため本記事ではPFCの断定を避け、カロリーを基準にメニューを比較しています。最新のカロリーは公式サイトやタッチパネルでご確認ください。" },
+          ]}
+        />
+
+        <UpdateHistory
+          entries={[
+            {
+              date: "2026-06-22",
+              note: "全カロリーをたべなび収録の最新メニューデータで再検証。架空メニュー（ベジ塩タンメン・シーザーサラダ・からあげ定食・海老と山芋オクラのねばとろサラダうどん）を実在メニューへ差し替え、マルゲリータピザ等のカロリー誤差を修正。ガストはPFC公式値が非公開のため、タンパク質・脂質・炭水化物の断定値を削除しカロリー基準に統一。",
+            },
+            {
+              date: "2026-03-19",
+              note: "記事公開。",
+            },
           ]}
         />
 

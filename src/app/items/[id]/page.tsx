@@ -143,13 +143,53 @@ export default async function ItemDetailPage({
   }
 
   const supabase = createPublicClient();
-  const { data: similarItems } = await supabase
-    .from("menu_items")
-    .select("*, chain_restaurants(name, emoji)")
-    .eq("category", item.category ?? "")
-    .neq("id", item.id)
-    .limit(6)
-    .returns<MenuItem[]>();
+  const chainName = item.chain_restaurants?.name ?? "";
+
+  // 「関連メニュー」は同一チェーン内に限定(チェーン混在バグの修正: 旧コードはカテゴリーのみで絞り、
+  // マック商品ページにモス等が混ざっていた)。同カテゴリーが6件未満なら同チェーンの他カテゴリーで補完。
+  // チェーン不明(物販等)のみ従来どおりカテゴリー横断。select("*")→明示カラムで転送量も削減。
+  const COLS =
+    "id, name, calories, protein, fat, carbs, category, price, source_type, description, chain_restaurants(name, emoji)";
+  const COLS_INNER =
+    "id, name, calories, protein, fat, carbs, category, price, source_type, description, chain_restaurants!inner(name, emoji)";
+  let similarItems: MenuItem[] = [];
+  if (chainName) {
+    const { data: sameCat } = await supabase
+      .from("menu_items")
+      .select(COLS_INNER)
+      .eq("chain_restaurants.name", chainName)
+      .eq("category", item.category ?? "")
+      .neq("id", item.id)
+      .limit(6)
+      .returns<MenuItem[]>();
+    similarItems = sameCat ?? [];
+    if (similarItems.length < 6) {
+      const { data: sameChain } = await supabase
+        .from("menu_items")
+        .select(COLS_INNER)
+        .eq("chain_restaurants.name", chainName)
+        .neq("id", item.id)
+        .limit(12)
+        .returns<MenuItem[]>();
+      const seen = new Set(similarItems.map((s) => s.id));
+      for (const s of sameChain ?? []) {
+        if (similarItems.length >= 6) break;
+        if (!seen.has(s.id)) {
+          similarItems.push(s);
+          seen.add(s.id);
+        }
+      }
+    }
+  } else {
+    const { data } = await supabase
+      .from("menu_items")
+      .select(COLS)
+      .eq("category", item.category ?? "")
+      .neq("id", item.id)
+      .limit(6)
+      .returns<MenuItem[]>();
+    similarItems = data ?? [];
+  }
 
   const sourceBadge = getSourceBadge(item.source_type);
   const hasNutrition =
@@ -162,7 +202,6 @@ export default async function ItemDetailPage({
       ? calcPfcRatio(item.protein, item.fat, item.carbs)
       : null;
   const badges = getSuitabilityBadges(item);
-  const chainName = item.chain_restaurants?.name ?? "";
   // メニューが属するチェーンの URL slug（パンくず・チェーンページへのリンク用）。
   // これで孤児だった商品ページがチェーンページ/目的別ランキングと相互リンクする。
   const chainSlug = chainSlugByName(chainName);
@@ -490,7 +529,7 @@ export default async function ItemDetailPage({
         {similarItems && similarItems.length > 0 && (
           <div className="mb-6">
             <h2 className="text-sm font-semibold text-gray-500 mb-3">
-              同じカテゴリーのメニュー
+              {chainName ? `${chainName}の関連メニュー` : "同じカテゴリーのメニュー"}
             </h2>
             <div className="flex gap-3 overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide">
               {similarItems.map((similar) => (

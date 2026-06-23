@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { createClient } from "@/lib/supabase/server";
+import { createPublicClient } from "@/lib/supabase/public";
 import { ARTICLE_CATEGORIES } from "@/lib/articles";
 import { CHAIN_SLUGS, GOAL_KEYS } from "@/lib/chains";
 
@@ -40,12 +40,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "diet-mistakes", "eating-out-nutrition-report",
     "hamburger-comparison",
     "conveni-comparison",
+    "high-protein-chain-database",
   ];
 
   // ─── メニュー詳細ページ（DBから取得 / pagination で全件） ───
   let itemPages: MetadataRoute.Sitemap = [];
   try {
-    const supabase = await createClient();
+    const supabase = createPublicClient();
     const PAGE = 1000;
     let allItems: { id: string }[] = [];
     for (let page = 0; ; page++) {

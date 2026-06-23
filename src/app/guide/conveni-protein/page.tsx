@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   title:
     "【2026年最新版】コンビニで買える高タンパク商品ランキング【セブン・ローソン・ファミマ徹底比較】 | たべなび",
   description:
-    "セブンイレブン・ローソン・ファミリーマートの高タンパク商品をランキング形式で紹介。筋トレ後やダイエット中のタンパク質補給におすすめの商品を徹底比較。",
+    "セブンイレブン・ローソン・ファミリーマートの高タンパク商品をランキング形式で紹介。さんまの塩焼P30g、サラダチキンロールP25.2gなど、筋トレ後やダイエット中のタンパク質補給におすすめの商品を実測値で徹底比較。",
   keywords: [
     "コンビニ 高タンパク",
     "コンビニ タンパク質",
@@ -62,10 +62,11 @@ const jsonLd = {
   datePublished: "2026-03-18",
   dateModified: new Date().toISOString().split("T")[0],
   author: {
-    "@type": "Organization",
-    name: "たべなび",
-    url: "https://www.tabenavi.jp",
-  },
+      "@type": "Person",
+      name: "ヒロ",
+      description: "外食で13kg減量した、たべなび開発者",
+      url: "https://www.tabenavi.jp/sources",
+    },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
@@ -114,7 +115,7 @@ export default function ConveniProteinPage() {
           question="コンビニで一番タンパク質が摂れる商品は？セブン・ローソン・ファミマで違いは？"
           answer={
             <>
-              <strong>サラダチキン（プレーン）が王道</strong>で、3社とも約25g前後のタンパク質を100〜120kcalで摂取できます。最強コンビは<strong>サラダチキン+おにぎり1個+ゆで卵</strong>で約350kcal/P35g（理想的なPFCバランス）。チェーン別の特徴は、<strong>セブン: 種類が豊富 / ローソン: たんぱく質シリーズで幅広い選択肢 / ファミマ: RIZAP共同開発商品が秀逸</strong>。プロテインバーやプロテイン飲料も併用すれば、間食でも気軽にP10〜20g摂れます。
+              実測値で見ると、単品で最強なのは<strong>セブンの「7プレミアム さんまの塩焼」（162kcal / タンパク質30.0g）</strong>。糖質ほぼゼロで、カロリー効率が群を抜いています。チキン系では<strong>ファミマ「たんぱく質が摂れる！サラダチキンロール」（324kcal / P25.2g）</strong>や<strong>ローソン「たんぱく質が摂れる 国産鶏むね肉のサラダ」（206kcal / P23.1g）</strong>が高水準。チェーン別の特徴は、<strong>セブン: 「たんぱく質が摂れる」シリーズと魚惣菜が強い / ローソン: NLブランパンや砂肝など低糖質系が豊富 / ファミマ: 「たんぱく質が摂れる」サラダ・ロールのラインが充実</strong>。組み合わせ次第で1食P30g以上も無理なく狙えます。
             </>
           }
         />
@@ -173,68 +174,68 @@ export default function ConveniProteinPage() {
 
           <RankingCard
             rank={2}
-            title="サラダチキンと野菜の弁当"
-            subtitle="セブンイレブン"
+            title="たんぱく質が摂れる！サラダチキンロール"
+            subtitle="ファミリーマート"
           >
             <div className="grid grid-cols-4 gap-2 mb-3">
               <div className="bg-sky-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-sky-600 font-bold text-sm">448</p>
+                <p className="text-sky-600 font-bold text-sm">324</p>
                 <p className="text-sky-600 text-[10px]">kcal</p>
               </div>
               <div className="bg-blue-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-blue-600 font-bold text-sm">28.5g</p>
+                <p className="text-blue-600 font-bold text-sm">25.2g</p>
                 <p className="text-blue-600 text-[10px]">タンパク</p>
               </div>
               <div className="bg-amber-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-amber-600 font-bold text-sm">12.5g</p>
+                <p className="text-amber-600 font-bold text-sm">13.3g</p>
                 <p className="text-amber-600 text-[10px]">脂質</p>
               </div>
               <div className="bg-green-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-green-600 font-bold text-sm">55.5g</p>
+                <p className="text-green-600 font-bold text-sm">28.1g</p>
                 <p className="text-green-600 text-[10px]">炭水化物</p>
               </div>
             </div>
             <p className="text-sm text-gray-600">
-              1パックで<Marker>タンパク質28.5g・1食完結</Marker>。サラダチキンと野菜のバランスが良く、追加のサイドメニューを買わなくても満足できる。ダイエット中のランチに最適。
+              1本で<Marker>タンパク質25.2g・主食まで完結</Marker>。サラダチキンを生地で巻いた手軽さで、追加のサイドメニューなしでも満足できる。ランチや筋トレ後の補給にぴったり。
             </p>
           </RankingCard>
 
           <RankingCard
             rank={3}
-            title="サラダチキン (プレーン)"
-            subtitle="セブンイレブン / ローソン / ファミマ"
+            title="たんぱく質が摂れる 国産鶏むね肉のサラダ"
+            subtitle="ローソン"
           >
             <div className="grid grid-cols-4 gap-2 mb-3">
               <div className="bg-sky-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-sky-600 font-bold text-sm">113</p>
+                <p className="text-sky-600 font-bold text-sm">206</p>
                 <p className="text-sky-600 text-[10px]">kcal</p>
               </div>
               <div className="bg-blue-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-blue-600 font-bold text-sm">24.3g</p>
+                <p className="text-blue-600 font-bold text-sm">23.1g</p>
                 <p className="text-blue-600 text-[10px]">タンパク</p>
               </div>
               <div className="bg-amber-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-amber-600 font-bold text-sm">1.5g</p>
+                <p className="text-amber-600 font-bold text-sm">11.0g</p>
                 <p className="text-amber-600 text-[10px]">脂質</p>
               </div>
               <div className="bg-green-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-green-600 font-bold text-sm">0g</p>
+                <p className="text-green-600 font-bold text-sm">4.9g</p>
                 <p className="text-green-600 text-[10px]">炭水化物</p>
               </div>
             </div>
             <p className="text-sm text-gray-600">
-              全コンビニで買える定番中の定番。<Marker color="green">カロリーわずか113kcalでタンパク質24.3g</Marker>という圧倒的なカロリー効率が最大の強み。糖質ゼロで脂質1.5gは外食では再現不可能なレベル。
+              ローソン「たんぱく質が摂れる」シリーズの主力。<Marker color="green">206kcalでタンパク質23.1g</Marker>、糖質も4.9gと低め。野菜も一緒に摂れるので、これ1品でダイエット中のランチがまとまる。
             </p>
           </RankingCard>
 
-          <TipBox title="4位以下のランキング（2026年5月時点）">
-            <p className="mb-1">4位: 直火焼きサラダチキン プレーン（ファミマ） P24.2g / 112kcal</p>
-            <p className="mb-1">5位: たんぱく質が摂れるサラダチキン プレーン（ローソン） P23.5g / 110kcal</p>
-            <p className="mb-1">6位: 直火焼きサラダチキン バジル（ファミマ） P23.8g / 110kcal</p>
-            <p className="mb-1">7位: 7プレミアム サラダチキン スモーク（セブン） P22.6g / 105kcal</p>
-            <p className="mb-1">8位: 7プレミアム サラダチキンバー スモーク（セブン） P21.6g / 98kcal</p>
-            <p className="mb-1">9位: たんぱく質が摂れるサラダチキンロール（ローソン） P25.2g / 324kcal</p>
-            <p>10位: 味付き半熟ゆでたまご（セブン） P6.4g / 65kcal × 5個でP32g</p>
+          <TipBox title="4位以下のランキング（2026年6月時点・DB実測値）">
+            <p className="mb-1">4位: たんぱく質が摂れる！鶏むね肉とたまごのサラダ（ファミマ） P23.0g / 169kcal</p>
+            <p className="mb-1">5位: たんぱく質が摂れる鶏むね肉サラダ（セブン） P21.8g / 199kcal</p>
+            <p className="mb-1">6位: 若鶏の砂肝にんにく（ローソン） P21.4g / 160kcal</p>
+            <p className="mb-1">7位: ファミマプレミアムチキン（骨付き）（ファミマ） P20.7g / 242kcal</p>
+            <p className="mb-1">8位: よだれ鶏（ローソン） P17.9g / 182kcal</p>
+            <p className="mb-1">9位: パリパリチキン（ローソン） P16.9g / 180kcal</p>
+            <p>10位: ガーリック香る砂肝焼（ローソン） P14.1g / わずか76kcal</p>
           </TipBox>
         </section>
 
@@ -244,24 +245,24 @@ export default function ConveniProteinPage() {
             セブンイレブンの高タンパク商品
           </SectionHeading>
           <p className="mb-4">
-            セブンイレブンは<Marker>「たんぱく質が摂れる」シリーズが充実</Marker>。サラダチキンのバリエーションも豊富で、飽きずに高タンパク生活を続けられます。
+            セブンイレブンは<Marker>魚惣菜と「たんぱく質が摂れる」シリーズが強み</Marker>。さんまの塩焼はタンパク質30g・糖質ほぼゼロと、コンビニ単品では随一のカロリー効率です。
           </p>
 
           <NutritionTable
             highlightProtein
             items={[
-              { name: "サラダチキン（プレーン）", calories: 113, protein: 24.3, fat: 1.2, carbs: 0.5, highlight: true },
-              { name: "7プレミアム サラダチキンバー", calories: 108, protein: 21.6, fat: 1.5, carbs: 1.8 },
-              { name: "たんぱく質が摂れるチキン&スパイシーチリ", calories: 242, protein: 20.2, fat: 8.5, carbs: 22.1 },
-              { name: "たんぱく質が摂れる鶏むね肉サラダ", calories: 152, protein: 19.8, fat: 5.2, carbs: 8.4 },
-              { name: "プロテインバー チョコレート", calories: 183, protein: 15.2, fat: 8.5, carbs: 12.8 },
-              { name: "味付き半熟ゆでたまご 2個", calories: 130, protein: 12.8, fat: 8.8, carbs: 0.8 },
+              { name: "7プレミアム さんまの塩焼", calories: 162, protein: 30.0, fat: 4.6, carbs: 0.4, highlight: true },
+              { name: "たんぱく質が摂れる鶏むね肉サラダ", calories: 199, protein: 21.8, fat: 10.9, carbs: 4.4 },
+              { name: "スパイスチキン", calories: 200, protein: 14.2, fat: 11.0, carbs: 11.2 },
+              { name: "7プレミアム 塩ゆで枝豆", calories: 158, protein: 12.9, fat: 7.5, carbs: 10.5 },
+              { name: "炭火焼き鳥（タレ）", calories: 73, protein: 10.1, fat: 3.2, carbs: 0.9 },
+              { name: "7プレミアム たまごサラダ", calories: 211, protein: 7.6, fat: 19.1, carbs: 2.3 },
             ]}
           />
 
           <TipBox title="セブンイレブンの攻略ポイント">
             <p>
-              サラダチキン（P24.3g）とゆでたまご2個（P12.8g）の組み合わせで、<Marker color="blue">合計タンパク質37.1g / 243kcal / ¥400</Marker>。コスパ・カロリー効率ともに最強の組み合わせです。
+              さんまの塩焼（P30.0g / 162kcal）と炭火焼き鳥タレ（P10.1g / 73kcal）の組み合わせで、<Marker color="blue">合計タンパク質40.1g / 235kcal</Marker>。糖質をほとんど増やさずに、1食分のタンパク質をまかなえます。
             </p>
           </TipBox>
         </section>
@@ -272,23 +273,24 @@ export default function ConveniProteinPage() {
             ローソンの高タンパク商品
           </SectionHeading>
           <p className="mb-4">
-            ローソンは<Marker>筋肉食堂DELIとのコラボ商品が目玉</Marker>。タンパク質32.5gの鶏の照り焼きは、コンビニ高タンパク商品の中でもトップクラスです。低糖質ブランパンシリーズもダイエッターに人気。
+            ローソンは<Marker>「たんぱく質が摂れる」シリーズとNLブランパンが目玉</Marker>。砂肝や鶏ハツなど低カロリー高タンパクなおつまみ系も豊富で、糖質を抑えたい人に向いています。
           </p>
 
           <NutritionTable
             highlightProtein
             items={[
-              { name: "筋肉食堂DELI 鶏の照り焼き", calories: 285, protein: 32.5, fat: 8.2, carbs: 15.3, highlight: true },
-              { name: "サラダチキン スパイシー", calories: 125, protein: 21.8, fat: 2.1, carbs: 1.5 },
-              { name: "グリルチキン（黒胡椒）", calories: 130, protein: 20.4, fat: 3.5, carbs: 1.2 },
-              { name: "ブランパン 2個入", calories: 130, protein: 10.6, fat: 4.4, carbs: 12.2 },
-              { name: "たまごサラダ（タンパク質10g）", calories: 148, protein: 10.2, fat: 11.5, carbs: 2.8 },
+              { name: "たんぱく質が摂れる 国産鶏むね肉のサラダ", calories: 206, protein: 23.1, fat: 11.0, carbs: 4.9, highlight: true },
+              { name: "若鶏の砂肝にんにく", calories: 160, protein: 21.4, fat: 4.9, carbs: 9.0 },
+              { name: "よだれ鶏", calories: 182, protein: 17.9, fat: 4.6, carbs: 17.5 },
+              { name: "ガーリック香る砂肝焼", calories: 76, protein: 14.1, fat: 1.5, carbs: 1.6 },
+              { name: "ごま油香る鶏ハツ焼", calories: 81, protein: 11.1, fat: 3.6, carbs: 1.3 },
+              { name: "NL たんぱく質が摂れるブランパン 2個入", calories: 66, protein: 6.1, fat: 2.8, carbs: 6.1 },
             ]}
           />
 
           <TipBox title="ローソンの攻略ポイント">
             <p>
-              ローソンの強みは<Marker color="green">低糖質ブランパン</Marker>。ブランパン2個（P10.6g）＋グリルチキン（P20.4g）で、糖質を抑えつつタンパク質31gを確保できます。ダイエット中のランチに最適。
+              ローソンの強みは<Marker color="green">低糖質なおつまみ系</Marker>。ガーリック香る砂肝焼（P14.1g / 76kcal）＋若鶏の砂肝にんにく（P21.4g / 160kcal）で、糖質を抑えつつタンパク質35.5gを236kcalで確保できます。
             </p>
           </TipBox>
         </section>
@@ -299,23 +301,24 @@ export default function ConveniProteinPage() {
             ファミリーマートの高タンパク商品
           </SectionHeading>
           <p className="mb-4">
-            ファミリーマートの<Marker>プロテインボックスは1パックでタンパク質28.5g</Marker>と驚異的。RIZAPコラボ商品も豊富で、手軽にボディメイクをサポートしてくれます。
+            ファミリーマートは<Marker>「たんぱく質が摂れる」サラダ・ロールのラインが充実</Marker>。鶏むね肉とたまごのサラダは169kcalでタンパク質23gと、低カロリー高タンパクの優等生です。
           </p>
 
           <NutritionTable
             highlightProtein
             items={[
-              { name: "プロテインボックス", calories: 320, protein: 28.5, fat: 12.4, carbs: 18.5, highlight: true },
-              { name: "直火焼きサラダチキン", calories: 118, protein: 24.2, fat: 1.8, carbs: 1.2 },
-              { name: "グリルチキン（プレーン）", calories: 112, protein: 19.5, fat: 2.2, carbs: 0.8 },
-              { name: "砂肝の黒胡椒焼き", calories: 98, protein: 18.6, fat: 2.8, carbs: 0.5 },
-              { name: "RIZAP サラダチキンバー", calories: 95, protein: 16.8, fat: 1.5, carbs: 1.8 },
+              { name: "たんぱく質が摂れる！サラダチキンロール", calories: 324, protein: 25.2, fat: 13.3, carbs: 28.1, highlight: true },
+              { name: "たんぱく質が摂れる！鶏むね肉とたまごのサラダ", calories: 169, protein: 23.0, fat: 7.2, carbs: 3.4 },
+              { name: "ファミマプレミアムチキン（骨付き）", calories: 242, protein: 20.7, fat: 12.4, carbs: 11.9 },
+              { name: "たんぱく質が摂れる！しそ入り鶏つくねのサラダ", calories: 238, protein: 16.3, fat: 11.3, carbs: 19.2 },
+              { name: "特製ダレの味付けたまご", calories: 179, protein: 13.1, fat: 13.0, carbs: 2.6 },
+              { name: "たんぱく質が摂れる！豚しゃぶのサラダ", calories: 140, protein: 13.2, fat: 7.4, carbs: 5.7 },
             ]}
           />
 
           <TipBox title="ファミマの攻略ポイント">
             <p>
-              砂肝の黒胡椒焼き（P18.6g / <Marker color="green">わずか98kcal</Marker>）は隠れた名品。おつまみコーナーにあるので見落としがちですが、カロリー効率はサラダチキン以上です。
+              たんぱく質が摂れる！鶏むね肉とたまごのサラダ（P23.0g / <Marker color="green">169kcal・糖質3.4g</Marker>）は隠れた名品。糖質を抑えつつタンパク質をしっかり摂りたいダイエット中のランチに最適です。
             </p>
           </TipBox>
         </section>
@@ -345,63 +348,54 @@ export default function ConveniProteinPage() {
           <SubSectionHeading>筋トレ後（タンパク質30g以上）</SubSectionHeading>
           <div className="bg-white rounded-lg border border-gray-200 p-5 mb-6 shadow-sm">
             <p className="font-bold text-gray-900 mb-2">
-              サラダチキン + ゆでたまご2個 + おにぎり1個
+              たんぱく質が摂れる鶏むね肉サラダ + 塩ゆで枝豆 + 炭火焼き鳥（タレ）（セブン）
             </p>
             <div className="flex flex-wrap gap-2 mb-3">
               <span className="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full font-bold">
-                P 42.1g
+                P 44.8g
               </span>
               <span className="text-xs bg-sky-50 text-sky-700 px-2.5 py-1 rounded-full font-bold">
-                443 kcal
-              </span>
-              <span className="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full">
-                約¥600
+                430 kcal
               </span>
             </div>
             <p className="text-sm text-gray-600 leading-relaxed">
-              トレーニング後に必要なタンパク質30g以上を確保。おにぎりで炭水化物も補給し、筋合成に必要な栄養素をカバー。
+              トレーニング後に必要なタンパク質30g以上を、500kcal以下で確保。枝豆の炭水化物でエネルギーも補給でき、筋合成に向けた栄養素をカバーします。
             </p>
           </div>
 
           <SubSectionHeading>ダイエット中（500kcal以下で高タンパク）</SubSectionHeading>
           <div className="bg-white rounded-lg border border-gray-200 p-5 mb-6 shadow-sm">
             <p className="font-bold text-gray-900 mb-2">
-              サラダチキンバー + ブランパン + サラダ
+              若鶏の砂肝にんにく + NL たんぱく質が摂れるブランパン2個入 + ローストチキンのサラダ（ローソン）
             </p>
             <div className="flex flex-wrap gap-2 mb-3">
               <span className="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full font-bold">
-                P 34.2g
+                P 36.3g
               </span>
               <span className="text-xs bg-sky-50 text-sky-700 px-2.5 py-1 rounded-full font-bold">
-                298 kcal
-              </span>
-              <span className="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full">
-                約¥550
+                291 kcal
               </span>
             </div>
             <p className="text-sm text-gray-600 leading-relaxed">
-              <Marker color="green">300kcal以下でタンパク質34g以上</Marker>。低糖質ブランパンで満腹感も得られ、ダイエット中のランチに最適。
+              <Marker color="green">350kcal以下でタンパク質34g以上</Marker>。低糖質なNLブランパンと砂肝で満腹感も得られ、ダイエット中のランチに向いています。
             </p>
           </div>
 
           <SubSectionHeading>朝食（手軽に栄養バランス）</SubSectionHeading>
           <div className="bg-white rounded-lg border border-gray-200 p-5 mb-6 shadow-sm">
             <p className="font-bold text-gray-900 mb-2">
-              ゆでたまご2個 + バナナ + プロテインバー
+              特製ダレの味付けたまご + たんぱく質が摂れる！豚しゃぶのサラダ + 手巻 真昆布（ファミマ）
             </p>
             <div className="flex flex-wrap gap-2 mb-3">
               <span className="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full font-bold">
-                P 30.0g
+                P 29.5g
               </span>
               <span className="text-xs bg-sky-50 text-sky-700 px-2.5 py-1 rounded-full font-bold">
-                399 kcal
-              </span>
-              <span className="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full">
-                約¥440
+                502 kcal
               </span>
             </div>
             <p className="text-sm text-gray-600 leading-relaxed">
-              忙しい朝でもサッと食べられる組み合わせ。バナナの炭水化物でエネルギー補給しつつ、タンパク質もしっかり摂取。
+              忙しい朝でもサッと食べられる組み合わせ。おにぎりの炭水化物でエネルギー補給しつつ、たまごと豚しゃぶでタンパク質もしっかり摂取できます。
             </p>
           </div>
         </section>
@@ -420,19 +414,19 @@ export default function ConveniProteinPage() {
               },
               {
                 title: "タンパク質あたりのカロリーで比較",
-                body: "同じタンパク質量でもカロリーが大きく異なる場合があります。サラダチキン（P24.3g/113kcal）はカロリー効率が非常に良い食品です。",
+                body: "同じタンパク質量でもカロリーが大きく異なる場合があります。セブンのさんまの塩焼（P30.0g/162kcal）やローソンのガーリック香る砂肝焼（P14.1g/76kcal）はカロリー効率が非常に良い食品です。",
               },
               {
                 title: "「たんぱく質が摂れる」シリーズを活用",
-                body: "セブンイレブンの「たんぱく質が摂れる」シリーズやローソンの筋肉食堂DELIなど、高タンパクを謳った商品は探しやすく、栄養設計もされています。",
+                body: "セブン・ローソン・ファミマがそれぞれ展開する「たんぱく質が摂れる」シリーズは、高タンパクを謳った商品で探しやすく、栄養設計もされています。",
               },
               {
                 title: "組み合わせでタンパク質30gを目指す",
-                body: "1食あたり20〜30gのタンパク質摂取が理想。単品で足りない場合は、ゆでたまごやプロテインバーを追加してタンパク質を補いましょう。",
+                body: "1食あたり20〜30gのタンパク質摂取が理想。単品で足りない場合は、味付けたまごや砂肝・焼き鳥などのおつまみ系を追加してタンパク質を補いましょう。",
               },
               {
                 title: "定番商品をローテーションする",
-                body: "サラダチキン、ゆでたまご、プロテインバーを軸に、週替わりで別の商品を組み合わせると飽きずに続けられます。",
+                body: "「たんぱく質が摂れる」シリーズのサラダ、味付けたまご、砂肝・焼き鳥を軸に、週替わりで別の商品を組み合わせると飽きずに続けられます。",
               },
             ]}
           />
@@ -460,11 +454,11 @@ export default function ConveniProteinPage() {
 
           <CheckList
             items={[
-              "サラダチキンは全コンビニで高タンパク・低カロリーの王道商品",
-              "ローソン筋肉食堂DELI（P32.5g）やファミマプロテインボックス（P28.5g）が総合トップ",
+              "セブンのさんまの塩焼（162kcal/P30.0g）が単品でのカロリー効率No.1",
+              "ファミマのサラダチキンロール（P25.2g）やローソンの国産鶏むね肉のサラダ（P23.1g）が総合上位",
               "目的に合わせて組み合わせることで、1食30g以上のタンパク質摂取が可能",
               "栄養成分表示のチェックとカロリー効率の比較が賢い選び方のカギ",
-              "定番商品のローテーションで飽きずに高タンパク生活を継続",
+              "「たんぱく質が摂れる」シリーズや砂肝・焼き鳥のローテーションで飽きずに継続",
             ]}
           />
 
@@ -479,23 +473,23 @@ export default function ConveniProteinPage() {
           items={[
             {
               q: "コンビニで一番タンパク質が摂れる商品は？",
-              a: "ローソンの「鶏むね肉のサラダチキン プレーン」が約25g前後で最高水準。次いでセブンの「サラダチキン プレーン」が約24g、ファミマの「RIZAP サラダチキン」が約23g。プロテインバーでは「inバー プロテイン Granola」が約15g、ザバスミルクプロテインが15gで手軽です。",
+              a: "実測値では、セブンの「7プレミアム さんまの塩焼」（162kcal / P30.0g）が単品で最高水準。チキン系ではファミマの「たんぱく質が摂れる！サラダチキンロール」（324kcal / P25.2g）、ローソンの「たんぱく質が摂れる 国産鶏むね肉のサラダ」（206kcal / P23.1g）、ファミマの「たんぱく質が摂れる！鶏むね肉とたまごのサラダ」（169kcal / P23.0g）が続きます。",
             },
             {
-              q: "コンビニのサラダチキン、毎日食べても大丈夫？",
-              a: "栄養面では問題ありませんが、塩分が1食あたり1.5〜2g含まれるため、1日2食以上食べる場合は他の食事の塩分を控えめに。また、プレーン以外（ハーブ・スモーク等）は香料・添加物が多いので、無理せずローテーションで楽しむのがおすすめです。",
+              q: "コンビニのチキン系商品、毎日食べても大丈夫？",
+              a: "栄養面では問題ない範囲とされますが、惣菜やサラダは商品によって塩分が含まれるため、1日2食以上食べる場合は他の食事の塩分を控えめにするとよいでしょう。味付きのもの（タレ・スパイス等）は糖質や脂質が増えるので、栄養成分表示を見ながらローテーションで楽しむのがおすすめです。",
             },
             {
               q: "コンビニで朝食を高タンパクにするコツは？",
-              a: "①ゆで卵+サラダチキン+おにぎり、②ギリシャヨーグルト（ハイ・プロテイン系）+プロテインバー、③SAVAS等のプロテイン飲料+おにぎり。3パターンとも300〜400kcalでP25〜30g摂取可能。時間がない朝でもコンビニなら1分で買えます。",
+              a: "①味付けたまご＋チキン系サラダ＋おにぎり、②さんまの塩焼＋おにぎり、③砂肝・焼き鳥＋おにぎりなど、主菜＋主食の組み合わせが手軽。いずれも300〜500kcalでP25〜30gを狙えます。時間がない朝でもコンビニなら1分で揃えられます。",
             },
             {
-              q: "プロテインバーとプロテイン飲料、どっちがいい？",
-              a: "目的次第。間食・小腹満たしならプロテインバー（150〜200kcal）、運動後の素早い吸収ならプロテイン飲料（100〜150kcal）が最適。糖質量に注意：菓子系プロテインバー（チョコ、グラノーラ）は糖質15g以上含むことが多いので、ダイエット中は無糖タイプを選びましょう。",
+              q: "おつまみ系の砂肝・焼き鳥は高タンパクって本当？",
+              a: "本当です。ローソンの「ガーリック香る砂肝焼」はわずか76kcalでP14.1g、「若鶏の砂肝にんにく」は160kcalでP21.4gと、カロリー効率が非常に高い商品です。セブンの「炭火焼き鳥（タレ）」も73kcalでP10.1g。おつまみコーナーは見落としがちですが、低カロリー高タンパクの宝庫です。",
             },
             {
-              q: "ファミマのRIZAPシリーズの特徴は？",
-              a: "RIZAP監修商品はカロリー・糖質ともに通常商品より控えめに設計されており、ダイエット向き。例えばRIZAPサラダチキンは125kcal/P22g、RIZAPプロテインバーは200kcal/P10g。これらを毎食活用すれば、自然と低カロリー高タンパクな食事が継続できます。",
+              q: "「たんぱく質が摂れる」シリーズの特徴は？",
+              a: "セブン・ローソン・ファミマがそれぞれ展開するシリーズで、商品名にタンパク質量の狙いが反映されています。例えばローソン「たんぱく質が摂れる 国産鶏むね肉のサラダ」は206kcal/P23.1g、ファミマ「たんぱく質が摂れる！鶏むね肉とたまごのサラダ」は169kcal/P23.0gと、低〜中カロリーで20g前後のタンパク質を確保できる設計です。",
             },
             {
               q: "コンビニでカロリー控えめなおにぎりの選び方は？",
@@ -503,7 +497,7 @@ export default function ConveniProteinPage() {
             },
             {
               q: "コンビニ夜食でカロリー控えめな選択肢は？",
-              a: "21時以降は炭水化物を控えめに。サラダチキン（110kcal）+ あおさみそ汁（30kcal）+ 豆腐（80kcal）の組み合わせで合計220kcal/P30g。または、ヨーグルト+ゆで卵+ナッツ少々で200kcal以下。深夜にラーメンは300kcal以上の差が出ます。",
+              a: "21時以降は炭水化物を控えめに。ローソンの「ガーリック香る砂肝焼」（76kcal/P14.1g）＋「冷やっこセット」（129kcal/P11.6g）の組み合わせなら、合計205kcalでP25.7gを確保できます。ファミマの「炭火焼きとりもも塩」（83kcal/P8.1g）など焼き鳥単品も低カロリー。深夜のラーメンと比べて数百kcalの差が出ます。",
             },
           ]}
         />
@@ -514,6 +508,7 @@ export default function ConveniProteinPage() {
         {/* Update History */}
         <UpdateHistory
           entries={[
+            { date: "2026-06-22", note: "全商品の栄養成分・商品名をたべなびデータベースの実測値に照合して全面改訂。実在しない商品を実在品へ差し替え、ランキング・組み合わせ・FAQの数値を再計算" },
             { date: "2026-05-12", note: "QuickAnswer・FAQ・著者情報を追加。最新コンビニ商品ラインナップに対応" },
             { date: "2026-03-19", note: "初稿公開" },
           ]}

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { AffiliateDisclosure } from "@/components/guide/AffiliateComponents";
 import {
   AuthorityBadge,
   ArticleHero,
@@ -16,6 +17,9 @@ import {
   CheckList,
   NumberedList,
   ComparisonTable,
+  ArticleSummary,
+  AuthorBio,
+  UpdateHistory,
   ArticleFooter,
   ArticleImage,
   QuickAnswer,
@@ -26,9 +30,9 @@ import { ArticleLayout } from "@/components/guide/ArticleLayout";
 export const metadata: Metadata = {
   alternates: { canonical: "https://www.tabenavi.jp/guide/subway-diet" },
   title:
-    "【2026年最新】サブウェイダイエットガイド｜低カロリー＆高タンパクサンドの選び方 | たべなび",
+    "サブウェイ ダイエット｜低カロリー＆高タンパクサンドの選び方【2026年最新】 | たべなび",
   description:
-    "サブウェイのカロリーランキング、ダイエット中におすすめの低カロリーサンド、カスタマイズ術を徹底解説。ローストチキン282kcal・P22.5g、ターキーブレスト262kcalなど具体的な栄養データで紹介。",
+    "サブウェイのカロリーランキング、ダイエット中におすすめの低カロリーサンド、カスタマイズ術を徹底解説。チリチキン273kcal・P20.5g、ベジーデライト215kcalなど実データで紹介。",
   keywords: [
     "サブウェイ ダイエット",
     "サブウェイ カロリー",
@@ -37,7 +41,7 @@ export const metadata: Metadata = {
     "SUBWAY ダイエット",
   ],
   openGraph: {
-    title: "【2026年最新】サブウェイダイエットガイド｜低カロリー＆高タンパクサンドの選び方",
+    title: "サブウェイ ダイエット｜低カロリー＆高タンパクサンドの選び方【2026年最新】",
     description:
       "サブウェイのカロリーランキング、ダイエット中におすすめの低カロリーサンド、カスタマイズ術を徹底解説。",
     url: "https://www.tabenavi.jp/guide/subway-diet",
@@ -50,16 +54,17 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Article",
   headline:
-    "【2026年最新】サブウェイダイエットガイド｜低カロリー＆高タンパクサンドの選び方",
+    "サブウェイ ダイエット｜低カロリー＆高タンパクサンドの選び方【2026年最新】",
   description:
     "サブウェイのカロリーランキング、ダイエット中におすすめの低カロリーサンド、カスタマイズ術を徹底解説。",
   datePublished: "2026-03-19",
   dateModified: new Date().toISOString().split("T")[0],
   author: {
-    "@type": "Organization",
-    name: "たべなび",
-    url: "https://www.tabenavi.jp",
-  },
+      "@type": "Person",
+      name: "ヒロ",
+      description: "外食で13kg減量した、たべなび開発者",
+      url: "https://www.tabenavi.jp/sources",
+    },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
@@ -94,17 +99,18 @@ export default function SubwayDietPage() {
       <ArticleLayout tocItems={tocItems} currentSlug="subway-diet">
         {/* Authority & Date */}
         <AuthorityBadge />
-        <p className="text-sm text-gray-400 mt-3 mb-6">最終更新: 2026年3月19日</p>
+        <p className="text-sm text-gray-400 mt-3 mb-2">最終更新: 2026年6月22日</p>
+        <AffiliateDisclosure />
 
         {/* Introduction */}
         <p className="mb-4">
-          サブウェイは「ダイエットに最も適した外食チェーン」として世界的に知られています。その理由は明確で、<Marker>野菜たっぷり・高タンパク・カスタマイズ自在</Marker>という3つの強みがダイエットの成功に直結するからです。
+          サブウェイは「ダイエットに向いた外食チェーン」として知られています。その理由は、<Marker>野菜たっぷり・高タンパク・カスタマイズ自在</Marker>という3つの強みがダイエットの継続に役立つからです。
         </p>
         <p className="mb-4">
-          特に<Marker color="blue">ローストチキン（282kcal / P22.5g）やターキーブレスト（262kcal / P20.8g）</Marker>は、300kcal以下で20g以上のタンパク質を摂取できる驚異的なメニュー。これは他のファストフードチェーンでは実現が難しい数値です。
+          特に<Marker color="blue">チリチキン（273kcal / P20.5g）</Marker>は、300kcal以下で20g以上のタンパク質を摂れる効率の良いメニュー。<Marker>サラダチキン（ハニーマスタードソース）（281kcal / P21.2g / 脂質わずか2.8g）</Marker>も高タンパク・低脂質で、カロリーコントロールを助けてくれます。
         </p>
         <p className="mb-8">
-          この記事では、サブウェイのメニューをカロリー順にランキングし、ダイエット効果を最大化するカスタマイズ術までPFCデータとともに徹底解説します。
+          この記事では、サブウェイのメニューをカロリー順にランキングし、カスタマイズの考え方までPFCデータとともに解説します。
         </p>
 
         {/* Mobile TOC */}
@@ -116,34 +122,34 @@ export default function SubwayDietPage() {
         <section className="mb-16">
                   <QuickAnswer
           question={"サブウェイはダイエット向けですか？おすすめメニューを教えてください。"}
-          answer={"サブウェイはダイエットに最適な外食チェーンです。ローストチキン（282kcal・タンパク質22.5g）やターキーブレスト（262kcal・タンパク質20.8g）など、300kcal以下で高タンパクなメニューが豊富。野菜は無料で増量でき、ドレッシングも低カロリー選択肢が充実しているため、カスタマイズで栄養バランスを大幅に改善できます。"}
+          answer={"サブウェイはダイエット中でも選びやすい外食チェーンです。チリチキン（273kcal・タンパク質20.5g・脂質4.1g）やサラダチキン（ハニーマスタードソース）（281kcal・タンパク質21.2g・脂質2.8g）など、300kcal以下で高タンパク・低脂質なメニューがあります。野菜は無料で増量でき、パンの種類を選べるため、カスタマイズで栄養バランスを整えやすいのが強みです。"}
         />
 
         <SectionHeading id="why-subway">サブウェイがダイエットに最適な理由</SectionHeading>
 
           <p className="mb-4">
-            数あるファストフードチェーンの中でも、<Marker>サブウェイがダイエットに最も向いている</Marker>と言い切れる理由は大きく3つあります。
+            数あるファストフードチェーンの中でも、<Marker>サブウェイがダイエット中に選びやすい</Marker>理由は大きく3つあります。
           </p>
 
           <NumberedList
             items={[
               {
                 title: "野菜が無料で増量できる",
-                body: "レタス・トマト・ピーマン・オニオン・オリーブなど、すべての野菜を無料で増量可能。野菜を「上限まで」増やせば、食物繊維とビタミンを追加カロリーなしで大幅に摂取できます。",
+                body: "レタス・トマト・ピーマン・オニオン・オリーブなど、野菜を無料で増量可能。野菜を「上限まで」増やせば、食物繊維とビタミンを少ない追加カロリーで補いやすくなります。",
               },
               {
-                title: "300kcal以下のサンドが豊富",
-                body: "ローストチキン（282kcal）、ターキーブレスト（262kcal）、ベジー（230kcal）など、300kcal以下のメニューが多数。他チェーンのバーガーが400〜600kcalであることを考えると圧倒的に低カロリーです。",
+                title: "300kcal前後のサンドが選べる",
+                body: "ベジーデライト（215kcal）、ハムサンド（260kcal）、チリチキン（273kcal）など、300kcal前後のメニューがあります。他チェーンのバーガーが400〜600kcal台であることを考えると、低めに抑えやすいのが特徴です。",
               },
               {
-                title: "パン・ソース・トッピングを選べる",
-                body: "パンの種類でカロリーが変わり、ソースもノンオイル系を選べば脂質を大幅カット。自分だけの「ダイエット専用サンド」をカスタマイズできるのがサブウェイ最大の強みです。",
+                title: "パン・野菜・トッピングを選べる",
+                body: "パンの種類でカロリーが変わり、トッピングを抑えれば脂質も調整しやすい。自分に合わせてカスタマイズできるのがサブウェイの強みです。",
               },
             ]}
           />
 
           <TipBox title="サブウェイ vs マクドナルド カロリー比較">
-            <p>サブウェイのローストチキン（282kcal / P22.5g）は、マクドナルドのチキンフィレオ（465kcal / P18.8g）と比べて<Marker>183kcal低く、タンパク質は3.7g多い</Marker>。同じ「チキンサンド」でもこれだけの差が生まれます。</p>
+            <p>サブウェイのチリチキン（273kcal / P20.5g）は、マクドナルドのチキンフィレオ（479kcal / P19.9g）と比べて<Marker>206kcal低く、タンパク質は0.6g多い</Marker>。同じ「チキン系」でもこれだけの差が生まれます。</p>
           </TipBox>
 
           <ArticleImage src="https://images.unsplash.com/photo-1554433607-66b5efe9d304?w=800&h=400&fit=crop" alt="新鮮な野菜がたっぷり挟まれたサブウェイ風サンドイッチ" />
@@ -154,33 +160,34 @@ export default function SubwayDietPage() {
           <SectionHeading id="calorie-ranking">サブウェイ カロリーランキング</SectionHeading>
 
           <p className="mb-4">
-            サブウェイのレギュラーサンド（レギュラーサイズ）をカロリーの低い順にランキングしました。<Marker color="blue">ほとんどのメニューが200〜400kcal台</Marker>と、ファストフードとしては驚くほど低カロリーです。
+            サブウェイのサンドイッチをカロリーの低い順にランキングしました。<Marker color="blue">多くのメニューが200〜400kcal台</Marker>と、ファストフードとしては低めに収まっています。
           </p>
 
           <NutritionTable
             items={[
-              { name: "ベジー", calories: 230, protein: 8.2, fat: 3.5, carbs: 42.8, highlight: true },
-              { name: "ターキーブレスト", calories: 262, protein: 20.8, fat: 4.2, carbs: 43.5, highlight: true },
-              { name: "ローストチキン", calories: 282, protein: 22.5, fat: 5.8, carbs: 42.2, highlight: true },
-              { name: "チキンブレスト（ハーブ）", calories: 298, protein: 21.2, fat: 5.5, carbs: 44.8 },
-              { name: "生ハム＆マスカルポーネ", calories: 312, protein: 14.5, fat: 10.2, carbs: 42.5 },
-              { name: "BLT", calories: 340, protein: 15.8, fat: 12.5, carbs: 42.2 },
-              { name: "てり焼きチキン", calories: 352, protein: 18.5, fat: 8.8, carbs: 52.5 },
-              { name: "えびアボカド", calories: 328, protein: 14.2, fat: 10.5, carbs: 46.8 },
-              { name: "ローストビーフ", calories: 308, protein: 19.8, fat: 6.5, carbs: 44.2 },
-              { name: "チリチキン", calories: 322, protein: 20.2, fat: 6.8, carbs: 46.5 },
-              { name: "アボカドベジー", calories: 292, protein: 8.8, fat: 8.2, carbs: 46.2 },
-              { name: "たまご", calories: 378, protein: 16.2, fat: 15.8, carbs: 42.5 },
+              { name: "ベジーデライト", calories: 215, protein: 7.2, fat: 4.4, carbs: 38.0 },
+              { name: "ハムサンド", calories: 260, protein: 12.4, fat: 6.4, carbs: 40.0 },
+              { name: "チリチキン", calories: 273, protein: 20.5, fat: 4.1, carbs: 39.7, highlight: true },
+              { name: "アボカドベジー", calories: 295, protein: 8.4, fat: 9.8, carbs: 44.8 },
+              { name: "ローストビーフ", calories: 309, protein: 16.2, fat: 9.5, carbs: 40.0 },
+              { name: "たまごサンド", calories: 318, protein: 11.7, fat: 13.0, carbs: 39.6 },
+              { name: "えびアボカド", calories: 319, protein: 11.9, fat: 12.2, carbs: 41.1 },
+              { name: "チーズサラダチキン", calories: 331, protein: 22.7, fat: 8.8, carbs: 41.8 },
+              { name: "BLT", calories: 335, protein: 11.3, fat: 14.2, carbs: 41.9 },
+              { name: "てり焼きチキン", calories: 346, protein: 19.7, fat: 9.9, carbs: 45.5 },
+              { name: "アメリカンクラブハウス", calories: 349, protein: 21.0, fat: 11.3, carbs: 42.8 },
+              { name: "アボカドチキン", calories: 373, protein: 21.7, fat: 12.6, carbs: 44.3 },
+              { name: "スパイシークラブハウス", calories: 396, protein: 25.4, fat: 12.6, carbs: 46.6 },
             ]}
             highlightProtein
           />
 
           <p className="text-xs text-gray-400 mb-8">
-            ※レギュラーサイズ・ウィートブレッド・ドレッシングなしの数値。おすすめマークは300kcal以下の高タンパクメニューに表示。
+            ※サンドイッチの数値（公式栄養データ／レギュラーサイズ）。おすすめマークは300kcal以下で高タンパクなメニューに表示。
           </p>
 
           <TipBox title="カロリーランキングの読み解き方">
-            <p>サブウェイの特徴は<Marker>ほぼ全メニューが400kcal以下</Marker>に収まっていること。他チェーンでは「低カロリーメニュー」を探す必要がありますが、サブウェイでは「どれを選んでも比較的低カロリー」という安心感があります。差がつくのはタンパク質と脂質。チキン系（P20g以上）を選ぶのがダイエットの鉄則です。</p>
+            <p>サブウェイの特徴は<Marker>サンドイッチの多くが400kcal以下</Marker>に収まっていること。差がつくのはタンパク質と脂質です。たとえばチリチキンはP20.5gで脂質4.1g、対してBLTはP11.3gで脂質14.2g。<Marker color="blue">同じカロリー帯でも中身で栄養バランスが大きく変わる</Marker>ため、チキン系（P20g前後）を選ぶとタンパク質を確保しやすくなります。</p>
           </TipBox>
         </section>
 
@@ -189,45 +196,44 @@ export default function SubwayDietPage() {
           <SectionHeading id="recommended">ダイエット中のおすすめサンド</SectionHeading>
 
           <p className="mb-6">
-            サブウェイでダイエット中に積極的に選びたいサンドをランキング形式で紹介します。<Marker>カロリー・タンパク質・脂質のバランスが優れたメニュー</Marker>を厳選しました。
+            サブウェイでダイエット中に選びやすいサンドをランキング形式で紹介します。<Marker>カロリー・タンパク質・脂質のバランスが良いメニュー</Marker>を厳選しました。
           </p>
 
-          <RankingCard rank={1} title="ローストチキン" subtitle="282kcal / P22.5g / F5.8g / C42.2g / ¥590">
+          <RankingCard rank={1} title="チリチキン" subtitle="273kcal / P20.5g / F4.1g / C39.7g">
             <p className="text-sm text-gray-700 leading-relaxed mb-3">
-              サブウェイの<Marker>ダイエット最強メニュー</Marker>。282kcalでP22.5g、さらに脂質わずか5.8gという驚異的なPFCバランスです。タンパク質1gあたりのカロリーはわずか12.5kcalで、プロテインドリンク並みの効率。
+              サブウェイの<Marker>PFCバランス上位メニュー</Marker>。273kcalでP20.5g、さらに脂質わずか4.1gと、サンドイッチの中でも高タンパク・低脂質が際立ちます。タンパク質1gあたりのカロリーは約13.3kcalと効率的です。
             </p>
             <p className="text-sm text-gray-700 leading-relaxed">
-              ローストされた鶏むね肉は柔らかく、野菜との相性も抜群。毎日食べても飽きにくい味わいで、ダイエットの定番メニューとして最適です。
-            </p>
-          </RankingCard>
-
-          <RankingCard rank={2} title="ターキーブレスト" subtitle="262kcal / P20.8g / F4.2g / C43.5g / ¥590">
-            <p className="text-sm text-gray-700 leading-relaxed">
-              <Marker color="blue">サブウェイで最も低カロリーな肉系サンド</Marker>。262kcalは肉入りサンドとしては圧倒的な低さ。脂質4.2gもサブウェイ最少クラスです。七面鳥の胸肉は高タンパク・低脂質の代表的な食材で、アメリカではダイエット食の定番。さっぱりした味わいなので、野菜多めのカスタマイズと好相性です。
+              ピリ辛の味付けで満足感も得やすく、野菜多めのカスタマイズと相性のよい一品。タンパク質を確保しながらカロリーを抑えたいときの選択肢です。
             </p>
           </RankingCard>
 
-          <RankingCard rank={3} title="ローストビーフ" subtitle="308kcal / P19.8g / F6.5g / C44.2g / ¥690">
+          <RankingCard rank={2} title="サラダチキン（ハニーマスタードソース）" subtitle="281kcal / P21.2g / F2.8g / C44.1g">
             <p className="text-sm text-gray-700 leading-relaxed">
-              <Marker color="green">赤身肉の旨味を楽しみながら308kcal・P19.8g</Marker>。牛肉には鶏肉にはない鉄分や亜鉛が豊富に含まれており、ダイエット中に不足しがちなミネラル補給に最適。脂質6.5gと控えめで、満足感の高いサンドです。
+              <Marker color="blue">脂質わずか2.8gという低脂質の代表格</Marker>。281kcalでP21.2gと、タンパク質をしっかり摂りつつ脂質を最小限に抑えたい人に向いています。ハニーマスタードの甘みで食べやすく、さっぱりした味わいです。
+            </p>
+          </RankingCard>
+
+          <RankingCard rank={3} title="ローストビーフ" subtitle="309kcal / P16.2g / F9.5g / C40.0g">
+            <p className="text-sm text-gray-700 leading-relaxed">
+              <Marker color="green">赤身肉の旨味を楽しみながら309kcal・P16.2g</Marker>。牛肉には鶏肉にはない鉄分や亜鉛が含まれており、ダイエット中に不足しがちなミネラルの補給にも役立ちます。脂質9.5gと中程度で、満足感の高いサンドです。
             </p>
           </RankingCard>
 
           <SubSectionHeading>おすすめの組み合わせセット</SubSectionHeading>
 
           <NutritionCard
-            name="ローストチキン + ミネストローネ + 野菜ジュース"
+            name="チリチキン + ゴロゴロ野菜のトマト＆クラムスープ"
             chain="サブウェイ"
-            calories={412}
-            protein={28.5}
-            fat={7.2}
-            carbs={62.8}
-            price={990}
+            calories={335}
+            protein={23.7}
+            fat={5.2}
+            carbs={49.5}
             recommended
           />
 
           <p className="mb-8 mt-4">
-            <Marker>412kcalでP28.5g、脂質わずか7.2g</Marker>という理想的なダイエットランチ。ミネストローネ（130kcal）で温かいスープも楽しめ、満足感も十分。サブウェイでのダイエットランチの完成形です。
+            <Marker>合計335kcalでP23.7g、脂質わずか5.2g</Marker>という栄養効率の良いランチ。ゴロゴロ野菜のトマト＆クラムスープ（62kcal / P3.2g）で温かい一品を足しても低カロリーに収まり、満足感も得やすい組み合わせです。
           </p>
 
           <ArticleImage src="https://images.unsplash.com/photo-1540914124281-342587941389?w=800&h=400&fit=crop" alt="カラフルな野菜が詰まったヘルシーなサンドイッチ" />
@@ -243,28 +249,27 @@ export default function SubwayDietPage() {
           <SectionHeading id="customize">ダイエット効果を最大化するカスタマイズ術</SectionHeading>
 
           <p className="mb-6">
-            サブウェイの真価はカスタマイズにあります。<Marker>パン・野菜・ドレッシングの選び方で同じサンドでもカロリーが100kcal以上変わる</Marker>ことも。ダイエット効果を最大化するカスタマイズ術を紹介します。
+            サブウェイの強みはカスタマイズにあります。<Marker>パンや野菜、トッピングの選び方で同じサンドでも栄養バランスが変わる</Marker>ため、無理なく調整しやすいのが特徴です。ダイエット中のカスタマイズの考え方を紹介します。
           </p>
 
           <SubSectionHeading>パンの選び方</SubSectionHeading>
           <p className="mb-4">
-            サブウェイのパンは種類によってカロリーが異なります。
+            サブウェイのパンは種類によってカロリーが異なります（パン単体の数値）。
           </p>
 
           <ComparisonTable
             headers={["パンの種類", "カロリー", "特徴"]}
             rows={[
-              ["ウィート", "169 kcal", "全粒粉入りで食物繊維が多い"],
-              ["ホワイト", "172 kcal", "定番のホワイトブレッド"],
-              ["セサミ", "179 kcal", "ゴマの風味が特徴"],
-              ["ハニーオーツ", "185 kcal", "はちみつ＋オーツ麦"],
-              ["フラットブレッド", "210 kcal", "薄焼きだがカロリー高め"],
+              ["ホワイト", "179 kcal", "定番のホワイトブレッド"],
+              ["ウィート", "180 kcal", "全粒粉入りで食物繊維が多い"],
+              ["ハニーオーツ", "190 kcal", "はちみつ＋オーツ麦"],
+              ["セサミ", "196 kcal", "ゴマの風味が特徴"],
             ]}
             bestRowIndex={0}
           />
 
           <p className="mb-6">
-            <Marker>ダイエット中はウィートブレッドが最適</Marker>。169kcalと最も低カロリーで、全粒粉の食物繊維が血糖値の急上昇を抑えてくれます。フラットブレッドは一見ヘルシーに見えますが、実は最もカロリーが高い点に注意。
+            <Marker>カロリーで選ぶならホワイト（179kcal）かウィート（180kcal）</Marker>。差はわずか1kcalなので、食物繊維を重視するなら全粒粉入りのウィートがおすすめです。ハニーオーツやセサミは風味が良い反面、ホワイトより10〜17kcal高くなる点を覚えておくと選びやすくなります。
           </p>
 
           <SubSectionHeading>野菜の増量テクニック</SubSectionHeading>
@@ -274,64 +279,49 @@ export default function SubwayDietPage() {
 
           <SubSectionHeading>ドレッシングの選び方</SubSectionHeading>
           <p className="mb-6">
-            ドレッシングはカロリーの差が大きいポイント。<Marker color="green">マヨネーズ（78kcal）を避け、わさび醤油ソース（18kcal）やバルサミコソース（5kcal）</Marker>を選ぶだけで60〜70kcalカットできます。
+            ドレッシングはサンド全体のカロリー・脂質を左右するポイントです。<Marker color="green">マヨネーズ系などオイルの多いドレッシングは脂質が増えやすい</Marker>ため、ダイエット中はノンオイル系やお酢ベースのあっさりした選択肢を選ぶと、余分な脂質を抑えやすくなります。「ドレッシング少なめ」「別添え」と伝えて自分で量を調整するのも有効です。
           </p>
 
-          <ComparisonTable
-            headers={["ドレッシング", "カロリー", "脂質"]}
-            rows={[
-              ["バルサミコソース", "5 kcal", "0.0g"],
-              ["わさび醤油ソース", "18 kcal", "0.2g"],
-              ["オイル＆ビネガー（塩・コショウ）", "25 kcal", "2.5g"],
-              ["ハニーマスタード", "42 kcal", "1.8g"],
-              ["シーザードレッシング", "62 kcal", "6.2g"],
-              ["マヨネーズタイプ", "78 kcal", "8.5g"],
-            ]}
-            bestRowIndex={0}
-          />
-
-          <SubSectionHeading>究極のダイエットカスタマイズ</SubSectionHeading>
+          <SubSectionHeading>低脂質を重視したいときの選び方</SubSectionHeading>
           <p className="mb-4">
-            最もダイエット効果の高いカスタマイズは<Marker>「ローストチキン＋ウィートブレッド＋野菜全部多め＋わさび醤油ソース」</Marker>。これで約270kcal / P22g / F4.5g / C40gという、ファストフードとは思えない栄養バランスが実現します。
+            脂質を抑えつつタンパク質を確保したいなら、<Marker>サラダチキン（ハニーマスタードソース）が有力な選択肢</Marker>。281kcal・P21.2g・脂質わずか2.8gと、サンドイッチ・サラダ系の中でも低脂質が際立ちます。
           </p>
 
           <NutritionCard
-            name="究極のダイエットカスタマイズ（ローストチキン）"
+            name="サラダチキン（ハニーマスタードソース）"
             chain="サブウェイ"
-            calories={270}
-            protein={22.0}
-            fat={4.5}
-            carbs={40.0}
-            price={590}
+            calories={281}
+            protein={21.2}
+            fat={2.8}
+            carbs={44.1}
             recommended
           />
 
           <p className="mb-4 mt-4">
-            もう1つの低脂質カスタマイズもおすすめです。
+            タンパク質を最優先したいときは、チーズサラダチキンも候補です。
           </p>
 
           <NutritionCard
-            name="ターキーブレスト + ウィート + バルサミコ + 野菜多め"
+            name="チーズサラダチキン"
             chain="サブウェイ"
-            calories={255}
-            protein={20.8}
-            fat={3.8}
-            carbs={41.2}
-            price={590}
+            calories={331}
+            protein={22.7}
+            fat={8.8}
+            carbs={41.8}
             recommended
           />
 
           <p className="mb-8 mt-4">
-            <Marker color="blue">255kcalでP20.8g、脂質わずか3.8g</Marker>。ファストフードでありながらプロテインバー以上の栄養効率を誇ります。バルサミコソースの5kcalがほぼゼロカロリーなので、ドレッシングを気にせず味わえるのもポイントです。
+            <Marker color="blue">331kcalでP22.7g</Marker>と、サンドイッチの中でもトップクラスのタンパク質量。チーズが入る分だけ脂質はやや上がりますが、しっかり食べたい日のタンパク源として頼りになります。
           </p>
 
-          <SubSectionHeading>トッピングの活用</SubSectionHeading>
+          <SubSectionHeading>トッピングと野菜の活用</SubSectionHeading>
           <p className="mb-6">
-            サブウェイではチーズやベーコンなどの有料トッピングも選べますが、ダイエット中は注意が必要。<Marker color="green">ナチュラルスライスチーズ（+40kcal / P2.5g）は許容範囲</Marker>ですが、クリームチーズ（+90kcal）やベーコン（+60kcal）は脂質が大幅に増えるため避けましょう。
+            サブウェイではチーズやベーコンなどのトッピングも選べますが、ダイエット中は脂質の増加に注意。<Marker color="green">脂質を抑えたいときは野菜の増量を中心に</Marker>し、ベーコンやチーズの追加は控えめにすると、カロリーと脂質をコントロールしやすくなります。野菜は無料で増量できるため、満足感を上げる手段として活用しましょう。
           </p>
 
           <TipBox title="「サラダ」メニューの活用">
-            <p>サブウェイではサンドの中身をパンなしの「サラダ」として注文可能。<Marker>パンのカロリー（約170kcal）を丸ごとカット</Marker>できるため、超低カロリー（約110kcal / P22g）の食事が実現。糖質制限中の方には特におすすめです。</p>
+            <p>サブウェイではサンドの中身をパンなしの「サラダ」として注文することも可能です。たとえばサラダチキン サラダは<Marker>93kcal・P14.7g・脂質0.8g</Marker>と、パンのカロリー（約180kcal）を抑えながら高タンパクな一品になります。糖質を控えたいときの選択肢として覚えておくと便利です。</p>
           </TipBox>
 
           <ArticleImage src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&h=400&fit=crop" alt="色鮮やかな野菜サラダのイメージ" />
@@ -345,38 +335,38 @@ export default function SubwayDietPage() {
             サブウェイは全体的に低カロリーですが、<Marker>選び方やカスタマイズ次第でカロリーが跳ね上がるケース</Marker>があります。以下のポイントに注意しましょう。
           </p>
 
-          <WarningBox title="ダイエット中に避けるべきポイント">
+          <WarningBox title="ダイエット中に注意したいポイント">
             <ul className="space-y-2">
-              <li><span className="font-bold">たまごサンド（378kcal / F15.8g）</span> ─ 脂質15.8gはサブウェイの中で最も高い。同じ価格帯ならローストチキンの方がP+6g・F-10gと圧倒的に優秀。</li>
-              <li><span className="font-bold">マヨネーズ系ドレッシング</span> ─ マヨネーズ（78kcal）を追加するだけでサンド全体のカロリーが約1.3倍に。必ずノンオイル系を選びましょう。</li>
-              <li><span className="font-bold">フットロングサイズ</span> ─ レギュラーの2倍サイズ＝カロリーも2倍。ローストチキンでも564kcalに。1人で食べきらず、シェアするか翌日に回しましょう。</li>
-              <li><span className="font-bold">クッキー（約200kcal）</span> ─ 1枚200kcalでタンパク質はほぼゼロ。セットで付いてきても我慢するのがベスト。</li>
-              <li><span className="font-bold">ポテト（約270kcal）</span> ─ サイドメニューのポテトは270kcalで栄養価も低い。追加するならミネストローネ（130kcal）を選びましょう。</li>
+              <li><span className="font-bold">BLT（335kcal / P11.3g / F14.2g）</span> ─ ベーコンの脂質が効いて脂質14.2g。タンパク質はチリチキン（P20.5g）より約9g少ないため、タンパク質重視ならチキン系が有利です。</li>
+              <li><span className="font-bold">たまごサンド（318kcal / P11.7g / F13.0g）</span> ─ 脂質13.0gとやや高め。同じ300kcal台ならチーズサラダチキン（P22.7g）の方がタンパク質を多く摂れます。</li>
+              <li><span className="font-bold">マヨネーズ系ドレッシング</span> ─ オイルの多いドレッシングは脂質を押し上げやすい。脂質を抑えたいときはノンオイル系を選び、量は控えめにしましょう。</li>
+              <li><span className="font-bold">クッキー（チョコチップ208kcal・ホワイトマカダミア219kcal）</span> ─ タンパク質はほぼ得られず、脂質と糖質が中心。デザートを足すなら頻度を抑えるのが無難です。</li>
+              <li><span className="font-bold">コロコロポテト オリジナル（M）280kcal</span> ─ サイドのポテトはMサイズで280kcal。サイドを足すなら、ゴロゴロ野菜のトマト＆クラムスープ（62kcal）など軽めのスープが選択肢です。</li>
             </ul>
           </WarningBox>
 
           <ComparisonTable
             headers={["注文パターン", "カロリー", "タンパク質", "脂質"]}
             rows={[
-              ["ローストチキン + わさび醤油 + 野菜多め", "270 kcal", "22.0g", "4.5g"],
-              ["たまご + マヨネーズ + ポテト", "726 kcal", "18.5g", "32.8g"],
+              ["チリチキン + 野菜多め", "273 kcal", "20.5g", "4.1g"],
+              ["たまごサンド + ポテト（M）", "598 kcal", "15.9g", "23.6g"],
             ]}
             bestRowIndex={0}
           />
 
           <p className="mb-6 text-sm text-gray-700">
-            同じサブウェイでも、<Marker>注文の仕方で270kcal vs 726kcalと約2.7倍の差</Marker>が生まれます。「サブウェイだから安心」と油断せず、メニューとカスタマイズの選択が重要です。
+            同じサブウェイでも、<Marker>注文の仕方で273kcal vs 598kcalと約2.2倍の差</Marker>が生まれます。「サブウェイだから安心」と油断せず、メニューとサイドの選択が大切です。
           </p>
 
-          <TipBox title="BLT（340kcal）は意外と要注意">
-            <p>BLTは「ベーコン・レタス・トマト」のシンプルな構成で健康的に見えますが、<Marker>ベーコンの脂質12.5gが全体を引き上げて340kcal</Marker>に。タンパク質も15.8gとローストチキン（P22.5g）より7g少ない。同じ価格帯なら迷わずローストチキンを選びましょう。</p>
+          <TipBox title="BLT（335kcal）は意外と脂質高め">
+            <p>BLTは「ベーコン・レタス・トマト」のシンプルな構成で健康的に見えますが、<Marker>ベーコンの脂質14.2gが全体を引き上げて335kcal</Marker>に。タンパク質も11.3gとチリチキン（P20.5g）より約9g少なめです。タンパク質を確保したいときはチキン系を選ぶと効率的です。</p>
           </TipBox>
 
           <ArticleImage src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=800&h=400&fit=crop" alt="新鮮なサラダとヘルシーなランチのイメージ" />
 
           <CTABanner
-            title="たべなびで栄養管理を始めよう"
-            subtitle="32チェーン・6,000品以上の栄養データ、全部無料"
+            title="そのメニュー、何kcal？ たべなびで今すぐ検索"
+            subtitle="32チェーン・6,000品以上を、カロリー・タンパク質・脂質で絞り込み検索。登録不要・無料です。"
           />
         </section>
 
@@ -385,22 +375,32 @@ export default function SubwayDietPage() {
           <SectionHeading id="summary">まとめ</SectionHeading>
 
           <p className="mb-6">
-            サブウェイはダイエット中の外食先として最も優れたチェーンの一つです。この記事のポイントを整理しました。
+            サブウェイはダイエット中の外食先として選びやすいチェーンの一つです。この記事のポイントを整理しました。
           </p>
+
+          <ArticleSummary
+            points={[
+              "チリチキン（273kcal / P20.5g / F4.1g）が高タンパク・低脂質でバランス良好",
+              "サラダチキン（ハニーマスタードソース）（281kcal / P21.2g / F2.8g）は脂質を最小に抑えたいとき向き",
+              "タンパク質を最優先するならチーズサラダチキン（331kcal / P22.7g）やスパイシークラブハウス（396kcal / P25.4g）",
+              "野菜は無料で増量可能。「野菜全部多め」で満足感と栄養価をアップ",
+              "パンはカロリー重視ならホワイト（179kcal）かウィート（180kcal）。食物繊維ならウィート",
+              "脂質が高めのBLT（335kcal / F14.2g）やサイドのポテト・クッキーは頻度に注意",
+            ]}
+          />
 
           <CheckList
             items={[
-              "ローストチキン（282kcal / P22.5g / F5.8g）がダイエット最強メニュー",
-              "ターキーブレスト（262kcal / P20.8g）は最も低カロリーな肉系サンド",
+              "高タンパク・低脂質ならチリチキン or サラダチキン（ハニーマスタードソース）",
               "野菜は全て無料で増量可能。「野菜全部多め」で栄養価UP",
-              "パンはウィート（169kcal）を選択。フラットブレッドは避ける",
-              "ドレッシングはわさび醤油（18kcal）やバルサミコ（5kcal）を選ぶ",
-              "マヨネーズ・クッキー・フットロングの3つを避ければ低カロリーを維持できる",
+              "パンはホワイト（179kcal）かウィート（180kcal）を選ぶ",
+              "ドレッシングはオイルの多いものを避け、量は控えめに",
+              "サイドを足すなら軽めのスープ（ゴロゴロ野菜のトマト＆クラムスープ62kcalなど）",
             ]}
           />
 
           <p className="text-xs text-gray-400 mt-4 mb-8">
-            ※価格・栄養成分は店舗により異なる場合があります。最新の情報はサブウェイ公式サイトでご確認ください。
+            ※価格・栄養成分は店舗・時期により異なる場合があります。最新の情報はサブウェイ公式サイトでご確認ください。
           </p>
         </section>
 
@@ -408,11 +408,22 @@ export default function SubwayDietPage() {
         <FAQSection
           slug="subway-diet"
           items={[
-            { q: "サブウェイのカロリーが低い理由は何ですか？", a: "野菜が無料で増量できる、300kcal以下のメニューが豊富、パン・ソース・トッピングをカスタマイズできるという3つの理由。特にマクドナルドのチキンフィレオ（465kcal）と比べてローストチキン（282kcal）は183kcal低く、タンパク質は3.7g多いです。" },
-            { q: "ダイエット中はどのパンを選ぶべきですか？", a: "ウィートブレッド（169kcal）がおすすめ。全粒粉入りで食物繊維が豊富、血糖値の急上昇を抑えます。フラットブレッド（210kcal）は一見ヘルシーですが、実はサブウェイで最もカロリーが高い点に注意。" },
-            { q: "ドレッシングはどれを選べば良いですか？", a: "バルサミコソース（5kcal）またはわさび醤油ソース（18kcal）を選択。マヨネーズ（78kcal）を避けるだけで60〜70kcal削減できます。ドレッシング選択だけで栄養バランスが大きく変わります。" },
-            { q: "たまごサンドはダイエットに適していますか？", a: "避けるべきメニューです。たまごサンド（378kcal・脂質15.8g）は脂質がサブウェイで最も高く、ローストチキン（脂質5.8g）と比較してタンパク質も6g少なく、コスパが悪い。" },
-            { q: "サブウェイをサラダで注文する方法もありますか？", a: "はい。サンドの中身をパンなしの「サラダ」として注文可能。パンのカロリー（約170kcal）を削減でき、ローストチキンで約110kcal・タンパク質22gの超低カロリー食が実現。糖質制限中に特におすすめです。" },
+            { q: "サブウェイのカロリーが低めな理由は何ですか？", a: "野菜が無料で増量できる、300kcal前後のサンドが選べる、パンや野菜・トッピングをカスタマイズできるという3つの理由があります。たとえばチリチキン（273kcal / P20.5g）はマクドナルドのチキンフィレオ（479kcal / P19.9g）と比べて206kcal低く、タンパク質は0.6g多いです（2026年6月時点・各社公式栄養データ）。" },
+            { q: "ダイエット中はどのパンを選ぶべきですか？", a: "カロリーで選ぶならホワイト（179kcal）かウィート（180kcal）。差はわずか1kcalなので、食物繊維を重視するなら全粒粉入りのウィートがおすすめです。ハニーオーツ（190kcal）やセサミ（196kcal）は風味が良い反面、ホワイトより10〜17kcal高くなります。" },
+            { q: "高タンパク・低脂質のおすすめメニューは？", a: "チリチキン（273kcal / P20.5g / 脂質4.1g）と、サラダチキン（ハニーマスタードソース）（281kcal / P21.2g / 脂質2.8g）が高タンパク・低脂質でおすすめ。タンパク質を最優先するならチーズサラダチキン（331kcal / P22.7g）も選択肢です。" },
+            { q: "たまごサンドはダイエットに向いていますか？", a: "脂質がやや高めのメニューです。たまごサンド（318kcal / 脂質13.0g / P11.7g）は、同じ300kcal台のチーズサラダチキン（脂質8.8g / P22.7g）と比べてタンパク質が約11g少なめ。タンパク質を確保したいときはチキン系が効率的です。" },
+            { q: "サブウェイをサラダで注文する方法もありますか？", a: "はい。サンドの中身をパンなしの「サラダ」として注文できます。たとえばサラダチキン サラダは93kcal・タンパク質14.7g・脂質0.8gと、パンのカロリー（約180kcal）を抑えながら高タンパクな一品に。糖質を控えたいときの選択肢になります。" },
+          ]}
+        />
+
+        {/* Author Bio */}
+        <AuthorBio />
+
+        {/* Update History */}
+        <UpdateHistory
+          entries={[
+            { date: "2026-03-19", note: "初稿公開" },
+            { date: "2026-06-22", note: "全栄養数値をたべなびDB（公式栄養データ）の実値に再検証。実在しないメニュー（ローストチキン・ターキーブレスト等）を実在品へ差し替え、カロリー・PFC・ランキング・FAQ・まとめを実データに修正。価格非掲載の品の価格表記を削除。" },
           ]}
         />
 

@@ -19,6 +19,7 @@ import {
   ArticleImage,
   QuickAnswer,
   FAQSection,
+  UpdateHistory,
 } from "@/components/guide/ArticleComponents";
 import {
   AffiliateDisclosure,
@@ -31,7 +32,7 @@ export const metadata: Metadata = {
   title:
     "【2026年最新】ラーメンはダイエット中に食べていい？カロリー比較と太らない食べ方 | たべなび",
   description:
-    "ラーメンのカロリーを味噌・醤油・豚骨・塩で徹底比較。日高屋・丸亀製麺・リンガーハットなどチェーン店別ランキングと、ダイエット中でも太らないラーメンの食べ方5選を解説します。",
+    "ラーメンのカロリーを味噌・醤油・豚骨・塩で徹底比較。日高屋・丸亀製麺などチェーン店別のカロリーと、ダイエット中でも太らないラーメンの食べ方5選を解説します。",
   keywords: [
     "ラーメン カロリー",
     "ラーメン ダイエット",
@@ -58,10 +59,11 @@ const jsonLd = {
   datePublished: "2026-03-23",
   dateModified: new Date().toISOString().split("T")[0],
   author: {
-    "@type": "Organization",
-    name: "たべなび",
-    url: "https://www.tabenavi.jp",
-  },
+      "@type": "Person",
+      name: "ヒロ",
+      description: "外食で13kg減量した、たべなび開発者",
+      url: "https://www.tabenavi.jp/sources",
+    },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
@@ -95,7 +97,7 @@ export default function RamenDietPage() {
       <ArticleLayout tocItems={tocItems} currentSlug="ramen-diet">
         {/* Authority & Date */}
         <AuthorityBadge />
-        <p className="text-sm text-gray-400 mt-3 mb-2">最終更新: 2026年3月23日</p>
+        <p className="text-sm text-gray-400 mt-3 mb-2">最終更新: 2026年6月22日</p>
         <AffiliateDisclosure />
 
         {/* Introduction */}
@@ -177,16 +179,14 @@ export default function RamenDietPage() {
           <SectionHeading id="chain-ranking">チェーン店ラーメンのカロリーランキング</SectionHeading>
 
           <p className="mb-4">
-            人気ラーメンチェーン店の主要メニューをカロリー順にランキング。<Marker>同じラーメンでもチェーン店によって200kcal以上の差</Marker>があります。
+            人気ラーメンチェーン店の主要メニューをカロリー順に比較。<Marker>同じラーメンでもチェーン店・メニューによって数百kcalの差</Marker>があります。
           </p>
 
           <NutritionTable
             items={[
+              { name: "丸亀製麺 かけうどん（並・温）", calories: 299, protein: 9.5, fat: 1.3, carbs: 62.3, highlight: true },
               { name: "リンガーハット 長崎ちゃんぽん（麺半分）", calories: 390, protein: 20.0, fat: 12.0, carbs: 45.0, highlight: true },
-              { name: "日高屋 中華そば", calories: 430, protein: 18.5, fat: 10.5, carbs: 62.0, highlight: true },
-              { name: "丸亀製麺 かけうどん（並）", calories: 305, protein: 8.5, fat: 1.5, carbs: 63.0, highlight: true },
               { name: "リンガーハット 長崎ちゃんぽん", calories: 682, protein: 30.5, fat: 22.0, carbs: 82.0 },
-              { name: "日高屋 味噌ラーメン", calories: 720, protein: 28.0, fat: 25.5, carbs: 82.5 },
               { name: "幸楽苑 中華そば", calories: 510, protein: 19.0, fat: 12.0, carbs: 72.0 },
               { name: "天下一品 こってりラーメン（並）", calories: 799, protein: 32.5, fat: 42.0, carbs: 68.0 },
               { name: "ラーメン二郎 小ラーメン", calories: 1400, protein: 60.0, fat: 65.0, carbs: 130.0 },
@@ -194,7 +194,28 @@ export default function RamenDietPage() {
           />
 
           <p className="text-xs text-gray-400 mb-8">
-            ※栄養成分は各チェーン公式サイトおよび一般的な推計値をもとに記載。
+            ※丸亀製麺は公式の栄養成分値。リンガーハット・幸楽苑・天下一品・ラーメン二郎は各チェーン公式サイトおよび一般的な推計値をもとに記載。
+          </p>
+
+          <SubSectionHeading>日高屋ラーメンのカロリー（カロリー基準）</SubSectionHeading>
+
+          <p className="mb-4">
+            庶民派チェーン日高屋のラーメン類のカロリーは以下の通り。<Marker>日高屋はタンパク質・脂質・炭水化物の内訳が公表されていない</Marker>ため、ここではカロリーのみで比較します。
+          </p>
+
+          <ComparisonTable
+            headers={["メニュー", "カロリー", "ダイエット評価"]}
+            rows={[
+              ["中華そば", "636 kcal", "あっさり系で比較的低め"],
+              ["味玉中華そば", "714 kcal", "まずまず"],
+              ["とんこつラーメン", "670 kcal", "注意"],
+              ["味噌ラーメン", "940 kcal", "非推奨"],
+            ]}
+            bestRowIndex={0}
+          />
+
+          <p className="text-xs text-gray-400 mb-8">
+            ※日高屋のカロリーはDB収録値。タンパク質・脂質・炭水化物は非公表のため記載していません。
           </p>
 
           <SubSectionHeading>ダイエット中のベストチョイス3選</SubSectionHeading>
@@ -204,27 +225,15 @@ export default function RamenDietPage() {
           </p>
 
           <NutritionCard
-            name="丸亀製麺 かけうどん（並）"
-            calories={305}
-            protein={8.5}
-            fat={1.5}
-            carbs={63.0}
+            name="丸亀製麺 かけうどん（並・温）"
+            calories={299}
+            protein={9.5}
+            fat={1.3}
+            carbs={62.3}
           />
 
           <p className="mb-4">
-            厳密にはラーメンではありませんが、<Marker color="blue">丸亀製麺のかけうどん（305kcal / F1.5g）</Marker>は麺類の中で圧倒的に低カロリー・低脂質。「麺が食べたい」欲求を満たすなら最もダイエット向きです。
-          </p>
-
-          <NutritionCard
-            name="日高屋 中華そば"
-            calories={430}
-            protein={18.5}
-            fat={10.5}
-            carbs={62.0}
-          />
-
-          <p className="mb-4">
-            ラーメンの中では<Marker>日高屋の中華そば（430kcal）</Marker>がトップクラスの低カロリー。あっさりした醤油ベースでタンパク質18.5gもしっかり摂れます。価格も400円前後とコスパ抜群。
+            厳密にはラーメンではありませんが、<Marker color="blue">丸亀製麺のかけうどん（299kcal / F1.3g）</Marker>は麺類の中で圧倒的に低カロリー・低脂質。「麺が食べたい」欲求を満たすなら最もダイエット向きです。
           </p>
 
           <NutritionCard
@@ -239,9 +248,14 @@ export default function RamenDietPage() {
             リンガーハットの<Marker color="blue">麺半分オプション（390kcal）</Marker>は野菜たっぷりでタンパク質20g。麺を半分にすることで糖質を大幅カットしながら、野菜480gで食物繊維とビタミンを豊富に摂取できます。
           </p>
 
+          <p className="mb-4">
+            ラーメン系のチェーンなら、<Marker>日高屋の中華そば（636kcal）</Marker>もあっさりした醤油ベースで、味噌ラーメン（940kcal）など他メニューより抑えめ。スープを残せばさらにカロリーを下げられます。価格も400円台とコスパ良好です。
+          </p>
+
           <WarningBox title="ダイエット中に避けるべきラーメン">
             <ul className="space-y-2">
               <li><span className="font-bold">天下一品 こってり（799kcal / F42g）</span> ─ 脂質42gはダイエット中の1食分としては多すぎ。どうしても行くなら「あっさり」を選択。</li>
+              <li><span className="font-bold">日高屋 味噌ラーメン（940kcal）</span> ─ 同じ日高屋なら中華そば（636kcal）の方が約300kcal低い。味噌系は控えめに。</li>
               <li><span className="font-bold">ラーメン二郎 小ラーメン（約1,400kcal）</span> ─ 1杯で1日分のカロリーに迫る。「野菜マシ」でも焼け石に水。</li>
               <li><span className="font-bold">つけ麺（特盛）（800〜1,000kcal）</span> ─ 麺量が多くなるため、カロリーが跳ね上がる。並盛でも650kcal前後。</li>
             </ul>
@@ -321,8 +335,7 @@ export default function RamenDietPage() {
 
           <NutritionTable
             items={[
-              { name: "かけうどん（丸亀製麺）", calories: 305, protein: 8.5, fat: 1.5, carbs: 63.0, highlight: true },
-              { name: "タンメン（日高屋）", calories: 490, protein: 20.0, fat: 12.0, carbs: 68.0, highlight: true },
+              { name: "かけうどん 並・温（丸亀製麺）", calories: 299, protein: 9.5, fat: 1.3, carbs: 62.3, highlight: true },
               { name: "長崎ちゃんぽん麺半分（リンガーハット）", calories: 390, protein: 20.0, fat: 12.0, carbs: 45.0, highlight: true },
               { name: "ざるそば（一般的）", calories: 350, protein: 12.0, fat: 2.0, carbs: 68.0 },
               { name: "フォー（一般的）", calories: 380, protein: 15.0, fat: 5.0, carbs: 62.0 },
@@ -330,14 +343,14 @@ export default function RamenDietPage() {
             ]}
           />
 
-          <SubSectionHeading>タンメンはラーメンの上位互換</SubSectionHeading>
+          <SubSectionHeading>日高屋のタンメンも野菜たっぷり</SubSectionHeading>
 
           <p className="mb-4">
-            日高屋の<Marker color="blue">タンメン（490kcal / P20g）</Marker>は野菜たっぷりで食物繊維が豊富。通常のラーメンと比べて野菜量が約2〜3倍で、食べごたえがありながらカロリーは控えめです。スープもあっさり塩味ベースで脂質12gと低め。
+            日高屋の<Marker color="blue">野菜たっぷりタンメン（麺少なめ）（639kcal）</Marker>は野菜が多く食物繊維が豊富。麺少なめにすることで、通常の野菜たっぷりタンメン（826kcal）より約190kcal抑えられます。日高屋はP/F/Cの内訳が非公表のため、ここではカロリーのみを目安にしてください。
           </p>
 
           <p className="mb-4">
-            「ラーメンの代わりに何を食べよう」と迷ったら、<Marker>タンメンかちゃんぽん（麺半分）</Marker>を選べば、麺の満足感を保ちながらカロリーと栄養バランスを両立できます。
+            「ラーメンの代わりに何を食べよう」と迷ったら、<Marker>ちゃんぽん（麺半分）や麺少なめのタンメン</Marker>を選べば、麺の満足感を保ちながらカロリーを抑えられます。
           </p>
 
           <SubSectionHeading>コンビニの低カロリー麺類</SubSectionHeading>
@@ -349,12 +362,12 @@ export default function RamenDietPage() {
           <ComparisonTable
             headers={["代替メニュー", "カロリー", "メリット", "デメリット"]}
             rows={[
-              ["タンメン", "490 kcal", "野菜たっぷり・高タンパク", "やや塩分高め"],
+              ["日高屋 タンメン（麺少なめ）", "639 kcal", "野菜たっぷり", "やや塩分高め"],
               ["ちゃんぽん（麺半分）", "390 kcal", "野菜480g・P20g", "店舗が限られる"],
-              ["かけうどん", "305 kcal", "最低カロリー・低脂質", "タンパク質が少ない"],
+              ["かけうどん（並・温）", "299 kcal", "最低カロリー・低脂質", "タンパク質は控えめ"],
               ["春雨スープ", "150 kcal", "超低カロリー・手軽", "満足感は低め"],
             ]}
-            bestRowIndex={1}
+            bestRowIndex={2}
           />
 
           <ArticleImage src="https://images.unsplash.com/photo-1552611052-33e04de1b100?w=800&h=400&fit=crop" alt="野菜たっぷりのタンメン" />
@@ -382,7 +395,7 @@ export default function RamenDietPage() {
               "塩・醤油ラーメン（470〜500kcal）を選び、豚骨・家系は控える",
               "スープを残すだけで150〜250kcalカット（最重要ルール）",
               "麺少なめ + スープ残しで豚骨ラーメンも300kcalに",
-              "チェーン店なら日高屋の中華そば（430kcal）がベスト",
+              "チェーン店なら丸亀製麺のかけうどん（299kcal）が最低カロリー、日高屋の中華そば（636kcal）も味噌ラーメン（940kcal）より抑えめ",
               "リンガーハットの麺半分ちゃんぽん（390kcal）は野菜も摂れて優秀",
               "ラーメンの頻度は週1回まで、前後の食事で1日のカロリーを調整する",
               "代替案としてタンメン・うどん・春雨スープも活用する",
@@ -404,11 +417,18 @@ export default function RamenDietPage() {
         <FAQSection
           slug="ramen-diet"
           items={[
-            { q: "ラーメンと他の麺類でカロリーが低いのはどれ？", a: "丸亀製麺のかけうどん（305kcal）が最も低カロリーです。次にリンガーハット長崎ちゃんぽん麺半分（390kcal）、日高屋中華そば（430kcal）がおすすめ。タンメンなら野菜たっぷりで490kcalで栄養バランスも優秀です。" },
+            { q: "ラーメンと他の麺類でカロリーが低いのはどれ？", a: "丸亀製麺のかけうどん（並・温299kcal）が最も低カロリーです。次にリンガーハット長崎ちゃんぽん麺半分（390kcal）がおすすめ。ラーメン系チェーンなら日高屋の中華そば（636kcal）が味噌ラーメン（940kcal）より抑えめです。" },
             { q: "ラーメンのスープを残すとどのくらいカロリーが減る？", a: "スープを残すだけで150〜250kcalカットできます。ラーメンのカロリーの約30〜40%がスープに含まれており、この削減が最も効果的なカロリーコントロール法です。同時に塩分過剰摂取によるむくみも防げます。" },
             { q: "ダイエット中に避けるべきラーメンはどれ？", a: "二郎系ラーメン（約1,500kcal）と天下一品こってり（799kcal、脂質42g）は避けるべき。豚骨味噌ラーメン（750kcal）やつけ麺（800〜1,000kcal）も控えめにして、塩・醤油などあっさり系を週1回程度に制限するのが目安です。" },
             { q: "ラーメン1杯のタンパク質はどのくらい摂れる？", a: "塩ラーメンで18g、醤油ラーメンで20.5g、豚骨ラーメンで25gほど摂取できます。チャーシューや味玉などタンパク質豊富なトッピングを選べば、さらに10〜20g増やせるため、ダイエット食としても悪くない選択肢です。" },
             { q: "スープと麺を半分にするとラーメンのカロリーはいくらになる？", a: "豚骨ラーメン（通常650kcal）をスープ残す＋麺半分にすると約300kcalまで下げられます。これにタンパク質豊富なトッピング（味玉など80kcal）を追加しても380kcalで、おにぎり2個以下のカロリーで満足感も得られます。" },
+          ]}
+        />
+
+        <UpdateHistory
+          entries={[
+            { date: "2026-06-22", note: "日高屋の中華そば・味噌ラーメン・タンメン等のカロリーをDB実値に修正（中華そば636kcal、味噌ラーメン940kcal、野菜たっぷりタンメン麺少なめ639kcal）。日高屋はP/F/Cが非公表のためタンパク質等の断定を削除しカロリー基準へ縮退。丸亀製麺かけうどんを公式値299kcalに更新。架空メニュー「日高屋タンメン490kcal」を実在メニューへ差替。ランキング・比較・まとめ・FAQの数値依存記述を全面更新。" },
+            { date: "2026-03-23", note: "記事公開。" },
           ]}
         />
 

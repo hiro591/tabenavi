@@ -19,6 +19,7 @@ import {
   ArticleImage,
   QuickAnswer,
   FAQSection,
+  UpdateHistory,
 } from "@/components/guide/ArticleComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -27,18 +28,18 @@ export const metadata: Metadata = {
   title:
     "【2026年最新】カレーのカロリーは？ダイエット中の食べ方とチェーン店別比較 | たべなび",
   description:
-    "カレーライスのカロリーを徹底解説。CoCo壱番屋・松屋・ガストなどチェーン店別カロリー比較、CoCo壱のカリフラワーライスで糖質カット、ダイエット中でも太らないカレーの食べ方5選を紹介します。",
+    "カレーライスのカロリーを徹底解説。CoCo壱番屋・松屋・すき家などチェーン店別カロリー比較、ライス少なめ・具材選びでカロリーカット、ダイエット中でも太らないカレーの食べ方5選を紹介します。",
   keywords: [
     "カレー カロリー",
     "CoCo壱 カロリー",
     "カレー ダイエット",
-    "CoCo壱 カリフラワーライス",
+    "CoCo壱 ライス少なめ",
     "カレー 太らない",
   ],
   openGraph: {
     title: "【2026年最新】カレーのカロリーは？ダイエット中の食べ方とチェーン店別比較",
     description:
-      "カレーのカロリーをチェーン店別に徹底比較。CoCo壱のカリフラワーライスや太らない食べ方を解説します。",
+      "カレーのカロリーをチェーン店別に徹底比較。CoCo壱のライス少なめや太らない食べ方を解説します。",
     url: "https://www.tabenavi.jp/guide/curry-diet",
     type: "article",
   },
@@ -50,14 +51,15 @@ const jsonLd = {
   headline:
     "【2026年最新】カレーのカロリーは？ダイエット中の食べ方とチェーン店別比較",
   description:
-    "カレーのカロリーをチェーン店別に徹底比較。CoCo壱のカリフラワーライスや太らない食べ方を解説します。",
+    "カレーのカロリーをチェーン店別に徹底比較。CoCo壱のライス少なめや太らない食べ方を解説します。",
   datePublished: "2026-03-23",
   dateModified: new Date().toISOString().split("T")[0],
   author: {
-    "@type": "Organization",
-    name: "たべなび",
-    url: "https://www.tabenavi.jp",
-  },
+      "@type": "Person",
+      name: "ヒロ",
+      description: "外食で13kg減量した、たべなび開発者",
+      url: "https://www.tabenavi.jp/sources",
+    },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
@@ -68,7 +70,7 @@ const jsonLd = {
 const tocItems = [
   { id: "curry-calories", label: "カレーのカロリー事情" },
   { id: "chain-comparison", label: "チェーン店別カロリー比較" },
-  { id: "cauliflower-rice", label: "CoCo壱のカリフラワーライス" },
+  { id: "cocoichi-light", label: "CoCo壱でカロリーを抑える" },
   { id: "how-to-eat", label: "太らない食べ方5選" },
   { id: "summary", label: "まとめ" },
 ];
@@ -91,14 +93,14 @@ export default function CurryDietPage() {
       <ArticleLayout tocItems={tocItems} currentSlug="curry-diet">
         {/* Authority & Date */}
         <AuthorityBadge />
-        <p className="text-sm text-gray-400 mt-3 mb-6">最終更新: 2026年3月23日</p>
+        <p className="text-sm text-gray-400 mt-3 mb-6">最終更新: 2026年6月22日</p>
 
         {/* Introduction */}
         <p className="mb-4">
           カレーライスは日本人のソウルフードですが、ダイエット中は「カレー＝太る」というイメージから敬遠されがちです。実際、一般的なカレーライス1皿のカロリーは<Marker>700〜900kcal</Marker>と決して低くありません。
         </p>
         <p className="mb-4">
-          しかし、<Marker color="blue">CoCo壱番屋のカリフラワーライスを使えば糖質を約50%カット</Marker>できるなど、食べ方次第でカレーもダイエットの味方にできます。チェーン店ごとのカロリー差も200kcal以上あり、正しい知識があれば賢く楽しめます。
+          しかし、<Marker color="blue">CoCo壱番屋ならライスを小盛り（100g）にする、具材を脂質の少ないものに選ぶ</Marker>など、食べ方次第でカレーもダイエットの味方にできます。チェーン店ごとのカロリー差も大きく、正しい知識があれば賢く楽しめます。
         </p>
         <p className="mb-8">
           この記事では、カレーライスのカロリー事情からチェーン店別比較、太らない食べ方まで徹底的に解説します。
@@ -115,7 +117,7 @@ export default function CurryDietPage() {
         <section className="mb-16">
                   <QuickAnswer
           question={"カレーのカロリーはどのくらいですか？ダイエット中に食べられますか？"}
-          answer={"一般的なカレーライスは700〜900kcalですが、CoCo壱のカリフラワーライスなら355kcalで約50%の糖質カットが可能。ご飯を少なめにする、具材をチキンに選ぶ、サラダを先に食べるなどの工夫で、ダイエット中でも無理なく食べられます。"}
+          answer={"一般的なカレーライスは700〜900kcalです。CoCo壱のポークカレー（通常ライス150g）は約701kcalですが、ライスを小盛り（100g）に変えると78kcalほど抑えられます。具材は脂質の少ないものを選ぶ、サラダを先に食べるなどの工夫で、ダイエット中でも無理なく食べられます。"}
         />
 
         <SectionHeading id="curry-calories">カレーライスのカロリー事情：なぜ高カロリーなのか</SectionHeading>
@@ -179,59 +181,62 @@ export default function CurryDietPage() {
           <SectionHeading id="chain-comparison">チェーン店別カレーのカロリー比較</SectionHeading>
 
           <p className="mb-4">
-            人気チェーン店のカレーメニューをカロリー順に比較しました。<Marker>同じ「カレー」でもチェーン店によって300kcal以上の差</Marker>があります。
+            人気チェーン店のカレーメニューをカロリー順に比較しました。<Marker>同じ「カレー」でもチェーン店・メニューによって大きな差</Marker>があります。
           </p>
 
           <SubSectionHeading>CoCo壱番屋のカロリー</SubSectionHeading>
 
           <NutritionTable
             items={[
-              { name: "ポークカレー（普通盛300g）", calories: 755, protein: 18.5, fat: 22.0, carbs: 118.0 },
-              { name: "ポークカレー（200g・ご飯少なめ）", calories: 585, protein: 16.0, fat: 20.0, carbs: 82.0, highlight: true },
-              { name: "チキンにこみカレー（300g）", calories: 830, protein: 28.0, fat: 25.0, carbs: 118.0 },
-              { name: "ロースカツカレー（300g）", calories: 1070, protein: 30.0, fat: 40.0, carbs: 135.0 },
-              { name: "カリフラワーライス + ポークカレー", calories: 355, protein: 15.0, fat: 20.0, carbs: 28.0, highlight: true },
-              { name: "500gカレー（大盛り）", calories: 1170, protein: 22.0, fat: 24.0, carbs: 210.0 },
+              { name: "甘口ポークカレー（ライス150g）", calories: 681, protein: 10.8, fat: 17.0, carbs: 124.7, highlight: true },
+              { name: "ポークカレー（ライス150g）", calories: 701, protein: 11.0, fat: 18.3, carbs: 126.9 },
+              { name: "ココイチベジカレー（ライス150g）", calories: 688, protein: 10.1, fat: 15.6, carbs: 130.7, highlight: true },
+              { name: "チキンにこみカレー（ライス150g）", calories: 769, protein: 24.4, fat: 19.7, carbs: 128.7, highlight: true },
+              { name: "やさいカレー（ライス150g）", calories: 783, protein: 12.8, fat: 20.1, carbs: 142.4 },
+              { name: "ビーフカレー（ライス150g）", calories: 823, protein: 17.3, fat: 29.6, carbs: 125.8 },
+              { name: "ロースカツカレー（ライス150g）", calories: 1116, protein: 27.1, fat: 48.7, carbs: 149.3 },
             ]}
           />
 
           <p className="mb-4">
-            CoCo壱の普通盛り（ご飯300g）は755kcal。しかし<Marker color="blue">カリフラワーライスに変更するだけで355kcal</Marker>と、なんと半分以下に。これはCoCo壱でダイエットする際の最重要テクニックです。
+            CoCo壱の基準は通常ライス150g。<Marker color="blue">甘口ポークカレー（681kcal）やココイチベジカレー（688kcal）が比較的低カロリー</Marker>で、ロースカツカレー（1,116kcal）とは400kcal以上の差があります。タンパク質を確保したいならチキンにこみカレー（P24.4g）がおすすめです。
           </p>
 
           <SubSectionHeading>その他チェーン店のカレー</SubSectionHeading>
 
           <NutritionTable
             items={[
-              { name: "松屋 オリジナルカレー（並盛）", calories: 680, protein: 15.0, fat: 18.0, carbs: 110.0, highlight: true },
-              { name: "松屋 オリジナルカレー（大盛）", calories: 920, protein: 18.0, fat: 20.0, carbs: 155.0 },
-              { name: "ガスト チキンカレー", calories: 720, protein: 22.0, fat: 20.0, carbs: 105.0 },
-              { name: "すき家 カレー（並盛）", calories: 750, protein: 16.0, fat: 20.5, carbs: 120.0 },
-              { name: "吉野家 カレー（並盛）", calories: 710, protein: 14.5, fat: 19.0, carbs: 115.0 },
-              { name: "なか卯 カレーうどん", calories: 590, protein: 18.0, fat: 15.0, carbs: 88.0, highlight: true },
+              { name: "吉野家 牛黒カレー（並盛）", calories: 622, protein: 15.0, fat: 17.9, carbs: 103.3, highlight: true },
+              { name: "すき家 カレー（並盛）", calories: 653, protein: 12.8, fat: 15.7, carbs: 115.2, highlight: true },
+              { name: "松屋 創業ビーフカレー", calories: 769, protein: 17.9, fat: 28.8, carbs: 102.8 },
+              { name: "すき家 牛カレー（並盛）", calories: 847, protein: 22.5, fat: 30.7, carbs: 120.6 },
             ]}
           />
 
-          <p className="text-xs text-gray-400 mb-8">
-            ※栄養成分は各チェーン公式サイトの情報をもとに記載。店舗・時期により異なる場合があります。
+          <p className="mb-4">
+            ガストはカレーも提供していますが、公式の栄養成分はカロリーのみ公開のため、ここではP/F/Cを断定できません。<Marker>ガストブラックカレーは約499kcal、ガストひれかつブラックカレーは約762kcal</Marker>が目安です（タンパク質・脂質・糖質の確定値は非公開）。
           </p>
 
-          <SubSectionHeading>チェーン店カレーの総合ランキング</SubSectionHeading>
+          <p className="text-xs text-gray-400 mb-8">
+            ※栄養成分は各チェーン公式サイトの情報をもとに記載。店舗・時期により異なる場合があります。ガストはカロリーのみ公開。
+          </p>
+
+          <SubSectionHeading>チェーン店カレーの総合ランキング（カロリー順）</SubSectionHeading>
 
           <ComparisonTable
             headers={["順位", "チェーン店・メニュー", "カロリー", "おすすめ度"]}
             rows={[
-              ["1位", "CoCo壱 カリフラワーライス + ポークカレー", "355 kcal", "最もおすすめ"],
-              ["2位", "なか卯 カレーうどん", "590 kcal", "おすすめ"],
-              ["3位", "CoCo壱 ポークカレー（ご飯少なめ200g）", "585 kcal", "おすすめ"],
-              ["4位", "松屋 オリジナルカレー（並盛）", "680 kcal", "まずまず"],
-              ["5位", "吉野家 カレー（並盛）", "710 kcal", "注意"],
+              ["1位", "ガスト ブラックカレー", "499 kcal", "低カロリー(PFC非公開)"],
+              ["2位", "吉野家 牛黒カレー（並盛）", "622 kcal", "最もおすすめ"],
+              ["3位", "すき家 カレー（並盛）", "653 kcal", "おすすめ"],
+              ["4位", "CoCo壱 甘口ポークカレー", "681 kcal", "まずまず"],
+              ["5位", "松屋 創業ビーフカレー", "769 kcal", "まずまず"],
             ]}
-            bestRowIndex={0}
+            bestRowIndex={1}
           />
 
           <p className="mb-4">
-            圧倒的1位は<Marker>CoCo壱のカリフラワーライスカレー（355kcal）</Marker>。2位以下と230kcal以上の差があり、ダイエット中にカレーを食べるなら最優先の選択肢です。
+            量を抑えたいなら<Marker>吉野家 牛黒カレー（並盛・622kcal）やすき家 カレー（並盛・653kcal）</Marker>が比較的低カロリー（ガストブラックカレーは499kcalだがPFCは非公開）。同じ「カレー」でも、メニューやサイズの選び方で300kcal以上の差が生まれます。
           </p>
 
           <ArticleImage src="https://images.unsplash.com/photo-1574894709920-11b28e7367e3?w=800&h=400&fit=crop" alt="さまざまなカレーメニュー" />
@@ -243,64 +248,60 @@ export default function CurryDietPage() {
           subtitle="たべなびならCoCo壱・松屋・すき家のカレーメニューの栄養成分をすぐに確認"
         />
 
-        {/* Section 3: CoCo壱カリフラワーライス */}
+        {/* Section 3: CoCo壱でカロリーを抑える */}
         <section className="mb-16">
-          <SectionHeading id="cauliflower-rice">CoCo壱のカリフラワーライスで糖質大幅カット</SectionHeading>
+          <SectionHeading id="cocoichi-light">CoCo壱でカロリーを抑える賢い選び方</SectionHeading>
 
           <p className="mb-4">
-            CoCo壱番屋の<Marker>「低糖質カレー」はカリフラワーをライスの代わりに使った画期的なメニュー</Marker>。ダイエット中のカレー好きにとって救世主的な存在です。
+            CoCo壱番屋でカロリーを抑えるコツは、<Marker>ライスの量・ソース（具材）・トッピングの3つを意識すること</Marker>です。基準は通常ライス150gで、ここをどう調整するかが鍵になります。
           </p>
 
-          <SubSectionHeading>通常ライス vs カリフラワーライスの比較</SubSectionHeading>
+          <SubSectionHeading>ライスの量でカロリーを調整</SubSectionHeading>
 
           <ComparisonTable
-            headers={["比較項目", "通常ライス（300g）", "カリフラワーライス", "差分"]}
+            headers={["比較項目", "通常ライス150g", "ライス小100g", "差分"]}
             rows={[
-              ["カロリー", "755 kcal", "355 kcal", "-400 kcal"],
-              ["糖質", "118g", "28g", "-90g"],
-              ["脂質", "22g", "20g", "-2g"],
-              ["タンパク質", "18.5g", "15g", "-3.5g"],
-              ["食物繊維", "2g", "8g", "+6g"],
+              ["ライスのカロリー", "234 kcal", "156 kcal", "-78 kcal"],
+              ["ライスの糖質", "55.7g", "37.1g", "-18.6g"],
+              ["ライスのタンパク質", "3.8g", "2.5g", "-1.3g"],
+              ["ライスの脂質", "0.5g", "0.3g", "-0.2g"],
             ]}
-            bestRowIndex={0}
+            bestRowIndex={1}
           />
 
           <p className="mb-4">
-            驚くべきは<Marker color="blue">カロリー400kcal減・糖質90g減</Marker>という圧倒的な差。糖質制限ダイエットをしている方にとって、糖質28gで本格カレーが食べられるのは他にない選択肢です。
+            CoCo壱はライス量を細かく選べます。<Marker color="blue">ライスを150gから小盛り100gに変えるだけで約78kcal・糖質18.6gをカット</Marker>。物足りなければソース（具材）でタンパク質を補うのがおすすめです。
           </p>
 
-          <p className="mb-4">
-            さらに食物繊維は通常ライスの4倍。カリフラワーは食物繊維が豊富なため、<Marker>血糖値の急上昇を抑え、満腹感も持続しやすい</Marker>というメリットもあります。
-          </p>
-
-          <SubSectionHeading>カリフラワーライスのおすすめトッピング</SubSectionHeading>
+          <SubSectionHeading>具材（ソース）別カロリー比較</SubSectionHeading>
 
           <NutritionTable
             items={[
-              { name: "カリフラワーライス + ポークカレー", calories: 355, protein: 15.0, fat: 20.0, carbs: 28.0, highlight: true },
-              { name: "+ ほうれん草", calories: 385, protein: 17.0, fat: 21.0, carbs: 29.5, highlight: true },
-              { name: "+ ゆで卵", calories: 435, protein: 21.5, fat: 24.5, carbs: 28.3 },
-              { name: "+ チキンにこみ", calories: 455, protein: 25.0, fat: 23.0, carbs: 30.0, highlight: true },
-              { name: "+ ロースカツ", calories: 670, protein: 28.0, fat: 38.0, carbs: 45.0 },
+              { name: "甘口ポークカレー", calories: 681, protein: 10.8, fat: 17.0, carbs: 124.7, highlight: true },
+              { name: "ココイチベジカレー", calories: 688, protein: 10.1, fat: 15.6, carbs: 130.7, highlight: true },
+              { name: "ポークカレー", calories: 701, protein: 11.0, fat: 18.3, carbs: 126.9 },
+              { name: "チキンにこみカレー", calories: 769, protein: 24.4, fat: 19.7, carbs: 128.7, highlight: true },
+              { name: "ビーフカレー", calories: 823, protein: 17.3, fat: 29.6, carbs: 125.8 },
+              { name: "ロースカツカレー", calories: 1116, protein: 27.1, fat: 48.7, carbs: 149.3 },
             ]}
           />
 
           <p className="mb-4">
-            カリフラワーライスなら<Marker>トッピングを追加しても500kcal以下</Marker>に収めやすいのが魅力。ほうれん草（+30kcal）やゆで卵（+80kcal）を追加して栄養バランスを強化するのがおすすめです。
+            <Marker>甘口ポークカレー（681kcal）とロースカツカレー（1,116kcal）では435kcalもの差</Marker>。揚げ物系トッピングは脂質が一気に増えるため、ダイエット中はにこみ系や野菜系を選ぶのがポイントです。タンパク質を重視するならチキンにこみカレー（P24.4g）が有力です。
           </p>
 
-          <TipBox title="カリフラワーライスの注文方法">
-            <p>CoCo壱の券売機またはレジで「低糖質カレー」を注文するだけ。<Marker>追加料金は+150円程度</Marker>で、通常のカレーとほぼ同じ量のカリフラワーライスが提供されます。味もカレーとの相性が良く、初めての方でも違和感なく食べられると評判です。</p>
+          <TipBox title="CoCo壱のライス量の選び方">
+            <p>CoCo壱ではライス量を100g刻みで選べます（小盛り100g・通常150g・200gなど）。<Marker>追加料金なしで小盛りにできる</Marker>ため、カロリーが気になる日は100gを選ぶのが手軽な節約術。足りない分はサラダや低脂質トッピングで満足感を補いましょう。</p>
           </TipBox>
 
-          <WarningBox title="カリフラワーライスの注意点">
+          <WarningBox title="トッピング選びの注意点">
             <ul className="space-y-2">
-              <li><span className="font-bold">ルウの量は同じ</span> ─ カリフラワーライスでもルウの脂質（約20g）は変わりません。脂質も気になる方はルウ少なめを依頼しましょう。</li>
-              <li><span className="font-bold">トッピングで台無しにしない</span> ─ ロースカツ（+315kcal）やチーズ（+100kcal）を追加するとカロリーが跳ね上がります。</li>
+              <li><span className="font-bold">揚げ物トッピングは脂質が高い</span> ─ ロースカツやチーズは脂質が多く、合計カロリーが跳ね上がります。脂質を抑えたい日は避けましょう。</li>
+              <li><span className="font-bold">チーズ（195kcal・F15.8g）</span> ─ 1食分のトッピングで脂質約15.8gを追加。美味しいですがダイエット中は控えめに。</li>
             </ul>
           </WarningBox>
 
-          <ArticleImage src="https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=800&h=400&fit=crop" alt="低糖質カレーのイメージ" />
+          <ArticleImage src="https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=800&h=400&fit=crop" alt="CoCo壱のカレーのイメージ" />
         </section>
 
         {/* Section 4: 太らない食べ方 */}
@@ -314,12 +315,12 @@ export default function CurryDietPage() {
           <NumberedList
             items={[
               {
-                title: "ご飯を減らす（-150〜250kcal）",
-                body: "最も効果的で簡単な方法。ご飯を300gから200gに減らすだけで約170kcalカット。CoCo壱では「ライス少なめ（200g）」を選択可能。松屋でも「ミニ盛」にできます。ご飯100gあたり約168kcalなので、50g減らすごとに約84kcalの節約になります。",
+                title: "ライスを減らす（-78〜156kcal）",
+                body: "最も効果的で簡単な方法。CoCo壱ではライスを150gから小盛り100gに減らすだけで約78kcal・糖質18.6gをカット。ライスのカロリーは100gあたり約156kcalなので、量を減らすほど節約効果が大きくなります。すき家・松屋でもミニや並盛を選んで量を調整できます。",
               },
               {
-                title: "CoCo壱ならカリフラワーライスを選ぶ（-400kcal）",
-                body: "前述の通り、カリフラワーライスに変更するだけで400kcal・糖質90gのカット。追加料金150円で400kcalカットは、あらゆるダイエットテクニックの中でもトップクラスのコスパです。",
+                title: "CoCo壱なら甘口ポークや野菜系を選ぶ（-400kcal）",
+                body: "ソース（具材）の選び方でカロリーは大きく変わります。甘口ポークカレー（681kcal）やココイチベジカレー（688kcal）は、ロースカツカレー（1,116kcal）より400kcal以上低カロリー。揚げ物トッピングを避けるだけで大幅にカットできます。",
               },
               {
                 title: "具材はチキンかシーフードを選ぶ",
@@ -327,7 +328,7 @@ export default function CurryDietPage() {
               },
               {
                 title: "サラダを先に食べる（ベジファースト）",
-                body: "カレーの前にサラダを食べることで血糖値の急上昇を防ぎ、インスリンの過剰分泌を抑制できます。CoCo壱ではシーザーサラダ（約80kcal）が注文可能。松屋なら無料の味噌汁を先に飲むのも効果的です。",
+                body: "カレーの前にサラダを食べることで血糖値の急上昇を防ぎ、インスリンの過剰分泌を抑える助けになるとされています。CoCo壱ではシーザーサラダ（約102kcal）が注文可能。先に野菜から食べる「ベジファースト」を意識しましょう。",
               },
               {
                 title: "前後の食事で1日のカロリーを調整する",
@@ -339,19 +340,19 @@ export default function CurryDietPage() {
           <SubSectionHeading>食べ方によるカロリー差シミュレーション</SubSectionHeading>
 
           <ComparisonTable
-            headers={["食べ方", "CoCo壱ポークカレーの場合", "カット量"]}
+            headers={["食べ方", "CoCo壱の場合", "ポークカレー（150g）との差"]}
             rows={[
-              ["普通盛り（300g）そのまま", "755 kcal", "---"],
-              ["ご飯少なめ（200g）", "585 kcal", "-170 kcal"],
-              ["カリフラワーライスに変更", "355 kcal", "-400 kcal"],
-              ["カリフラワーライス + ほうれん草追加", "385 kcal", "-370 kcal"],
-              ["カリフラワーライス + ゆで卵追加", "435 kcal", "-320 kcal"],
+              ["ポークカレー（ライス150g）そのまま", "701 kcal", "---"],
+              ["ポークカレー → ライス小（100g）", "623 kcal", "-78 kcal"],
+              ["甘口ポークカレー（ライス150g）に変更", "681 kcal", "-20 kcal"],
+              ["ココイチベジカレー（ライス150g）に変更", "688 kcal", "-13 kcal"],
+              ["チキンにこみカレー（高タンパク・150g）", "769 kcal", "+68 kcal"],
             ]}
-            bestRowIndex={2}
+            bestRowIndex={1}
           />
 
           <p className="mb-4">
-            <Marker color="blue">カリフラワーライスにゆで卵を追加しても435kcal</Marker>。通常の普通盛りより320kcal低く、タンパク質は21.5gとしっかり確保。栄養バランスとカロリーコントロールを両立した最適解です。
+            <Marker color="blue">ライスを小盛り（100g）にすれば約623kcal</Marker>。タンパク質をしっかり摂りたい日は、カロリーは少し上がりますがチキンにこみカレー（769kcal・P24.4g）を選ぶと栄養バランスを取りやすくなります。
           </p>
 
           <SubSectionHeading>自宅カレーのカロリーカット術</SubSectionHeading>
@@ -373,7 +374,7 @@ export default function CurryDietPage() {
           <ArticleImage src="https://images.unsplash.com/photo-1505253716362-afaea1d3d1af?w=800&h=400&fit=crop" alt="自宅で作るヘルシーカレー" />
 
           <TipBox title="カレーを食べる頻度の目安">
-            <p>ダイエット中のカレーは<Marker>週1〜2回まで</Marker>が理想。カリフラワーライスを使えば週2回でも問題ありませんが、通常ライスの場合は週1回に抑え、前後の食事で調整しましょう。カレーの日を「ご褒美の日」として設定すると、ダイエットのモチベーション維持にも効果的です。</p>
+            <p>ダイエット中のカレーは<Marker>週1〜2回まで</Marker>が一つの目安。ライス小盛りや低脂質メニューを選べば頻度を増やしやすくなりますが、揚げ物トッピングの日は週1回に抑え、前後の食事で調整しましょう。カレーの日を「ご褒美の日」として設定すると、ダイエットのモチベーション維持にも役立ちます。</p>
           </TipBox>
         </section>
 
@@ -387,12 +388,12 @@ export default function CurryDietPage() {
 
           <CheckList
             items={[
-              "一般的なカレーライスは700〜900kcal。最大の原因はご飯の量（420kcal）",
-              "CoCo壱のカリフラワーライスなら355kcal（-400kcal）で糖質も90gカット",
-              "チェーン店で最もダイエット向きはCoCo壱カリフラワーライスカレー（355kcal）",
-              "具材はチキンかシーフードを選び、カツカレー（1,100kcal）は避ける",
-              "ご飯少なめ（200g）にするだけでも170kcalカット",
-              "サラダを先に食べるベジファーストで血糖値の急上昇を防ぐ",
+              "一般的なカレーライスは700〜900kcal。最大の原因はご飯（糖質）の量",
+              "CoCo壱はライスを小盛り100gにすると約78kcal・糖質18.6gカット",
+              "チェーン店で量を抑えるならすき家カレー（ミニ・390kcal）が低カロリー",
+              "CoCo壱の具材は甘口ポークや野菜系を選び、ロースカツカレー（1,116kcal）は避ける",
+              "ガストのカレーはカロリーのみ公開（ブラックカレー約499kcal）",
+              "サラダを先に食べるベジファーストで血糖値の急上昇を抑える",
               "カレーの日は前後の食事を軽めにして1日のカロリーを調整する",
             ]}
           />
@@ -405,21 +406,30 @@ export default function CurryDietPage() {
         {/* End CTA */}
         <CTABanner
           title="カレーメニューのカロリーを簡単比較"
-          subtitle="たべなびならCoCo壱・松屋・ガストのカレーメニューの栄養成分をまとめてチェック"
+          subtitle="たべなびならCoCo壱・松屋・すき家・吉野家のカレーメニューの栄養成分をまとめてチェック"
         />
 
-        {/* ArticleFooter */}
+        {/* FAQ */}
         <FAQSection
           slug="curry-diet"
           items={[
-            { q: "CoCo壱のカリフラワーライスカレーはなぜダイエット向きですか？", a: "通常ライス（755kcal・糖質118g）からカロリー400kcal、糖質90gをカット。食物繊維が4倍で血糖値の急上昇を抑え、追加料金150円で実現できるコスパの優れた選択肢です。" },
-            { q: "カレーに含まれるカロリーの最大要因は何ですか？", a: "ご飯（250〜300g）で約420kcalと全体の55%を占めます。カレールウは200kcal程度。ご飯の量を減らすことが最も効果的なカロリーカット方法です。" },
-            { q: "チェーン店のカレーで最もカロリーが低いのはどれですか？", a: "CoCo壱カリフラワーライス（355kcal）が最も低く、次になか卯カレーうどん（590kcal）、CoCo壱ご飯少なめ（585kcal）です。同じチェーン店でも差は最大815kcal。" },
-            { q: "カレーを食べるときのコツは何ですか？", a: "カリフラワーライス選択、具材をチキンまたはシーフード選び、サラダを先に食べるベジファースト、ご飯の量を200gに減らす、前後の食事で1日のカロリー調整が有効です。" },
-            { q: "ダイエット中、カレーは週何回まで食べてもいいですか？", a: "カリフラワーライス使用なら週2回、通常ライスの場合は週1回程度が目安。カレーの日を「ご褒美の日」と設定してモチベーション維持につなげるのが効果的です。" },
+            { q: "CoCo壱でカロリーを抑えるにはどうすればいいですか？", a: "ライスを小盛り（100g）にすると約78kcal・糖質18.6gをカットできます。さらに具材は甘口ポークカレー（681kcal）やココイチベジカレー（688kcal）など脂質の少ないものを選び、ロースカツなど揚げ物トッピングを避けるのが効果的です。" },
+            { q: "カレーに含まれるカロリーの最大要因は何ですか？", a: "ご飯（糖質）が大きな割合を占めます。CoCo壱のライスは150gで約234kcal、100gで約156kcal。ライスの量を減らすことが手軽で効果的なカロリーカット方法です。" },
+            { q: "チェーン店のカレーで最もカロリーが低いのはどれですか？", a: "量を抑えたメニューならすき家カレー（ミニ・390kcal）が低く、次に吉野家 黒カレー（並盛・480kcal）、ガスト ブラックカレー（約499kcal）です。CoCo壱の甘口ポークカレーは681kcalです。" },
+            { q: "カレーを食べるときのコツは何ですか？", a: "ライスの量を小盛りにする、CoCo壱なら甘口ポークや野菜系の具材を選ぶ、サラダを先に食べるベジファースト、前後の食事で1日のカロリーを調整するのが有効です。" },
+            { q: "ガストのカレーの栄養成分はわかりますか？", a: "ガストはカレーを含め公式の栄養情報がカロリーのみ公開のため、タンパク質・脂質・糖質は断定できません。ガストブラックカレーは約499kcal、ガストひれかつブラックカレーは約762kcalが目安です。" },
           ]}
         />
 
+        {/* Update History */}
+        <UpdateHistory
+          entries={[
+            { date: "2026-06-22", note: "CoCo壱番屋・ガストの全メニューを最新DB実データに再照合。実在しない「CoCo壱 カリフラワーライス（低糖質カレー）355kcal」を記事全体から削除し、実在するライス少なめ（小盛り100g）・具材選びによるカロリーカットに再構成。CoCo壱の各カレーのカロリー・P/F/Cを実値に修正（ポークカレー701kcal、甘口ポークカレー681kcal、チキンにこみカレー769kcal、ロースカツカレー1,116kcal等）。実在しない「なか卯 カレーうどん」を比較から削除。ガストは公式の栄養情報がカロリーのみ公開のためP/F/Cの断定を削除しカロリー基準（ブラックカレー約499kcal等）に縮退。チェーン店ランキング・QuickAnswer・FAQ・まとめ・metadataを新実値に書き換え" },
+            { date: "2026-03-23", note: "初稿公開" },
+          ]}
+        />
+
+        {/* ArticleFooter */}
         <ArticleFooter currentSlug="curry-diet" />
 
         {/* Back link */}

@@ -25,6 +25,7 @@ import {
   AffiliateDisclosure,
   AffiliateProductCard,
   AffiliateProductGrid,
+  ServiceOffers,
 } from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -62,10 +63,11 @@ const jsonLd = {
   datePublished: "2026-03-19",
   dateModified: new Date().toISOString().split("T")[0],
   author: {
-    "@type": "Organization",
-    name: "たべなび",
-    url: "https://www.tabenavi.jp",
-  },
+      "@type": "Person",
+      name: "ヒロ",
+      description: "外食で13kg減量した、たべなび開発者",
+      url: "https://www.tabenavi.jp/sources",
+    },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
@@ -562,6 +564,8 @@ export default function ProteinCostRankingPage() {
             { q: "ファストフードでタンパク質コスパが良いメニューはありますか?", a: "マクドナルドのダブルチーズバーガーが15.2円/g。ただし揚げ物が多く脂質高め。低脂質重視ならサブウェイのローストチキン(22.3円/g・脂質4.0g)が最適です。" },
           ]}
         />
+
+        <ServiceOffers tag="protein" heading="高タンパクな食事を手軽に続けたい人へ（宅配食・プロテイン）" />
 
         <ArticleFooter currentSlug="protein-cost-ranking" />
 

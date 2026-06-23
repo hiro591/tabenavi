@@ -52,10 +52,11 @@ const jsonLd = {
   datePublished: "2026-03-01",
   dateModified: new Date().toISOString().split("T")[0],
   author: {
-    "@type": "Organization",
-    name: "たべなび",
-    url: "https://www.tabenavi.jp",
-  },
+      "@type": "Person",
+      name: "ヒロ",
+      description: "外食で13kg減量した、たべなび開発者",
+      url: "https://www.tabenavi.jp/sources",
+    },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
@@ -428,7 +429,7 @@ export default function MuscleEatingOutPage() {
 
         <CTABanner
           title="筋トレ×外食の最強パートナー"
-          subtitle="ここまで読んでくれたあなたへ。32チェーン・6,000品以上の栄養データ、全部無料。"
+          subtitle="32チェーン・6,000品以上を、カロリー・タンパク質・脂質で絞り込み検索。登録不要・無料です。"
         />
 
         {/* ─── Section 6: まとめ ─── */}

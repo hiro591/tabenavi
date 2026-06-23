@@ -50,3 +50,7 @@ marketing/remotion-ads/out/
 marketing/remotion-ads/ai-assets/
 marketing/remotion-ads/public/*.mp4
 *.mp4
+
+# Google Search Console service account key (never commit)
+gsc-key.json
+*-gsc-key.json

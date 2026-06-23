@@ -78,6 +78,7 @@ export const RELATED_ARTICLES: RelatedArticle[] = [
   { slug: "sushi-diet", title: "回転寿司ダイエットガイド", description: "ネタ別カロリーと太らない食べ方。", category: "cuisine" },
   { slug: "family-restaurant-diet", title: "ファミレスダイエット比較", description: "サイゼリヤ・ガスト・デニーズを徹底比較。", category: "cuisine" },
   { slug: "conveni-comparison", title: "コンビニ3社カロリー比較", description: "セブン・ローソン・ファミマを栄養データで横断比較。", category: "chain" },
+  { slug: "high-protein-chain-database", title: "高タンパク外食ランキング", description: "32チェーン6,000品を検証した、外食で高タンパクなメニューのランキング。", category: "training" },
 ];
 
 export const ARTICLE_CATEGORIES = {

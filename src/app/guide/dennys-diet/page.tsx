@@ -20,6 +20,7 @@ import {
   ArticleImage,
   QuickAnswer,
   FAQSection,
+  UpdateHistory,
 } from "@/components/guide/ArticleComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
   title:
     "【2026年最新】デニーズダイエットガイド｜低カロリーメニューランキングとおすすめの食べ方 | たべなび",
   description:
-    "デニーズの低カロリーメニューランキング、ハンバーグの選び方、ダイエット中のおすすめ注文テクニックを徹底解説。ファミレスで太らない食べ方がわかります。",
+    "デニーズの低カロリーメニューランキング、ハンバーグの選び方、ダイエット中のおすすめ注文テクニックを徹底解説。和風ハンバーグ488kcalなど実測の栄養成分でファミレスで太らない食べ方がわかります。",
   keywords: [
     "デニーズ ダイエット",
     "デニーズ カロリー",
@@ -55,10 +56,11 @@ const jsonLd = {
   datePublished: "2026-03-19",
   dateModified: new Date().toISOString().split("T")[0],
   author: {
-    "@type": "Organization",
-    name: "たべなび",
-    url: "https://www.tabenavi.jp",
-  },
+      "@type": "Person",
+      name: "ヒロ",
+      description: "外食で13kg減量した、たべなび開発者",
+      url: "https://www.tabenavi.jp/sources",
+    },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
@@ -93,14 +95,14 @@ export default function DennysDietPage() {
       <ArticleLayout tocItems={tocItems} currentSlug="dennys-diet">
         {/* Authority & Date */}
         <AuthorityBadge />
-        <p className="text-sm text-gray-400 mt-3 mb-6">最終更新: 2026年3月19日</p>
+        <p className="text-sm text-gray-400 mt-3 mb-6">最終更新: 2026年6月22日</p>
 
         {/* Introduction */}
         <p className="mb-4">
           デニーズはファミリーレストランの中でも<Marker>メニューの幅広さとヘルシー志向のメニュー開発</Marker>に定評があるチェーンです。和食から洋食、サラダまでバリエーション豊富なため、ダイエット中でも食事に飽きることなく通い続けられます。
         </p>
         <p className="mb-4">
-          特に<Marker>和風ハンバーグ（535kcal/P28g）</Marker>は、ハンバーグでありながらカロリーを抑えた優秀メニュー。デザートの誘惑さえ乗り越えれば、デニーズはダイエットの強い味方になります。
+          特に<Marker>和風ハンバーグ（488kcal/P25.2g）</Marker>は、ハンバーグの中ではカロリー控えめで高タンパクなメニュー。デザートの誘惑さえ乗り越えれば、デニーズはダイエットの強い味方になります。
         </p>
         <p className="mb-4">
           この記事では、デニーズのメニューをカロリー順にランキングし、ダイエット中の注文テクニックを徹底解説します。
@@ -118,7 +120,7 @@ export default function DennysDietPage() {
         <section className="mb-16">
                   <QuickAnswer
           question={"デニーズでダイエット中に選ぶべきメニューは何ですか？"}
-          answer={"和風ハンバーグ（535kcal・タンパク質28g）と豆腐ハンバーグ（385kcal・タンパク質22.5g）がダイエット向きです。ソースの脂質で100〜200kcalの差が出るため、チーズやデミグラス系は避けて和風おろしを選ぶのが重要。メインの前にサラダを食べてベジファーストを実践しましょう。"}
+          answer={"All Beef ハンバーグ～おろしソース（444kcal・タンパク質22.7g）やデミ煮込みハンバーグ（475kcal・脂質28.6g）、和風ハンバーグ（488kcal・タンパク質25.2g）がハンバーグ系では比較的カロリー・脂質を抑えやすい選択です。チーズ系（ベーコンチーズハンバーグ等）は脂質が高くなるため、おろし・煮込み系を選ぶのがおすすめ。メインの前にシーザーサラダなどの野菜を食べてベジファーストを実践しましょう。"}
         />
 
         <SectionHeading id="why-dennys">デニーズがダイエットに使える理由</SectionHeading>
@@ -135,11 +137,11 @@ export default function DennysDietPage() {
               },
               {
                 title: "ライスの量を調整しやすい",
-                body: "ライスの量を「小盛り」に変更可能。通常のライスから小盛りに変えるだけで約80kcalカットできます。セットメニューではパンに変更する選択肢もあります。",
+                body: "ライスの量を「少なめ」に変更可能。通常のライス（302kcal）から「ライス少なめ」（168kcal）に変えるだけで約130kcal・炭水化物約30gカットできます。セットメニューではパンに変更する選択肢もあります。",
               },
               {
                 title: "単品サラダの種類が豊富",
-                body: "サイドサラダやシーザーサラダなど、メインの前に野菜を摂れるメニューが充実。ベジファーストを実践しやすいのがデニーズの強みです。",
+                body: "シーザーサラダやCOBBサラダ、ローストビーフのパワーサラダなど、メインの前に野菜を摂れるメニューが充実。ベジファーストを実践しやすいのがデニーズの強みです。",
               },
             ]}
           />
@@ -156,39 +158,39 @@ export default function DennysDietPage() {
           <SectionHeading id="calorie-ranking">デニーズ カロリーランキング（低い順）</SectionHeading>
 
           <p className="mb-4">
-            デニーズの主要メニューをカロリーの低い順にランキング。<Marker color="blue">サラダ・和食系は300〜500kcal台と低カロリー</Marker>で、ハンバーグ系も選び方次第で600kcal以下に抑えられます。
+            デニーズの主要メニューをカロリーの低い順にランキング。<Marker color="blue">サラダ・焼鮭などの単品は150〜180kcal台と低カロリー</Marker>で、ハンバーグ系も選び方次第で500kcal以下に抑えられます。
           </p>
 
           <NutritionTable
             items={[
-              { name: "グリーンサラダ", calories: 82, protein: 2.5, fat: 5.2, carbs: 6.8, highlight: true },
-              { name: "海鮮サラダ", calories: 245, protein: 18.5, fat: 12.8, carbs: 14.2, highlight: true },
-              { name: "豆腐ハンバーグ", calories: 385, protein: 22.5, fat: 18.2, carbs: 32.4, highlight: true },
-              { name: "和風ハンバーグ", calories: 535, protein: 28.0, fat: 28.5, carbs: 42.2 },
-              { name: "All Beefハンバーグ", calories: 620, protein: 30.5, fat: 35.8, carbs: 38.4 },
-              { name: "デミグラスハンバーグ", calories: 698, protein: 29.5, fat: 38.2, carbs: 48.5 },
-              { name: "ハンバーグカレードリア", calories: 742, protein: 24.8, fat: 32.5, carbs: 82.6 },
-              { name: "チーズインハンバーグ", calories: 785, protein: 32.2, fat: 42.5, carbs: 52.4 },
-              { name: "とろ〜り卵とチーズのオムライス", calories: 824, protein: 26.8, fat: 35.2, carbs: 92.5 },
-              { name: "ビーフシチューセット", calories: 865, protein: 32.5, fat: 38.8, carbs: 82.4 },
+              { name: "シーザーサラダ～４種チーズ使用", calories: 149, protein: 4.8, fat: 11.5, carbs: 6.2, highlight: true },
+              { name: "焼鮭", calories: 170, protein: 16.0, fat: 10.0, carbs: 1.9, highlight: true },
+              { name: "ローストビーフのパワーサラダ（ドレッシング除く）", calories: 180, protein: 10.4, fat: 7.1, carbs: 20.7, highlight: true },
+              { name: "All Beef ハンバーグ～おろしソース", calories: 444, protein: 22.7, fat: 30.1, carbs: 21.0 },
+              { name: "デミ煮込みハンバーグ", calories: 475, protein: 26.0, fat: 28.6, carbs: 29.2 },
+              { name: "和風ハンバーグ", calories: 488, protein: 25.2, fat: 32.8, carbs: 23.6 },
+              { name: "ベーコンチーズハンバーグ", calories: 563, protein: 29.2, fat: 39.5, carbs: 22.1 },
+              { name: "トロけるお肉のビーフシチュー", calories: 651, protein: 37.1, fat: 48.3, carbs: 17.3 },
+              { name: "とろ～り卵とチーズのオムライス", calories: 755, protein: 29.6, fat: 39.7, carbs: 67.5 },
+              { name: "ハンバーグカレードリア", calories: 805, protein: 34.2, fat: 35.2, carbs: 85.0 },
             ]}
             highlightProtein
           />
 
           <p className="text-xs text-gray-400 mb-8">
-            ※栄養成分はセットメニュー（ライス含む）の場合の概算値です。単品注文時はライス分のカロリーが異なります。
+            ※栄養成分はデニーズ公式の栄養成分表に基づく単品の値です。ライスやソースを追加・除外すると数値は変わります。
           </p>
 
           <TipBox title="ハンバーグの選び方がカギ">
-            <p>デニーズの看板はハンバーグですが、<Marker>ソースの種類で100〜200kcalの差が出ます</Marker>。和風ソース（535kcal）が最も低カロリーで、チーズインやデミグラスは脂質が跳ね上がります。ハンバーグを食べたいなら和風一択です。</p>
+            <p>デニーズの看板はハンバーグですが、<Marker>ソースやチーズの有無で100kcal前後の差が出ます</Marker>。脂質を抑えたいならデミ煮込みハンバーグ（475kcal・脂質28.6g）やAll Beef ハンバーグ～おろしソース（444kcal・脂質30.1g）が選びやすく、ベーコンチーズハンバーグ（563kcal・脂質39.5g）と比べてカロリー・脂質ともに抑えられます。チーズ系を避けるのが基本です。</p>
           </TipBox>
 
           <SubSectionHeading>PFCバランスで見るデニーズメニューの特徴</SubSectionHeading>
           <p className="mb-4">
-            デニーズのハンバーグ系メニューは<Marker color="green">タンパク質22〜32gの範囲に集中</Marker>しており、いずれもタンパク質源としては優秀です。差が出るのは脂質と炭水化物。ソースにチーズやクリームを使ったメニューは脂質が40g超になる一方、和風ソースやポン酢系なら28g程度に抑えられます。
+            デニーズのハンバーグ系メニューは<Marker color="green">タンパク質22〜37gの範囲に集中</Marker>しており、いずれもタンパク質源としては優秀です。差が出るのは脂質。チーズやクリームを使ったメニューは脂質が39g超になる一方、デミ煮込みハンバーグ（脂質28.6g）やAll Beef ハンバーグ～おろしソース（脂質30.1g）なら抑えられます。
           </p>
           <p className="mb-8">
-            また、デニーズの和食メニュー（焼き魚定食・そば等）は<Marker>カロリーが400〜550kcal台と非常に低い</Marker>のも見逃せないポイント。ハンバーグに飽きたら和食メニューも積極的に活用しましょう。
+            また、デニーズには焼鮭（170kcal・タンパク質16g）のように<Marker>高タンパクで低カロリーな単品メニュー</Marker>もあります。ハンバーグに飽きたら焼鮭朝食などの和食系メニューも活用しましょう。
           </p>
         </section>
 
@@ -200,24 +202,24 @@ export default function DennysDietPage() {
             デニーズのメニューから、<Marker>ダイエット中でも安心して注文できるメニュー</Marker>を厳選しました。
           </p>
 
-          <RankingCard rank={1} title="和風ハンバーグ" subtitle="535kcal / P28.0g / F28.5g / C42.2g">
+          <RankingCard rank={1} title="和風ハンバーグ" subtitle="488kcal / P25.2g / F32.8g / C23.6g">
             <p className="text-sm text-gray-700 leading-relaxed mb-3">
-              デニーズハンバーグの中で<Marker>最もダイエット向き</Marker>な一品。和風おろしソースでさっぱりと食べられ、タンパク質28gをしっかり確保。脂質28.5gはハンバーグとしては控えめで、大根おろしのさっぱり感が食べ過ぎを防いでくれます。
+              ハンバーグの中ではカロリー控えめ（488kcal）で、<Marker>タンパク質25.2gをしっかり確保</Marker>できる一品。和風おろしソースでさっぱりと食べられ、大根おろしのさっぱり感が食べ過ぎを防いでくれます。脂質を最優先で抑えたい日は、デミ煮込みハンバーグ（脂質28.6g）も候補に。
             </p>
             <p className="text-sm text-gray-700 leading-relaxed">
-              ライスを小盛りにすれば約455kcalまで抑えられます。デニーズでハンバーグを食べたいなら、まずこれを選びましょう。
-            </p>
-          </RankingCard>
-
-          <RankingCard rank={2} title="All Beefハンバーグ" subtitle="620kcal / P30.5g / F35.8g / C38.4g">
-            <p className="text-sm text-gray-700 leading-relaxed">
-              <Marker color="blue">100%ビーフで作られたジューシーなハンバーグ</Marker>。タンパク質30.5gと高タンパクで、牛肉由来の鉄分やビタミンB12も摂取できます。脂質は35.8gとやや高めですが、ビーフの旨みで満足感が高く、デザートへの誘惑を断ち切りやすいメニューです。
+              ライスを少なめにすれば、ベーコンチーズハンバーグ（563kcal）より大幅にカロリーを抑えられます。デニーズでハンバーグを食べたいなら、まずこれを選びましょう。
             </p>
           </RankingCard>
 
-          <RankingCard rank={3} title="豆腐ハンバーグ" subtitle="385kcal / P22.5g / F18.2g / C32.4g">
+          <RankingCard rank={2} title="All Beef ハンバーグ～おろしソース" subtitle="444kcal / P22.7g / F30.1g / C21.0g">
             <p className="text-sm text-gray-700 leading-relaxed">
-              <Marker color="green">385kcalはハンバーグ系で最もカロリーが低い</Marker>メニュー。豆腐を使うことで脂質を18.2gまで抑えつつ、タンパク質は22.5gをキープ。大豆イソフラボンも摂れるため、女性のダイエットにも最適です。
+              <Marker color="blue">100%ビーフで作られたジューシーなハンバーグ</Marker>。ハンバーグ系では444kcalと最もカロリーが低く、タンパク質22.7gも確保できます。牛肉由来の鉄分やビタミンB12も期待でき、ビーフの旨みで満足感が高いためデザートへの誘惑を断ち切りやすいメニューです。
+            </p>
+          </RankingCard>
+
+          <RankingCard rank={3} title="焼鮭" subtitle="170kcal / P16.0g / F10.0g / C1.9g">
+            <p className="text-sm text-gray-700 leading-relaxed">
+              <Marker color="green">170kcalで炭水化物わずか1.9g</Marker>という高タンパク・低糖質の単品メニュー。タンパク質16gをしっかり摂れて、青魚に含まれるEPA・DHAも期待できます。焼鮭朝食として組み合わせれば、和食でしっかり満足できる選択肢になります。
             </p>
           </RankingCard>
 
@@ -225,31 +227,31 @@ export default function DennysDietPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
             <NutritionCard
-              name="グリーンサラダ"
+              name="シーザーサラダ～４種チーズ使用"
               chain="デニーズ"
-              calories={82}
-              protein={2.5}
-              fat={5.2}
-              carbs={6.8}
+              calories={149}
+              protein={4.8}
+              fat={11.5}
+              carbs={6.2}
               recommended
             />
             <NutritionCard
-              name="海鮮サラダ"
+              name="ローストビーフのパワーサラダ"
               chain="デニーズ"
-              calories={245}
-              protein={18.5}
-              fat={12.8}
-              carbs={14.2}
+              calories={180}
+              protein={10.4}
+              fat={7.1}
+              carbs={20.7}
               recommended
             />
           </div>
 
           <p className="mb-4">
-            グリーンサラダは<Marker>わずか82kcalで食物繊維をしっかり摂取</Marker>できる優秀なサイドメニュー。メインの前に注文して先に食べることで、ベジファーストを実践できます。ドレッシングは和風を選ぶと、シーザー系より約30kcalカットできます。
+            シーザーサラダ～４種チーズ使用は<Marker>149kcalで野菜をしっかり摂取</Marker>できるサイドメニュー。メインの前に注文して先に食べることで、ベジファーストを実践できます。
           </p>
 
           <p className="mb-8">
-            海鮮サラダは<Marker color="blue">タンパク質18.5gとサラダとしては高タンパク</Marker>。エビやイカから良質なタンパク質を摂取でき、メインのハンバーグと合わせれば合計タンパク質40g以上も可能です。
+            ローストビーフのパワーサラダ（ドレッシング除く）は<Marker color="blue">タンパク質10.4gとサラダとしては高タンパク</Marker>。ローストビーフから良質なタンパク質を摂取でき、メインのハンバーグと合わせれば合計タンパク質30g以上も可能です。
           </p>
 
           <ArticleImage src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800&h=400&fit=crop" alt="ジューシーなハンバーグのイメージ" />
@@ -271,27 +273,27 @@ export default function DennysDietPage() {
 
           <WarningBox title="ダイエット中は要注意なメニュー">
             <ul className="space-y-2">
-              <li><span className="font-bold">とろ〜り卵とチーズのオムライス（824kcal）</span> ─ 卵+チーズ+ライスで炭水化物92.5g。脂質も35.2gと高カロリーの代表格です。</li>
-              <li><span className="font-bold">ビーフシチューセット（865kcal）</span> ─ ルーの脂質が高く、パンやライスと合わせると900kcal近くに。特別な日以外は避けましょう。</li>
-              <li><span className="font-bold">チーズインハンバーグ（785kcal）</span> ─ 中からとろけるチーズが脂質を一気に押し上げ、F42.5g。和風ハンバーグとの差は250kcal。</li>
-              <li><span className="font-bold">ハンバーグカレードリア（742kcal）</span> ─ ハンバーグ+カレー+ドリアの三重奏。炭水化物82.6gと糖質過多です。</li>
-              <li><span className="font-bold">パンケーキ・パフェ系デザート</span> ─ 300〜500kcal台のデザートはメイン1食分のカロリー。食後のデザートは最大の敵です。</li>
+              <li><span className="font-bold">ハンバーグカレードリア（805kcal）</span> ─ ハンバーグ+カレー+ドリアの三重奏。炭水化物85gと糖質が多めです。</li>
+              <li><span className="font-bold">とろ～り卵とチーズのオムライス（755kcal）</span> ─ 卵+チーズ+ライスで炭水化物67.5g。脂質も39.7gと高カロリーの代表格です。</li>
+              <li><span className="font-bold">トロけるお肉のビーフシチュー（651kcal）</span> ─ 脂質48.3gと高め。タンパク質37.1gは豊富ですが、脂質量に注意したいメニューです。</li>
+              <li><span className="font-bold">ベーコンチーズハンバーグ（563kcal）</span> ─ ベーコンとチーズが脂質を押し上げ、F39.5g。和風ハンバーグとの差は約75kcalです。</li>
+              <li><span className="font-bold">パンケーキ・サンデー系デザート</span> ─ パンケーキ（Tallサイズ3枚）488kcal、とちおとめのザ・サンデー575kcalなど、デザートはメイン1食分相当のカロリー。食後のデザートは要注意です。</li>
             </ul>
           </WarningBox>
 
           <ComparisonTable
             headers={["メニュー", "カロリー", "タンパク質", "脂質", "判定"]}
             rows={[
-              ["豆腐ハンバーグ", "385 kcal", "22.5g", "18.2g", "◎"],
-              ["和風ハンバーグ", "535 kcal", "28.0g", "28.5g", "○"],
-              ["All Beefハンバーグ", "620 kcal", "30.5g", "35.8g", "○"],
-              ["チーズインハンバーグ", "785 kcal", "32.2g", "42.5g", "×"],
+              ["All Beef ハンバーグ～おろしソース", "444 kcal", "22.7g", "30.1g", "◎"],
+              ["デミ煮込みハンバーグ", "475 kcal", "26.0g", "28.6g", "◎"],
+              ["和風ハンバーグ", "488 kcal", "25.2g", "32.8g", "○"],
+              ["ベーコンチーズハンバーグ", "563 kcal", "29.2g", "39.5g", "×"],
             ]}
             bestRowIndex={0}
           />
 
-          <TipBox title="他ファミレスとのカロリー比較">
-            <p>デニーズの和風ハンバーグ（535kcal）は、<Marker>ガストのチーズINハンバーグ（約750kcal）やロイヤルホストの黒×黒ハンバーグ（約820kcal）と比較しても低カロリー</Marker>。ファミレスでハンバーグを食べたいなら、デニーズの和風が最も賢い選択です。</p>
+          <TipBox title="ハンバーグはソース・チーズの有無で選ぶ">
+            <p>デニーズのハンバーグは<Marker>ソースやチーズの有無で脂質・カロリーが変わります</Marker>。All Beef ハンバーグ～おろしソース（444kcal・脂質30.1g）やデミ煮込みハンバーグ（脂質28.6g）はベーコンチーズハンバーグ（563kcal・脂質39.5g）より脂質・カロリーともに低め。ファミレスでハンバーグを食べたいなら、おろし・煮込み系が選びやすい選択です。</p>
           </TipBox>
 
           <ArticleImage src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=800&h=400&fit=crop" alt="ヘルシーなプレートランチのイメージ" />
@@ -307,17 +309,17 @@ export default function DennysDietPage() {
 
           <SubSectionHeading>テクニック1：サラダをセットに追加する</SubSectionHeading>
           <p className="mb-6">
-            メインの前にグリーンサラダ（82kcal）を注文し、先に食べましょう。<Marker>食物繊維を最初に摂ることで血糖値の急上昇を防ぎ</Marker>、脂肪の蓄積を抑えられます。ドレッシングは和風を選ぶとさらにカロリーダウン。
+            メインの前にシーザーサラダ（149kcal）を注文し、先に食べましょう。<Marker>食物繊維を最初に摂ることで血糖値の急上昇を防ぎやすくなり</Marker>、食べ過ぎの抑制も期待できます。
           </p>
 
-          <SubSectionHeading>テクニック2：ライスは小盛り or パンに変更</SubSectionHeading>
+          <SubSectionHeading>テクニック2：ライスは少なめ or パンに変更</SubSectionHeading>
           <p className="mb-6">
-            ライスの小盛り変更で<Marker color="blue">約80kcal・炭水化物約20gカット</Marker>。パンに変更すると、バターを使わなければさらにカロリーを抑えられます。主食のカロリーを調整するのが最も手軽なダイエットテクニックです。
+            ライスを「少なめ」（168kcal）に変更すると、通常ライス（302kcal）から<Marker color="blue">約130kcal・炭水化物約30gカット</Marker>。パンに変更すると、バターを使わなければさらにカロリーを抑えられます。主食のカロリーを調整するのが最も手軽なダイエットテクニックです。
           </p>
 
-          <SubSectionHeading>テクニック3：ソースはあっさり系を選ぶ</SubSectionHeading>
+          <SubSectionHeading>テクニック3：ソース・チーズの有無で選ぶ</SubSectionHeading>
           <p className="mb-6">
-            ハンバーグのソースは<Marker color="green">和風おろし・ポン酢系がベスト</Marker>。デミグラス、チーズ、クリーム系のソースは脂質が高いため避けましょう。同じハンバーグでもソースの選択で100〜200kcalの差が生まれます。
+            ハンバーグは<Marker color="green">和風・おろし系がベスト</Marker>。ベーコンチーズやデミ煮込み系は脂質が高めなので、脂質を抑えたいときは避けましょう。同じハンバーグでもチーズやソースの違いで100kcal前後の差が生まれます。
           </p>
 
           <SubSectionHeading>テクニック4：ドリンクバーでは無糖を選ぶ</SubSectionHeading>
@@ -333,23 +335,23 @@ export default function DennysDietPage() {
           <ComparisonTable
             headers={["目的", "注文内容", "合計カロリー", "タンパク質"]}
             rows={[
-              ["最小カロリー", "豆腐ハンバーグ + グリーンサラダ", "467 kcal", "25.0g"],
-              ["高タンパク", "All Beefハンバーグ + 海鮮サラダ", "865 kcal", "49.0g"],
-              ["バランス重視", "和風ハンバーグ + グリーンサラダ（ライス小盛り）", "537 kcal", "30.5g"],
+              ["最小カロリー", "All Beef ハンバーグ～おろしソース + シーザーサラダ", "593 kcal", "27.5g"],
+              ["高タンパク", "和風ハンバーグ + ローストビーフのパワーサラダ", "668 kcal", "35.6g"],
+              ["バランス重視", "和風ハンバーグ + シーザーサラダ", "637 kcal", "30.0g"],
             ]}
             bestRowIndex={2}
           />
 
           <p className="mb-8">
-            <Marker>サラダを先に食べてからメインに取りかかる</Marker>のが共通のルール。血糖値の急上昇を防ぎ、食べ過ぎも防止できます。
+            <Marker>サラダを先に食べてからメインに取りかかる</Marker>のが共通のルール。血糖値の急上昇を防ぎやすくなり、食べ過ぎの抑制も期待できます。
           </p>
 
           <TipBox title="デザートの誘惑を乗り越える方法">
-            <p>デニーズのデザートメニューは非常に魅力的ですが、パンケーキ1皿で約450kcal。<Marker>どうしてもデザートが食べたい場合は、低カロリーのゼリー系（約80kcal）を選ぶ</Marker>か、友人とシェアして量を半分にしましょう。</p>
+            <p>デニーズのデザートメニューは非常に魅力的ですが、いちごのフレンチトーストで約418kcal、とちおとめのザ・サンデーで約575kcalあります。<Marker>どうしてもデザートが食べたい場合は、比較的軽めのいちごのゼリー仕立て（79kcal）を選ぶ</Marker>か、友人とシェアして量を半分にしましょう。</p>
           </TipBox>
 
           <WarningBox title="セットメニューの落とし穴に注意">
-            <p>デニーズのセットメニュー（ハンバーグ+ドリンクバー+デザート）はお得感がありますが、<Marker>ドリンクバーで甘い飲み物2〜3杯（200〜300kcal）+ デザート（300〜450kcal）で合計500〜750kcalの追加</Marker>に。セットを頼むなら、ドリンクは無糖飲料のみ、デザートはスキップが鉄則です。</p>
+            <p>デニーズのセットメニュー（ハンバーグ+ドリンクバー+デザート）はお得感がありますが、<Marker>ドリンクバーで甘い飲み物2〜3杯（コーラ約89kcal/杯など）+ デザート（300〜500kcal）で合計500kcal以上の追加</Marker>になりがち。セットを頼むなら、ドリンクは無糖飲料のみ、デザートはスキップが無難です。</p>
           </WarningBox>
 
           <ArticleImage src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&h=400&fit=crop" alt="色鮮やかなサラダのイメージ" />
@@ -357,8 +359,8 @@ export default function DennysDietPage() {
 
         {/* Bottom CTA */}
         <CTABanner
-          title="たべなびで外食の栄養管理を始めよう"
-          subtitle="32チェーン・6,000品以上の栄養データ、全部無料"
+          title="そのメニュー、何kcal？ たべなびで今すぐ検索"
+          subtitle="32チェーン・6,000品以上を、カロリー・タンパク質・脂質で絞り込み検索。登録不要・無料です。"
         />
 
         {/* Extra Image */}
@@ -377,12 +379,12 @@ export default function DennysDietPage() {
 
           <CheckList
             items={[
-              "和風ハンバーグ（535kcal/P28g）がハンバーグ系で最もダイエット向き",
-              "豆腐ハンバーグ（385kcal/P22.5g）なら400kcal以下で満足感も十分",
-              "ソースは和風おろし・ポン酢系を選び、チーズ・クリーム系は避ける",
-              "ライス小盛りで約80kcalカット。五穀米がなくてもカロリー調整は可能",
-              "メインの前にグリーンサラダ（82kcal）でベジファースト",
-              "デザートとドリンクバーの甘い飲み物は最大の敵。無糖飲料を選ぶ",
+              "和風ハンバーグ（488kcal/P25.2g）は高タンパク、デミ煮込みハンバーグ（脂質28.6g）は脂質控えめでどちらも選びやすい",
+              "All Beef ハンバーグ～おろしソース（444kcal/P22.7g）ならハンバーグ系で最もカロリーが低い",
+              "ハンバーグはチーズやソースの有無で選び、ベーコンチーズ系は脂質が高め",
+              "ライスを少なめにすると約130kcalカット。手軽にカロリー調整できる",
+              "メインの前にシーザーサラダ（149kcal）でベジファースト",
+              "デザートとドリンクバーの甘い飲み物は要注意。無糖飲料を選ぶ",
             ]}
           />
 
@@ -395,11 +397,19 @@ export default function DennysDietPage() {
         <FAQSection
           slug="dennys-diet"
           items={[
-            { q: "デニーズの最も低カロリーなメニューは？", a: "グリーンサラダ（82kcal）がメニュー全体で最低。ハンバーグなどのメインを選ぶなら豆腐ハンバーグ（385kcal）が最も低カロリーで、脂質18.2g・タンパク質22.5gとバランスも優秀です。" },
-            { q: "デニーズで700kcal超のメニューにはどんなものがある？", a: "デミグラスハンバーグ（698kcal）、ハンバーグカレードリア（742kcal）、チーズインハンバーグ（785kcal）、オムライス（824kcal）、ビーフシチューセット（865kcal）など。ダイエット中は避けるべきメニューです。" },
-            { q: "デニーズのハンバーグを食べるときのカロリーカット方法は？", a: "ライスを小盛りにして約80kcalカット、ドレッシングは和風選択で約30kcalカット、ソースは和風系を選んで100〜200kcルカット。メインの前にサラダを食べるベジファーストで血糖値上昇を防げます。" },
-            { q: "他のファミレスと比べてデニーズはダイエット向き？", a: "はい。デニーズの和風ハンバーグ（535kcal）は、ガストのチーズINハンバーグ（約750kcal）やロイヤルホストの黒×黒ハンバーグ（約820kcal）より低カロリー。メニューにカロリー表示があるのも判断しやすい利点です。" },
-            { q: "デニーズのデザートはダイエット中に選べるものがある？", a: "パンケーキは約450kcal、パフェは300〜500kcalと高い。低カロリーのゼリー系（約80kcal）なら選択可能ですが、基本的にはデザートはスキップするか友人とシェアする工夫が重要です。" },
+            { q: "デニーズの最も低カロリーなメニューは？", a: "サラダ・単品ではシーザーサラダ～４種チーズ使用（149kcal）や焼鮭（170kcal）が低カロリーです。ハンバーグなどのメインを選ぶなら、All Beef ハンバーグ～おろしソース（444kcal）がハンバーグ系で最もカロリーが低く、タンパク質22.7gも確保できます。" },
+            { q: "デニーズで700kcal超のメニューにはどんなものがある？", a: "とろ～り卵とチーズのオムライス（755kcal）、ハンバーグカレードリア（805kcal）、ミックスフライ定食（821kcal）、チキン南蛮定食（836kcal）など。これらは炭水化物や脂質が多いため、ダイエット中は頻度を抑えたいメニューです。" },
+            { q: "デニーズのハンバーグを食べるときのカロリーカット方法は？", a: "ライスを少なめにして約130kcalカット、ハンバーグは和風・おろし系を選んでベーコンチーズ系より約75kcalカット、というのが手軽な方法です。メインの前にサラダを食べるベジファーストで血糖値の急上昇も防ぎやすくなります。" },
+            { q: "デニーズでダイエット向きのハンバーグは？", a: "All Beef ハンバーグ～おろしソース（444kcal）はハンバーグ系で最もカロリーが低く、デミ煮込みハンバーグ（475kcal・脂質28.6g）は脂質を抑えやすい選択です。和風ハンバーグ（488kcal・タンパク質25.2g）も高タンパクでおすすめ。ベーコンチーズハンバーグ（563kcal・脂質39.5g）などチーズ入りは脂質が高めになります。" },
+            { q: "デニーズのデザートはダイエット中に選べるものがある？", a: "いちごのフレンチトーストは約418kcal、とちおとめのザ・サンデーは約575kcalと高めです。比較的軽めのいちごのゼリー仕立て（79kcal）なら選びやすいですが、基本的にはデザートはスキップするか友人とシェアする工夫がおすすめです。" },
+          ]}
+        />
+
+        {/* Update History */}
+        <UpdateHistory
+          entries={[
+            { date: "2026-06-22", note: "全メニューのカロリー・PFC・メニュー名を最新DB実データに再照合。架空メニュー（グリーンサラダ・海鮮サラダ・豆腐ハンバーグ・チーズインハンバーグ・デミグラスハンバーグ・ビーフシチューセット）を実在メニュー（シーザーサラダ・ローストビーフのパワーサラダ・焼鮭・All Beef ハンバーグ～おろしソース・ベーコンチーズハンバーグ・デミ煮込みハンバーグ・トロけるお肉のビーフシチュー）へ差し替え。和風ハンバーグ等の栄養値を実測値に修正し、ランキング・比較表・QuickAnswer・FAQ・まとめの依存記述も全て書き換え" },
+            { date: "2026-03-19", note: "初稿公開" },
           ]}
         />
 

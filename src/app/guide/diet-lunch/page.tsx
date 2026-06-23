@@ -24,6 +24,7 @@ import {
 import {
   AffiliateDisclosure,
   AffiliateProductGrid,
+  ServiceOffers,
 } from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -61,10 +62,11 @@ const jsonLd = {
   datePublished: "2026-03-19",
   dateModified: new Date().toISOString().split("T")[0],
   author: {
-    "@type": "Organization",
-    name: "たべなび",
-    url: "https://www.tabenavi.jp",
-  },
+      "@type": "Person",
+      name: "ヒロ",
+      description: "外食で13kg減量した、たべなび開発者",
+      url: "https://www.tabenavi.jp/sources",
+    },
   publisher: { "@type": "Organization", name: "たべなび" },
   mainEntityOfPage: "https://www.tabenavi.jp/guide/diet-lunch",
 };
@@ -567,6 +569,8 @@ export default function DietLunchPage() {
             { q: "オフィスワーカーがダイエットランチを継続するコツは？", a: "あらかじめ3パターンのランチルーティンを決めておく、12時前に食べる、コンビニは入店前に選ぶメニューを決める、午後の間食にプロテインを常備、週1回のご褒美ランチでモチベーション維持が重要です。ながら食べは避け15分以上かけて食べましょう。" },
           ]}
         />
+
+        <ServiceOffers tag="diet" heading="ランチも栄養バランスよく。宅配食という選択肢" />
 
         <ArticleFooter currentSlug="diet-lunch" />
 

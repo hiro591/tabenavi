@@ -24,8 +24,8 @@ import {
   AffiliateProductGrid,
 } from "@/components/guide/AffiliateComponents";
 
-// ISR: cache DB-driven calorie list for 12 hours (CPU optimization).
-export const revalidate = 43200;
+// ISR: 栄養データは月次変更。7日キャッシュで再生成CPUを大幅削減(旧12h)。
+export const revalidate = 604800;
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
 export const metadata: Metadata = {
@@ -59,10 +59,11 @@ const jsonLd = {
   datePublished: "2026-03-01",
   dateModified: new Date().toISOString().split("T")[0],
   author: {
-    "@type": "Organization",
-    name: "たべなび",
-    url: "https://www.tabenavi.jp",
-  },
+      "@type": "Person",
+      name: "ヒロ",
+      description: "外食で13kg減量した、たべなび開発者",
+      url: "https://www.tabenavi.jp/sources",
+    },
   publisher: { "@type": "Organization", name: "たべなび" },
   mainEntityOfPage: "https://www.tabenavi.jp/guide/calorie-database",
 };

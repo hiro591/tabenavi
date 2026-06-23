@@ -18,6 +18,8 @@ import {
   ArticleImage,
   QuickAnswer,
   FAQSection,
+  UpdateHistory,
+  CalorieBar,
 } from "@/components/guide/ArticleComponents";
 import { AffiliateProductGrid } from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
@@ -27,7 +29,7 @@ export const metadata: Metadata = {
   title:
     "【2026年最新】丸亀製麺ダイエットガイド｜うどんは太る？低カロリーメニューの選び方 | たべなび",
   description:
-    "丸亀製麺のカロリー・PFC一覧、ダイエット中のおすすめメニュー、天ぷらの落とし穴を徹底解説。うどんは実は低脂質でダイエット向き。太らない食べ方がわかります。",
+    "丸亀製麺のカロリー・PFC一覧、ダイエット中のおすすめメニュー、天ぷらの落とし穴を徹底解説。かけうどん並は299kcal・脂質1.3gと低脂質でダイエット向き。太らない食べ方がわかります。",
   keywords: [
     "丸亀製麺 ダイエット",
     "丸亀製麺 カロリー",
@@ -55,10 +57,11 @@ const jsonLd = {
   datePublished: "2026-03-19",
   dateModified: new Date().toISOString().split("T")[0],
   author: {
-    "@type": "Organization",
-    name: "たべなび",
-    url: "https://www.tabenavi.jp",
-  },
+      "@type": "Person",
+      name: "ヒロ",
+      description: "外食で13kg減量した、たべなび開発者",
+      url: "https://www.tabenavi.jp/sources",
+    },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
@@ -93,11 +96,11 @@ export default function MarugameDietPage() {
 
       <ArticleLayout tocItems={tocItems} currentSlug="marugame-diet">
         {/* Date */}
-        <p className="text-sm text-gray-400 mt-3 mb-6">最終更新: 2026年3月19日</p>
+        <p className="text-sm text-gray-400 mt-3 mb-6">最終更新: 2026年6月22日</p>
 
         {/* Introduction */}
         <p className="mb-4">
-          「ダイエット中にうどんなんて食べていいの？」そう思っている方は多いはず。しかし、実は<Marker>うどんは外食メニューの中でもトップクラスに低脂質な食品</Marker>です。かけうどん（並）はわずか305kcal・脂質1.5gと、牛丼やハンバーガーとは比較にならないほどクリーンな栄養バランスを持っています。
+          「ダイエット中にうどんなんて食べていいの？」そう思っている方は多いはず。しかし、実は<Marker>うどんは外食メニューの中でもトップクラスに低脂質な食品</Marker>です。かけうどん（並・温）はわずか299kcal・脂質1.3gと、牛丼やハンバーガーとは比較にならないほどクリーンな栄養バランスを持っています。
         </p>
         <p className="mb-4">
           ただし、丸亀製麺には大きな落とし穴があります。それが<Marker color="blue">天ぷら</Marker>です。うどん本体が低カロリーでも、天ぷらを2〜3個トッピングするだけで一気に600〜800kcal超え。「うどんだからヘルシー」と油断するのが最も危険なパターンです。
@@ -105,6 +108,13 @@ export default function MarugameDietPage() {
         <p className="mb-8">
           この記事では、丸亀製麺のメニューをカロリー順にランキングし、ダイエット中でも安心して注文できるメニューの選び方と天ぷらの賢い付き合い方を徹底解説します。
         </p>
+
+        <UpdateHistory
+          entries={[
+            { date: "2026-06-22", note: "全メニューの栄養成分（カロリー・PFC）を最新の実データに更新。架空メニューを実在品へ修正し、ランキング・比較・FAQの数値をすべて再検算。" },
+            { date: "2026-03-19", note: "初版公開。" },
+          ]}
+        />
 
         {/* Mobile TOC */}
         <div className="lg:hidden">
@@ -115,28 +125,28 @@ export default function MarugameDietPage() {
         <section className="mb-16">
                   <QuickAnswer
           question={"丸亀製麺のうどんはダイエット向き？低カロリーメニューの選び方は？"}
-          answer={"丸亀製麺のかけうどん(並)は305kcal・脂質1.5gと低脂質で、脂質制限ダイエットに最適です。ただし天ぷらを付けると600kcal超に。ダイエット中のおすすめは、シンプルなうどん + 天ぷらは1個まで(かしわ天推奨) + 温泉たまごでタンパク質補給です。"}
+          answer={"丸亀製麺のかけうどん(並・温)は299kcal・脂質1.3gと低脂質で、脂質制限ダイエットに最適です。ただし天ぷらを付けると500kcal超に。ダイエット中のおすすめは、シンプルなうどん + 天ぷらは1個まで(かしわ天推奨) + 温泉玉子でタンパク質補給です。"}
         />
 
         <SectionHeading id="udon-diet">うどんはダイエットに向いてる？（実は低脂質）</SectionHeading>
 
           <p className="mb-4">
-            うどんは「炭水化物の塊だから太る」と思われがちですが、栄養データを見ると印象が一変します。<Marker>丸亀製麺のかけうどん（並）は305kcal・脂質わずか1.5g</Marker>。これは外食チェーンの中でも驚異的な低脂質です。
+            うどんは「炭水化物の塊だから太る」と思われがちですが、栄養データを見ると印象が一変します。<Marker>丸亀製麺のかけうどん（並・温）は299kcal・脂質わずか1.3g</Marker>。これは外食チェーンの中でも驚異的な低脂質です。
           </p>
 
           <NumberedList
             items={[
               {
                 title: "脂質がほぼゼロに近い",
-                body: "かけうどん（並）の脂質はたった1.5g。牛丼並盛り（脂質約25g）やビッグマック（脂質約30g）と比較すると、うどんの脂質の低さは圧倒的です。脂質制限ダイエットとの相性が抜群。",
+                body: "かけうどん（並・温）の脂質はたった1.3g。牛丼並盛り（脂質約23g）やビッグマック（脂質約28g）と比較すると、うどんの脂質の低さは圧倒的です。脂質制限ダイエットとの相性が抜群。",
               },
               {
                 title: "カロリー自体も低い",
-                body: "並盛りで305kcal。ご飯一膳（約250kcal）にだし汁をかけた程度のカロリーです。外食で300kcal台に収まるメインメニューは非常に少なく、これだけでも丸亀製麺の優位性がわかります。",
+                body: "並盛りで299kcal。ご飯一膳（約250kcal）にだし汁をかけた程度のカロリーです。外食で300kcal前後に収まるメインメニューは非常に少なく、これだけでも丸亀製麺の優位性がわかります。",
               },
               {
                 title: "問題は「トッピング次第」",
-                body: "うどん本体は優秀ですが、天ぷらやかき揚げを追加した瞬間にカロリーが倍増します。丸亀製麺でダイエットするなら「何を乗せるか」が最重要ポイントです。",
+                body: "うどん本体は優秀ですが、天ぷらやかき揚げを追加した瞬間にカロリーが大きく増えます。丸亀製麺でダイエットするなら「何を乗せるか」が最重要ポイントです。",
               },
             ]}
           />
@@ -144,16 +154,16 @@ export default function MarugameDietPage() {
           <ComparisonTable
             headers={["メニュー", "カロリー", "脂質", "タンパク質"]}
             rows={[
-              ["丸亀 かけうどん（並）", "305 kcal", "1.5g", "8.5g"],
-              ["すき家 牛丼（並）", "733 kcal", "25.0g", "22.0g"],
-              ["マクドナルド ビッグマック", "525 kcal", "28.3g", "26.0g"],
-              ["サイゼリヤ ミラノ風ドリア", "548 kcal", "22.4g", "15.8g"],
+              ["丸亀 かけうどん（並・温）", "299 kcal", "1.3g", "9.5g"],
+              ["すき家 牛丼（並）", "695 kcal", "23.4g", "21.7g"],
+              ["マクドナルド ビッグマック", "525 kcal", "28.0g", "26.1g"],
+              ["サイゼリヤ ミラノ風ドリア", "560 kcal", "21.0g", "18.0g"],
             ]}
             bestRowIndex={0}
           />
 
           <TipBox title="低脂質 = 脂質制限ダイエットに最適">
-            <p>ダイエットの方法は大きく「糖質制限」と「脂質制限」の2つに分かれます。うどんは糖質制限には不向きですが、<Marker>脂質制限（ローファットダイエット）なら最高の選択肢</Marker>。脂質1.5gのかけうどんは、1日の脂質目標40g以内に余裕で収まります。</p>
+            <p>ダイエットの方法は大きく「糖質制限」と「脂質制限」の2つに分かれます。うどんは糖質制限には不向きですが、<Marker>脂質制限（ローファットダイエット）なら最高の選択肢</Marker>。脂質1.3gのかけうどんは、1日の脂質目標40g以内に余裕で収まります。</p>
           </TipBox>
 
           <ArticleImage
@@ -167,21 +177,24 @@ export default function MarugameDietPage() {
           <SectionHeading id="calorie-ranking">丸亀製麺カロリーランキング（低い順）</SectionHeading>
 
           <p className="mb-4">
-            丸亀製麺の主要うどんメニューをカロリーの低い順にランキングしました。<Marker color="blue">シンプルなうどんほど低カロリー</Marker>で、カレーうどんや肉系は高めの傾向があります。すべて並盛りでの比較です。
+            丸亀製麺の主要うどんメニューをカロリーの低い順にランキングしました。<Marker color="blue">シンプルなうどんほど低カロリー</Marker>で、カレーうどんや肉系は高めの傾向があります。すべて並盛りでの比較です（温・冷は記載のもの）。
           </p>
 
           <NutritionTable
             items={[
-              { name: "かけうどん（並）", calories: 305, protein: 8.5, fat: 1.5, carbs: 63.5, highlight: true },
-              { name: "ぶっかけうどん（冷・並）", calories: 303, protein: 8.2, fat: 1.8, carbs: 62.8, highlight: true },
-              { name: "釜揚げうどん（並）", calories: 310, protein: 8.8, fat: 1.6, carbs: 64.0, highlight: true },
-              { name: "ざるうどん（並）", calories: 303, protein: 8.0, fat: 1.4, carbs: 63.2, highlight: true },
-              { name: "とろ玉うどん（並）", calories: 378, protein: 14.5, fat: 5.8, carbs: 65.2 },
-              { name: "明太釜玉うどん（並）", calories: 412, protein: 16.2, fat: 7.5, carbs: 66.8 },
-              { name: "肉うどん（並）", calories: 465, protein: 18.5, fat: 12.8, carbs: 66.5 },
-              { name: "肉ぶっかけうどん（並）", calories: 478, protein: 19.2, fat: 13.5, carbs: 65.8 },
-              { name: "カレーうどん（並）", calories: 498, protein: 14.8, fat: 10.5, carbs: 82.4 },
-              { name: "かけうどん＋野菜かき揚げ", calories: 555, protein: 11.2, fat: 15.5, carbs: 85.5 },
+              { name: "かけうどん（並・温）", calories: 299, protein: 9.5, fat: 1.3, carbs: 62.3, highlight: true },
+              { name: "ざるうどん（並・冷）", calories: 305, protein: 9.3, fat: 1.3, carbs: 63.8, highlight: true },
+              { name: "冷かけうどん（並・冷）", calories: 314, protein: 9.3, fat: 1.3, carbs: 64.5, highlight: true },
+              { name: "ぶっかけうどん（並・温）", calories: 317, protein: 9.6, fat: 1.3, carbs: 65.6, highlight: true },
+              { name: "ぶっかけうどん（並・冷）", calories: 320, protein: 9.6, fat: 1.3, carbs: 66.4, highlight: true },
+              { name: "釜揚げうどん（並・温）", calories: 338, protein: 10.4, fat: 1.5, carbs: 70.7, highlight: true },
+              { name: "釜玉うどん（並・温）", calories: 372, protein: 15.4, fat: 7.0, carbs: 60.7 },
+              { name: "明太釜玉うどん（並・温）", calories: 391, protein: 17.4, fat: 7.4, carbs: 62.8 },
+              { name: "とろ玉うどん（並・温）", calories: 407, protein: 16.7, fat: 7.0, carbs: 68.1 },
+              { name: "きつねうどん（並・温）", calories: 434, protein: 15.4, fat: 9.6, carbs: 71.2 },
+              { name: "明太クリームうどん（並・温）", calories: 507, protein: 13.0, fat: 20.6, carbs: 67.6 },
+              { name: "焼きたて肉うどん（並・温）", calories: 693, protein: 23.6, fat: 29.9, carbs: 82.1 },
+              { name: "トマたまカレーうどん（並・温）", calories: 702, protein: 15.3, fat: 23.7, carbs: 107.1 },
             ]}
             highlightProtein
           />
@@ -190,8 +203,24 @@ export default function MarugameDietPage() {
             ※栄養成分は目安値です。店舗や時期により異なる場合があります。おすすめマークは350kcal以下のメニューに表示。
           </p>
 
+          <CalorieBar
+            title="丸亀製麺 主要うどんのカロリー比較（並盛・低い順）"
+            items={[
+              { name: "かけうどん（温）", value: 299 },
+              { name: "ぶっかけうどん（冷）", value: 320 },
+              { name: "釜揚げうどん（温）", value: 338 },
+              { name: "釜玉うどん（温）", value: 372 },
+              { name: "とろ玉うどん（温）", value: 407 },
+              { name: "きつねうどん（温）", value: 434 },
+              { name: "明太クリームうどん（温）", value: 507 },
+              { name: "焼きたて肉うどん（温）", value: 693 },
+              { name: "トマたまカレーうどん（温）", value: 702 },
+            ]}
+            caption="シンプルなうどんほど低カロリー。クリーム系・肉系・カレー系は500kcalを大きく超える。"
+          />
+
           <TipBox title="並盛り vs 大盛りのカロリー差">
-            <p>丸亀製麺の大盛りは並盛りの約1.5倍の麺量。<Marker>かけうどんの場合、並305kcalに対して大は約460kcal</Marker>。150kcalの差は、おにぎり1個分に相当します。ダイエット中はまず並盛りで注文し、物足りなければ薬味やトッピングで満足感を補うのが賢い選択です。</p>
+            <p>丸亀製麺の大盛りは並盛りより麺量が多めです。<Marker>かけうどんの場合、並（温）299kcalに対して大（温）は445kcal</Marker>。約146kcalの差は、おにぎり1個分に相当します。ダイエット中はまず並盛りで注文し、物足りなければ薬味やトッピングで満足感を補うのが賢い選択です。</p>
           </TipBox>
         </section>
 
@@ -203,21 +232,20 @@ export default function MarugameDietPage() {
             丸亀製麺でダイエット中におすすめのメニューを厳選しました。基本の考え方は「<Marker>シンプルなうどん + 低カロリートッピング</Marker>」です。
           </p>
 
-          <SubSectionHeading>第1位：かけうどん（並）</SubSectionHeading>
+          <SubSectionHeading>第1位：かけうどん（並・温）</SubSectionHeading>
 
           <NutritionCard
-            name="かけうどん（並）"
+            name="かけうどん（並・温）"
             chain="丸亀製麺"
-            calories={305}
-            protein={8.5}
-            fat={1.5}
-            carbs={63.5}
-            price={390}
+            calories={299}
+            protein={9.5}
+            fat={1.3}
+            carbs={62.3}
             recommended
           />
 
           <p className="mb-8 mt-4">
-            <Marker>丸亀製麺のダイエット最強メニュー</Marker>。脂質わずか1.5gで305kcalという驚異的な数値。出汁の旨みだけで十分に美味しく、シンプルイズベストを体現したメニューです。ここに温泉たまご（約70kcal）を追加しても375kcalに収まります。
+            <Marker>丸亀製麺のダイエット最強メニュー</Marker>。脂質わずか1.3gで299kcalという驚異的な数値。出汁の旨みだけで十分に美味しく、シンプルイズベストを体現したメニューです。ここに温泉玉子（73kcal）を追加しても372kcalに収まります。
           </p>
 
           <SubSectionHeading>第2位：ぶっかけうどん（冷・並）</SubSectionHeading>
@@ -225,33 +253,31 @@ export default function MarugameDietPage() {
           <NutritionCard
             name="ぶっかけうどん（冷・並）"
             chain="丸亀製麺"
-            calories={303}
-            protein={8.2}
-            fat={1.8}
-            carbs={62.8}
-            price={390}
+            calories={320}
+            protein={9.6}
+            fat={1.3}
+            carbs={66.4}
             recommended
           />
 
           <p className="mb-8 mt-4">
-            かけうどんとほぼ同カロリーですが、冷たいうどんには嬉しいメリットが。<Marker color="blue">冷やすことでレジスタントスターチ（難消化性でんぷん）が増加する可能性があります</Marker>が、その効果の程度や個人差については科学的エビデンスが限定的です。夏場はもちろん、年間を通してダイエット向きな一杯です。
+            かけうどんに近い低脂質のまま、冷たいうどんには嬉しいメリットが。<Marker color="blue">冷やすことでレジスタントスターチ（難消化性でんぷん）が増加する可能性があります</Marker>が、その効果の程度や個人差については科学的エビデンスが限定的です。夏場はもちろん、年間を通してダイエット向きな一杯です。
           </p>
 
-          <SubSectionHeading>第3位：釜揚げうどん（並）</SubSectionHeading>
+          <SubSectionHeading>第3位：釜揚げうどん（並・温）</SubSectionHeading>
 
           <NutritionCard
-            name="釜揚げうどん（並）"
+            name="釜揚げうどん（並・温）"
             chain="丸亀製麺"
-            calories={310}
-            protein={8.8}
-            fat={1.6}
-            carbs={64.0}
-            price={390}
+            calories={338}
+            protein={10.4}
+            fat={1.5}
+            carbs={70.7}
             recommended
           />
 
           <p className="mb-8 mt-4">
-            丸亀製麺の看板メニュー。釜から直接あげたもちもちの麺をつけ汁でいただくスタイル。<Marker color="green">310kcalで脂質1.6g</Marker>とダイエット向き。つけ汁を全部飲み干さなければ、塩分も控えめにできます。
+            丸亀製麺の看板メニュー。釜から直接あげたもちもちの麺をつけ汁でいただくスタイル。<Marker color="green">338kcalで脂質1.5g</Marker>とダイエット向き。つけ汁を全部飲み干さなければ、塩分も控えめにできます。
           </p>
 
           <ArticleImage
@@ -271,19 +297,19 @@ export default function MarugameDietPage() {
           <SectionHeading id="tempura-trap">天ぷらの落とし穴（カロリー比較）</SectionHeading>
 
           <p className="mb-4">
-            丸亀製麺のダイエットで<Marker>最も注意すべきなのが天ぷら</Marker>です。うどん本体がいくら低カロリーでも、天ぷらを何個もトッピングすれば簡単に600〜800kcalを超えてしまいます。
+            丸亀製麺のダイエットで<Marker>最も注意すべきなのが天ぷら</Marker>です。うどん本体がいくら低カロリーでも、天ぷらを何個もトッピングすれば簡単に500〜600kcalを超えてしまいます。
           </p>
 
           <NutritionTable
             items={[
-              { name: "ちくわ磯辺天", calories: 95, protein: 3.8, fat: 5.2, carbs: 8.5, highlight: true },
-              { name: "えび天", calories: 110, protein: 5.5, fat: 6.2, carbs: 8.0, highlight: true },
-              { name: "かしわ天", calories: 140, protein: 10.5, fat: 7.8, carbs: 6.5 },
-              { name: "さつまいも天", calories: 160, protein: 1.2, fat: 7.5, carbs: 22.0 },
-              { name: "れんこん天", calories: 115, protein: 1.5, fat: 6.8, carbs: 12.5 },
-              { name: "かぼちゃ天", calories: 125, protein: 1.5, fat: 6.0, carbs: 16.5 },
-              { name: "野菜かき揚げ", calories: 250, protein: 2.8, fat: 14.0, carbs: 28.5 },
-              { name: "大海老天", calories: 180, protein: 7.5, fat: 10.5, carbs: 14.0 },
+              { name: "ちくわ磯辺天", calories: 87, protein: 2.7, fat: 4.9, carbs: 8.0, highlight: true },
+              { name: "海老天", calories: 110, protein: 6.0, fat: 6.4, carbs: 7.3, highlight: true },
+              { name: "れんこん天", calories: 126, protein: 1.2, fat: 7.5, carbs: 13.6 },
+              { name: "かしわ天", calories: 140, protein: 9.7, fat: 7.8, carbs: 7.9 },
+              { name: "半熟玉子天", calories: 140, protein: 6.9, fat: 10.5, carbs: 3.1 },
+              { name: "かぼちゃ天", calories: 151, protein: 1.3, fat: 9.1, carbs: 16.1 },
+              { name: "さつまいも天", calories: 159, protein: 2.1, fat: 6.6, carbs: 23.0 },
+              { name: "野菜かき揚げ", calories: 180, protein: 3.0, fat: 11.5, carbs: 14.7 },
             ]}
             highlightProtein
           />
@@ -292,28 +318,28 @@ export default function MarugameDietPage() {
             ※おすすめマークは120kcal以下の天ぷらに表示。
           </p>
 
-          <WarningBox title="天ぷら2〜3個でカロリー倍増の危険">
+          <WarningBox title="天ぷらを重ねるとカロリーが一気に増える">
             <ul className="space-y-2">
-              <li><span className="font-bold">野菜かき揚げ（250kcal）</span> ─ 最も危険な天ぷら。1個でかけうどんの約80%のカロリーを追加。脂質14gも一気に加算されます。</li>
-              <li><span className="font-bold">かけうどん + かき揚げ + かしわ天 = 695kcal</span> ─ 「うどんだからヘルシー」のはずが、天ぷら2個でほぼ700kcal。脂質も23.3gに跳ね上がります。</li>
-              <li><span className="font-bold">さつまいも天（160kcal）</span> ─ 野菜だからヘルシーと思いがちですが、炭水化物22gと糖質も高め。うどんの糖質に上乗せされるので要注意。</li>
+              <li><span className="font-bold">野菜かき揚げ（180kcal）</span> ─ 天ぷらの中で最も高カロリー。1個でかけうどんの約60%のカロリーを追加し、脂質11.5gも一気に加算されます。</li>
+              <li><span className="font-bold">かけうどん + かき揚げ + かしわ天 = 619kcal</span> ─ 「うどんだからヘルシー」のはずが、天ぷら2個で600kcal超。脂質も20.6gに跳ね上がります。</li>
+              <li><span className="font-bold">さつまいも天（159kcal）</span> ─ 野菜だからヘルシーと思いがちですが、炭水化物23gと糖質も高め。うどんの糖質に上乗せされるので要注意。</li>
             </ul>
           </WarningBox>
 
           <ComparisonTable
             headers={["組み合わせ", "カロリー", "脂質", "判定"]}
             rows={[
-              ["かけうどん（並）のみ", "305 kcal", "1.5g", "最適"],
-              ["かけうどん + ちくわ磯辺天", "400 kcal", "6.7g", "OK"],
-              ["かけうどん + かしわ天", "445 kcal", "9.3g", "ギリOK"],
-              ["かけうどん + 野菜かき揚げ", "555 kcal", "15.5g", "注意"],
-              ["かけうどん + かき揚げ + かしわ天", "695 kcal", "23.3g", "NG"],
+              ["かけうどん（並・温）のみ", "299 kcal", "1.3g", "最適"],
+              ["かけうどん + ちくわ磯辺天", "386 kcal", "6.2g", "OK"],
+              ["かけうどん + かしわ天", "439 kcal", "9.1g", "ギリOK"],
+              ["かけうどん + 野菜かき揚げ", "479 kcal", "12.8g", "注意"],
+              ["かけうどん + かき揚げ + かしわ天", "619 kcal", "20.6g", "NG"],
             ]}
             bestRowIndex={0}
           />
 
           <TipBox title="天ぷらを食べるなら「1個まで」ルール">
-            <p>どうしても天ぷらを食べたい場合は、<Marker>「天ぷらは1個まで」をルール化</Marker>しましょう。おすすめはかしわ天（140kcal / P10.5g）。タンパク質が最も多く、うどんに不足しがちなタンパク質を補えます。逆に、野菜かき揚げ（250kcal）だけは絶対に避けてください。</p>
+            <p>どうしても天ぷらを食べたい場合は、<Marker>「天ぷらは1個まで」をルール化</Marker>しましょう。おすすめはかしわ天（140kcal / P9.7g）。タンパク質が最も多く、うどんに不足しがちなタンパク質を補えます。逆に、野菜かき揚げ（180kcal）は脂質が最も高いので避けたい一品です。</p>
           </TipBox>
 
           <ArticleImage
@@ -335,43 +361,43 @@ export default function MarugameDietPage() {
           <NumberedList
             items={[
               {
-                title: "温泉たまご（約70kcal / P6.2g）",
-                body: "うどんに最も追加してほしいトッピング。タンパク質6.2gを補いつつ、70kcalと低カロリー。とろりとした黄身がうどんに絡んで満足感もアップします。",
+                title: "温泉玉子（73kcal / P6.2g）",
+                body: "うどんに最も追加してほしいトッピング。タンパク質6.2gを補いつつ、73kcalと低カロリー。とろりとした黄身がうどんに絡んで満足感もアップします。",
               },
               {
-                title: "とろろ（約30kcal）",
-                body: "ほぼカロリーゼロに近いトッピング。食物繊維が豊富で消化を助け、ねばねば食感が満腹感を高めてくれます。ぶっかけうどんとの相性が抜群。",
+                title: "とろろ（33kcal）",
+                body: "カロリーが低いトッピング。ねばねば食感が満腹感を高めてくれます。ぶっかけうどんとの相性が抜群。",
               },
               {
-                title: "ネギ・生姜・天かす控えめ",
-                body: "薬味コーナーのネギと生姜はカロリーほぼゼロ。生姜には体を温めるとされる作用がありますが、ダイエットに有意な代謝上昇をもたらすかは個人差が大きいです。ただし天かすはスプーン1杯で約25kcal、脂質2gなので要注意。",
+                title: "ネギ・おろししょうが・天かす控えめ",
+                body: "薬味コーナーの青ねぎ（6kcal）やおろししょうが（2kcal）はほぼカロリーゼロ。しょうがには体を温めるとされる作用がありますが、ダイエットに有意な代謝上昇をもたらすかは個人差が大きいです。ただし天かすは1人前で約69kcal、脂質5.9gなので要注意。",
               },
             ]}
           />
 
           <WarningBox title="天かすの盛りすぎに注意">
-            <p>丸亀製麺の薬味コーナーにある天かすは「無料だから」とつい大盛りにしがち。しかし<Marker>天かすをたっぷり入れると50〜80kcal、脂質4〜6gが加算</Marker>されます。せっかく低脂質のうどんを選んでも、天かすで台無しになるケースは非常に多いです。</p>
+            <p>丸亀製麺の薬味コーナーにある天かすは「無料だから」とつい大盛りにしがち。しかし<Marker>天かすは1人前で約69kcal、脂質5.9gが加算</Marker>されます。せっかく低脂質のうどんを選んでも、天かすで台無しになるケースは非常に多いです。スプーン1杯程度に抑えましょう。</p>
           </WarningBox>
 
           <SubSectionHeading>タンパク質を補う工夫</SubSectionHeading>
 
           <p className="mb-4">
-            うどんの弱点は<Marker color="blue">タンパク質の少なさ</Marker>です。かけうどん（並）のタンパク質はわずか8.5g。1食あたり20g以上を目標にするなら、追加トッピングで補う必要があります。
+            うどんの弱点は<Marker color="blue">タンパク質の少なさ</Marker>です。かけうどん（並・温）のタンパク質はわずか9.5g。1食あたり20g以上を目標にするなら、追加トッピングで補う必要があります。
           </p>
 
           <ComparisonTable
             headers={["組み合わせ", "カロリー", "タンパク質", "脂質"]}
             rows={[
-              ["かけうどん + 温泉たまご", "375 kcal", "P 14.7g", "6.3g"],
-              ["かけうどん + かしわ天", "445 kcal", "P 19.0g", "9.3g"],
-              ["かけうどん + 温泉たまご + かしわ天", "515 kcal", "P 25.2g", "14.5g"],
-              ["ぶっかけ + とろろ + 温泉たまご", "403 kcal", "P 14.4g", "6.6g"],
+              ["かけうどん + 温泉玉子", "372 kcal", "P 15.7g", "7.2g"],
+              ["かけうどん + かしわ天", "439 kcal", "P 19.2g", "9.1g"],
+              ["かけうどん + 温泉玉子 + かしわ天", "512 kcal", "P 25.4g", "15.0g"],
+              ["ぶっかけ（冷） + とろろ + 温泉玉子", "426 kcal", "P 16.9g", "7.4g"],
             ]}
             bestRowIndex={2}
           />
 
           <TipBox title="前後の食事でタンパク質を補うのもアリ">
-            <p>丸亀製麺でタンパク質を無理に追加しようとすると、天ぷらのカロリーが増えてしまいます。<Marker color="green">「丸亀は低カロリー・低脂質の食事」と割り切って、タンパク質は前後の食事やプロテインで補う</Marker>のも賢い戦略。昼に丸亀で305kcalに抑えれば、夜に少し多めにタンパク質を摂る余裕が生まれます。</p>
+            <p>丸亀製麺でタンパク質を無理に追加しようとすると、天ぷらのカロリーが増えてしまいます。<Marker color="green">「丸亀は低カロリー・低脂質の食事」と割り切って、タンパク質は前後の食事やプロテインで補う</Marker>のも賢い戦略。昼に丸亀で299kcalに抑えれば、夜に少し多めにタンパク質を摂る余裕が生まれます。</p>
           </TipBox>
         </section>
 
@@ -396,13 +422,13 @@ export default function MarugameDietPage() {
 
           <CheckList
             items={[
-              "かけうどん（並）305kcal・脂質1.5gが最強のダイエットメニュー",
+              "かけうどん（並・温）299kcal・脂質1.3gが最強のダイエットメニュー",
               "うどんは低脂質が最大の強み。脂質制限ダイエットに最適",
-              "天ぷらは「1個まで」。選ぶならかしわ天（P10.5g）でタンパク質補給",
-              "野菜かき揚げ（250kcal）は絶対に避ける。見た目ヘルシーでもNG",
-              "天かすの盛りすぎに注意。無料でもカロリーはゼロではない",
-              "タンパク質不足は温泉たまごや前後の食事で補う",
-              "冷たいうどん（ぶっかけ冷）はレジスタントスターチの面でも有利",
+              "天ぷらは「1個まで」。選ぶならかしわ天（P9.7g）でタンパク質補給",
+              "野菜かき揚げ（180kcal・脂質11.5g）は天ぷらの中で最も高脂質。避けたい",
+              "天かすの盛りすぎに注意。無料でもカロリーはゼロではない（約69kcal）",
+              "タンパク質不足は温泉玉子や前後の食事で補う",
+              "冷たいうどん（ぶっかけ冷）はレジスタントスターチの面でも有利な可能性",
             ]}
           />
 
@@ -415,11 +441,11 @@ export default function MarugameDietPage() {
         <FAQSection
           slug="marugame-diet"
           items={[
-            { q: "丸亀製麺で一番低カロリーなうどんメニューは？", a: "ぶっかけうどん(冷・並)の303kcalが最も低く、次点がかけうどん(並)305kcal。両メニューとも脂質1.5g前後と圧倒的に低脂質です。ぶっかけ冷は冷やすことでレジスタントスターチが増加し、糖の吸収が穏やかになるメリットもあります。" },
-            { q: "うどんにトッピングする天ぷらで避けるべきメニューは？", a: "野菜かき揚げ(250kcal)は最も危険。1個でかけうどんの約80%のカロリーを追加します。さつまいも天(160kcal)も炭水化物22gと糖質が高め。かけうどんとの組み合わせなら、ちくわ磯辺天(95kcal)かえび天(110kcal)に限定するか、かしわ天(140kcal)でタンパク質を補いましょう。" },
-            { q: "丸亀製麺のうどんで、天ぷら2個を追加するとカロリーはどうなる？", a: "かけうどん(305kcal) + かき揚げ(250kcal) + かしわ天(140kcal)で695kcal、脂質23.3gに跳ね上がります。「うどんはヘルシー」と油断して複数の天ぷらを追加すると、簡単に600kcal超になるため注意が必要です。" },
-            { q: "丸亀製麺のうどんに温泉たまごを追加するとカロリーはいくら？", a: "かけうどん(並・305kcal) + 温泉たまご(約70kcal)で合計375kcal。タンパク質が8.5gから14.7gに増加し、うどんの栄養バランスを改善できます。低カロリーでタンパク質補給できる最もおすすめのトッピングです。" },
-            { q: "無料の天かす・ネギ・生姜をたくさんかけると太る？", a: "ネギと生姜はほぼカロリーゼロで安全。しかし天かすは見落としやすく、たっぷり入れると50～80kcal・脂質4～6gが加算されます。無料だからと大盛りにすると、低脂質の利点が台無しになるため、スプーン1杯程度に抑えましょう。" },
+            { q: "丸亀製麺で一番低カロリーなうどんメニューは？", a: "かけうどん(並・温)の299kcalが最も低く、次点がざるうどん(並・冷)305kcal、冷かけうどん(並・冷)314kcal。いずれも脂質1.3g前後と圧倒的に低脂質です。冷たいうどんは冷やすことでレジスタントスターチが増加する可能性があるとされますが、効果の程度には個人差があります。" },
+            { q: "うどんにトッピングする天ぷらで避けるべきメニューは？", a: "野菜かき揚げ(180kcal・脂質11.5g)は天ぷらの中で最も高カロリー・高脂質。さつまいも天(159kcal)も炭水化物23gと糖質が高めです。かけうどんとの組み合わせなら、ちくわ磯辺天(87kcal)か海老天(110kcal)に限定するか、かしわ天(140kcal)でタンパク質を補いましょう。" },
+            { q: "丸亀製麺のうどんで、天ぷら2個を追加するとカロリーはどうなる？", a: "かけうどん(299kcal) + 野菜かき揚げ(180kcal) + かしわ天(140kcal)で619kcal、脂質20.6gに跳ね上がります。「うどんはヘルシー」と油断して複数の天ぷらを追加すると、簡単に600kcal超になるため注意が必要です。" },
+            { q: "丸亀製麺のうどんに温泉玉子を追加するとカロリーはいくら？", a: "かけうどん(並・温・299kcal) + 温泉玉子(73kcal)で合計372kcal。タンパク質が9.5gから15.7gに増加し、うどんの栄養バランスを改善できます。低カロリーでタンパク質補給できる最もおすすめのトッピングです。" },
+            { q: "無料の天かす・ネギ・しょうがをたくさんかけると太る？", a: "青ねぎ(6kcal)やおろししょうが(2kcal)はほぼカロリーゼロで安全。しかし天かすは見落としやすく、1人前で約69kcal・脂質5.9gが加算されます。無料だからと大盛りにすると、低脂質の利点が台無しになるため、スプーン1杯程度に抑えましょう。" },
           ]}
         />
 

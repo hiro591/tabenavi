@@ -59,12 +59,13 @@ const jsonLd = {
   description:
     "セブン・ローソン・ファミマの公式栄養データを横断比較。ダイエット中の選び方をPFC付きで解説。",
   datePublished: "2026-06-15",
-  dateModified: "2026-06-15",
+  dateModified: "2026-06-22",
   author: {
-    "@type": "Organization",
-    name: "たべなび",
-    url: "https://www.tabenavi.jp",
-  },
+      "@type": "Person",
+      name: "ヒロ",
+      description: "外食で13kg減量した、たべなび開発者",
+      url: "https://www.tabenavi.jp/sources",
+    },
   publisher: { "@type": "Organization", name: "たべなび" },
   mainEntityOfPage: "https://www.tabenavi.jp/guide/conveni-comparison",
 };
@@ -96,7 +97,7 @@ export default function ConveniComparisonPage() {
 
       <ArticleLayout tocItems={tocItems} currentSlug="conveni-comparison">
         <AuthorityBadge />
-        <p className="text-sm text-gray-400 mt-3 mb-2">最終更新: 2026年6月15日</p>
+        <p className="text-sm text-gray-400 mt-3 mb-2">最終更新: 2026年6月22日</p>
         <AffiliateDisclosure />
 
         <QuickAnswer
@@ -187,9 +188,9 @@ export default function ConveniComparisonPage() {
 
           <NutritionTable
             items={[
-              { name: "NL ブランパン 2個入（ローソン）", calories: 66, protein: 6.1, fat: 2.8, carbs: 6.1, highlight: true },
-              { name: "NL ブラン入り食パン 4枚入（ローソン・1枚あたり）", calories: 104, protein: 7.2, fat: 2.1, carbs: 16.0 },
-              { name: "ROLLサンド チキンとブロッコリー（ローソン）", calories: 344, protein: 15.7, fat: 18.6, carbs: 29.7 },
+              { name: "NL たんぱく質が摂れるブランパン 2個入（ローソン）", calories: 66, protein: 6.1, fat: 2.8, carbs: 6.1, highlight: true },
+              { name: "NL たんぱく質が摂れるブラン入り食パン 4枚入（ローソン）", calories: 104, protein: 7.2, fat: 2.1, carbs: 16.0 },
+              { name: "ROLLサンド たんぱく質が摂れるチキンとブロッコリー（ローソン）", calories: 344, protein: 15.7, fat: 18.6, carbs: 29.7 },
             ]}
           />
 
@@ -250,7 +251,7 @@ export default function ConveniComparisonPage() {
               <li><span className="font-bold">濃厚G系ラーメン（セブン・1,595kcal）</span> ─ 脂質102g。1食で大半の人の1日の脂質目安を超える水準です。</li>
               <li><span className="font-bold">700g超 カレー＆ミートパスタ（ファミマ・1,088kcal）</span> ─ 炭水化物164gと糖質が突出。</li>
               <li><span className="font-bold">からあげクン レッド3倍 BOX 20個入り（ローソン・904kcal）</span> ─ 大容量シェア向け。1人で食べると脂質56g。</li>
-              <li><span className="font-bold">大盛ペペロンチーノ系（各社800kcal超）</span> ─ 「シンプル＝低カロリー」ではない代表格。</li>
+              <li><span className="font-bold">大盛ペペロンチーノ系（セブン 大盛りペペロンチーノ836kcal・ローソン大盛ペペロンチーノ849kcal・ファミマ大盛ペペロンチーノ795kcal）</span> ─ 「シンプル＝低カロリー」ではない代表格。</li>
             </ul>
           </WarningBox>
 
@@ -375,6 +376,7 @@ export default function ConveniComparisonPage() {
 
         <UpdateHistory
           entries={[
+            { date: "2026-06-22", note: "全栄養数値・商品名をたべなび最新データベース実値と再照合。低糖質パンの商品名表記をDB登録名に統一、大盛ペペロンチーノの各社カロリーを実値（セブン836・ローソン849・ファミマ795kcal）に修正。" },
             { date: "2026-06-15", note: "初稿公開（セブン・ローソン・ファミマの公式栄養データに基づく横断比較）" },
           ]}
         />

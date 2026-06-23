@@ -23,6 +23,7 @@ import {
 import {
   AffiliateDisclosure,
   AffiliateProductGrid,
+  ServiceOffers,
 } from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -53,10 +54,11 @@ const jsonLd = {
   datePublished: "2026-03-01",
   dateModified: new Date().toISOString().split("T")[0],
   author: {
-    "@type": "Organization",
-    name: "たべなび",
-    url: "https://www.tabenavi.jp",
-  },
+      "@type": "Person",
+      name: "ヒロ",
+      description: "外食で13kg減量した、たべなび開発者",
+      url: "https://www.tabenavi.jp/sources",
+    },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
@@ -526,9 +528,11 @@ export default function EatingOutDietPage() {
 
         {/* Final CTA */}
         <CTABanner
-          title="たべなびで、外食ダイエットを始めよう"
-          subtitle="ここまで読んでくれたあなたへ。32チェーン・6,000品以上の栄養データ、全部無料。"
+          title="そのメニュー、何kcal？ たべなびで今すぐ検索"
+          subtitle="32チェーン・6,000品以上を、カロリー・タンパク質・脂質で絞り込み検索。登録不要・無料です。"
         />
+
+        <ServiceOffers tag="diet" heading="外食が続く人へ。栄養を整える宅配食という選択肢" />
 
         {/* Author Bio */}
         <AuthorBio />

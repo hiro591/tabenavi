@@ -20,6 +20,7 @@ import {
   ArticleImage,
   QuickAnswer,
   FAQSection,
+  UpdateHistory,
 } from "@/components/guide/ArticleComponents";
 import { AffiliateProductGrid } from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
@@ -29,7 +30,7 @@ export const metadata: Metadata = {
   title:
     "【2026年最新】ケンタッキーダイエットガイド｜意外と高タンパクなメニューの選び方 | たべなび",
   description:
-    "ケンタッキー（KFC）のカロリーランキング、高タンパクおすすめメニュー、ダイエット中の食べ方を徹底解説。オリジナルチキン237kcal・P16.7gなど具体的な栄養データで紹介。",
+    "ケンタッキー（KFC）のカロリーランキング、高タンパクおすすめメニュー、ダイエット中の食べ方を徹底解説。オリジナルチキン218kcal・P16.5gなど具体的な栄養データで紹介。",
   keywords: [
     "ケンタッキー ダイエット",
     "KFC カロリー",
@@ -56,10 +57,11 @@ const jsonLd = {
   datePublished: "2026-03-19",
   dateModified: new Date().toISOString().split("T")[0],
   author: {
-    "@type": "Organization",
-    name: "たべなび",
-    url: "https://www.tabenavi.jp",
-  },
+      "@type": "Person",
+      name: "ヒロ",
+      description: "外食で13kg減量した、たべなび開発者",
+      url: "https://www.tabenavi.jp/sources",
+    },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
@@ -95,13 +97,13 @@ export default function KfcDietPage() {
       <ArticleLayout tocItems={tocItems} currentSlug="kfc-diet">
         {/* Authority & Date */}
         <AuthorityBadge />
-        <p className="text-sm text-gray-400 mt-3 mb-6">最終更新: 2026年3月19日</p>
+        <p className="text-sm text-gray-400 mt-3 mb-6">最終更新: 2026年6月22日</p>
 
         {/* Introduction */}
         <p className="mb-4">
           「ダイエット中にケンタッキー（KFC）はNG」と思っていませんか？
           実は、<Marker>ケンタッキーのチキンは高タンパク・低糖質で、選び方次第でダイエットの強い味方</Marker>になります。
-          オリジナルチキン1ピースは237kcal・タンパク質16.7gと、コンビニのサラダチキンに匹敵する栄養バランスです。
+          オリジナルチキン1ピースは218kcal・タンパク質16.5gと、コンビニのサラダチキンに匹敵する栄養バランスです。
         </p>
         <p className="mb-4">
           一方で、サイドメニューやセットの組み合わせ方を間違えると一食で1,000kcalを超えることも。<Marker color="blue">メニュー選びと組み合わせ方が成否を分けます</Marker>。
@@ -119,7 +121,7 @@ export default function KfcDietPage() {
         <section className="mb-16">
                   <QuickAnswer
           question={"ケンタッキー（KFC）はダイエット中に食べられる？"}
-          answer={"ケンタッキーはダイエットに向いているチェーン店です。オリジナルチキン1ピースは237kcal・タンパク質16.7g・炭水化物7.4gと高タンパク低糖質。チキン単品を選び、サイドはコールスロー、ドリンクはゼロカロリーにするなどメニュー選びを工夫することで、ダイエット中でも活用できます。"}
+          answer={"ケンタッキーはダイエットに向いているチェーン店です。オリジナルチキン1ピースは218kcal・タンパク質16.5g・炭水化物9.1gと高タンパク低糖質。チキン単品を選び、サイドはコールスロー、ドリンクはゼロカロリーにするなどメニュー選びを工夫することで、ダイエット中でも活用できます。"}
         />
 
         <SectionHeading id="why-kfc">KFCはダイエットに向いてる?</SectionHeading>
@@ -132,21 +134,21 @@ export default function KfcDietPage() {
             items={[
               {
                 title: "チキンは天然の高タンパク食材",
-                body: "鶏肉はタンパク質が豊富で必須アミノ酸のバランスも優秀。オリジナルチキン1ピースでP16.7g、2ピースならP33.4gと、筋トレ後の栄養補給にも十分な量を摂取できます。",
+                body: "鶏肉はタンパク質が豊富で必須アミノ酸のバランスも優秀。オリジナルチキン1ピースでP16.5g、2ピースならP33.0gと、筋トレ後の栄養補給にも十分な量を摂取できます。",
               },
               {
                 title: "炭水化物が少ない",
-                body: "オリジナルチキンの炭水化物はわずか7.4g。バーガーチェーンのようにバンズから大量の糖質を摂ることがなく、糖質制限ダイエットにも適しています。",
+                body: "オリジナルチキンの炭水化物はわずか9.1g。バーガーチェーンのようにバンズから大量の糖質を摂ることがなく、糖質制限ダイエットにも適しています。",
               },
               {
                 title: "単品注文でカロリーをコントロールしやすい",
-                body: "セットではなく単品でチキンだけを注文すれば、余計なサイドメニューのカロリーを避けられます。1ピース237kcalと計算しやすいのもメリットです。",
+                body: "セットではなく単品でチキンだけを注文すれば、余計なサイドメニューのカロリーを避けられます。1ピース218kcalと計算しやすいのもメリットです。",
               },
             ]}
           />
 
           <TipBox title="KFC vs 他チェーンのタンパク質比較">
-            <p>オリジナルチキン2ピース（474kcal / P33.4g）は、マクドナルドのダブルチーズバーガー（457kcal / P26.4g）よりも<Marker>高タンパクで糖質が大幅に低い</Marker>のがポイント。バンズがない分、炭水化物はわずか14.8gに抑えられます。</p>
+            <p>オリジナルチキン2ピース（436kcal / P33.0g）は、マクドナルドのダブルチーズバーガー（459kcal / P26.4g）よりも<Marker>高タンパクで糖質が大幅に低い</Marker>のがポイント。バンズがない分、炭水化物はわずか18.2gに抑えられます。</p>
           </TipBox>
 
           <ArticleImage src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800&h=400&fit=crop" alt="ジューシーに揚がったフライドチキンのクローズアップ" />
@@ -157,33 +159,33 @@ export default function KfcDietPage() {
           <SectionHeading id="calorie-ranking">ケンタッキー カロリーランキング</SectionHeading>
 
           <p className="mb-4">
-            KFCの主要メニューをカロリーの低い順にランキングしました。<Marker color="blue">チキン単品は200〜300kcal台とコントロールしやすい</Marker>一方、サンドやセットは400kcal以上になることがわかります。
+            KFCの主要メニューをカロリーの低い順にランキングしました。<Marker color="blue">チキン単品は100〜300kcal台とコントロールしやすい</Marker>一方、バーガーやツイスターは300kcal以上になることがわかります。
           </p>
 
           <NutritionTable
             items={[
-              { name: "カーネルクリスピー", calories: 130, protein: 6.2, fat: 7.5, carbs: 9.8, highlight: true },
-              { name: "骨なしケンタッキー", calories: 204, protein: 15.8, fat: 10.2, carbs: 12.4, highlight: true },
-              { name: "オリジナルチキン", calories: 237, protein: 16.7, fat: 14.2, carbs: 7.4, highlight: true },
-              { name: "辛口チキン", calories: 266, protein: 16.0, fat: 16.8, carbs: 12.5 },
-              { name: "チキンフィレサンド", calories: 415, protein: 22.0, fat: 18.5, carbs: 38.2 },
-              { name: "和風チキンカツサンド", calories: 478, protein: 20.8, fat: 24.5, carbs: 42.8 },
-              { name: "チキンフィレバーガー", calories: 398, protein: 19.5, fat: 16.2, carbs: 40.5 },
-              { name: "ツイスター（てりやき）", calories: 340, protein: 14.8, fat: 14.5, carbs: 36.2 },
-              { name: "コールスローS", calories: 92, protein: 0.8, fat: 5.8, carbs: 9.2 },
-              { name: "ビスケット", calories: 200, protein: 3.2, fat: 9.8, carbs: 24.5 },
-              { name: "フライドポテトS", calories: 195, protein: 2.8, fat: 9.5, carbs: 24.8 },
-              { name: "ナゲット（5個）", calories: 230, protein: 13.5, fat: 12.8, carbs: 14.2 },
+              { name: "コールスローＳ", calories: 85, protein: 1.0, fat: 6.3, carbs: 6.3 },
+              { name: "カーネルクリスピー", calories: 119, protein: 6.8, fat: 6.6, carbs: 8.2, highlight: true },
+              { name: "骨なしケンタッキー", calories: 191, protein: 20.3, fat: 8.5, carbs: 8.3, highlight: true },
+              { name: "フライドポテト S", calories: 195, protein: 2.6, fat: 7.8, carbs: 28.7 },
+              { name: "ビスケット", calories: 211, protein: 3.2, fat: 12.5, carbs: 21.3 },
+              { name: "オリジナルチキン", calories: 218, protein: 16.5, fat: 12.8, carbs: 9.1, highlight: true },
+              { name: "ナゲット 5ピース", calories: 222, protein: 13.3, fat: 13.4, carbs: 11.8 },
+              { name: "レモン香るパリパリ旨塩チキン", calories: 253, protein: 17.6, fat: 15.0, carbs: 11.9, highlight: true },
+              { name: "レッドホットチキン", calories: 271, protein: 20.9, fat: 16.7, carbs: 9.3 },
+              { name: "てりやきツイスター", calories: 360, protein: 11.6, fat: 18.8, carbs: 35.0 },
+              { name: "チキンフィレバーガー", calories: 398, protein: 24.3, fat: 19.7, carbs: 31.1 },
+              { name: "和風チキンカツバーガー", calories: 426, protein: 16.0, fat: 22.3, carbs: 40.5 },
             ]}
             highlightProtein
           />
 
           <p className="text-xs text-gray-400 mb-8">
-            ※栄養成分は公式サイトおよび店頭情報を基に作成。季節限定メニューは除く。おすすめマークは250kcal以下のチキンメニューに表示。
+            ※栄養成分は公式サイトおよび店頭情報を基に作成。季節・地域限定メニューは一部除く。おすすめマークは260kcal以下のチキンメニューに表示。
           </p>
 
           <TipBox title="カロリーランキングの読み解き方">
-            <p>ポイントは<Marker>チキン単品（130〜266kcal）とサンド類（340〜478kcal）の差</Marker>。サンドにはバンズやソースのカロリーが加わるため、同じチキンでもカロリーが1.5〜2倍に。ダイエット中はサンドよりもチキン単品を選ぶのが鉄則です。</p>
+            <p>ポイントは<Marker>チキン単品（119〜271kcal）とバーガー・ツイスター類（360〜426kcal）の差</Marker>。バーガーにはバンズやソースのカロリーが加わるため、同じチキンでもカロリーが1.5〜2倍に。ダイエット中はバーガーよりもチキン単品を選ぶのが鉄則です。</p>
           </TipBox>
         </section>
 
@@ -195,57 +197,58 @@ export default function KfcDietPage() {
             KFCでダイエット中に積極的に選びたい高タンパクメニューをランキング形式で紹介します。<Marker>チキン系はすべてタンパク質が優秀</Marker>ですが、カロリーとのバランスが重要です。
           </p>
 
-          <RankingCard rank={1} title="オリジナルチキン" subtitle="237kcal / P16.7g / F14.2g / C7.4g / ¥310">
+          <RankingCard rank={1} title="骨なしケンタッキー" subtitle="191kcal / P20.3g / F8.5g / C8.3g">
             <p className="text-sm text-gray-700 leading-relaxed mb-3">
-              KFCの看板メニューであり、<Marker>ダイエット中にも最もおすすめできる一品</Marker>。1ピース237kcalでタンパク質16.7g、炭水化物わずか7.4gという優秀な栄養バランスが魅力です。
+              <Marker>191kcalでタンパク質20.3gはKFC屈指のカロリーパフォーマンス</Marker>。骨がないので食べやすく、オリジナルチキンよりも約27kcal低いうえにタンパク質はむしろ多いのがポイントです。
             </p>
             <p className="text-sm text-gray-700 leading-relaxed">
-              2ピース食べてもP33.4g / 474kcalと、1食分として十分コントロール可能。骨付きなので食べるのに時間がかかり、満腹感を得やすいのも隠れたメリットです。
-            </p>
-          </RankingCard>
-
-          <RankingCard rank={2} title="チキンフィレサンド" subtitle="415kcal / P22.0g / F18.5g / C38.2g / ¥440">
-            <p className="text-sm text-gray-700 leading-relaxed">
-              <Marker color="blue">KFCのサンド類でタンパク質No.1</Marker>。P22gと高タンパクで、パンが付くため満足感も高い。ただし炭水化物38.2gがあるため、糖質制限中は注意が必要です。ランチにしっかり食べたい日に最適。
+              脂質も8.5gと控えめで、炭水化物は8.3gと低糖質。2個食べても382kcal / P40.6gと、1食分のタンパク質をしっかり確保できます。
             </p>
           </RankingCard>
 
-          <RankingCard rank={3} title="骨なしケンタッキー" subtitle="204kcal / P15.8g / F10.2g / C12.4g / ¥290">
+          <RankingCard rank={2} title="オリジナルチキン" subtitle="218kcal / P16.5g / F12.8g / C9.1g">
+            <p className="text-sm text-gray-700 leading-relaxed mb-3">
+              KFCの看板メニューであり、<Marker>ダイエット中にも安心して選べる一品</Marker>。1ピース218kcalでタンパク質16.5g、炭水化物わずか9.1gという優秀な栄養バランスが魅力です。
+            </p>
             <p className="text-sm text-gray-700 leading-relaxed">
-              <Marker color="green">204kcalでP15.8gはKFCの中でも最も優秀なカロリーパフォーマンス</Marker>。骨がないので食べやすく、オリジナルチキンよりも30kcal以上低いのがポイント。脂質も10.2gと控えめです。
+              2ピース食べてもP33.0g / 436kcalと、1食分として十分コントロール可能。骨付きなので食べるのに時間がかかり、満腹感を得やすいのも隠れたメリットです。
+            </p>
+          </RankingCard>
+
+          <RankingCard rank={3} title="チキンフィレバーガー" subtitle="398kcal / P24.3g / F19.7g / C31.1g">
+            <p className="text-sm text-gray-700 leading-relaxed">
+              <Marker color="blue">バーガー類（ダブル系を除く）でタンパク質トップクラス</Marker>。P24.3gと高タンパクで、バンズが付くため満足感も高い。ただし炭水化物31.1gがあるため、糖質制限中は注意が必要です。ランチにしっかり食べたい日に最適。
             </p>
           </RankingCard>
 
           <SubSectionHeading>おすすめの組み合わせセット</SubSectionHeading>
 
           <NutritionCard
-            name="オリジナルチキン2ピース + コールスローS"
+            name="オリジナルチキン2ピース + コールスローＳ"
             chain="ケンタッキー"
-            calories={566}
-            protein={34.2}
-            fat={34.2}
-            carbs={24.0}
-            price={800}
+            calories={521}
+            protein={34.0}
+            fat={31.9}
+            carbs={24.5}
             recommended
           />
 
           <p className="mb-4 mt-4">
-            <Marker>566kcalでP34.2g</Marker>という、KFCダイエットの定番組み合わせ。コールスローで野菜も摂れるため栄養バランスも良好。ドリンクはゼロカロリーを選べば、1食600kcal以下に収まります。
+            <Marker>521kcalでP34.0g</Marker>という、KFCダイエットの定番組み合わせ。コールスローで野菜も摂れるため栄養バランスも良好。ドリンクはゼロカロリーを選べば、1食550kcal以下に収まります。
           </p>
 
           <NutritionCard
-            name="骨なしケンタッキー2個 + コールスローS"
+            name="骨なしケンタッキー2個 + コールスローＳ"
             chain="ケンタッキー"
-            calories={500}
-            protein={32.4}
-            fat={26.2}
-            carbs={34.0}
-            price={770}
+            calories={467}
+            protein={41.6}
+            fat={23.3}
+            carbs={22.9}
             recommended
           />
 
           <p className="mb-8 mt-4">
-            さらにカロリーを抑えたい方には骨なしケンタッキー2個がおすすめ。<Marker color="blue">500kcalちょうどでP32.4g</Marker>と、ワンコイン感覚のダイエット食が完成します。食べやすさも魅力で、忙しいランチタイムに最適です。
+            さらにカロリーを抑えたい方には骨なしケンタッキー2個がおすすめ。<Marker color="blue">467kcalでP41.6g</Marker>と、高タンパク低カロリーのダイエット食が完成します。食べやすさも魅力で、忙しいランチタイムに最適です。
           </p>
 
           <ArticleImage src="https://images.unsplash.com/photo-1562967914-608f82629710?w=800&h=400&fit=crop" alt="テーブルに並ぶ様々なチキンメニュー" />
@@ -266,10 +269,10 @@ export default function KfcDietPage() {
 
           <WarningBox title="ダイエット中は要注意なメニュー">
             <ul className="space-y-2">
-              <li><span className="font-bold">和風チキンカツサンド（478kcal）</span> ─ カツの衣 + パンで脂質24.5g・炭水化物42.8g。同じサンドならフィレサンドの方が60kcal以上低い。</li>
-              <li><span className="font-bold">ビスケット（200kcal）</span> ─ タンパク質わずか3.2gで炭水化物24.5g。栄養的にはほぼ「甘いパン」です。</li>
-              <li><span className="font-bold">フライドポテトS（195kcal）</span> ─ P2.8gしかなく、炭水化物24.8gとダイエットには不向き。チキン追加の方が圧倒的にコスパ良好。</li>
-              <li><span className="font-bold">ツイスター てりやき（340kcal）</span> ─ ソースの糖分で炭水化物36.2g。タンパク質14.8gに対してカロリーが割高。</li>
+              <li><span className="font-bold">和風チキンカツバーガー（426kcal）</span> ─ カツの衣 + バンズで脂質22.3g・炭水化物40.5g。同じバーガーならチキンフィレバーガーの方が28kcal低くタンパク質も多い。</li>
+              <li><span className="font-bold">ビスケット（211kcal）</span> ─ タンパク質わずか3.2gで炭水化物21.3g。栄養的にはほぼ「甘いパン」です。</li>
+              <li><span className="font-bold">フライドポテト S（195kcal）</span> ─ P2.6gしかなく、炭水化物28.7gとダイエットには不向き。チキン追加の方が圧倒的にコスパ良好。</li>
+              <li><span className="font-bold">てりやきツイスター（360kcal）</span> ─ ソースの糖分で炭水化物35.0g。タンパク質11.6gに対してカロリーが割高。</li>
               <li><span className="font-bold">セットメニュー全般</span> ─ ポテト＋ドリンク＋ビスケットが付くと+400kcal以上。単品注文を徹底しましょう。</li>
             </ul>
           </WarningBox>
@@ -277,33 +280,32 @@ export default function KfcDietPage() {
           <ComparisonTable
             headers={["メニュー", "カロリー", "タンパク質", "脂質", "炭水化物"]}
             rows={[
-              ["オリジナルチキン×2", "474 kcal", "33.4g", "28.4g", "14.8g"],
-              ["チキンフィレサンドセット", "810 kcal", "25.2g", "34.8g", "87.5g"],
+              ["オリジナルチキン×2", "436 kcal", "33.0g", "25.6g", "18.2g"],
+              ["和風チキンカツバーガー", "426 kcal", "16.0g", "22.3g", "40.5g"],
             ]}
             bestRowIndex={0}
           />
 
           <p className="mb-6 text-sm text-gray-700">
-            上の表を見てわかる通り、<Marker>オリジナルチキン2ピースの方がセットメニューよりもP+8g多く、カロリーは336kcal少ない</Marker>。セットの誘惑に負けない判断力がKFCダイエットの鍵です。
+            上の表を見てわかる通り、<Marker>オリジナルチキン2ピースは和風チキンカツバーガーとほぼ同じカロリーながらタンパク質が2倍以上、炭水化物は半分以下</Marker>。バーガーの誘惑に負けず、チキン単品を選ぶ判断力がKFCダイエットの鍵です。
           </p>
 
           <SubSectionHeading>ナゲットは意外と優秀</SubSectionHeading>
           <p className="mb-4">
-            見落とされがちですが、<Marker color="green">ナゲット5個（230kcal / P13.5g）はサイドメニューとしてはかなり優秀</Marker>。ポテトS（195kcal / P2.8g）と比べると、カロリーは35kcal高いだけでタンパク質は約5倍です。
+            見落とされがちですが、<Marker color="green">ナゲット5ピース（222kcal / P13.3g）はサイドメニューとしてはかなり優秀</Marker>。フライドポテト S（195kcal / P2.6g）と比べると、カロリーは27kcal高いだけでタンパク質は約5倍です。
           </p>
 
           <NutritionCard
-            name="ナゲット（5個）"
+            name="ナゲット 5ピース"
             chain="ケンタッキー"
-            calories={230}
-            protein={13.5}
-            fat={12.8}
-            carbs={14.2}
-            price={380}
+            calories={222}
+            protein={13.3}
+            fat={13.4}
+            carbs={11.8}
           />
 
           <p className="mb-8 mt-4">
-            オリジナルチキン1ピース＋ナゲット5個なら<Marker>467kcal / P30.2g</Marker>。チキンだけで飽きてしまう方は、ナゲットで変化をつけるのも一つの手です。
+            オリジナルチキン1ピース＋ナゲット5ピースなら<Marker>440kcal / P29.8g</Marker>。チキンだけで飽きてしまう方は、ナゲットで変化をつけるのも一つの手です。
           </p>
         </section>
 
@@ -322,12 +324,12 @@ export default function KfcDietPage() {
 
           <SubSectionHeading>コツ2：サイドはコールスローを選ぶ</SubSectionHeading>
           <p className="mb-6">
-            ポテト（195kcal）の代わりにコールスローS（92kcal）を選ぶと<Marker color="green">約100kcalカット</Marker>。さらに食物繊維やビタミンCも摂れるため一石二鳥です。どうしてもサイドが欲しい場合はコールスロー一択と覚えましょう。
+            フライドポテト S（195kcal）の代わりにコールスローＳ（85kcal）を選ぶと<Marker color="green">約110kcalカット</Marker>。さらに食物繊維やビタミンも摂れる可能性があり一石二鳥です。どうしてもサイドが欲しい場合はコールスロー一択と覚えましょう。
           </p>
 
           <SubSectionHeading>コツ3：ドリンクはゼロカロリーを徹底</SubSectionHeading>
           <p className="mb-6">
-            コーラM（140kcal）をペプシゼロやブラックコーヒーに変えるだけで140kcalの節約。<Marker>食事全体で見ると「ドリンクの差」が意外と大きい</Marker>のです。
+            ペプシコーラ（100kcal）をブラックコーヒー（2kcal）やお茶に変えるだけで約100kcalの節約。<Marker>食事全体で見ると「ドリンクの差」が意外と大きい</Marker>のです。
           </p>
 
           <SubSectionHeading>コツ4：部位の選び方を意識する</SubSectionHeading>
@@ -353,18 +355,18 @@ export default function KfcDietPage() {
           </p>
 
           <WarningBox title="深夜のKFCに注意">
-            <p>ケンタッキーはデリバリー対応も多く、深夜に注文しがち。しかし<Marker>22時以降は夜間時間帯</Marker>で脂肪の蓄積リスクが相対的に高まるとの研究もありますが、ダイエットの基本はカロリー収支です。どうしても夜食が必要な場合は、骨なしケンタッキー1個（204kcal）に留めましょう。</p>
+            <p>ケンタッキーはデリバリー対応も多く、深夜に注文しがち。しかし<Marker>22時以降は夜間時間帯</Marker>で脂肪が蓄積しやすくなる可能性を指摘する研究もありますが、ダイエットの基本はカロリー収支です。どうしても夜食が必要な場合は、骨なしケンタッキー1個（191kcal）に留めましょう。</p>
           </WarningBox>
 
           <TipBox title="最強のKFCダイエットセット">
-            <p>おすすめの注文は<Marker>「オリジナルチキン2ピース（キール指定）＋コールスローS＋ペプシゼロ」</Marker>。合計566kcal / P34.2g / C24.0gで、満足感の高い食事が完成します。価格も約800円程度とお手頃です。</p>
+            <p>おすすめの注文は<Marker>「オリジナルチキン2ピース（キール指定）＋コールスローＳ＋ゼロカロリードリンク」</Marker>。合計521kcal / P34.0g / C24.5gで、満足感の高い食事が完成します。</p>
           </TipBox>
 
           <ArticleImage src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&h=400&fit=crop" alt="バランスの取れた食事プレートのイメージ" />
 
           <CTABanner
-            title="たべなびで栄養管理を始めよう"
-            subtitle="32チェーン・6,000品以上の栄養データ、全部無料"
+            title="そのメニュー、何kcal？ たべなびで今すぐ検索"
+            subtitle="32チェーン・6,000品以上を、カロリー・タンパク質・脂質で絞り込み検索。登録不要・無料です。"
           />
         </section>
 
@@ -383,12 +385,13 @@ export default function KfcDietPage() {
 
           <CheckList
             items={[
-              "オリジナルチキン（237kcal / P16.7g / C7.4g）は低糖質・高タンパクの優秀メニュー",
-              "2ピースで474kcal・P33.4g。1食分として十分なタンパク質を確保できる",
-              "サンド類よりチキン単品を選ぶことでカロリーを大幅カット",
-              "サイドはポテトではなくコールスロー（92kcal）を選択",
+              "骨なしケンタッキー（191kcal / P20.3g / C8.3g）は低糖質・高タンパクの最優秀メニュー",
+              "オリジナルチキン（218kcal / P16.5g / C9.1g）も低糖質・高タンパクで使いやすい",
+              "2ピースで436kcal・P33.0g。1食分として十分なタンパク質を確保できる",
+              "バーガー・ツイスター類よりチキン単品を選ぶことでカロリーを大幅カット",
+              "サイドはポテトではなくコールスローＳ（85kcal）を選択",
               "セットメニューは+400kcal以上。単品注文を徹底する",
-              "衣を一部はがすテクニックで50〜60kcalカットが可能",
+              "衣を一部はがすテクニックで脂質をさらにカットできる可能性",
             ]}
           />
 
@@ -401,11 +404,19 @@ export default function KfcDietPage() {
         <FAQSection
           slug="kfc-diet"
           items={[
-            { q: "ケンタッキーで最もカロリーが低いメニューは何？", a: "カーネルクリスピーが130kcal、骨なしケンタッキーが204kcalです。タンパク質とのバランスを考えると、骨なしケンタッキー（204kcal・タンパク質15.8g）が最も優秀なカロリーパフォーマンスを発揮します。" },
-            { q: "ケンタッキーで避けるべきメニューは？", a: "避けるべきは和風チキンカツサンド（478kcal）、フライドポテト（195kcal・タンパク質2.8g）、セットメニューです。セットはポテト・ドリンク・ビスケットで+400kcal以上。単品注文を徹底しましょう。" },
-            { q: "ケンタッキーでタンパク質が最も多いメニューは？", a: "チキンフィレサンドが22.0gで最高。オリジナルチキン2ピースなら33.4gと、サンド類よりも多くのタンパク質を確保できてカロリーは低いため、ダイエット中はチキン単品がおすすめです。" },
-            { q: "ケンタッキーで賢い食べ方のコツは？", a: "衣を一部はがすと50～60kcalカット、サイドはポテト（195kcal）からコールスロー（92kcal）に変更すると100kcalカット。ドリンクはゼロカロリー、食べるなら昼食時がおすすめです。" },
-            { q: "ケンタッキーで高タンパクなおすすめメニュー組み合わせは？", a: "「オリジナルチキン2ピース＋コールスローS＋ペプシゼロ」で566kcal・タンパク質34.2g。または「骨なしケンタッキー2個＋コールスロー」で500kcal・タンパク質32.4gがおすすめです。" },
+            { q: "ケンタッキーで最もカロリーが低いメニューは何？", a: "チキン系で最も低いのはカーネルクリスピーで119kcal。タンパク質とのバランスを考えると、骨なしケンタッキー（191kcal・タンパク質20.3g）が最も優秀なカロリーパフォーマンスを発揮します。" },
+            { q: "ケンタッキーで避けるべきメニューは？", a: "避けたいのは和風チキンカツバーガー（426kcal）、フライドポテト S（195kcal・タンパク質2.6g）、セットメニューです。セットはポテト・ドリンク・ビスケットで+400kcal以上。単品注文を徹底しましょう。" },
+            { q: "ケンタッキーでタンパク質が最も多いメニューは？", a: "単品ではダブルチキンフィレバーガーが44.6gで最多、チーズチキンフィレバーガーなども26.8gと高タンパクです。チキン単品なら骨なしケンタッキーが20.3gで優秀。オリジナルチキン2ピースなら33.0gとカロリーを抑えつつしっかり確保でき、ダイエット中はチキン単品がおすすめです。" },
+            { q: "ケンタッキーで賢い食べ方のコツは？", a: "衣を一部はがすと脂質をさらにカットできる可能性があり、サイドはフライドポテト S（195kcal）からコールスローＳ（85kcal）に変更すると約110kcalカット。ドリンクはゼロカロリー、食べるなら昼食時がおすすめです。" },
+            { q: "ケンタッキーで高タンパクなおすすめメニュー組み合わせは？", a: "「オリジナルチキン2ピース＋コールスローＳ＋ゼロカロリードリンク」で521kcal・タンパク質34.0g。または「骨なしケンタッキー2個＋コールスローＳ」で467kcal・タンパク質41.6gがおすすめです。" },
+          ]}
+        />
+
+        {/* Update History */}
+        <UpdateHistory
+          entries={[
+            { date: "2026-06-22", note: "全栄養値をたべなびDBの実測値に更新（オリジナルチキン237→218kcal、骨なしケンタッキー204→191kcal・P15.8→20.3g等）。実在しないメニュー（チキンフィレサンド・和風チキンカツサンド・辛口チキン）を実在のバーガー・チキンへ差し替え。ランキング・比較・FAQ・まとめを実値に合わせて再構成。" },
+            { date: "2026-03-19", note: "初稿公開" },
           ]}
         />
 

@@ -20,6 +20,7 @@ import {
   ArticleImage,
   QuickAnswer,
   FAQSection,
+  UpdateHistory,
 } from "@/components/guide/ArticleComponents";
 import { AffiliateProductGrid } from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
@@ -29,7 +30,7 @@ export const metadata: Metadata = {
   title:
     "【2026年最新】すき家ダイエットガイド｜低カロリーメニューランキングとおすすめの食べ方 | たべなび",
   description:
-    "すき家のカロリー低い順ランキング、牛丼ライトなどダイエット向けメニュー、PFCバランスで選ぶ食べ方を徹底解説。すき家で太らない注文法がわかります。",
+    "すき家のカロリー低い順ランキング、牛丼ライト（並盛397kcal）などダイエット向けメニュー、PFCバランスで選ぶ食べ方を徹底解説。すき家で太らない注文法がわかります。",
   keywords: [
     "すき家 ダイエット",
     "すき家 カロリー",
@@ -40,7 +41,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "【2026年最新】すき家ダイエットガイド｜低カロリーメニューランキングとおすすめの食べ方",
     description:
-      "すき家のカロリー低い順ランキング、牛丼ライトなどダイエット向けメニュー、PFCバランスで選ぶ食べ方を徹底解説。",
+      "すき家のカロリー低い順ランキング、牛丼ライト（並盛397kcal）などダイエット向けメニュー、PFCバランスで選ぶ食べ方を徹底解説。",
     url: "https://www.tabenavi.jp/guide/sukiya-diet",
     type: "article",
   },
@@ -52,14 +53,15 @@ const jsonLd = {
   headline:
     "【2026年最新】すき家ダイエットガイド｜低カロリーメニューランキングとおすすめの食べ方",
   description:
-    "すき家のカロリー低い順ランキング、牛丼ライトなどダイエット向けメニュー、PFCバランスで選ぶ食べ方を徹底解説。",
+    "すき家のカロリー低い順ランキング、牛丼ライト（並盛397kcal）などダイエット向けメニュー、PFCバランスで選ぶ食べ方を徹底解説。",
   datePublished: "2026-03-19",
   dateModified: new Date().toISOString().split("T")[0],
   author: {
-    "@type": "Organization",
-    name: "たべなび",
-    url: "https://www.tabenavi.jp",
-  },
+      "@type": "Person",
+      name: "ヒロ",
+      description: "外食で13kg減量した、たべなび開発者",
+      url: "https://www.tabenavi.jp/sources",
+    },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
@@ -94,14 +96,14 @@ export default function SukiyaDietPage() {
       <ArticleLayout tocItems={tocItems} currentSlug="sukiya-diet">
         {/* Authority & Date */}
         <AuthorityBadge />
-        <p className="text-sm text-gray-400 mt-3 mb-6">最終更新: 2026年3月19日</p>
+        <p className="text-sm text-gray-400 mt-3 mb-6">最終更新: 2026年6月22日</p>
 
         {/* Introduction */}
         <p className="mb-4">
-          すき家は牛丼チェーン最大手。メニューの豊富さが魅力ですが、ダイエット中に最も注目すべきは<Marker>牛丼ライト（352kcal/P20g）</Marker>の存在です。ご飯の代わりに豆腐と野菜を使った画期的なメニューで、通常の牛丼並盛（733kcal）と比べて半分以下のカロリーに抑えられます。
+          すき家は牛丼チェーン最大手。メニューの豊富さが魅力ですが、ダイエット中に最も注目すべきは<Marker>牛丼ライト（並盛397kcal/P22.8g）</Marker>の存在です。ご飯の代わりに豆腐と野菜を使った画期的なメニューで、通常の牛丼（並）695kcalと比べて大幅にカロリーを抑えられます（ミニサイズなら309kcal）。
         </p>
         <p className="mb-4">
-          また、<Marker color="blue">まぐろたたき丼（455kcal/P28.5g）</Marker>のような魚メニューも充実しており、牛丼チェーンの中では最もメニューの選択肢が広いのがすき家の強みです。
+          また、<Marker color="blue">まぐろユッケ丼（並盛699kcal/P36.3g）</Marker>や山かけまぐろたたき丼（並盛639kcal/F10.1g）のような魚メニューも充実しており、牛丼チェーンの中では最もメニューの選択肢が広いのがすき家の強みです。
         </p>
         <p className="mb-8">
           この記事では、すき家の全メニューをカロリー低い順にランキングし、ダイエットに最適なメニューの選び方を詳しく解説します。
@@ -118,26 +120,32 @@ export default function SukiyaDietPage() {
         <section className="mb-16">
                   <QuickAnswer
           question={"すき家でダイエット中に選ぶべき一番低カロリーなメニューは何ですか？"}
-          answer={"すき家の牛丼ライト（352kcal）がダイエットに最適です。通常の牛丼並盛（733kcal）の半分以下に抑えられ、ご飯を豆腐と野菜で置き換えることでタンパク質20g、糖質24.8gと低糖質を実現。牛丼チェーンの中で唯一このメニューを提供しており、ダイエッターの強い味方です。"}
+          answer={"すき家の牛丼ライト（ミニ309kcal／並盛397kcal）がダイエットに最適です。ご飯を豆腐と野菜で置き換えており、並盛でも糖質16.8gと低糖質。通常の牛丼（並）695kcalと比べて大幅にカロリーを抑えられます。豆腐由来のタンパク質も加わり並盛でP22.8g。牛丼チェーンの中で唯一このメニューを提供しており、ダイエッターの強い味方です。"}
         />
 
         <SectionHeading id="calorie-ranking">すき家メニューのカロリーランキング</SectionHeading>
 
           <p className="mb-4">
-            すき家の主要メニューをカロリーの低い順に並べました。<Marker color="blue">牛丼ライトと魚系メニュー</Marker>がダイエット向けの上位を占めています。
+            すき家の主要な丼・定食メニューをカロリーの低い順に並べました。<Marker color="blue">牛丼ライトと魚系メニュー</Marker>がダイエット向けの上位を占めています。
           </p>
 
           <NutritionTable
             items={[
-              { name: "牛丼ライト", calories: 352, protein: 20.0, fat: 18.5, carbs: 24.8, highlight: true },
-              { name: "まぐろたたき丼（ミニ）", calories: 370, protein: 22.5, fat: 5.8, carbs: 58.0, highlight: true },
-              { name: "まぐろたたき丼（並盛）", calories: 455, protein: 28.5, fat: 7.2, carbs: 72.5, highlight: true },
-              { name: "牛丼ミニ", calories: 496, protein: 15.2, fat: 17.8, carbs: 68.5 },
-              { name: "牛丼並盛", calories: 733, protein: 22.0, fat: 25.0, carbs: 104.5 },
-              { name: "キムチ牛丼（並盛）", calories: 755, protein: 23.0, fat: 25.5, carbs: 108.0 },
-              { name: "ねぎ玉牛丼（並盛）", calories: 810, protein: 27.5, fat: 32.5, carbs: 106.0 },
-              { name: "牛丼大盛", calories: 966, protein: 30.5, fat: 34.0, carbs: 138.5 },
-              { name: "牛丼メガ", calories: 1174, protein: 46.5, fat: 55.8, carbs: 118.5 },
+              { name: "牛丼ライト ミニ", calories: 309, protein: 18.5, fat: 19.9, carbs: 14.8, highlight: true },
+              { name: "牛丼ライト 並盛", calories: 397, protein: 22.8, fat: 26.8, carbs: 16.8, highlight: true },
+              { name: "鮭定食 ミニ", calories: 436, protein: 21.2, fat: 10.1, carbs: 66.4, highlight: true },
+              { name: "牛丼 ミニ", calories: 464, protein: 14.8, fat: 16.0, carbs: 65.7 },
+              { name: "焼鮭朝食 ミニ", calories: 480, protein: 22.2, fat: 13.4, carbs: 69.5, highlight: true },
+              { name: "山かけまぐろたたき丼 並盛", calories: 639, protein: 30.2, fat: 10.1, carbs: 106.7, highlight: true },
+              { name: "牛丼（並）", calories: 695, protein: 21.7, fat: 23.4, carbs: 99.8 },
+              { name: "まぐろユッケ丼 並盛", calories: 699, protein: 36.3, fat: 16.8, carbs: 100.4, highlight: true },
+              { name: "キムチ牛丼 並盛", calories: 725, protein: 23.3, fat: 23.8, carbs: 104.8 },
+              { name: "牛丼 中盛", calories: 752, protein: 26.6, fat: 33.4, carbs: 86.5 },
+              { name: "ねぎ玉牛丼 並盛", calories: 802, protein: 29.4, fat: 29.9, carbs: 104.8 },
+              { name: "とろ～り3種のチーズ牛丼 並盛", calories: 871, protein: 32.9, fat: 36.7, carbs: 102.8 },
+              { name: "牛丼（大盛）", calories: 908, protein: 28.4, fat: 30.7, carbs: 130.1 },
+              { name: "牛丼 特盛", calories: 1100, protein: 37.8, fat: 45.6, carbs: 134.9 },
+              { name: "牛丼 メガ", calories: 1365, protein: 50.8, fat: 66.3, carbs: 141.6 },
             ]}
           />
 
@@ -146,7 +154,7 @@ export default function SukiyaDietPage() {
           </p>
 
           <TipBox title="すき家のダイエットの強み">
-            <p>すき家は牛丼チェーンの中で唯一<Marker>「牛丼ライト」（ご飯→豆腐＋野菜）</Marker>を提供しています。352kcalでタンパク質20gは、ダイエッターにとって非常にありがたい存在。また、まぐろたたき丼など魚系メニューも充実しており、選択肢の広さはトップクラスです。</p>
+            <p>すき家は牛丼チェーンの中で唯一<Marker>「牛丼ライト」（ご飯→豆腐＋野菜）</Marker>を提供しています。ミニ309kcal／並盛397kcalで、糖質はミニ14.8g・並盛16.8gと非常に低いのが特長。また、山かけまぐろたたき丼やまぐろユッケ丼など魚系メニューも充実しており、選択肢の広さはトップクラスです。</p>
           </TipBox>
         </section>
 
@@ -158,44 +166,44 @@ export default function SukiyaDietPage() {
             カロリーと<Marker>PFCバランス</Marker>を考慮した、すき家のダイエット向けメニューベスト3を紹介します。
           </p>
 
-          <RankingCard rank={1} title="牛丼ライト" subtitle="352kcal / P20.0g / F18.5g / C24.8g">
+          <RankingCard rank={1} title="牛丼ライト（並盛）" subtitle="397kcal / P22.8g / F26.8g / C16.8g">
             <p className="text-sm text-gray-700 leading-relaxed mb-3">
-              すき家ダイエットの絶対的エース。<Marker>ご飯の代わりに豆腐と野菜サラダ</Marker>を使用し、牛丼の味わいはそのままにカロリーを大幅カット。通常の牛丼並盛（733kcal）と比べて381kcalもの差があります。
+              すき家ダイエットの絶対的エース。<Marker>ご飯の代わりに豆腐と野菜サラダ</Marker>を使用し、牛丼の味わいはそのままにカロリーを大幅カット。通常の牛丼（並）695kcalと比べて298kcalもの差があります。
             </p>
             <p className="text-sm text-gray-700 leading-relaxed">
-              糖質24.8gと低糖質で、豆腐のタンパク質も加わってP20g。糖質制限ダイエットにもローファットダイエットにも対応できる万能メニューです。
+              糖質はわずか16.8gと超低糖質で、豆腐のタンパク質も加わってP22.8g。さらに抑えたいならミニ（309kcal）も選べます。糖質制限ダイエットの外食で最も頼りになるメニューです。
             </p>
           </RankingCard>
 
-          <RankingCard rank={2} title="まぐろたたき丼（並盛）" subtitle="455kcal / P28.5g / F7.2g / C72.5g">
+          <RankingCard rank={2} title="山かけまぐろたたき丼（並盛）" subtitle="639kcal / P30.2g / F10.1g / C106.7g">
             <p className="text-sm text-gray-700 leading-relaxed mb-3">
-              <Marker color="blue">脂質わずか7.2gで高タンパク28.5g</Marker>という驚異的なPFCバランス。ローファットダイエットをしている方にとって理想的なメニューです。
+              <Marker color="blue">脂質わずか10.1gで高タンパク30.2g</Marker>という優秀なPFCバランス。脂質を抑えたい方に向くメニューです。さらにあっさりさせたい場合は「まぐろたたき皿（並盛591kcal／F10.1g）」を単品で選ぶ手もあります。
             </p>
             <p className="text-sm text-gray-700 leading-relaxed">
-              まぐろに含まれるDHA・EPAなどの良質な脂肪酸も摂取でき、健康面でもメリットが大きい。牛丼チェーンで魚が食べられるのはすき家ならではの魅力です。
+              まぐろにはDHA・EPAなどの脂肪酸が含まれているとされ、魚メニューが充実しているのはすき家ならではの魅力です。
             </p>
           </RankingCard>
 
-          <RankingCard rank={3} title="牛丼ミニ" subtitle="496kcal / P15.2g / F17.8g / C68.5g">
+          <RankingCard rank={3} title="牛丼（ミニ）" subtitle="464kcal / P14.8g / F16.0g / C65.7g">
             <p className="text-sm text-gray-700 leading-relaxed">
-              「やっぱり普通の牛丼が食べたい」という方はミニサイズを。並盛（733kcal）から<Marker color="green">237kcalのカロリーダウン</Marker>で、500kcal以下に収まります。牛丼の味をしっかり楽しみながらカロリーを抑えたい方に最適です。
+              「やっぱり普通の牛丼が食べたい」という方はミニサイズを。並盛（695kcal）から<Marker color="green">231kcalのカロリーダウン</Marker>で、500kcal以下に収まります。牛丼の味をしっかり楽しみながらカロリーを抑えたい方に最適です。
             </p>
           </RankingCard>
 
-          <SubSectionHeading>注目メニュー：鮭朝食</SubSectionHeading>
+          <SubSectionHeading>注目メニュー：鮭定食</SubSectionHeading>
 
           <NutritionCard
-            name="鮭朝食"
+            name="鮭定食（ミニ）"
             chain="すき家"
-            calories={468}
-            protein={24.5}
-            fat={10.8}
-            carbs={68.0}
+            calories={436}
+            protein={21.2}
+            fat={10.1}
+            carbs={66.4}
             recommended
           />
 
           <p className="mb-8 mt-4">
-            すき家の朝食メニューも見逃せません。鮭朝食は<Marker>468kcalでP24.5g、脂質わずか10.8g</Marker>という優秀な栄養バランス。ご飯・みそ汁・おかずが揃った定食スタイルで、朝から栄養バランスの良い食事が可能です。
+            すき家の定食・朝食メニューも見逃せません。鮭定食（ミニ）は<Marker>436kcalでP21.2g、脂質わずか10.1g</Marker>というバランスのよい栄養構成。ご飯・みそ汁・おかずが揃った定食スタイルで、朝から食事を整えやすいメニューです（朝食の焼鮭朝食ミニは480kcal）。
           </p>
 
           <ArticleImage src="https://images.unsplash.com/photo-1532347231146-80afc9c3df2b?w=800&h=400&fit=crop" alt="新鮮な魚の料理イメージ" />
@@ -206,39 +214,40 @@ export default function SukiyaDietPage() {
           <SectionHeading id="size-comparison">牛丼のサイズ別カロリー比較</SectionHeading>
 
           <p className="mb-6">
-            すき家の牛丼はミニからメガまで5サイズ展開。<Marker>サイズ選びでカロリーは2倍以上の差</Marker>がつきます。
+            すき家の牛丼はミニからメガまで6サイズ展開。<Marker>サイズ選びでカロリーは約3倍の差</Marker>がつきます。
           </p>
 
           <ComparisonTable
             headers={["サイズ", "カロリー", "タンパク質", "脂質", "炭水化物"]}
             rows={[
-              ["ミニ", "496 kcal", "P 15.2g", "F 17.8g", "C 68.5g"],
-              ["並盛", "733 kcal", "P 22.0g", "F 25.0g", "C 104.5g"],
-              ["中盛", "798 kcal", "P 28.5g", "F 32.0g", "C 90.0g"],
-              ["大盛", "966 kcal", "P 30.5g", "F 34.0g", "C 138.5g"],
-              ["メガ", "1174 kcal", "P 46.5g", "F 55.8g", "C 118.5g"],
+              ["ミニ", "464 kcal", "P 14.8g", "F 16.0g", "C 65.7g"],
+              ["並", "695 kcal", "P 21.7g", "F 23.4g", "C 99.8g"],
+              ["中盛", "752 kcal", "P 26.6g", "F 33.4g", "C 86.5g"],
+              ["大盛", "908 kcal", "P 28.4g", "F 30.7g", "C 130.1g"],
+              ["特盛", "1100 kcal", "P 37.8g", "F 45.6g", "C 134.9g"],
+              ["メガ", "1365 kcal", "P 50.8g", "F 66.3g", "C 141.6g"],
             ]}
             bestRowIndex={0}
           />
 
           <TipBox title="「中盛」の裏技">
-            <p>すき家の「中盛」は<Marker>ご飯少なめ・肉1.5倍</Marker>というサイズ。並盛より+65kcalですが、タンパク質は28.5gと大幅にアップ。炭水化物は並盛より少ない90g。タンパク質を重視する方には並盛より中盛の方がコスパ良好です。</p>
+            <p>すき家の「中盛」は<Marker>ご飯少なめ・肉多め</Marker>というサイズ。並より+57kcalですが、タンパク質は26.6gとアップし、炭水化物は並より少ない86.5g。タンパク質を重視しつつ糖質を抑えたい方には、並より中盛の方が向いています。</p>
           </TipBox>
 
           <SubSectionHeading>牛丼ライトとの比較</SubSectionHeading>
 
           <ComparisonTable
-            headers={["メニュー", "カロリー", "タンパク質", "糖質", "差分"]}
+            headers={["メニュー", "カロリー", "タンパク質", "炭水化物", "差分"]}
             rows={[
-              ["牛丼ライト", "352 kcal", "P 20.0g", "C 24.8g", "基準"],
-              ["牛丼ミニ", "496 kcal", "P 15.2g", "C 68.5g", "+144 kcal"],
-              ["牛丼並盛", "733 kcal", "P 22.0g", "C 104.5g", "+381 kcal"],
+              ["牛丼ライト 並盛", "397 kcal", "P 22.8g", "C 16.8g", "基準"],
+              ["牛丼 ミニ", "464 kcal", "P 14.8g", "C 65.7g", "+67 kcal"],
+              ["牛丼（並）", "695 kcal", "P 21.7g", "C 99.8g", "+298 kcal"],
             ]}
             bestRowIndex={0}
           />
 
           <p className="mb-4">
-            牛丼ライトは並盛と比べて<Marker color="blue">381kcalも低く、糖質は約1/4</Marker>。ご飯を豆腐に置き換えるだけでこれだけの差が出ます。ダイエット中は積極的に牛丼ライトを活用しましょう。
+            牛丼ライト並盛は通常の牛丼（並）と比べて<Marker color="blue">298kcalも低く、炭水化物は約1/6</Marker>。ご飯を豆腐に置き換えるだけでこれだけの差が出ます。ダイエット中は積極的に牛丼ライトを活用しましょう。
           </p>
         </section>
 
@@ -258,19 +267,19 @@ export default function SukiyaDietPage() {
 
           <WarningBox title="ダイエット中は避けたいメニュー">
             <ul className="space-y-2">
-              <li><span className="font-bold">牛丼メガ（1,174kcal）</span> ─ 肉が3倍で脂質55.8g。1食で1日分のカロリーの大半を消費してしまいます。</li>
-              <li><span className="font-bold">牛丼大盛（966kcal）</span> ─ 炭水化物138.5gと糖質過多。ご飯の量が多すぎてカロリーの大半が炭水化物由来。</li>
-              <li><span className="font-bold">ねぎ玉牛丼・並盛（810kcal）</span> ─ トッピングの卵とマヨネーズで脂質32.5g。見た目以上に高脂質。</li>
-              <li><span className="font-bold">チーズ牛丼・並盛（850kcal）</span> ─ チーズ追加で+117kcal、脂質+8g。チーズ牛丼は人気ですがダイエットには不向き。</li>
-              <li><span className="font-bold">カレー大盛（約940kcal）</span> ─ カレールウの脂質と大盛ご飯のダブルパンチ。避けるべきメニューの筆頭。</li>
+              <li><span className="font-bold">牛丼メガ（1,365kcal）</span> ─ 肉が多く脂質66.3g。1食で1日分のカロリーの大半を消費してしまいます。</li>
+              <li><span className="font-bold">牛丼特盛（1,100kcal）</span> ─ 脂質45.6g・炭水化物134.9gと高カロリー。並と比べて405kcalも多くなります。</li>
+              <li><span className="font-bold">牛丼大盛（908kcal）</span> ─ 炭水化物130.1gと糖質過多。ご飯の量が多くカロリーの多くが炭水化物由来。</li>
+              <li><span className="font-bold">とろ～り3種のチーズ牛丼・並盛（871kcal）</span> ─ チーズで並より+176kcal、脂質36.7g。人気ですがダイエットには不向き。</li>
+              <li><span className="font-bold">ねぎ玉牛丼・並盛（802kcal）</span> ─ 卵とねぎのトッピングで脂質29.9g。見た目以上に高脂質。</li>
             </ul>
           </WarningBox>
 
           <WarningBox title="トッピングの落とし穴">
             <ul className="space-y-2">
-              <li><span className="font-bold">チーズ追加（+117kcal）</span> ─ 脂質が大幅に増加。すき家のチーズトッピングは量が多めで高カロリー。</li>
-              <li><span className="font-bold">マヨネーズ追加（+約100kcal）</span> ─ ほぼ脂質のみ。ダイエット中は必ず避けましょう。</li>
-              <li><span className="font-bold">おんたま追加（+約80kcal）</span> ─ カロリーは控えめだが、卵は毎食でなく1日1〜2個を目安に。</li>
+              <li><span className="font-bold">とろ～り3種チーズ（110kcal）</span> ─ 脂質12.1gとほぼ脂質。すき家のチーズトッピングは高脂質です。</li>
+              <li><span className="font-bold">おろしポン酢（100kcal）</span> ─ 脂質8.9g。さっぱり見えても意外とカロリーがあるので量に注意。</li>
+              <li><span className="font-bold">おんたま2個（123kcal）</span> ─ 1個あたり約62kcal。卵は良質なタンパク源ですが、入れすぎには注意を。</li>
             </ul>
           </WarningBox>
         </section>
@@ -287,23 +296,23 @@ export default function SukiyaDietPage() {
             items={[
               {
                 title: "「牛丼ライト」を第一選択に",
-                body: "迷ったら牛丼ライト（352kcal）。ご飯→豆腐＋野菜への置き換えで、牛丼の満足感はそのままにカロリーを半分以下に。糖質制限中の方はこれ一択と言っても過言ではありません。",
+                body: "迷ったら牛丼ライト（並盛397kcal／ミニ309kcal）。ご飯→豆腐＋野菜への置き換えで、牛丼の満足感はそのままにカロリーと糖質を大幅カット。糖質制限中の方はこれ一択と言っても過言ではありません。",
               },
               {
                 title: "魚メニューを積極的に活用",
-                body: "まぐろたたき丼（455kcal/P28.5g/F7.2g）は、脂質を極限まで抑えたい方に最適。すき家ならではの魚メニューを活用して、牛丼一辺倒にならない食事バリエーションを持ちましょう。",
+                body: "山かけまぐろたたき丼（639kcal/P30.2g/F10.1g）やまぐろたたき皿（591kcal/F10.1g）は、脂質を抑えたい方に向きます。すき家ならではの魚メニューを活用して、牛丼一辺倒にならない食事バリエーションを持ちましょう。",
               },
               {
                 title: "ミニサイズを基本にする",
-                body: "牛丼ミニ（496kcal）を基本サイズに。並盛から237kcalのカロリーカットで500kcal以下に収まります。物足りなければサラダやみそ汁を追加して調整を。",
+                body: "牛丼ミニ（464kcal）を基本サイズに。並（695kcal）から231kcalのカロリーカットで500kcal以下に収まります。物足りなければサラダやみそ汁を追加して調整を。",
               },
               {
-                title: "朝食メニューを活用する",
-                body: "鮭朝食（468kcal/P24.5g/F10.8g）をはじめ、すき家の朝食メニューは栄養バランスに優れたものが多い。朝食をすき家で摂ることで、1日のスタートから食事管理が可能です。",
+                title: "朝食・定食メニューを活用する",
+                body: "鮭定食ミニ（436kcal/P21.2g/F10.1g）や焼鮭朝食ミニ（480kcal/F13.4g）など、すき家の定食・朝食は脂質が低めでバランスのよいものが多い。朝食をすき家で摂ることで、1日のスタートから食事を整えやすくなります。",
               },
               {
                 title: "トッピングは慎重に選ぶ",
-                body: "チーズ（+117kcal）やマヨネーズ（+100kcal）は避け、おろしポン酢（+約15kcal）やキムチ（+約20kcal）など低カロリーなトッピングを選びましょう。紅生姜はほぼ0kcalなので自由に使えます。",
+                body: "とろ～り3種チーズ（110kcal/F12.1g）やおろしポン酢（100kcal/F8.9g）はカロリーが高め。キムチ（37kcal）など低カロリーなトッピングを選ぶのがおすすめです。",
               },
             ]}
           />
@@ -315,19 +324,19 @@ export default function SukiyaDietPage() {
           <ComparisonTable
             headers={["パターン", "メニュー構成", "カロリー", "タンパク質"]}
             rows={[
-              ["低糖質", "牛丼ライト + みそ汁", "385 kcal", "P 22.0g"],
-              ["ローファット", "まぐろたたき丼（並盛）+ みそ汁", "488 kcal", "P 30.5g"],
-              ["バランス型", "牛丼ミニ + サラダ + みそ汁", "560 kcal", "P 17.5g"],
+              ["低糖質", "牛丼ライト 並盛 + みそ汁", "434 kcal", "P 25.1g"],
+              ["ローファット", "山かけまぐろたたき丼 並盛 + みそ汁", "676 kcal", "P 32.5g"],
+              ["バランス型", "牛丼ミニ + サラダ + みそ汁", "538 kcal", "P 19.2g"],
             ]}
             bestRowIndex={0}
           />
 
           <p className="mb-4">
-            低糖質パターンの<Marker>「牛丼ライト+みそ汁」は385kcalでP22g</Marker>。糖質は約27gと非常に低く、糖質制限ダイエット中の外食で最も頼りになる組み合わせです。
+            低糖質パターンの<Marker>「牛丼ライト並盛+みそ汁」は434kcalでP25.1g</Marker>。炭水化物は約21gと非常に低く、糖質制限ダイエット中の外食で最も頼りになる組み合わせです。
           </p>
 
           <p className="mb-4">
-            ローファットパターンの<Marker color="blue">「まぐろたたき丼+みそ汁」は488kcalで脂質わずか約9g</Marker>。脂質制限ダイエット中の方にはこちらがベスト。タンパク質30.5gも確保できる理想的な構成です。
+            ローファットパターンの<Marker color="blue">「山かけまぐろたたき丼+みそ汁」は676kcalで脂質約11.5g</Marker>。脂質を抑えたい方に向く構成で、タンパク質32.5gも確保できます。
           </p>
 
           <SubSectionHeading>PFCバランスで見るすき家メニュー</SubSectionHeading>
@@ -339,20 +348,20 @@ export default function SukiyaDietPage() {
           <ComparisonTable
             headers={["目的", "おすすめメニュー", "カロリー", "特徴"]}
             rows={[
-              ["糖質制限", "牛丼ライト", "352 kcal", "糖質24.8gで豆腐ベース"],
-              ["ローファット", "まぐろたたき丼（並盛）", "455 kcal", "脂質7.2gと超低脂質"],
-              ["高タンパク", "牛丼中盛", "798 kcal", "P28.5gで肉1.5倍"],
-              ["カロリー制限", "牛丼ミニ", "496 kcal", "500kcal以下でシンプル"],
+              ["糖質制限", "牛丼ライト 並盛", "397 kcal", "炭水化物16.8gで豆腐ベース"],
+              ["ローファット", "山かけまぐろたたき丼 並盛", "639 kcal", "脂質10.1gと低脂質"],
+              ["高タンパク", "まぐろユッケ丼 並盛", "699 kcal", "P36.3gで脂質16.8g"],
+              ["カロリー制限", "牛丼 ミニ", "464 kcal", "500kcal以下でシンプル"],
             ]}
             bestRowIndex={0}
           />
 
           <p className="mb-4">
-            すき家の最大の強みは<Marker color="green">あらゆるダイエット方針に対応できるメニューの広さ</Marker>。糖質制限なら牛丼ライト、ローファットならまぐろたたき丼と、他の牛丼チェーンにはない選択肢が揃っています。
+            すき家の最大の強みは<Marker color="green">あらゆるダイエット方針に対応できるメニューの広さ</Marker>。糖質制限なら牛丼ライト、ローファットならまぐろたたき系メニューと、他の牛丼チェーンにはない選択肢が揃っています。
           </p>
 
           <TipBox title="すき家を1日の食事プランに組み込む">
-            <p>1日の目標カロリー1,600kcalの場合、昼食に牛丼ライト（352kcal）を選べば朝・夕食で1,248kcal使えます。牛丼ライトなら<Marker>糖質も24.8gと低く、午後の眠気も軽減</Marker>されるため、仕事中のランチにも最適です。</p>
+            <p>1日の目標カロリー1,600kcalの場合、昼食に牛丼ライト並盛（397kcal）を選べば朝・夕食で1,203kcal使えます。牛丼ライトなら<Marker>炭水化物も16.8gと低く</Marker>、血糖値の急な上昇を抑えたい仕事中のランチにも向いています。</p>
           </TipBox>
 
           <SubSectionHeading>すき家 vs 他チェーンの比較</SubSectionHeading>
@@ -364,13 +373,13 @@ export default function SukiyaDietPage() {
           <CheckList
             items={[
               "牛丼ライト ─ ご飯を豆腐+野菜に置換できる唯一のチェーン",
-              "魚メニュー ─ まぐろたたき丼など脂質7g台のローファットメニューが選べる",
-              "サイズ展開 ─ ミニから中盛まで、目的に合わせた細かいサイズ調整が可能",
+              "魚メニュー ─ 山かけまぐろたたき丼やまぐろユッケ丼など脂質10g台のローファットメニューが選べる",
+              "サイズ展開 ─ ミニから特盛・メガまで、目的に合わせた細かいサイズ調整が可能",
             ]}
           />
 
           <p className="mb-4">
-            特にローファットダイエットをしている方には、<Marker color="blue">まぐろたたき丼（F7.2g）は外食全体で見ても屈指の低脂質メニュー</Marker>です。牛丼チェーンでこれほど脂質の低いメニューが食べられるのはすき家だけの強みです。
+            特に脂質を抑えたい方には、<Marker color="blue">山かけまぐろたたき丼（F10.1g）は牛丼ボリュームながら低脂質なメニュー</Marker>です。牛丼チェーンで魚系の低脂質メニューが選べるのはすき家ならではの強みです。
           </p>
         </section>
 
@@ -389,11 +398,11 @@ export default function SukiyaDietPage() {
 
           <CheckList
             items={[
-              "牛丼ライト（352kcal/P20g）はすき家ダイエットの最強メニュー",
-              "まぐろたたき丼（455kcal/P28.5g/F7.2g）はローファットダイエットに最適",
-              "牛丼はミニサイズ（496kcal）を選んで500kcal以下に",
-              "牛丼メガ（1,174kcal）やチーズ・マヨトッピングは避ける",
-              "朝食メニューも栄養バランスが良くダイエット向き",
+              "牛丼ライト（並盛397kcal/P22.8g、ミニ309kcal）はすき家ダイエットの最強メニュー",
+              "山かけまぐろたたき丼（639kcal/P30.2g/F10.1g）はローファット向き",
+              "牛丼はミニサイズ（464kcal）を選んで500kcal以下に",
+              "牛丼メガ（1,365kcal）やチーズトッピングは避ける",
+              "鮭定食・焼鮭朝食など定食メニューも脂質低めでダイエット向き",
             ]}
           />
 
@@ -412,11 +421,19 @@ export default function SukiyaDietPage() {
         <FAQSection
           slug="sukiya-diet"
           items={[
-            { q: "すき家の牛丼ライトのカロリーと栄養はどうですか？", a: "牛丼ライトは352kcal、タンパク質20.0g、脂質18.5g、糖質24.8g。ご飯を豆腐と野菜サラダで置き換えており、並盛の733kcalから381kcal削減できます。糖質制限とローファットの両立が可能です。" },
-            { q: "すき家でローファットダイエット向けのメニューは？", a: "まぐろたたき丼（並盛）が脂質7.2g、タンパク質28.5g、455kcalで最適。DHA・EPAなどの良質な脂肪酸も摂取でき、他の牛丼チェーンでは珍しい低脂質メニューです。ローファットダイエット中の方に最も推奨できます。" },
-            { q: "すき家の牛丼ミニのカロリーは？", a: "牛丼ミニは496kcal、タンパク質15.2g。並盛から237kcal削減でき、500kcal以下に抑えられます。普通の牛丼の味わいを保ちながらカロリーを抑えたい方に最適なサイズです。" },
-            { q: "すき家のダイエット中に避けるべきメニューは？", a: "牛丼メガ（1,174kcal）、牛丼大盛（966kcal）、ねぎ玉牛丼（810kcal）を避けましょう。また、チーズ（+117kcal）やマヨネーズ（+100kcal）などのトッピング追加も要注意。高カロリー・高脂質になります。" },
-            { q: "すき家の朝食メニューはダイエット向き？", a: "鮭朝食は468kcal、タンパク質24.5g、脂質10.8g。ご飯・みそ汁・おかずが揃った定食スタイルで、朝から栄養バランスの良い食事が取れます。ダイエット中の朝食として活用できます。" },
+            { q: "すき家の牛丼ライトのカロリーと栄養はどうですか？", a: "牛丼ライト並盛は397kcal、タンパク質22.8g、脂質26.8g、炭水化物16.8g（ミニは309kcal）。ご飯を豆腐と野菜サラダで置き換えており、通常の牛丼（並）695kcalから約298kcal削減できます。炭水化物が非常に低く、糖質制限中の外食に向いています。" },
+            { q: "すき家でローファットダイエット向けのメニューは？", a: "山かけまぐろたたき丼（並盛）が脂質10.1g、タンパク質30.2g、639kcal。まぐろたたき皿（並盛591kcal/F10.1g）も低脂質です。まぐろにはDHA・EPAなどの脂肪酸が含まれているとされ、他の牛丼チェーンでは珍しい魚系メニューが選べます。" },
+            { q: "すき家の牛丼ミニのカロリーは？", a: "牛丼ミニは464kcal、タンパク質14.8g。並（695kcal）から231kcal削減でき、500kcal以下に抑えられます。普通の牛丼の味わいを保ちながらカロリーを抑えたい方に向くサイズです。" },
+            { q: "すき家のダイエット中に避けるべきメニューは？", a: "牛丼メガ（1,365kcal）、牛丼特盛（1,100kcal）、牛丼大盛（908kcal）はカロリーが高め。また、とろ～り3種チーズ（110kcal/F12.1g）やおろしポン酢（100kcal/F8.9g）などのトッピング追加も脂質が増えるので量に注意しましょう。" },
+            { q: "すき家の朝食・定食メニューはダイエット向き？", a: "鮭定食ミニは436kcal、タンパク質21.2g、脂質10.1g、焼鮭朝食ミニは480kcal/F13.4g。ご飯・みそ汁・おかずが揃った定食スタイルで脂質が低めなので、朝食として活用しやすいメニューです。" },
+          ]}
+        />
+
+        {/* Update History */}
+        <UpdateHistory
+          entries={[
+            { date: "2026-06-22", note: "実在しない数値・メニュー（牛丼ライト352kcal、まぐろたたき丼455kcal、鮭朝食468kcal等）を全面修正。牛丼ライト（並盛397kcal）・山かけまぐろたたき丼・鮭定食などを軸に、サイズ別カロリーや各メニューの栄養成分を最新の公式栄養成分（DB実値）に統一。ランキング・比較表・QuickAnswer・FAQ・まとめを更新" },
+            { date: "2026-03-19", note: "初稿公開" },
           ]}
         />
 

@@ -20,6 +20,7 @@ import {
   ArticleImage,
   QuickAnswer,
   FAQSection,
+  UpdateHistory,
 } from "@/components/guide/ArticleComponents";
 import { AffiliateProductGrid } from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
@@ -54,12 +55,13 @@ const jsonLd = {
   description:
     "松屋のカロリー低い順ランキング、ダイエット向けおすすめメニュー、定食と丼の比較を徹底解説。",
   datePublished: "2026-03-19",
-  dateModified: new Date().toISOString().split("T")[0],
+  dateModified: "2026-06-22",
   author: {
-    "@type": "Organization",
-    name: "たべなび",
-    url: "https://www.tabenavi.jp",
-  },
+      "@type": "Person",
+      name: "ヒロ",
+      description: "外食で13kg減量した、たべなび開発者",
+      url: "https://www.tabenavi.jp/sources",
+    },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
@@ -94,14 +96,14 @@ export default function MatsuyaDietPage() {
       <ArticleLayout tocItems={tocItems} currentSlug="matsuya-diet">
         {/* Authority & Date */}
         <AuthorityBadge />
-        <p className="text-sm text-gray-400 mt-3 mb-6">最終更新: 2026年3月19日</p>
+        <p className="text-sm text-gray-400 mt-3 mb-6">最終更新: 2026年6月22日</p>
 
         {/* Introduction */}
         <p className="mb-4">
           松屋は牛丼チェーンの中でも<Marker>定食メニューが充実している</Marker>のが特徴です。みそ汁が無料で付いてくるのも嬉しいポイント。実は定食スタイルを活用することで、ダイエット中でも栄養バランスの良い食事が可能です。
         </p>
         <p className="mb-4">
-          最もカロリーを抑えたいなら<Marker color="blue">牛めしミニ盛（380kcal）</Marker>がおすすめ。一方で牛焼肉定食は827kcalとハイカロリーです。メニュー選びで400kcal以上の差がつくため、正しい知識が大切です。
+          カロリーを抑えたいなら、ご飯を外した<Marker color="blue">牛皿（並）（299kcal）</Marker>や、丼の中で最も軽い<Marker color="blue">牛めし（小盛）（507kcal）</Marker>がおすすめ。一方で牛焼肉定食は806kcal、牛めし大盛は933kcalとハイカロリーです。メニュー選びで600kcal以上の差がつくため、正しい知識が大切です。
         </p>
         <p className="mb-8">
           この記事では、松屋のメニューをカロリー低い順にランキングし、定食と丼の賢い使い分け方を詳しく解説します。
@@ -118,26 +120,28 @@ export default function MatsuyaDietPage() {
         <section className="mb-16">
                   <QuickAnswer
           question={"松屋でダイエット向きのメニューは何ですか？"}
-          answer={"松屋は無料みそ汁と定食メニューが充実しており、ダイエット向きです。最もカロリーを抑えたいなら牛めしミニ盛（380kcal）がおすすめ。ご飯をカットして牛皿+みそ汁+サラダなら310kcalの低糖質セットが完成します。定食系ならご飯をミニに変更することで、タンパク質を維持しながら糖質をカットできます。"}
+          answer={"松屋は無料みそ汁と定食メニューが充実しており、ダイエット向きです。カロリーを抑えたいなら、ご飯を外した牛皿（並）（299kcal）がおすすめ。牛皿+みそ汁+生野菜でも約358kcal、糖質は約14gと低糖質に収まります。丼で食べるなら最も軽い牛めし（小盛）（507kcal）を基本サイズにすると、並盛（687kcal）より約180kcal抑えられます。"}
         />
 
         <SectionHeading id="calorie-ranking">松屋メニューのカロリーランキング</SectionHeading>
 
           <p className="mb-4">
-            松屋の主要メニューをカロリーの低い順に並べました。<Marker color="blue">ミニ盛や小鉢系を活用する</Marker>のがカロリーコントロールの鍵です。
+            松屋の主要メニューをカロリーの低い順に並べました。<Marker color="blue">小盛や牛皿（ご飯抜き）を活用する</Marker>のがカロリーコントロールの鍵です。
           </p>
 
           <NutritionTable
             items={[
-              { name: "豚汁", calories: 168, protein: 8.5, fat: 10.2, carbs: 10.5, highlight: true },
-              { name: "牛皿（並盛）", calories: 243, protein: 14.5, fat: 17.0, carbs: 5.5, highlight: true },
-              { name: "牛めしミニ盛", calories: 380, protein: 12.5, fat: 13.2, carbs: 50.8, highlight: true },
-              { name: "牛めし並盛", calories: 640, protein: 19.8, fat: 20.5, carbs: 91.0 },
-              { name: "豚肩ロース焼肉定食", calories: 710, protein: 30.5, fat: 22.0, carbs: 95.5 },
-              { name: "ネギたっぷり旨辛ネギたま牛めし", calories: 748, protein: 23.0, fat: 26.5, carbs: 98.0 },
-              { name: "カルビ焼肉定食", calories: 756, protein: 28.5, fat: 28.2, carbs: 95.8 },
-              { name: "牛焼肉定食", calories: 827, protein: 34.2, fat: 30.5, carbs: 98.5 },
-              { name: "牛めし大盛", calories: 855, protein: 27.2, fat: 27.8, carbs: 121.0 },
+              { name: "ミニ牛皿", calories: 160, protein: 5.3, fat: 14.3, carbs: 2.6, highlight: true },
+              { name: "豚汁", calories: 243, protein: 9.2, fat: 14.9, carbs: 17.6, highlight: true },
+              { name: "牛皿（並）", calories: 299, protein: 9.8, fat: 26.9, carbs: 4.3, highlight: true },
+              { name: "牛皿（大盛）", calories: 377, protein: 12.4, fat: 33.7, carbs: 6.0 },
+              { name: "牛めし（小盛）", calories: 507, protein: 13.1, fat: 22.8, carbs: 59.6, highlight: true },
+              { name: "牛めし（並）", calories: 687, protein: 17.1, fat: 28.9, carbs: 85.5 },
+              { name: "創業ビーフカレー", calories: 769, protein: 17.9, fat: 28.8, carbs: 102.8 },
+              { name: "牛焼肉定食", calories: 806, protein: 23.3, fat: 41.3, carbs: 86.5 },
+              { name: "豚ロースグリル定食", calories: 810, protein: 31.9, fat: 32.5, carbs: 89.4 },
+              { name: "ネギたっぷり旨辛ネギたま牛めし（並盛）", calories: 818, protein: 24.7, fat: 36.2, carbs: 94.1 },
+              { name: "牛めし（大盛）", calories: 933, protein: 22.3, fat: 35.9, carbs: 124.3 },
             ]}
           />
 
@@ -146,7 +150,7 @@ export default function MatsuyaDietPage() {
           </p>
 
           <TipBox title="松屋ならではのポイント">
-            <p>松屋は<Marker>みそ汁が無料</Marker>で付いてきます。みそ汁を食事の最初に飲むことで満腹感が得やすくなり、食べ過ぎを防止できます。また、豚汁（168kcal）への変更も可能で、具だくさんの豚汁は満足感が高くおすすめです。</p>
+            <p>松屋は<Marker>みそ汁（35kcal）が無料</Marker>で付いてきます。みそ汁を食事の最初に飲むことで満腹感が得やすくなり、食べ過ぎを防止できます。また、具だくさんの豚汁（243kcal）への変更も可能で、満足感が高くおすすめです。</p>
           </TipBox>
         </section>
 
@@ -158,27 +162,27 @@ export default function MatsuyaDietPage() {
             カロリーと<Marker>PFCバランス</Marker>を考慮した、松屋のダイエット向けメニューベスト3を紹介します。
           </p>
 
-          <RankingCard rank={1} title="牛めしミニ盛" subtitle="380kcal / P12.5g / F13.2g / C50.8g">
+          <RankingCard rank={1} title="牛皿（並）+ みそ汁" subtitle="合計 約334kcal / P11.6g / F28.2g / C8.0g">
             <p className="text-sm text-gray-700 leading-relaxed mb-3">
-              松屋でダイエットなら<Marker>まずミニ盛を選ぶのが鉄則</Marker>。並盛（640kcal）から約260kcalもカットでき、ご飯の量が控えめになることで炭水化物も大幅に削減できます。
+              <Marker color="blue">ご飯を完全にカットして牛皿単品+無料みそ汁</Marker>という組み合わせ。糖質制限中の方にはこれがベスト。糖質わずか約8gで、しっかりとしたおかずを楽しめます。
+            </p>
+            <p className="text-sm text-gray-700 leading-relaxed">
+              物足りなさを感じたら生野菜（24kcal）を追加しても約358kcal。脂質はやや高めですが、糖質を抑えたい日に向いた組み合わせです。
+            </p>
+          </RankingCard>
+
+          <RankingCard rank={2} title="牛めし（小盛）" subtitle="507kcal / P13.1g / F22.8g / C59.6g">
+            <p className="text-sm text-gray-700 leading-relaxed mb-3">
+              丼で食べたいなら<Marker>最も軽い小盛を選ぶのが鉄則</Marker>。並盛（687kcal）から約180kcalカットでき、ご飯の量が控えめになることで炭水化物も削減できます。
             </p>
             <p className="text-sm text-gray-700 leading-relaxed">
               価格も並盛より安く、お財布にも優しい選択。みそ汁無料と合わせて、コスパの良いダイエット食になります。
             </p>
           </RankingCard>
 
-          <RankingCard rank={2} title="牛皿（並盛）+ みそ汁" subtitle="合計 約280kcal / P16.5g / F17.5g / C8.5g">
-            <p className="text-sm text-gray-700 leading-relaxed mb-3">
-              <Marker color="blue">ご飯を完全にカットして牛皿単品+無料みそ汁</Marker>という組み合わせ。糖質制限中の方にはこれがベスト。糖質わずか8.5gで、しっかりとしたおかずを楽しめます。
-            </p>
+          <RankingCard rank={3} title="豚ロースグリル定食" subtitle="810kcal / P31.9g / F32.5g / C89.4g">
             <p className="text-sm text-gray-700 leading-relaxed">
-              物足りなさを感じたらサラダ（約30kcal）を追加しても約310kcal。低カロリーを維持しやすい組み合わせです。
-            </p>
-          </RankingCard>
-
-          <RankingCard rank={3} title="豚肩ロース焼肉定食" subtitle="710kcal / P30.5g / F22.0g / C95.5g">
-            <p className="text-sm text-gray-700 leading-relaxed">
-              「がっつり食べたい日」はこの定食。カロリーは710kcalとやや高めですが、<Marker color="green">タンパク質30.5gと高タンパク</Marker>で脂質は22gと比較的控えめ。筋トレ後の食事や、1日の中でメインの食事にするなら十分許容範囲です。定食なので野菜も摂れます。
+              「がっつり食べたい日」はこの定食。カロリーは810kcalと高めですが、<Marker color="green">タンパク質31.9gと高タンパク</Marker>。同じくらいのカロリー帯の牛焼肉定食（P23.3g/F41.3g）より脂質が約9g少なくタンパク質も多いため、筋トレ後の食事や1日のメインにするなら有力な選択です。定食なので野菜も摂れます。
             </p>
           </RankingCard>
 
@@ -194,19 +198,19 @@ export default function MatsuyaDietPage() {
           </p>
 
           <ComparisonTable
-            headers={["比較項目", "牛めし（丼）並盛", "牛焼肉定食"]}
+            headers={["比較項目", "牛めし（丼）並", "牛焼肉定食"]}
             rows={[
-              ["カロリー", "640 kcal", "827 kcal"],
-              ["タンパク質", "19.8g", "34.2g"],
-              ["脂質", "20.5g", "30.5g"],
-              ["炭水化物", "91.0g", "98.5g"],
-              ["野菜", "少ない", "サラダ付き"],
+              ["カロリー", "687 kcal", "806 kcal"],
+              ["タンパク質", "17.1g", "23.3g"],
+              ["脂質", "28.9g", "41.3g"],
+              ["炭水化物", "85.5g", "86.5g"],
+              ["野菜", "少ない", "生野菜付き"],
               ["みそ汁", "無料付き", "無料付き"],
             ]}
           />
 
           <p className="mb-4">
-            カロリーだけで見ると牛めし並盛の方が低いですが、<Marker color="blue">定食はタンパク質が約1.7倍</Marker>。定食には野菜サラダやキャベツが付くため、食物繊維やビタミンも摂取できます。
+            カロリーだけで見ると牛めし並の方が低いですが、<Marker color="blue">定食はタンパク質が約1.4倍</Marker>。定食には生野菜が付くため、食物繊維やビタミンも摂取できます。ただし牛焼肉定食は脂質41.3gと高めなので、脂質を抑えたい場合は豚ロースグリル定食（F32.5g）の方が向いています。
           </p>
 
           <TipBox title="定食の賢い活用法">
@@ -216,7 +220,7 @@ export default function MatsuyaDietPage() {
           <SubSectionHeading>松屋で使える裏技：「ご飯少なめ」</SubSectionHeading>
 
           <p className="mb-4">
-            松屋では券売機で「ミニ盛」を選べるほか、口頭で「ご飯少なめ」とお願いすることも可能です。<Marker color="green">ご飯の量を減らすことでカロリーをカットできます。</Marker>になります。定食メニューでも活用できるので積極的に使いましょう。
+            松屋では券売機で牛めしの「小盛」を選べるほか、口頭で「ご飯少なめ」とお願いすることも可能です。<Marker color="green">ご飯の量を減らすことでカロリーをカットできます</Marker>。定食メニューでも活用できるので積極的に使いましょう。
           </p>
 
           <SubSectionHeading>定食メニューの詳細比較</SubSectionHeading>
@@ -228,19 +232,19 @@ export default function MatsuyaDietPage() {
           <ComparisonTable
             headers={["定食メニュー", "カロリー", "タンパク質", "脂質", "P/F比"]}
             rows={[
-              ["豚肩ロース焼肉定食", "710 kcal", "P 30.5g", "F 22.0g", "1.39"],
-              ["カルビ焼肉定食", "756 kcal", "P 28.5g", "F 28.2g", "1.01"],
-              ["牛焼肉定食", "827 kcal", "P 34.2g", "F 30.5g", "1.12"],
+              ["豚ロースグリル定食", "810 kcal", "P 31.9g", "F 32.5g", "0.98"],
+              ["トンテキ定食", "899 kcal", "P 33.6g", "F 35.3g", "0.95"],
+              ["牛焼肉定食", "806 kcal", "P 23.3g", "F 41.3g", "0.56"],
             ]}
             bestRowIndex={0}
           />
 
           <p className="mb-4">
-            P/F比（タンパク質/脂質）が最も高いのは豚肩ロース焼肉定食。<Marker color="blue">脂質を抑えながらタンパク質をしっかり摂取</Marker>できるため、筋トレ中の方やローファットダイエット中の方に最もおすすめの定食です。
+            P/F比（タンパク質/脂質）が最も高いのは豚ロースグリル定食。<Marker color="blue">脂質を抑えながらタンパク質をしっかり摂取</Marker>できるため、筋トレ中の方やローファットダイエット中の方に最もおすすめの定食です。
           </p>
 
           <p className="mb-4">
-            逆に、カルビ焼肉定食はP/F比が1.01と脂質とタンパク質がほぼ同量。同じ焼肉定食でも<Marker>豚肩ロースを選ぶだけで脂質を6.2g抑えられます</Marker>。
+            逆に、牛焼肉定食はP/F比が0.56と脂質がタンパク質を大きく上回ります。同じくらいのカロリーでも<Marker>豚ロースグリル定食を選ぶだけで脂質を約9g抑え、タンパク質を約8g増やせます</Marker>。
           </p>
         </section>
 
@@ -260,18 +264,18 @@ export default function MatsuyaDietPage() {
 
           <WarningBox title="ダイエット中は避けたいメニュー">
             <ul className="space-y-2">
-              <li><span className="font-bold">牛めし大盛（855kcal）</span> ─ 並盛から+215kcal。ご飯の量が大幅に増え、炭水化物121gに。</li>
-              <li><span className="font-bold">牛焼肉定食（827kcal）</span> ─ タンパク質34.2gは優秀だが、カロリーと脂質が高め。がっつり食べたい日以外は避けましょう。</li>
-              <li><span className="font-bold">カルビ焼肉定食（756kcal）</span> ─ カルビの脂質28.2gが高い。同じ焼肉定食なら豚肩ロース（710kcal/F22g）の方がまし。</li>
-              <li><span className="font-bold">ネギたっぷり旨辛ネギたま牛めし（748kcal）</span> ─ トッピングの卵とソースでカロリーが上乗せ。名前の印象ほどヘルシーではない。</li>
-              <li><span className="font-bold">カレー大盛（920kcal）</span> ─ カレーはルウに脂質と糖質が凝縮。大盛にすると900kcal超えに。</li>
+              <li><span className="font-bold">牛めし（大盛）（933kcal）</span> ─ 並（687kcal）から+246kcal。ご飯の量が大幅に増え、炭水化物124.3gに。</li>
+              <li><span className="font-bold">ネギたっぷり旨辛ネギたま牛めし（並盛）（818kcal）</span> ─ トッピングの卵とソースでカロリーが上乗せ。名前の印象ほどヘルシーではありません。</li>
+              <li><span className="font-bold">牛焼肉定食（806kcal）</span> ─ タンパク質23.3gは取れるが脂質が41.3gと高い。脂質を抑えたいなら豚ロースグリル定食（F32.5g）の方がまし。</li>
+              <li><span className="font-bold">チーズ創業ビーフカレー（938kcal）</span> ─ カレーはルウに脂質と糖質が凝縮。チーズが加わると900kcal超えに。</li>
+              <li><span className="font-bold">うまトマハンバーグ定食（986kcal）</span> ─ ハンバーグ＋ソースで脂質39.7g・炭水化物112.5gと高め。食べるなら頻度を抑えて。</li>
             </ul>
           </WarningBox>
 
           <WarningBox title="サイドメニューの注意点">
             <ul className="space-y-2">
-              <li><span className="font-bold">フライドポテト（320kcal）</span> ─ 揚げ物系サイドは脂質が高い。サラダ（約30kcal）に変更を。</li>
-              <li><span className="font-bold">牛めし+カレーのセット</span> ─ 合計で軽く1,000kcal超え。お得に見えてもカロリー的には大損です。</li>
+              <li><span className="font-bold">炙りチーズポテト（128kcal）・ポテサラ（92kcal）</span> ─ 揚げ物・芋系サイドは脂質が高め。生野菜（24kcal）に変更を。</li>
+              <li><span className="font-bold">創業ビーフカレー（769kcal）に牛皿を追加</span> ─ 牛皿（並・299kcal）を足すと1,000kcal超え。お得に見えてもカロリー的には大損です。</li>
             </ul>
           </WarningBox>
         </section>
@@ -288,15 +292,15 @@ export default function MatsuyaDietPage() {
             items={[
               {
                 title: "まずみそ汁から飲む",
-                body: "松屋の無料みそ汁を食事の最初に飲むことで、胃が温まり満腹感を感じやすくなります。これだけで自然と食べ過ぎを防止。豚汁（168kcal）に変更すれば具材で満足感もアップします。",
+                body: "松屋の無料みそ汁（35kcal）を食事の最初に飲むことで、胃が温まり満腹感を感じやすくなります。これだけで自然と食べ過ぎを防止。豚汁（243kcal）に変更すれば具材で満足感もアップします。",
               },
               {
-                title: "ミニ盛を基本にする",
-                body: "牛めしはミニ盛（380kcal）を基本サイズに。並盛より260kcal低く、物足りなければサラダ（約30kcal）を追加しても合計410kcalに収まります。",
+                title: "丼は小盛を基本にする",
+                body: "牛めしは小盛（507kcal）を基本サイズに。並（687kcal）より約180kcal低く、物足りなければ生野菜（24kcal）を追加しても合計約531kcalに収まります。",
               },
               {
-                title: "定食のご飯を「ミニ」に",
-                body: "定食メニューを注文する際、ご飯をミニ盛に変更しましょう。タンパク質量はそのままで、炭水化物と総カロリーだけをカットできる賢い方法です。",
+                title: "定食のご飯を「少なめ」に",
+                body: "定食メニューを注文する際、ご飯を少なめにお願いしましょう。タンパク質量はそのままで、炭水化物と総カロリーだけをカットできる賢い方法です。",
               },
               {
                 title: "丼より定食スタイルを選ぶ",
@@ -316,15 +320,15 @@ export default function MatsuyaDietPage() {
           <ComparisonTable
             headers={["パターン", "メニュー構成", "カロリー", "タンパク質"]}
             rows={[
-              ["低糖質", "牛皿 + 無料みそ汁 + サラダ", "310 kcal", "P 17.0g"],
-              ["バランス型", "牛めしミニ盛 + サラダ", "410 kcal", "P 14.5g"],
-              ["高タンパク", "豚肩ロース焼肉定食（ご飯ミニ）", "610 kcal", "P 30.5g"],
+              ["低糖質", "牛皿（並） + 無料みそ汁 + 生野菜", "約358 kcal", "P 12.8g"],
+              ["バランス型", "牛めし（小盛） + 生野菜", "約531 kcal", "P 14.3g"],
+              ["高タンパク", "豚ロースグリル定食", "810 kcal", "P 31.9g"],
             ]}
             bestRowIndex={0}
           />
 
           <p className="mb-4">
-            低糖質パターンの<Marker>「牛皿+みそ汁+サラダ」なら310kcalでP17g</Marker>。糖質制限ダイエット中の方に最適な組み合わせです。みそ汁が無料なのは松屋ならではのメリットです。
+            低糖質パターンの<Marker>「牛皿（並）+みそ汁+生野菜」なら約358kcalでP約13g、糖質は約14g</Marker>。糖質制限ダイエット中の方に向いた組み合わせです。みそ汁が無料なのは松屋ならではのメリットです。
           </p>
 
           <SubSectionHeading>PFCバランスで見る松屋メニュー</SubSectionHeading>
@@ -336,19 +340,19 @@ export default function MatsuyaDietPage() {
           <ComparisonTable
             headers={["目的", "おすすめメニュー", "カロリー", "特徴"]}
             rows={[
-              ["糖質制限", "牛皿 + みそ汁", "280 kcal", "糖質8.5gの超低糖質"],
-              ["ローファット", "豚肩ロース焼肉定食（ご飯ミニ）", "610 kcal", "P30.5gで脂質控えめ"],
-              ["カロリー制限", "牛めしミニ盛", "380 kcal", "手軽に400kcal以下"],
+              ["糖質制限", "牛皿（並） + みそ汁", "約334 kcal", "糖質約8gの低糖質"],
+              ["ローファット", "豚ロースグリル定食", "810 kcal", "P31.9gで定食内では脂質控えめ"],
+              ["カロリー制限", "牛皿（並）", "299 kcal", "手軽に300kcal前後"],
             ]}
             bestRowIndex={2}
           />
 
           <p className="mb-4">
-            松屋は定食メニューが充実しているため、<Marker color="blue">ローファットダイエットとの相性が特に良い</Marker>のが特徴です。焼肉定食系はタンパク質が豊富で、ご飯をミニに変更すれば脂質を抑えつつ高タンパクな食事が実現できます。
+            松屋は定食メニューが充実しているため、<Marker color="blue">高タンパク食との相性が良い</Marker>のが特徴です。豚ロースグリル定食は同カロリー帯の牛焼肉定食より脂質が控えめで、ご飯を少なめにすればさらに糖質を抑えつつ高タンパクな食事に近づけられます。
           </p>
 
           <TipBox title="松屋を週間プランに組み込む">
-            <p>松屋を週3回利用する場合のおすすめローテーション：月曜＝牛めしミニ盛（380kcal）、水曜＝牛皿+みそ汁（280kcal）、金曜＝豚肩ロース焼肉定食ご飯ミニ（610kcal）。<Marker>同じチェーンでも注文を変えることで飽きを防ぎ、栄養バランスも整います</Marker>。</p>
+            <p>松屋を週3回利用する場合のおすすめローテーション：月曜＝牛めし（小盛）（507kcal）、水曜＝牛皿（並）+みそ汁（約334kcal）、金曜＝豚ロースグリル定食（810kcal、ご飯少なめでさらに低減）。<Marker>同じチェーンでも注文を変えることで飽きを防ぎ、栄養バランスも整います</Marker>。</p>
           </TipBox>
 
           <SubSectionHeading>松屋 vs 他チェーンの比較</SubSectionHeading>
@@ -381,9 +385,9 @@ export default function MatsuyaDietPage() {
 
           <CheckList
             items={[
-              "牛めしミニ盛（380kcal）を基本サイズにするだけで大幅カロリーカット",
-              "牛皿+みそ汁+サラダで310kcalの低糖質セットが完成",
-              "定食はご飯を「ミニ」に変更してタンパク質を維持しつつ糖質カット",
+              "牛めし（小盛）（507kcal）を基本サイズにするだけで並（687kcal）より約180kcalカット",
+              "牛皿（並）+みそ汁+生野菜で約358kcal・糖質約14gの低糖質セットが完成",
+              "定食はご飯を「少なめ」にしてタンパク質を維持しつつ糖質カット",
               "丼より定食スタイルの方が栄養バランスに優れている",
               "まずみそ汁から飲んで満腹感を高め、食べ過ぎを防止",
             ]}
@@ -404,11 +408,19 @@ export default function MatsuyaDietPage() {
         <FAQSection
           slug="matsuya-diet"
           items={[
-            { q: "松屋のカロリーが最も低いメニューは何ですか？", a: "豚汁が最も低く168kcal、次に牛皿（並盛）243kcal、牛めしミニ盛380kcalです。豚汁は具が多く満足感も高いため、単品やメイン前の一品としておすすめです。" },
-            { q: "松屋の牛めし並盛と丼メニューの違いは何ですか？", a: "牛めし並盛は640kcal、タンパク質19.8gに対し、牛焼肉定食は827kcalながらタンパク質34.2gと約1.7倍。定食には野菜サラダも付き、栄養バランスが優れています。ダイエット向きは定食スタイルです。" },
-            { q: "ダイエット中に避けるべき松屋のメニューは何ですか？", a: "牛めし大盛（855kcal）、牛焼肉定食（827kcal）、カルビ焼肉定食（756kcal）は800kcal前後で高カロリー。また、牛めし+カレーセットは1,000kcal超えになるため避けましょう。" },
-            { q: "松屋でご飯の量を調整する方法はありますか？", a: "券売機で「ミニ盛」を選ぶか、口頭で「ご飯少なめ」と注文できます。ご飯を半分にするだけで約150kcalカットになり、定食系との相性も良くおすすめです。" },
-            { q: "松屋ダイエットで満腹感を高めるコツは何ですか？", a: "無料のみそ汁を食事の最初に飲むことが重要。胃が温まり満腹感を感じやすくなります。豚汁（168kcal）に変更すれば具材で更に満足感が高まります。" },
+            { q: "松屋のカロリーが最も低い食事メニューは何ですか？", a: "牛皿系ではミニ牛皿が160kcal、豚汁が243kcal、牛皿（並）が299kcalと低めです。丼では牛めし（小盛）が507kcalで最も軽くなります。豚汁は具が多く満足感も高いため、単品やメイン前の一品としておすすめです。" },
+            { q: "松屋の牛めし（並）と定食メニューの違いは何ですか？", a: "牛めし（並）は687kcal・タンパク質17.1gに対し、牛焼肉定食は806kcalでタンパク質23.3gと約1.4倍。定食には生野菜も付き栄養バランスが優れています。ただし牛焼肉定食は脂質41.3gと高めなので、脂質を抑えたい場合は豚ロースグリル定食（810kcal/F32.5g/P31.9g）が向いています。" },
+            { q: "ダイエット中に避けるべき松屋のメニューは何ですか？", a: "牛めし（大盛）（933kcal）、ネギたっぷり旨辛ネギたま牛めし（並盛）（818kcal）、牛焼肉定食（806kcal・脂質41.3g）は高カロリー・高脂質です。また、創業ビーフカレー（769kcal）に牛皿を追加すると1,000kcal超えになるため避けましょう。" },
+            { q: "松屋でご飯の量を調整する方法はありますか？", a: "牛めしは券売機で「小盛」を選ぶか、口頭で「ご飯少なめ」と注文できます。牛めしを並（687kcal）から小盛（507kcal）にすると約180kcalカットになり、定食系でもご飯少なめが可能でおすすめです。" },
+            { q: "松屋ダイエットで満腹感を高めるコツは何ですか？", a: "無料のみそ汁（35kcal）を食事の最初に飲むことが重要。胃が温まり満腹感を感じやすくなります。豚汁（243kcal）に変更すれば具材で更に満足感が高まります。" },
+          ]}
+        />
+
+        {/* Update History */}
+        <UpdateHistory
+          entries={[
+            { date: "2026-06-22", note: "実在しない数値・メニュー（牛めしミニ盛380kcal、豚肩ロース焼肉定食710kcal、カルビ焼肉定食756kcal、カレー大盛920kcal、フライドポテト320kcal等）を全面修正。牛皿（並）299kcal・牛めし（小盛）507kcal・牛めし（並）687kcal・牛焼肉定食806kcal・豚ロースグリル定食810kcal・豚汁243kcal・みそ汁35kcalなど、最新の公式栄養成分（DB実値）に統一。ランキング・比較表・QuickAnswer・FAQ・まとめを更新" },
+            { date: "2026-03-19", note: "初稿公開" },
           ]}
         />
 

@@ -8,10 +8,11 @@ import {
   CheckCircle,
   ChevronRight,
   BookOpen,
-  ExternalLink,
+  Search,
   Database,
 } from "lucide-react";
 import { pickRelated } from "@/lib/articles";
+import { MENU_PHOTOS, MENU_STOCK, GENRE_STOCK } from "@/lib/guide/photos";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -137,16 +138,23 @@ export function TableOfContents({
 export function SectionHeading({
   children,
   id,
+  index,
 }: {
   children: React.ReactNode;
   id: string;
+  index?: number;
 }) {
   return (
     <h2
       id={id}
-      className="bg-sky-400 text-white font-bold text-lg sm:text-xl px-5 py-3.5 scroll-mt-24 mt-2 mb-8 border-t-[3px] border-b-[3px] border-sky-600"
+      className="flex items-center gap-3 bg-gradient-to-r from-sky-500 to-cyan-400 text-white font-bold text-lg sm:text-xl pl-4 pr-5 py-3.5 rounded-r-lg scroll-mt-24 mt-2 mb-8 shadow-sm border-l-[5px] border-sky-700"
     >
-      {children}
+      {index != null && (
+        <span className="flex-shrink-0 w-7 h-7 rounded-full bg-white/25 text-white text-sm flex items-center justify-center font-extrabold tabular-nums">
+          {index}
+        </span>
+      )}
+      <span className="leading-snug">{children}</span>
     </h2>
   );
 }
@@ -193,39 +201,26 @@ export function NutritionCard({
 }: MenuItem) {
   return (
     <div className="bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow p-4">
-      <div className="flex items-start justify-between mb-3">
-        <div>
-          <p className="font-bold text-gray-900 text-sm sm:text-base">{name}</p>
-          {chain && (
-            <p className="text-xs text-gray-500 mt-0.5">{chain}</p>
+      <div className="flex items-start justify-between gap-2 mb-3">
+        <div className="min-w-0">
+          <p className="font-bold text-gray-900 text-sm sm:text-base leading-snug">{name}</p>
+          {chain && <p className="text-xs text-gray-500 mt-0.5">{chain}</p>}
+        </div>
+        <div className="flex flex-col items-end flex-shrink-0">
+          {recommended && (
+            <span className="bg-sky-400 text-white text-[11px] px-2 py-0.5 rounded-full font-semibold mb-1">
+              おすすめ
+            </span>
           )}
-        </div>
-        {recommended && (
-          <span className="bg-sky-400 text-white text-xs px-2 py-0.5 rounded-full font-semibold flex-shrink-0">
-            おすすめ
+          <span className="text-2xl font-extrabold text-gray-900 tabular-nums leading-none">
+            {calories}
+            <span className="text-[11px] font-normal text-gray-400 ml-0.5">kcal</span>
           </span>
-        )}
-      </div>
-      <div className="grid grid-cols-4 gap-2 mb-3">
-        <div className="bg-sky-50 rounded-lg py-2 px-3 text-center">
-          <p className="text-sky-600 font-bold text-sm">{calories}</p>
-          <p className="text-sky-600 text-[10px]">kcal</p>
-        </div>
-        <div className="bg-blue-50 rounded-lg py-2 px-3 text-center">
-          <p className="text-blue-600 font-bold text-sm">{protein.toFixed(1)}g</p>
-          <p className="text-blue-600 text-[10px]">タンパク</p>
-        </div>
-        <div className="bg-amber-50 rounded-lg py-2 px-3 text-center">
-          <p className="text-amber-600 font-bold text-sm">{fat.toFixed(1)}g</p>
-          <p className="text-amber-600 text-[10px]">脂質</p>
-        </div>
-        <div className="bg-green-50 rounded-lg py-2 px-3 text-center">
-          <p className="text-green-600 font-bold text-sm">{carbs.toFixed(1)}g</p>
-          <p className="text-green-600 text-[10px]">炭水化物</p>
         </div>
       </div>
+      <PFCBar protein={protein} fat={fat} carbs={carbs} />
       {price != null && (
-        <p className="text-sm font-bold text-gray-700">¥{price.toLocaleString()}</p>
+        <p className="text-sm font-bold text-gray-700 mt-2">¥{price.toLocaleString()}</p>
       )}
     </div>
   );
@@ -337,23 +332,33 @@ export function ArticleImage({
 // ─── 10. CTABanner ───────────────────────────────────────────────────────────
 
 export function CTABanner({
-  title = "たべなびで栄養管理を始めよう",
-  subtitle = "32チェーン・6,000品以上の栄養データ、全部無料",
+  title = "そのメニュー、何kcal？ たべなびで今すぐ検索",
+  subtitle = "32チェーン・6,000品以上を、カロリー・タンパク質・脂質で絞り込み検索。登録不要・無料で今すぐ使えます。",
+  href = "/search",
+  buttonText = "メニューを無料で検索する",
 }: {
   title?: string;
   subtitle?: string;
+  href?: string;
+  buttonText?: string;
 }) {
   return (
-    <section className="my-12 bg-gradient-to-r from-sky-400 to-cyan-400 p-8 text-center shadow-lg shadow-sky-200/50 border-t-[3px] border-b-[3px] border-sky-600">
+    <section className="my-12 rounded-2xl bg-gradient-to-r from-sky-400 to-cyan-400 p-8 text-center shadow-lg shadow-sky-200/50">
       <h3 className="text-xl font-bold text-white mb-2">{title}</h3>
-      <p className="text-sky-100 text-sm sm:text-base mb-6">{subtitle}</p>
+      <p className="text-sky-50 text-sm sm:text-base mb-6 leading-relaxed">{subtitle}</p>
       <Link
-        href="/signup"
-        className="inline-flex items-center gap-2 bg-white text-sky-600 font-bold px-8 py-3 rounded-full text-base shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-200"
+        href={href}
+        className="inline-flex items-center gap-2 bg-white text-sky-600 font-bold px-8 py-3.5 rounded-full text-base shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-200"
       >
-        無料で始める
-        <ExternalLink className="w-4 h-4" />
+        <Search className="w-4 h-4" />
+        {buttonText}
       </Link>
+      <p className="text-sky-50/90 text-xs mt-3">
+        食べたものを記録して管理するなら{" "}
+        <Link href="/signup" className="underline font-medium hover:text-white">
+          無料会員登録
+        </Link>
+      </p>
     </section>
   );
 }
@@ -370,44 +375,57 @@ export function ComparisonTable({
   bestRowIndex?: number;
 }) {
   return (
-    <div className="overflow-x-auto border border-gray-200 my-6 shadow-sm">
-      <table className="w-full text-sm">
-        <thead>
-          <tr className="bg-sky-400 text-white">
-            {headers.map((h) => (
-              <th key={h} className="text-left px-4 py-3 font-bold text-sm">
-                {h}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((row, i) => (
-            <tr
-              key={i}
-              className={`border-t border-gray-100 ${
-                i % 2 === 1 ? "bg-gray-50" : "bg-white"
-              }`}
-            >
-              {row.map((cell, j) => (
-                <td
-                  key={j}
-                  className={`px-4 py-3 ${
-                    i === bestRowIndex
-                      ? "text-green-600 font-bold"
-                      : j === 0
-                        ? "text-gray-900 font-medium"
-                        : "text-gray-700"
-                  }`}
-                >
-                  {i === bestRowIndex && j === 0 ? `★ ${cell}` : cell}
-                </td>
+    <figure className="my-6">
+      {/* デスクトップ: 表 */}
+      <div className="hidden sm:block overflow-x-auto border border-gray-200 rounded-lg shadow-sm">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="bg-sky-400 text-white">
+              {headers.map((h) => (
+                <th key={h} className="text-left px-4 py-3 font-bold text-sm">
+                  {h}
+                </th>
               ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody>
+            {rows.map((row, i) => (
+              <tr key={i} className={`border-t border-gray-100 ${i % 2 === 1 ? "bg-gray-50" : "bg-white"}`}>
+                {row.map((cell, j) => (
+                  <td
+                    key={j}
+                    className={`px-4 py-3 ${
+                      i === bestRowIndex ? "text-green-600 font-bold" : j === 0 ? "text-gray-900 font-medium" : "text-gray-700"
+                    }`}
+                  >
+                    {i === bestRowIndex && j === 0 ? `★ ${cell}` : cell}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {/* モバイル: 行ごとカード(横スクロール回避) */}
+      <div className="sm:hidden space-y-2.5">
+        {rows.map((row, i) => (
+          <div key={i} className={`rounded-xl border p-3.5 ${i === bestRowIndex ? "border-green-300 bg-green-50/40" : "border-gray-200 bg-white"}`}>
+            <p className="font-bold text-gray-900 text-sm mb-2">
+              {i === bestRowIndex && <span className="text-green-600">★ </span>}
+              {row[0]}
+            </p>
+            <dl className="grid grid-cols-1 gap-y-1 text-[13px]">
+              {row.slice(1).map((cell, j) => (
+                <div key={j} className="flex justify-between gap-2 border-b border-gray-50 pb-1 last:border-0">
+                  <dt className="text-gray-400">{headers[j + 1]}</dt>
+                  <dd className={`font-medium ${i === bestRowIndex ? "text-green-600" : "text-gray-700"}`}>{cell}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        ))}
+      </div>
+    </figure>
   );
 }
 
@@ -464,32 +482,54 @@ export function RankingCard({
   rank,
   title,
   subtitle,
+  calories,
+  protein,
+  fat,
+  carbs,
   children,
 }: {
   rank: number;
   title: string;
   subtitle: string;
+  calories?: number;
+  protein?: number;
+  fat?: number;
+  carbs?: number;
   children: React.ReactNode;
 }) {
-  const rankColors: Record<number, { bg: string; circle: string }> = {
-    1: { bg: "from-yellow-50 to-amber-50", circle: "bg-yellow-400" },
-    2: { bg: "from-gray-50 to-slate-50", circle: "bg-gray-400" },
-    3: { bg: "from-sky-50 to-cyan-50", circle: "bg-sky-400" },
+  const rankColors: Record<number, { bg: string; circle: string; ring: string }> = {
+    1: { bg: "from-yellow-50 to-amber-50", circle: "bg-gradient-to-br from-yellow-400 to-amber-500", ring: "ring-yellow-200" },
+    2: { bg: "from-gray-50 to-slate-50", circle: "bg-gradient-to-br from-gray-300 to-slate-400", ring: "ring-gray-200" },
+    3: { bg: "from-orange-50 to-amber-50", circle: "bg-gradient-to-br from-orange-300 to-amber-400", ring: "ring-orange-200" },
   };
-  const colors = rankColors[rank] || { bg: "from-gray-50 to-gray-50", circle: "bg-gray-300" };
+  const colors = rankColors[rank] || { bg: "from-gray-50 to-gray-50", circle: "bg-gray-300", ring: "ring-gray-100" };
+  const hasPfc = protein != null && fat != null && carbs != null;
 
   return (
-    <div className="mb-8 border border-gray-200 overflow-hidden">
+    <div className="mb-8 border border-gray-200 rounded-xl overflow-hidden shadow-sm">
       <div className={`bg-gradient-to-r ${colors.bg} px-5 py-4 flex items-center gap-3 border-b border-gray-100`}>
-        <span className={`w-10 h-10 rounded-full ${colors.circle} flex items-center justify-center text-white font-bold text-lg shadow-sm`}>
+        <span className={`flex-shrink-0 w-10 h-10 rounded-full ${colors.circle} flex items-center justify-center text-white font-bold text-lg shadow-sm ring-2 ${colors.ring}`}>
           {rank}
         </span>
-        <div>
-          <h3 className="text-lg font-bold text-gray-900">{title}</h3>
+        <div className="min-w-0 flex-1">
+          <h3 className="text-lg font-bold text-gray-900 leading-snug">{title}</h3>
           <p className="text-xs text-gray-500">{subtitle}</p>
         </div>
+        {calories != null && (
+          <span className="flex-shrink-0 text-2xl font-extrabold text-gray-900 tabular-nums leading-none">
+            {calories}
+            <span className="text-[11px] font-normal text-gray-400 ml-0.5">kcal</span>
+          </span>
+        )}
       </div>
-      <div className="p-5">{children}</div>
+      <div className="p-5">
+        {hasPfc && (
+          <div className="mb-4">
+            <PFCBar protein={protein} fat={fat} carbs={carbs} />
+          </div>
+        )}
+        {children}
+      </div>
     </div>
   );
 }
@@ -499,6 +539,7 @@ export function RankingCard({
 export function NutritionTable({
   items,
   highlightProtein,
+  caption,
 }: {
   items: {
     name: string;
@@ -509,48 +550,104 @@ export function NutritionTable({
     highlight?: boolean;
   }[];
   highlightProtein?: boolean;
+  caption?: string;
 }) {
+  const [sortKey, setSortKey] = useState<"calories" | "protein" | "fat" | "carbs" | null>(null);
+  const [asc, setAsc] = useState(true);
+  const view = sortKey
+    ? [...items].sort((a, b) => (asc ? a[sortKey] - b[sortKey] : b[sortKey] - a[sortKey]))
+    : items;
+  const head = (key: "calories" | "protein" | "fat" | "carbs", label: string) => (
+    <th
+      onClick={() => {
+        setAsc(sortKey === key ? !asc : true);
+        setSortKey(key);
+      }}
+      className="text-right px-4 py-2.5 font-bold cursor-pointer select-none hover:bg-sky-500 transition-colors"
+    >
+      {label}
+      <span className="ml-0.5 opacity-70 text-[10px]">{sortKey === key ? (asc ? "▲" : "▼") : "⇅"}</span>
+    </th>
+  );
   return (
-    <div className="overflow-x-auto border border-gray-200 my-6">
-      <table className="w-full text-sm">
-        <thead>
-          <tr className="bg-sky-400 text-white">
-            <th className="text-left px-4 py-2.5 font-bold">メニュー</th>
-            <th className="text-right px-4 py-2.5 font-bold">カロリー</th>
-            <th className="text-right px-4 py-2.5 font-bold">P</th>
-            <th className="text-right px-4 py-2.5 font-bold">F</th>
-            <th className="text-right px-4 py-2.5 font-bold">C</th>
-          </tr>
-        </thead>
-        <tbody>
-          {items.map((item, i) => (
-            <tr
-              key={item.name}
-              className={
-                item.highlight
-                  ? "bg-sky-50/50"
-                  : i % 2 === 0
-                    ? "bg-white"
-                    : "bg-gray-50/50"
-              }
-            >
-              <td className="px-4 py-2.5 text-gray-900 font-medium">
+    <figure className="my-6">
+      {/* デスクトップ: ソート可能な表 */}
+      <div className="hidden sm:block overflow-x-auto border border-gray-200 rounded-lg">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="bg-sky-400 text-white">
+              <th className="text-left px-4 py-2.5 font-bold">メニュー</th>
+              {head("calories", "カロリー")}
+              {head("protein", "P")}
+              {head("fat", "F")}
+              {head("carbs", "C")}
+            </tr>
+          </thead>
+          <tbody>
+            {view.map((item, i) => (
+              <tr key={item.name} className={item.highlight ? "bg-sky-50/60" : i % 2 ? "bg-gray-50/50" : "bg-white"}>
+                <td className="px-4 py-2.5 text-gray-900 font-medium">
+                  {item.name}
+                  {item.highlight && (
+                    <span className="ml-2 text-[11px] bg-sky-100 text-sky-700 px-1.5 py-0.5 rounded-full font-bold">おすすめ</span>
+                  )}
+                </td>
+                <td className="text-right px-4 py-2.5 font-bold text-gray-900 tabular-nums">
+                  {item.calories}
+                  <span className="text-[11px] text-gray-400 ml-0.5">kcal</span>
+                </td>
+                <td className={`text-right px-4 py-2.5 font-bold tabular-nums ${highlightProtein ? "text-blue-600" : "text-blue-500"}`}>
+                  {item.protein.toFixed(1)}
+                  <span className="text-[11px] font-normal text-gray-400">g</span>
+                </td>
+                <td className="text-right px-4 py-2.5 text-amber-600 tabular-nums">
+                  {item.fat.toFixed(1)}
+                  <span className="text-[11px] text-gray-400">g</span>
+                </td>
+                <td className="text-right px-4 py-2.5 text-green-600 tabular-nums">
+                  {item.carbs.toFixed(1)}
+                  <span className="text-[11px] text-gray-400">g</span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {/* モバイル: カード積み上げ(横スクロール撲滅・kcal特大) */}
+      <div className="sm:hidden space-y-2.5">
+        {view.map((item) => (
+          <div key={item.name} className={`rounded-xl border p-3.5 ${item.highlight ? "border-sky-300 bg-sky-50/50" : "border-gray-200 bg-white"}`}>
+            <div className="flex items-center justify-between gap-2 mb-2">
+              <p className="font-bold text-gray-900 text-sm leading-snug">
                 {item.name}
                 {item.highlight && (
-                  <span className="ml-2 text-xs text-sky-600 font-bold">おすすめ</span>
+                  <span className="ml-1.5 text-[10px] bg-sky-100 text-sky-700 px-1.5 py-0.5 rounded-full font-bold align-middle">おすすめ</span>
                 )}
-              </td>
-              <td className="text-right px-4 py-2.5 text-gray-700">{item.calories} kcal</td>
-              <td className={`text-right px-4 py-2.5 font-bold ${highlightProtein ? "text-sky-600" : "text-blue-600"}`}>
-                {item.protein.toFixed(1)}g
-              </td>
-              <td className="text-right px-4 py-2.5 text-gray-700">{item.fat.toFixed(1)}g</td>
-              <td className="text-right px-4 py-2.5 text-gray-700">{item.carbs.toFixed(1)}g</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+              </p>
+              <span className="text-lg font-extrabold text-gray-900 tabular-nums flex-shrink-0">
+                {item.calories}
+                <span className="text-[11px] text-gray-400 ml-0.5">kcal</span>
+              </span>
+            </div>
+            <div className="grid grid-cols-3 gap-1.5 text-center text-[11px]">
+              <div className="bg-blue-50 rounded py-1">
+                <b className="text-blue-600 text-sm">{item.protein.toFixed(1)}g</b>
+                <br />P
+              </div>
+              <div className="bg-amber-50 rounded py-1">
+                <b className="text-amber-600 text-sm">{item.fat.toFixed(1)}g</b>
+                <br />F
+              </div>
+              <div className="bg-green-50 rounded py-1">
+                <b className="text-green-600 text-sm">{item.carbs.toFixed(1)}g</b>
+                <br />C
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      {caption && <figcaption className="text-[11px] text-gray-400 mt-3">{caption}</figcaption>}
+    </figure>
   );
 }
 
@@ -761,5 +858,201 @@ export function ArticleFooter({ currentSlug }: { currentSlug: string }) {
         ))}
       </div>
     </section>
+  );
+}
+
+// ─── 24. CompareBar (横棒比較バー = ランキング可視化) ──────────────────────────
+// 競合は数値を表/本文でしか出さない。1指標を「長さ」で見せて一目で比較できる差別化部品。
+export function CompareBar({
+  title,
+  items,
+  unit = "kcal",
+  metric = "calorie",
+  sort = "asc",
+  highlightTop = 1,
+  caption,
+}: {
+  title: string;
+  items: { name: string; value: number; note?: string }[];
+  unit?: string;
+  metric?: "calorie" | "protein" | "fat" | "carbs";
+  sort?: "asc" | "desc" | "none";
+  highlightTop?: number;
+  caption?: string;
+}) {
+  const palette = {
+    calorie: { fill: "bg-sky-400", track: "bg-sky-50", text: "text-sky-700" },
+    protein: { fill: "bg-blue-500", track: "bg-blue-50", text: "text-blue-700" },
+    fat: { fill: "bg-amber-400", track: "bg-amber-50", text: "text-amber-700" },
+    carbs: { fill: "bg-green-500", track: "bg-green-50", text: "text-green-700" },
+  }[metric];
+
+  const sorted =
+    sort === "none"
+      ? items
+      : [...items].sort((a, b) => (sort === "asc" ? a.value - b.value : b.value - a.value));
+  const max = Math.max(...sorted.map((i) => i.value)) || 1;
+
+  return (
+    <figure className="my-8 rounded-xl border border-gray-200 bg-white p-5 sm:p-6">
+      <figcaption className="text-sm font-bold text-gray-900 mb-4">{title}</figcaption>
+      <div className="space-y-3">
+        {sorted.map((it, i) => {
+          const pct = Math.max((it.value / max) * 100, 6);
+          const strong = i < highlightTop;
+          return (
+            <div key={it.name}>
+              <div className="flex items-baseline justify-between mb-1 gap-2">
+                <span className="text-[13px] sm:text-sm text-gray-700 font-medium truncate">
+                  {strong && <span className="text-sky-500 mr-1">●</span>}
+                  {it.name}
+                </span>
+                <span className={`text-sm font-bold tabular-nums ${strong ? palette.text : "text-gray-600"}`}>
+                  {it.value.toLocaleString()}
+                  <span className="text-[11px] font-normal ml-0.5">{unit}</span>
+                  {it.note && <span className="text-[11px] text-gray-400 font-normal ml-1.5">{it.note}</span>}
+                </span>
+              </div>
+              <div className={`h-3 rounded-full ${palette.track} overflow-hidden`}>
+                <div
+                  className={`h-full rounded-full ${strong ? palette.fill : "bg-gray-300"} transition-[width] duration-500`}
+                  style={{ width: `${pct}%` }}
+                  role="img"
+                  aria-label={`${it.name} ${it.value}${unit}`}
+                />
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      {caption && <p className="text-[11px] text-gray-400 mt-4">{caption}</p>}
+    </figure>
+  );
+}
+
+type CompareBarProps = Parameters<typeof CompareBar>[0];
+export const CalorieBar = (p: Omit<CompareBarProps, "metric" | "unit">) => (
+  <CompareBar {...p} metric="calorie" unit="kcal" sort={p.sort ?? "asc"} />
+);
+export const ProteinBar = (p: Omit<CompareBarProps, "metric" | "unit">) => (
+  <CompareBar {...p} metric="protein" unit="g" sort={p.sort ?? "desc"} />
+);
+
+// ─── 25. PFCBar (P:F:C カロリー寄与の積み上げ横バー) ──────────────────────────
+// 割合はグラム比でなくカロリー寄与(P×4/F×9/C×4)。脂質が多い=見た目も太い、と直感が合う。
+export function PFCBar({
+  protein,
+  fat,
+  carbs,
+  showLegend = true,
+  compact = false,
+}: {
+  protein: number;
+  fat: number;
+  carbs: number;
+  showLegend?: boolean;
+  compact?: boolean;
+}) {
+  const pK = protein * 4,
+    fK = fat * 9,
+    cK = carbs * 4;
+  const tot = pK + fK + cK || 1;
+  const seg = [
+    { label: "P", g: protein, pct: (pK / tot) * 100, fill: "bg-blue-500", text: "text-blue-700" },
+    { label: "F", g: fat, pct: (fK / tot) * 100, fill: "bg-amber-400", text: "text-amber-700" },
+    { label: "C", g: carbs, pct: (cK / tot) * 100, fill: "bg-green-500", text: "text-green-700" },
+  ];
+  return (
+    <div className={compact ? "" : "my-3"}>
+      <div
+        className="flex h-3 w-full rounded-full overflow-hidden bg-gray-100"
+        role="img"
+        aria-label={`PFCバランス タンパク質${protein}g 脂質${fat}g 炭水化物${carbs}g`}
+      >
+        {seg.map((s) => (
+          <div key={s.label} className={s.fill} style={{ width: `${s.pct}%` }} />
+        ))}
+      </div>
+      {showLegend && (
+        <div className="flex flex-wrap gap-x-4 gap-y-1 mt-2">
+          {seg.map((s) => (
+            <span key={s.label} className="inline-flex items-center gap-1.5 text-[11px]">
+              <span className={`w-2.5 h-2.5 rounded-sm ${s.fill}`} />
+              <span className={`font-bold ${s.text}`}>{s.label}</span>
+              <span className="text-gray-500 tabular-nums">
+                {s.g.toFixed(1)}g・{Math.round(s.pct)}%
+              </span>
+            </span>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─── 26. ArticleMeta (公開日＋更新日＋権威バッジの信頼ヘッダ) ──────────────────
+export function ArticleMeta({ published, updated }: { published: string; updated: string }) {
+  return (
+    <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mt-3 mb-6">
+      <AuthorityBadge />
+      <span className="text-xs text-gray-400">公開: {published}</span>
+      <span className="text-xs text-gray-500 font-medium inline-flex items-center gap-1">
+        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+        更新: {updated}
+      </span>
+    </div>
+  );
+}
+
+// ─── 28. MenuPhoto (自分で撮った実写真。マニフェスト登録分だけ表示・未登録は何も出さない) ───
+// Next/Imageを使わず<img>直接配信(Vercel画像最適化のコストを避ける)。事前リサイズ前提。
+export function MenuPhoto({
+  id,
+  genre,
+  priority = false,
+}: {
+  id: string;
+  genre?: string;
+  priority?: boolean;
+}) {
+  // 優先順: 実写真(/public) → メニュー個別の代用 → ジャンル代用。どれも無ければ非表示(壊れない)。
+  const real = MENU_PHOTOS[id];
+  const p = real ?? MENU_STOCK[id] ?? (genre ? GENRE_STOCK[genre] : undefined);
+  if (!p) return null;
+  const isStock = !real;
+  return (
+    <figure className="my-6">
+      <div className="overflow-hidden rounded-2xl border border-gray-200 bg-gray-50">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={p.src}
+          alt={p.alt}
+          loading={priority ? "eager" : "lazy"}
+          className="w-full h-auto max-h-80 object-cover"
+        />
+      </div>
+      <figcaption className="text-[11px] text-gray-400 mt-2">
+        {p.caption ?? p.alt}
+        {isStock ? "（※写真はイメージ）" : " ／撮影: たべなび"}
+      </figcaption>
+    </figure>
+  );
+}
+
+// ─── 27. SourceNote (データ近傍のインライン出典) ─────────────────────────────
+export function SourceNote({
+  source = "各チェーン公式サイトの栄養成分情報",
+  asOf,
+}: {
+  source?: string;
+  asOf: string;
+}) {
+  return (
+    <p className="flex items-start gap-1.5 text-[11px] text-gray-400 mt-2 mb-6">
+      <Database className="w-3 h-3 mt-0.5 flex-shrink-0" />
+      <span>
+        出典: {source}（{asOf} 時点）／たべなびDBで検証済み
+      </span>
+    </p>
   );
 }

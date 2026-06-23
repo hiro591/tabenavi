@@ -24,8 +24,8 @@ import {
 } from "@/components/guide/ArticleComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
-// ISR: cache for 24 hours (CPU optimization).
-export const revalidate = 86400;
+// ISR: 栄養データは月次変更のため30日キャッシュ(再生成CPU削減)。
+export const revalidate = 2592000;
 
 export const metadata: Metadata = {
   alternates: { canonical: "https://www.tabenavi.jp/guide/low-fat-eating-out" },
@@ -57,10 +57,11 @@ const jsonLd = {
   datePublished: "2026-03-01",
   dateModified: new Date().toISOString().split("T")[0],
   author: {
-    "@type": "Organization",
-    name: "たべなび",
-    url: "https://www.tabenavi.jp",
-  },
+      "@type": "Person",
+      name: "ヒロ",
+      description: "外食で13kg減量した、たべなび開発者",
+      url: "https://www.tabenavi.jp/sources",
+    },
   publisher: { "@type": "Organization", name: "たべなび" },
   mainEntityOfPage: "https://www.tabenavi.jp/guide/low-fat-eating-out",
 };

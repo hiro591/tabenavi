@@ -4,8 +4,8 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { CHAINS, GOALS } from "@/lib/chains";
 
-// ISR: programmatic SEO pages cached 24h. Each (chain × goal) combo regenerates daily at most.
-export const revalidate = 86400;
+// ISR: programmatic SEO pages. 栄養データは月次変更のため7日キャッシュ(再生成CPU削減)。
+export const revalidate = 604800;
 
 type MenuItem = {
   id: string;

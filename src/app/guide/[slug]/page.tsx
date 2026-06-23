@@ -1,8 +1,12 @@
+import { cache } from "react";
 import { createPublicClient } from "@/lib/supabase/public";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import { GOALS, CHAINS as PROGRAMMATIC_CHAINS } from "@/lib/chains";
+import { QuickAnswer, FAQSection, MenuPhoto, type FAQItem } from "@/components/guide/ArticleComponents";
+import { RELATED_ARTICLES } from "@/lib/articles";
+import NutritionTableClient from "./NutritionTableClient";
 
 const CHAIN_MAP: Record<string, { name: string; description: string }> = {
   mcdonalds: {
@@ -208,8 +212,39 @@ const TIPS_MAP: Record<string, string> = {
     "ステーキガストは赤身ステーキ+サラダバーで高タンパク低脂質を狙えます。ライス・カレー・パンの食べ放題は糖質が増えやすいので量を意識しましょう。",
 };
 
-// ISR: cache chain nutrition pages for 12 hours (CPU optimization).
-export const revalidate = 43200;
+// チェーン→ジャンル代用画像(GENRE_STOCK)のマップ。
+// GENRE_STOCKに正確な無料画像が無いジャンル(牛丼=吉野家/すき家/松屋/てんや、とんかつ等)は
+// あえて未指定にして画像を出さない(誤った画像より無しが正しい。実写真で順次対応)。
+const CHAIN_GENRE: Record<string, string> = {
+  mcdonalds: "burger", mos: "burger", burgerking: "burger", zetteria: "burger",
+  kfc: "fried-chicken", matsunoya: "fried-chicken",
+  saizeriya: "pasta",
+  marugame: "udon",
+  kurasushi: "sushi", sushiro: "sushi",
+  ohsho: "chinese", bamiyan: "chinese", hidakaya: "chinese",
+  ichibanya: "curry",
+  starbucks: "cafe", doutor: "cafe",
+  subway: "sandwich",
+  gusto: "steak", dennys: "steak", joyfull: "steak", cocos: "steak",
+  "bikkuri-donkey": "steak", "steak-gusto": "steak",
+  ootoya: "grilled-fish", yayoiken: "grilled-fish",
+  "seven-eleven": "salad", lawson: "salad", familymart: "salad", conveni: "salad",
+};
+
+// 面A(チェーンのデータページ)→面B(ダイエット手法記事)への送客マップ。
+// 「カロリーを調べに来て離脱寸前の人」を、購買意欲・回遊性の高い手法記事へ送る。
+// 同時に最高トラフィックページから内部リンクを通し、面B記事の順位を押し上げる(集客の元栓)。
+const CHAIN_DIET: Record<string, string> = {
+  mcdonalds: "mcdonalds-diet", yoshinoya: "yoshinoya-diet", matsuya: "matsuya-diet",
+  sukiya: "sukiya-diet", saizeriya: "saizeriya-diet", gusto: "gusto-diet",
+  ootoya: "ootoya-diet", dennys: "dennys-diet", kfc: "kfc-diet", subway: "subway-diet",
+  starbucks: "starbucks-diet", marugame: "marugame-diet", "seven-eleven": "seven-eleven-diet",
+  lawson: "lawson-diet", familymart: "familymart-diet", conveni: "conveni-protein",
+};
+
+// ISR: 栄養データは月次程度しか変わらないため30日キャッシュ。再生成CPUを約14x削減。
+// データ更新時は import スクリプトから revalidatePath("/guide/<slug>") で即時反映する想定。
+export const revalidate = 2592000;
 
 // 初回アクセス時に生成→キャッシュ(オンデマンドISR)。これで毎リクエストのSSRを避ける。
 export async function generateStaticParams() {
@@ -235,17 +270,53 @@ export async function generateMetadata({
 }) {
   const { slug } = await params;
   const chain = CHAIN_MAP[slug];
+
+  if (slug === "eating-out-diet") {
+    return {
+      title:
+        "外食ダイエット完全ガイド｜チェーン店別おすすめメニューとカロリー早見表【2026年最新】 | たべなび",
+      description:
+        "外食ダイエットの基本と、主要チェーン店の低カロリー・高タンパクメニューをまとめた完全ガイド。チェーン別の選び方のコツやPFCバランスの整え方も解説します。",
+      alternates: { canonical: `https://www.tabenavi.jp/guide/${slug}` },
+    };
+  }
+
+  const name = chain?.name ?? "外食";
+  // PFC充足を実データで判定し、タイトル/説明文を「カロリー・栄養成分(PFC)」か「カロリー」に出し分ける。
+  // PFC欠損チェーン(サイゼリヤ等7社)に「栄養成分(PFC)」を約束しない=YMYL整合＋検索意図ミスマッチ回避。
+  const items = await fetchItems(slug);
+  const hasPfc =
+    coverage(items, "protein") >= PFC_COVERAGE_MIN &&
+    coverage(items, "fat") >= PFC_COVERAGE_MIN &&
+    coverage(items, "carbs") >= PFC_COVERAGE_MIN;
+  const title = hasPfc
+    ? `${name}のカロリー・栄養成分一覧｜全メニューのPFC(タンパク質・脂質・炭水化物)【2026年最新】 | たべなび`
+    : `${name}のカロリー一覧｜全メニューのカロリーを一覧で確認【2026年最新】 | たべなび`;
+  const description =
+    slug === "conveni"
+      ? chain?.description ?? "コンビニ3社の栄養成分一覧"
+      : hasPfc
+        ? `${name}の全メニューのカロリー・タンパク質・脂質・炭水化物(PFC)を一覧表で掲載。低カロリー・高タンパクのおすすめメニューや、ダイエット・筋トレ中の選び方のコツも解説します。`
+        : `${name}の全メニューのカロリーを一覧表で掲載。低カロリーのおすすめメニューや、ダイエット中の選び方のコツも解説します。`;
   return {
-    title: slug === "eating-out-diet"
-      ? "【2026年最新】外食ダイエット完全ガイド｜チェーン店別おすすめメニュー | たべなび"
-      : `【2026年最新】${chain?.name ?? "外食"} カロリー・栄養成分一覧｜全メニューPFC表 | たべなび`,
-    description:
-      chain?.description ?? "外食チェーンの栄養成分一覧",
+    title,
+    description,
     alternates: { canonical: `https://www.tabenavi.jp/guide/${slug}` },
+    openGraph: {
+      title: hasPfc
+        ? `${name}のカロリー・栄養成分一覧【2026年最新】`
+        : `${name}のカロリー一覧【2026年最新】`,
+      description: hasPfc
+        ? `${name}の全メニューのPFC(タンパク質・脂質・炭水化物)を一覧で確認。`
+        : `${name}の全メニューのカロリーを一覧で確認。`,
+      url: `https://www.tabenavi.jp/guide/${slug}`,
+      type: "article",
+    },
   };
 }
 
-async function fetchItems(slug: string) {
+// generateMetadata と本体で同一クエリを共有(cache()でリクエスト内1回に)。
+const fetchItems = cache(async (slug: string) => {
   const supabase = createPublicClient();
 
   if (slug === "conveni") {
@@ -280,7 +351,16 @@ async function fetchItems(slug: string) {
     .returns<MenuItem[]>();
 
   return data ?? [];
+});
+
+// 値>0の割合。protein/fat/carbsが実質欠損のチェーン(サイゼリヤ3%/くら寿司0%/ガスト0%/スシロー0%
+// /バーミヤン0%/日高屋1%/ステーキガスト0%)を検出し、PFC列・高P/低脂質UIを隠してカロリー基準に縮退する。
+// これをしないと「0.0g」の羅列=誤情報になる(YMYL)。閾値0.5: 実データは≤3% か ≥65% に二極化している。
+function coverage(items: MenuItem[], key: "protein" | "fat" | "carbs") {
+  if (items.length === 0) return 0;
+  return items.filter((i) => (i[key] ?? 0) > 0).length / items.length;
 }
+const PFC_COVERAGE_MIN = 0.5;
 
 export default async function GuideArticlePage({
   params,
@@ -313,9 +393,27 @@ export default async function GuideArticlePage({
     .sort((a, b) => (b.protein ?? 0) - (a.protein ?? 0))
     .slice(0, 5);
 
+  const lowFatItems = [...items]
+    .filter((i) => i.fat != null)
+    .sort((a, b) => (a.fat ?? 0) - (b.fat ?? 0))
+    .slice(0, 5);
+
+  // データ品質ガード(カバレッジ基準): 値>0が半数未満のチェーンでは該当列・UIを隠す。
+  // 例: サイゼリヤ(P3%)/くら寿司(P0%)/ガスト/スシロー/バーミヤン/日高屋/ステーキガストはPFC欠損。
+  // max>0だけで判定すると、値が数件あるだけのサイゼリヤを通して「0.0g」の高タンパクTOP5を出してしまう。
+  const hasProteinData = coverage(items, "protein") >= PFC_COVERAGE_MIN;
+  const hasFatData = coverage(items, "fat") >= PFC_COVERAGE_MIN;
+  const hasCarbsData = coverage(items, "carbs") >= PFC_COVERAGE_MIN;
+  const hasPfcData = hasProteinData && hasFatData && hasCarbsData;
+  // 価格は揃っているチェーンが少ない。3割以上に価格がある時だけ価格列を出す。
+  const priceCount = items.filter((i) => i.price != null).length;
+  const hasPriceData = items.length > 0 && priceCount / items.length >= 0.3;
+
   const title = isGeneralGuide
     ? "外食ダイエット完全ガイド"
-    : `${chain!.name} カロリー・栄養成分一覧`;
+    : hasPfcData
+      ? `${chain!.name} カロリー・栄養成分一覧`
+      : `${chain!.name} カロリー一覧`;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -324,26 +422,126 @@ export default async function GuideArticlePage({
     description: chain?.description ?? "外食チェーンの栄養成分一覧",
     dateModified: new Date().toISOString().split("T")[0],
     author: {
-      "@type": "Organization",
-      name: "たべなび",
-      url: "https://www.tabenavi.jp",
+      "@type": "Person",
+      name: "ヒロ",
+      description: "外食で13kg減量した、たべなび開発者",
+      url: "https://www.tabenavi.jp/sources",
     },
     publisher: {
       "@type": "Organization",
       name: "たべなび",
     },
-    mainEntityOfPage: `https://tabenavi.jp/guide/${slug}`,
+    mainEntityOfPage: `https://www.tabenavi.jp/guide/${slug}`,
   };
+
+  // パンくず構造化データ(検索結果でのパンくず表示＋階層理解)
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "ホーム", item: "https://www.tabenavi.jp" },
+      { "@type": "ListItem", position: 2, name: "ガイド", item: "https://www.tabenavi.jp/guide" },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: title,
+        item: `https://www.tabenavi.jp/guide/${slug}`,
+      },
+    ],
+  };
+
+  // QuickAnswer / FAQ はDB実値から組み立てる(捏造ゼロ・チェーン毎に常に正確)。
+  const topLowCal = lowCalItems[0];
+  const topProtein = highProteinItems[0];
+  const quickAnswerNode = chain ? (
+    <>
+      {chain.name}の全<strong>{items.length}メニュー</strong>
+      {hasPfcData
+        ? "のカロリー・タンパク質・脂質・炭水化物を一覧で確認できます。"
+        : "のカロリーを一覧で確認できます。"}
+      {topLowCal && (
+        <>
+          最もカロリーが低いのは「{topLowCal.name}」（
+          <strong>{topLowCal.calories}kcal</strong>）
+        </>
+      )}
+      {hasProteinData && topProtein && topProtein.protein != null && (
+        <>
+          、高タンパクなのは「{topProtein.name}」（
+          <strong>タンパク質{topProtein.protein.toFixed(1)}g</strong>）
+        </>
+      )}
+      です。
+    </>
+  ) : null;
+
+  const faqItems: FAQItem[] = [];
+  if (chain && topLowCal) {
+    const second = lowCalItems[1];
+    faqItems.push({
+      q: `${chain.name}で一番カロリーが低いメニューは？`,
+      a: `${topLowCal.name}で${topLowCal.calories}kcalです。${
+        second ? `次いで${second.name}（${second.calories}kcal）などが低カロリーです。` : ""
+      }ダイエット中はこうした低カロリーメニューを選ぶのがおすすめです。`,
+    });
+  }
+  if (chain && hasProteinData && topProtein && topProtein.protein != null) {
+    faqItems.push({
+      q: `${chain.name}で高タンパクなメニューは？`,
+      a: `${topProtein.name}がタンパク質${topProtein.protein.toFixed(
+        1
+      )}gで最も多く、筋トレ・ボディメイク中の方におすすめです。本ページの「高タンパクメニューTOP5」も参考にしてください。`,
+    });
+  }
+  if (chain) {
+    faqItems.push({
+      q: `${chain.name}の栄養成分（カロリー・PFC）はどこで確認できますか？`,
+      a: `本ページで${chain.name}の全${items.length}メニューのカロリー・タンパク質・脂質・炭水化物を一覧表で確認できます。アプリ「たべなび」を使えば、食べたメニューをタップするだけで栄養を記録・管理できます。`,
+    });
+  }
+  if (chain && TIPS_MAP[slug]) {
+    faqItems.push({
+      q: `${chain.name}でダイエット中に選ぶならどのメニューがおすすめ？`,
+      a: TIPS_MAP[slug],
+    });
+  }
 
   const otherChains = Object.entries(CHAIN_MAP).filter(
     ([key]) => key !== slug && key !== "conveni"
   );
+
+  // 目次(TOC): 実際に表示されるセクションだけを動的に。id付きH2と対でpassageランク/サイトリンクを狙う。
+  const toc: { id: string; label: string }[] = [];
+  if (slug in PROGRAMMATIC_CHAINS && chain) toc.push({ id: "by-goal", label: `${chain.name}を目的別に探す` });
+  if (items.length > 0) toc.push({ id: "nutrition-table", label: hasPfcData ? "全メニュー栄養成分一覧" : "全メニューカロリー一覧" });
+  if (lowCalItems.length > 0) toc.push({ id: "low-calorie", label: "低カロリーメニューTOP5" });
+  if (hasProteinData && highProteinItems.length > 0) toc.push({ id: "high-protein", label: "高タンパクメニューTOP5" });
+  if (hasFatData && lowFatItems.length > 0) toc.push({ id: "low-fat", label: "低脂質メニューTOP5" });
+  if (chain && TIPS_MAP[slug]) toc.push({ id: "tips", label: `${chain.name}で栄養管理するコツ` });
+  if (faqItems.length > 0) toc.push({ id: "faq", label: "よくある質問" });
+
+  // 面B(ダイエット手法記事)への送客リンク: チェーン固有のダイエット記事＋普遍的な高価値記事。
+  const guideLinkSlugs = [
+    CHAIN_DIET[slug],
+    "high-protein-chain-database",
+    "protein-cost-ranking",
+    "eating-out-diet",
+    "diet-lunch",
+  ].filter((s): s is string => Boolean(s) && s !== slug);
+  const guideLinks = [...new Set(guideLinkSlugs)]
+    .map((s) => RELATED_ARTICLES.find((a) => a.slug === s))
+    .filter((a): a is NonNullable<typeof a> => Boolean(a))
+    .slice(0, 4);
 
   return (
     <div className="min-h-screen bg-white">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
 
       {/* Header */}
@@ -371,15 +569,44 @@ export default async function GuideArticlePage({
         {/* Introduction text */}
         {chain && (
           <p className="text-gray-600 leading-relaxed mb-8">
-            {chain.name}の全メニューのカロリー、タンパク質（P）、脂質（F）、炭水化物（C）の栄養成分を一覧でまとめています。
+            {hasPfcData
+              ? `${chain.name}の全メニューのカロリー、タンパク質（P）、脂質（F）、炭水化物（C）の栄養成分を一覧でまとめています。`
+              : `${chain.name}の全メニューのカロリーを一覧でまとめています。`}
             ダイエットや筋トレ中の食事選びにお役立てください。
-            ※価格・栄養成分は店舗により異なる場合があります。
+            ※カロリー・栄養成分は店舗・時期により異なる場合があります。
           </p>
+        )}
+
+        {/* QuickAnswer: AI Overview / 強調スニペット対策の冒頭即答 */}
+        {quickAnswerNode && (
+          <QuickAnswer
+            question={`${chain!.name}でカロリーが低い・高タンパクなメニューは？`}
+            answer={quickAnswerNode}
+          />
+        )}
+
+        {/* チェーンのジャンル代用画像(著作権フリー・実写真があれば自動で差し替わる) */}
+        {chain && <MenuPhoto id={`chain-${slug}`} genre={CHAIN_GENRE[slug]} priority />}
+
+        {/* 目次(TOC): id付きH2へのアンカー。同一ページ内ジャンプ＋passageランク対策 */}
+        {toc.length > 2 && (
+          <nav className="mb-10 rounded-xl border border-gray-200 bg-gray-50/50 p-4">
+            <p className="text-xs font-bold text-gray-500 mb-2">目次</p>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1.5">
+              {toc.map((t) => (
+                <li key={t.id}>
+                  <a href={`#${t.id}`} className="text-sm text-sky-600 hover:underline">
+                    {t.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
         )}
 
         {/* 目的別ランキングへの内部リンク(チェーンページ=ハブ → 8目的ランキング → 各メニュー) */}
         {slug in PROGRAMMATIC_CHAINS && chain && (
-          <section className="mb-12">
+          <section id="by-goal" className="mb-12 scroll-mt-20">
             <h2 className="text-lg font-bold text-gray-900 mb-4">
               {chain.name}を目的別に探す
             </h2>
@@ -397,72 +624,26 @@ export default async function GuideArticlePage({
           </section>
         )}
 
-        {/* Full Nutrition Table */}
+        {/* Full Nutrition Table (ソート/検索/カテゴリ絞り込み可能。SSRで全件HTML化=SEO非劣化) */}
         {items.length > 0 && (
-          <section className="mb-12">
+          <section id="nutrition-table" className="mb-12 scroll-mt-20">
             <h2 className="text-lg font-bold text-gray-900 mb-4">
-              全メニュー栄養成分一覧
+              {hasPfcData ? "全メニュー栄養成分一覧" : "全メニューカロリー一覧"}
             </h2>
-            <div className="overflow-x-auto rounded-xl border border-gray-200">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="bg-gray-50 text-gray-600">
-                    <th className="text-left px-4 py-3 font-medium">メニュー</th>
-                    {isGeneralGuide && (
-                      <th className="text-left px-4 py-3 font-medium">チェーン</th>
-                    )}
-                    <th className="text-right px-4 py-3 font-medium">価格</th>
-                    <th className="text-right px-4 py-3 font-medium">カロリー</th>
-                    <th className="text-right px-4 py-3 font-medium">タンパク質</th>
-                    <th className="text-right px-4 py-3 font-medium">脂質</th>
-                    <th className="text-right px-4 py-3 font-medium">炭水化物</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {items.map((item, i) => (
-                    <tr
-                      key={item.id}
-                      className={i % 2 === 0 ? "bg-white" : "bg-gray-50/50"}
-                    >
-                      <td className="px-4 py-2.5 text-gray-900 font-medium max-w-[200px] truncate">
-                        <Link
-                          href={`/items/${item.id}`}
-                          className="hover:text-orange-500 transition-colors"
-                        >
-                          {item.name}
-                        </Link>
-                      </td>
-                      {isGeneralGuide && (
-                        <td className="px-4 py-2.5 text-gray-500 text-xs">
-                          {item.chain_restaurants?.name ?? "-"}
-                        </td>
-                      )}
-                      <td className="text-right px-4 py-2.5 text-gray-700">
-                        {item.price != null ? `¥${item.price}` : "-"}
-                      </td>
-                      <td className="text-right px-4 py-2.5 text-gray-700">
-                        {item.calories != null ? `${item.calories} kcal` : "-"}
-                      </td>
-                      <td className="text-right px-4 py-2.5 text-gray-700">
-                        {item.protein != null ? `${item.protein.toFixed(1)} g` : "-"}
-                      </td>
-                      <td className="text-right px-4 py-2.5 text-gray-700">
-                        {item.fat != null ? `${item.fat.toFixed(1)} g` : "-"}
-                      </td>
-                      <td className="text-right px-4 py-2.5 text-gray-700">
-                        {item.carbs != null ? `${item.carbs.toFixed(1)} g` : "-"}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            <NutritionTableClient
+              items={items}
+              isGeneralGuide={isGeneralGuide}
+              hasPriceData={hasPriceData}
+              hasProteinData={hasProteinData}
+              hasFatData={hasFatData}
+              hasCarbsData={hasCarbsData}
+            />
           </section>
         )}
 
         {/* Low Calorie Top 5 */}
         {lowCalItems.length > 0 && (
-          <section className="mb-12">
+          <section id="low-calorie" className="mb-12 scroll-mt-20">
             <h2 className="text-lg font-bold text-gray-900 mb-4">
               ダイエット中のおすすめメニューTOP5
             </h2>
@@ -500,9 +681,9 @@ export default async function GuideArticlePage({
           </section>
         )}
 
-        {/* High Protein Top 5 */}
-        {highProteinItems.length > 0 && (
-          <section className="mb-12">
+        {/* High Protein Top 5 (タンパク質データが実質あるチェーンのみ) */}
+        {hasProteinData && highProteinItems.length > 0 && (
+          <section id="high-protein" className="mb-12 scroll-mt-20">
             <h2 className="text-lg font-bold text-gray-900 mb-4">
               高タンパクメニューTOP5
             </h2>
@@ -540,9 +721,49 @@ export default async function GuideArticlePage({
           </section>
         )}
 
+        {/* Low Fat Top 5 (「○○ 脂質 一覧」系クエリ対応。脂質データが揃うチェーンのみ) */}
+        {hasFatData && lowFatItems.length > 0 && (
+          <section id="low-fat" className="mb-12 scroll-mt-20">
+            <h2 className="text-lg font-bold text-gray-900 mb-4">
+              低脂質メニューTOP5
+            </h2>
+            <div className="space-y-3">
+              {lowFatItems.map((item, i) => (
+                <Link
+                  key={item.id}
+                  href={`/items/${item.id}`}
+                  className="flex items-center gap-4 bg-white rounded-xl border border-gray-100 shadow-sm p-4 hover:shadow-md transition-all"
+                >
+                  <span className="flex-shrink-0 w-8 h-8 rounded-full bg-amber-50 flex items-center justify-center text-amber-600 font-bold text-sm">
+                    {i + 1}
+                  </span>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium text-gray-900 truncate">
+                      {item.name}
+                    </p>
+                    {isGeneralGuide && item.chain_restaurants?.name && (
+                      <p className="text-xs text-gray-400">
+                        {item.chain_restaurants.name}
+                      </p>
+                    )}
+                  </div>
+                  <div className="text-right flex-shrink-0">
+                    <p className="text-sm font-bold text-amber-600">
+                      脂質 {item.fat?.toFixed(1) ?? "-"}g
+                    </p>
+                    <p className="text-xs text-gray-400">
+                      {item.calories ?? "-"} kcal
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
+
         {/* Tips section */}
         {chain && TIPS_MAP[slug] && (
-          <section className="mb-12">
+          <section id="tips" className="mb-12 scroll-mt-20">
             <h2 className="text-lg font-bold text-gray-900 mb-4">
               {chain.name}で上手に栄養管理するコツ
             </h2>
@@ -550,6 +771,32 @@ export default async function GuideArticlePage({
               <p className="text-gray-600 leading-relaxed">
                 {TIPS_MAP[slug]}
               </p>
+            </div>
+          </section>
+        )}
+
+        {/* 面B(ダイエット手法記事)への送客。離脱寸前の流入を深掘り記事へ＋内部リンクで面B記事を強化 */}
+        {guideLinks.length > 0 && (
+          <section className="mb-12">
+            <h2 className="text-lg font-bold text-gray-900 mb-4">
+              {chain ? `${chain.name}を活用してダイエット・筋トレするなら` : "外食ダイエットをもっと極める"}
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {guideLinks.map((a) => (
+                <Link
+                  key={a.slug}
+                  href={`/guide/${a.slug}`}
+                  className="flex items-start gap-3 rounded-xl border border-gray-200 bg-white p-4 hover:border-sky-300 hover:shadow-sm transition-all"
+                >
+                  <span className="flex-shrink-0 mt-0.5 w-8 h-8 rounded-lg bg-sky-50 flex items-center justify-center text-sky-500 text-base">
+                    📖
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block text-sm font-bold text-gray-900 leading-snug">{a.title}</span>
+                    <span className="block text-xs text-gray-500 mt-0.5 leading-snug">{a.description}</span>
+                  </span>
+                </Link>
+              ))}
             </div>
           </section>
         )}
@@ -572,6 +819,13 @@ export default async function GuideArticlePage({
               ))}
             </div>
           </section>
+        )}
+
+        {/* FAQ: FAQPage構造化データを自動生成(DB実値ベース・捏造なし) */}
+        {faqItems.length > 0 && (
+          <div id="faq" className="scroll-mt-20">
+            <FAQSection items={faqItems} slug={slug} />
+          </div>
         )}
 
         {/* CTA */}

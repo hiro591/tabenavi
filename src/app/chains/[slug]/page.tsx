@@ -5,7 +5,8 @@ import type { Metadata } from "next";
 import { CHAINS, GOALS } from "@/lib/chains";
 
 // ISR: チェーンハブ。各チェーンの目的別ランキングへの幹(ハブ)。
-export const revalidate = 86400;
+// 栄養データは月次変更のため7日キャッシュ(再生成CPU削減。鮮度はデプロイ/revalidatePathで担保)。
+export const revalidate = 604800;
 
 type MenuItem = {
   id: string;

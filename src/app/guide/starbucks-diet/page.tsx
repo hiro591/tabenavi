@@ -20,6 +20,8 @@ import {
   ArticleImage,
   QuickAnswer,
   FAQSection,
+  UpdateHistory,
+  CompareBar,
 } from "@/components/guide/ArticleComponents";
 import { AffiliateProductGrid } from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
@@ -29,18 +31,18 @@ export const metadata: Metadata = {
   title:
     "【2026年最新】スタバダイエットガイド｜低カロリードリンクランキングと太らない注文術 | たべなび",
   description:
-    "スタバの低カロリードリンクランキング、無脂肪ミルク変更やシロップ減量などのカスタマイズ術、フードメニューの選び方を徹底解説。スタバで太らない注文方法がわかります。",
+    "スタバのドリンクをカロリー順にランキング。コーヒー系・ティー系の低カロリーメニュー、ラテやフラペチーノのカロリー、フードの選び方まで実データで徹底解説。スタバで太らない選び方がわかります。",
   keywords: [
     "スタバ ダイエット",
     "スタバ カロリー",
     "スタバ 低カロリー",
     "スターバックス カロリー",
-    "スタバ カスタマイズ ダイエット",
+    "スタバ フラペチーノ カロリー",
   ],
   openGraph: {
     title: "【2026年最新】スタバダイエットガイド｜低カロリードリンクランキングと太らない注文術",
     description:
-      "スタバの低カロリードリンクランキング、無脂肪ミルク変更やシロップ減量などのカスタマイズ術を徹底解説。",
+      "スタバのドリンクをカロリー順にランキング。低カロリーメニューの選び方とフラペチーノのカロリーを実データで徹底解説。",
     url: "https://www.tabenavi.jp/guide/starbucks-diet",
     type: "article",
   },
@@ -52,14 +54,15 @@ const jsonLd = {
   headline:
     "【2026年最新】スタバダイエットガイド｜低カロリードリンクランキングと太らない注文術",
   description:
-    "スタバの低カロリードリンクランキング、無脂肪ミルク変更やシロップ減量などのカスタマイズ術を徹底解説。",
+    "スタバのドリンクをカロリー順にランキング。低カロリーメニューの選び方とフラペチーノのカロリーを実データで徹底解説。",
   datePublished: "2026-03-19",
   dateModified: new Date().toISOString().split("T")[0],
   author: {
-    "@type": "Organization",
-    name: "たべなび",
-    url: "https://www.tabenavi.jp",
-  },
+      "@type": "Person",
+      name: "ヒロ",
+      description: "外食で13kg減量した、たべなび開発者",
+      url: "https://www.tabenavi.jp/sources",
+    },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
@@ -70,7 +73,7 @@ const jsonLd = {
 const tocItems = [
   { id: "calorie-facts", label: "スタバドリンクのカロリー事情" },
   { id: "low-cal-ranking", label: "低カロリードリンクランキング" },
-  { id: "customize", label: "カスタマイズで100kcal以下にする方法" },
+  { id: "customize", label: "カスタマイズでカロリーを抑える方法" },
   { id: "food-menu", label: "フードメニューの選び方" },
   { id: "avoid", label: "避けるべきドリンク" },
   { id: "summary", label: "まとめ" },
@@ -94,17 +97,17 @@ export default function StarbucksDietPage() {
       <ArticleLayout tocItems={tocItems} currentSlug="starbucks-diet">
         {/* Authority & Date */}
         <AuthorityBadge />
-        <p className="text-sm text-gray-400 mt-3 mb-6">最終更新: 2026年3月19日</p>
+        <p className="text-sm text-gray-400 mt-3 mb-6">最終更新: 2026年6月22日</p>
 
         {/* Introduction */}
         <p className="mb-4">
-          スターバックスはダイエット中に「行くべきではない場所」と思われがちですが、実は<Marker>カスタマイズ次第でカロリーを大幅にカットできる</Marker>のをご存じでしょうか。ドリップコーヒーはわずか15kcal、カスタマイズを駆使すればラテ系でも100kcal以下に抑えられます。
+          スターバックスはダイエット中に「行くべきではない場所」と思われがちですが、実は<Marker>メニューの選び方次第でカロリーを大きく抑えられる</Marker>のをご存じでしょうか。ブリュード コーヒーはわずか11〜17kcal、ティー系にいたっては0〜5kcalと、ほぼゼロカロリーで楽しめるドリンクが揃っています。
         </p>
         <p className="mb-4">
-          一方で、<Marker>フラペチーノ系は300〜500kcalとショートケーキ並みのカロリー</Marker>。何も知らずに注文すると、1杯で1食分のカロリーを摂取してしまうことも。知識があるかないかで大きな差が出るのがスタバです。
+          一方で、<Marker>フラペチーノ系は240〜500kcalとケーキ並みのカロリー</Marker>。何も知らずに注文すると、1杯で1食分近いカロリーを摂取してしまうことも。知識があるかないかで大きな差が出るのがスタバです。
         </p>
         <p className="mb-8">
-          この記事では、スタバの全ドリンクをカロリー順にランキングし、ダイエット中でも安心して楽しめるカスタマイズ術を徹底解説します。
+          この記事では、たべなび収録のスタバドリンクをカロリー順にランキングし、ダイエット中でも安心して選べるメニューと、注意したい高カロリードリンクを実データで解説します。
         </p>
 
         {/* Mobile TOC */}
@@ -116,42 +119,46 @@ export default function StarbucksDietPage() {
         <section className="mb-16">
                   <QuickAnswer
           question={"スタバでカロリーの低いドリンクは何ですか？"}
-          answer={"ドリップコーヒーとコールドブリューはわずか10～15kcalで、ダイエット中の最強の選択肢です。ラテが飲みたい場合は、無脂肪ミルク（無料）に変更することで通常の150kcalから88kcalまで削減でき、ダイエット中でも安心して楽しめます。"}
+          answer={"コールドブリュー コーヒー（10kcal）やブリュード コーヒー（アイス11kcal／ホット17kcal）、カフェ アメリカーノ（11kcal）が最も低カロリーで、ダイエット中の最有力候補です。さらにティー系（カモミール0kcal、アール グレイ2kcalなど）はほぼゼロカロリー。ラテが飲みたい場合はカプチーノ（ホット120kcal）が比較的カロリーを抑えられます。"}
         />
 
         <SectionHeading id="calorie-facts">スタバドリンクのカロリー事情</SectionHeading>
 
           <p className="mb-4">
-            スタバドリンクのカロリーは、使われる<Marker>ミルクの種類・シロップの量・ホイップの有無</Marker>で大きく変わります。まずはカロリーの仕組みを理解しましょう。
+            スタバドリンクのカロリーは、<Marker>ベースが「コーヒー・ティーだけ」か「ミルクが入るか」「フラペチーノか」</Marker>でカテゴリごとに大きく変わります。まずはカテゴリごとのカロリー帯を把握しましょう。
           </p>
 
           <NumberedList
             items={[
               {
-                title: "ミルクの種類がカロリーを左右する",
-                body: "通常のミルク（約100kcal/Tall）を無脂肪ミルクに変更すると約60kcalに。アーモンドミルクやオーツミルクは約70kcalと中間的な位置づけです。ソイミルクは約85kcal。",
+                title: "コーヒー・ティー系はほぼゼロカロリー",
+                body: "ブリュード コーヒー（アイス11kcal／ホット17kcal）、カフェ アメリカーノ（11kcal）、コールドブリュー コーヒー（10kcal）はほぼゼロカロリー。ティー（カモミール）は0kcal、アール グレイは2kcalと、ストレートのティー系も極めて低カロリーです。",
               },
               {
-                title: "シロップ1ポンプ=約20kcal",
-                body: "バニラシロップやキャラメルシロップは1ポンプ約20kcal。Tallサイズのラテには通常3ポンプ入るため、シロップだけで約60kcal。「シロップ少なめ」で1ポンプに減らせば40kcalカットできます。",
+                title: "ミルクが入るラテ系は120〜230kcal前後",
+                body: "カプチーノ（ホット120kcal／アイス146kcal）、カフェミスト（134kcal）、キャラメル マキアート（アイス181kcal／ホット223kcal）、抹茶 ティー ラテ（アイス214kcal／ホット231kcal）など。ミルクが入るぶんカロリーが上がります。",
               },
               {
-                title: "ホイップクリーム=約90kcal",
-                body: "フラペチーノに載るホイップクリームは約90kcal。「ホイップなし」を指定するだけで、おにぎり約半個分のカロリーを削減できます。これが最も手軽なカロリーカット法です。",
+                title: "フラペチーノ・甘いドリンクは240〜500kcal",
+                body: "THE フラペチーノ® of コーヒー ジェリー（243kcal）からダブル チョコレート フラペチーノ（497kcal）まで、フラペチーノ系はケーキ並みのカロリー。クリーム・ソース・トッピングが重なるほど高くなります。",
               },
             ]}
           />
 
-          <ComparisonTable
-            headers={["ミルクの種類", "Tallあたりカロリー", "脂質", "タンパク質"]}
-            rows={[
-              ["無脂肪ミルク", "約60 kcal", "0.2g", "6.5g"],
-              ["アーモンドミルク", "約70 kcal", "3.5g", "1.5g"],
-              ["オーツミルク", "約72 kcal", "2.8g", "1.8g"],
-              ["ソイミルク", "約85 kcal", "3.8g", "5.2g"],
-              ["通常ミルク", "約100 kcal", "5.5g", "5.8g"],
+          <CompareBar
+            title="低カロリードリンクの比較（カロリーが低い順）"
+            items={[
+              { name: "ティー（カモミール）", value: 0 },
+              { name: "アイスティー（ブラック）", value: 4 },
+              { name: "コールドブリュー コーヒー", value: 10 },
+              { name: "カフェ アメリカーノ", value: 11 },
+              { name: "ブリュード コーヒー（ホット）", value: 17 },
+              { name: "カプチーノ（ホット）", value: 120 },
             ]}
-            bestRowIndex={0}
+            metric="calorie"
+            sort="asc"
+            highlightTop={2}
+            caption="出典：たべなび収録のスターバックス栄養成分データ（2026年6月時点）"
           />
 
           <ArticleImage src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=800&h=400&fit=crop" alt="スタバ風のラテアートが美しいコーヒー" />
@@ -162,50 +169,48 @@ export default function StarbucksDietPage() {
           <SectionHeading id="low-cal-ranking">低カロリードリンクランキング</SectionHeading>
 
           <p className="mb-4">
-            スタバの定番ドリンクをカロリーの低い順にランキング。<Marker color="blue">ブラック系・ティー系は50kcal以下</Marker>で、ラテ系もミルクの選択で大きく変わります。すべてTallサイズでの比較です。
+            スタバの定番ドリンクをカロリーの低い順にランキング。<Marker color="blue">コーヒー系・ティー系は20kcal以下</Marker>で、ミルクの入るラテ系は120kcal前後から、フラペチーノ系はさらに高くなります。
           </p>
 
           <NutritionTable
             items={[
-              { name: "ティー（ストレート）", calories: 5, protein: 0.0, fat: 0.0, carbs: 1.2, highlight: true },
-              { name: "コールドブリューコーヒー", calories: 10, protein: 0.3, fat: 0.0, carbs: 2.0, highlight: true },
-              { name: "ドリップコーヒー", calories: 15, protein: 0.5, fat: 0.0, carbs: 2.8, highlight: true },
-              { name: "カフェアメリカーノ", calories: 15, protein: 0.8, fat: 0.0, carbs: 2.5, highlight: true },
-              { name: "カフェラテ（無脂肪）", calories: 88, protein: 8.2, fat: 0.2, carbs: 12.8 },
-              { name: "カフェラテ（低脂肪）", calories: 120, protein: 7.5, fat: 3.2, carbs: 13.5 },
-              { name: "カフェラテ（通常）", calories: 150, protein: 7.8, fat: 6.5, carbs: 13.8 },
-              { name: "抹茶ティーラテ（無脂肪）", calories: 145, protein: 6.8, fat: 1.5, carbs: 26.5 },
-              { name: "ソイラテ", calories: 180, protein: 8.5, fat: 5.8, carbs: 18.2 },
-              { name: "キャラメルマキアート", calories: 200, protein: 7.2, fat: 6.8, carbs: 28.5 },
-              { name: "カフェモカ", calories: 280, protein: 8.5, fat: 12.5, carbs: 35.2 },
+              { name: "コールドブリュー コーヒー", calories: 10, protein: 0.4, fat: 0.0, carbs: 2.3, highlight: true },
+              { name: "カフェ アメリカーノ（アイス）", calories: 11, protein: 0.8, fat: 0.0, carbs: 2.2, highlight: true },
+              { name: "ブリュード コーヒー（ホット）", calories: 17, protein: 1.0, fat: 0.0, carbs: 3.1, highlight: true },
+              { name: "カプチーノ（ホット）", calories: 120, protein: 6.9, fat: 6.0, carbs: 10.1 },
+              { name: "カフェミスト", calories: 134, protein: 7.6, fat: 6.5, carbs: 11.4 },
+              { name: "カプチーノ（アイス）", calories: 146, protein: 10.5, fat: 4.5, carbs: 16.1 },
+              { name: "キャラメル マキアート（アイス）", calories: 181, protein: 8.0, fat: 4.7, carbs: 26.8 },
+              { name: "抹茶 ティー ラテ（アイス）", calories: 214, protein: 7.7, fat: 6.4, carbs: 32.2 },
+              { name: "カフェ モカ（アイス）", calories: 262, protein: 7.5, fat: 8.1, carbs: 41.4 },
             ]}
             highlightProtein
           />
 
           <p className="text-xs text-gray-400 mb-4">
-            ※すべてTallサイズ。カスタマイズなしのデフォルト値です。
+            ※たべなび収録のスターバックス栄養成分データ（2026年6月時点）に基づく値です。
           </p>
 
-          <RankingCard rank={1} title="ドリップコーヒー / アメリカーノ" subtitle="10〜15kcal / ほぼゼロカロリー">
+          <RankingCard rank={1} title="コールドブリュー / アメリカーノ / ブリュード コーヒー" subtitle="10〜17kcal / ほぼゼロカロリー">
             <p className="text-sm text-gray-700 leading-relaxed">
-              <Marker>ダイエット中のスタバはブラック系一択</Marker>。ドリップコーヒーは15kcal、コールドブリューは10kcalと実質ゼロカロリー。カフェインの覚醒作用も期待でき、トレーニング前のドリンクとしても最適です。
+              <Marker>ダイエット中のスタバはブラック系一択</Marker>。コールドブリュー コーヒーは10kcal、カフェ アメリカーノ（アイス）は11kcal、ブリュード コーヒー（ホット）は17kcalと実質ゼロカロリー。カフェインの覚醒作用も期待でき、トレーニング前のドリンクとしても向いています。
             </p>
           </RankingCard>
 
-          <RankingCard rank={2} title="カフェラテ（無脂肪ミルク変更）" subtitle="88kcal / P8.2g / F0.2g / C12.8g">
+          <RankingCard rank={2} title="ティー各種（ストレート）" subtitle="0〜5kcal / カロリーほぼゼロ">
             <p className="text-sm text-gray-700 leading-relaxed">
-              ブラックが苦手な方は<Marker color="blue">無脂肪ミルク変更のカフェラテ</Marker>がベスト。88kcalで脂質はほぼゼロ、タンパク質は8.2gと牛乳の栄養もしっかり摂れます。通常ミルク（150kcal）から62kcalのカットになります。
+              <Marker color="green">ティー（カモミール）は0kcal、アール グレイは2kcal、イングリッシュ ブレックファストは5kcal</Marker>と、ストレートのティー系はほぼゼロカロリー。カフェインを控えたい方はカモミールなどのハーブティーも選べます。午後の気分転換に最適です。
             </p>
           </RankingCard>
 
-          <RankingCard rank={3} title="ティー各種（ストレート）" subtitle="5kcal / カロリーほぼゼロ">
+          <RankingCard rank={3} title="カプチーノ（ホット）" subtitle="120kcal / P6.9g / F6.0g / C10.1g">
             <p className="text-sm text-gray-700 leading-relaxed">
-              <Marker color="green">イングリッシュブレックファスト、アールグレイ、ほうじ茶など</Marker>のストレートティーはわずか5kcal。カフェインを控えたい方はカモミールなどのハーブティーも選べます。午後の気分転換に最適です。
+              ブラックが苦手でミルク系が飲みたい方には<Marker color="blue">カプチーノ（ホット）</Marker>。120kcalとミルク系の中では比較的カロリーが低く、タンパク質も6.9gと牛乳の栄養が摂れます。同じカプチーノでもアイス（146kcal）よりホットの方がやや低カロリーです。
             </p>
           </RankingCard>
 
-          <TipBox title="サイズ選びもカロリーに直結">
-            <p>同じドリンクでもサイズで大きな差が出ます。カフェラテの場合、<Marker>Short:103kcal → Tall:150kcal → Grande:200kcal → Venti:270kcal</Marker>（通常ミルク）。Shortを選ぶだけでTallより約50kcalカットできます。</p>
+          <TipBox title="同じドリンクでもホット/アイスで差が出る">
+            <p>スタバはホットとアイスでカロリーが異なるドリンクがあります。たとえば<Marker>カプチーノはホット120kcalに対しアイス146kcal、キャラメル マキアートはアイス181kcalに対しホット223kcal</Marker>。ドリンクごとに低い方を選ぶと、無理なくカロリーを抑えられます。</p>
           </TipBox>
         </section>
 
@@ -215,44 +220,51 @@ export default function StarbucksDietPage() {
           subtitle="たべなびなら外食メニューの栄養成分をすぐに確認できます"
         />
 
-        {/* Section 3: カスタマイズで100kcal以下にする方法 */}
+        {/* Section 3: カスタマイズでカロリーを抑える方法 */}
         <section className="mb-16">
-          <SectionHeading id="customize">カスタマイズで100kcal以下にする方法</SectionHeading>
+          <SectionHeading id="customize">カスタマイズでカロリーを抑える方法</SectionHeading>
 
           <p className="mb-6">
-            スタバの強みは豊富なカスタマイズオプション。<Marker>ミルク変更・シロップ減量・ホイップ抜きの3つを組み合わせる</Marker>ことで、ほぼすべてのドリンクを大幅にカロリーカットできます。
+            スタバの強みは豊富なカスタマイズオプション。<Marker>ミルク変更・シロップ減量・ホイップ抜きの3つを組み合わせる</Marker>ことで、甘いドリンクのカロリーを抑えやすくなります。具体的な削減量は店舗やレシピで変わりますが、考え方を押さえておくと選びやすくなります。
           </p>
 
-          <SubSectionHeading>カスタマイズ1：無脂肪ミルクに変更（無料）</SubSectionHeading>
+          <SubSectionHeading>カスタマイズ1：無脂肪・低脂肪ミルクに変更（無料）</SubSectionHeading>
           <p className="mb-6">
-            <Marker color="blue">無脂肪ミルクへの変更は無料</Marker>で、最も効果的なカロリーカット法です。通常ミルクから変更するだけで、ラテ系で約40〜60kcal削減。「ノンファットミルクでお願いします」と一言伝えるだけで完了します。脂質もほぼゼロになるため、脂質制限中の方に特におすすめです。
+            <Marker color="blue">ミルクの変更は無料</Marker>で、手軽なカロリーカット法です。通常ミルクから無脂肪ミルクに変えると脂質が減るぶんカロリーが下がる傾向があります。「ノンファットミルクでお願いします」と一言伝えるだけで完了。脂質を抑えたい方に向いた選び方です。
           </p>
 
           <SubSectionHeading>カスタマイズ2：シロップ減量・なし</SubSectionHeading>
           <p className="mb-6">
-            「シロップ少なめ（1ポンプに減量）」で約40kcalカット、「シロップなし」なら約60kcalカット。<Marker>キャラメルマキアートのシロップを1ポンプに減らすだけで160kcalまで下がります</Marker>。甘さが少し減りますが、エスプレッソの風味がより感じられて美味しいという声も。
+            シロップは甘いドリンクのカロリーと糖質の大きな要因。「シロップ少なめ」や「シロップなし」にすると、そのぶんカロリーを抑えられます。<Marker>甘いラテ系やフラペチーノはシロップ量の調整が効きやすい</Marker>のがポイント。甘さは少し減りますが、コーヒーや茶葉の風味がより感じられます。
           </p>
 
           <SubSectionHeading>カスタマイズ3：ホイップクリーム抜き</SubSectionHeading>
           <p className="mb-6">
-            <Marker color="green">ホイップなしで約90kcalカット</Marker>。カフェモカやフラペチーノのホイップを抜くだけで、大きなカロリー削減になります。ホイップは脂質が高いため、ダイエット中は必ず「ホイップなしで」と伝えましょう。
+            <Marker color="green">ホイップは脂質が高い</Marker>ため、抜くだけでカロリー削減につながります。カフェ モカやフラペチーノのホイップを抜くのは、手軽で効果が出やすいカスタマイズ。ダイエット中は「ホイップなしで」と伝えるのがおすすめです。
           </p>
 
-          <SubSectionHeading>実践例：人気ドリンクを100kcal以下にする</SubSectionHeading>
+          <SubSectionHeading>そもそも低カロリーなドリンクを選ぶ</SubSectionHeading>
+          <p className="mb-6">
+            カスタマイズ以前に、<Marker>ベースから低カロリーなドリンクを選ぶ</Marker>のが最も確実です。下の比較のように、同じ「コーヒー系」でもブラックとフラペチーノでは大きな差があります。
+          </p>
 
-          <ComparisonTable
-            headers={["ドリンク", "通常", "カスタマイズ後", "カット量"]}
-            rows={[
-              ["カフェラテ", "150 kcal", "88 kcal（無脂肪ミルク）", "-62 kcal"],
-              ["キャラメルマキアート", "200 kcal", "98 kcal（無脂肪+シロップ1P）", "-102 kcal"],
-              ["カフェモカ", "280 kcal", "148 kcal（無脂肪+ホイップ抜き）", "-132 kcal"],
-              ["抹茶ティーラテ", "210 kcal", "145 kcal（無脂肪ミルク）", "-65 kcal"],
+          <CompareBar
+            title="同じコーヒー系でもこれだけ違う（カロリー比較）"
+            items={[
+              { name: "カフェ アメリカーノ（アイス）", value: 11 },
+              { name: "カプチーノ（ホット）", value: 120 },
+              { name: "カフェ モカ（アイス）", value: 262 },
+              { name: "THE フラペチーノ® of コーヒー ジェリー", value: 243 },
+              { name: "ダブル チョコレート フラペチーノ", value: 497 },
             ]}
-            bestRowIndex={1}
+            metric="calorie"
+            sort="asc"
+            highlightTop={1}
+            caption="出典：たべなび収録のスターバックス栄養成分データ（2026年6月時点）"
           />
 
-          <TipBox title="「ライトシロップ」という裏技">
-            <p>「シロップ少なめ」ではなく<Marker>「シロップ半分で」と伝えると、1.5ポンプ（通常3ポンプ）に調整</Marker>してもらえます。甘さを完全になくすのは寂しいけど、カロリーは抑えたい。そんなときに使える中間的な注文方法です。</p>
+          <TipBox title="「シロップ少なめ」で甘さとカロリーのバランスを取る">
+            <p>甘さを完全になくすのは寂しいけれど、カロリーは抑えたい。そんなときは<Marker>「シロップ少なめで」</Marker>と伝えるのが手軽です。甘いラテやフラペチーノほど効果が出やすいので、まずは1段階減らしてみるのがおすすめです。</p>
           </TipBox>
 
           <ArticleImage src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=800&h=400&fit=crop" alt="カスタマイズされたスタバドリンクのイメージ" />
@@ -270,51 +282,52 @@ export default function StarbucksDietPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
             <NutritionCard
-              name="ヨーグルト&グラノーラ"
+              name="アサイーベリー ヨーグルト＆グラノーラ"
               chain="スターバックス"
-              calories={220}
-              protein={8.5}
-              fat={6.2}
-              carbs={32.5}
+              calories={171}
+              protein={11.0}
+              fat={4.0}
+              carbs={22.6}
               recommended
             />
             <NutritionCard
-              name="サラダラップ（根菜チキン）"
+              name="ヨーグルト＆バナナグラノーラ"
               chain="スターバックス"
-              calories={235}
-              protein={12.5}
-              fat={8.8}
-              carbs={28.2}
+              calories={179}
+              protein={11.5}
+              fat={5.5}
+              carbs={20.9}
               recommended
             />
             <NutritionCard
-              name="あらびきソーセージパイ"
+              name="ハム＆チーズ 石窯カンパーニュサンド"
               chain="スターバックス"
-              calories={285}
-              protein={8.8}
-              fat={18.2}
-              carbs={22.5}
+              calories={255}
+              protein={17.4}
+              fat={13.8}
+              carbs={15.9}
+              recommended
             />
             <NutritionCard
-              name="石窯フィローネ（ハム＆マリボーチーズ）"
+              name="バジルポーク ホットトルティーヤ"
               chain="スターバックス"
-              calories={342}
-              protein={15.8}
-              fat={12.5}
-              carbs={38.8}
+              calories={352}
+              protein={16.2}
+              fat={23.8}
+              carbs={18.4}
             />
           </div>
 
           <WarningBox title="避けるべきフードメニュー">
             <ul className="space-y-2">
-              <li><span className="font-bold">チョコレートチャンクスコーン（約420kcal）</span> ─ バターたっぷりのスコーンにチョコレート。脂質22g以上で、おやつとしてはカロリー過多。</li>
-              <li><span className="font-bold">シナモンロール（約380kcal）</span> ─ 砂糖とバターの塊。炭水化物が50g以上と、糖質も非常に高い。</li>
-              <li><span className="font-bold">ニューヨークチーズケーキ（約410kcal）</span> ─ クリームチーズたっぷりで脂質28g。フラペチーノ + チーズケーキのコンボは800kcal超えも。</li>
+              <li><span className="font-bold">チョコレートテリーヌ（393kcal）</span> ─ 脂質31.8gと高め。濃厚なチョコレートスイーツで、おやつとしてはカロリー過多になりやすい。</li>
+              <li><span className="font-bold">クリームシフォンケーキ（374kcal）</span> ─ 脂質23.7g。ふんわり軽く見えても、生クリーム由来の脂質が多めです。</li>
+              <li><span className="font-bold">アールグレイ バスクチーズケーキ（368kcal）</span> ─ 脂質25.7gと高脂質。フラペチーノ + ケーキのコンボは800kcal超えになることも。</li>
             </ul>
           </WarningBox>
 
           <TipBox title="フードを食べるならドリンクはブラック系で">
-            <p>フードメニューを注文する場合は、<Marker>ドリンクをドリップコーヒー（15kcal）かアメリカーノ（15kcal）にする</Marker>のがルール。サラダラップ（235kcal）+ ドリップコーヒー（15kcal）= 250kcalなら、ランチとしても十分低カロリーです。</p>
+            <p>フードメニューを注文する場合は、<Marker>ドリンクをブリュード コーヒー（11〜17kcal）かカフェ アメリカーノ（11kcal）にする</Marker>のがおすすめ。ハム＆チーズ 石窯カンパーニュサンド（255kcal）+ カフェ アメリカーノ（11kcal）= 約266kcalなら、軽めのランチとしても十分です。</p>
           </TipBox>
 
           <ArticleImage src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&h=400&fit=crop" alt="コーヒーとサンドイッチの軽食" />
@@ -325,36 +338,36 @@ export default function StarbucksDietPage() {
           <SectionHeading id="avoid">ダイエット中に避けるべきドリンク</SectionHeading>
 
           <p className="mb-4">
-            スタバで最も注意すべきは<Marker>フラペチーノ系ドリンク</Marker>。クリーム・シロップ・ホイップの三重構造で、1杯で300〜500kcalに達します。
+            スタバで最も注意すべきは<Marker>フラペチーノ系・チョコレート系ドリンク</Marker>。クリーム・ソース・トッピングが重なり、1杯で340〜500kcalに達するものもあります。
           </p>
 
           <NutritionTable
             items={[
-              { name: "バニラクリームフラペチーノ", calories: 274, protein: 4.8, fat: 11.2, carbs: 38.5 },
-              { name: "キャラメルフラペチーノ", calories: 322, protein: 4.2, fat: 12.5, carbs: 48.5 },
-              { name: "抹茶クリームフラペチーノ", calories: 322, protein: 5.8, fat: 11.5, carbs: 48.8 },
-              { name: "ダークモカチップフラペチーノ", calories: 348, protein: 5.5, fat: 15.8, carbs: 48.2 },
-              { name: "ホワイトモカ（ホイップ付き）", calories: 405, protein: 8.2, fat: 18.5, carbs: 52.4 },
-              { name: "季節限定フラペチーノ", calories: 450, protein: 4.5, fat: 18.8, carbs: 65.2 },
+              { name: "和三蜜 アーモンドミルク フラペチーノ®", calories: 342, protein: 6.8, fat: 17.4, carbs: 40.3 },
+              { name: "スターバックス ストロベリー フラペチーノ®", calories: 357, protein: 5.0, fat: 12.6, carbs: 56.3 },
+              { name: "THE フラペチーノ® of チャンキー クッキー", calories: 366, protein: 6.6, fat: 17.7, carbs: 45.6 },
+              { name: "ホワイト モカ（ホット）", calories: 413, protein: 13.4, fat: 18.4, carbs: 49.0 },
+              { name: "イチゴ チョコレート フラペチーノ®", calories: 425, protein: 5.7, fat: 16.0, carbs: 64.9 },
+              { name: "ダブル チョコレート フラペチーノ", calories: 497, protein: 7.7, fat: 20.2, carbs: 72.1 },
             ]}
           />
 
-          <WarningBox title="フラペチーノ1杯＝ショートケーキと同等">
+          <WarningBox title="フラペチーノ1杯＝ケーキと同等">
             <ul className="space-y-2">
-              <li><span className="font-bold">季節限定フラペチーノ（約450kcal）</span> ─ 期間限定の甘い誘惑。1杯で砂糖約50g以上、ショートケーキ1個分を超えるカロリー。</li>
-              <li><span className="font-bold">ホワイトモカ＋ホイップ（405kcal）</span> ─ ホワイトチョコレートソース + ホイップで脂質18.5g。「モカ」系は総じてカロリーが高い。</li>
-              <li><span className="font-bold">キャラメルフラペチーノ（322kcal）</span> ─ 人気メニューだが、炭水化物48.5gはご飯1杯分以上。「たまのご褒美」にとどめましょう。</li>
+              <li><span className="font-bold">ダブル チョコレート フラペチーノ（497kcal）</span> ─ 炭水化物72.1g、脂質20.2gと、たべなび収録のスタバドリンクで最も高カロリー。1杯でほぼ1食分のカロリーです。</li>
+              <li><span className="font-bold">イチゴ チョコレート フラペチーノ®（425kcal）</span> ─ 炭水化物64.9gはご飯1杯分を大きく超える量。「たまのご褒美」にとどめましょう。</li>
+              <li><span className="font-bold">ホワイト モカ（ホット・413kcal）</span> ─ ホワイトチョコレートソースで脂質18.4g。「モカ」系は総じてカロリーが高めです。</li>
             </ul>
           </WarningBox>
 
           <ComparisonTable
-            headers={["ドリンク", "カロリー", "砂糖相当量", "同等の食べ物"]}
+            headers={["ドリンク", "カロリー", "炭水化物", "脂質"]}
             rows={[
-              ["ドリップコーヒー", "15 kcal", "0g", "ほぼゼロ"],
-              ["カフェラテ（無脂肪）", "88 kcal", "12g", "バナナ1本"],
-              ["キャラメルマキアート", "200 kcal", "25g", "おにぎり1個"],
-              ["キャラメルフラペチーノ", "322 kcal", "48g", "ショートケーキ"],
-              ["季節限定フラペチーノ", "450 kcal", "65g", "牛丼並盛り相当"],
+              ["カフェ アメリカーノ（アイス）", "11 kcal", "2.2g", "0g"],
+              ["カプチーノ（ホット）", "120 kcal", "10.1g", "6.0g"],
+              ["キャラメル マキアート（アイス）", "181 kcal", "26.8g", "4.7g"],
+              ["カフェ モカ（アイス）", "262 kcal", "41.4g", "8.1g"],
+              ["ダブル チョコレート フラペチーノ", "497 kcal", "72.1g", "20.2g"],
             ]}
             bestRowIndex={0}
           />
@@ -362,8 +375,8 @@ export default function StarbucksDietPage() {
 
         {/* Bottom CTA */}
         <CTABanner
-          title="たべなびで外食の栄養管理を始めよう"
-          subtitle="32チェーン・6,000品以上の栄養データ、全部無料"
+          title="そのメニュー、何kcal？ たべなびで今すぐ検索"
+          subtitle="32チェーン・6,000品以上を、カロリー・タンパク質・脂質で絞り込み検索。登録不要・無料です。"
         />
 
         <AffiliateProductGrid
@@ -381,18 +394,18 @@ export default function StarbucksDietPage() {
 
           <CheckList
             items={[
-              "ドリップコーヒー（15kcal）・アメリカーノ（15kcal）が最強の低カロリードリンク",
-              "ラテ系は無脂肪ミルク変更（無料）で約40〜60kcalカット",
-              "シロップ少なめ（1ポンプ）で約40kcalカット、ホイップ抜きで約90kcalカット",
-              "キャラメルマキアートも無脂肪+シロップ1Pで98kcalまで下げられる",
-              "フラペチーノ系（300〜500kcal）はダイエット中は禁止。ショートケーキ並みのカロリー",
-              "フードを食べるならドリンクはブラック系に。サラダラップ（235kcal）がおすすめ",
-              "サイズはShortかTallに。GrandeやVentiは不要なカロリーの上乗せ",
+              "コールドブリュー（10kcal）・カフェ アメリカーノ（11kcal）・ブリュード コーヒー（11〜17kcal）が最強の低カロリードリンク",
+              "ティー系（カモミール0kcal、アール グレイ2kcalなど）はほぼゼロカロリー",
+              "ミルク系を選ぶならカプチーノ（ホット120kcal）が比較的低カロリー",
+              "ミルク変更・シロップ少なめ・ホイップ抜きで甘いドリンクのカロリーを抑えられる",
+              "フラペチーノ・チョコレート系（340〜500kcal）はケーキ並み。たまのご褒美に",
+              "フードを食べるならドリンクはブラック系に。アサイーベリー ヨーグルト＆グラノーラ（171kcal）やハム＆チーズ 石窯カンパーニュサンド（255kcal）がおすすめ",
+              "同じドリンクでもホット/アイスでカロリーが違うことがある（例：カプチーノはホット120kcal／アイス146kcal）",
             ]}
           />
 
           <p className="text-xs text-gray-400 mt-4 mb-8">
-            ※カロリー・栄養成分は2026年3月時点の情報です。季節メニューや店舗により異なる場合があります。最新の情報はスターバックス公式サイトでご確認ください。
+            ※カロリー・栄養成分は2026年6月時点でたべなびに収録された情報です。季節メニューや店舗、レシピ改定により異なる場合があります。最新の情報はスターバックス公式サイトでご確認ください。
           </p>
         </section>
 
@@ -400,11 +413,25 @@ export default function StarbucksDietPage() {
         <FAQSection
           slug="starbucks-diet"
           items={[
-            { q: "スタバのラテをカロリーカットしたい場合、どうすればいいですか？", a: "無脂肪ミルルへの変更（無料、約40～60kcalカット）、シロップ少なめ（約40kcalカット）、ホイップなし（約90kcalカット）の3つを組み合わせられます。特に無脂肪ミルク変更は最も効果的で手軽な方法です。" },
-            { q: "スタバのフラペチーノはダイエット中に飲めますか？", a: "フラペチーノ系は300～500kcalでショートケーキ並みのカロリーがあり、ダイエット中は避けるべきメニューです。どうしても飲みたい場合は、ホイップなしやシロップ少なめで注文し、カロリーを最小限に抑えましょう。" },
-            { q: "スタバのフードメニューで低カロリーなものは？", a: "ヨーグルト＆グラノーラ（220kcal）やサラダラップ（235kcal）がおすすめです。フードを選ぶ場合は、ドリンクをドリップコーヒー（15kcal）などブラック系にすることで、全体のカロリーを抑えられます。" },
-            { q: "スタバのサイズ選びはカロリーに影響しますか？", a: "大きく影響します。カフェラテの場合、Short（103kcal）→ Tall（150kcal）→ Grande（200kcal）→ Venti（270kcal）と段階的に増加。ダイエット中はShortやTallを選ぶだけで数十kcalのカットになります。" },
-            { q: "スタバで避けるべきフードメニューは何ですか？", a: "チョコレートチャンクスコーン（約420kcal、脂質22g以上）、シナモンロール（約380kcal、糖質50g以上）、ニューヨークチーズケーキ（約410kcal、脂質28g）は特に高カロリー・高脂質のため注意が必要です。" },
+            { q: "スタバでカロリーが最も低いドリンクは何ですか？", a: "コールドブリュー コーヒー（10kcal）、カフェ アメリカーノ（アイス11kcal）、ブリュード コーヒー（アイス11kcal／ホット17kcal）がほぼゼロカロリーで最も低カロリーです。ティー系はさらに低く、ティー（カモミール）0kcal、アール グレイ2kcalなど、ストレートの茶葉系はほぼゼロカロリーで楽しめます。" },
+            { q: "スタバのラテをカロリーカットしたい場合、どうすればいいですか？", a: "ミルクの無脂肪・低脂肪への変更（無料）、シロップ少なめ、ホイップなしの3つを組み合わせるとカロリーを抑えやすくなります。削減量は店舗やレシピで変わります。ミルク系の中ではカプチーノ（ホット120kcal）が比較的低カロリーです。" },
+            { q: "スタバのフラペチーノはダイエット中に飲めますか？", a: "フラペチーノ・チョコレート系は340～500kcalとケーキ並みのカロリーがあり、ダイエット中は控えめにしたいメニューです。たとえばダブル チョコレート フラペチーノは497kcal。どうしても飲みたい場合は、ホイップなしやシロップ少なめで注文し、カロリーを抑えましょう。" },
+            { q: "スタバのフードメニューで低カロリーなものは？", a: "アサイーベリー ヨーグルト＆グラノーラ（171kcal）やヨーグルト＆バナナグラノーラ（179kcal）、ハム＆チーズ 石窯カンパーニュサンド（255kcal）が比較的低カロリーです。フードを選ぶ場合は、ドリンクをカフェ アメリカーノ（11kcal）などブラック系にすることで、全体のカロリーを抑えられます。" },
+            { q: "スタバで避けるべき（高カロリーな）ドリンクは何ですか？", a: "ダブル チョコレート フラペチーノ（497kcal、炭水化物72.1g）、イチゴ チョコレート フラペチーノ®（425kcal）、ホワイト モカ（ホット413kcal）などが高カロリーです。フラペチーノやチョコレート系はカロリー・糖質ともに高くなりやすいので注意しましょう。" },
+            { q: "スタバで避けるべき（高カロリーな）フードは何ですか？", a: "チョコレートテリーヌ（393kcal、脂質31.8g）、クリームシフォンケーキ（374kcal、脂質23.7g）、アールグレイ バスクチーズケーキ（368kcal、脂質25.7g）は特に高カロリー・高脂質のため注意が必要です。" },
+          ]}
+        />
+
+        <UpdateHistory
+          entries={[
+            {
+              date: "2026-06-22",
+              note: "全ドリンク・フードのカロリーとPFCをたべなび収録の最新メニューデータで再検証。実在しないメニュー（ドリップコーヒー／カフェラテ無脂肪・低脂肪・通常／ソイラテ／バニラクリーム・キャラメル・抹茶クリーム・ダークモカチップ各フラペチーノ／季節限定フラペチーノ／ヨーグルト&グラノーラ／サラダラップ／あらびきソーセージパイ／石窯フィローネ／チョコレートチャンクスコーン／シナモンロール／ニューヨークチーズケーキ）を実在メニューへ差し替え。出典のないミルク種別・シロップ・サイズ別のカロリー断定値を削除し、実データに基づくカロリー・PFCへ修正。ランキング・比較表・QuickAnswer・FAQ・まとめも実値に統一。",
+            },
+            {
+              date: "2026-03-19",
+              note: "記事公開。",
+            },
           ]}
         />
 

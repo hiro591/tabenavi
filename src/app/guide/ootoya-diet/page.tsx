@@ -20,6 +20,7 @@ import {
   ArticleImage,
   QuickAnswer,
   FAQSection,
+  MenuPhoto,
 } from "@/components/guide/ArticleComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -55,10 +56,11 @@ const jsonLd = {
   datePublished: "2026-03-19",
   dateModified: new Date().toISOString().split("T")[0],
   author: {
-    "@type": "Organization",
-    name: "たべなび",
-    url: "https://www.tabenavi.jp",
-  },
+      "@type": "Person",
+      name: "ヒロ",
+      description: "外食で13kg減量した、たべなび開発者",
+      url: "https://www.tabenavi.jp/sources",
+    },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
@@ -93,7 +95,7 @@ export default function OotoyaDietPage() {
       <ArticleLayout tocItems={tocItems} currentSlug="ootoya-diet">
         {/* Authority & Date */}
         <AuthorityBadge />
-        <p className="text-sm text-gray-400 mt-3 mb-6">最終更新: 2026年3月19日</p>
+        <p className="text-sm text-gray-400 mt-3 mb-6">最終更新: 2026年6月19日</p>
 
         {/* Introduction */}
         <p className="mb-4">
@@ -118,7 +120,7 @@ export default function OotoyaDietPage() {
         <section className="mb-16">
                   <QuickAnswer
           question={"大戸屋でダイエット向きのメニューは何ですか？"}
-          answer={"大戸屋でダイエットに最適なのは低カロリーメニューです。しまほっけの炭火焼き定食（642kcal・タンパク質36.8g）が最もおすすめ。白米を五穀米に無料変更し、ご飯を少なめにすることで、カロリーをさらに削減。焼き魚・蒸し鶏・煮メニューを選び、揚げ物を避けることが成功の鍵です。"}
+          answer={"大戸屋でダイエット向きなのは、脂質が低く高タンパクなメニューです。大戸屋ばくだん丼（568kcal・タンパク質28.8g・脂質12.0g）、しまほっけの炭火焼き（612kcal・タンパク質45.5g・脂質13.1g）、豚ヒレの冷しゃぶ おろし柚香だれ（627kcal・脂質わずか8.0g）が特におすすめ。白米を五穀米に無料変更し、ご飯を少なめにするとさらに削減できます。チキン南蛮やかつ系の揚げ物は脂質が高いので頻度を抑えましょう。"}
         />
 
         <SectionHeading id="why-ootoya">大戸屋がダイエットに最適な理由</SectionHeading>
@@ -156,30 +158,31 @@ export default function OotoyaDietPage() {
           <SectionHeading id="calorie-ranking">大戸屋カロリーランキング（低い順）</SectionHeading>
 
           <p className="mb-4">
-            大戸屋の主要定食メニューをカロリーの低い順に並べました。<Marker color="blue">焼き魚定食や蒸し鶏系は600kcal台と低カロリー</Marker>で、揚げ物系でも800kcal前後に収まるメニューが多いのが特徴です。
+            大戸屋の主菜メニューをカロリーの低い順に並べました。<Marker color="blue">丼・焼き魚系は500〜700kcal台と低カロリー</Marker>な一方、揚げ物系（チキン南蛮など）は900〜1,300kcalと高めで、選ぶメニュー次第でカロリーが倍近く変わります。
           </p>
 
           <NutritionTable
             items={[
-              { name: "しまほっけの炭火焼き定食", calories: 642, protein: 36.8, fat: 18.5, carbs: 78.2, highlight: true },
-              { name: "さばの炭火焼き定食", calories: 668, protein: 32.5, fat: 24.8, carbs: 74.5, highlight: true },
-              { name: "蒸し鶏と野菜のせいろ蒸し定食", calories: 685, protein: 34.2, fat: 16.8, carbs: 82.5 },
-              { name: "鶏と野菜の黒酢あん定食", calories: 752, protein: 32.5, fat: 22.4, carbs: 94.8 },
-              { name: "チキンかあさん煮定食", calories: 804, protein: 40.2, fat: 28.5, carbs: 86.4 },
-              { name: "大戸屋風チキン南蛮定食", calories: 892, protein: 35.8, fat: 38.2, carbs: 95.6 },
-              { name: "ロースかつ定食", calories: 948, protein: 32.4, fat: 42.5, carbs: 98.2 },
-              { name: "四元豚のロースかつ定食", calories: 985, protein: 34.8, fat: 45.2, carbs: 96.8 },
-              { name: "鶏と野菜の黒酢あん（大盛り）", calories: 1024, protein: 38.5, fat: 28.8, carbs: 132.5 },
+              { name: "大戸屋ばくだん丼", calories: 568, protein: 28.8, fat: 12.0, carbs: 83.6, highlight: true },
+              { name: "しまほっけの炭火焼き", calories: 612, protein: 45.5, fat: 13.1, carbs: 79.3, highlight: true },
+              { name: "豚ヒレの冷しゃぶ おろし柚香だれ", calories: 627, protein: 42.3, fat: 8.0, carbs: 97.7, highlight: true },
+              { name: "鰹の梅はさみ揚げ", calories: 672, protein: 27.6, fat: 19.2, carbs: 96.9 },
+              { name: "鰆の西京焼き 菜の花からし和え添え", calories: 699, protein: 40.5, fat: 17.8, carbs: 94.5 },
+              { name: "さばの味噌煮", calories: 739, protein: 36.9, fat: 26.9, carbs: 85.1 },
+              { name: "さばの炭火焼き", calories: 870, protein: 35.9, fat: 47.4, carbs: 79.7 },
+              { name: "チキンかあさん煮", calories: 897, protein: 29.5, fat: 32.2, carbs: 118.8 },
+              { name: "鶏と野菜の黒酢あん", calories: 952, protein: 27.5, fat: 33.5, carbs: 135.3 },
+              { name: "大戸屋風チキン南蛮", calories: 1283, protein: 44.1, fat: 70.8, carbs: 109.6 },
             ]}
             highlightProtein
           />
 
           <p className="text-xs text-gray-400 mb-8">
-            ※栄養成分は「ご飯普通盛り」での値です。五穀米変更時はカロリーがほぼ同等ですがGI値が低下します。
+            ※栄養成分はたべなび収録のDB値（ご飯を含む定食・丼の値）です。五穀米変更時はカロリーがほぼ同等で、最新値は大戸屋公式でご確認ください。
           </p>
 
           <TipBox title="カロリーランキングの読み解き方">
-            <p>注目すべきは<Marker>焼き魚定食（642〜668kcal）とフライ系定食（892〜985kcal）の間に約300kcalの差がある</Marker>点。調理法の違いだけでこれだけの差が出ます。ダイエット中は「焼き」「蒸し」「煮」を選ぶのが鉄則です。</p>
+            <p>注目すべきは<Marker>丼・焼き魚系（568〜700kcal）と揚げ物系（870〜1,283kcal）の間に400〜700kcalもの差がある</Marker>点。調理法の違いでこれだけ差が出ます。意外なのは焼き魚でも<Marker color="blue">さばの炭火焼きは脂質47.4gと高め</Marker>な点。「焼き＝低脂質」とは限らないので、脂質を抑えたい日は魚種にも注目しましょう。</p>
           </TipBox>
 
           <SubSectionHeading>PFCバランスで見る大戸屋メニューの特徴</SubSectionHeading>
@@ -187,7 +190,7 @@ export default function OotoyaDietPage() {
             大戸屋のメニューは全体的に<Marker color="green">タンパク質が30g以上のメニューが多い</Marker>のが特徴です。定食スタイルなので炭水化物（ご飯）は含まれますが、ご飯の量を調整すれば糖質コントロールも可能。脂質は調理法で大きく変わるため、メニュー選びが重要になります。
           </p>
           <p className="mb-8">
-            特に焼き魚系は<Marker>DHA・EPAなどのオメガ3脂肪酸を含む「良い脂質」</Marker>が摂れる点も魅力。単にカロリーだけでなく、脂質の質まで考慮すると、しまほっけやさばの炭火焼きは最もダイエットに適したメニューと言えます。
+            焼き魚系は<Marker>DHA・EPAなどのオメガ3脂肪酸を含む「良い脂質」</Marker>が摂れる点も魅力。特にしまほっけの炭火焼きは脂質13.1g・タンパク質45.5gと、低脂質・高タンパクの理想形です。ただし<Marker color="blue">同じ焼き魚でもさばの炭火焼きは脂質47.4gと高い</Marker>ため、総脂質を抑えたい日はしまほっけや豚ヒレの冷しゃぶを選ぶのがおすすめです。
           </p>
         </section>
 
@@ -199,24 +202,25 @@ export default function OotoyaDietPage() {
             大戸屋のメニューの中から、<Marker>カロリーとタンパク質のバランスが特に優れたメニュー</Marker>を厳選しました。
           </p>
 
-          <RankingCard rank={1} title="しまほっけの炭火焼き定食" subtitle="642kcal / P36.8g / F18.5g / C78.2g">
+          <RankingCard rank={1} title="しまほっけの炭火焼き" subtitle="612kcal / P45.5g / F13.1g / C79.3g">
+            <MenuPhoto id="ootoya-shimahokke" />
             <p className="text-sm text-gray-700 leading-relaxed mb-3">
-              大戸屋の<Marker>低カロリーNo.1定食</Marker>。しまほっけは脂質が低く、DHAやEPAなどの良質な脂肪酸を含む優秀な食材です。タンパク質36.8gと高く、脂質はわずか18.5g。
+              <Marker>低カロリー・高タンパクの大戸屋No.1</Marker>。タンパク質45.5gは大戸屋メニュー屈指の多さで、脂質はわずか13.1g。しまほっけはDHA・EPAなどの良質な脂肪酸も含む優秀な食材です。
             </p>
             <p className="text-sm text-gray-700 leading-relaxed">
-              定食としての完成度が高く、味噌汁と小鉢で野菜やミネラルも補えます。五穀米に変更すれば、さらに栄養価がアップします。
-            </p>
-          </RankingCard>
-
-          <RankingCard rank={2} title="チキンかあさん煮定食" subtitle="804kcal / P40.2g / F28.5g / C86.4g">
-            <p className="text-sm text-gray-700 leading-relaxed">
-              大戸屋の看板メニューであり、<Marker color="blue">タンパク質40.2gはトップクラス</Marker>。鶏むね肉を揚げてから出汁で煮るスタイルで、揚げ物でありながら煮汁で余分な油が落ちるため、脂質は28.5gと控えめ。大根おろしでさっぱりと食べられます。
+              味噌汁と小鉢で野菜やミネラルも補え、定食としての完成度が高い一品。五穀米に変更すれば食物繊維もプラスできます。
             </p>
           </RankingCard>
 
-          <RankingCard rank={3} title="鶏と野菜の黒酢あん定食" subtitle="752kcal / P32.5g / F22.4g / C94.8g">
+          <RankingCard rank={2} title="大戸屋ばくだん丼" subtitle="568kcal / P28.8g / F12.0g / C83.6g">
             <p className="text-sm text-gray-700 leading-relaxed">
-              <Marker color="green">野菜がたっぷり摂れる</Marker>のがこのメニューの最大の魅力。黒酢のクエン酸は疲労回復効果もあり、トレーニング後の食事にも適しています。タンパク質32.5gで脂質22.4gとバランスの良い一品です。
+              主菜の中で<Marker color="blue">最も低カロリー（568kcal）かつ脂質も12.0gと低い</Marker>一杯。まぐろ・オクラ・山芋などを合わせた丼で、タンパク質28.8gを確保しつつ脂質を抑えたい日に最適です。
+            </p>
+          </RankingCard>
+
+          <RankingCard rank={3} title="豚ヒレの冷しゃぶ おろし柚香だれ" subtitle="627kcal / P42.3g / F8.0g / C97.7g">
+            <p className="text-sm text-gray-700 leading-relaxed">
+              <Marker color="green">脂質わずか8.0gは大戸屋の主菜で最も低い</Marker>水準。それでいてタンパク質42.3gと非常に高く、「低脂質・高タンパク」を最優先したい人の本命です。おろし柚香だれでさっぱり食べられます。
             </p>
           </RankingCard>
 
@@ -224,31 +228,31 @@ export default function OotoyaDietPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
             <NutritionCard
-              name="さばの炭火焼き定食"
+              name="鰆の西京焼き 菜の花からし和え添え"
               chain="大戸屋"
-              calories={668}
-              protein={32.5}
-              fat={24.8}
-              carbs={74.5}
+              calories={699}
+              protein={40.5}
+              fat={17.8}
+              carbs={94.5}
               recommended
             />
             <NutritionCard
-              name="蒸し鶏と野菜のせいろ蒸し定食"
+              name="鰹の梅はさみ揚げ"
               chain="大戸屋"
-              calories={685}
-              protein={34.2}
-              fat={16.8}
-              carbs={82.5}
+              calories={672}
+              protein={27.6}
+              fat={19.2}
+              carbs={96.9}
               recommended
             />
           </div>
 
           <p className="mb-4">
-            さばの炭火焼きは<Marker>EPA・DHAが豊富で、血液サラサラ効果</Marker>も期待できます。蒸し鶏定食は脂質わずか16.8gと、大戸屋メニューの中でも最も脂質が低い選択肢。蒸し料理は素材の栄養を逃さず、余分な油も使わないため、ダイエット中の理想的な調理法です。
+            鰆の西京焼きは<Marker>タンパク質40.5gと高く、脂質も17.8gと控えめ</Marker>。焼き魚ながら脂質が抑えられた優秀な一品で、青魚のDHA・EPAも摂れます。鰹の梅はさみ揚げは揚げ物の中では672kcalと比較的低カロリーで、梅でさっぱり食べられます。
           </p>
 
           <p className="mb-8">
-            どちらのメニューも<Marker color="blue">五穀米に変更し、ご飯少なめ</Marker>にすることで、さらに50〜100kcalのカットが可能。定番のローテーションメニューとして活用しましょう。
+            いずれも<Marker color="blue">五穀米に変更し、ご飯少なめ</Marker>にすることで、さらに約80〜100kcalのカットが可能。低脂質を最優先するなら、しまほっけ・豚ヒレの冷しゃぶ・鰆の西京焼きをローテーションするのがおすすめです。
           </p>
 
           <ArticleImage src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&h=400&fit=crop" alt="焼き魚定食のイメージ写真" />
@@ -270,26 +274,26 @@ export default function OotoyaDietPage() {
 
           <WarningBox title="ダイエット中は要注意なメニュー">
             <ul className="space-y-2">
-              <li><span className="font-bold">四元豚のロースかつ定食（985kcal）</span> ─ 脂質45.2gとかなり高め。タンパク質34.8gは魅力的だが、カロリーが高すぎます。</li>
-              <li><span className="font-bold">ロースかつ定食（948kcal）</span> ─ 衣の吸油量が多く、脂質42.5g。同じ豚肉なら生姜焼き系を選びましょう。</li>
-              <li><span className="font-bold">大戸屋風チキン南蛮定食（892kcal）</span> ─ タルタルソースが脂質を押し上げ、F38.2g。チキンかあさん煮（804kcal）の方が約90kcal低い。</li>
-              <li><span className="font-bold">大盛りメニュー全般</span> ─ ご飯大盛りで+約150kcal。ダイエット中は普通盛りか少なめを選びましょう。</li>
+              <li><span className="font-bold">大戸屋風チキン南蛮（1,283kcal）</span> ─ タルタルソースで脂質70.8gと突出。タンパク質44.1gは魅力的ですが、カロリー・脂質ともに高すぎます。</li>
+              <li><span className="font-bold">鶏と野菜の黒酢あん（952kcal）</span> ─ 野菜は摂れますが脂質33.5g・炭水化物135gと高め。食べるならご飯少なめがおすすめ。</li>
+              <li><span className="font-bold">さばの炭火焼き（870kcal）</span> ─ 焼き魚ですが、さばは脂が多く脂質47.4g。脂質を抑えたい日はしまほっけや豚ヒレの冷しゃぶに。</li>
+              <li><span className="font-bold">大盛り・ご飯おかわり</span> ─ ご飯1杯で約250kcalの上乗せ。ダイエット中は普通盛りか少なめを選びましょう。</li>
             </ul>
           </WarningBox>
 
           <ComparisonTable
             headers={["メニュー", "カロリー", "タンパク質", "脂質", "判定"]}
             rows={[
-              ["しまほっけ定食", "642 kcal", "36.8g", "18.5g", "◎"],
-              ["チキンかあさん煮", "804 kcal", "40.2g", "28.5g", "○"],
-              ["チキン南蛮定食", "892 kcal", "35.8g", "38.2g", "△"],
-              ["ロースかつ定食", "948 kcal", "32.4g", "42.5g", "×"],
+              ["大戸屋ばくだん丼", "568 kcal", "28.8g", "12.0g", "◎"],
+              ["しまほっけの炭火焼き", "612 kcal", "45.5g", "13.1g", "◎"],
+              ["チキンかあさん煮", "897 kcal", "29.5g", "32.2g", "△"],
+              ["大戸屋風チキン南蛮", "1,283 kcal", "44.1g", "70.8g", "×"],
             ]}
             bestRowIndex={0}
           />
 
           <TipBox title="「揚げ物だけど煮る」がポイント">
-            <p>チキンかあさん煮は揚げた鶏肉を出汁で煮るため、<Marker>揚げ物の衣に含まれる油が煮汁に溶け出し、実質的な脂質が下がります</Marker>。同じ揚げ鶏でもチキン南蛮（F38.2g）とかあさん煮（F28.5g）では約10gの差。この「煮る」工程が大戸屋独自のヘルシーポイントです。</p>
+            <p>チキンかあさん煮は揚げた鶏肉を出汁で煮るため、<Marker>揚げ物の衣に含まれる油が煮汁に溶け出し、実質的な脂質が下がります</Marker>。同じ揚げ鶏でも大戸屋風チキン南蛮（脂質70.8g）とかあさん煮（脂質32.2g）では2倍以上の差。同じ「鶏の揚げ物」でも調理の仕上げ方でこれだけ変わります。</p>
           </TipBox>
 
           <ArticleImage src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=800&h=400&fit=crop" alt="ヘルシーな和食プレートのイメージ" />
@@ -320,7 +324,7 @@ export default function OotoyaDietPage() {
 
           <SubSectionHeading>コツ4：「焼き」「蒸し」「煮」メニューを選ぶ</SubSectionHeading>
           <p className="mb-6">
-            揚げ物を避け、<Marker color="green">焼き魚定食・蒸し鶏定食・煮魚定食</Marker>を選ぶだけで脂質を大幅にカットできます。同じ鶏肉でもチキン南蛮（F38.2g）とチキンかあさん煮（F28.5g）では約10gの差があります。
+            揚げ物を避け、<Marker color="green">焼き魚・煮魚・丼・冷しゃぶ系</Marker>を選ぶだけで脂質を大幅にカットできます。同じ鶏の揚げ物でも大戸屋風チキン南蛮（脂質70.8g）とチキンかあさん煮（脂質32.2g）では2倍以上の差があります。
           </p>
 
           <SubSectionHeading>コツ5：おすすめの組み合わせパターン</SubSectionHeading>
@@ -329,12 +333,12 @@ export default function OotoyaDietPage() {
           </p>
 
           <ComparisonTable
-            headers={["目的", "おすすめ定食", "カロリー", "タンパク質"]}
+            headers={["目的", "おすすめメニュー", "カロリー", "タンパク質"]}
             rows={[
-              ["最小カロリー", "しまほっけ定食（五穀米・少なめ）", "約560 kcal", "36.8g"],
-              ["高タンパク", "チキンかあさん煮定食（五穀米）", "804 kcal", "40.2g"],
-              ["バランス重視", "鶏と野菜の黒酢あん定食（五穀米）", "752 kcal", "32.5g"],
-              ["低脂質", "蒸し鶏と野菜のせいろ蒸し定食", "685 kcal", "34.2g"],
+              ["最小カロリー", "大戸屋ばくだん丼", "568 kcal", "28.8g"],
+              ["高タンパク", "しまほっけの炭火焼き", "612 kcal", "45.5g"],
+              ["低脂質", "豚ヒレの冷しゃぶ おろし柚香だれ", "627 kcal", "42.3g"],
+              ["バランス重視", "鰆の西京焼き", "699 kcal", "40.5g"],
             ]}
             bestRowIndex={0}
           />
@@ -356,8 +360,8 @@ export default function OotoyaDietPage() {
 
         {/* Bottom CTA */}
         <CTABanner
-          title="たべなびで外食の栄養管理を始めよう"
-          subtitle="32チェーン・6,000品以上の栄養データ、全部無料"
+          title="そのメニュー、何kcal？ たべなびで今すぐ検索"
+          subtitle="32チェーン・6,000品以上を、カロリー・タンパク質・脂質で絞り込み検索。登録不要・無料です。"
         />
 
         {/* Extra Image */}
@@ -376,12 +380,12 @@ export default function OotoyaDietPage() {
 
           <CheckList
             items={[
-              "しまほっけ定食（642kcal/P36.8g）が低カロリーNo.1でおすすめ",
-              "チキンかあさん煮定食（804kcal/P40.2g）はタンパク質トップクラス",
-              "白米→五穀米の変更は無料。GI値が下がり脂肪蓄積を防げる",
+              "大戸屋ばくだん丼（568kcal/脂質12.0g）としまほっけの炭火焼き（612kcal/P45.5g）が低カロリー・高タンパクの二枚看板",
+              "豚ヒレの冷しゃぶは脂質わずか8.0gで主菜の中で最も低脂質",
+              "白米→五穀米の変更は無料。GI値が低めで食物繊維も摂れるとされる",
               "ご飯少なめで約80〜100kcalカット可能",
-              "「焼き」「蒸し」「煮」を選び、揚げ物は避ける",
-              "味噌汁→副菜→メイン→ご飯の順で食べるとダイエット効果アップ",
+              "揚げ物系（チキン南蛮1,283kcal/脂質70.8g）は脂質が高いので頻度を抑える",
+              "さばの炭火焼きは焼き魚でも脂質47.4gと高め（意外な落とし穴）",
             ]}
           />
 
@@ -395,9 +399,9 @@ export default function OotoyaDietPage() {
           slug="ootoya-diet"
           items={[
             { q: "大戸屋の白米を五穀米に変更するメリットは何ですか？", a: "五穀米は白米（GI値88）より低GI値（55程度）で、血糖値の急上昇を抑えます。食物繊維も約2倍で満腹感が続き、間食を防げます。カロリーはほぼ同等ですが、ダイエット効果が大きく異なります。" },
-            { q: "大戸屋の定食でダイエット中に避けるべきメニューは？", a: "四元豚ロースかつ定食（985kcal・脂質45.2g）、通常ロースかつ定食（948kcal）、チキン南蛮定食（892kcal・脂質38.2g）は高脂質。大盛りメニューも+150kcal増加するため避けましょう。" },
-            { q: "大戸屋の定食でご飯を少なめにするとカロリーは何kcal減りますか？", a: "ご飯少なめで約80～100kcalをカットできます。五穀米への変更と組み合わせると、しまほっけ定食は約560kcalまで低下。同じメニューでも注文方法で大きな差が生まれます。" },
-            { q: "チキンかあさん煮定食がダイエット向きなのはなぜですか？", a: "揚げた鶏肉を出汁で煮るため、衣の油が煮汁に落ちます。804kcal・タンパク質40.2gで、同じ揚げ鶏のチキン南蛮（38.2g脂質）より脂質が10g少ない設計です。大戸屋独自のヘルシーメニューです。" },
+            { q: "大戸屋でダイエット中に避けるべきメニューは？", a: "大戸屋風チキン南蛮（1,283kcal・脂質70.8g）、鶏と野菜の黒酢あん（952kcal・脂質33.5g）、チキンかあさん煮（897kcal）が高カロリー。さばの炭火焼きも焼き魚ながら脂質47.4gと高めなので、脂質を抑えたい日は量に注意しましょう。" },
+            { q: "大戸屋でご飯を少なめにするとカロリーは何kcal減りますか？", a: "ご飯少なめで約80〜100kcalをカットできます。五穀米への変更と組み合わせると、しまほっけの炭火焼きは約520kcalまで下げられます。同じメニューでも注文方法で差が生まれます。" },
+            { q: "チキンかあさん煮がダイエット向きと言われるのはなぜですか？", a: "揚げた鶏肉を出汁で煮るため、衣の油が煮汁に落ちます。897kcal・タンパク質29.5gで、同じ揚げ鶏の大戸屋風チキン南蛮（脂質70.8g）より脂質（32.2g）が大幅に少ないのが特徴です。ただしカロリーは高めなので、ご飯少なめと合わせるのがおすすめです。" },
             { q: "大戸屋でダイエット中の食べる順序のコツはありますか？", a: "味噌汁→副菜→メイン→ご飯の順が理想的。味噌汁で胃を温め、野菜から食べることで血糖値上昇を抑え、満腹中枢が早く刺激されます。ベジファーストの実践がダイエット効果を最大化します。" },
           ]}
         />

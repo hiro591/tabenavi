@@ -28,9 +28,9 @@ import { ArticleLayout } from "@/components/guide/ArticleLayout";
 export const metadata: Metadata = {
   alternates: { canonical: "https://www.tabenavi.jp/guide/seven-eleven-diet" },
   title:
-    "【2026年最新】セブンイレブンダイエット完全ガイド｜低カロリー＆高タンパク商品ランキング | たべなび",
+    "セブンイレブン ダイエット｜低カロリー＆高タンパク商品ランキング【2026年最新】 | たべなび",
   description:
-    "セブンイレブンでダイエットに最適な低カロリー・高タンパク商品をランキング形式で紹介。朝昼晩のおすすめ組み合わせも解説。セブンのPB商品を活用した賢いダイエット法。",
+    "セブンイレブンでダイエット向きの低カロリー・高タンパク商品をDB実値でランキング。さんまの塩焼162kcal/P30g、鶏むね肉サラダ199kcal/P21.8g、おでん各種を朝昼晩の組み合わせで解説。",
   keywords: [
     "セブンイレブン ダイエット",
     "セブン 低カロリー",
@@ -41,9 +41,9 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title:
-      "【2026年最新】セブンイレブンダイエット完全ガイド｜低カロリー＆高タンパク商品ランキング",
+      "セブンイレブン ダイエット｜低カロリー＆高タンパク商品ランキング【2026年最新】",
     description:
-      "セブンイレブンの低カロリー・高タンパク商品を徹底解説。朝昼晩の組み合わせプランも紹介。",
+      "セブンイレブンの低カロリー・高タンパク商品をDB実値で徹底解説。さんまの塩焼やおでんを使った朝昼晩の組み合わせプランも紹介。",
     url: "https://www.tabenavi.jp/guide/seven-eleven-diet",
     type: "article",
   },
@@ -53,16 +53,17 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Article",
   headline:
-    "【2026年最新】セブンイレブンダイエット完全ガイド｜低カロリー＆高タンパク商品ランキング",
+    "セブンイレブン ダイエット｜低カロリー＆高タンパク商品ランキング【2026年最新】",
   description:
-    "セブンイレブンでダイエットに最適な低カロリー・高タンパク商品をランキング形式で紹介。",
+    "セブンイレブンでダイエット向きの低カロリー・高タンパク商品をDB実値でランキング形式で紹介。",
   datePublished: "2026-03-23",
   dateModified: new Date().toISOString().split("T")[0],
   author: {
-    "@type": "Organization",
-    name: "たべなび",
-    url: "https://www.tabenavi.jp",
-  },
+      "@type": "Person",
+      name: "ヒロ",
+      description: "外食で13kg減量した、たべなび開発者",
+      url: "https://www.tabenavi.jp/sources",
+    },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
@@ -109,7 +110,7 @@ export default function SevenElevenDietPage() {
           question="セブンイレブンでダイエット中におすすめの商品は？高タンパク低カロリーの定番は？"
           answer={
             <>
-              <strong>サラダチキン プレーン（113kcal/P24.3g）</strong>と<strong>7プレミアム さんまの塩焼（162kcal/P30g）</strong>がツートップ。低カロリーランキング1位は<strong>味付き半熟ゆでたまご（65kcal/P6.4g）</strong>。1食300〜400kcalで組むなら「サラダチキン+おにぎり1個+ゆで卵」がP35gの理想バランス。お弁当系なら<strong>サラダチキンと野菜の弁当（448kcal/P28.5g）</strong>が単品完結で優秀です。
+              <strong>7プレミアム さんまの塩焼（162kcal/P30g）</strong>と<strong>たんぱく質が摂れる鶏むね肉サラダ（199kcal/P21.8g）</strong>がツートップ。低カロリーで高タンパクなら<strong>炭火焼き鳥 塩（66kcal/P9.6g）</strong>や<strong>おでんのなんこつ入り鶏つくね串（66kcal/P7g）</strong>も優秀。1食300〜400kcalで組むなら「さんまの塩焼＋手巻おにぎり（紀州南高梅 166kcal）＋おでん」でP35g前後が狙えます。
             </>
           }
         />
@@ -142,7 +143,7 @@ export default function SevenElevenDietPage() {
             items={[
               {
                 title: "7プレミアム（PB商品）の圧倒的な充実度",
-                body: "セブンイレブンのPBブランド「7プレミアム」は約4,000品目。ダイエット向け商品も豊富で、サラダチキンだけでもプレーン・ハーブ・スモーク・タンドリーなど10種類以上のバリエーションがあります。",
+                body: "セブンイレブンのPBブランド「7プレミアム」は約4,000品目。ダイエット向けの惣菜・サラダ・おでんも豊富で、さんまの塩焼や塩ゆで枝豆など、低脂質・高タンパクの選択肢が揃っています。",
               },
               {
                 title: "全商品に栄養成分表示",
@@ -161,7 +162,7 @@ export default function SevenElevenDietPage() {
 
           <TipBox title="セブンイレブンのダイエット向けアプリ活用">
             <p>
-              セブンイレブンアプリでクーポンを活用すると、ダイエット商品がお得に買えることも。<Marker color="green">サラダチキンやゆでたまごの割引クーポン</Marker>が定期的に配信されるので、チェックしておきましょう。
+              セブンイレブンアプリでクーポンを活用すると、対象商品がお得に買えることも。<Marker color="green">おでんや惣菜の割引クーポン</Marker>が配信されることがあるので、チェックしておきましょう。
             </p>
           </TipBox>
         </section>
@@ -177,22 +178,22 @@ export default function SevenElevenDietPage() {
 
           <NutritionTable
             items={[
-              { name: "1位: 味付き半熟ゆでたまご", calories: 65, protein: 6.4, fat: 4.4, carbs: 0.4, highlight: true },
-              { name: "2位: 7プレミアム さんまの塩焼", calories: 162, protein: 30.0, fat: 4.6, carbs: 0.4, highlight: true },
-              { name: "3位: 7プレミアム サラダチキン スモーク", calories: 105, protein: 22.6, fat: 1.1, carbs: 0.5, highlight: true },
-              { name: "4位: サラダチキン (プレーン)", calories: 113, protein: 24.3, fat: 1.5, carbs: 0 },
-              { name: "5位: 7プレミアム 寄せ豆腐", calories: 58, protein: 5.5, fat: 3.5, carbs: 1.5 },
-              { name: "6位: ほうれん草の胡麻和え", calories: 72, protein: 3.2, fat: 3.5, carbs: 6.8 },
-              { name: "7位: ひじきの煮物", calories: 85, protein: 3.8, fat: 2.5, carbs: 11.2 },
-              { name: "8位: 蒸し鶏のサラダ", calories: 128, protein: 14.2, fat: 5.8, carbs: 5.5 },
-              { name: "9位: ゼロキロカロリー寒天ゼリー", calories: 0, protein: 0, fat: 0, carbs: 0, highlight: true },
-              { name: "10位: 7プレミアム もずく酢", calories: 18, protein: 0.5, fat: 0.1, carbs: 3.8 },
+              { name: "1位: おでん 牛すじ串", calories: 26, protein: 3.8, fat: 1.1, carbs: 0.3, highlight: true },
+              { name: "2位: おでん 味しみ絹厚揚げ", calories: 55, protein: 4.0, fat: 3.7, carbs: 1.8 },
+              { name: "3位: 炭火焼き鳥（塩）", calories: 66, protein: 9.6, fat: 3.0, carbs: 0.3, highlight: true },
+              { name: "4位: おでん なんこつ入り鶏つくね串", calories: 66, protein: 7.0, fat: 4.0, carbs: 0.7 },
+              { name: "5位: 炭火焼き鳥（タレ）", calories: 73, protein: 10.1, fat: 3.2, carbs: 0.9, highlight: true },
+              { name: "6位: おでん 味しみたまご", calories: 77, protein: 6.7, fat: 4.9, carbs: 1.4 },
+              { name: "7位: 7プレミアム 塩味そら豆", calories: 93, protein: 8.3, fat: 0.5, carbs: 15.4 },
+              { name: "8位: 枝豆", calories: 94, protein: 8.0, fat: 4.1, carbs: 8.4 },
+              { name: "9位: 国産大豆使用 冷奴セット", calories: 116, protein: 10.1, fat: 6.9, carbs: 3.7 },
+              { name: "10位: 7プレミアム 塩ゆで枝豆", calories: 158, protein: 12.9, fat: 7.5, carbs: 10.5 },
             ]}
           />
 
-          <TipBox title="ゼロカロリー商品の活用法">
+          <TipBox title="おでんの低カロリー活用法">
             <p>
-              セブンの<Marker>ゼロキロカロリー寒天ゼリー</Marker>は、食後のデザート欲を満たすのに最適。甘いものが食べたくなった時の救世主です。ぶどう味やみかん味など種類も豊富で、罪悪感ゼロで楽しめます。
+              セブンの<Marker>おでんは1品20〜80kcal台</Marker>と低カロリーで、温かさで満腹感も得やすいのが魅力。牛すじ串・絹厚揚げ・鶏つくね串などを2〜3品組み合わせても200kcal前後に収まります。寒い時期の小腹満たしに便利です。
             </p>
           </TipBox>
         </section>
@@ -213,91 +214,91 @@ export default function SevenElevenDietPage() {
 
           <RankingCard
             rank={1}
-            title="サラダチキン（プレーン）"
-            subtitle="¥238 ・ コスパ最強"
+            title="7プレミアム さんまの塩焼"
+            subtitle="低脂質・高タンパクの隠れ王"
           >
             <div className="grid grid-cols-4 gap-2 mb-3">
               <div className="bg-sky-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-sky-600 font-bold text-sm">113</p>
+                <p className="text-sky-600 font-bold text-sm">162</p>
                 <p className="text-sky-600 text-[10px]">kcal</p>
               </div>
               <div className="bg-blue-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-blue-600 font-bold text-sm">24.3g</p>
+                <p className="text-blue-600 font-bold text-sm">30.0g</p>
                 <p className="text-blue-600 text-[10px]">タンパク</p>
               </div>
               <div className="bg-amber-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-amber-600 font-bold text-sm">1.2g</p>
+                <p className="text-amber-600 font-bold text-sm">4.6g</p>
                 <p className="text-amber-600 text-[10px]">脂質</p>
               </div>
               <div className="bg-green-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-green-600 font-bold text-sm">0.5g</p>
+                <p className="text-green-600 font-bold text-sm">0.4g</p>
                 <p className="text-green-600 text-[10px]">炭水化物</p>
               </div>
             </div>
             <p className="text-sm text-gray-600">
-              不動の王者。<Marker>タンパク質1gあたり約10円</Marker>というコスパの良さも魅力。味のバリエーションが豊富なので飽きずに続けられます。
+              タンパク質量はセブンのメニュー中トップクラス。<Marker>162kcalでP30g・脂質4.6g・炭水化物0.4g</Marker>という低脂質・低糖質バランスで、青魚の脂を含みつつカロリーを抑えやすい一品です。
             </p>
           </RankingCard>
 
           <RankingCard
             rank={2}
-            title="たんぱく質が摂れるチキン&スパイシーチリ"
-            subtitle="¥430 ・ おかず系"
+            title="こく旨キムチ鍋"
+            subtitle="鍋系で満足感とタンパク質を両立"
           >
             <div className="grid grid-cols-4 gap-2 mb-3">
               <div className="bg-sky-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-sky-600 font-bold text-sm">242</p>
+                <p className="text-sky-600 font-bold text-sm">247</p>
                 <p className="text-sky-600 text-[10px]">kcal</p>
               </div>
               <div className="bg-blue-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-blue-600 font-bold text-sm">20.2g</p>
+                <p className="text-blue-600 font-bold text-sm">22.3g</p>
                 <p className="text-blue-600 text-[10px]">タンパク</p>
               </div>
               <div className="bg-amber-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-amber-600 font-bold text-sm">8.5g</p>
+                <p className="text-amber-600 font-bold text-sm">12.8g</p>
                 <p className="text-amber-600 text-[10px]">脂質</p>
               </div>
               <div className="bg-green-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-green-600 font-bold text-sm">22.1g</p>
+                <p className="text-green-600 font-bold text-sm">13.7g</p>
                 <p className="text-green-600 text-[10px]">炭水化物</p>
               </div>
             </div>
             <p className="text-sm text-gray-600">
-              サラダチキンに飽きた方におすすめ。<Marker color="blue">スパイシーな味付けで満足感が高く</Marker>、ランチのメインおかずとしても優秀です。
+              温かい鍋でタンパク質22.3gを確保。<Marker color="blue">247kcalで満腹感が得やすく</Marker>、寒い時期の夕食メインとしても向いています。
             </p>
           </RankingCard>
 
           <RankingCard
             rank={3}
-            title="7プレミアム サラダチキンバー"
-            subtitle="¥198 ・ 手軽さNo.1"
+            title="たんぱく質が摂れる鶏むね肉サラダ"
+            subtitle="野菜も摂れる高タンパクサラダ"
           >
             <div className="grid grid-cols-4 gap-2 mb-3">
               <div className="bg-sky-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-sky-600 font-bold text-sm">108</p>
+                <p className="text-sky-600 font-bold text-sm">199</p>
                 <p className="text-sky-600 text-[10px]">kcal</p>
               </div>
               <div className="bg-blue-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-blue-600 font-bold text-sm">21.6g</p>
+                <p className="text-blue-600 font-bold text-sm">21.8g</p>
                 <p className="text-blue-600 text-[10px]">タンパク</p>
               </div>
               <div className="bg-amber-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-amber-600 font-bold text-sm">1.5g</p>
+                <p className="text-amber-600 font-bold text-sm">10.9g</p>
                 <p className="text-amber-600 text-[10px]">脂質</p>
               </div>
               <div className="bg-green-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-green-600 font-bold text-sm">1.8g</p>
+                <p className="text-green-600 font-bold text-sm">4.4g</p>
                 <p className="text-green-600 text-[10px]">炭水化物</p>
               </div>
             </div>
             <p className="text-sm text-gray-600">
-              片手で食べられるバータイプ。<Marker color="green">108kcalでタンパク質21.6g</Marker>と効率抜群。忙しい日のタンパク質補給に最適です。
+              鶏むね肉と野菜を一度に摂れるサラダ。<Marker color="green">199kcalでタンパク質21.8g</Marker>。炭水化物4.4gと低糖質で、糖質を控えたいランチに向いています。
             </p>
           </RankingCard>
 
           <TipBox title="4〜5位もチェック">
-            <p className="mb-1">4位: たんぱく質が摂れる鶏むね肉サラダ（P19.8g / 152kcal / ¥430）</p>
-            <p>5位: たんぱく質が摂れるチキン&たまごサンド（P22.5g / 285kcal / ¥350）</p>
+            <p className="mb-1">4位: 若鶏のからあげ（もも）5個入り（P18.5g / 291kcal / F15.8g）</p>
+            <p>5位: スパイスチキン（P14.2g / 200kcal / F11.0g）</p>
           </TipBox>
         </section>
 
@@ -316,72 +317,63 @@ export default function SevenElevenDietPage() {
             セブンイレブンだけで<Marker>1日1,500kcal以下・タンパク質80g以上</Marker>を達成するプランを紹介します。
           </p>
 
-          <SubSectionHeading>朝食プラン（約350kcal / P25g）</SubSectionHeading>
+          <SubSectionHeading>朝食プラン（約329kcal / P22g）</SubSectionHeading>
           <div className="bg-white rounded-lg border border-gray-200 p-5 mb-6 shadow-sm">
             <p className="font-bold text-gray-900 mb-2">
-              ゆでたまご2個 + ギリシャヨーグルト + バナナ
+              おでん 味しみたまご2個 + 枝豆 + 7プレミアム ブルーベリー
             </p>
             <div className="flex flex-wrap gap-2 mb-3">
               <span className="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full font-bold">
-                P 25.2g
+                P 22.2g
               </span>
               <span className="text-xs bg-sky-50 text-sky-700 px-2.5 py-1 rounded-full font-bold">
-                345 kcal
-              </span>
-              <span className="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full">
-                約¥450
+                329 kcal
               </span>
             </div>
             <p className="text-sm text-gray-600 leading-relaxed">
-              朝はタンパク質と果物でエネルギーチャージ。ギリシャヨーグルトはタンパク質10g以上で腸内環境にも良い。
+              朝はたまごと枝豆でタンパク質を確保しつつ、果物で軽くエネルギーをチャージ。おでんのたまごは1個77kcalで腹持ちも良好です。
             </p>
           </div>
 
-          <SubSectionHeading>昼食プラン（約500kcal / P35g）</SubSectionHeading>
+          <SubSectionHeading>昼食プラン（約547kcal / P33g）</SubSectionHeading>
           <div className="bg-white rounded-lg border border-gray-200 p-5 mb-6 shadow-sm">
             <p className="font-bold text-gray-900 mb-2">
-              サラダチキン + おにぎり（鮭）+ 味噌汁
+              たんぱく質が摂れる鶏むね肉サラダ + 手巻おにぎり 紀州南高梅 + コクと旨味の豚汁
             </p>
             <div className="flex flex-wrap gap-2 mb-3">
               <span className="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full font-bold">
-                P 34.8g
+                P 32.6g
               </span>
               <span className="text-xs bg-sky-50 text-sky-700 px-2.5 py-1 rounded-full font-bold">
-                485 kcal
-              </span>
-              <span className="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full">
-                約¥550
+                547 kcal
               </span>
             </div>
             <p className="text-sm text-gray-600 leading-relaxed">
-              昼は炭水化物もしっかり摂って午後のエネルギーを確保。味噌汁で温かさと満足感をプラス。
+              昼は炭水化物もしっかり摂って午後のエネルギーを確保。豚汁で温かさと満足感をプラスできます。
             </p>
           </div>
 
-          <SubSectionHeading>夕食プラン（約400kcal / P30g）</SubSectionHeading>
+          <SubSectionHeading>夕食プラン（約304kcal / P44g）</SubSectionHeading>
           <div className="bg-white rounded-lg border border-gray-200 p-5 mb-6 shadow-sm">
             <p className="font-bold text-gray-900 mb-2">
-              たんぱく質が摂れる鶏むね肉サラダ + 茶碗蒸し + もずく酢
+              7プレミアム さんまの塩焼 + 国産大豆使用 冷奴セット + おでん 牛すじ串
             </p>
             <div className="flex flex-wrap gap-2 mb-3">
               <span className="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full font-bold">
-                P 27.5g
+                P 43.9g
               </span>
               <span className="text-xs bg-sky-50 text-sky-700 px-2.5 py-1 rounded-full font-bold">
-                260 kcal
-              </span>
-              <span className="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full">
-                約¥600
+                304 kcal
               </span>
             </div>
             <p className="text-sm text-gray-600 leading-relaxed">
-              夕食は低カロリーに抑えつつタンパク質をしっかり摂取。<Marker color="green">260kcalなのでダイエット中でも安心</Marker>。
+              夕食はカロリーを抑えつつタンパク質をしっかり摂取。<Marker color="green">304kcalでP44gと高タンパク低カロリー</Marker>のバランスです。
             </p>
           </div>
 
           <TipBox title="1日トータル">
             <p>
-              朝345kcal + 昼485kcal + 夕260kcal = <Marker>合計1,090kcal / タンパク質87.5g</Marker>。間食にゼロカロリーゼリーやプロテインバーを追加しても1,300kcal以内に収まります。
+              朝329kcal + 昼547kcal + 夕304kcal = <Marker>合計1,180kcal / タンパク質98.7g</Marker>。間食におでんや枝豆を追加しても1,300〜1,400kcal程度に収まります（数値はDB実値の単純合算）。
             </p>
           </TipBox>
         </section>
@@ -402,25 +394,25 @@ export default function SevenElevenDietPage() {
 
           <WarningBox title="ダイエット中は要注意の商品">
             <p className="mb-2">
-              <strong>揚げ鶏（からあげ棒）:</strong> 約250kcal、脂質15g以上。手軽に買えるだけに危険。
+              <strong>7プレミアム 濃厚G系ラーメン:</strong> 1,595kcal・脂質102.1g。1食で1日の目標カロリーを超えることも。
             </p>
             <p className="mb-2">
-              <strong>メロンパン:</strong> 約380kcal、糖質58g。甘いパンは血糖値スパイクの原因。
+              <strong>やみつきガーリック 大盛ペペロンチーノ:</strong> 863kcal・脂質41.2g。大盛り＋油の組み合わせは高カロリー。
             </p>
             <p className="mb-2">
-              <strong>焼きそばパン:</strong> 約420kcal、脂質18g。炭水化物x炭水化物の組み合わせ。
+              <strong>味しみロースかつ丼:</strong> 843kcal・炭水化物117.2g。揚げ物＋ご飯で糖質・脂質ともに高め。
             </p>
             <p>
-              <strong>大盛りパスタ:</strong> 約700kcal以上。1食で1日の目標カロリーの半分に。
+              <strong>ケチャップソースの大盛ナポリタン:</strong> 621kcal・炭水化物100.7g。麺の大盛りは糖質が多くなりがち。
             </p>
           </WarningBox>
 
           <NutritionTable
             items={[
-              { name: "揚げ鶏", calories: 252, protein: 14.5, fat: 15.8, carbs: 12.5, highlight: true },
-              { name: "メロンパン", calories: 380, protein: 6.8, fat: 12.5, carbs: 58.2 },
-              { name: "焼きそばパン", calories: 420, protein: 8.2, fat: 18.0, carbs: 55.8 },
-              { name: "大盛りナポリタン", calories: 720, protein: 18.5, fat: 22.0, carbs: 105.0 },
+              { name: "7プレミアム 濃厚G系ラーメン", calories: 1595, protein: 46.2, fat: 102.1, carbs: 128.8, highlight: true },
+              { name: "やみつきガーリック 大盛ペペロンチーノ", calories: 863, protein: 34.3, fat: 41.2, carbs: 92.6 },
+              { name: "味しみロースかつ丼", calories: 843, protein: 31.6, fat: 28.9, carbs: 117.2 },
+              { name: "ケチャップソースの大盛ナポリタン", calories: 621, protein: 24.8, fat: 15.2, carbs: 100.7 },
             ]}
           />
         </section>
@@ -445,12 +437,12 @@ export default function SevenElevenDietPage() {
 
           <ArticleSummary
             points={[
-              "セブンは7プレミアム・栄養表示・店舗数でダイエッターに最適なコンビニ",
-              "サラダチキン（113kcal/P24.3g）は低カロリー＆高タンパクの王道",
-              "7プレミアム さんまの塩焼（162kcal/P30g）は隠れた高タンパク王",
-              "1食300〜400kcal/P30g台の食事プランがセブンだけで実現可能",
-              "揚げ鶏・菓子パン・大盛りパスタはダイエット中NG",
-              "アプリのクーポンを活用してお得にダイエット食品をゲット",
+              "セブンは7プレミアム・栄養表示・店舗数でダイエッターに使いやすいコンビニ",
+              "7プレミアム さんまの塩焼（162kcal/P30g）はメニュー中トップクラスの高タンパク",
+              "たんぱく質が摂れる鶏むね肉サラダ（199kcal/P21.8g）は低糖質ランチに最適",
+              "おでんや炭火焼き鳥は1品20〜80kcal台で低カロリーの強い味方",
+              "朝329+昼547+夕304kcal＝1,180kcal/P98.7gがセブンだけで実現可能",
+              "濃厚G系ラーメン・大盛ペペロンチーノ・かつ丼など大盛り・揚げ物系は高カロリー",
             ]}
           />
 
@@ -465,31 +457,31 @@ export default function SevenElevenDietPage() {
           items={[
             {
               q: "セブンイレブンで一番タンパク質が多い商品は？",
-              a: "「7プレミアム さんまの塩焼」が162kcal/P30gで圧倒的に優秀です。次いで「サラダチキン プレーン」（113kcal/P24.3g）、「サラダチキンスモーク」（105kcal/P22.6g）、「サラダチキンと野菜の弁当」（448kcal/P28.5g）など。タンパク質効率を重視するなら、これらの商品を中心に選びましょう。",
+              a: "「7プレミアム さんまの塩焼」が162kcal/P30gで、扱いやすいサイズの商品ではトップクラスです。次いで「こく旨キムチ鍋」（247kcal/P22.3g）、「たんぱく質が摂れる鶏むね肉サラダ」（199kcal/P21.8g）、「若鶏のからあげ（もも）5個入り」（291kcal/P18.5g）など。タンパク質効率を重視するなら、これらの商品を中心に選びましょう。",
             },
             {
               q: "セブンの200kcal以下のおすすめ商品は？",
-              a: "味付き半熟ゆでたまご（65kcal）、寄せ豆腐（58kcal）、サラダチキン プレーン（113kcal）、サラダチキンスモーク（105kcal）、おでん各種（55〜80kcal）が代表格。複数組み合わせれば300kcal以下で1食完結も可能です。",
+              a: "炭火焼き鳥 塩（66kcal/P9.6g）、炭火焼き鳥 タレ（73kcal/P10.1g）、おでん 味しみたまご（77kcal/P6.7g）、7プレミアム 塩味そら豆（93kcal/P8.3g）、枝豆（94kcal/P8g）、国産大豆使用 冷奴セット（116kcal/P10.1g）が代表格。おでんは1品20〜80kcal台なので、複数組み合わせても300kcal以下で1食完結が可能です。",
             },
             {
               q: "セブンの朝食にダイエット向きなのは？",
-              a: "「サラダチキン+おにぎり1個（手巻きおにぎり 紀州南高梅 166kcal/P2.9g等）+ゆで卵」で約350kcal/P30g。または「7プレミアム ヨーグルト+ゆで卵+カフェオレ」で約250kcal/P15g。朝に高タンパクを摂ることで、午前中の代謝をアップできます。",
+              a: "「おでん 味しみたまご2個（154kcal/P13.4g）+枝豆（94kcal/P8g）+7プレミアム ブルーベリー（81kcal）」で約329kcal/P22g。または「炭火焼き鳥 塩+国産大豆使用 冷奴セット」で約182kcal/P19.7g。朝に高タンパクを摂ることで、満足感を得やすくなります。",
             },
             {
-              q: "セブンのお弁当でダイエット向きはどれ？",
-              a: "「サラダチキンと野菜の弁当」（448kcal/P28.5g）が単品完結で最強。「炭火焼きチキン弁当」（548kcal/P28.5g）、「肉めし 炙り焼豚ロース弁当（麦飯）」（659kcal/P27.7g）も低脂質高タンパクで優秀。逆に「ロースかつ丼」（843kcal）は高カロリーなので注意。",
+              q: "セブンのお弁当・ご飯ものでダイエット向きはどれ？",
+              a: "「肉めし 炙り焼豚ロース弁当（麦飯）」（659kcal/P27.7g）は脂質7.5gと比較的低脂質で高タンパク。軽めにしたい場合は「和風ツナマヨネーズ御飯」（458kcal/P17.9g）も選択肢。逆に「味しみロースかつ丼」（843kcal/炭水化物117.2g）は高カロリーなので、頻度を抑えるのがおすすめです。",
             },
             {
-              q: "セブンの夜食で太らないものは？",
-              a: "おでん（牛もつ串64kcal、牛すじハラミ串66kcal、なんこつつくね串66kcal）、寄せ豆腐（58kcal）、サラダチキン（105〜113kcal）、もずく酢（18kcal）が定番。3〜4品組み合わせても300kcal以下で済みます。",
+              q: "セブンの夜食で太りにくいものは？",
+              a: "おでん（牛すじ串26kcal/P3.8g、絹厚揚げ55kcal/P4g、牛もつ串64kcal/P4.1g、なんこつ入り鶏つくね串66kcal/P7g、絶品！牛すじハラミ串66kcal/P7.4g）、国産大豆使用 冷奴セット（116kcal/P10.1g）、炭火焼き鳥 塩（66kcal/P9.6g）が定番。3〜4品組み合わせても300kcal以下で済みます。",
             },
             {
-              q: "セブンのスイーツでダイエット中OKなのは？",
-              a: "「ゼロキロカロリー寒天ゼリー」（0kcal）、「7プレミアム もずく酢」（18kcal）が罪悪感ゼロ。アイスなら「7プレミアム 北海道バニラバーマルチ」（67kcal/個）が比較的低カロリーです。和菓子は意外と高カロリーなので、寒天系・低糖質スイーツを選びましょう。",
+              q: "セブンのデザート・アイスでカロリーが低めなのは？",
+              a: "アイスなら「7プレミアム 北海道バニラバーマルチ」（67kcal/個）、「7プレミアム 白桃バーマルチ」（76kcal/個）が比較的低カロリー。フルーツでは7プレミアムパイナップル（54kcal）や7プレミアム ブルーベリー（81kcal）も選択肢です。ドーナツや大型のケーキ系は高カロリーになりやすいので、量と頻度に注意しましょう。",
             },
             {
               q: "セブンとローソン・ファミマ、ダイエット向きの違いは？",
-              a: "セブンは「商品ラインナップの豊富さ＆店舗数」、ローソンは「たんぱく質シリーズの本気度」、ファミマは「RIZAP共同開発商品」が強み。タンパク質量で比較するとローソンのプレミアムロースサラダチキン（120kcal/P25g）も同等レベル。3社使い分けもおすすめです。",
+              a: "セブンは「商品ラインナップの豊富さ＆店舗数」、ローソンは「たんぱく質シリーズの充実」、ファミマは「RIZAP共同開発商品」がそれぞれ知られています。セブンはさんまの塩焼やおでん、鶏むね肉サラダなど低脂質・高タンパクの選択肢が多いのが強み。気分や近くの店舗に合わせて3社を使い分けるのもおすすめです。",
             },
           ]}
         />
@@ -500,6 +492,7 @@ export default function SevenElevenDietPage() {
         {/* Update History */}
         <UpdateHistory
           entries={[
+            { date: "2026-06-22", note: "DB実在しない商品（サラダチキン プレーン/スモーク/バー、味付き半熟ゆでたまご、寄せ豆腐、ゼロカロリー寒天ゼリー等）を全て削除し、さんまの塩焼・鶏むね肉サラダ・おでん・炭火焼き鳥など実在商品へ全面差し替え。ランキング・組み合わせプラン・FAQ・まとめの数値をDB実値で再検算" },
             { date: "2026-05-13", note: "セブン234商品の最新栄養データに更新。QuickAnswer・FAQ・著者情報を追加" },
             { date: "2026-03-23", note: "初稿公開" },
           ]}

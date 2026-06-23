@@ -1,9 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { redirect } from "next/navigation";
 import { ChevronRight, Search, MapPin, Sparkles, Utensils, ArrowRight, Smartphone } from "lucide-react";
 import { getChainLogo } from "@/lib/chain-logos";
-import { createClient } from "@/lib/supabase/server";
 import { AuthGate } from "@/components/AuthGate";
 
 const CHAINS = [
@@ -75,14 +73,12 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://www.tabenavi.jp" },
 };
 
-export default async function Home() {
-  // Redirect logged-in users to dashboard
-  try {
-    const supabase = await createClient();
-    const { data: { user } } = await supabase.auth.getUser();
-    if (user) redirect("/dashboard");
-  } catch {}
+// トップを完全静的化(CDN HIT=Active CPUほぼ0)。最大トラフィックURLなのでCPU効果が最大。
+// ログイン者の /dashboard リダイレクトはクライアントの <AuthGate /> が担う(冗長なサーバー認証を撤去)。
+// force-static = 将来うっかり cookies()/動的APIを足したらビルドで失敗させる再発防止ガード。
+export const dynamic = "force-static";
 
+export default function Home() {
   return (
     <main className="min-h-screen bg-white text-gray-900">
       <AuthGate />

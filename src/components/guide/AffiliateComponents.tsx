@@ -12,6 +12,7 @@ import {
   type AffiliateProduct,
   type ProductCategory,
 } from "@/data/affiliateProducts";
+import { SERVICE_OFFERS, type ServiceTag } from "@/data/mealDeliveryOffers";
 
 // ─── Internal: GA4イベント送信 ───────────────────────────────────
 type Network = "amazon" | "rakuten";
@@ -330,5 +331,63 @@ export function AffiliateAuditPanel() {
     <div className="fixed bottom-4 right-4 bg-black text-white text-xs px-3 py-2 rounded shadow-lg z-50">
       Affiliate: {configured}/{total} configured
     </div>
+  );
+}
+
+// ─── ServiceOffers: 宅配食/プロテイン等のサービス案件カード(A8) ──────────
+// 意図の合う面B記事にだけ tag 指定で配置。url 未設定のオファーは表示しない(凍結に影響なし)。
+function trackServiceClick(offerId: string) {
+  if (typeof window === "undefined") return;
+  const win = window as unknown as {
+    gtag?: (cmd: string, name: string, params: Record<string, unknown>) => void;
+  };
+  if (typeof win.gtag === "function") {
+    win.gtag("event", "service_offer_click", {
+      offer_id: offerId,
+      page_path: window.location.pathname,
+    });
+  }
+}
+
+export function ServiceOffers({
+  tag,
+  heading = "外食が続く人におすすめの宅配食・サービス",
+}: {
+  tag: ServiceTag;
+  heading?: string;
+}) {
+  const offers = SERVICE_OFFERS.filter((o) => o.url && o.tags.includes(tag));
+  if (offers.length === 0) return null; // 提携承認・リンク設定前は何も出さない
+
+  return (
+    <section className="my-8 rounded-2xl border border-sky-100 bg-sky-50/40 p-5">
+      <div className="flex items-center gap-2 mb-3">
+        <h3 className="text-sm font-bold text-gray-900">{heading}</h3>
+        <PRBadge />
+      </div>
+      <div className="space-y-3">
+        {offers.map((o) => (
+          <div key={o.id} className="rounded-xl border border-gray-200 bg-white p-4">
+            <p className="font-bold text-gray-900 text-sm mb-1">{o.name}</p>
+            {o.description && (
+              <p className="text-xs text-gray-600 leading-relaxed mb-3">{o.description}</p>
+            )}
+            <a
+              href={o.url}
+              target="_blank"
+              rel="sponsored nofollow noopener"
+              onClick={() => trackServiceClick(o.id)}
+              className="inline-flex items-center gap-1.5 bg-sky-500 hover:bg-sky-600 text-white text-sm font-bold px-5 py-2.5 rounded-full transition-colors"
+            >
+              詳しく見る
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+          </div>
+        ))}
+      </div>
+      <p className="text-[10px] text-gray-400 mt-3">
+        ※広告。価格・内容は各サービス公式サイトでご確認ください。
+      </p>
+    </section>
   );
 }

@@ -31,12 +31,12 @@ export const metadata: Metadata = {
   title:
     "【2026年最新】ローソンダイエット完全ガイド｜低カロリー＆高タンパク商品ランキング | たべなび",
   description:
-    "ローソンでダイエットに最適な低カロリー・高タンパク商品をランキング形式で紹介。ロカボシリーズの活用法、朝昼晩のおすすめ組み合わせも解説。ローソンの強みを活かした賢いダイエット法。",
+    "ローソンでダイエット中に選びやすい低カロリー・高タンパク商品をランキング形式で紹介。NL ブランパンなど低糖質商品の活用法、朝昼晩のおすすめ組み合わせも解説。たべなびのDB実値（2026年6月）に基づく。",
   keywords: [
     "ローソン ダイエット",
     "ローソン 低カロリー",
     "ローソン 高タンパク",
-    "ローソン ロカボ",
+    "ローソン ブランパン",
     "ローソン ダイエット おすすめ",
     "コンビニ ダイエット ローソン",
     "ローソン 糖質制限",
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     title:
       "【2026年最新】ローソンダイエット完全ガイド｜低カロリー＆高タンパク商品ランキング",
     description:
-      "ローソンの低カロリー・高タンパク商品を徹底解説。ロカボシリーズの活用法、朝昼晩の組み合わせプランも紹介。",
+      "ローソンの低カロリー・高タンパク商品を徹底解説。NL ブランパンなど低糖質商品の活用法、朝昼晩の組み合わせプランも紹介。",
     url: "https://www.tabenavi.jp/guide/lawson-diet",
     type: "article",
   },
@@ -66,10 +66,11 @@ const jsonLd = {
   datePublished: "2026-03-25",
   dateModified: new Date().toISOString().split("T")[0],
   author: {
-    "@type": "Organization",
-    name: "たべなび",
-    url: "https://www.tabenavi.jp",
-  },
+      "@type": "Person",
+      name: "ヒロ",
+      description: "外食で13kg減量した、たべなび開発者",
+      url: "https://www.tabenavi.jp/sources",
+    },
   publisher: {
     "@type": "Organization",
     name: "たべなび",
@@ -82,7 +83,7 @@ const tocItems = [
   { id: "low-calorie", label: "低カロリー商品TOP10" },
   { id: "high-protein", label: "高タンパク商品TOP5" },
   { id: "meal-plans", label: "朝昼晩のおすすめ組み合わせ" },
-  { id: "low-carb", label: "ロカボ商品の活用法" },
+  { id: "low-carb", label: "低糖質商品の活用法" },
   { id: "avoid", label: "避けるべき商品" },
   { id: "summary", label: "まとめ" },
 ];
@@ -114,23 +115,23 @@ export default function LawsonDietPage() {
 
         {/* QuickAnswer */}
         <QuickAnswer
-          question="ローソンでダイエット中におすすめは？ロカボ商品とサラダチキンの定番は？"
+          question="ローソンでダイエット中におすすめは？低糖質パンと高タンパク商品の定番は？"
           answer={
             <>
-              <strong>ローソンの強みは「ブランパン」「たんぱく質シリーズ」「ナチュラルローソン」の3本柱</strong>。糖質制限派なら<strong>ブランパン2個入り（約140kcal/糖質約4g）</strong>、高タンパク派なら<strong>サラダチキン プレーン（約110kcal/P25g）</strong>や<strong>たんぱく質が摂れるバー系商品（150〜200kcal/P15g）</strong>が定番。1食300kcal/P30g台の組み合わせが他コンビニより簡単に作れます。416商品（2026年5月時点）のラインナップで選択肢が圧倒的です。
+              <strong>ローソンの強みは「NL（ナチュラルローソン）たんぱく質が摂れるブランパン」「たんぱく質が摂れるサラダシリーズ」「焼き鳥・グリルチキン系のホットスナック」</strong>。低糖質パン派なら<strong>NL たんぱく質が摂れるブランパン 2個入（66kcal/P6.1g/炭水化物6.1g）</strong>、高タンパク派なら<strong>たんぱく質が摂れる 国産鶏むね肉のサラダ（206kcal/P23.1g）</strong>や<strong>若鶏の砂肝にんにく（160kcal/P21.4g）</strong>が定番。1食300kcal台でP20g超の組み合わせが作りやすいのが特長です。416商品（2026年6月時点）のラインナップで選択肢が豊富です。
             </>
           }
         />
 
         {/* Introduction */}
         <p className="mb-4">
-          全国に約14,600店舗を展開するローソン。実は<Marker>糖質制限ダイエッターにとって最強のコンビニ</Marker>であることをご存知ですか？他のコンビニにはない独自の「ロカボ（低糖質）」商品ラインナップが、ローソン最大の武器です。
+          全国に多数の店舗を展開するローソン。実は<Marker>炭水化物を控えたい人に向いた商品が多いコンビニ</Marker>であることをご存知ですか？ナチュラルローソン（NL）の低糖質パンラインナップが、ローソンの強みのひとつです。
         </p>
         <p className="mb-4">
-          ブランパンをはじめとするロカボシリーズは<Marker color="blue">糖質が通常商品の半分以下</Marker>でありながら、味もしっかり美味しい。さらにナチュラルローソンのヘルシー食品も含めると、ダイエット向け商品の充実度はコンビニNo.1と言えます。
+          NL たんぱく質が摂れるブランパンをはじめとするブランパンシリーズは<Marker color="blue">炭水化物を抑えた</Marker>商品。さらに「たんぱく質が摂れる」サラダや焼き鳥系のホットスナックも含めると、ダイエット中に選びやすい商品が揃っています。
         </p>
         <p className="mb-10">
-          この記事では、ローソンで買える低カロリー商品TOP10と高タンパク商品TOP5をランキング形式で紹介し、朝昼晩の最適な組み合わせプランやロカボ商品の活用法も詳しく解説します。
+          この記事では、ローソンで買える低カロリー商品TOP10と高タンパク商品TOP5をランキング形式で紹介し、朝昼晩の組み合わせプランや低糖質商品の活用法も詳しく解説します。掲載数値はたべなびのデータベース実値（416商品・2026年6月時点）に基づきます。
         </p>
 
         {/* Mobile TOC */}
@@ -152,27 +153,27 @@ export default function LawsonDietPage() {
           <NumberedList
             items={[
               {
-                title: "「ロカボ」シリーズの圧倒的な品揃え",
-                body: "ローソンは2012年からロカボ商品の開発に注力しており、現在ではパン・スイーツ・麺類など100品目以上のロカボ商品を展開。特にブランパンシリーズは糖質2.2gからと、糖質制限ダイエットの強い味方です。セブンイレブンやファミリーマートにはないローソン独自の強みです。",
+                title: "「NL（ナチュラルローソン）」低糖質パンの品揃え",
+                body: "ローソンは健康志向のPBブランド「ナチュラルローソン（NL）」で低糖質パンを多数展開。NL たんぱく質が摂れるブランパン 2個入は炭水化物6.1g・66kcal、NL たんぱく質が摂れるブラン入り食パン 4枚入は炭水化物16g・104kcalと、低糖質パンの選択肢が豊富です。",
               },
               {
-                title: "ナチュラルローソン商品の充実",
-                body: "健康志向のPBブランド「ナチュラルローソン」は、食物繊維たっぷりのお菓子やオーガニック食品を展開。ダイエット中の間食に最適な低糖質スナックやプロテインバーが豊富に揃っています。",
+                title: "「たんぱく質が摂れる」サラダシリーズ",
+                body: "「たんぱく質が摂れる 国産鶏むね肉のサラダ」（206kcal/P23.1g）や「たんぱく質が摂れる 国産豚肉のサラダ」（284kcal/P16.8g）など、1品でタンパク質20g前後が摂れるサラダがラインナップ。野菜とタンパク質を同時に補給できます。",
               },
               {
-                title: "全商品の栄養成分表示+糖質量表示",
-                body: "ローソンは全商品にカロリー・タンパク質・脂質・炭水化物だけでなく、糖質量と食物繊維量も個別に表示。糖質制限中の方にとって、商品選びが格段にしやすいコンビニです。",
+                title: "全商品の栄養成分表示",
+                body: "ローソンは全商品にカロリー・タンパク質・脂質・炭水化物を表示。たべなび上でも416商品分の数値を確認でき、商品選びがしやすいコンビニです。",
               },
               {
-                title: "「からあげクン」に高タンパク版が登場",
-                body: "2025年からラインナップに加わった「たんぱく質がとれるからあげクン」は、1パック168kcalでタンパク質19g。ホットスナックで高タンパクが摂れるのはローソンならでは。",
+                title: "焼き鳥・グリルチキン系のホットスナック",
+                body: "「若鶏の砂肝にんにく」（160kcal/P21.4g）や「グリルチキン串」（113kcal/P9.9g）、「直火焼鳥 もも塩＆やげん軟骨」（125kcal/P14g）など、温かいホットスナックで高タンパクが摂れる商品が揃っています。",
               },
             ]}
           />
 
           <TipBox title="ローソンアプリのお試し引換券を活用">
             <p>
-              ローソンアプリの「お試し引換券」を使えば、<Marker color="green">Pontaポイントやdポイントでダイエット商品を格安ゲット</Marker>できます。サラダチキンやブランパンが30~50%オフで手に入ることも多いので、こまめにチェックしましょう。
+              ローソンアプリの「お試し引換券」を使えば、<Marker color="green">Pontaポイントやdポイントで商品を格安交換</Marker>できることがあります。低糖質パンやホットスナックが対象になることもあるので、こまめにチェックしましょう。
             </p>
           </TipBox>
         </section>
@@ -188,22 +189,22 @@ export default function LawsonDietPage() {
 
           <NutritionTable
             items={[
-              { name: "1位: ブランパン 2個入", calories: 120, protein: 6.5, fat: 3.4, carbs: 14.4, highlight: true },
-              { name: "2位: 味付き半熟たまご 2個入", calories: 130, protein: 12.8, fat: 8.8, carbs: 0.8, highlight: true },
-              { name: "3位: 国産サラダチキン（プレーン）", calories: 114, protein: 24.0, fat: 1.4, carbs: 0.6, highlight: true },
-              { name: "4位: NL ブランのチーズ蒸しケーキ", calories: 105, protein: 4.3, fat: 5.8, carbs: 15.5 },
-              { name: "5位: 海藻と大根のサラダ", calories: 28, protein: 1.5, fat: 0.3, carbs: 5.2 },
-              { name: "6位: もち麦入りおにぎり（枝豆と塩昆布）", calories: 175, protein: 4.2, fat: 1.5, carbs: 36.8 },
-              { name: "7位: こんにゃく麺サラダ", calories: 85, protein: 3.8, fat: 3.2, carbs: 12.5 },
-              { name: "8位: 豆腐バー（バジル）", calories: 108, protein: 11.2, fat: 5.8, carbs: 2.5 },
-              { name: "9位: ゼロキロカロリーゼリー", calories: 0, protein: 0, fat: 0, carbs: 0, highlight: true },
-              { name: "10位: NL 素焼きミックスナッツ 35g", calories: 194, protein: 5.2, fat: 17.5, carbs: 4.8 },
+              { name: "1位: ローストチキンのサラダ", calories: 65, protein: 8.8, fat: 1.8, carbs: 4.3, highlight: true },
+              { name: "2位: NL たんぱく質が摂れるブランパン 2個入", calories: 66, protein: 6.1, fat: 2.8, carbs: 6.1, highlight: true },
+              { name: "3位: ガーリック香る砂肝焼", calories: 76, protein: 14.1, fat: 1.5, carbs: 1.6, highlight: true },
+              { name: "4位: 煮たまご", calories: 78, protein: 6.5, fat: 5.5, carbs: 0.6 },
+              { name: "5位: 子持ちししゃも", calories: 88, protein: 8.7, fat: 5.7, carbs: 0.5 },
+              { name: "6位: 食物繊維が摂れる 豆腐とひじきの和風サラダ", calories: 95, protein: 5.4, fat: 4.4, carbs: 10.6 },
+              { name: "7位: 縞ほっけの塩焼", calories: 106, protein: 12.5, fat: 6.2, carbs: 0 },
+              { name: "8位: 銀鮭の西京焼", calories: 111, protein: 10.7, fat: 6.0, carbs: 3.7 },
+              { name: "9位: 塩ゆで枝豆", calories: 111, protein: 9.0, fat: 5.3, carbs: 7.4 },
+              { name: "10位: グリルチキン串", calories: 113, protein: 9.9, fat: 5.7, carbs: 5.8 },
             ]}
           />
 
-          <TipBox title="ブランパンが低カロリーな理由">
+          <TipBox title="NL ブランパンが低カロリーな理由">
             <p>
-              ブランパンは小麦の外皮（ブラン/ふすま）を使用したパンで、通常のロールパンが約95kcal/個のところ、<Marker>ブランパンは約60kcal/個</Marker>。さらに糖質はわずか2.2g（通常のロールパンは約14g）。食物繊維も5.4gと豊富で、腹持ちも良好です。
+              NL たんぱく質が摂れるブランパンは小麦の外皮（ブラン/ふすま）を使用したパンで、<Marker>2個入で66kcal・炭水化物6.1g</Marker>と低カロリー・低炭水化物。1個あたりタンパク質も約3gと栄養価が高く、糖質を控えたい主食代替として活用できます。国産小麦のバターロール 4個入（95kcal/炭水化物14.8g）と比べても炭水化物が少なめです。
             </p>
           </TipBox>
         </section>
@@ -224,91 +225,91 @@ export default function LawsonDietPage() {
 
           <RankingCard
             rank={1}
-            title="国産サラダチキン（プレーン）"
-            subtitle="¥225 ・ 低脂質の王者"
+            title="鶏の炭火焼き3種盛り"
+            subtitle="炭火焼の高タンパクおつまみ"
           >
             <div className="grid grid-cols-4 gap-2 mb-3">
               <div className="bg-sky-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-sky-600 font-bold text-sm">114</p>
+                <p className="text-sky-600 font-bold text-sm">303</p>
                 <p className="text-sky-600 text-[10px]">kcal</p>
               </div>
               <div className="bg-blue-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-blue-600 font-bold text-sm">24.0g</p>
+                <p className="text-blue-600 font-bold text-sm">27.2g</p>
                 <p className="text-blue-600 text-[10px]">タンパク</p>
               </div>
               <div className="bg-amber-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-amber-600 font-bold text-sm">1.4g</p>
+                <p className="text-amber-600 font-bold text-sm">15.3g</p>
                 <p className="text-amber-600 text-[10px]">脂質</p>
               </div>
               <div className="bg-green-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-green-600 font-bold text-sm">0.6g</p>
+                <p className="text-green-600 font-bold text-sm">15.1g</p>
                 <p className="text-green-600 text-[10px]">炭水化物</p>
               </div>
             </div>
             <p className="text-sm text-gray-600">
-              ローソンのサラダチキンは<Marker>国産鶏むね肉100%使用</Marker>で品質も安心。プレーン以外にもハーブ・スモーク・レモン・タンドリーなどフレーバーが豊富。1パックでタンパク質24gは驚異的です。
+              ローソンの高タンパク商品の中でも<Marker>1品でタンパク質27.2g</Marker>とトップクラス。炭火焼の香ばしさで満足感も高く、しっかりタンパク質を補給したい日のメインになります。
             </p>
           </RankingCard>
 
           <RankingCard
             rank={2}
-            title="たんぱく質がとれるからあげクン"
-            subtitle="¥248 ・ ホットスナック系"
+            title="たんぱく質が摂れる 国産鶏むね肉のサラダ"
+            subtitle="野菜も一緒に"
           >
             <div className="grid grid-cols-4 gap-2 mb-3">
               <div className="bg-sky-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-sky-600 font-bold text-sm">168</p>
+                <p className="text-sky-600 font-bold text-sm">206</p>
                 <p className="text-sky-600 text-[10px]">kcal</p>
               </div>
               <div className="bg-blue-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-blue-600 font-bold text-sm">19.0g</p>
+                <p className="text-blue-600 font-bold text-sm">23.1g</p>
                 <p className="text-blue-600 text-[10px]">タンパク</p>
               </div>
               <div className="bg-amber-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-amber-600 font-bold text-sm">7.5g</p>
+                <p className="text-amber-600 font-bold text-sm">11.0g</p>
                 <p className="text-amber-600 text-[10px]">脂質</p>
               </div>
               <div className="bg-green-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-green-600 font-bold text-sm">5.8g</p>
+                <p className="text-green-600 font-bold text-sm">4.9g</p>
                 <p className="text-green-600 text-[10px]">炭水化物</p>
               </div>
             </div>
             <p className="text-sm text-gray-600">
-              からあげクンの高タンパク版。<Marker color="blue">168kcalでタンパク質19g</Marker>は揚げ物としては驚異的な数値。サラダチキンに飽きた時の救世主として活用できます。温かいホットスナックなので満足感も高いです。
+              <Marker color="green">タンパク質23.1gと野菜が同時に摂れる</Marker>のが最大の強み。炭水化物も4.9gと控えめで、ランチのメインとして優秀です。ドレッシングを別添えにすればカロリーコントロールもしやすくなります。
             </p>
           </RankingCard>
 
           <RankingCard
             rank={3}
-            title="たんぱく質が摂れる鶏むね肉のサラダ"
-            subtitle="¥420 ・ 野菜も一緒に"
+            title="若鶏の砂肝にんにく"
+            subtitle="低脂質・高タンパクのおつまみ"
           >
             <div className="grid grid-cols-4 gap-2 mb-3">
               <div className="bg-sky-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-sky-600 font-bold text-sm">162</p>
+                <p className="text-sky-600 font-bold text-sm">160</p>
                 <p className="text-sky-600 text-[10px]">kcal</p>
               </div>
               <div className="bg-blue-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-blue-600 font-bold text-sm">20.5g</p>
+                <p className="text-blue-600 font-bold text-sm">21.4g</p>
                 <p className="text-blue-600 text-[10px]">タンパク</p>
               </div>
               <div className="bg-amber-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-amber-600 font-bold text-sm">6.2g</p>
+                <p className="text-amber-600 font-bold text-sm">4.9g</p>
                 <p className="text-amber-600 text-[10px]">脂質</p>
               </div>
               <div className="bg-green-50 rounded-lg py-2 px-3 text-center">
-                <p className="text-green-600 font-bold text-sm">7.8g</p>
+                <p className="text-green-600 font-bold text-sm">9.0g</p>
                 <p className="text-green-600 text-[10px]">炭水化物</p>
               </div>
             </div>
             <p className="text-sm text-gray-600">
-              <Marker color="green">タンパク質20.5gと野菜が同時に摂れる</Marker>のが最大の強み。ドレッシングを別添えにしてカロリーコントロールもしやすい。ランチのメインとして優秀です。
+              <Marker color="blue">160kcalでタンパク質21.4g・脂質4.9g</Marker>と、低脂質・高タンパクの優等生。コリコリした食感で満足感もあり、夜のおつまみやタンパク質の追加に向いています。
             </p>
           </RankingCard>
 
           <TipBox title="4~5位もチェック">
-            <p className="mb-1">4位: 豆腐バー（バジル）（P11.2g / 108kcal / ¥148）- 手軽に食べられるバータイプ</p>
-            <p>5位: たんぱく質が摂れるチキンステーキ弁当（P32.5g / 462kcal / ¥598）- しっかり食べたい日に</p>
+            <p className="mb-1">4位: よだれ鶏（P17.9g / 182kcal）- 低脂質でタンパク質をしっかり補給</p>
+            <p>5位: パリパリチキン（P16.9g / 180kcal）- 皮目の香ばしさで満足感あり</p>
           </TipBox>
 
           <p className="mb-4">
@@ -328,84 +329,75 @@ export default function LawsonDietPage() {
             朝昼晩のおすすめ組み合わせ
           </SectionHeading>
           <p className="mb-6">
-            ローソンだけで<Marker>1日1,400kcal以下・タンパク質80g以上・糖質100g以下</Marker>を達成するプランを紹介します。糖質制限とカロリー制限の両方に対応した組み合わせです。
+            ローソンだけで<Marker>1日1,200kcal前後・タンパク質80g以上・炭水化物100g以下</Marker>を目安にするプランを紹介します。低炭水化物とカロリー制限の両方を意識した組み合わせです。
           </p>
 
-          <SubSectionHeading>朝食プラン（約320kcal / P20g / 糖質15g）</SubSectionHeading>
+          <SubSectionHeading>朝食プラン（約235kcal / P17.5g / 炭水化物14.7g）</SubSectionHeading>
           <div className="bg-white rounded-lg border border-gray-200 p-5 mb-6 shadow-sm">
             <p className="font-bold text-gray-900 mb-2">
-              ブランパン2個 + 味付き半熟たまご1個 + カフェラテ（無糖）
+              NL たんぱく質が摂れるブランパン 2個入 + 煮たまご + カフェラテ(M)
             </p>
             <div className="flex flex-wrap gap-2 mb-3">
               <span className="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full font-bold">
-                P 19.8g
+                P 17.5g
               </span>
               <span className="text-xs bg-sky-50 text-sky-700 px-2.5 py-1 rounded-full font-bold">
-                318 kcal
+                235 kcal
               </span>
               <span className="text-xs bg-purple-50 text-purple-700 px-2.5 py-1 rounded-full font-bold">
-                糖質 14.8g
-              </span>
-              <span className="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full">
-                約¥380
+                炭水化物 14.7g
               </span>
             </div>
             <p className="text-sm text-gray-600 leading-relaxed">
-              ブランパンの糖質はわずか4.4g（2個分）。卵でタンパク質を補い、カフェラテのカフェインで代謝アップも狙えます。
+              ブランパンの炭水化物は6.1g（2個分）。煮たまごでタンパク質を補い、カフェラテで満足感もプラスできます。
             </p>
           </div>
 
-          <SubSectionHeading>昼食プラン（約450kcal / P35g / 糖質30g）</SubSectionHeading>
+          <SubSectionHeading>昼食プラン（約397kcal / P28g / 炭水化物46.5g）</SubSectionHeading>
           <div className="bg-white rounded-lg border border-gray-200 p-5 mb-6 shadow-sm">
             <p className="font-bold text-gray-900 mb-2">
-              サラダチキン（プレーン）+ もち麦入りおにぎり + 海藻と大根のサラダ
+              たんぱく質が摂れる 国産鶏むね肉のサラダ + 塩昆布と沢庵おにぎり(国産もち麦入り) + 玉ねぎサラダ
             </p>
             <div className="flex flex-wrap gap-2 mb-3">
               <span className="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full font-bold">
-                P 29.7g
+                P 28.0g
               </span>
               <span className="text-xs bg-sky-50 text-sky-700 px-2.5 py-1 rounded-full font-bold">
-                317 kcal
+                397 kcal
               </span>
               <span className="text-xs bg-purple-50 text-purple-700 px-2.5 py-1 rounded-full font-bold">
-                糖質 38.2g
-              </span>
-              <span className="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full">
-                約¥580
+                炭水化物 46.5g
               </span>
             </div>
             <p className="text-sm text-gray-600 leading-relaxed">
-              昼はもち麦おにぎりで炭水化物も摂取。もち麦は通常の白米より食物繊維が豊富で血糖値の上昇が緩やか。サラダチキンで高タンパクも確保。
+              昼はもち麦入りおにぎりで炭水化物も摂取。もち麦は食物繊維が豊富です。鶏むね肉のサラダで高タンパクも確保できます。
             </p>
           </div>
 
-          <SubSectionHeading>夕食プラン（約350kcal / P25g / 糖質20g）</SubSectionHeading>
+          <SubSectionHeading>夕食プラン（約361kcal / P39.3g / 炭水化物19.6g）</SubSectionHeading>
           <div className="bg-white rounded-lg border border-gray-200 p-5 mb-6 shadow-sm">
             <p className="font-bold text-gray-900 mb-2">
-              たんぱく質が摂れる鶏むね肉のサラダ + 豆腐バー + こんにゃく麺サラダ
+              若鶏の砂肝にんにく + 食物繊維が摂れる 豆腐とひじきの和風サラダ + 縞ほっけの塩焼
             </p>
             <div className="flex flex-wrap gap-2 mb-3">
               <span className="text-xs bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full font-bold">
-                P 35.5g
+                P 39.3g
               </span>
               <span className="text-xs bg-sky-50 text-sky-700 px-2.5 py-1 rounded-full font-bold">
-                355 kcal
+                361 kcal
               </span>
               <span className="text-xs bg-purple-50 text-purple-700 px-2.5 py-1 rounded-full font-bold">
-                糖質 22.8g
-              </span>
-              <span className="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full">
-                約¥680
+                炭水化物 19.6g
               </span>
             </div>
             <p className="text-sm text-gray-600 leading-relaxed">
-              夕食は糖質を控えめに。こんにゃく麺で満腹感を出しつつ、鶏むね肉サラダと豆腐バーでタンパク質をしっかり確保。<Marker color="green">355kcalでタンパク質35.5gは驚異的</Marker>。
+              夕食は炭水化物を控えめに。豆腐とひじきのサラダで食物繊維を、砂肝とほっけの塩焼でタンパク質をしっかり確保。<Marker color="green">361kcalでタンパク質39.3gは優秀</Marker>。
             </p>
           </div>
 
           <TipBox title="1日トータル">
             <p>
-              朝318kcal + 昼317kcal + 夕355kcal = <Marker>合計990kcal / タンパク質85g / 糖質75.8g</Marker>。間食にナッツ35g（194kcal）やゼロカロリーゼリーを追加しても1,200kcal以内に収まります。糖質制限もカロリー制限も両立可能です。
+              朝235kcal + 昼397kcal + 夕361kcal = <Marker>合計993kcal / タンパク質84.8g / 炭水化物80.8g</Marker>。間食に塩ゆで枝豆（111kcal）やローストチキンのサラダ（65kcal）を追加しても1,200kcal前後に収まります。低炭水化物もカロリー制限も両立しやすい構成です。
             </p>
           </TipBox>
 
@@ -422,70 +414,70 @@ export default function LawsonDietPage() {
         {/* Section 5: ロカボ商品の活用法 */}
         <section className="mb-16">
           <SectionHeading id="low-carb">
-            ロカボ商品の活用法
+            低糖質商品の活用法
           </SectionHeading>
 
           <p className="mb-6">
-            ローソンのロカボ商品は<Marker>糖質制限ダイエットの最強の味方</Marker>です。ここでは、カテゴリー別にロカボ商品の特徴と活用法を解説します。
+            ローソンの低糖質（ロカボ）商品は<Marker>炭水化物を抑えたい人の味方</Marker>です。ここでは、カテゴリー別に低糖質商品の特徴と活用法を解説します。
           </p>
 
-          <SubSectionHeading>ブランパンシリーズ（パン類）</SubSectionHeading>
+          <SubSectionHeading>NL ブランパンシリーズ（パン類）</SubSectionHeading>
           <p className="mb-4">
-            ローソンの看板ロカボ商品。小麦ブラン（ふすま）を使用し、通常のパンと比べて<Marker color="blue">糖質を60~80%カット</Marker>しています。
+            ナチュラルローソン（NL）の看板低糖質商品。小麦ブラン（ふすま）を使用し、通常のパンと比べて<Marker color="blue">炭水化物を抑えています</Marker>。
           </p>
 
           <ComparisonTable
-            headers={["商品名", "カロリー", "糖質", "食物繊維", "タンパク質"]}
+            headers={["商品名", "カロリー", "炭水化物", "タンパク質", "脂質"]}
             rows={[
-              ["ブランパン 2個入", "120 kcal", "4.4g", "10.8g", "6.5g"],
-              ["ブランの焼きカレーパン", "135 kcal", "7.5g", "8.2g", "5.8g"],
-              ["ブランのスイートチョコロール", "142 kcal", "9.8g", "6.5g", "4.2g"],
-              ["ブランのハムチーズパン", "155 kcal", "6.2g", "7.8g", "8.5g"],
-              ["（参考）通常のロールパン 2個", "190 kcal", "28.0g", "1.2g", "5.0g"],
+              ["NL たんぱく質が摂れるブランパン 2個入", "66 kcal", "6.1g", "6.1g", "2.8g"],
+              ["NL ブランのハム＆チーズパン 2個入", "78 kcal", "10.9g", "3.3g", "3.8g"],
+              ["NL たんぱく質が摂れるブラン入り食パン 4枚入", "104 kcal", "16.0g", "7.2g", "2.1g"],
+              ["NL ブランのチーズクリーム＆ダブルベリーパン 2個入", "113 kcal", "13.1g", "4.5g", "6.3g"],
+              ["（参考）国産小麦のバターロール 4個入", "95 kcal", "14.8g", "3.0g", "2.8g"],
             ]}
             bestRowIndex={0}
           />
 
-          <SubSectionHeading>ロカボスイーツ</SubSectionHeading>
+          <SubSectionHeading>低カロリースイーツ・パン</SubSectionHeading>
           <p className="mb-4">
-            ダイエット中でも甘いものが食べたい。そんな願いを叶えてくれるのがローソンのロカボスイーツです。<Marker>糖質10g以下で本格的な味わい</Marker>のスイーツが揃っています。
+            ダイエット中でも甘いものが食べたい。そんなときは<Marker>カロリー控えめのパン・スイーツ</Marker>を選びましょう。1個あたりのカロリーが低い商品を集めました。
           </p>
 
           <NutritionTable
             items={[
-              { name: "NL ブランのチーズ蒸しケーキ", calories: 105, protein: 4.3, fat: 5.8, carbs: 15.5, highlight: true },
-              { name: "NL アーモンドケーキ", calories: 185, protein: 3.5, fat: 12.5, carbs: 16.8 },
-              { name: "NL バスチー（糖質オフ）", calories: 175, protein: 4.8, fat: 12.0, carbs: 12.5, highlight: true },
-              { name: "ゼロキロカロリーゼリー（各種）", calories: 0, protein: 0, fat: 0, carbs: 0, highlight: true },
-              { name: "NL くるみとココナッツのキャラメリゼ", calories: 165, protein: 2.5, fat: 12.0, carbs: 13.5 },
+              { name: "紅はるかのおいも蒸しパン 4個入", calories: 85, protein: 1.1, fat: 0.4, carbs: 19.6, highlight: true },
+              { name: "もっちりとしたチョコパン 4個入", calories: 97, protein: 1.8, fat: 3.7, carbs: 14.6 },
+              { name: "クリームパン 4個入", calories: 112, protein: 2.6, fat: 3.6, carbs: 17.6 },
+              { name: "抹茶とホワイトチョコのスコーン 4個入", calories: 114, protein: 1.6, fat: 5.7, carbs: 14.3, highlight: true },
+              { name: "フィナンシェ 4個入", calories: 146, protein: 1.6, fat: 8.8, carbs: 15.2 },
             ]}
           />
 
-          <SubSectionHeading>ロカボお菓子・おつまみ</SubSectionHeading>
+          <SubSectionHeading>お菓子・おつまみ</SubSectionHeading>
           <p className="mb-4">
-            ナチュラルローソンブランドのお菓子は、<Marker color="green">糖質10g以下で食物繊維が豊富</Marker>な商品が多数。ダイエット中の間食やおつまみに最適です。
+            ローソンには、<Marker color="green">1品あたりのカロリーが控えめ</Marker>なお菓子・おつまみもあります。ダイエット中の間食やおつまみに選びやすい商品です。
           </p>
 
           <NumberedList
             items={[
               {
-                title: "素焼きミックスナッツ 35g（194kcal / 糖質4.0g）",
-                body: "アーモンド・カシューナッツ・くるみをミックス。良質な脂質とビタミンEが豊富で、小腹が空いた時に最適。ただし食べ過ぎ注意（1袋をしっかり守る）。",
+                title: "チョコチップスナック 6本入（82kcal / 炭水化物13.2g）",
+                body: "1袋でも82kcalと控えめなスナック。小腹が空いた時の間食に。食べ過ぎには注意しましょう。",
               },
               {
-                title: "パリパリ食感の枝豆チップス（132kcal / 糖質11.2g）",
-                body: "枝豆の風味が楽しめるチップス。通常のポテトチップスの半分以下のカロリーで、食物繊維も4.2g。おつまみの代替として優秀。",
+                title: "塩ゆで枝豆（111kcal / P9.0g / 炭水化物7.4g）",
+                body: "タンパク質9gが摂れる定番おつまみ。炭水化物も控えめで、おつまみの代替として優秀です。",
               },
               {
-                title: "堅焼きおっとっと（125kcal / 糖質15.8g）",
-                body: "小麦全粒粉を使用し、食物繊維が3.5g。低カロリーながら満足感のあるお菓子。糖質はやや高めなので量に注意。",
+                title: "おつまみメンマ（36kcal / 炭水化物7.4g）",
+                body: "36kcalと非常に低カロリー。コリコリした食感で満足感もあり、もう一品ほしいときに便利です。",
               },
             ]}
           />
 
-          <TipBox title="ロカボ商品の見分け方">
+          <TipBox title="低糖質（NL）商品の見分け方">
             <p>
-              ローソンのロカボ商品には<Marker>緑色の「ロカボ」マーク</Marker>が目印。糖質量も大きく表示されているので、店頭で迷ったらまずこのマークを探しましょう。「NL」表記はナチュラルローソンブランドの商品です。糖質制限ダイエットの基本は<Link href="/guide/low-carb-eating-out" className="text-sky-600 hover:text-sky-700 underline">糖質制限x外食ガイド</Link>で詳しく解説しています。
+              ローソンで低糖質パンを探すなら<Marker>「NL（ナチュラルローソン）」表記</Marker>が目印。NL たんぱく質が摂れるブランパンなど、炭水化物を抑えた商品が中心です。糖質制限ダイエットの基本は<Link href="/guide/low-carb-eating-out" className="text-sky-600 hover:text-sky-700 underline">糖質制限x外食ガイド</Link>で詳しく解説しています。
             </p>
           </TipBox>
         </section>
@@ -501,35 +493,35 @@ export default function LawsonDietPage() {
 
           <WarningBox title="ダイエット中は要注意の商品">
             <p className="mb-2">
-              <strong>からあげクン（通常版）:</strong> レギュラー味で220kcal、脂質14g。高タンパク版ではない通常版は脂質が高いため注意。
+              <strong>からあげクン ブラックペッパー味など:</strong> 255kcal・脂質18.7g。フレーバーによって脂質が高めなので量に注意。低脂質を狙うなら焼き鳥系のホットスナックへ切り替えを。
             </p>
             <p className="mb-2">
-              <strong>Lチキ（各種）:</strong> 約300kcal、脂質18g以上。揚げ衣が厚くカロリーが高い。Lチキを買うなら「たんぱく質がとれるからあげクン」に切り替えを。
+              <strong>Lチキ レギュラー:</strong> 255kcal・脂質16.6g。揚げ衣が厚くカロリー・脂質が高め。高タンパクを狙うなら焼き鳥やグリルチキン串が向いています。
             </p>
             <p className="mb-2">
-              <strong>大盛りパスタ・焼きそば:</strong> 約650~800kcal、糖質80g以上。1食でカロリー・糖質ともに大幅オーバー。
+              <strong>大盛ナポリタン・大盛ソース焼そば:</strong> 700kcal前後、炭水化物100g以上。1食でカロリー・炭水化物ともに大幅オーバー。
             </p>
             <p>
-              <strong>プレミアムロールケーキ:</strong> 約210kcal、糖質14g。美味しいですが、ダイエット中のスイーツはロカボ版を選びましょう。
+              <strong>ダブルホイップクロワッサン:</strong> 502kcal・脂質28.3g。美味しいですが、ダイエット中のスイーツは低カロリーのパンを選びましょう。
             </p>
           </WarningBox>
 
           <NutritionTable
             items={[
-              { name: "からあげクン（レギュラー）", calories: 220, protein: 14.0, fat: 14.0, carbs: 8.0, highlight: true },
-              { name: "Lチキ", calories: 302, protein: 15.8, fat: 18.5, carbs: 16.2 },
-              { name: "大盛りナポリタン", calories: 685, protein: 17.5, fat: 20.0, carbs: 102.5 },
-              { name: "プレミアムロールケーキ", calories: 210, protein: 3.5, fat: 13.5, carbs: 18.2 },
+              { name: "からあげクン ブラックペッパー味", calories: 255, protein: 13.4, fat: 18.7, carbs: 8.5, highlight: true },
+              { name: "Lチキ レギュラー", calories: 255, protein: 13.7, fat: 16.6, carbs: 12.8 },
+              { name: "大盛ナポリタン", calories: 728, protein: 28.6, fat: 25.5, carbs: 101.9 },
+              { name: "ダブルホイップクロワッサン", calories: 502, protein: 5.6, fat: 28.3, carbs: 57.0 },
             ]}
           />
 
           <ComparisonTable
             headers={["商品", "NG版", "OK版（代替品）", "カロリー差"]}
             rows={[
-              ["からあげ", "からあげクン通常(220kcal)", "高タンパクからあげクン(168kcal)", "-52 kcal"],
-              ["パン", "メロンパン(380kcal)", "ブランパン2個(120kcal)", "-260 kcal"],
-              ["スイーツ", "ロールケーキ(210kcal)", "ブランチーズ蒸しケーキ(105kcal)", "-105 kcal"],
-              ["麺類", "大盛りパスタ(685kcal)", "こんにゃく麺サラダ(85kcal)", "-600 kcal"],
+              ["ホットスナック", "Lチキ レギュラー(255kcal)", "グリルチキン串(113kcal)", "-142 kcal"],
+              ["パン", "ゴロチョコ！メロンパン(407kcal)", "NL ブランパン2個(66kcal)", "-341 kcal"],
+              ["スイーツ", "ダブルホイップクロワッサン(502kcal)", "紅はるかのおいも蒸しパン4個(85kcal)", "-417 kcal"],
+              ["麺類", "大盛ナポリタン(728kcal)", "豆腐とひじきの和風サラダ(95kcal)", "-633 kcal"],
             ]}
             bestRowIndex={3}
           />
@@ -555,19 +547,19 @@ export default function LawsonDietPage() {
 
           <ArticleSummary
             points={[
-              "ローソンはロカボ商品100品目以上でコンビニNo.1の低糖質ラインナップ",
-              "ブランパン2個入りは約140kcal・糖質約4gとダイエットの神商品",
-              "国産サラダチキン プレーン（約110kcal/P25g）は低カロリー＆高タンパクの王道",
-              "たんぱく質シリーズが豊富。バー・ドリンク・パン全カバー",
-              "1食300kcal/P30g台のプランがローソンだけで実現可能",
-              "ロカボスイーツで糖質10g以下のスイーツが楽しめる",
-              "Lチキ・大盛りパスタ・プレミアムロールケーキはダイエット中NG",
-              "お試し引換券でダイエット商品をお得にゲット",
+              "ローソンはNL（ナチュラルローソン）の低糖質パンが充実",
+              "NL たんぱく質が摂れるブランパン 2個入は66kcal・炭水化物6.1gと低糖質パンの定番",
+              "たんぱく質が摂れる 国産鶏むね肉のサラダ（206kcal/P23.1g）は高タンパクの王道",
+              "焼き鳥・グリルチキン系ホットスナックで温かい高タンパクが摂れる",
+              "1食300kcal台でP20g超のプランがローソンだけで実現可能",
+              "低カロリーのパン・スイーツも選べば間食も楽しめる",
+              "Lチキ・大盛ナポリタン・ダブルホイップクロワッサンはダイエット中は控えめに",
+              "お試し引換券で商品をお得に交換できることも",
             ]}
           />
 
           <p className="mb-4 mt-6">
-            ローソンは<Marker>「糖質制限ダイエット」をするなら最もおすすめのコンビニ</Marker>です。ブランパンシリーズとサラダチキンを組み合わせるだけで、簡単に低カロリー・低糖質・高タンパクの食事が完成します。たべなびを活用して、ローソンでの賢い食事選びを始めましょう。
+            ローソンは<Marker>NLの低糖質パンと高タンパクサラダが充実したコンビニ</Marker>です。NL ブランパンシリーズと「たんぱく質が摂れる」サラダを組み合わせるだけで、低カロリー・低炭水化物・高タンパクを意識した食事が作りやすくなります。たべなびを活用して、ローソンでの賢い食事選びを始めましょう。
           </p>
 
           <p className="mb-4">
@@ -585,31 +577,31 @@ export default function LawsonDietPage() {
           items={[
             {
               q: "ローソンで一番タンパク質が多い商品は？",
-              a: "「サラダチキン プレーン」（約110kcal/P25g）が王道。バー型なら「サラダチキンバー（プレーン）」、お弁当系なら「鶏むね肉のグリル弁当」など。1商品で20g以上のタンパク質が摂れる商品が416商品中数十品あります。",
+              a: "サラダ・おつまみ系では「たんぱく質が摂れる 国産鶏むね肉のサラダ」（206kcal/P23.1g）や「若鶏の砂肝にんにく」（160kcal/P21.4g）、「鶏の炭火焼き3種盛り」（303kcal/P27.2g）が高タンパク。お弁当・麺類まで含めると、おかズドン！トリプルメンチカツ弁当（P33.7g）や特盛！冷し肉そば（P35.2g）などP30g超の商品もあります。",
             },
             {
-              q: "ブランパンは本当にダイエットに効く？",
-              a: "ブランパン2個入り（約140kcal/糖質約4g）は通常パンの3分の1の糖質。1個あたりタンパク質も約5gと栄養価が高く、糖質制限中の主食代替として優秀です。サラダチキンを挟めばボリュームある低糖質サンドイッチが完成します。",
+              q: "NL ブランパンは本当にダイエットに向く？",
+              a: "NL たんぱく質が摂れるブランパン 2個入は66kcal・炭水化物6.1gと低カロリー・低炭水化物。1個あたりタンパク質も約3gと栄養価が高く、炭水化物を控えたい主食代替として活用しやすい商品です。鶏むね肉のサラダと合わせれば、低炭水化物で高タンパクな食事になります。",
             },
             {
-              q: "ローソンのおにぎりでダイエット中OKは？",
-              a: "梅・鮭・昆布・おかか系（約170〜200kcal）が低カロリー＆低脂質。逆にツナマヨ（約240kcal）やチャーハン系（260kcal以上）は脂質高め。糖質制限中なら「もち麦」シリーズが食物繊維豊富でおすすめ。",
+              q: "ローソンのおにぎりでダイエット中向きは？",
+              a: "手巻おにぎり 熟成紀州南高梅（169kcal/F1g）、だしおにぎり 日高昆布（182kcal/F0.8g）、味付海苔手巻おにぎり 追い鰹製法おかか（171kcal/F0.9g）など梅・昆布・おかか系が低カロリー＆低脂質。大きなおにぎり シーチキン®マヨネーズ（366kcal）など大盛り・マヨ系はカロリー高め。食物繊維を摂りたいなら「国産もち麦入り」シリーズもおすすめです。",
             },
             {
               q: "からあげクンとLチキ、どっちがダイエット向き？",
-              a: "両者とも高タンパクですが、Lチキは1個約380kcal/F25gと脂質が高め。からあげクン（約220kcal/P15g/F12g）の方が低カロリー＆PFCバランス良好。ただし揚げ物なので頻繁には食べないこと。",
+              a: "両者とも揚げ物ですが、Lチキ レギュラーは255kcal/P13.7g/F16.6g、からあげクン レギュラーは226kcal/P14.4g/F15.4g。からあげクンの方がやや低カロリーです。ただしどちらも脂質が高めなので、低脂質を狙うならグリルチキン串（113kcal/P9.9g/F5.7g）や焼き鳥系の方が向いています。",
             },
             {
-              q: "ローソンの低カロリースイーツは？",
-              a: "「ロカボ」シリーズのスイーツ（チョコ・プリン・大福系）が糖質10g以下で罪悪感なく食べられます。「バスチー」（約220kcal）は低糖質ながら満足感あり。逆にプレミアムロールケーキは1個300kcal以上なので注意。",
+              q: "ローソンの低カロリーなパン・スイーツは？",
+              a: "紅はるかのおいも蒸しパン 4個入（85kcal）や抹茶とホワイトチョコのスコーン 4個入（114kcal）など、1個あたりのカロリーが控えめな商品が選びやすいです。逆にダブルホイップクロワッサン（502kcal）やゴロチョコ！メロンパン（407kcal）はカロリーが高いので注意。",
             },
             {
               q: "ローソンとセブン、どっちがダイエットに向いてる？",
-              a: "目的次第です。糖質制限ならローソン（ブランパン・ロカボ充実）、商品の選択肢の多さならセブン（栄養表示が完璧）。最強は「両方使い分け」。当アプリで両店の商品を一括比較できます。",
+              a: "目的次第です。低糖質パンを重視するならローソン（NL ブランパンが充実）、商品の選択肢の多さならセブン。最強は「両方使い分け」。たべなびで両店の商品を一括比較できます。",
             },
             {
-              q: "ナチュラルローソンとは？",
-              a: "ローソンのプレミアムブランド。一般のローソン店舗の中にも一部商品が並んでいます。無添加・低糖質・有機素材を重視した商品が中心で、プロテインバー、グラノーラ、ヘルシースイーツが充実。少し価格は高めですが、栄養面では妥協なしの設計。",
+              q: "ナチュラルローソン（NL）とは？",
+              a: "ローソンの健康志向ブランド。一般のローソン店舗にも一部商品が並んでいます。NL たんぱく質が摂れるブランパンやブラン入り食パンなど、炭水化物を抑えた低糖質パンが中心。たべなび上でも「NL」表記の商品で栄養数値を確認できます。",
             },
           ]}
         />
@@ -620,6 +612,7 @@ export default function LawsonDietPage() {
         {/* Update History */}
         <UpdateHistory
           entries={[
+            { date: "2026-06-22", note: "ローソン416商品のDB実値と全数値・商品名を突合。実在しない商品（サラダチキン・ブランパン2個入の旧表記・豆腐バー・こんにゃく麺サラダ・ゼロカロリーゼリー等）を実在商品へ差替え、ランキング・組み合わせプラン・FAQ・まとめを実値で再構成。糖質断定はDBに項目がないため炭水化物基準へ変更" },
             { date: "2026-05-13", note: "ローソン416商品の最新栄養データに更新。QuickAnswer・FAQ・著者情報を追加" },
             { date: "2026-03-25", note: "初稿公開" },
           ]}
