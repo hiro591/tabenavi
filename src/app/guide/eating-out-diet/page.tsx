@@ -52,7 +52,7 @@ const jsonLd = {
   description:
     "外食しながら痩せたい人のための完全ガイド。マクドナルド・吉野家・サイゼリヤなどチェーン店別の低カロリーおすすめメニューと、太らないための5つのルールを紹介。",
   datePublished: "2026-03-01",
-  dateModified: new Date().toISOString().split("T")[0],
+  dateModified: "2026-06-23",
   author: {
       "@type": "Person",
       name: "ヒロ",
@@ -105,7 +105,7 @@ export default function EatingOutDietPage() {
           question="外食しながら本当に痩せられますか？どんなメニューを選べばいい？"
           answer={
             <>
-              <strong>結論: 外食でも工夫次第で十分にダイエット可能</strong>です。鍵となるのは「①1食あたり500kcal以下を意識」「②高タンパク・低脂質メニューを優先」「③セットではなく単品＋サイドサラダ」の3点。例えばマクドナルドのハンバーガー単品（259kcal）、吉野家のライザップ牛サラダ（398kcal/P28g）、サイゼリヤの若鶏のグリル（480kcal/P35g）など、各チェーンに「ダイエット向き神メニュー」が存在します。
+              <strong>結論: 外食でも工夫次第で十分にダイエット可能</strong>です。鍵となるのは「①1食あたり500kcal以下を意識」「②高タンパク・低脂質メニューを優先」「③セットではなく単品＋サイドサラダ」の3点。例えばマクドナルドのハンバーガー単品（259kcal）、吉野家の牛皿 並盛（281kcal/P13.5g）、サイゼリヤの辛味チキン（295kcal）など、各チェーンに「ダイエット向き神メニュー」が存在します。
             </>
           }
         />
@@ -202,30 +202,29 @@ export default function EatingOutDietPage() {
                 name="ハンバーガー"
                 chain="マクドナルド"
                 calories={259}
-                protein={13.2}
-                fat={9.4}
-                carbs={30.2}
+                protein={13.0}
+                fat={9.5}
+                carbs={30.3}
                 price={190}
                 recommended
               />
               <NutritionCard
                 name="エッグマックマフィン"
                 chain="マクドナルド"
-                calories={311}
-                protein={19.2}
-                fat={13.5}
-                carbs={27.0}
-                price={250}
+                calories={310}
+                protein={18.6}
+                fat={13.6}
+                carbs={27.2}
+                price={290}
                 recommended
               />
               <NutritionCard
-                name="チキンクリスプ"
+                name="マックチキン®"
                 chain="マクドナルド"
-                calories={345}
-                protein={14.8}
-                fat={15.5}
-                carbs={36.6}
-                price={180}
+                calories={383}
+                protein={13.5}
+                fat={19.2}
+                carbs={39.5}
               />
             </div>
           </div>
@@ -242,37 +241,37 @@ export default function EatingOutDietPage() {
             <p className="mb-4">
               吉野家でダイエット中に最も重要なのは
               <strong className="text-gray-900">サイズ選び</strong>
-              です。牛丼は並盛（633kcal）と大盛（823kcal）で約190kcalもの差があります。
+              です。牛丼は並盛（633kcal）と大盛（823kcal）で約190kcalもの差があります。ご飯なしの「牛皿」を選べばさらに低カロリーに抑えられます。
             </p>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 mb-4">
               <NutritionCard
-                name="ライザップ牛サラダ"
+                name="牛皿 並盛"
                 chain="吉野家"
-                calories={398}
-                protein={28.0}
-                fat={25.2}
-                carbs={17.2}
-                price={630}
-                recommended
-              />
-              <NutritionCard
-                name="牛皿（並盛）"
-                chain="吉野家"
-                calories={248}
-                protein={14.8}
-                fat={17.3}
-                carbs={5.7}
-                price={398}
+                calories={281}
+                protein={13.5}
+                fat={22.9}
+                carbs={5.2}
+                price={368}
                 recommended
               />
               <NutritionCard
                 name="牛丼（小盛）"
                 chain="吉野家"
-                calories={488}
-                protein={15.9}
-                fat={16.0}
-                carbs={66.0}
+                calories={474}
+                protein={15.4}
+                fat={19.6}
+                carbs={60.9}
                 price={398}
+                recommended
+              />
+              <NutritionCard
+                name="牛丼（並盛）"
+                chain="吉野家"
+                calories={633}
+                protein={19.6}
+                fat={23.6}
+                carbs={88.2}
+                price={380}
               />
             </div>
           </div>
@@ -293,41 +292,23 @@ export default function EatingOutDietPage() {
           <div className="mb-12">
             <SubSectionHeading>サイゼリヤのダイエットメニュー</SubSectionHeading>
             <p className="mb-4">
-              サイゼリヤはダイエッターにとって
-              <strong className="text-gray-900">最強のファミレス</strong>
-              です。500円以下で高タンパク・低カロリーなメニューが多数あり、コスパと栄養バランスの両立が可能です。
+              サイゼリヤはコストパフォーマンスが高く、
+              <strong className="text-gray-900">比較的カロリーが低めのメニューも揃っています</strong>。
+              ただし、サイゼリヤは公式にPFC（タンパク質・脂質・炭水化物）を非公開としているため、カロリーと価格のみを掲載します。
             </p>
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 mb-4">
-              <NutritionCard
-                name="若鶏のグリル"
-                chain="サイゼリヤ"
-                calories={480}
-                protein={35.2}
-                fat={30.5}
-                carbs={12.8}
-                price={500}
-                recommended
-              />
-              <NutritionCard
-                name="ミックスグリル"
-                chain="サイゼリヤ"
-                calories={478}
-                protein={32.2}
-                fat={30.5}
-                carbs={16.0}
-                price={600}
-                recommended
-              />
-              <NutritionCard
-                name="小エビのサラダ"
-                chain="サイゼリヤ"
-                calories={125}
-                protein={6.4}
-                fat={7.5}
-                carbs={8.3}
-                price={350}
-              />
-            </div>
+            <ComparisonTable
+              headers={["メニュー", "カロリー", "価格"]}
+              rows={[
+                ["辛味チキン", "295 kcal", "¥300"],
+                ["若鶏のディアボラ風", "683 kcal", "¥500"],
+                ["ミックスグリル", "702 kcal", "¥650"],
+                ["小エビのサラダ", "198 kcal", "¥350"],
+              ]}
+              bestRowIndex={0}
+            />
+            <p className="text-xs text-gray-500 mt-2">
+              ※サイゼリヤはPFCを公式非公開のため、カロリー・価格のみ掲載。たんぱく質量の断定はできません。
+            </p>
           </div>
 
           {/* コンビニ */}
@@ -342,33 +323,30 @@ export default function EatingOutDietPage() {
             </p>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 mb-4">
               <NutritionCard
-                name="サラダチキン（プレーン）"
-                chain="コンビニ各社"
-                calories={114}
-                protein={24.1}
-                fat={1.2}
-                carbs={1.0}
-                price={238}
+                name="たんぱく質が摂れる！鶏むね肉とたまごのサラダ"
+                chain="ファミリーマート"
+                calories={169}
+                protein={23.0}
+                fat={7.2}
+                carbs={3.4}
                 recommended
               />
               <NutritionCard
-                name="たんぱく質が摂れるチキン＆チリ"
+                name="スパイスチキン"
                 chain="セブンイレブン"
-                calories={252}
-                protein={27.4}
-                fat={9.3}
-                carbs={15.7}
-                price={321}
+                calories={200}
+                protein={14.2}
+                fat={11.0}
+                carbs={11.2}
                 recommended
               />
               <NutritionCard
-                name="ゆで卵 2個入り"
-                chain="コンビニ各社"
-                calories={130}
-                protein={11.0}
-                fat={8.6}
-                carbs={0.6}
-                price={162}
+                name="たんぱく質が摂れる鶏むね肉サラダ"
+                chain="セブンイレブン"
+                calories={199}
+                protein={21.8}
+                fat={10.9}
+                carbs={4.4}
               />
             </div>
           </div>
@@ -482,9 +460,9 @@ export default function EatingOutDietPage() {
           <ArticleSummary
             points={[
               "外食でもダイエットは可能。1食500〜700kcalが目安",
-              "マクドナルドはハンバーガー単品（259kcal）がベスト",
-              "吉野家はライザップ牛サラダ（398kcal/P28g）が優秀",
-              "サイゼリヤは若鶏のグリル（480kcal/P35g）が最強コスパ",
+              "マクドナルドはハンバーガー単品（259kcal/P13g）がベスト",
+              "吉野家は牛皿 並盛（281kcal/P13.5g）がご飯なしで低カロリー",
+              "サイゼリヤはPFC非公開。辛味チキン（295kcal）がカロリー控えめ",
               "コンビニはサラダチキン＋おにぎりの組み合わせが便利",
               "PFCバランスはP30:F25:C45を目安に",
             ]}
@@ -497,7 +475,7 @@ export default function EatingOutDietPage() {
           items={[
             {
               q: "外食ばかりでも本当に痩せられますか？",
-              a: "はい、可能です。重要なのは「1食あたりの摂取カロリー」と「PFCバランス」を意識すること。例えば1日1,800kcalを目安にする場合、外食3食でも1食600kcalずつに収めれば達成できます。マクドナルドのハンバーガー単品（259kcal）+サイドサラダ、吉野家のライザップ牛サラダ（398kcal）など、低カロリー高タンパクなメニューはどのチェーンにも存在します。",
+              a: "はい、可能です。重要なのは「1食あたりの摂取カロリー」と「PFCバランス」を意識すること。例えば1日1,800kcalを目安にする場合、外食3食でも1食600kcalずつに収めれば達成できます。マクドナルドのハンバーガー単品（259kcal/P13g）+サイドサラダ、吉野家の牛皿 並盛（281kcal/P13.5g）など、低カロリーなメニューはどのチェーンにも存在します。",
             },
             {
               q: "ダイエット中の外食、1食何kcalが目安？",
@@ -505,7 +483,7 @@ export default function EatingOutDietPage() {
             },
             {
               q: "コンビニとファストフード、ダイエットにはどっちがいい？",
-              a: "コンビニの方が選択肢が豊富で柔軟性が高いです。サラダチキン（約110kcal/P25g）+おにぎり1個（約180kcal）+ゆで卵で約350kcal/P35g という理想的な組み合わせが可能。一方ファストフードは栄養バランスを取りにくいですが、マクドナルドの朝マック等は活用できます。",
+              a: "コンビニの方が選択肢が豊富で柔軟性が高いです。鶏むね肉系のサラダやおにぎりを組み合わせれば、300〜400kcal台・タンパク質20g以上という理想的な1食が実現できます。一方ファストフードは栄養バランスを取りにくいですが、マクドナルドのハンバーガー単品（259kcal）等は活用できます。",
             },
             {
               q: "外食でPFCバランスを整えるコツは？",
@@ -540,6 +518,7 @@ export default function EatingOutDietPage() {
         {/* Update History */}
         <UpdateHistory
           entries={[
+            { date: "2026-06-23", note: "DB実値と乖離した数値・実在しないメニュー（ライザップ牛サラダ等）・PFC非公開チェーンの架空PFCを全面是正" },
             { date: "2026-05-12", note: "全チェーンの栄養データを最新版に更新、QuickAnswer・FAQ・著者情報を追加" },
             { date: "2026-03-01", note: "初稿公開" },
           ]}

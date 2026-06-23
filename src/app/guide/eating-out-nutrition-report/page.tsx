@@ -180,16 +180,16 @@ export default function EatingOutNutritionReportPage() {
         </p>
         <NutritionTable
           items={[
-            { name: "1位 ローソン 若鶏の砂肝にんにく", calories: 160, protein: 21.4, fat: 5.0, carbs: 4.0, highlight: true },
+            { name: "1位 ローソン 若鶏の砂肝にんにく", calories: 160, protein: 21.4, fat: 4.9, carbs: 9.0, highlight: true },
             { name: "2位 セブン 7プレミアム さんまの塩焼", calories: 162, protein: 30.0, fat: 4.6, carbs: 0.4, highlight: true },
-            { name: "3位 ファミマ 鶏むね肉とたまごのサラダ", calories: 169, protein: 23.0, fat: 6.0, carbs: 5.0, highlight: true },
-            { name: "4位 ケンタッキー 骨なしケンタッキー", calories: 191, protein: 20.3, fat: 11.0, carbs: 8.0 },
-            { name: "5位 セブン たんぱく質が摂れる鶏むね肉サラダ", calories: 199, protein: 21.8, fat: 7.0, carbs: 6.0 },
-            { name: "6位 ローソン 国産鶏むね肉のサラダ", calories: 206, protein: 23.1, fat: 8.0, carbs: 5.0 },
-            { name: "7位 モスバーガー 香る醤油のローストチキン", calories: 208, protein: 20.3, fat: 9.0, carbs: 9.0 },
-            { name: "8位 バーガーキング アメリカンスモーキーチキン4P", calories: 220, protein: 23.8, fat: 11.0, carbs: 8.0 },
-            { name: "9位 ローソン 鶏肉のガーリックトマト煮", calories: 240, protein: 20.2, fat: 12.0, carbs: 10.0 },
-            { name: "10位 ファミマ プレミアムチキン（骨付き）", calories: 242, protein: 20.7, fat: 14.0, carbs: 3.0 },
+            { name: "3位 ファミマ 鶏むね肉とたまごのサラダ", calories: 169, protein: 23.0, fat: 7.2, carbs: 3.4, highlight: true },
+            { name: "4位 ケンタッキー 骨なしケンタッキー", calories: 191, protein: 20.3, fat: 8.5, carbs: 8.3 },
+            { name: "5位 セブン たんぱく質が摂れる鶏むね肉サラダ", calories: 199, protein: 21.8, fat: 10.9, carbs: 4.4 },
+            { name: "6位 ローソン 国産鶏むね肉のサラダ", calories: 206, protein: 23.1, fat: 11.0, carbs: 4.9 },
+            { name: "7位 モスバーガー 香る醤油のローストチキン", calories: 208, protein: 20.3, fat: 12.9, carbs: 2.6 },
+            { name: "8位 バーガーキング アメリカンスモーキーチキン4P", calories: 220, protein: 23.8, fat: 13.0, carbs: 2.0 },
+            { name: "9位 ローソン 鶏肉のガーリックトマト煮", calories: 240, protein: 20.2, fat: 11.8, carbs: 14.2 },
+            { name: "10位 ファミマ プレミアムチキン（骨付き）", calories: 242, protein: 20.7, fat: 12.4, carbs: 11.9 },
           ]}
         />
         <p className="text-xs text-gray-400 mb-6 mt-2">
