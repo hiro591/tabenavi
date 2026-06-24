@@ -32,14 +32,14 @@ export const SERVICE_OFFERS: ServiceOffer[] = [
     id: "muscle-deli",
     name: "マッスルデリ",
     description: "高タンパク・PFCバランスを重視した宅配食。筋トレ・ボディメイク中の食事管理を手軽にしたい人向け。",
-    url: "",
+    url: "https://px.a8.net/svt/ejp?a8mat=4B61WG+1IRWFM+4CPY+5YRHE",
     tags: ["protein"],
   },
   {
     id: "tsurukame",
     name: "Dr.つるかめキッチン",
     description: "糖質・塩分・カロリーを抑えた制限食の宅配。健康管理を意識した食事に切り替えたい人向け。",
-    url: "",
+    url: "https://px.a8.net/svt/ejp?a8mat=4B61WG+1JYRN6+48GW+63H8I",
     tags: ["diet", "restriction"],
   },
   {
