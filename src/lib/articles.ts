@@ -79,6 +79,10 @@ export const RELATED_ARTICLES: RelatedArticle[] = [
   { slug: "family-restaurant-diet", title: "ファミレスダイエット比較", description: "サイゼリヤ・ガスト・デニーズを徹底比較。", category: "cuisine" },
   { slug: "conveni-comparison", title: "コンビニ3社カロリー比較", description: "セブン・ローソン・ファミマを栄養データで横断比較。", category: "chain" },
   { slug: "high-protein-chain-database", title: "高タンパク外食ランキング", description: "32チェーン6,000品を検証した、外食で高タンパクなメニューのランキング。", category: "training" },
+  { slug: "ohsho-diet", title: "餃子の王将のダイエットメニュー｜高タンパク・低カロリーの選び方", description: "餃子の王将で太りにくいメニューの選び方を、カロリー・タンパク質・PFCの実データで解説。唐揚げ・レバニラ・餃子など主要メニューを高タンパク／低カロリー順に整理し、ダイエット中でも王将を楽しむコツを紹介します。", category: "chain" },
+  { slug: "yayoiken-diet", title: "やよい軒の高タンパク・ダイエットメニュー｜定食のタンパク質ランキング", description: "やよい軒の定食をタンパク質・カロリー・PFCの実データでランキング。高タンパクな定食やダイエット中におすすめの低カロリーメニュー、ご飯の調整法まで外食減量の視点で解説します。", category: "chain" },
+  { slug: "ichibanya-diet", title: "CoCo壱番屋のダイエット・カロリー攻略｜太りにくいカレーの選び方", description: "CoCo壱番屋（ココイチ）でダイエット中でも楽しむコツを、カロリー・タンパク質・PFCの実データで解説。ライス量の調整やトッピング選びでカロリーを抑える方法、高タンパクなトッピングを紹介します。", category: "chain" },
+  { slug: "bikkuri-donkey-diet", title: "びっくりドンキーのダイエット・カロリーガイド｜太りにくいメニューの選び方", description: "びっくりドンキーでダイエット中でも楽しむための、カロリー・タンパク質・PFCの実データ解説。ハンバーグディッシュのカロリー比較、ライス量やサイドの選び方、高タンパク・低カロリーのおすすめを紹介します。", category: "chain" },
 ];
 
 export const ARTICLE_CATEGORIES = {
