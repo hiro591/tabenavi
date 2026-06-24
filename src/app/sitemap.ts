@@ -45,6 +45,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "yayoiken-diet",
     "ichibanya-diet",
     "bikkuri-donkey-diet",
+    "mos-diet",
+    "doutor-diet",
+    "tenya-diet",
+    "cocos-diet",
   ];
 
   // ─── メニュー詳細ページ（DBから取得 / pagination で全件） ───
