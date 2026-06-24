@@ -93,6 +93,9 @@ export const RELATED_ARTICLES: RelatedArticle[] = [
   { slug: "burgerking-diet", title: "バーガーキングのダイエット・カロリーガイド｜太りにくいメニューの選び方", description: "バーガーキングでダイエット中でも楽しむための、カロリー・タンパク質・PFCの実データ解説。ワッパーなどバーガーのカロリー比較、サイドの選び方、低カロリー・高タンパクのおすすめを紹介します。", category: "chain" },
   { slug: "teishoku-comparison", title: "定食チェーン高タンパク比較｜やよい軒・大戸屋・松屋のタンパク質・カロリー", description: "やよい軒・大戸屋・松屋の定食を、タンパク質・カロリー・PFC・価格の実データで徹底比較。高タンパクな定食ランキングと、ダイエット中におすすめの選び方を外食減量の視点で解説します。", category: "cuisine" },
   { slug: "cafe-comparison", title: "カフェチェーンのカロリー比較｜スターバックス・ドトールで太りにくい選び方", description: "スターバックス・ドトールのドリンク・フードを、カロリー・タンパク質・糖質の実データで比較。低カロリー・低糖質なドリンクの選び方、ダイエット中におすすめのメニューを紹介します。", category: "cuisine" },
+  { slug: "curry-comparison", title: "カレーチェーン カロリー・栄養比較｜CoCo壱・すき家・松屋のカレーを徹底比較", description: "CoCo壱番屋・すき家・松屋のカレーを、カロリー・タンパク質・PFC・価格の実データで徹底比較。太りにくいカレーの選び方、ライス量やトッピングでカロリーを抑えるコツを紹介します。", category: "cuisine" },
+  { slug: "hamburg-comparison", title: "ファミレスのハンバーグ カロリー比較｜びっくりドンキー・ココス・デニーズ・ジョイフル", description: "びっくりドンキー・ココス・デニーズ・ジョイフルのハンバーグを、カロリー・タンパク質・PFCの実データで比較。高タンパクで太りにくいハンバーグの選び方、サイドやライスの調整法を紹介します。", category: "cuisine" },
+  { slug: "breakfast-comparison", title: "外食モーニング カロリー比較｜マック・すき家・松屋・やよい軒の朝食を徹底比較", description: "マクドナルド・すき家・松屋・やよい軒の朝食メニューを、カロリー・タンパク質・PFCの実データで比較。ダイエット中におすすめの高タンパク・低カロリーな朝食の選び方を紹介します。", category: "cuisine" },
 ];
 
 export const ARTICLE_CATEGORIES = {
