@@ -28,6 +28,7 @@ import {
   AffiliateDisclosure,
   AffiliateProductCard,
   AffiliateProductGrid,
+  ServiceOffers,
 } from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -533,6 +534,8 @@ export default function LowCarbEatingOutPage() {
         />
 
         {/* FAQ */}
+        <ServiceOffers tag="diet" heading="糖質を抑えた食事を続けたい人へ。宅配食という選択肢" />
+
         <FAQSection
           slug="low-carb-eating-out"
           items={[

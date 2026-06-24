@@ -26,6 +26,7 @@ import {
 import {
   AffiliateDisclosure,
   AffiliateProductGrid,
+  ServiceOffers,
 } from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -767,6 +768,8 @@ export default function DailyMealPlanPage() {
         />
 
         {/* FAQ */}
+        <ServiceOffers tag="diet" heading="献立を考えるのが面倒な日に。宅配食という選択肢" />
+
         <FAQSection
           slug="daily-meal-plan"
           items={[

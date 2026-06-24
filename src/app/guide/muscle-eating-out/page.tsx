@@ -23,6 +23,7 @@ import {
   AffiliateDisclosure,
   AffiliateProductCard,
   AffiliateProductGrid,
+  ServiceOffers,
 } from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -519,6 +520,8 @@ export default function MuscleEatingOutPage() {
         </section>
 
         {/* Related Articles */}
+        <ServiceOffers tag="protein" heading="高タンパクな食事管理を手軽に。宅配食という選択肢" />
+
         <FAQSection
           slug="muscle-eating-out"
           items={[

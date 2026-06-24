@@ -25,6 +25,7 @@ import {
 import {
   AffiliateDisclosure,
   AffiliateProductGrid,
+  ServiceOffers,
 } from "@/components/guide/AffiliateComponents";
 import { ArticleLayout } from "@/components/guide/ArticleLayout";
 
@@ -468,6 +469,8 @@ export default function ConveniProteinPage() {
         </section>
 
         {/* FAQ */}
+        <ServiceOffers tag="protein" heading="コンビニ以上に手軽な高タンパク宅配食という選択肢" />
+
         <FAQSection
           slug="conveni-protein"
           items={[
