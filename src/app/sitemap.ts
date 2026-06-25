@@ -58,6 +58,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "curry-comparison",
     "hamburg-comparison",
     "breakfast-comparison",
+    "kurasushi-diet",
+    "sushiro-diet",
+    "hidakaya-diet",
+    "bamiyan-diet",
+    "steak-gusto-diet",
   ];
 
   // ─── メニュー詳細ページ（DBから取得 / pagination で全件） ───
