@@ -5,6 +5,8 @@ import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import { GOALS, CHAINS as PROGRAMMATIC_CHAINS } from "@/lib/chains";
 import { QuickAnswer, FAQSection, MenuPhoto, type FAQItem } from "@/components/guide/ArticleComponents";
+import { ServiceOffers } from "@/components/guide/AffiliateComponents";
+import { serviceTagForChain } from "@/data/mealDeliveryOffers";
 import { RELATED_ARTICLES } from "@/lib/articles";
 import NutritionTableClient from "./NutritionTableClient";
 
@@ -800,6 +802,13 @@ export default async function GuideArticlePage({
             </div>
           </section>
         )}
+
+        {/* 換金面: 栄養を見に来た流入の終点に、文脈一致の宅配食オファーを控えめに1ブロック。
+            面Aは購買WTPが弱いため、テーブル/送客の下に節度ある配置。serviceTagでチェーンに合わせ出し分け。 */}
+        <ServiceOffers
+          tag={serviceTagForChain(slug)}
+          heading={chain ? `${chain.name}の外食が続く人へ。栄養バランスを整える選択肢` : "外食が続く人へ。栄養バランスを整える選択肢"}
+        />
 
         {/* Internal links to other guides */}
         {otherChains.length > 0 && (

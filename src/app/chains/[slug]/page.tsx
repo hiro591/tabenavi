@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { CHAINS, GOALS } from "@/lib/chains";
+import { ServiceOffers } from "@/components/guide/AffiliateComponents";
+import { serviceTagForChain } from "@/data/mealDeliveryOffers";
 
 // ISR: チェーンハブ。各チェーンの目的別ランキングへの幹(ハブ)。
 // 栄養データは月次変更のため7日キャッシュ(再生成CPU削減。鮮度はデプロイ/revalidatePathで担保)。
@@ -215,6 +217,9 @@ export default async function ChainHubPage({
             メニューを無料で検索
           </Link>
         </div>
+
+        {/* 換金面: 文脈一致の宅配食オファーを控えめに1ブロック(serviceTagでチェーンに合わせ出し分け) */}
+        <ServiceOffers tag={serviceTagForChain(slug)} heading="外食が続く人へ。栄養バランスを整える選択肢" />
 
         {/* 他チェーンのハブへ */}
         <div className="mb-8">

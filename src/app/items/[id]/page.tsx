@@ -6,6 +6,8 @@ import type { Metadata } from "next";
 import { ChevronLeft, MapPin, Utensils } from "lucide-react";
 import { getChainLogo } from "@/lib/chain-logos";
 import { chainSlugByName, GOALS } from "@/lib/chains";
+import { ServiceOffers } from "@/components/guide/AffiliateComponents";
+import { serviceTagForChain } from "@/data/mealDeliveryOffers";
 import FavoriteButton from "./FavoriteButton";
 import ShareCard from "./ShareCard";
 import ItemHeroImage from "./ItemHeroImage";
@@ -616,6 +618,12 @@ export default async function ItemDetailPage({
             </p>
           </div>
         )}
+
+        {/* 換金面: 単品の栄養を見た後の文脈に、宅配食オファーを控えめに1ブロック(チェーンに合わせ出し分け) */}
+        <ServiceOffers
+          tag={serviceTagForChain(chainSlugByName(chainName))}
+          heading="外食が続く人へ。栄養バランスを整える選択肢"
+        />
       </div>
 
       {/* Sticky Bottom Action Bar */}

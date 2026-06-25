@@ -6,7 +6,9 @@
 //   2. 下の該当オファーの url に貼る
 //   → tag が一致する記事の <ServiceOffers tag="..." /> に自動表示される(url が空なら非表示=凍結に影響なし)
 //
-// 表示は意図の合う面B(ダイエット手法)記事のみ。面A(チェーンカロリー)には出さない方針。
+// 表示面: 面B(ダイエット手法記事)に加え、2026-06から面A(動的テンプレ guide/[slug]・chains/[slug]・
+// items/[id]=チェーン栄養ページ)にも展開。面Aは「栄養数値の確認」意図で購買WTPが弱いため、
+// テーブル下の控えめな1ブロックに留め、文脈一致タグ(serviceTagForChain)で出し分ける。
 // 景表法/ステマ規制: カードに「PR」表記を付与し、リンクは rel="sponsored nofollow"。
 
 export type ServiceTag = "diet" | "protein" | "restriction";
@@ -58,3 +60,19 @@ export const SERVICE_OFFERS: ServiceOffer[] = [
     tags: ["protein"],
   },
 ];
+
+// チェーンslug → 文脈に合うServiceTag。動的テンプレ(guide/[slug]・chains/[slug]・items/[id])の
+// 換金面で、チェーンの性格に合うオファーを出し分けるために使う。
+// 高タンパクを自然に訴求できるチェーン → protein(マッスルデリ)、それ以外 → diet(Dr.つるかめキッチン)。
+const CHAIN_SERVICE_TAG: Record<string, ServiceTag> = {
+  ootoya: "protein", yayoiken: "protein", // 定食=高タンパク
+  kfc: "protein", matsunoya: "protein", // チキン・かつ
+  kurasushi: "protein", sushiro: "protein", // 寿司=魚タンパク
+  yoshinoya: "protein", sukiya: "protein", matsuya: "protein", // 牛丼
+  "seven-eleven": "protein", lawson: "protein", familymart: "protein", conveni: "protein", // コンビニ高タンパク
+};
+
+export function serviceTagForChain(slug?: string | null): ServiceTag {
+  if (slug && CHAIN_SERVICE_TAG[slug]) return CHAIN_SERVICE_TAG[slug];
+  return "diet";
+}
