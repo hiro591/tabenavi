@@ -368,6 +368,17 @@ export function ServiceOffers({
       <div className="space-y-3">
         {offers.map((o) => (
           <div key={o.id} className="rounded-xl border border-gray-200 bg-white p-4">
+            {o.imageUrl && (
+              <a href={o.url} target="_blank" rel="sponsored nofollow noopener" onClick={() => trackServiceClick(o.id)}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={o.imageUrl}
+                  alt={o.imageAlt ?? o.name}
+                  loading="lazy"
+                  className="max-w-full h-auto mx-auto rounded-lg mb-3 border border-gray-100"
+                />
+              </a>
+            )}
             <p className="font-bold text-gray-900 text-sm mb-1">{o.name}</p>
             {o.description && (
               <p className="text-xs text-gray-600 leading-relaxed mb-3">{o.description}</p>
