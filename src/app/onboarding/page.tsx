@@ -10,7 +10,9 @@ import { NativePushToggle } from "@/components/native/NativePushToggle";
 import { trackEvent } from "@/lib/track";
 import { safeNextPath } from "@/lib/auth-errors";
 
-const TOTAL_STEPS = 12;
+// 短縮版: 12→7ステップ(未使用のtimeline/eatingOutFreqを削除、性別+生まれ年/身長+体重+目標体重を統合)。
+// ステップ数=離脱リスクなので、計算に必要な項目とパーソナライズに使う項目だけに絞った。
+const TOTAL_STEPS = 7;
 
 interface Chain {
   id: string;
@@ -72,8 +74,6 @@ function OnboardingFlow() {
   const [saveError, setSaveError] = useState(false);
 
   const [goal, setGoal] = useState<string | null>(null);
-  const [timeline, setTimeline] = useState<string | null>(null);
-  const [eatingOutFreq, setEatingOutFreq] = useState<string | null>(null);
   const [gender, setGender] = useState<string | null>(null);
   const [birthYear, setBirthYear] = useState<number>(1998);
   const [height, setHeight] = useState<number>(170);
@@ -107,11 +107,25 @@ function OnboardingFlow() {
       const supabase = createClient();
       const { data: { user } } = await supabase.auth.getUser();
       if (user) {
+        // 必須: 目標カロリー(既存カラム)。ここが失敗したら完了させない。
         const { error } = await supabase.from("profiles").update({ target_calories: targetCalories }).eq("id", user.id);
         if (error) throw error;
+        // 拡張プロフィール: migration_v7 適用後にDB保存される。未適用時は error が返るが
+        // 意図的に無視して完了を妨げない(回答は下のlocalStorageにも保存されるため失われない)。
+        await supabase.from("profiles").update({
+          goal,
+          gender,
+          birth_year: birthYear,
+          height_cm: height,
+          weight_kg: weight,
+          target_weight_kg: targetWeight,
+          activity_level: activityLevel,
+          favorite_chains: favoriteChains,
+          onboarded_at: new Date().toISOString(),
+        }).eq("id", user.id);
       }
       localStorage.setItem("onboarding", JSON.stringify({
-        goal, timeline, eatingOutFreq, gender, birthYear, height, weight,
+        goal, gender, birthYear, height, weight,
         targetWeight, activityLevel, favoriteChains,
         targetCalories, completedAt: new Date().toISOString(),
       }));
@@ -149,7 +163,7 @@ function OnboardingFlow() {
             <h1 className="text-[24px] font-bold text-gray-900 mt-6 mb-3">たべなびへようこそ</h1>
             <p className="text-gray-500 text-[15px] leading-relaxed mb-10">いくつかの質問に答えると、<br />あなた専用の目標カロリーを自動計算します。</p>
             <PrimaryButton onClick={next}>はじめる</PrimaryButton>
-            <p className="text-[12px] text-gray-400 mt-4">すべてスキップ可能 · プロフィールで変更可</p>
+            <p className="text-[12px] text-gray-400 mt-4">30秒で完了 · スキップ可 · プロフィールで変更可</p>
           </Center>
         )}
 
@@ -168,58 +182,27 @@ function OnboardingFlow() {
           </Q>
         )}
 
-        {/* 3: Timeline */}
+        {/* 3: あなたについて(性別 + 生まれ年) */}
         {step === 3 && (
-          <Q title="どのくらいの期間で達成したい？" onBack={prev} onSkip={next}>
-            <Choices
-              options={[
-                { key: "1m", label: "1ヶ月以内" },
-                { key: "3m", label: "3ヶ月くらい" },
-                { key: "6m", label: "半年くらい" },
-                { key: "1y", label: "1年かけてゆっくり" },
-                { key: "none", label: "特に期限はない" },
-              ]}
-              selected={timeline}
-              onSelect={(k) => { setTimeline(k); next(); }}
-            />
-          </Q>
-        )}
-
-        {/* 4: Eating out freq */}
-        {step === 4 && (
-          <Q title="外食は週に何日しますか？" onBack={prev} onSkip={next}>
-            <Choices
-              options={[
-                { key: "1-2", label: "1〜2日", desc: "たまに外食" },
-                { key: "3-4", label: "3〜4日", desc: "半分くらい外食" },
-                { key: "5+", label: "5日以上", desc: "ほぼ毎日外食" },
-              ]}
-              selected={eatingOutFreq}
-              onSelect={(k) => { setEatingOutFreq(k); next(); }}
-            />
-          </Q>
-        )}
-
-        {/* 5: Gender */}
-        {step === 5 && (
-          <Q title="性別は？" onBack={prev} onSkip={next}>
-            <Choices
-              options={[
+          <Q title="あなたについて" subtitle="目標カロリーの計算に使います" onBack={prev} onSkip={next}>
+            <div className="grid grid-cols-3 gap-2 mb-6">
+              {[
                 { key: "male", label: "男性" },
                 { key: "female", label: "女性" },
-                { key: "other", label: "その他 / 回答しない" },
-              ]}
-              selected={gender}
-              onSelect={(k) => { setGender(k); next(); }}
-            />
-          </Q>
-        )}
-
-        {/* 6: Birth year (picker) */}
-        {step === 6 && (
-          <Q title="生まれ年を選んでください" onBack={prev} onSkip={next}>
+                { key: "other", label: "その他" },
+              ].map((o) => (
+                <button
+                  key={o.key}
+                  onClick={() => setGender(o.key)}
+                  className={`p-3 rounded-xl border-2 text-sm font-bold transition-all active:scale-[0.97] ${gender === o.key ? "border-sky-400 bg-sky-50 text-gray-900" : "border-gray-100 bg-white text-gray-500"}`}
+                >
+                  {o.label}
+                </button>
+              ))}
+            </div>
+            <p className="text-xs text-gray-400 mb-1 text-center">生まれ年</p>
             <div className="flex justify-center mb-6">
-              <div className="w-48">
+              <div className="w-40">
                 <ScrollPicker items={years} value={birthYear} onChange={(v) => setBirthYear(v as number)} suffix="年" />
               </div>
             </div>
@@ -227,44 +210,29 @@ function OnboardingFlow() {
           </Q>
         )}
 
-        {/* 7: Height (picker) */}
-        {step === 7 && (
-          <Q title="身長を選んでください" onBack={prev} onSkip={next}>
-            <div className="flex justify-center mb-6">
-              <div className="w-48">
-                <ScrollPicker items={heights} value={height} onChange={(v) => setHeight(v as number)} suffix=" cm" />
+        {/* 4: 体型(身長 + 体重 + 目標体重) */}
+        {step === 4 && (
+          <Q title="体型を教えてください" subtitle="身長・体重・目標体重" onBack={prev} onSkip={next}>
+            <div className="flex gap-2 mb-3">
+              <div className="flex-1">
+                <p className="text-xs text-gray-400 mb-1 text-center">身長(cm)</p>
+                <ScrollPicker items={heights} value={height} onChange={(v) => setHeight(v as number)} />
+              </div>
+              <div className="flex-1">
+                <p className="text-xs text-gray-400 mb-1 text-center">体重(kg)</p>
+                <ScrollPicker items={weights} value={weight} onChange={(v) => setWeight(v as number)} />
+              </div>
+              <div className="flex-1">
+                <p className="text-xs text-gray-400 mb-1 text-center">目標(kg)</p>
+                <ScrollPicker items={weights} value={targetWeight} onChange={(v) => setTargetWeight(v as number)} />
               </div>
             </div>
             <PrimaryButton onClick={next}>次へ</PrimaryButton>
           </Q>
         )}
 
-        {/* 8: Current weight (picker) */}
-        {step === 8 && (
-          <Q title="現在の体重は？" onBack={prev} onSkip={next}>
-            <div className="flex justify-center mb-6">
-              <div className="w-48">
-                <ScrollPicker items={weights} value={weight} onChange={(v) => setWeight(v as number)} suffix=" kg" />
-              </div>
-            </div>
-            <PrimaryButton onClick={next}>次へ</PrimaryButton>
-          </Q>
-        )}
-
-        {/* 9: Target weight (picker) */}
-        {step === 9 && (
-          <Q title="目標体重は？" onBack={prev} onSkip={next}>
-            <div className="flex justify-center mb-6">
-              <div className="w-48">
-                <ScrollPicker items={weights} value={targetWeight} onChange={(v) => setTargetWeight(v as number)} suffix=" kg" />
-              </div>
-            </div>
-            <PrimaryButton onClick={next}>次へ</PrimaryButton>
-          </Q>
-        )}
-
-        {/* 10: Activity level */}
-        {step === 10 && (
+        {/* 5: Activity level */}
+        {step === 5 && (
           <Q title="普段の活動量は？" onBack={prev} onSkip={next}>
             <Choices
               options={[
@@ -279,9 +247,9 @@ function OnboardingFlow() {
           </Q>
         )}
 
-        {/* 11: Favorite chains */}
-        {step === 11 && (
-          <Q title="よく行くチェーン店は？" subtitle="複数選択OK" onBack={prev} onSkip={next}>
+        {/* 6: Favorite chains */}
+        {step === 6 && (
+          <Q title="よく行くチェーン店は？" subtitle="複数選択OK · 記録画面で上に表示されます" onBack={prev} onSkip={next}>
             <div className="grid grid-cols-3 gap-2.5 mb-6">
               {chains.map((chain) => {
                 const sel = favoriteChains.includes(chain.id);
@@ -299,8 +267,8 @@ function OnboardingFlow() {
           </Q>
         )}
 
-        {/* 12: Complete + Calculated calories */}
-        {step === 12 && (
+        {/* 7: Complete + Calculated calories */}
+        {step === 7 && (
           <div className="flex-1 flex flex-col items-center justify-center text-center">
             <div className="w-16 h-16 bg-gradient-to-br from-emerald-400 to-green-500 rounded-full flex items-center justify-center mb-5 shadow-lg shadow-emerald-100">
               <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
