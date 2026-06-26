@@ -39,6 +39,19 @@ type WeeklySummary = {
   calories: number;
 };
 
+type FrequentItem = {
+  key: string;
+  count: number;
+  menu_item_id: string | null;
+  custom_name: string | null;
+  name: string;
+  chain: string | null;
+  calories: number;
+  protein: number;
+  fat: number;
+  carbs: number;
+};
+
 export default function DashboardPage() {
   const supabase = createClient();
   const router = useRouter();
@@ -49,6 +62,9 @@ export default function DashboardPage() {
   const [streak, setStreak] = useState(0);
   const [loading, setLoading] = useState(true);
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  // よく食べる物(過去ログから集計)。ワンタップ再記録で頻度のレバーを作る(favorites=0問題の機能的解決)。
+  const [frequentItems, setFrequentItems] = useState<FrequentItem[]>([]);
+  const [quickLoggingKey, setQuickLoggingKey] = useState<string | null>(null);
 
   const fetchData = useCallback(async () => {
     const {
@@ -65,7 +81,7 @@ export default function DashboardPage() {
     sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 6);
     const { startISO: weekStartISO } = localDayRangeISO(sevenDaysAgo);
 
-    const [profileRes, logsRes, weeklyLogsRes] = await Promise.all([
+    const [profileRes, logsRes, weeklyLogsRes, recentRes] = await Promise.all([
       supabase.from("profiles").select("*").eq("id", currentUser.id).single(),
       supabase
         .from("food_logs")
@@ -80,10 +96,48 @@ export default function DashboardPage() {
         .eq("user_id", currentUser.id)
         .gte("logged_at", weekStartISO)
         .order("logged_at", { ascending: false }),
+      // よく食べる物の集計用に直近ログを取得(全47件規模なのでlimit120で十分)
+      supabase
+        .from("food_logs")
+        .select("menu_item_id, custom_name, calories, protein, fat, carbs, menu_items(name, chain_restaurants(name))")
+        .eq("user_id", currentUser.id)
+        .order("logged_at", { ascending: false })
+        .limit(120),
     ]);
 
     if (profileRes.data) setProfile(profileRes.data);
     if (logsRes.data) setLogs(logsRes.data as FoodLog[]);
+
+    // 直近ログを「メニュー単位」で集計し、登場回数の多い順に上位5件を再記録候補に
+    const freqMap = new Map<string, FrequentItem>();
+    for (const l of (recentRes.data ?? []) as Array<Record<string, unknown>>) {
+      const menuItemId = (l.menu_item_id as string | null) ?? null;
+      const customName = (l.custom_name as string | null) ?? null;
+      const menu = l.menu_items as { name?: string; chain_restaurants?: { name?: string } } | null;
+      const name = menu?.name ?? customName ?? "";
+      if (!name) continue;
+      const key = menuItemId ?? `custom:${customName ?? ""}`;
+      const existing = freqMap.get(key);
+      if (existing) {
+        existing.count += 1;
+      } else {
+        freqMap.set(key, {
+          key,
+          count: 1,
+          menu_item_id: menuItemId,
+          custom_name: customName,
+          name,
+          chain: menu?.chain_restaurants?.name ?? null,
+          calories: (l.calories as number) ?? 0,
+          protein: (l.protein as number) ?? 0,
+          fat: (l.fat as number) ?? 0,
+          carbs: (l.carbs as number) ?? 0,
+        });
+      }
+    }
+    setFrequentItems(
+      [...freqMap.values()].sort((a, b) => b.count - a.count).slice(0, 5)
+    );
 
     const dayLabels = ["日", "月", "火", "水", "木", "金", "土"];
     const weeklyData: WeeklySummary[] = [];
@@ -160,6 +214,41 @@ export default function DashboardPage() {
       toast.error("削除に失敗しました");
     } finally {
       setDeletingId(null);
+    }
+  };
+
+  // よく食べる物をワンタップで再記録(3ステップのrecordを経由せず頻度を上げる)
+  const quickLog = async (item: FrequentItem) => {
+    setQuickLoggingKey(item.key);
+    try {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (!user) {
+        router.push("/login");
+        return;
+      }
+      const h = new Date().getHours();
+      const meal_type =
+        h < 10 ? "breakfast" : h < 15 ? "lunch" : h < 21 ? "dinner" : "snack";
+      const { error } = await supabase.from("food_logs").insert({
+        user_id: user.id,
+        menu_item_id: item.menu_item_id,
+        custom_name: item.menu_item_id ? null : item.custom_name,
+        calories: item.calories,
+        protein: item.protein,
+        fat: item.fat,
+        carbs: item.carbs,
+        meal_type,
+        logged_at: new Date().toISOString(),
+      });
+      if (error) throw error;
+      toast.success(`${item.name}を記録しました`);
+      await fetchData();
+    } catch {
+      toast.error("記録に失敗しました");
+    } finally {
+      setQuickLoggingKey(null);
     }
   };
 
@@ -337,6 +426,40 @@ export default function DashboardPage() {
           </div>
         </Link>
       </div>
+
+      {/* ─── よく食べる物(ワンタップ再記録) ─── */}
+      {frequentItems.length > 0 && (
+        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 mb-4">
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="text-sm font-bold text-gray-800">よく食べる物</h2>
+            <span className="text-[10px] text-gray-400">タップで今すぐ記録</span>
+          </div>
+          <div className="space-y-2">
+            {frequentItems.map((item) => (
+              <button
+                key={item.key}
+                onClick={() => quickLog(item)}
+                disabled={quickLoggingKey === item.key}
+                className={`w-full flex items-center justify-between rounded-xl px-3.5 py-3 bg-sky-50/60 border border-sky-100 hover:border-sky-300 active:scale-[0.98] transition-all text-left ${
+                  quickLoggingKey === item.key ? "opacity-50" : ""
+                }`}
+              >
+                <div className="min-w-0">
+                  {item.chain && (
+                    <p className="text-[10px] text-gray-400 truncate">{item.chain}</p>
+                  )}
+                  <p className="text-[13px] font-medium text-gray-700 truncate">{item.name}</p>
+                </div>
+                <div className="flex items-center gap-2 ml-2 shrink-0">
+                  <span className="text-[13px] font-bold text-gray-800 tabular-nums">{item.calories}</span>
+                  <span className="text-[10px] text-gray-400">kcal</span>
+                  <span className="flex items-center justify-center w-6 h-6 rounded-full bg-sky-400 text-white text-sm font-bold shrink-0">＋</span>
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* ─── Today's Logs ─── */}
       <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 mb-4">

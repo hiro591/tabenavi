@@ -141,13 +141,29 @@ function RecordPageContent() {
     fetchRemaining();
   }, [step]);
 
-  // Filtered chains
+  // オンボーディングで選んだ「よく行くチェーン」(localStorageにchain id配列で保存済み)。
+  // 収集済みだが未活用だったデータを、記録のチェーン選択の並び順に反映してアクティベーションの摩擦を下げる。
+  const favoriteChainIds = useMemo<string[]>(() => {
+    if (typeof window === "undefined") return [];
+    try {
+      const raw = localStorage.getItem("onboarding");
+      const parsed = raw ? JSON.parse(raw) : null;
+      return Array.isArray(parsed?.favoriteChains) ? parsed.favoriteChains : [];
+    } catch {
+      return [];
+    }
+  }, []);
+
+  // Filtered chains（よく行く店を先頭に）
   const filteredChains = useMemo(() => {
-    if (!chainSearch) return chains;
-    return chains.filter((c) =>
-      c.name.toLowerCase().includes(chainSearch.toLowerCase())
-    );
-  }, [chains, chainSearch]);
+    const base = chainSearch
+      ? chains.filter((c) => c.name.toLowerCase().includes(chainSearch.toLowerCase()))
+      : chains;
+    if (favoriteChainIds.length === 0) return base;
+    const fav = base.filter((c) => favoriteChainIds.includes(c.id));
+    const rest = base.filter((c) => !favoriteChainIds.includes(c.id));
+    return [...fav, ...rest];
+  }, [chains, chainSearch, favoriteChainIds]);
 
   // Filtered menus
   const filteredMenus = useMemo(() => {
@@ -375,6 +391,9 @@ function RecordPageContent() {
                       <span className="text-xs font-medium text-gray-700 line-clamp-2">
                         {chain.name}
                       </span>
+                      {favoriteChainIds.includes(chain.id) && (
+                        <span className="block mt-1 text-[9px] font-bold text-sky-500">★よく行く</span>
+                      )}
                     </button>
                   ))}
                 </div>
