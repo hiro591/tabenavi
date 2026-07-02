@@ -84,6 +84,9 @@ export default async function ChainHubPage({
   // 主要メニュー(カロリー低い順に最大15件)を /items へ
   const topItems = [...withCal].sort((a, b) => (a.calories ?? 0) - (b.calories ?? 0)).slice(0, 15);
 
+  // /guide/[slug](栄養成分一覧の面A)への内部リンク用。PFC充足で文言を出し分け(欠損チェーンに栄養成分を約束しない)
+  const hasPfc = items.length > 0 && withProtein.length / items.length >= 0.5;
+
   const otherChains = Object.entries(CHAINS).filter(([k]) => k !== slug);
 
   const url = `https://www.tabenavi.jp/chains/${slug}`;
@@ -208,6 +211,19 @@ export default async function ChainHubPage({
             </Link>
           ))}
         </div>
+
+        {/* 面A(栄養成分/カロリー一覧)への内部リンク: 「[チェーン] 栄養成分 一覧」意図の集約先へアンカーテキストで送る */}
+        <Link
+          href={`/guide/${slug}`}
+          className="flex items-center justify-between bg-white border border-sky-200 rounded-xl p-4 mb-10 hover:border-sky-400 hover:shadow-sm transition-all"
+        >
+          <span className="text-sm font-bold text-gray-900">
+            {hasPfc
+              ? `${chain.name}の全メニュー カロリー・栄養成分(PFC)一覧を見る`
+              : `${chain.name}の全メニュー カロリー一覧を見る`}
+          </span>
+          <span className="text-sky-500 text-sm font-bold shrink-0 ml-3">→</span>
+        </Link>
 
         {/* CTA */}
         <div className="bg-gradient-to-r from-sky-50 to-cyan-50 border border-sky-100 rounded-2xl p-5 mb-8 text-center">

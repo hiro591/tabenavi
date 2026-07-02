@@ -293,13 +293,13 @@ export async function generateMetadata({
     coverage(items, "carbs") >= PFC_COVERAGE_MIN;
   const title = hasPfc
     ? `${name}のカロリー・栄養成分一覧｜全メニューのPFC(タンパク質・脂質・炭水化物)【2026年最新】 | たべなび`
-    : `${name}のカロリー一覧｜全メニューのカロリーを一覧で確認【2026年最新】 | たべなび`;
+    : `${name}のカロリー一覧｜栄養成分(PFC)は公式非公開・全メニューのカロリーを掲載【2026年最新】 | たべなび`;
   const description =
     slug === "conveni"
       ? chain?.description ?? "コンビニ3社の栄養成分一覧"
       : hasPfc
         ? `${name}の全メニューのカロリー・タンパク質・脂質・炭水化物(PFC)を一覧表で掲載。低カロリー・高タンパクのおすすめメニューや、ダイエット・筋トレ中の選び方のコツも解説します。`
-        : `${name}の全メニューのカロリーを一覧表で掲載。低カロリーのおすすめメニューや、ダイエット中の選び方のコツも解説します。`;
+        : `${name}は公式にタンパク質・脂質・炭水化物(PFC)の栄養成分を公開していません。本ページでは公式公開されているカロリーを全メニュー一覧表で掲載。低カロリーのおすすめや、ダイエット中の選び方のコツも解説します。`;
   return {
     title,
     description,
@@ -390,10 +390,11 @@ export default async function GuideArticlePage({
     .sort((a, b) => (a.calories ?? 0) - (b.calories ?? 0))
     .slice(0, 5);
 
+  // 「[チェーン] タンパク質 ランキング」の検索意図に合わせTOP10まで掲載
   const highProteinItems = [...items]
     .filter((i) => i.protein != null)
     .sort((a, b) => (b.protein ?? 0) - (a.protein ?? 0))
-    .slice(0, 5);
+    .slice(0, 10);
 
   const lowFatItems = [...items]
     .filter((i) => i.fat != null)
@@ -474,6 +475,12 @@ export default async function GuideArticlePage({
         </>
       )}
       です。
+      {!hasPfcData && (
+        <>
+          なお{chain.name}は<strong>栄養成分のうちPFC(タンパク質・脂質・炭水化物)を公式に公開していない</strong>
+          ため、本ページは公式公開されているカロリーを中心に掲載しています。
+        </>
+      )}
     </>
   ) : null;
 
@@ -492,13 +499,15 @@ export default async function GuideArticlePage({
       q: `${chain.name}で高タンパクなメニューは？`,
       a: `${topProtein.name}がタンパク質${topProtein.protein.toFixed(
         1
-      )}gで最も多く、筋トレ・ボディメイク中の方におすすめです。本ページの「高タンパクメニューTOP5」も参考にしてください。`,
+      )}gで最も多く、筋トレ・ボディメイク中の方におすすめです。本ページの「高タンパク(タンパク質)ランキングTOP10」も参考にしてください。`,
     });
   }
   if (chain) {
     faqItems.push({
       q: `${chain.name}の栄養成分（カロリー・PFC）はどこで確認できますか？`,
-      a: `本ページで${chain.name}の全${items.length}メニューのカロリー・タンパク質・脂質・炭水化物を一覧表で確認できます。アプリ「たべなび」を使えば、食べたメニューをタップするだけで栄養を記録・管理できます。`,
+      a: hasPfcData
+        ? `本ページで${chain.name}の全${items.length}メニューのカロリー・タンパク質・脂質・炭水化物を一覧表で確認できます。アプリ「たべなび」を使えば、食べたメニューをタップするだけで栄養を記録・管理できます。`
+        : `${chain.name}はタンパク質・脂質・炭水化物(PFC)の栄養成分を公式に公開していません。公式公開されているのはカロリーで、本ページで全${items.length}メニューのカロリーを一覧表で確認できます。`,
     });
   }
   if (chain && TIPS_MAP[slug]) {
@@ -516,9 +525,9 @@ export default async function GuideArticlePage({
   const toc: { id: string; label: string }[] = [];
   if (slug in PROGRAMMATIC_CHAINS && chain) toc.push({ id: "by-goal", label: `${chain.name}を目的別に探す` });
   if (items.length > 0) toc.push({ id: "nutrition-table", label: hasPfcData ? "全メニュー栄養成分一覧" : "全メニューカロリー一覧" });
-  if (lowCalItems.length > 0) toc.push({ id: "low-calorie", label: "低カロリーメニューTOP5" });
-  if (hasProteinData && highProteinItems.length > 0) toc.push({ id: "high-protein", label: "高タンパクメニューTOP5" });
-  if (hasFatData && lowFatItems.length > 0) toc.push({ id: "low-fat", label: "低脂質メニューTOP5" });
+  if (lowCalItems.length > 0) toc.push({ id: "low-calorie", label: "低カロリーメニューランキングTOP5" });
+  if (hasProteinData && highProteinItems.length > 0) toc.push({ id: "high-protein", label: "高タンパク(タンパク質)ランキングTOP10" });
+  if (hasFatData && lowFatItems.length > 0) toc.push({ id: "low-fat", label: "低脂質メニューランキングTOP5" });
   if (chain && TIPS_MAP[slug]) toc.push({ id: "tips", label: `${chain.name}で栄養管理するコツ` });
   if (faqItems.length > 0) toc.push({ id: "faq", label: "よくある質問" });
 
@@ -647,7 +656,7 @@ export default async function GuideArticlePage({
         {lowCalItems.length > 0 && (
           <section id="low-calorie" className="mb-12 scroll-mt-20">
             <h2 className="text-lg font-bold text-gray-900 mb-4">
-              ダイエット中のおすすめメニューTOP5
+              低カロリーメニューランキングTOP5（ダイエット向け）
             </h2>
             <div className="space-y-3">
               {lowCalItems.map((item, i) => (
@@ -687,7 +696,7 @@ export default async function GuideArticlePage({
         {hasProteinData && highProteinItems.length > 0 && (
           <section id="high-protein" className="mb-12 scroll-mt-20">
             <h2 className="text-lg font-bold text-gray-900 mb-4">
-              高タンパクメニューTOP5
+              高タンパク(タンパク質)ランキングTOP10
             </h2>
             <div className="space-y-3">
               {highProteinItems.map((item, i) => (
@@ -727,7 +736,7 @@ export default async function GuideArticlePage({
         {hasFatData && lowFatItems.length > 0 && (
           <section id="low-fat" className="mb-12 scroll-mt-20">
             <h2 className="text-lg font-bold text-gray-900 mb-4">
-              低脂質メニューTOP5
+              低脂質メニューランキングTOP5
             </h2>
             <div className="space-y-3">
               {lowFatItems.map((item, i) => (
