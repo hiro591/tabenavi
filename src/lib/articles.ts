@@ -101,6 +101,9 @@ export const RELATED_ARTICLES: RelatedArticle[] = [
   { slug: "hidakaya-diet", title: "日高屋のカロリーガイド｜太りにくいメニューの選び方", description: "中華食堂・日高屋のメニューをカロリーの実データで解説。低カロリーなメニューや、麺・揚げ物のカロリーに注意した選び方、ダイエット中の食べ方のコツを紹介します。", category: "chain" },
   { slug: "bamiyan-diet", title: "バーミヤンのカロリーガイド｜中華ファミレスで太りにくいメニューの選び方", description: "中華ファミレス・バーミヤンのメニューをカロリーの実データで解説。低カロリーなメニューや、避けたい高カロリーメニュー、ダイエット中の選び方のコツを紹介します。", category: "chain" },
   { slug: "steak-gusto-diet", title: "ステーキガストのカロリーガイド｜太りにくいメニューの選び方", description: "ステーキガストのメニューをカロリーの実データで解説。ステーキやサラダバーの活用法、低カロリーな選び方、ダイエット中に注意したい高カロリーメニューを紹介します。", category: "chain" },
+  { slug: "kaitenzushi-comparison", title: "回転寿司のカロリー比較｜くら寿司・スシローで太りにくいネタの選び方", description: "くら寿司・スシローの寿司ネタ・サイドメニューをカロリーの実データで比較。低カロリーなネタの選び方、皿数の目安、回転寿司でダイエット中でも楽しむコツを紹介します。", category: "cuisine" },
+  { slug: "fried-chicken-comparison", title: "フライドチキンのカロリー比較｜ケンタッキー・マック・コンビニチキンを徹底比較", description: "ケンタッキー・マクドナルド・モスバーガー・バーガーキングとコンビニ3社(ファミチキ・からあげクン等)のチキンを、カロリー・タンパク質・PFCの実データで比較。高タンパクで太りにくいチキンの選び方を紹介します。", category: "cuisine" },
+  { slug: "donburi-comparison", title: "丼もののカロリー比較｜牛丼・カツ丼・天丼で太りにくいのはどれ？", description: "牛丼(吉野家・すき家・松屋)・カツ丼(松のや)・天丼(てんや)を、カロリー・タンパク質・PFCの実データで徹底比較。太りにくい丼の選び方、ご飯量の調整やサイドの組み合わせ方を紹介します。", category: "cuisine" },
 ];
 
 export const ARTICLE_CATEGORIES = {
