@@ -17,7 +17,7 @@ description: たべなび（tabenavi.jp）のSEOガイド記事を新規作成�
 
 ## 記事の構成（hamburger-comparison準拠・この順番）
 
-1. **JSON-LD**（Article型: headline / datePublished / dateModified / author=Organization「たべなび」/ mainEntityOfPage）
+1. **JSON-LD**（Article型: headline / datePublished / dateModified / author=**Person**{name:"ヒロ", description:"外食で13kg減量した、たべなび開発者", url:"https://www.tabenavi.jp/sources"}・publisherはOrganization「たべなび」/ mainEntityOfPage）※2026-06に全記事Person化済み。Organization著者は旧仕様
 2. **ArticleHero**（title / subtitle / imageUrl=Unsplash / breadcrumb）
 3. **ArticleLayout**（tocItems, currentSlug）で本文全体を包む — デスクトップのサイドバーTOC・関連記事・CTAを自動で出す
 4. **AuthorityBadge** ＋ 最終更新日 ＋ **AffiliateDisclosure**（アフィリエイトを含むため必須）
@@ -50,10 +50,14 @@ description: たべなび（tabenavi.jp）のSEOガイド記事を新規作成�
 健康・栄養はYMYL領域。2026-06に全記事の断定表現を監査で一掃した経緯があるため:
 
 - **健康効果を断定しない**。「痩せます」→「カロリーコントロールがしやすくなります」「〜が期待できます」等の可能性表現にする
-- **数値は全てSupabase DB（menu_items）の実値で検算してから書く**。AIの記憶やWeb検索由来の数値をそのまま使わない（過去にAI提案数値の誤りが多発し、「DB検算で採否判定」が運用ルールとして確定している）
+- **数値は全てSupabase DB（menu_items）の実値で検算してから書く**。AIの記憶やWeb検索由来の数値をそのまま使わない（2026-06に助言系含む全記事で系統的捏造を検出・全数是正した経緯があり、「DB検算で採否判定」が絶対ルール）。検算の標準ツール: `node scripts/data-update/menu-lookup.mjs "<チェーン名>" ["<商品名の一部>"]`（チェーン一覧は `--chains`）。※Supabase MCPは別プロジェクト(Qurio)を指すため使わない
+- **PFC欠損チェーン**（サイゼリヤ・ガスト・くら寿司・スシロー・バーミヤン・日高屋・ステーキガスト＝DBのP/F/Cが0=未公開の意味）: これらの特定メニューにP/F/C数値を絶対に付けない（捏造になる）。カロリー・価格のみで書き、「公式にPFC非公開のためカロリー中心」と明記する
+- **「TOP◯」「最多」「一番」は全数検証できた場合のみ**。母集団を絞って選んだなら「おすすめ◯選」＋選定基準の明示に言い換える（エージェントは自分の表と矛盾するTOP主張をしがち＝最頻出事故）
 - 評価・レビュー・体験談・実績の**捏造は絶対にしない**（捏造aggregateRating・架空の声を全削除した監査の経緯あり。構造化データにも入れない）
 - 注意書き「※価格・栄養成分は店舗・時期により異なる場合があります」を入れる
 - **なか卯はDBに存在しない** — 記事・内部リンク・sitemapに含めるとsoft-404になるので出さない
+- 記事を書き終えたら**独立検証**（別エージェントが全数値主張を抽出→menu-lookupでDB突合）を通してからデプロイする
+- `<MenuPhoto>` は **id が必須prop**（省略すると型エラー）。牛丼/とんかつ/天丼/和定食は正確なフリー画像が無いため汎用「和定食イメージ」(photo-1490645935967)で代用するかArticleImageを使う（誤画像を避ける）
 
 ## データ取得
 
