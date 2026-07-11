@@ -291,15 +291,19 @@ export async function generateMetadata({
     coverage(items, "protein") >= PFC_COVERAGE_MIN &&
     coverage(items, "fat") >= PFC_COVERAGE_MIN &&
     coverage(items, "carbs") >= PFC_COVERAGE_MIN;
+  // 【実測済みの教訓・2026-07】PFC欠損チェーンのtitleに「栄養成分(PFC)は公式非公開」と入れる実験(7/2)は
+  // 逆効果だった: 「◯◯ 栄養成分」クエリの表示が約97%消失(サイゼ7.7位→14位・クリック-65%)。
+  // titleの否定語はGoogleに「このページに栄養成分は無い」と解釈される。誠実な非公開注記は
+  // ページ内(QuickAnswer/FAQ)でのみ行い、titleには入れない。この形へ戻して回復済み → 再変更しないこと。
   const title = hasPfc
     ? `${name}のカロリー・栄養成分一覧｜全メニューのPFC(タンパク質・脂質・炭水化物)【2026年最新】 | たべなび`
-    : `${name}のカロリー一覧｜栄養成分(PFC)は公式非公開・全メニューのカロリーを掲載【2026年最新】 | たべなび`;
+    : `${name}のカロリー一覧｜全メニューのカロリーを一覧で確認【2026年最新】 | たべなび`;
   const description =
     slug === "conveni"
       ? chain?.description ?? "コンビニ3社の栄養成分一覧"
       : hasPfc
         ? `${name}の全メニューのカロリー・タンパク質・脂質・炭水化物(PFC)を一覧表で掲載。低カロリー・高タンパクのおすすめメニューや、ダイエット・筋トレ中の選び方のコツも解説します。`
-        : `${name}は公式にタンパク質・脂質・炭水化物(PFC)の栄養成分を公開していません。本ページでは公式公開されているカロリーを全メニュー一覧表で掲載。低カロリーのおすすめや、ダイエット中の選び方のコツも解説します。`;
+        : `${name}の全メニューのカロリーを一覧表で掲載。低カロリーのおすすめメニューや、ダイエット中の選び方のコツも解説します。`;
   return {
     title,
     description,
