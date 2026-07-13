@@ -418,6 +418,8 @@ export default function DietLunchPage() {
           alt="コスパの良いヘルシーランチ"
         />
 
+        <ServiceOffers tag="diet" heading="ランチも栄養バランスよく。宅配食という選択肢" />
+
         {/* ─── Section 4: 避けるべきメニュー ─── */}
         <SectionHeading id="avoid-menus">
           ランチで避けるべきメニュー
@@ -577,8 +579,6 @@ export default function DietLunchPage() {
             { q: "オフィスワーカーがダイエットランチを継続するコツは？", a: "あらかじめ3パターンのランチルーティンを決めておく、12時前に食べる、コンビニは入店前に選ぶメニューを決める、午後の間食にプロテインを常備、週1回のご褒美ランチでモチベーション維持が重要です。ながら食べは避け15分以上かけて食べましょう。" },
           ]}
         />
-
-        <ServiceOffers tag="diet" heading="ランチも栄養バランスよく。宅配食という選択肢" />
 
         {/* Update History */}
         <UpdateHistory

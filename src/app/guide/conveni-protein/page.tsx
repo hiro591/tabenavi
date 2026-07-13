@@ -401,6 +401,8 @@ export default function ConveniProteinPage() {
           </div>
         </section>
 
+        <ServiceOffers tag="protein" heading="コンビニ以上に手軽な高タンパク宅配食という選択肢" />
+
         {/* Section 6: 選ぶコツ */}
         <section className="mb-12">
           <SectionHeading id="tips">
@@ -469,8 +471,6 @@ export default function ConveniProteinPage() {
         </section>
 
         {/* FAQ */}
-        <ServiceOffers tag="protein" heading="コンビニ以上に手軽な高タンパク宅配食という選択肢" />
-
         <FAQSection
           slug="conveni-protein"
           items={[

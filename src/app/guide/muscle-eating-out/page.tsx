@@ -402,6 +402,8 @@ export default function MuscleEatingOutPage() {
           </div>
         </section>
 
+        <ServiceOffers tag="protein" heading="高タンパクな食事管理を手軽に。宅配食という選択肢" />
+
         {/* ─── Section 4: 筋トレ後の外食で意識すべきこと ─── */}
         <section className="mb-14">
           <SectionHeading id="post-workout">
@@ -518,9 +520,6 @@ export default function MuscleEatingOutPage() {
             ))}
           </div>
         </section>
-
-        {/* Related Articles */}
-        <ServiceOffers tag="protein" heading="高タンパクな食事管理を手軽に。宅配食という選択肢" />
 
         <FAQSection
           slug="muscle-eating-out"

@@ -285,6 +285,8 @@ export default function Page() {
           <SourceNote asOf="2026年6月" />
         </section>
 
+        <ServiceOffers tag="protein" heading="高タンパクな食事を手軽にしたい人へ（宅配食・プロテイン）" />
+
         {/* 6. 避けがち */}
         <section id="avoid" className="mb-16 scroll-mt-24">
           <SectionHeading id="avoid">「高タンパク風」メニューの落とし穴</SectionHeading>
@@ -367,8 +369,6 @@ export default function Page() {
           title="高タンパクメニューを今すぐ検索"
           subtitle="たべなびで32チェーン・6,000品以上の栄養データを無料で絞り込み"
         />
-
-        <ServiceOffers tag="protein" heading="高タンパクな食事を手軽にしたい人へ（宅配食・プロテイン）" />
 
         <AuthorBio />
         <UpdateHistory entries={[{ date: "2026-06-19", note: "初稿公開（DB検証データで3軸ランキングを作成）" }]} />

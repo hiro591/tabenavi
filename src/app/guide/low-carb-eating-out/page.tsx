@@ -446,6 +446,8 @@ export default function LowCarbEatingOutPage() {
           </ul>
         </WarningBox>
 
+        <ServiceOffers tag="diet" heading="糖質を抑えた食事を続けたい人へ。宅配食という選択肢" />
+
         {/* ─── Section 4: 5つのコツ ─── */}
         <SectionHeading id="tips">
           糖質制限×外食の5つのコツ
@@ -532,9 +534,6 @@ export default function LowCarbEatingOutPage() {
           title="あなたに合った低糖質メニューを探そう"
           subtitle="たべなびで32チェーン・6,000品以上から糖質の低い順に検索できます"
         />
-
-        {/* FAQ */}
-        <ServiceOffers tag="diet" heading="糖質を抑えた食事を続けたい人へ。宅配食という選択肢" />
 
         <FAQSection
           slug="low-carb-eating-out"

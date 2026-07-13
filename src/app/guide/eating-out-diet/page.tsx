@@ -401,6 +401,8 @@ export default function EatingOutDietPage() {
           </p>
         </TipBox>
 
+        <ServiceOffers tag="diet" heading="外食が続く人へ。栄養を整える宅配食という選択肢" />
+
         {/* ─── Section 4: PFCバランスの基本 ─── */}
         <section className="mb-12">
           <SectionHeading id="pfc-basics">
@@ -509,8 +511,6 @@ export default function EatingOutDietPage() {
           title="そのメニュー、何kcal？ たべなびで今すぐ検索"
           subtitle="32チェーン・6,000品以上を、カロリー・タンパク質・脂質で絞り込み検索。登録不要・無料です。"
         />
-
-        <ServiceOffers tag="diet" heading="外食が続く人へ。栄養を整える宅配食という選択肢" />
 
         {/* Author Bio */}
         <AuthorBio />

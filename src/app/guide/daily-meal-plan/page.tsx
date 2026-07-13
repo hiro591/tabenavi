@@ -517,6 +517,8 @@ export default function DailyMealPlanPage() {
           productIds={["inbar-protein", "salada-chicken-pack", "tuna-can", "onebar-protein"]}
         />
 
+        <ServiceOffers tag="diet" heading="献立を考えるのが面倒な日に。宅配食という選択肢" />
+
         {/* ─── Section 6: パターンD ─── */}
         <SectionHeading id="plan-d">パターンD：筋トレ日プラン（高タンパク重視）</SectionHeading>
 
@@ -768,8 +770,6 @@ export default function DailyMealPlanPage() {
         />
 
         {/* FAQ */}
-        <ServiceOffers tag="diet" heading="献立を考えるのが面倒な日に。宅配食という選択肢" />
-
         <FAQSection
           slug="daily-meal-plan"
           items={[

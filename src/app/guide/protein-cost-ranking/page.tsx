@@ -372,6 +372,8 @@ export default function ProteinCostRankingPage() {
           alt="バランスの良い外食定食のイメージ"
         />
 
+        <ServiceOffers tag="protein" heading="高タンパクな食事を手軽に続けたい人へ（宅配食・プロテイン）" />
+
         {/* ─── Section 4: コスパ最大化テクニック ─── */}
         <SectionHeading id="maximize-tips">コスパを最大化するテクニック5選</SectionHeading>
 
@@ -540,8 +542,6 @@ export default function ProteinCostRankingPage() {
             { q: "ファストフードでタンパク質コスパが良いメニューはありますか?", a: "マクドナルドのエグチ(エッグチーズバーガー)が8.9円/gで最強クラス。ソーセージエッグマフィン(11.9円/g)も優秀です。低脂質重視ならケンタッキーの骨なしケンタッキー(13.3円/g・脂質8.5g)が最適です。" },
           ]}
         />
-
-        <ServiceOffers tag="protein" heading="高タンパクな食事を手軽に続けたい人へ（宅配食・プロテイン）" />
 
         {/* Update History */}
         <UpdateHistory
