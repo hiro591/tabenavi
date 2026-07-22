@@ -479,14 +479,11 @@ export default async function GuideArticlePage({
         </>
       )}
       です。
-      {!hasPfcData && (
-        <>
-          なお{chain.name}は<strong>栄養成分のうちPFC(タンパク質・脂質・炭水化物)を公式に公開していない</strong>
-          ため、本ページは公式公開されているカロリーを中心に掲載しています。
-        </>
-      )}
     </>
   ) : null;
+  // 【教訓の続き・2026-07-22】QuickAnswer内のPFC非公開注記も削除した。titleロールバック(7/12)後も
+  // 回復が停滞したため、最上部パッセージの否定語密集を7/2以前の状態へ完全復元。
+  // 非公開の誠実な説明はFAQ(ポジティブ先行の語順)にのみ残す。QuickAnswerに否定注記を再追加しないこと。
 
   const faqItems: FAQItem[] = [];
   if (chain && topLowCal) {
@@ -511,7 +508,7 @@ export default async function GuideArticlePage({
       q: `${chain.name}の栄養成分（カロリー・PFC）はどこで確認できますか？`,
       a: hasPfcData
         ? `本ページで${chain.name}の全${items.length}メニューのカロリー・タンパク質・脂質・炭水化物を一覧表で確認できます。アプリ「たべなび」を使えば、食べたメニューをタップするだけで栄養を記録・管理できます。`
-        : `${chain.name}はタンパク質・脂質・炭水化物(PFC)の栄養成分を公式に公開していません。公式公開されているのはカロリーで、本ページで全${items.length}メニューのカロリーを一覧表で確認できます。`,
+        : `カロリーは本ページで全${items.length}メニュー分を一覧表で確認できます。タンパク質・脂質・炭水化物(PFC)は${chain.name}が公式に公開していないため掲載していません。`,
     });
   }
   if (chain && TIPS_MAP[slug]) {
